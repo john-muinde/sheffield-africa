@@ -329,6 +329,7 @@
                 Cancel
             </button>
         </div>
+    </div>
     
 </template>
 
@@ -373,6 +374,7 @@ const getProductLink = (id, name, model_number, main_second_parent_cat) => {
 const query = ref("");
 const results = ref([]);
 const showResults = ref(false);
+const showPopup = ref(false);
 
 const search = async () => {
     if (query.value.length >= 3) {
@@ -941,10 +943,9 @@ const bodyClassAdded = ref(true);
         background: linear-gradient(134deg, #3b5dac 28.15%, transparent 50%),
             linear-gradient(29deg, #3b5dac 27.73%, transparent 39.5%);
     }
-
-
-
     
+}
+
 .popup-advert {
     position: fixed; /* Use fixed positioning */
     top: 0; /* Align to the top of the viewport */
@@ -972,7 +973,5 @@ const bodyClassAdded = ref(true);
     max-width: 100%; /* Ensure the image is responsive */
     height: auto; /* Keep the aspect ratio */
     border-radius: 8px; /* Optional rounded corners for the image */
-}
-    
 }
 </style>

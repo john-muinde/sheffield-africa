@@ -8,10 +8,7 @@ import sass from "sass";
 import commonjs from '@rollup/plugin-commonjs'
 
 export default defineConfig({
-	// server: {
- //        host: '127.0.0.1', // Replace 'YOUR_IP_ADDRESS' with the desired IP address
- //        port: 5173, // You can keep the port as is or change it if needed
- //    },
+
     build: {
         sourcemap: false,
         assetsDir: 'assets',
