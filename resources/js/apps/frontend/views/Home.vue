@@ -94,7 +94,10 @@
                         Contact Us</a
                     > -->
 
-                     <button @click="handleButtonClick" class="mobile-menu-toggler">
+                    <button
+                        @click="handleButtonClick"
+                        class="mobile-menu-toggler"
+                    >
                         <span class="sr-only">Toggle mobile menu</span>
                         <i class="icon-bars"></i>
                     </button>
@@ -184,7 +187,11 @@
 
                 <div class="header-right">
                     <!-- <a class="header_phone" href="tel:+254713777111">+254 713 777 111</a> -->
-                    <button @click="addClassToBody" id="mobile-menu-toggler" class="mobile-menu-toggler">
+                    <button
+                        @click="addClassToBody"
+                        id="mobile-menu-toggler"
+                        class="mobile-menu-toggler"
+                    >
                         <span class="sr-only">Toggle mobile menu</span>
                         <i class="icon-bars"></i>
                     </button>
@@ -205,13 +212,11 @@
     <div class="page-wrapper">
         <main class="main1">
             <div class="container">
-
                 <div class="justify-content-center mt-4 home-design">
-                    
                     <router-link
                         class="home-first home-section home-section-cat"
                         to="/about-us/sheffield-advantage"
-                    >    
+                    >
                         <div class="home-section-white">
                             <img
                                 src="assets/images/homepage/sheffield_engineer.jpg"
@@ -255,11 +260,10 @@
                         </div>
                     </router-link>
 
-                   
                     <router-link
                         class="home-last home-section home-section-cat"
                         to="/projects"
-                    > 
+                    >
                         <div class="home-section-white">
                             <img
                                 src="assets/images/homepage/female_worker.jpg"
@@ -315,6 +319,7 @@
     <button id="scroll-top" title="Back to Top">
         <i class="icon-arrow-up"></i>
     </button>
+
     <div class="popup-advert" v-if="showPopup">
         <div class="popup-content">
             <img
@@ -322,32 +327,42 @@
                 alt="Advert"
                 class="popup-image"
             />
-            <button
-                @click="dismissPopup"
-                class="btn btn-primary btn-footer mr-5"
-            >
-                Cancel
-            </button>
+            <div class="button-group">
+                <button
+                    @click="dismissPopup"
+                    class="btn btn-primary btn-footer mr-5"
+                >
+                    Cancel
+                </button>
+                <button
+                    @click="viewProduct"
+                    class="btn btn-secondary btn-footer ml-5"
+                >
+                    View
+                </button>
+            </div>
         </div>
     </div>
-    
 </template>
 
 <script setup>
 import { ref, onMounted, onUnmounted, reactive, nextTick, watch } from "vue";
+import { useRouter } from "vue-router";
+
 import { Carousel, Navigation, Slide, Pagination } from "vue3-carousel";
 
 import { useMeta } from "../../admin/composables/use-meta";
-useMeta({ 
+useMeta({
     title: "Home",
-    description:"We offer commercial kitchen, laundry, cold room & stainless steel fabricated solutions",
-    keywords:"Commercial Kitchen, Commercial laundry, Commercial Cold room"
+    description:
+        "We offer commercial kitchen, laundry, cold room & stainless steel fabricated solutions",
+    keywords: "Commercial Kitchen, Commercial laundry, Commercial Cold room",
 });
 
 /////////////
 
 const getProductLink = (id, name, model_number, main_second_parent_cat) => {
-    const firstPart = main_second_parent_cat.split('/')[0];
+    const firstPart = main_second_parent_cat.split("/")[0];
     // Replace spaces with dashes
     let transformedName = name.replace(/ /g, "-").replace(/\//g, "-");
     // Remove consecutive dashes
@@ -369,12 +384,11 @@ const getProductLink = (id, name, model_number, main_second_parent_cat) => {
     return `/${firstPart}/product/${id}/${transformedName}-${transformedModelNumber}`;
 };
 
-
-
 const query = ref("");
 const results = ref([]);
 const showResults = ref(false);
 const showPopup = ref(false);
+const router = useRouter();
 
 const search = async () => {
     if (query.value.length >= 3) {
@@ -398,40 +412,40 @@ const search = async () => {
 const bodyClassAdded = ref(true);
 
 // Function to toggle the class on document.body
-    const addClassToBody = () => {
+const addClassToBody = () => {
+    console.log("clicked");
+    console.log("Before toggle:", bodyClassAdded.value);
 
-      console.log("clicked");
-      console.log('Before toggle:', bodyClassAdded.value);
+    const targetElement = document.querySelector(".the_main_div");
+    targetElement.classList.add("mmenu-active");
+    //bodyClassAdded.value = !bodyClassAdded.value;
+    //document.body.classList.toggle('mmenu-active', bodyClassAdded.value);
+};
 
-      const targetElement = document.querySelector('.the_main_div');
-      targetElement.classList.add('mmenu-active');
-      //bodyClassAdded.value = !bodyClassAdded.value;
-      //document.body.classList.toggle('mmenu-active', bodyClassAdded.value);
-      
-    };
+document.addEventListener("DOMContentLoaded", () => {
+    document.body.classList.toggle("mmenu-active1", true);
+    //document.body.classList.toggle('mmenu-active', false);
+});
 
-    
-    document.addEventListener('DOMContentLoaded', () => {
-      document.body.classList.toggle('mmenu-active1', true);
-      //document.body.classList.toggle('mmenu-active', false);
-    });
+const handleButtonClick = () => {
+    addClassToBody();
+};
 
-    const handleButtonClick = () => {
-      addClassToBody();
-    };
-    
-    // Function to dismiss the popup
-    const dismissPopup = () => {
-        showPopup.value = false;
-        localStorage.setItem("popupDismissed", "true"); // Set flag in local storage
-    };
-    
-    onMounted(() => {
-        const popupDismissed = localStorage.getItem("popupDismissed");
-        if (!popupDismissed) {
-            showPopup.value = true;
-        }
-    });
+// Function to dismiss the popup
+const dismissPopup = () => {
+    showPopup.value = false;
+    localStorage.setItem("popupDismissed", "true");
+};
+
+onMounted(() => {
+    const popupDismissed = localStorage.getItem("popupDismissed");
+    if (!popupDismissed) {
+        showPopup.value = true;
+    }
+});
+const viewProduct = () => {
+    router.push("/kitchen/93/rotary-ovens/page/1");
+};
 </script>
 
 <style>
@@ -609,9 +623,6 @@ const bodyClassAdded = ref(true);
     border: none;
 }
 
-
-
-
 .home-section {
     opacity: 0;
     animation-duration: 1.5s;
@@ -681,7 +692,6 @@ const bodyClassAdded = ref(true);
         transform: translateX(0);
     }
 }
-
 
 .home-design-mobile {
     display: none;
@@ -788,7 +798,6 @@ const bodyClassAdded = ref(true);
 }
 
 .desktop-header .mobile-menu-toggler {
-
     padding-top: 1.9rem;
     font-size: 4.6rem;
 }
@@ -796,7 +805,6 @@ const bodyClassAdded = ref(true);
 .desktop-header .icon-bars:before {
     color: #333;
 }
-
 
 /* mobile screens */
 
@@ -879,12 +887,11 @@ const bodyClassAdded = ref(true);
         animation-name: slideFromLeft;
     }
 
-    .cta-title{
+    .cta-title {
         font-size: 1.54rem;
     }
 
     .my-footer-li {
-
         margin-left: 29px;
     }
 
@@ -897,7 +904,7 @@ const bodyClassAdded = ref(true);
 }
 
 .desktop-header {
-   margin-top: -110px;
+    margin-top: -110px;
 }
 
 /* Tablet screens */
@@ -943,9 +950,12 @@ const bodyClassAdded = ref(true);
         background: linear-gradient(134deg, #3b5dac 28.15%, transparent 50%),
             linear-gradient(29deg, #3b5dac 27.73%, transparent 39.5%);
     }
-    
 }
-
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+}
 .popup-advert {
     position: fixed; /* Use fixed positioning */
     top: 0; /* Align to the top of the viewport */
