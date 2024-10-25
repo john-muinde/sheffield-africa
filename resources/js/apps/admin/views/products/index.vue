@@ -26,10 +26,13 @@
             <div class="col-xl-12 col-lg-12 col-sm-12 layout-spacing">
                 <div class="panel br-6 p-0">
                     <div class="panel-heading pb-0">
-                        <div class="row">
-                            <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                <h3><b>View Products</b></h3>
-                            </div>
+                        <div class="flex justify-between items-center">
+                            <h3 class="text-lg font-bold">View Products</h3>
+                            <button
+                                class="bg-blue-500 text-white font-semibold py-2 px-4 rounded hover:bg-blue-600"
+                            >
+                                Add Product
+                            </button>
                         </div>
                     </div>
 

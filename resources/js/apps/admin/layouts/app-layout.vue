@@ -1,7 +1,5 @@
 <template>
-
     <router-view v-if="!user?.name"></router-view>
-
 
     <div v-if="user?.name">
         <!--  BEGIN NAVBAR  -->
@@ -61,9 +59,9 @@
 </template>
 
 <script>
-    export default {
-        name: "app-layout",
-    };
+export default {
+    name: "app-layout",
+};
 </script>
 
 <script setup>
@@ -72,14 +70,11 @@ import Sidebar from "../components/layout/sidebar.vue";
 import Footer from "../components/layout/footer.vue";
 import appSettings from "../components/app-settings.vue";
 
-
-import { useStore} from "vuex";
+import { useStore } from "vuex";
 import useAuth from "@/composables/auth";
-import {computed} from "vue";
-
+import { computed } from "vue";
 
 const store = useStore();
-const user = computed(() => store.getters["auth/user"])
+const user = computed(() => store.getters["auth/user"]);
 //const { processing, logout } = useAuth();
-
 </script>
