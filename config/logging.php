@@ -85,7 +85,7 @@ return [
             'handler_with' => [
                 'host' => env('PAPERTRAIL_URL'),
                 'port' => env('PAPERTRAIL_PORT'),
-                'connectionString' => 'tls://'.env('PAPERTRAIL_URL').':'.env('PAPERTRAIL_PORT'),
+                'connectionString' => 'tls://' . env('PAPERTRAIL_URL') . ':' . env('PAPERTRAIL_PORT'),
             ],
         ],
 
@@ -117,6 +117,13 @@ return [
         'emergency' => [
             'path' => storage_path('logs/laravel.log'),
         ],
+
+        // 'no_stack' => [
+        //     'driver' => 'single',
+        //     'path' => storage_path('logs/no_stack.log'),
+        //     'level' => 'info',
+        //     'tap' => [App\Logging\CustomLogFormatter::class], // Custom Formatter
+        // ],
     ],
 
 ];

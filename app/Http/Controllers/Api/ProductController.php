@@ -26,21 +26,19 @@ class ProductController extends Controller
         if (!in_array($orderDirection, ['asc', 'desc'])) {
             $orderDirection = 'desc';
         }
-        $products = Product::
-            when(request('search_id'), function ($query) {
-                $query->where('id', request('search_id'));
-            })
+        $products = Product::when(request('search_id'), function ($query) {
+            $query->where('id', request('search_id'));
+        })
             ->when(request('search_title'), function ($query) {
-                $query->where('name', 'like', '%'.request('search_title').'%');
+                $query->where('name', 'like', '%' . request('search_title') . '%');
             })
             ->when(request('search_parent_id'), function ($query) {
-                $query->where('parent_id', 'like', '%'.request('search_parent_id').'%');
+                $query->where('parent_id', 'like', '%' . request('search_parent_id') . '%');
             })
             ->when(request('search_global'), function ($query) {
-                $query->where(function($q) {
+                $query->where(function ($q) {
                     $q->where('id', request('search_global'))
-                        ->orWhere('name', 'like', '%'.request('search_global').'%');
-
+                        ->orWhere('name', 'like', '%' . request('search_global') . '%');
                 });
             })
             ->orderBy($orderColumn, $orderDirection)
@@ -51,8 +49,6 @@ class ProductController extends Controller
     public function store(StoreProductRequest $request)
     {
         $this->authorize('product-create');
-
-        //dd($request);
 
         // Check if the product with the same name already exists
         $existingProduct = Product::where('name', $request->name)->first();
@@ -68,7 +64,7 @@ class ProductController extends Controller
 
             $file = $request->file('main_image');
 
-            $file_name = time().'_'.$request->file('main_image')->getClientOriginalName();
+            $file_name = time() . '_' . $request->file('main_image')->getClientOriginalName();
             $file_path = 'uploads/' . $file_name;
 
             // Resize and optimize the image
@@ -79,19 +75,17 @@ class ProductController extends Controller
 
             // Store the optimized image
             Storage::disk('public')->put($file_path, $image);
-            //$file_path = $request->file('main_image')->storeAs('uploads', $file_name, 'public');
-
             $validatedData['main_image_path'] = $file_path;
         }
 
         if ($request->hasFile('document')) {
 
-            $file_name = time().'_'.$request->file('document')->getClientOriginalName();
+            $file_name = time() . '_' . $request->file('document')->getClientOriginalName();
             $file_path = $request->file('document')->storeAs('uploads', $file_name, 'public');
             $validatedData['document_path'] = $file_path;
         }
-        
-       
+
+
         $product = Product::create($validatedData);
 
 
@@ -101,7 +95,7 @@ class ProductController extends Controller
             $categoryIds = explode(',', $categories);
 
             foreach ($categoryIds as $categoryId) {
-                
+
                 $product->productCategories()->create([
                     'category_id' => $categoryId,
                 ]);
@@ -114,9 +108,9 @@ class ProductController extends Controller
 
             $productGallery = collect($request->file('product_gallery'))->map(function ($file) {
 
-                $file_name = time().'_'.'_gallery_'.$file->getClientOriginalName();
+                $file_name = time() . '_' . '_gallery_' . $file->getClientOriginalName();
                 $file_path = 'uploads/' . $file_name;
-            
+
                 // Resize and optimize the image
                 $image = Image::make($file)->resize(800, null, function ($constraint) {
                     $constraint->aspectRatio();
@@ -128,10 +122,9 @@ class ProductController extends Controller
 
 
                 return $file_path;
-
             })->toArray();
 
-           
+
             foreach ($productGallery as $imagePath) {
                 $product->productImages()->create([
                     'name' => $imagePath,
@@ -168,13 +161,13 @@ class ProductController extends Controller
 
             $file = $request->file('main_image');
 
-            $file_name = time().'_'.$request->file('main_image')->getClientOriginalName();
+            $file_name = time() . '_' . $request->file('main_image')->getClientOriginalName();
             $file_path = 'uploads/' . $file_name;
 
             $image = Image::make($file)->resize(800, null, function ($constraint) {
                 $constraint->aspectRatio();
                 $constraint->upsize();
-            })->encode('jpg', 85); 
+            })->encode('jpg', 85);
             Storage::disk('public')->put($file_path, $image);
 
             $validatedData['main_image_path'] = $file_path;
@@ -182,7 +175,7 @@ class ProductController extends Controller
 
         if ($request->hasFile('document')) {
 
-            $file_name = time().'_'.$request->file('document')->getClientOriginalName();
+            $file_name = time() . '_' . $request->file('document')->getClientOriginalName();
             $file_path = $request->file('document')->storeAs('uploads', $file_name, 'public');
             $validatedData['document_path'] = $file_path;
         }
@@ -201,7 +194,7 @@ class ProductController extends Controller
             $categoryIds = explode(',', $categories);
 
             foreach ($categoryIds as $categoryId) {
-                
+
                 $product->productCategories()->create([
                     'category_id' => $categoryId,
                 ]);
@@ -214,9 +207,9 @@ class ProductController extends Controller
 
             $productGallery = collect($request->file('product_gallery'))->map(function ($file) {
 
-                $file_name = time().'_'.'_gallery_'.$file->getClientOriginalName();
+                $file_name = time() . '_' . '_gallery_' . $file->getClientOriginalName();
                 $file_path = 'uploads/' . $file_name;
-            
+
                 // Resize and optimize the image
                 $image = Image::make($file)->resize(800, null, function ($constraint) {
                     $constraint->aspectRatio();
@@ -228,10 +221,9 @@ class ProductController extends Controller
 
 
                 return $file_path;
-
             })->toArray();
 
-           
+
             foreach ($productGallery as $imagePath) {
                 $product->productImages()->create([
                     'name' => $imagePath,
@@ -245,8 +237,10 @@ class ProductController extends Controller
         return new ProductResource($product);
     }
 
-    public function destroy(Product $product) {
-        $this->authorize('product-delete');
+    public function destroy(Product $product)
+    {
+
+        // $this->authorize(ability: 'product-delete');
         $product->delete();
 
         return response()->noContent();
@@ -259,7 +253,7 @@ class ProductController extends Controller
 
     public function getProducts()
     {
-        $perPage = request('per_page', 12); 
+        $perPage = request('per_page', 12);
         $categoryId = request('category_id', 21);
         $checkedCategories = request('checkedCategories');
         $checkedBrands = request('checkedBrands');
@@ -271,109 +265,30 @@ class ProductController extends Controller
         $the_category = $category;
         $allChildrenIds = $category->getAllChildrenIds();
 
-        // $products_main_query = Product::with('productBrand');
-
-      
-
-       //  if (!isset($checkedCategories[$categoryId])) {
-
-       //      $products_main_query = $products_main_query->whereHas('productCategories', function ($query) use ($categoryId, $allChildrenIds) {
-       //         $query->whereIn('category_id', $allChildrenIds);
-       //         $query->orWhere('category_id', '=', $categoryId);
-       //      });
-
-       //  }else{
-
-       //      $allcats = [];
-
-       //      foreach ($checkedCategories[$categoryId] as  $key => $value) {
-            
-       //          $categorycat = Category::find($value);
-       //          $allChildrenIdscat = $categorycat->getAllChildrenIds();
-       //          $allcats = array_merge($allcats, [$value]);
-       //          $allcats = array_merge($allcats, $allChildrenIdscat);
-       //      }
-
-       //       $products_main_query = $products_main_query->whereHas('productCategories', function ($query) use ($allcats) {
-       //         $query->whereIn('category_id', $allcats);
-       //      });
-       // }
-
-       // if (isset($checkedBrands[$categoryId])) {
-
-       //      $allbrands = $checkedBrands[$categoryId];
-
-       //      $products_main_query = $products_main_query->WhereIn("brand", $allbrands);
-
-       // }
-
-       // if($selectedSortOption != null){
-
-       //      if($selectedSortOption == "name_asc"){
-
-       //          $products_main_query = $products_main_query->orderBy('name', 'ASC');
-
-       //      }
-
-       //      if($selectedSortOption == "name_desc"){
-
-       //          $products_main_query = $products_main_query->orderBy('name', 'DESC');
-       //      }
-
-       //      if($selectedSortOption == "created_at_asc"){
-
-       //          $products_main_query = $products_main_query->orderBy('created_at', 'ASC');
-       //      }
-
-       //      if($selectedSortOption == "created_at_desc"){
-
-       //          $products_main_query = $products_main_query->orderBy('created_at', 'DESC');
-       //      }
-       // }else{
-
-       //      $products_main_query = $products_main_query->with(['productCategories' => function ($query) {
-
-       //          $query->orderBy('order_index', 'ASC');
-
-       //      }])->orderBy('order_index', 'ASC');
-
-       // }
-
-        // $products = $products_main_query->paginate($perPage);
-
         if (!isset($checkedCategories[$categoryId])) {
 
             $the_category_ids = $allChildrenIds;
-
-        }else{
+        } else {
 
             $allcats = [];
 
             foreach ($checkedCategories[$categoryId] as  $key => $value) {
-            
+
                 $categorycat = Category::find($value);
                 $allChildrenIdscat = $categorycat->getAllChildrenIds();
                 $allcats = array_merge($allcats, [$value]);
                 $allcats = array_merge($allcats, $allChildrenIdscat);
             }
 
-           $the_category_ids =  $allcats; 
-       }
+            $the_category_ids =  $allcats;
+        }
 
         $allbrands = [];
 
         if (isset($checkedBrands[$categoryId])) {
 
             $allbrands = $checkedBrands[$categoryId];
-
         }
-
-
-
-
-   
-
-
 
 
         $category_products = Category::whereIn('id', $the_category_ids);
@@ -381,19 +296,18 @@ class ProductController extends Controller
         if (!isset($checkedCategories[$categoryId])) {
 
             $category_products = $category_products->orWhere('id', '=', $categoryId);
-
         }
 
-        $category_products = $category_products->with(['products' => function ($query) use($allbrands, $selectedSortOption) {
+        $category_products = $category_products->with(['products' => function ($query) use ($allbrands, $selectedSortOption) {
 
-            if(count($allbrands) > 0){
+            if (count($allbrands) > 0) {
                 $query = $query->WhereIn("brand", $allbrands);
             }
 
 
             $query = $query->with('productBrand');
 
-            if($selectedSortOption != null){
+            if ($selectedSortOption != null) {
 
                 // if($selectedSortOption == "name_asc"){
 
@@ -416,18 +330,13 @@ class ProductController extends Controller
                 //     $query = $query->orderBy('created_at', 'DESC');
                 // }
 
-            }else{
+            } else {
 
                 $query = $query->orderBy('order_index');
-
             }
-
-
-
-
         }])
-        ->orderBy('order_index')
-        ->get();
+            ->orderBy('order_index')
+            ->get();
 
         // Number of products per page
         $page = request()->get('page', 1); // Get the current page from the request
@@ -445,8 +354,8 @@ class ProductController extends Controller
 
         $productBrands = Product::with('productBrand')
             ->whereHas('productCategories', function ($query) use ($categoryId, $allChildrenIds) {
-               $query->whereIn('category_id', $allChildrenIds);
-               $query->orWhere('category_id', '=', $categoryId);
+                $query->whereIn('category_id', $allChildrenIds);
+                $query->orWhere('category_id', '=', $categoryId);
             })
             ->select('brand')
             ->orderBy('brand', 'ASC')
@@ -469,13 +378,13 @@ class ProductController extends Controller
 
     public function getproductsAdmin()
     {
-        $perPage = request('per_page', 20); 
+        $perPage = request('per_page', 20);
         $categoryId = request('category_id', 21);
         $mainCategory = request('mainCategory');
         $filter_category_id = request('filter_category_id');
         $search = request('search');
 
-        if(isset($mainCategory) && !isset($search)){
+        if (isset($mainCategory) && !isset($search)) {
 
             $perPage = 1000;
         }
@@ -486,43 +395,41 @@ class ProductController extends Controller
 
         if ($search != "") {
 
-            $Product = $Product->Where('name', 'like', '%'.$search.'%')
-                                ->orWhere('model_number', 'like', '%'.$search.'%');
-            
+            $Product = $Product->Where('name', 'like', '%' . $search . '%')
+                ->orWhere('model_number', 'like', '%' . $search . '%');
         }
 
-        if($mainCategory != "" && $filter_category_id == "" ){
+        if ($mainCategory != "" && $filter_category_id == "") {
 
             $Product = $Product->whereHas('productCategories', function ($query) use ($mainCategory) {
-               //$query->whereIn('category_id', $mainCategory);
-               $query->Where('category_id', '=', $mainCategory);
+                //$query->whereIn('category_id', $mainCategory);
+                $query->Where('category_id', '=', $mainCategory);
             });
-            
         }
 
-        if($mainCategory != "" && $filter_category_id != "" ){
+        if ($mainCategory != "" && $filter_category_id != "") {
 
             $Product = $Product->whereHas('productCategories', function ($query) use ($filter_category_id) {
-               //$query->whereIn('category_id', $mainCategory);
-               $query->Where('category_id', '=', $filter_category_id);
+                //$query->whereIn('category_id', $mainCategory);
+                $query->Where('category_id', '=', $filter_category_id);
             });
-            
         }
-       
+
 
         $Product = $Product->OrderBy('order_index', 'ASC')->paginate($perPage);
 
-       
+
 
         $result = [
-            
+
             'categories' => $Product
         ];
 
         return response()->json($result);
     }
 
-    public function getFeaturedProducts(){
+    public function getFeaturedProducts()
+    {
 
         //kitchen
 
@@ -533,8 +440,8 @@ class ProductController extends Controller
 
         $products_kitchen = Product::with('productBrand')->with('productCategories')
             ->whereHas('productCategories', function ($query) use ($products_kitchen_id, $allChildrenIds) {
-               $query->whereIn('category_id', $allChildrenIds);
-               $query->orWhere('category_id', '=', $products_kitchen_id);
+                $query->whereIn('category_id', $allChildrenIds);
+                $query->orWhere('category_id', '=', $products_kitchen_id);
             })
             ->take(10)->get();
 
@@ -547,24 +454,24 @@ class ProductController extends Controller
 
         $products_laundry = Product::with('productBrand')->with('productCategories')
             ->whereHas('productCategories', function ($query) use ($products_laundry_id, $allChildrenIds) {
-               $query->whereIn('category_id', $allChildrenIds);
-               $query->orWhere('category_id', '=', $products_laundry_id);
+                $query->whereIn('category_id', $allChildrenIds);
+                $query->orWhere('category_id', '=', $products_laundry_id);
             })
-           ->take(10)->get();
+            ->take(10)->get();
 
         //cold room
 
-        $products_cold_room_id = 22;//refregiration
+        $products_cold_room_id = 22; //refregiration
 
         $category = Category::find($products_cold_room_id);
         $allChildrenIds = $category->getAllChildrenIds();
 
         $products_cold_room = Product::with('productBrand')->with('productCategories')
             ->whereHas('productCategories', function ($query) use ($products_cold_room_id, $allChildrenIds) {
-               $query->whereIn('category_id', $allChildrenIds);
-               $query->orWhere('category_id', '=', $products_cold_room_id);
+                $query->whereIn('category_id', $allChildrenIds);
+                $query->orWhere('category_id', '=', $products_cold_room_id);
             })
-           ->take(10)->get();
+            ->take(10)->get();
 
         $result = [
             'products_kitchen' => $products_kitchen,
@@ -573,11 +480,10 @@ class ProductController extends Controller
         ];
 
         return response()->json($result);
-
-
     }
 
-    public function getProduct(){
+    public function getProduct()
+    {
 
         $product_id = request('product_id', 1);
 
@@ -587,20 +493,22 @@ class ProductController extends Controller
     }
 
 
-    public function productEnquiry(){
+    public function productEnquiry()
+    {
 
         return response()->json(['success' => ['name' => ['Product with the same name already exists.']]], 409);
     }
 
-    public function searchProduct($searchProduct){
+    public function searchProduct($searchProduct)
+    {
 
-        $products = Product::Where('name', 'like', '%'.$searchProduct.'%')->orderByRaw("LOCATE('$searchProduct', name)")->get();
+        $products = Product::Where('name', 'like', '%' . $searchProduct . '%')->orderByRaw("LOCATE('$searchProduct', name)")->get();
 
         return ProductResource::collection($products);
-
     }
 
-    public function postNewOrderProducts() {
+    public function postNewOrderProducts()
+    {
 
         $data = request('data');
 
@@ -617,10 +525,6 @@ class ProductController extends Controller
                 $Product->order_index = $key + 1;
                 $Product->save();
             }
-
-
         }
     }
-
-
 }

@@ -1,171 +1,179 @@
-import { ref, reactive, inject, provide } from 'vue'
+import { ref, reactive, inject, provide } from "vue";
 import { useRouter } from "vue-router";
-import { AbilityBuilder, Ability } from '@casl/ability';
-import { ABILITY_TOKEN } from '@casl/vue';
-import store from '../store';
-import axios from 'axios';
+import { AbilityBuilder, Ability } from "@casl/ability";
+import { ABILITY_TOKEN } from "@casl/vue";
+import store from "../store";
+import axiosInstance from "../axiosInstance";
 
 let user = reactive({
-    name: '',
-    email: '',
-})
+    name: "",
+    email: "",
+});
 
 export default function useAuth() {
-    const processing = ref(false)
-    const validationErrors = ref({})
-    const router = useRouter()
-    const swal = inject('$swal')
-    const ability = inject(ABILITY_TOKEN)
-    
+    const processing = ref(false);
+    const validationErrors = ref({});
+    const router = useRouter();
+    const swal = inject("$swal");
+    const ability = inject(ABILITY_TOKEN);
 
     const head = ref({
-        use: () => {}
-    })
+        use: () => {},
+    });
 
     const loginForm = reactive({
-        email: '',
-        password: '',
-        remember: false
-    })
+        email: "",
+        password: "",
+        remember: false,
+    });
 
     const registerForm = reactive({
-        name: '',
-        email: '',
-        password: '',
-        password_confirmation: ''
-    })
+        name: "",
+        email: "",
+        password: "",
+        password_confirmation: "",
+    });
 
     const submitLogin = async () => {
-        if (processing.value) return
+        if (processing.value) return;
 
-        processing.value = true
-        validationErrors.value = {}
+        processing.value = true;
+        validationErrors.value = {};
 
-        await axios.post('/login', loginForm)
-            .then(async response => {
-                await store.dispatch('auth/getUser')
-                await loginUser()
+        await axiosInstance
+            .post("/login", loginForm)
+            .then(async (response) => {
+                await store.dispatch("auth/getUser");
+                await loginUser();
                 swal({
-                    icon: 'success',
-                    title: 'Login successfully',
+                    icon: "success",
+                    title: "Login successfully",
                     showConfirmButton: false,
-                    timer: 0
-                })
-                await router.push({ name: 'frontend.myaccount' })
+                    timer: 0,
+                });
+                await router.push({ name: "frontend.myaccount" });
             })
-            .catch(error => {
+            .catch((error) => {
                 if (error.response?.data) {
-                    validationErrors.value = error.response.data.errors
+                    validationErrors.value = error.response.data.errors;
                 }
             })
-            .finally(() => processing.value = false)
-    }
+            .finally(() => (processing.value = false));
+    };
 
     const submitRegister = async () => {
-        if (processing.value) return
+        if (processing.value) return;
 
-        processing.value = true
-        validationErrors.value = {}
+        processing.value = true;
+        validationErrors.value = {};
 
-        await axios.post('/register', registerForm)
-            .then(async response => {
+        await axiosInstance
+            .post("/register", registerForm)
+            .then(async (response) => {
                 // await store.dispatch('auth/getUser')
                 // await loginUser()
                 swal({
-                    icon: 'success',
-                    title: 'Registration successfully',
+                    icon: "success",
+                    title: "Registration successfully",
                     showConfirmButton: false,
-                    timer: 1500
-                })
-                await router.push({ name: 'auth.login' })
+                    timer: 1500,
+                });
+                await router.push({ name: "auth.login" });
             })
-            .catch(error => {
+            .catch((error) => {
                 if (error.response?.data) {
-                    validationErrors.value = error.response.data.errors
+                    validationErrors.value = error.response.data.errors;
                 }
             })
-            .finally(() => processing.value = false)
-    }
+            .finally(() => (processing.value = false));
+    };
 
     const submitLoginAdmin = async () => {
-        if (processing.value) return
+        if (processing.value) return;
+        processing.value = true;
+        validationErrors.value = {};
 
-        processing.value = true
-        validationErrors.value = {}
-
-        await axios.post('/login', loginForm)
-            .then(async response => {
-                await store.dispatch('auth/getUser')
-                await loginUser()
+        await axiosInstance
+            .post("/login", loginForm)
+            .then(async (response) => {
+                localStorage.setItem("token", response.data.token);
+                localStorage.setItem(
+                    "user",
+                    JSON.stringify(response.data.user)
+                );
+                await store.dispatch("auth/getUser");
+                await loginUser();
                 swal({
-                    icon: 'success',
-                    title: 'Login successfully',
+                    icon: "success",
+                    title: "Login successfully",
                     showConfirmButton: false,
-                    timer: 1500
-                })
-                await router.push({ name: 'admin.dashboard' })
+                    timer: 1500,
+                });
+                await router.push({ name: "admin.dashboard" });
                 //await router.go(-1);
             })
-            .catch(error => {
+            .catch((error) => {
                 if (error.response?.data) {
-                    validationErrors.value = error.response.data.errors
+                    validationErrors.value = error.response.data.errors;
                 }
             })
-            .finally(() => processing.value = false)
-    }
+            .finally(() => (processing.value = false));
+    };
 
     const submitRegisterAdmin = async () => {
-        if (processing.value) return
+        if (processing.value) return;
 
-        processing.value = true
-        validationErrors.value = {}
+        processing.value = true;
+        validationErrors.value = {};
 
-        await axios.post('/register', registerForm)
-            .then(async response => {
+        await axiosInstance
+            .post("/register", registerForm)
+            .then(async (response) => {
                 // await store.dispatch('auth/getUser')
                 // await loginUser()
                 swal({
-                    icon: 'success',
-                    title: 'Registration successfully',
+                    icon: "success",
+                    title: "Registration successfully",
                     showConfirmButton: false,
-                    timer: 1500
-                })
-                await router.push({ name: 'admin.dashboard' })
+                    timer: 1500,
+                });
+                await router.push({ name: "admin.dashboard" });
             })
-            .catch(error => {
+            .catch((error) => {
                 if (error.response?.data) {
-                    validationErrors.value = error.response.data.errors
+                    validationErrors.value = error.response.data.errors;
                 }
             })
-            .finally(() => processing.value = false)
-    }
+            .finally(() => (processing.value = false));
+    };
 
     const loginUser = () => {
-        user = store.state.auth.user
+        user = store.state.auth.user;
         // Cookies.set('loggedIn', true)
-        getAbilities()
-    }
+        getAbilities();
+    };
 
     const getUser = async () => {
-        if (store.getters['auth/authenticated']) {
-            await store.dispatch('auth/getUser')
-            await loginUser()
+        if (store.getters["auth/authenticated"]) {
+            await store.dispatch("auth/getUser");
+            await loginUser();
         }
-    }
+    };
 
     const logout = async () => {
-        if (processing.value) return
+        if (processing.value) return;
 
-        processing.value = true
+        processing.value = true;
 
-        axios.post('/logout')
-            .then(response => {
-                user.name = ''
-                user.email = ''
-                store.dispatch('auth/logout')
-                router.push({ name: 'frontend.login' });
+        axiosInstance
+            .post("/logout")
+            .then((response) => {
+                user.name = "";
+                user.email = "";
+                store.dispatch("auth/logout");
+                router.push({ name: "frontend.login" });
             })
-            .catch(error => {
+            .catch((error) => {
                 // swal({
                 //     icon: 'error',
                 //     title: error.response.status,
@@ -173,24 +181,29 @@ export default function useAuth() {
                 // })
             })
             .finally(() => {
-                processing.value = false
+                processing.value = false;
                 // Cookies.remove('loggedIn')
-            })
-    }
+            });
+    };
 
     const logoutAdmin = async () => {
-        if (processing.value) return
+        if (processing.value) return;
 
-        processing.value = true
+        processing.value = true;
 
-        axios.post('/logout')
-            .then(response => {
-                user.name = ''
-                user.email = ''
-                store.dispatch('auth/logout')
-                router.replace({ name: 'admin.login', meta: { layout: 'auth' }, replace: true });
+        axiosInstance
+            .post("/logout")
+            .then((response) => {
+                user.name = "";
+                user.email = "";
+                store.dispatch("auth/logout");
+                router.replace({
+                    name: "admin.login",
+                    meta: { layout: "auth" },
+                    replace: true,
+                });
             })
-            .catch(error => {
+            .catch((error) => {
                 // swal({
                 //     icon: 'error',
                 //     title: error.response.status,
@@ -198,25 +211,24 @@ export default function useAuth() {
                 // })
             })
             .finally(() => {
-                processing.value = false
+                processing.value = false;
                 // Cookies.remove('loggedIn')
-            })
-    }
+            });
+    };
 
-    const getAbilities = async() => {
-        await axios.get('/api/abilities')
-            .then(response => {
-                const permissions = response.data
-                const { can, rules } = new AbilityBuilder(Ability)
+    const getAbilities = async () => {
+        await axiosInstance.get("/api/abilities").then((response) => {
+            const permissions = response.data;
+            const { can, rules } = new AbilityBuilder(Ability);
 
-                can(permissions)
+            can(permissions);
 
-                ability.update(rules)
-            })
-    }
+            ability.update(rules);
+        });
+    };
 
     // Apply the 'head' injection using app.use()
-    head.value.use(getAbilities)
+    head.value.use(getAbilities);
 
     return {
         loginForm,
@@ -231,6 +243,6 @@ export default function useAuth() {
         getUser,
         logout,
         logoutAdmin,
-        getAbilities
-    }
+        getAbilities,
+    };
 }
