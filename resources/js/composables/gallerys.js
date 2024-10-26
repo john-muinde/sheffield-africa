@@ -1,5 +1,6 @@
 import { ref, inject } from "vue";
 import { useRouter } from "vue-router";
+import axiosInstance from "../axiosInstance";
 
 export default function useGallery() {
     const gallerys = ref([]);
@@ -23,7 +24,7 @@ export default function useGallery() {
         order_column = "created_at",
         order_direction = "desc"
     ) => {
-        axios
+        axiosInstance
             .get(
                 "/api/gallerys?page=" +
                     page +
@@ -44,7 +45,7 @@ export default function useGallery() {
     };
 
     const getGallery = async (id) => {
-        axios.get("/api/gallerys/" + id).then((response) => {
+        axiosInstance.get("/api/gallerys/" + id).then((response) => {
             gallery.value = response.data.data;
         });
     };
@@ -74,7 +75,7 @@ export default function useGallery() {
             headers: { "content-type": "multipart/form-data" },
         };
 
-        axios
+        axiosInstance
             .post("/api/gallerys", serializedPost, config)
             .then((response) => {
                 router.push({ name: "gallerys.create" });
@@ -114,14 +115,6 @@ export default function useGallery() {
             }
         }
 
-        // for (let item in gallery) {
-        //     if (gallery.hasOwnProperty(item)) {
-        //         if (gallery.hasOwnProperty(item) && item !== 'categories') {
-        //             serializedPost.append(item, gallery[item])
-        //         }
-        //     }
-        // }
-
         for (let item in gallery) {
             if (gallery.hasOwnProperty(item) && item !== "categories") {
                 let value = gallery[item];
@@ -149,7 +142,7 @@ export default function useGallery() {
 
         console.log(serializedPost);
 
-        await axios
+        await axiosInstance
             .post("/api/gallerys/" + gallery.id, serializedPost, config)
             .then((response) => {
                 router.push({ name: "gallerys.index" });
@@ -179,7 +172,7 @@ export default function useGallery() {
             reverseButtons: true,
         }).then((result) => {
             if (result.isConfirmed) {
-                axios
+                axiosInstance
                     .delete("/api/gallerys/" + id)
                     .then((response) => {
                         getGallerys();
@@ -212,7 +205,7 @@ export default function useGallery() {
             reverseButtons: true,
         }).then((result) => {
             if (result.isConfirmed) {
-                axios
+                axiosInstance
                     .delete("/api/gallery-images/" + id)
                     .then((response) => {
                         getGallerys();
@@ -234,7 +227,7 @@ export default function useGallery() {
     };
 
     const getGalleryList = async () => {
-        axios.get("/api/gallery-list").then((response) => {
+        axiosInstance.get("/api/gallery-list").then((response) => {
             galleryList.value = response.data.data;
         });
     };

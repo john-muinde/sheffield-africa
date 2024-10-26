@@ -1,78 +1,88 @@
-import { ref, inject } from 'vue'
-import { useRouter } from 'vue-router'
+import { ref, inject } from "vue";
+import { useRouter } from "vue-router";
+import axiosInstance from "../axiosInstance";
 
 export default function useSolutions() {
-    const solutions = ref([])
-    const solutionList = ref([])
+    const solutions = ref([]);
+    const solutionList = ref([]);
     const solution = ref({
-        name: '',
-        parent_id: '',
-        description: '',
-        is_published: '',
-    })
+        name: "",
+        parent_id: "",
+        description: "",
+        is_published: "",
+    });
 
-    const router = useRouter()
-    const validationErrors = ref({})
-    const isLoading = ref(false)
-    const swal = inject('$swal')
+    const router = useRouter();
+    const validationErrors = ref({});
+    const isLoading = ref(false);
+    const swal = inject("$swal");
 
     const getSolutions = async (
         page = 1,
-        search_id = '',
-        search_title = '',
-        search_parent_id = '',
-        search_global = '',
-        order_column = 'created_at',
-        order_direction = 'desc'
+        search_id = "",
+        search_title = "",
+        search_parent_id = "",
+        search_global = "",
+        order_column = "created_at",
+        order_direction = "desc"
     ) => {
-        axios.get('/api/solutions?page=' + page +
-            '&search_id=' + search_id +
-            '&search_title=' + search_title +
-            '&search_parent_id=' + search_parent_id +
-            '&search_global=' + search_global +
-            '&order_column=' + order_column +
-            '&order_direction=' + order_direction)
-            .then(response => {
+        axiosInstance
+            .get(
+                "/api/solutions?page=" +
+                    page +
+                    "&search_id=" +
+                    search_id +
+                    "&search_title=" +
+                    search_title +
+                    "&search_parent_id=" +
+                    search_parent_id +
+                    "&search_global=" +
+                    search_global +
+                    "&order_column=" +
+                    order_column +
+                    "&order_direction=" +
+                    order_direction
+            )
+            .then((response) => {
                 solutions.value = response.data;
-            })
-    }
+            });
+    };
 
     const getSolution = async (id) => {
-        axios.get('/api/solutions/' + id)
-            .then(response => {
-                solution.value = response.data.data;
-            })
-    }
+        axiosInstance.get("/api/solutions/" + id).then((response) => {
+            solution.value = response.data.data;
+        });
+    };
 
-    const storeSolution = async (solution,  files) => {
+    const storeSolution = async (solution, files) => {
         if (isLoading.value) return;
 
         console.log(solution);
 
-        isLoading.value = true
-        validationErrors.value = {}
+        isLoading.value = true;
+        validationErrors.value = {};
 
-        let serializedPost = new FormData()
-        const categoryIds = solution.categories.map(category => category.id);
+        let serializedPost = new FormData();
+        const categoryIds = solution.categories.map((category) => category.id);
 
-        serializedPost.append('categories', categoryIds);
-
+        serializedPost.append("categories", categoryIds);
 
         for (let item in solution) {
             if (solution.hasOwnProperty(item)) {
-                if (solution.hasOwnProperty(item) && item !== 'categories') {
-                    serializedPost.append(item, solution[item])
+                if (solution.hasOwnProperty(item) && item !== "categories") {
+                    serializedPost.append(item, solution[item]);
                 }
             }
         }
 
         const config = {
-            headers: { 'content-type': 'multipart/form-data' }
-        }
+            headers: { "content-type": "multipart/form-data" },
+        };
 
-        axios.post('/api/solutions', serializedPost, config)
-            .then(response => {
-                router.push({name: 'solutions.create'})
+        axiosInstance
+            .post("/api/solutions", serializedPost, config)
+            .then((response) => {
+                router.push({ name: "solutions.create" });
                 // Reset the form values
                 solution.name = null;
                 solution.solution_category = null;
@@ -81,142 +91,135 @@ export default function useSolutions() {
                 solution.main_image = null;
 
                 swal({
-                    icon: 'success',
-                    title: 'Solution saved successfully'
-                })
+                    icon: "success",
+                    title: "Solution saved successfully",
+                });
             })
-            .catch(error => {
+            .catch((error) => {
                 if (error.response?.data) {
-                    validationErrors.value = error.response.data.errors
+                    validationErrors.value = error.response.data.errors;
                 }
             })
-            .finally(() => isLoading.value = false)
-    }
+            .finally(() => (isLoading.value = false));
+    };
 
-    const updateSolution = async (solution,  files) => {
+    const updateSolution = async (solution, files) => {
         if (isLoading.value) return;
 
-        isLoading.value = true
-        validationErrors.value = {}
+        isLoading.value = true;
+        validationErrors.value = {};
 
         let serializedPost = new FormData();
 
-        const categoryIds = solution.categories.map(category => category.id);
+        const categoryIds = solution.categories.map((category) => category.id);
 
-        serializedPost.append('categories', categoryIds);
+        serializedPost.append("categories", categoryIds);
 
         for (let item in solution) {
             if (solution.hasOwnProperty(item)) {
-                if (solution.hasOwnProperty(item) && item !== 'categories') {
-                    serializedPost.append(item, solution[item])
+                if (solution.hasOwnProperty(item) && item !== "categories") {
+                    serializedPost.append(item, solution[item]);
                 }
             }
         }
 
-
         const config = {
-            headers: { 'Content-Type': 'multipart/form-data' }
-        }
+            headers: { "Content-Type": "multipart/form-data" },
+        };
 
         serializedPost.append("_method", "put");
 
         console.log(serializedPost);
 
-        await axios.post('/api/solutions/' + solution.id, serializedPost, config)
-            .then(response => {
-                router.push({name: 'solutions.index'})
+        await axiosInstance
+            .post("/api/solutions/" + solution.id, serializedPost, config)
+            .then((response) => {
+                router.push({ name: "solutions.index" });
                 swal({
-                    icon: 'success',
-                    title: 'Solution updated successfully'
-                })
+                    icon: "success",
+                    title: "Solution updated successfully",
+                });
             })
-            .catch(error => {
+            .catch((error) => {
                 if (error.response?.data) {
-                    validationErrors.value = error.response.data.errors
+                    validationErrors.value = error.response.data.errors;
                 }
             })
-            .finally(() => isLoading.value = false)
-    }
-
-
-
+            .finally(() => (isLoading.value = false));
+    };
 
     const deleteSolution = async (id) => {
         swal({
-            title: 'Are you sure?',
-            text: 'You won\'t be able to revert this action!',
-            icon: 'warning',
+            title: "Are you sure?",
+            text: "You won't be able to revert this action!",
+            icon: "warning",
             showCancelButton: true,
-            confirmButtonText: 'Yes, delete it!',
-            confirmButtonColor: '#ef4444',
+            confirmButtonText: "Yes, delete it!",
+            confirmButtonColor: "#ef4444",
             timer: 20000,
             timerProgressBar: true,
-            reverseButtons: true
-        })
-            .then(result => {
-                if (result.isConfirmed) {
-                    axios.delete('/api/solutions/' + id)
-                        .then(response => {
-                            getSolutions()
-                            router.push({name: 'solutions.index'})
-                            swal({
-                                icon: 'success',
-                                title: 'Solution deleted successfully'
-                            })
-                        })
-                        .catch(error => {
-                            swal({
-                                icon: 'error',
-                                title: 'Something went wrong'
-                            })
-                        })
-                }
-            })
-    }
+            reverseButtons: true,
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axiosInstance
+                    .delete("/api/solutions/" + id)
+                    .then((response) => {
+                        getSolutions();
+                        router.push({ name: "solutions.index" });
+                        swal({
+                            icon: "success",
+                            title: "Solution deleted successfully",
+                        });
+                    })
+                    .catch((error) => {
+                        swal({
+                            icon: "error",
+                            title: "Something went wrong",
+                        });
+                    });
+            }
+        });
+    };
 
     const deleteSolutionImage = async (id) => {
         swal({
-            title: 'Are you sure?',
-            text: 'You won\'t be able to revert this action!',
-            icon: 'warning',
+            title: "Are you sure?",
+            text: "You won't be able to revert this action!",
+            icon: "warning",
             showCancelButton: true,
-            confirmButtonText: 'Yes, delete it!',
-            confirmButtonColor: '#ef4444',
+            confirmButtonText: "Yes, delete it!",
+            confirmButtonColor: "#ef4444",
             timer: 20000,
             timerProgressBar: true,
-            reverseButtons: true
-        })
-            .then(result => {
-                if (result.isConfirmed) {
-                    axios.delete('/api/solution-images/' + id)
-                        .then(response => {
-                            getSolutions()
-                            //router.push({name: 'solutions.index'})
-                            router.go(0);
-                            swal({
-                                icon: 'success',
-                                title: 'Image deleted successfully'
-                            })
-                        })
-                        .catch(error => {
-                            swal({
-                                icon: 'error',
-                                title: 'Something went wrong'
-                            })
-                        })
-                }
-            })
-    }
-
-
-
+            reverseButtons: true,
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axiosInstance
+                    .delete("/api/solution-images/" + id)
+                    .then((response) => {
+                        getSolutions();
+                        //router.push({name: 'solutions.index'})
+                        router.go(0);
+                        swal({
+                            icon: "success",
+                            title: "Image deleted successfully",
+                        });
+                    })
+                    .catch((error) => {
+                        swal({
+                            icon: "error",
+                            title: "Something went wrong",
+                        });
+                    });
+            }
+        });
+    };
 
     const getSolutionList = async () => {
-        axios.get('/api/solution-list')
-            .then(response => {
-                solutionList.value = response.data.data;
-            })
-    }
+        axiosInstance.get("/api/solution-list").then((response) => {
+            solutionList.value = response.data.data;
+        });
+    };
 
     return {
         solutionList,
@@ -230,6 +233,6 @@ export default function useSolutions() {
         deleteSolution,
         deleteSolutionImage,
         validationErrors,
-        isLoading
-    }
+        isLoading,
+    };
 }

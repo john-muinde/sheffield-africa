@@ -1,5 +1,6 @@
 import { ref, inject } from "vue";
 import { useRouter } from "vue-router";
+import axiosInstance from "../axiosInstance";
 
 export default function useClients() {
     const clients = ref([]);
@@ -27,7 +28,7 @@ export default function useClients() {
         order_column = "created_at",
         order_direction = "desc"
     ) => {
-        axios
+        axiosInstance
             .get(
                 "/api/clients?page=" +
                     page +
@@ -48,7 +49,7 @@ export default function useClients() {
     };
 
     const getClient = async (id) => {
-        axios.get("/api/clients/" + id).then((response) => {
+        axiosInstance.get("/api/clients/" + id).then((response) => {
             client.value = response.data.data;
         });
     };
@@ -74,7 +75,7 @@ export default function useClients() {
 
         console.log(serializedPost);
 
-        axios
+        axiosInstance
             .post("/api/clients", serializedPost, config)
             .then((response) => {
                 router.push({ name: "clients.create" });
@@ -120,7 +121,7 @@ export default function useClients() {
 
         console.log(serializedPost);
 
-        axios
+        axiosInstance
             .put("/api/clients/" + client.id, client)
             .then((response) => {
                 router.push({ name: "clients.index" });
@@ -150,7 +151,7 @@ export default function useClients() {
             reverseButtons: true,
         }).then((result) => {
             if (result.isConfirmed) {
-                axios
+                axiosInstance
                     .delete("/api/clients/" + id)
                     .then((response) => {
                         getClients();
@@ -171,7 +172,7 @@ export default function useClients() {
     };
 
     const getClientList = async () => {
-        axios.get("/api/client-list").then((response) => {
+        axiosInstance.get("/api/client-list").then((response) => {
             clientList.value = response.data.data;
         });
     };

@@ -1,5 +1,6 @@
 import { ref, inject } from "vue";
 import { useRouter } from "vue-router";
+import axiosInstance from "../axiosInstance";
 
 export default function useProjects() {
     const projects = ref([]);
@@ -25,7 +26,7 @@ export default function useProjects() {
         order_column = "created_at",
         order_direction = "desc"
     ) => {
-        axios
+        axiosInstance
             .get(
                 "/api/projects?page=" +
                     page +
@@ -48,7 +49,7 @@ export default function useProjects() {
     };
 
     const getProject = async (id) => {
-        axios.get("/api/projects/" + id).then((response) => {
+        axiosInstance.get("/api/projects/" + id).then((response) => {
             project.value = response.data.data;
         });
     };
@@ -85,7 +86,7 @@ export default function useProjects() {
 
         console.log(serializedPost);
 
-        axios
+        axiosInstance
             .post("/api/projects", serializedPost, config)
             .then((response) => {
                 router.push({ name: "projects.create" });
@@ -166,7 +167,7 @@ export default function useProjects() {
 
         console.log(serializedPost);
 
-        await axios
+        await axiosInstance
             .post("/api/projects/" + project.id, serializedPost, config)
             .then((response) => {
                 router.push({ name: "projects.index" });
@@ -196,7 +197,7 @@ export default function useProjects() {
             reverseButtons: true,
         }).then((result) => {
             if (result.isConfirmed) {
-                axios
+                axiosInstance
                     .delete("/api/projects/" + id)
                     .then((response) => {
                         getProjects();
@@ -229,7 +230,7 @@ export default function useProjects() {
             reverseButtons: true,
         }).then((result) => {
             if (result.isConfirmed) {
-                axios
+                axiosInstance
                     .delete("/api/project-images/" + id)
                     .then((response) => {
                         getProjects();
@@ -251,7 +252,7 @@ export default function useProjects() {
     };
 
     const getProjectList = async () => {
-        axios.get("/api/project-list").then((response) => {
+        axiosInstance.get("/api/project-list").then((response) => {
             projectList.value = response.data.data;
         });
     };

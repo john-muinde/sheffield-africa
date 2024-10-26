@@ -1,5 +1,6 @@
 import { ref, inject } from "vue";
 import { useRouter } from "vue-router";
+import axiosInstance from "../axiosInstance";
 
 export default function useNewss() {
     const newss = ref([]);
@@ -24,7 +25,7 @@ export default function useNewss() {
         order_column = "created_at",
         order_direction = "desc"
     ) => {
-        axios
+        axiosInstance
             .get(
                 "/api/newss?page=" +
                     page +
@@ -45,7 +46,7 @@ export default function useNewss() {
     };
 
     const getNews = async (id) => {
-        axios.get("/api/newss/" + id).then((response) => {
+        axiosInstance.get("/api/newss/" + id).then((response) => {
             news.value = response.data.data;
         });
     };
@@ -71,7 +72,7 @@ export default function useNewss() {
 
         console.log(serializedPost);
 
-        axios
+        axiosInstance
             .post("/api/newss", serializedPost, config)
             .then((response) => {
                 router.push({ name: "news.create" });
@@ -117,7 +118,7 @@ export default function useNewss() {
 
         console.log(serializedPost);
 
-        axios
+        axiosInstance
             .post("/api/newss/" + news.id, serializedPost, config)
             .then((response) => {
                 router.push({ name: "news.index" });
@@ -147,7 +148,7 @@ export default function useNewss() {
             reverseButtons: true,
         }).then((result) => {
             if (result.isConfirmed) {
-                axios
+                axiosInstance
                     .delete("/api/newss/" + id)
                     .then((response) => {
                         getNewss();
@@ -168,7 +169,7 @@ export default function useNewss() {
     };
 
     const getNewsList = async () => {
-        axios.get("/api/news-list").then((response) => {
+        axiosInstance.get("/api/news-list").then((response) => {
             newsList.value = response.data.data;
         });
     };

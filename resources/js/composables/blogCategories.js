@@ -1,5 +1,6 @@
 import { ref, inject } from "vue";
 import { useRouter } from "vue-router";
+import axiosInstance from "../axiosInstance";
 
 export default function useBlogCategories() {
     const blogCategories = ref([]);
@@ -24,7 +25,7 @@ export default function useBlogCategories() {
         order_column = "created_at",
         order_direction = "desc"
     ) => {
-        axios
+        axiosInstance
             .get(
                 "/api/blogCategories?page=" +
                     page +
@@ -45,7 +46,7 @@ export default function useBlogCategories() {
     };
 
     const getBlogCategory = async (id) => {
-        axios.get("/api/blogCategories/" + id).then((response) => {
+        axiosInstance.get("/api/blogCategories/" + id).then((response) => {
             blogCategory.value = response.data.data;
         });
     };
@@ -71,7 +72,7 @@ export default function useBlogCategories() {
 
         console.log(serializedPost);
 
-        axios
+        axiosInstance
             .post("/api/blogCategories", serializedPost, config)
             .then((response) => {
                 router.push({ name: "blogCategories.create" });
@@ -114,7 +115,7 @@ export default function useBlogCategories() {
 
         console.log(serializedPost);
 
-        axios
+        axiosInstance
             .put("/api/blogCategories/" + blogCategory.id, blogCategory)
             .then((response) => {
                 router.push({ name: "blogCategories.index" });
@@ -144,7 +145,7 @@ export default function useBlogCategories() {
             reverseButtons: true,
         }).then((result) => {
             if (result.isConfirmed) {
-                axios
+                axiosInstance
                     .delete("/api/blogCategories/" + id)
                     .then((response) => {
                         getBlogCategories();
@@ -165,7 +166,7 @@ export default function useBlogCategories() {
     };
 
     const getBlogCategoryList = async () => {
-        axios.get("/api/blogCategory-list").then((response) => {
+        axiosInstance.get("/api/blogCategory-list").then((response) => {
             blogCategoryList.value = response.data.data;
         });
     };
