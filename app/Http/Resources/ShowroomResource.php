@@ -28,7 +28,7 @@ class ShowroomResource extends JsonResource
             'is_published' => $this->is_published,
             'main_image_path' => $this->main_image_path,
             'showroom_images' => ShowroomImagesResource::collection($this->showroomImages),
-            'created_at' => $this->created_at->toDateString()
+            'created_at' => $this->created_at ? $this->created_at->toDateString() : "",
         ];
     }
 }

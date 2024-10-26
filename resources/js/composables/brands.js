@@ -1,5 +1,6 @@
 import { ref, inject } from "vue";
 import { useRouter } from "vue-router";
+import axiosInstance from "../axiosInstance";
 
 export default function useBrands() {
     const brands = ref([]);

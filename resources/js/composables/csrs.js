@@ -1,5 +1,6 @@
 import { ref, inject } from "vue";
 import { useRouter } from "vue-router";
+import axiosInstance from "../axiosInstance";
 
 export default function useCsrs() {
     const csrs = ref([]);
@@ -23,7 +24,7 @@ export default function useCsrs() {
         order_column = "created_at",
         order_direction = "desc"
     ) => {
-        axios
+        axiosInstance
             .get(
                 "/api/csrs?page=" +
                     page +
@@ -44,7 +45,7 @@ export default function useCsrs() {
     };
 
     const getCsr = async (id) => {
-        axios.get("/api/csrs/" + id).then((response) => {
+        axiosInstance.get("/api/csrs/" + id).then((response) => {
             csr.value = response.data.data;
         });
     };
@@ -74,7 +75,7 @@ export default function useCsrs() {
             headers: { "content-type": "multipart/form-data" },
         };
 
-        axios
+        axiosInstance
             .post("/api/csrs", serializedPost, config)
             .then((response) => {
                 router.push({ name: "csrs.create" });
@@ -149,7 +150,7 @@ export default function useCsrs() {
 
         console.log(serializedPost);
 
-        await axios
+        await axiosInstance
             .post("/api/csrs/" + csr.id, serializedPost, config)
             .then((response) => {
                 router.push({ name: "csrs.index" });
@@ -179,7 +180,7 @@ export default function useCsrs() {
             reverseButtons: true,
         }).then((result) => {
             if (result.isConfirmed) {
-                axios
+                axiosInstance
                     .delete("/api/csrs/" + id)
                     .then((response) => {
                         getCsrs();
@@ -212,7 +213,7 @@ export default function useCsrs() {
             reverseButtons: true,
         }).then((result) => {
             if (result.isConfirmed) {
-                axios
+                axiosInstance
                     .delete("/api/csr-images/" + id)
                     .then((response) => {
                         getCsrs();
@@ -234,7 +235,7 @@ export default function useCsrs() {
     };
 
     const getCsrList = async () => {
-        axios.get("/api/csr-list").then((response) => {
+        axiosInstance.get("/api/csr-list").then((response) => {
             csrList.value = response.data.data;
         });
     };
