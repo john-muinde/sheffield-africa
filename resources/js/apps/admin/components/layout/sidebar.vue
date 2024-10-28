@@ -99,7 +99,7 @@ const menuItems = ref([
         icon: CalendarDateRangeIcon,
         subItems: [
             { title: "New Event", route: "/admin/events/create" },
-            { title: "View Event", route: "/admin/events" },
+            { title: "View Events", route: "/admin/events" },
         ],
     },
     {
@@ -251,7 +251,7 @@ const menuItems = ref([
         icon: GlobeAltIcon,
         subItems: [
             { title: "Manage SEO Settings", route: "/admin/seo/create_seo" },
-            { title: "View SEO Reports", route: "/admin/view_seo" },
+            { title: "View SEO Reports", route: "/admin/seo/view_seo" },
         ],
     },
 ]);
@@ -259,10 +259,10 @@ const openSubmenus = ref(new Set());
 
 const toggleSubmenu = (id) => {
     if (openSubmenus.value.has(id)) {
-        openSubmenus.value.delete(id); // Close the currently open submenu
+        openSubmenus.value.delete(id);
     } else {
-        openSubmenus.value.clear(); // Close all other submenus
-        openSubmenus.value.add(id); // Open the clicked submenu
+        openSubmenus.value.clear();
+        openSubmenus.value.add(id);
     }
 };
 

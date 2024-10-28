@@ -9,6 +9,7 @@ use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
 use App\Models\News;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class NewsController extends Controller
 {
@@ -142,6 +143,7 @@ class NewsController extends Controller
 
     public function destroy(News $news)
     {
+        Log::info('News id' . $news->id);
         $this->authorize('product-delete');
         $news->delete();
 

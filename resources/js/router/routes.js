@@ -116,23 +116,28 @@ const routes = [
             {
                 path: "/offers",
                 name: "frontend.offers",
-                component: () => import(/* webpackChunkName: "offers" */ "../apps/frontend/views/Landing.vue"),
+                component: () =>
+                    import(
+                        /* webpackChunkName: "offers" */ "../apps/frontend/views/Landing.vue"
+                    ),
                 meta: {
                     layout: "frontend",
                     title: "Offers",
                     metaTags: [
                         {
                             name: "description",
-                            content: "Here are our top offers offered at Sheffield Africa.",
+                            content:
+                                "Here are our top offers offered at Sheffield Africa.",
                         },
                         {
                             property: "og:description",
-                            content: "Here are our top offers at Sheffield Africa",
+                            content:
+                                "Here are our top offers at Sheffield Africa",
                         },
                     ],
                 },
             },
-            
+
             {
                 path: "/about-us",
                 name: "about",
@@ -380,7 +385,6 @@ const routes = [
                 },
             },
 
-
             {
                 path: "/media/videos",
                 name: "media-videos",
@@ -403,8 +407,6 @@ const routes = [
                     ],
                 },
             },
-
-            
 
             {
                 path: "/media/in-the-news",
@@ -429,7 +431,6 @@ const routes = [
                 },
             },
 
-
             {
                 path: "/media/in-the-news/page/:page",
                 name: "media-in-the-news.pages",
@@ -453,7 +454,6 @@ const routes = [
                 },
             },
 
-
             {
                 path: "/media/gallery",
                 name: "media-gallery",
@@ -476,7 +476,6 @@ const routes = [
                     ],
                 },
             },
-
 
             {
                 path: "/media/gallery/page/:page",
@@ -569,8 +568,7 @@ const routes = [
                     ],
                 },
             },
-            
-            
+
             {
                 path: "/faq",
                 name: "faq",
@@ -662,8 +660,6 @@ const routes = [
                     ],
                 },
             },
-
-            
 
             {
                 path: "/customer-service",
@@ -989,29 +985,6 @@ const routes = [
                 },
             },
 
-            // {
-            //     path: "/category/kitchen",
-            //     name: "products",
-            //     component: () =>
-            //         import(
-            //             /* webpackChunkName: "index" */ "../apps/frontend/views/Category.vue"
-            //         ),
-            //     meta: {
-            //         layout: "frontend",
-            //         title: "Products",
-            //         metaTags: [
-            //             {
-            //                 name: "description",
-            //                 content: "The about page of our example app.",
-            //             },
-            //             {
-            //                 property: "og:description",
-            //                 content: "The about page of our example app.",
-            //             },
-            //         ],
-            //     },
-            // },
-
             {
                 path: "/category/:id/:name",
                 name: "frontend.category",
@@ -1080,7 +1053,6 @@ const routes = [
                     ],
                 },
             },
-
 
             {
                 path: "/kitchen/solutions/:id/:name",
@@ -1180,7 +1152,6 @@ const routes = [
                     next();
                 },
             },
-
 
             {
                 path: "/laundry/product/:id/:name",
@@ -1740,7 +1711,6 @@ const routes = [
                 },
             },
 
-
             {
                 path: "/admin/categories/create",
                 name: "categories.create",
@@ -2172,14 +2142,13 @@ const routes = [
                 },
             },
 
-
             //start publications
-
 
             {
                 path: "/admin/publications",
                 name: "publications.index",
-                component: () => import("../apps/admin/views/publications/index.vue"),
+                component: () =>
+                    import("../apps/admin/views/publications/index.vue"),
                 meta: {
                     layout: "app",
                     title: "Publications",
@@ -2198,7 +2167,8 @@ const routes = [
             {
                 path: "/admin/publications/create",
                 name: "publications.create",
-                component: () => import("../apps/admin/views/publications/create.vue"),
+                component: () =>
+                    import("../apps/admin/views/publications/create.vue"),
                 meta: {
                     layout: "app",
                     title: "Create Publications",
@@ -2217,7 +2187,8 @@ const routes = [
             {
                 path: "/admin/publications/edit/:id",
                 name: "publications.edit",
-                component: () => import("../apps/admin/views/publications/edit.vue"),
+                component: () =>
+                    import("../apps/admin/views/publications/edit.vue"),
                 meta: {
                     layout: "app",
                     title: "Edit Publications",
@@ -2234,7 +2205,6 @@ const routes = [
                 },
             },
 
-
             //end publications
 
             //start in the news
@@ -2242,7 +2212,8 @@ const routes = [
             {
                 path: "/admin/in-the-news",
                 name: "in_the_news.index",
-                component: () => import("../apps/admin/views/in_the_news/index.vue"),
+                component: () =>
+                    import("../apps/admin/views/in_the_news/index.vue"),
                 meta: {
                     layout: "app",
                     title: "In the News",
@@ -2261,7 +2232,8 @@ const routes = [
             {
                 path: "/admin/in-the-news/create",
                 name: "news.create",
-                component: () => import("../apps/admin/views/in_the_news/create.vue"),
+                component: () =>
+                    import("../apps/admin/views/in_the_news/create.vue"),
                 meta: {
                     layout: "app",
                     title: "Create In the News",
@@ -2280,7 +2252,8 @@ const routes = [
             {
                 path: "/admin/in-the-news/edit/:id",
                 name: "news.edit",
-                component: () => import("../apps/admin/views/in_the_news/edit.vue"),
+                component: () =>
+                    import("../apps/admin/views/in_the_news/edit.vue"),
                 meta: {
                     layout: "app",
                     title: "Edit In the News",
@@ -2297,7 +2270,6 @@ const routes = [
                 },
             },
             //end in the news
-
 
             //start vides
 
@@ -2323,7 +2295,8 @@ const routes = [
             {
                 path: "/admin/videos/create",
                 name: "videos.create",
-                component: () => import("../apps/admin/views/videos/create.vue"),
+                component: () =>
+                    import("../apps/admin/views/videos/create.vue"),
                 meta: {
                     layout: "app",
                     title: "Create Videos",
@@ -2361,14 +2334,13 @@ const routes = [
 
             //end videos
 
-
-
             //start gallery
 
             {
                 path: "/admin/gallery",
                 name: "gallery.index",
-                component: () => import("../apps/admin/views/gallery/index.vue"),
+                component: () =>
+                    import("../apps/admin/views/gallery/index.vue"),
                 meta: {
                     layout: "app",
                     title: "Gallery",
@@ -2387,7 +2359,8 @@ const routes = [
             {
                 path: "/admin/gallery/create",
                 name: "gallery.create",
-                component: () => import("../apps/admin/views/gallery/create.vue"),
+                component: () =>
+                    import("../apps/admin/views/gallery/create.vue"),
                 meta: {
                     layout: "app",
                     title: "Create Gallery",
@@ -2424,8 +2397,6 @@ const routes = [
             },
 
             //end gallery
-
-
 
             //solutions
 
@@ -2471,12 +2442,13 @@ const routes = [
                 },
             },
 
-
             {
                 path: "/admin/solutions/category-sequence/:id",
                 name: "solutions.category.sequence",
                 component: () =>
-                    import("../apps/admin/views/solutions/category-sequence.vue"),
+                    import(
+                        "../apps/admin/views/solutions/category-sequence.vue"
+                    ),
                 meta: {
                     layout: "app",
                     title: "solutions",
@@ -2497,7 +2469,9 @@ const routes = [
                 path: "/admin/solutions/category-sequence/:id/page/:page",
                 name: "solutions.category.sequence.page.pagenation",
                 component: () =>
-                    import("../apps/admin/views/solutions/category-sequence.vue"),
+                    import(
+                        "../apps/admin/views/solutions/category-sequence.vue"
+                    ),
                 meta: {
                     layout: "app",
                     title: "solutions",
@@ -2741,7 +2715,6 @@ const routes = [
                 },
             },
 
-
             //clients
 
             {
@@ -2787,8 +2760,7 @@ const routes = [
             {
                 path: "/admin/clients/edit/:id",
                 name: "clients.edit",
-                component: () =>
-                    import("../apps/admin/views/clients/edit.vue"),
+                component: () => import("../apps/admin/views/clients/edit.vue"),
                 meta: {
                     layout: "app",
                     title: "Edit Clients",
@@ -2807,7 +2779,7 @@ const routes = [
 
             //projects
 
-             //clients
+            //clients
 
             {
                 path: "/admin/projects",

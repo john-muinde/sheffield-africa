@@ -54,6 +54,7 @@
                                         <div class="text-danger mt-1">
                                             <div
                                                 v-for="message in validationErrors?.name"
+                                                :key="message.id"
                                             >
                                                 {{ message }}
                                             </div>
@@ -140,6 +141,7 @@
                                         <div class="text-danger mt-1">
                                             <div
                                                 v-for="message in validationErrors?.type"
+                                                :key="message.id"
                                             >
                                                 {{ message }}
                                             </div>
@@ -211,6 +213,7 @@
                                         <div class="text-danger mt-1">
                                             <div
                                                 v-for="message in validationErrors?.video_url"
+                                                :key="message.id"
                                             >
                                                 {{ message }}
                                             </div>
@@ -247,6 +250,7 @@
                                         <div class="text-danger mt-1">
                                             <div
                                                 v-for="message in validationErrors?.is_published"
+                                                :key="message.id"
                                             >
                                                 {{ message }}
                                             </div>
@@ -401,7 +405,6 @@ onMounted(() => {
 
     watchEffect(() => {
         if (postData.value && postData.value.main_image_path) {
-            
             const mainImagePath = postData.value.main_image_path;
 
             // Define the variable

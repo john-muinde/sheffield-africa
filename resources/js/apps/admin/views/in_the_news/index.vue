@@ -95,7 +95,7 @@
 
                                 <a
                                     href="javascript:;"
-                                    @click.prevent="deleteBlog(props.row.id)"
+                                    @click.prevent="deleteNews(props.row.id)"
                                     class="ms-2 badge bg-danger"
                                     data-bs-toggle="tooltip"
                                     data-bs-placement="top"
