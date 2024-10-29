@@ -4,37 +4,27 @@
             <div
                 class="col-xs-3 col-sm-4 col-md-2 white-bg"
                 v-for="(category, index) in mainCategories"
-                :key="index"
+                :key="category.id"
             >
                 <router-link
                     class="element-type"
                     :to="getCategoryLink(category.id, category.name, 1)"
                 >
                     <div class="element box">
-                        <p>
-                            <img
-                                class="menu-icon"
-                                :src="`/assets/images/menu-icons/${formattedName(
-                                    category.name
-                                )}.png`"
-                            />{{ category.name }}
-                        </p>
+                        <p><img class="menu-icon" :src="`/assets/images/menu-icons/${formattedName(category.name)}.png`">{{ category.name }}</p>
                     </div>
                 </router-link>
             </div>
 
-            <div class="col-xs-3 col-sm-4 col-md-2 white-bg">
+            <div
+                class="col-xs-3 col-sm-4 col-md-2 white-bg"
+            >
                 <router-link
                     class="element-type router-link-active active"
                     to="/consultancy-and-design"
                 >
                     <div class="element box box2 box3">
-                        <p>
-                            <img
-                                class="menu-icon"
-                                src="/assets/images/menu-icons/consultancy-design.png"
-                            />Consultancy & Design
-                        </p>
+                        <p><img class="menu-icon" src="/assets/images/menu-icons/consultancy-design.png">Consultancy & Design </p>
                     </div>
                 </router-link>
             </div>
@@ -64,31 +54,24 @@
                     :to="getCategoryLink(category.id, category.name, 1)"
                 >
                     <div class="sf-with-ul">
-                        <p class="category">
-                            <img
-                                class="mobile-menu-icon"
-                                :src="`/assets/images/menu-icons/${formattedName(
-                                    category.name
-                                )}.png`"
-                            />
-                            {{ category.name }}
-                        </p>
+                        <p class="category"><img class="mobile-menu-icon" :src="`/assets/images/menu-icons/${formattedName(category.name)}.png`"> {{ category.name }}</p>
                     </div>
                 </router-link>
             </li>
 
-            <li role="presentation">
-                <router-link class="element-type" to="/consultancy-and-design">
+
+            <li
+                role="presentation"
+            >
+                <router-link
+                    class="element-type"
+                    to="/consultancy-and-design"
+                >
                     <div class="sf-with-ul">
-                        <p class="category">
-                            <img
-                                class="mobile-menu-icon"
-                                src="/assets/images/menu-icons/consultancy-design.png"
-                            />
-                            Consultancy & Design
-                        </p>
+                        <p class="category"><img class="mobile-menu-icon" src="/assets/images/menu-icons/consultancy-design.png"> Consultancy & Design</p>
                     </div>
                 </router-link>
+
             </li>
         </ul>
     </div>
@@ -110,7 +93,6 @@ const fetchMainCategories = async () => {
     try {
         const response = await axios.get("/api/get-main-categories/21", {});
         mainCategories.value = response.data.data;
-        console.log("Cat -> ", mainCategories.value);
     } catch (error) {
         console.error(error);
     }
@@ -132,8 +114,8 @@ onMounted(async () => {
     fetchMainCategories();
 });
 
-const formattedName = (category_name) => {
-    return category_name.toLowerCase().replace(/\s/g, "-");
+const formattedName = (category_name) => {    
+  return category_name.toLowerCase().replace(/\s/g, '-');
 };
 
 const route = useRoute();
@@ -277,6 +259,8 @@ const linkClass = computed(() => {
     border: 3.5px solid #c02434;
 }
 
+
+
 .mobile-categories {
     display: none;
     margin-top: -2rem;
@@ -291,12 +275,12 @@ const linkClass = computed(() => {
 }
 
 .router-link-active .box .menu-icon {
-    filter: invert(20%) sepia(63%) saturate(3227%) hue-rotate(337deg)
-        brightness(88%) contrast(94%);
+
+    filter: invert(20%) sepia(63%) saturate(3227%) hue-rotate(337deg) brightness(88%) contrast(94%);
 }
 
 .mobile-menu-icon {
-    width: 35px;
+    width:35px;
     padding-left: 5px;
     padding-right: 10px;
     display: inline-block;
@@ -343,8 +327,11 @@ const linkClass = computed(() => {
 }
 
 @media (max-width: 1367px) {
-    .box p {
+
+    .box p{
+
         font-size: 1rem;
+
     }
 }
 

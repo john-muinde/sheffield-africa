@@ -28,6 +28,7 @@
         </nav>
         <!-- End .page-header -->
 
+
         <div class="page-content">
             <div class="container">
                 <div class="row">
@@ -110,22 +111,26 @@
                     </div>
                     <!-- End .col-lg-9 -->
 
-                    <aside class="lg:order-first mt-2 lg:w-1/4">
-                        <div class="space-y-4">
-                            <div class="bg-white rounded-lg shadow p-4">
-                                <h3
-                                    class="text-lg font-semibold text-gray-700 mb-2"
+                    <aside class="col-lg-3 order-lg-first mt-2">
+                        <div class="sidebar sidebar-shop sidebar-shop-solution">
+                            <!-- End .widget widget-clean -->
+
+                            <div class="widget widget-cats widget-categories">
+                                <h3 class="widget-title">Relevant Products</h3>
+                                <!-- End .widget-title -->
+
+                                <hr />
+
+                                <ul
+                                    v-for="category in solutionCategoriesList"
+                                    :key="category.id"
                                 >
-                                    Relevant Products
-                                </h3>
-
-                                <hr class="border-t border-gray-300 my-2" />
-
-                                <ul>
                                     <li
-                                        v-for="category in solutionCategoriesList"
-                                        :key="category.id"
-                                        class="border-b border-gray-300 py-2"
+                                        class=""
+                                        style="
+                                            border-bottom: 1px solid #ccc;
+                                            padding: 10px;
+                                        "
                                     >
                                         <router-link
                                             :to="
@@ -135,26 +140,25 @@
                                                     currentPage - 1
                                                 )
                                             "
-                                            class="text-blue-600 hover:text-blue-800 flex justify-between items-center"
+                                            >{{ category.name
+                                            }}<span>>></span></router-link
                                         >
-                                            <span>{{ category.name }}</span>
-                                            <span>&gt;&gt;</span>
-                                        </router-link>
                                     </li>
                                 </ul>
 
-                                <div class="mt-5">
+                                <div class="widget-body mt-5">
                                     <router-link
                                         to="/contact-us"
-                                        class="block w-full bg-blue-500 hover:bg-blue-600 text-white text-center py-2 rounded"
+                                        class="btn btn-secondary btn-block"
+                                        >Need Advise?</router-link
                                     >
-                                        Need Advice?
-                                    </router-link>
                                 </div>
                             </div>
-                        </div>
-                    </aside>
 
+                            
+                        </div>
+                        <!-- End .sidebar sidebar-shop -->
+                    </aside>
                     <!-- End .col-lg-3 -->
                 </div>
                 <!-- End .row -->
@@ -186,27 +190,27 @@ const the_category = ref([]);
 const solutionCategories = ref([]);
 const solutionCategoriesList = ref([]);
 
-import { useStore } from "vuex"; // Import the store
+import { useStore } from 'vuex'; // Import the store
 
 const store = useStore();
 
 const addToCart = (product) => {
-    const toast = window.Swal.mixin({
-        toast: true,
-        position: "bottom-end",
-        showConfirmButton: false,
-        timer: 4000,
-        padding: "2em",
-    });
-    toast.fire({
-        icon: "success",
-        title: "Item added to cart",
-        padding: "2em",
-        customClass: {
-            title: "swal-title-class",
-        },
-    });
-    store.dispatch("cart/addToCart", product);
+    const toast =  window.Swal.mixin({
+      toast: true,
+      position: 'bottom-end',
+      showConfirmButton: false,
+      timer: 4000,
+      padding: '2em'
+   });
+   toast.fire({
+      icon: 'success',
+      title: 'Item added to cart',
+      padding: '2em',
+      customClass: {
+         title: 'swal-title-class', 
+      },
+   });
+store.dispatch('cart/addToCart', product);
 };
 
 const fetchSolutionCategories = async () => {
@@ -234,16 +238,12 @@ const solutionCategoryProducts = ref([]);
 
 const fetchSolutionCategoryProducts = async () => {
     try {
-        const response = await axios.get(
-            "/api/get-solution-category-products",
-            {
-                params: {
-                    solution_id: solution_id.value,
-                    checkedCategoriesSolutions:
-                        checkedCategoriesSolutions.value,
-                },
-            }
-        );
+        const response = await axios.get('/api/get-solution-category-products', {
+            params: {
+              solution_id: solution_id.value,
+              checkedCategoriesSolutions: checkedCategoriesSolutions.value,
+            },
+        });
         solutionCategoryProducts.value = response.data.products.data;
 
         //console.log(solutionCategoryProducts.value);
@@ -390,23 +390,24 @@ watch(products, updateDisplayedProducts);
 }
 
 .laundry-image img {
-    box-shadow: 14px -9px 5px 0px rgba(0, 0, 0, 0.3);
-    filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.3));
+    box-shadow: 14px -9px 5px 0px rgba(0,0,0,0.3);
+    filter: drop-shadow(5px 5px 5px rgba(0,0,0,0.3));
 }
 
 .sidebar-shop-solution .filter-items-count .filter-item {
     padding-right: 0rem !important;
 }
 
-.swal2-popup.swal2-toast .swal2-title {
-    font-size: 1.5rem !important;
+.swal2-popup.swal2-toast .swal2-title  {
+
+   font-size: 1.5rem !important;
 }
 
-.swal2-container.swal2-bottom-end > .swal2-popup {
-    background-color: #c02434;
+.swal2-container.swal2-bottom-end>.swal2-popup {
+   background-color: #c02434;
 }
 
 .swal2-popup.swal2-toast .swal2-title {
-    color: #ffffff;
+   color: #ffffff;
 }
 </style>
