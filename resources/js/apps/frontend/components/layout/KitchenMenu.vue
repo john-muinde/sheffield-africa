@@ -110,7 +110,6 @@ const fetchMainCategories = async () => {
     try {
         const response = await axios.get("/api/get-main-categories/21", {});
         mainCategories.value = response.data.data;
-        console.log("Cat -> ", mainCategories.value);
     } catch (error) {
         console.error(error);
     }

@@ -209,71 +209,93 @@
                     </div>
                     <!-- End .col-lg-9 -->
 
-                    <aside class="lg:order-first mt-2 lg:w-1/6">
-                        <div class="space-y-4">
+                    <aside class="col-lg-2 order-lg-first mt-2">
+                        <div class="sidebar sidebar-shop sidebar-shop-solution">
+                            <!-- End .widget widget-clean -->
                             <div
                                 v-if="solutionCategoriesList.length"
-                                class="bg-white rounded-lg shadow p-4"
+                                class="widget widget-collapsible widget-categories"
                             >
-                                <h3
-                                    class="text-lg font-semibold text-gray-700 mb-2"
-                                >
+                                <h3 class="widget-title">
                                     <a
+                                        data-toggle="collapse"
                                         href="#widget-1"
                                         role="button"
                                         aria-expanded="true"
                                         aria-controls="widget-1"
-                                        class="hover:text-blue-600"
                                     >
                                         Product Categories
                                     </a>
                                 </h3>
-                                <div class="space-y-2" id="widget-1">
-                                    <div
-                                        v-for="category in solutionCategoriesList"
-                                        :key="category.id"
-                                        class="flex items-center space-x-2"
-                                    >
-                                        <input
-                                            type="checkbox"
-                                            :id="'cat-' + category.id"
-                                            :value="category.id"
-                                            @change="
-                                                handleCheckboxChange(
-                                                    category.id
-                                                )
-                                            "
-                                            class="text-blue-600 focus:ring-blue-500 rounded-sm mb-1"
-                                        />
-                                        <label
-                                            :for="'cat-' + category.id"
-                                            class="text-gray-600 leading-none text-md"
+                                <!-- End .widget-title -->
+                                <div class="collapse show" id="widget-1">
+                                    <div class="widget-body">
+                                        <div
+                                            class="filter-items filter-items-count"
                                         >
-                                            {{ category.name }}
-                                        </label>
+                                            <div
+                                                class="filter-item"
+                                                v-for="category in solutionCategoriesList"
+                                                :key="category.id"
+                                            >
+                                                <div
+                                                    class="custom-control custom-checkbox"
+                                                >
+                                                    <input
+                                                        type="checkbox"
+                                                        class="custom-control-input"
+                                                        :id="
+                                                            'cat-' + category.id
+                                                        "
+                                                        :value="category.id"
+                                                        @change="
+                                                            handleCheckboxChange(
+                                                                category.id
+                                                            )
+                                                        "
+                                                    />
+                                                    <label
+                                                        class="custom-control-label"
+                                                        :for="
+                                                            'cat-' + category.id
+                                                        "
+                                                        >{{
+                                                            category.name
+                                                        }}</label
+                                                    >
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- End .filter-items -->
                                     </div>
+                                    <!-- End .widget-body -->
                                 </div>
+                                <!-- End .collapse -->
                             </div>
 
-                            <div class="bg-white rounded-lg shadow p-4">
-                                <div class="w-full h-auto">
-                                    <img
-                                        :src="
-                                            '/storage/' +
-                                            solutionCategories.main_image_path
-                                        "
-                                        v-lazy:src="
-                                            '/storage/' +
-                                            solutionCategories.main_image_path
-                                        "
-                                        alt="Product image"
-                                        class="w-full rounded-lg"
-                                    />
+                            <div class="widget widget-collapsible">
+                                <div class="collapse show" id="widget-4">
+                                    <div class="widget-body">
+                                        <img
+                                            :src="
+                                                '/storage/' +
+                                                solutionCategories.main_image_path
+                                            "
+                                            v-lazy:src="
+                                                '/storage/' +
+                                                solutionCategories.main_image_path
+                                            "
+                                            alt="Product image"
+                                        />
+                                        <!-- End .filter-items -->
+                                    </div>
+                                    <!-- End .widget-body -->
                                 </div>
+                                <!-- End .collapse -->
                             </div>
                         </div>
+                        <!-- End .sidebar sidebar-shop -->
                     </aside>
-
                     <!-- End .col-lg-3 -->
                 </div>
                 <!-- End .row -->
