@@ -5,26 +5,23 @@ import vueI18n from "@intlify/vite-plugin-vue-i18n";
 import laravel from "laravel-vite-plugin";
 import sass from "sass";
 // import sass from "vite-plugin-sass";
-import commonjs from '@rollup/plugin-commonjs'
+import commonjs from "@rollup/plugin-commonjs";
 
 export default defineConfig({
-
     build: {
         sourcemap: false,
-        assetsDir: 'assets',
+        assetsDir: "assets",
         manifest: {
-            write: 'assets/manifest.json'
+            write: "assets/manifest.json",
         },
         rollupOptions: {
-          plugins: [
-            commonjs()
-          ]
-        }
+            plugins: [commonjs()],
+        },
     },
     plugins: [
         laravel({
             input: [
-                "resources/js/admin-main.js", 
+                "resources/js/admin-main.js",
                 "resources/js/frontend-main.js",
                 "resources/css/app.css",
                 "resources/js/apps/frontend/assets/css/bootstrap.min.css",
@@ -68,7 +65,7 @@ export default defineConfig({
     ],
     css: {
         modules: {
-            scopeBehaviour: 'local'
+            scopeBehaviour: "local",
         },
     },
     optimizeDeps: {
