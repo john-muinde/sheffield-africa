@@ -28,7 +28,6 @@
         </nav>
         <!-- End .page-header -->
 
-
         <div class="page-content">
             <div class="container">
                 <div class="row">
@@ -154,8 +153,6 @@
                                     >
                                 </div>
                             </div>
-
-                            
                         </div>
                         <!-- End .sidebar sidebar-shop -->
                     </aside>
@@ -190,27 +187,27 @@ const the_category = ref([]);
 const solutionCategories = ref([]);
 const solutionCategoriesList = ref([]);
 
-import { useStore } from 'vuex'; // Import the store
+import { useStore } from "vuex"; // Import the store
 
 const store = useStore();
 
 const addToCart = (product) => {
-    const toast =  window.Swal.mixin({
-      toast: true,
-      position: 'bottom-end',
-      showConfirmButton: false,
-      timer: 4000,
-      padding: '2em'
-   });
-   toast.fire({
-      icon: 'success',
-      title: 'Item added to cart',
-      padding: '2em',
-      customClass: {
-         title: 'swal-title-class', 
-      },
-   });
-store.dispatch('cart/addToCart', product);
+    const toast = window.Swal.mixin({
+        toast: true,
+        position: "bottom-end",
+        showConfirmButton: false,
+        timer: 4000,
+        padding: "2em",
+    });
+    toast.fire({
+        icon: "success",
+        title: "Item added to cart",
+        padding: "2em",
+        customClass: {
+            title: "swal-title-class",
+        },
+    });
+    store.dispatch("cart/addToCart", product);
 };
 
 const fetchSolutionCategories = async () => {
@@ -238,12 +235,16 @@ const solutionCategoryProducts = ref([]);
 
 const fetchSolutionCategoryProducts = async () => {
     try {
-        const response = await axios.get('/api/get-solution-category-products', {
-            params: {
-              solution_id: solution_id.value,
-              checkedCategoriesSolutions: checkedCategoriesSolutions.value,
-            },
-        });
+        const response = await axios.get(
+            "/api/get-solution-category-products",
+            {
+                params: {
+                    solution_id: solution_id.value,
+                    checkedCategoriesSolutions:
+                        checkedCategoriesSolutions.value,
+                },
+            }
+        );
         solutionCategoryProducts.value = response.data.products.data;
 
         //console.log(solutionCategoryProducts.value);
@@ -390,24 +391,23 @@ watch(products, updateDisplayedProducts);
 }
 
 .laundry-image img {
-    box-shadow: 14px -9px 5px 0px rgba(0,0,0,0.3);
-    filter: drop-shadow(5px 5px 5px rgba(0,0,0,0.3));
+    box-shadow: 14px -9px 5px 0px rgba(0, 0, 0, 0.3);
+    filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.3));
 }
 
 .sidebar-shop-solution .filter-items-count .filter-item {
     padding-right: 0rem !important;
 }
 
-.swal2-popup.swal2-toast .swal2-title  {
-
-   font-size: 1.5rem !important;
+.swal2-popup.swal2-toast .swal2-title {
+    font-size: 1.5rem !important;
 }
 
-.swal2-container.swal2-bottom-end>.swal2-popup {
-   background-color: #c02434;
+.swal2-container.swal2-bottom-end > .swal2-popup {
+    background-color: #c02434;
 }
 
 .swal2-popup.swal2-toast .swal2-title {
-   color: #ffffff;
+    color: #ffffff;
 }
 </style>
