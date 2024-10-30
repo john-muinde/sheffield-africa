@@ -18,38 +18,44 @@ use App\Models\Publication;
 use App\Models\Video;
 use App\Models\Gallery;
 use App\Models\News;
+use Illuminate\Support\Facades\Cache;
 
 class BlogController extends Controller
 {
     public function index()
     {
         $orderColumn = request('order_column', 'created_at');
-        if (!in_array($orderColumn, ['id', 'name', 'created_at'])) {
-            $orderColumn = 'created_at';
-        }
+        $allowedColumns = ['id', 'name', 'created_at'];
+        $orderColumn = in_array($orderColumn, $allowedColumns) ? $orderColumn : 'created_at';
+
         $orderDirection = request('order_direction', 'desc');
-        if (!in_array($orderDirection, ['asc', 'desc'])) {
-            $orderDirection = 'desc';
-        }
-        $blogs = Blog::when(request('search_id'), function ($query) {
+        $orderDirection = in_array($orderDirection, ['asc', 'desc']) ? $orderDirection : 'desc';
+
+        $cacheKey = 'blogs_' . md5(json_encode(request()->all()));
+
+        $blogs = Cache::remember($cacheKey, now()->addMinutes(10), function () use ($orderColumn, $orderDirection) {
+            return Blog::when(request('search_id'), function ($query) {
                 $query->where('id', request('search_id'));
             })
-            ->when(request('search_title'), function ($query) {
-                $query->where('name', 'like', '%' . request('search_title') . '%');
-            })
-            ->when(request('search_parent_id'), function ($query) {
-                $query->where('parent_id', 'like', '%' . request('search_parent_id') . '%');
-            })
-            ->when(request('search_global'), function ($query) {
-                $query->where(function ($q) {
-                    $q->where('id', request('search_global'))
-                        ->orWhere('name', 'like', '%' . request('search_global') . '%');
-                });
-            })
-            ->orderBy($orderColumn, $orderDirection)
-            ->paginate(10000);
+                ->when(request('search_title'), function ($query) {
+                    $query->where('name', 'like', '%' . request('search_title') . '%');
+                })
+                ->when(request('search_parent_id'), function ($query) {
+                    $query->where('parent_id', 'like', '%' . request('search_parent_id') . '%');
+                })
+                ->when(request('search_global'), function ($query) {
+                    $query->where(function ($q) {
+                        $q->where('id', request('search_global'))
+                            ->orWhere('name', 'like', '%' . request('search_global') . '%');
+                    });
+                })
+                ->orderBy($orderColumn, $orderDirection)
+                ->paginate(request('per_page', 20)); // Reduced pagination size
+        });
+
         return BlogResource::collection($blogs);
     }
+
 
     public function store(StoreBlogRequest $request)
     {
@@ -258,11 +264,19 @@ class BlogController extends Controller
 
     public function getBlogs()
     {
-        $perPage = request('per_page', 5); 
-        $blogs = Blog::Where('is_published', '=', true)->orderBy('created_at', 'DESC')->paginate($perPage);
+        $perPage = request('per_page', 5);
+        $cacheKey = 'blogs_published_' . $perPage . '_page_' . request('page', 1);
+
+        $blogs = Cache::remember($cacheKey, now()->addMinutes(10), function () use ($perPage) {
+            return Blog::where('is_published', true)
+                ->orderBy('created_at', 'DESC')
+                ->select(['id', 'name', 'excerpt', 'main_image_path'])
+                ->paginate($perPage);
+        });
 
         return $blogs;
     }
+
 
     public function getBlog()
     {
@@ -275,83 +289,89 @@ class BlogController extends Controller
     }
 
 
-    public function getBlogDetails(){
+    public function getBlogDetails()
+    {
 
         $blog_id = request('blog_id', 1);
 
         $blog = Blog::find($blog_id);
-        $other_blogs = Blog::where('id', '!=', $blog_id)->get();
+        $other_blogs = Blog::where('id', '!=', $blog_id)
+            ->select('main_image_path', 'name', 'id')
+            ->limit(15)
+            ->get();
 
-        return response()->json(['blog' => new BlogResource($blog), 'other_blogs' => $other_blogs ]);
 
+        return response()->json(['blog' => new BlogResource($blog), 'other_blogs' => $other_blogs]);
     }
 
 
-    public function getBlogSidebar(){
+    public function getBlogSidebar()
+    {
         $other_blogs = Blog::orderBy('created_at', 'ASC')->get();
-        return response()->json(['other_blogs' => $other_blogs ]);
+        return response()->json(['other_blogs' => $other_blogs]);
     }
 
-    public function getMediaCenter(){
+    public function getMediaCenter()
+    {
 
         $blogs = Blog::orderBy('created_at', 'DESC')->limit(9)->get();
         $videos = Video::orderBy('created_at', 'DESC')->get();
         $newsletters = Publication::Where('type', '=', 'Newsletter')->orderBy('created_at', 'DESC')->get();
         $brochures = Publication::Where('type', '=', 'Brochures')->orderBy('created_at', 'DESC')->get();
 
-        
+
 
         return response()->json(
             [
                 'blogs' => $blogs,
-                'videos' => $videos, 
-                'newsletters' => $newsletters, 
-                'brochures' => $brochures,  
+                'videos' => $videos,
+                'newsletters' => $newsletters,
+                'brochures' => $brochures,
             ]
         );
-
     }
 
 
-    public function getMediaCenterVideos(){
+    public function getMediaCenterVideos()
+    {
 
         $videos = Video::orderBy('created_at', 'DESC')->get();
 
         return response()->json(
             [
-               
-                'videos' => $videos, 
+
+                'videos' => $videos,
             ]
         );
-
     }
 
 
-    public function getMediaCenterGalleries(){
+    public function getMediaCenterGalleries()
+    {
 
-        $perPage = request('per_page', 9); 
+        $perPage = request('per_page', 9);
         $Gallerys = Gallery::Where('is_published', '=', true)->orderBy('created_at', 'DESC')->paginate($perPage);
 
         return $Gallerys;
-
     }
 
-    public function getMediaCenterGalleriesDetails(){
+    public function getMediaCenterGalleriesDetails()
+    {
 
         $showroom_id = request('showroom_id', 1);
 
         $Gallery = Gallery::find($showroom_id);
 
-        return response()->json(['showroom' => new GalleryResource($Gallery) ]);
+        return response()->json(['showroom' => new GalleryResource($Gallery)]);
     }
 
 
-    public function getInTheNews(){
+    public function getInTheNews()
+    {
 
-        $perPage = request('per_page', 9); 
+        $perPage = request('per_page', 9);
         $News = News::Where('is_published', '=', true)->orderBy('created_at', 'DESC')->paginate($perPage);
 
         return $News;
-
     }
 }

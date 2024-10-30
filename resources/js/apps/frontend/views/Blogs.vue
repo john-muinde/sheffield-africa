@@ -79,7 +79,7 @@
                                                 <div class="mb-2">
                                                     {{
                                                         getFirstParagraph(
-                                                            post.content
+                                                            post.excerpt
                                                         )
                                                     }}
                                                 </div>
@@ -339,8 +339,8 @@ const getFirstParagraph = (content) => {
     for (const paragraph of paragraphs) {
         const textContent = paragraph.textContent.trim();
         if (textContent.length > 50) {
-            if (textContent.length > 150) {
-                return textContent.slice(0, 180) + "...";
+            if (textContent.length > 140) {
+                return textContent.slice(0, 144) + "...";
             } else {
                 return textContent;
             }
