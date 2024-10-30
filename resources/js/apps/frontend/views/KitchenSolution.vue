@@ -228,7 +228,7 @@
                                     </a>
                                 </h3>
                                 <!-- End .widget-title -->
-                                <div class="collapse show" id="widget-1">
+                                <div class="show" id="widget-1">
                                     <div class="widget-body">
                                         <div
                                             class="filter-items filter-items-count"
@@ -274,7 +274,7 @@
                             </div>
 
                             <div class="widget widget-collapsible">
-                                <div class="collapse show" id="widget-4">
+                                <div class="show" id="widget-4">
                                     <div class="widget-body">
                                         <img
                                             :src="
