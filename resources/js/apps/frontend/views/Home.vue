@@ -346,17 +346,24 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted, reactive, nextTick, watch } from "vue";
+import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
+import { useHead } from "@unhead/vue";
 
-import { Carousel, Navigation, Slide, Pagination } from "vue3-carousel";
-
-import { useMeta } from "../../admin/composables/use-meta";
-useMeta({
-    title: "Home",
-    description:
-        "We offer commercial kitchen, laundry, cold room & stainless steel fabricated solutions",
-    keywords: "Commercial Kitchen, Commercial laundry, Commercial Cold room",
+useHead({
+    title: "Sheffield Green Solutions - Comprehensive Kitchen, Laundry, and Cold Room Solutions",
+    meta: [
+        {
+            name: "description",
+            content:
+                "Sheffield Steel Systems Limited specializes in comprehensive kitchen, laundry, and cold room solutions. Experience tailored services from design to installation in Nairobi.",
+        },
+        {
+            name: "keywords",
+            content:
+                "Commercial Kitchen Solutions, Commercial laundry Solutions, Commercial Cold room Solutions",
+        },
+    ],
 });
 
 /////////////
@@ -397,11 +404,9 @@ const search = async () => {
                 `/api/product_search` + `/${query.value}`
             );
             results.value = response.data.data;
-            //console.log(results.value);
             showResults.value = true;
-            //console.log(showResults.value);
         } catch (error) {
-            //console.error(error);
+            console.error(error);
         }
     } else {
         results.value = [];
@@ -431,7 +436,6 @@ const handleButtonClick = () => {
     addClassToBody();
 };
 
-// Function to dismiss the popup
 const dismissPopup = () => {
     showPopup.value = false;
     localStorage.setItem("popupDismissed", "true");

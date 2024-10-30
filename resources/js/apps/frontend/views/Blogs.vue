@@ -212,9 +212,15 @@
 <script setup>
 import { ref, computed, watch, onMounted, watchEffect } from "vue";
 import { useRoute } from "vue-router";
-import { useMeta } from "../../admin/composables/use-meta";
+import { useHead } from "@unhead/vue";
 
-useMeta({ title: "Blogs | Media Center" });
+useHead({
+    title: "Sheffield Green Solutions | Blog Posts",
+    meta: [
+        { name: "description", content: "Blog" },
+        { name: "keywords", content: "Blog" },
+    ],
+});
 
 const route = useRoute();
 
