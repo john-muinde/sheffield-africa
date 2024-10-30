@@ -351,17 +351,161 @@ import { useRouter } from "vue-router";
 import { useHead } from "@unhead/vue";
 
 useHead({
-    title: "Sheffield Green Solutions - Comprehensive Kitchen, Laundry, and Cold Room Solutions",
+    title: "Comprehensive Kitchen, Laundry, and Cold Room Solutions",
     meta: [
         {
             name: "description",
             content:
-                "Sheffield Steel Systems Limited specializes in comprehensive kitchen, laundry, and cold room solutions. Experience tailored services from design to installation in Nairobi.",
+                "Sheffield Steel Systems specializes in comprehensive kitchen, laundry, and cold room solutions. Experience tailored services from design to installation",
         },
         {
             name: "keywords",
             content:
-                "Commercial Kitchen Solutions, Commercial laundry Solutions, Commercial Cold room Solutions",
+                "Commercial Kitchen Solutions, Commercial Laundry Solutions, Commercial Cold Room Solutions",
+        },
+        {
+            property: "og:title",
+            content:
+                "Sheffield Green Solutions - Comprehensive Kitchen, Laundry, and Cold Room Solutions",
+        },
+        {
+            property: "og:description",
+            content:
+                "Sheffield Steel Systems Limited specializes in comprehensive kitchen, laundry, and cold room solutions. Experience tailored services from design to installation in Nairobi.",
+        },
+        {
+            property: "og:type",
+            content: "website",
+        },
+        {
+            property: "og:url",
+            content: "https://sheffieldafrica.com",
+        },
+        {
+            property: "og:image",
+            content: "https://sheffieldafrica.com/path/to/image.jpg",
+        },
+        {
+            name: "twitter:card",
+            content: "summary_large_image",
+        },
+        {
+            name: "twitter:title",
+            content:
+                "Sheffield Green Solutions - Comprehensive Kitchen, Laundry, and Cold Room Solutions",
+        },
+        {
+            name: "twitter:description",
+            content:
+                "Sheffield Steel Systems Limited specializes in comprehensive kitchen, laundry, and cold room solutions. Experience tailored services from design to installation in Nairobi.",
+        },
+        {
+            name: "twitter:image",
+            content: "https://sheffieldafrica.com/path/to/image.jpg",
+        },
+    ],
+
+    script: [
+        {
+            type: "application/ld+json",
+            content: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "Organization",
+                name: "Sheffield Steel Systems Limited",
+                url: "https://sheffieldafrica.com",
+                logo: "https://sheffieldafrica.com/path/to/logo.jpg",
+                contactPoint: [
+                    {
+                        "@type": "ContactPoint",
+                        telephone: "+254 713 777 111",
+                        contactType: "Customer Support",
+                        areaServed: "Nairobi",
+                        availableLanguage: "English",
+                    },
+                    {
+                        "@type": "ContactPoint",
+                        telephone: "+254 713 444 000",
+                        contactType: "Customer Support",
+                        areaServed: "Nairobi",
+                        availableLanguage: "English",
+                    },
+                    {
+                        "@type": "ContactPoint",
+                        telephone: "+254 716 518 450",
+                        contactType: "Customer Support",
+                        areaServed: "Mombasa",
+                        availableLanguage: "English",
+                    },
+                    {
+                        "@type": "ContactPoint",
+                        telephone: "+256 741 177 711",
+                        contactType: "Customer Support",
+                        areaServed: "Kampala",
+                        availableLanguage: "English",
+                    },
+                    {
+                        "@type": "ContactPoint",
+                        telephone: "+256 741 177 713",
+                        contactType: "Customer Support",
+                        areaServed: "Kampala",
+                        availableLanguage: "English",
+                    },
+                    {
+                        "@type": "ContactPoint",
+                        telephone: "+250 790 001 231",
+                        contactType: "Customer Support",
+                        areaServed: "Kigali",
+                        availableLanguage: "English",
+                    },
+                ],
+                address: [
+                    {
+                        "@type": "PostalAddress",
+                        streetAddress:
+                            "Icon 1 Off Old Mombasa Road before the Nairobi Standard Gauge Railway Station",
+                        postalCode: "00606",
+                        addressLocality: "Nairobi",
+                        addressRegion: "Nairobi",
+                        addressCountry: "KE",
+                    },
+                    {
+                        "@type": "PostalAddress",
+                        streetAddress:
+                            "Petrocity Complex 1st Floor-Off Links Road, Nyali",
+                        addressLocality: "Mombasa",
+                        addressCountry: "KE",
+                    },
+                    {
+                        "@type": "PostalAddress",
+                        streetAddress:
+                            "Bugalobi Hardware City Opposite Uganda Baati, Block 3 Room 102, Mulwana Road",
+                        addressLocality: "Kampala",
+                        addressCountry: "UG",
+                    },
+                    {
+                        "@type": "PostalAddress",
+                        addressLocality: "Kigali",
+                        addressCountry: "RW",
+                    },
+                ],
+                email: [
+                    {
+                        "@type": "Email",
+                        email: "info@sheffieldafrica.com",
+                        areaServed: "Nairobi",
+                    },
+                    {
+                        "@type": "Email",
+                        email: "sales@sheffieldafrica.com",
+                        areaServed: "Kampala",
+                    },
+                    {
+                        "@type": "Email",
+                        email: "sales1rwanda@sheffieldafrica.com",
+                        areaServed: "Kigali",
+                    },
+                ],
+            }),
         },
     ],
 });
