@@ -26,8 +26,8 @@
                             <div v-else class="row blogs-main-page-section">
                                 <div
                                     class="entry-item col-sm-6 col-lg-4"
-                                    v-for="product in displayedProducts"
-                                    :key="product.id"
+                                    v-for="post in displayedPosts"
+                                    :key="post.id"
                                 >
                                     <article class="entry entry-grid">
                                         <figure
@@ -36,19 +36,19 @@
                                             <router-link
                                                 :to="
                                                     getBlogLink(
-                                                        product.id,
-                                                        product.name
+                                                        post.id,
+                                                        post.name
                                                     )
                                                 "
                                             >
                                                 <img
                                                     :src="
                                                         '/storage/' +
-                                                        product.main_image_path
+                                                        post.main_image_path
                                                     "
                                                     v-lazy:src="
                                                         '/storage/' +
-                                                        product.main_image_path
+                                                        post.main_image_path
                                                     "
                                                     alt="image desc"
                                                 />
@@ -62,13 +62,13 @@
                                                     class="text-primary"
                                                     :to="
                                                         getBlogLink(
-                                                            product.id,
-                                                            product.name
+                                                            post.id,
+                                                            post.name
                                                         )
                                                     "
                                                     >{{
                                                         getBlogParagraph(
-                                                            product.name
+                                                            post.name
                                                         )
                                                     }}</router-link
                                                 >
@@ -79,7 +79,7 @@
                                                 <div class="mb-2">
                                                     {{
                                                         getFirstParagraph(
-                                                            product.content
+                                                            post.content
                                                         )
                                                     }}
                                                 </div>
@@ -87,8 +87,8 @@
                                                     class="btn btn-primary"
                                                     :to="
                                                         getBlogLink(
-                                                            product.id,
-                                                            product.name
+                                                            post.id,
+                                                            post.name
                                                         )
                                                     "
                                                 >
@@ -211,33 +211,22 @@
 
 <script setup>
 import { ref, computed, watch, onMounted, watchEffect } from "vue";
-// import axios from "axios";
 import { useRoute } from "vue-router";
 import { useMeta } from "../../admin/composables/use-meta";
 
 useMeta({ title: "Blogs | Media Center" });
 
 const route = useRoute();
-const currentRoute = ref(route);
 
 const currentPage = ref(route.params.page ? parseInt(route.params.page) : 1);
 const perPage = ref(9);
-const totalProducts = ref(0);
-const products = ref([]);
-const totalCountperPage = ref(0);
+const totalPosts = ref(0);
+const posts = ref([]);
 const category_id = ref(route.params.id ? parseInt(route.params.id) : 1);
-const categories = ref([]);
 const other_blogs = ref([]);
-const the_category = ref([]);
-
-const checkedCategories = ref([]);
-const mainCategorySelected = ref([]);
-const checkedBrands = ref([]);
-const selectedSortOption = ref("");
 const loading = ref(false);
 
-// Fetch products based on the current page
-const fetchProducts = async () => {
+const fetchBlogPosts = async () => {
     loading.value = true;
     try {
         const response = await axios.get("/api/get-blogs", {
@@ -247,10 +236,8 @@ const fetchProducts = async () => {
                 category_id: category_id.value,
             },
         });
-        products.value = response.data.data;
-        totalProducts.value = response.data.total;
-
-        console.log(totalProducts.value);
+        posts.value = response.data.data;
+        totalPosts.value = response.data.total;
     } catch (error) {
         console.error(error);
     } finally {
@@ -261,7 +248,6 @@ const fetchProducts = async () => {
 const fetchBlogSidebar = async () => {
     try {
         const response = await axios.get("/api/get-blog-sidebar", {});
-        //blog.value = response.data.blog;
         other_blogs.value = response.data.other_blogs;
     } catch (error) {
         console.error(error);
@@ -283,11 +269,11 @@ const getBlogPageLink = (page) => {
 
 // Determine the total number of pages
 const totalPages = computed(() => {
-    return Math.ceil(totalProducts.value / perPage.value);
+    return Math.ceil(totalPosts.value / perPage.value);
 });
 
 // Displayed products based on the current page
-const displayedProducts = ref([]);
+const displayedPosts = ref([]);
 
 // Go to the previous page
 const goToPreviousPage = () => {
@@ -307,26 +293,22 @@ const goToThisPage = (page) => {
     currentPage.value = page;
 };
 
-const updateDisplayedProducts = () => {
+const updateDisplayedPosts = () => {
     const startIndex = 0;
-    displayedProducts.value = products.value;
+    displayedPosts.value = posts.value;
 };
 
 const isInteger = (value) => {
     return Number.isInteger(value);
 };
 
-// Generate the page links
 const generatePageLinks = computed(() => {
     const pageLinks = [];
-    const maxVisiblePages = 5; // Maximum number of visible page links
+    const maxVisiblePages = 5;
 
-    // Add previous link
     if (currentPage.value > 1) {
         pageLinks.push("Prev");
     }
-
-    // Add current page and surrounding pages
     let startPage = Math.max(
         1,
         currentPage.value - Math.floor(maxVisiblePages / 2)
@@ -341,7 +323,6 @@ const generatePageLinks = computed(() => {
         pageLinks.push(page);
     }
 
-    // Add next link
     if (currentPage.value < totalPages.value) {
         pageLinks.push("Next");
     }
@@ -381,21 +362,18 @@ const getBlogParagraph = (content) => {
     return "";
 };
 
-// Initial fetch of products
 onMounted(() => {
-    fetchProducts();
+    fetchBlogPosts();
     fetchBlogSidebar();
 });
 
-// Watch for changes in the currentPage and fetch products accordingly
-watch(currentPage, fetchProducts);
+watch(currentPage, fetchBlogPosts);
 
-// Watch for changes in the products and update displayedProducts
-watch(products, updateDisplayedProducts);
+watch(posts, updateDisplayedPosts);
 
 watchEffect(() => {
-    const params = route.params; // Access the route parameters
-    const query = route.query; // Access the query parameters
+    const params = route.params;
+    const query = route.query;
 
     if (params.id !== "" && category_id !== params.id) {
         currentPage.value = 1;
@@ -406,10 +384,7 @@ watchEffect(() => {
             currentPage.value = params.page ? parseInt(params.page) : 1;
         }
 
-        // Call a method or update component data based on the new route
-
-        fetchProducts();
-        //console.log("test "+the_cat_name.value);
+        fetchBlogPosts();
     }
 });
 </script>
