@@ -6,7 +6,7 @@
     ];
 @endphp
 <!DOCTYPE html>
-<html>
+<html lang="{{ $locale }}">
 
 <head>
     <meta charset="utf-8">

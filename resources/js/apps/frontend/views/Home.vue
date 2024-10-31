@@ -56,7 +56,7 @@
                                                     result.main_image_path
                                                 "
                                                 class="rounded profile-img"
-                                                alt=""
+                                                alt=" Shelffield Green Solutions - Commercial Kitchen Solutions, Cold-Storage Solutions and Launch Solutions"
                                             />
                                             {{ result.name }}
                                         </router-link>
@@ -73,7 +73,7 @@
                         <img
                             class="zoom-image"
                             src="../assets/images/logo.png"
-                            alt="Sheffield Logo"
+                            alt="Sheffield Green Solutions Logo"
                             width="245"
                             height="auto"
                         />
@@ -177,7 +177,7 @@
                     <router-link to="/" class="logo">
                         <img
                             src="../assets/images/logo.png"
-                            alt="Sheffield Logo"
+                            alt="Sheffield Green Solutions Logo"
                             width="245"
                             height="auto"
                         />
@@ -220,6 +220,7 @@
                         <div class="home-section-white">
                             <img
                                 src="assets/images/homepage/sheffield_engineer.jpg"
+                                alt="Sheffield Green Solutions - Commercial Kitchen Solutions, Cold-Storage Solutions and Launch Solutions"
                             />
                         </div>
                     </router-link>
@@ -231,7 +232,7 @@
                         <div class="home-section-white">
                             <img
                                 src="assets/images/homepage/cold_storage_home.jpg"
-                                alt="Commercial Cold Storage"
+                                alt="Commercial Cold Storage Solutions"
                             />
                         </div>
                     </router-link>
@@ -243,7 +244,7 @@
                         <div class="home-section-white">
                             <img
                                 src="assets/images/homepage/food_service_equipment.jpg"
-                                alt="Commercial Food Service Equipment"
+                                alt="Commercial Food Service Equipment Solutions"
                             />
                         </div>
                     </router-link>
@@ -255,7 +256,7 @@
                         <div class="home-section-white">
                             <img
                                 src="assets/images/homepage/laundry_and_cleaning.jpg"
-                                alt="Commercial Laundry and Cleaning"
+                                alt="Commercial Laundry and Cleaning Solutions"
                             />
                         </div>
                     </router-link>
@@ -267,6 +268,7 @@
                         <div class="home-section-white">
                             <img
                                 src="assets/images/homepage/female_worker.jpg"
+                                alt="Commercial Laundry and Cleaning Solutions"
                             />
                         </div>
                     </router-link>
@@ -292,7 +294,7 @@
                         <div class="home-section-white">
                             <img
                                 src="assets/images/homepage/cold_storage_home.jpg"
-                                alt="Commercial Cold Storage"
+                                alt="Commercial Cold Storage Solutions"
                             />
                         </div>
                     </router-link>
@@ -304,7 +306,7 @@
                         <div class="home-section-white">
                             <img
                                 src="assets/images/homepage/laundry_and_cleaning.jpg"
-                                alt="Commercial Laundry and Cleaning"
+                                alt="Commercial Laundry and Cleaning Solutions"
                             />
                         </div>
                     </router-link>
@@ -324,7 +326,7 @@
         <div class="popup-content">
             <img
                 src="../assets/images/adverts/rotobake-ovens.jpg"
-                alt="Advert"
+                alt="Rotobake Ovens Solutions"
                 class="popup-image"
             />
             <div class="button-group">
