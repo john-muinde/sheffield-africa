@@ -224,7 +224,7 @@
                                                     @input="search"
                                                     class="form-control"
                                                     name="q"
-                                                    id="q"
+                                                    id="query2"
                                                     placeholder="Search product ..."
                                                     autocomplete="off"
                                                     required

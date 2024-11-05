@@ -12,7 +12,6 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('showrooms', function (Blueprint $table) {
-            $table->string('main_image_path')->nullable();
             $table->string('document_path')->nullable();
         });
     }

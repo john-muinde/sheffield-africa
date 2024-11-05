@@ -1,8 +1,8 @@
 import { createStore } from "vuex";
 import i18n from "../i18n";
-import createPersistedState from 'vuex-persistedstate'
-import auth from '../store/auth'
-import cart from '../store/cart';
+import createPersistedState from "vuex-persistedstate";
+import auth from "../store/auth";
+import cart from "../store/cart";
 //import lang from '../store/lang'
 
 const store = createStore({
@@ -101,14 +101,12 @@ const store = createStore({
             return state.layout;
         },
     },
-    plugins:[
-        createPersistedState()
-    ],
-    modules:{
+    plugins: [createPersistedState()],
+    modules: {
         auth,
         cart,
         //lang
-    }
+    },
 });
 
-export default store
+export default store;

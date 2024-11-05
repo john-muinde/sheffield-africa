@@ -7,57 +7,30 @@
         <div class="header-middle mt-2">
             <div class="container">
                 <div class="header-left">
-                    <div
-                        class="header-search header-search-extended header-search-visible d-none d-lg-block"
-                    >
-                        <a href="#" class="search-toggle" role="button"
-                            ><i class="icon-search"></i
-                        ></a>
+                    <div class="header-search header-search-extended header-search-visible d-none d-lg-block">
+                        <a href="#" class="search-toggle" role="button"><i class="icon-search"></i></a>
                         <form action="#" method="get">
-                            <div
-                                class="header-search-wrapper search-wrapper-wide searchListMainDiv"
-                            >
+                            <div class="header-search-wrapper search-wrapper-wide searchListMainDiv">
                                 <label for="q" class="sr-only">Search</label>
                                 <button class="btn btn-primary" type="submit">
                                     <i class="icon-search"></i>
                                 </button>
-                                <input
-                                    type="search"
-                                    v-model="query"
-                                    @input="search"
-                                    class="form-control"
-                                    name="q"
-                                    id="q"
-                                    autocomplete="off"
-                                    placeholder="Search product ..."
-                                    required=""
-                                />
+                                <input type="search" v-model="query" @input="search" class="form-control" name="q"
+                                    id="query2" autocomplete="off" placeholder="Search product ..." required="" />
                                 <ul v-if="showResults" class="">
-                                    <li
-                                        v-for="result in results"
-                                        :key="result.id"
-                                    >
-                                        <router-link
-                                            :to="
-                                                getProductLink(
-                                                    result.id,
-                                                    result.name,
-                                                    result.model_number,
-                                                    result.categories_json[0]
-                                                        .parent_name_with_slashes
-                                                )
-                                            "
-                                        >
-                                            <img
-                                                style="display: inline"
-                                                width="28"
-                                                :src="
-                                                    '/storage/' +
-                                                    result.main_image_path
-                                                "
-                                                class="rounded profile-img"
-                                                alt=" Shelffield Green Solutions - Commercial Kitchen Solutions, Cold-Storage Solutions and Launch Solutions"
-                                            />
+                                    <li v-for="result in results" :key="result.id">
+                                        <router-link :to="getProductLink(
+                                            result.id,
+                                            result.name,
+                                            result.model_number,
+                                            result.categories_json[0]
+                                                .parent_name_with_slashes
+                                        )
+                                            ">
+                                            <img style="display: inline" width="28" :src="'/storage/' +
+                                                result.main_image_path
+                                                " class="rounded profile-img"
+                                                alt=" Shelffield Green Solutions - Commercial Kitchen Solutions, Cold-Storage Solutions and Launch Solutions" />
                                             {{ result.name }}
                                         </router-link>
                                     </li>
@@ -70,13 +43,8 @@
                 </div>
                 <div class="header-center">
                     <router-link to="/" class="logo">
-                        <img
-                            class="zoom-image"
-                            src="../assets/images/logo.png"
-                            alt="Sheffield Green Solutions Logo"
-                            width="245"
-                            height="auto"
-                        />
+                        <img class="zoom-image" src="../assets/images/logo.png" alt="Sheffield Green Solutions Logo"
+                            width="245" height="auto" />
                     </router-link>
                 </div>
                 <!-- End .header-left -->
@@ -94,10 +62,7 @@
                         Contact Us</a
                     > -->
 
-                    <button
-                        @click="handleButtonClick"
-                        class="mobile-menu-toggler"
-                    >
+                    <button @click="handleButtonClick" class="mobile-menu-toggler">
                         <span class="sr-only">Toggle mobile menu</span>
                         <i class="icon-bars"></i>
                     </button>
@@ -112,57 +77,29 @@
         <div class="header-middle">
             <div class="container">
                 <div class="header-left">
-                    <div
-                        class="header-search header-search-extended header-search-visible d-none d-lg-block"
-                    >
-                        <a href="#" class="search-toggle" role="button"
-                            ><i class="icon-search"></i
-                        ></a>
+                    <div class="header-search header-search-extended header-search-visible d-none d-lg-block">
+                        <a href="#" class="search-toggle" role="button"><i class="icon-search"></i></a>
                         <form action="#" method="get">
-                            <div
-                                class="header-search-wrapper search-wrapper-wide searchListMainDiv"
-                            >
+                            <div class="header-search-wrapper search-wrapper-wide searchListMainDiv">
                                 <label for="q" class="sr-only">Search</label>
                                 <button class="btn btn-primary" type="submit">
                                     <i class="icon-search"></i>
                                 </button>
-                                <input
-                                    type="search"
-                                    v-model="query"
-                                    @input="search"
-                                    class="form-control"
-                                    name="q"
-                                    id="q"
-                                    autocomplete="off"
-                                    placeholder="Search product ..."
-                                    required=""
-                                />
+                                <input type="search" v-model="query" @input="search" class="form-control" name="q"
+                                    id="q" autocomplete="off" placeholder="Search product ..." required="" />
                                 <ul v-if="showResults" class="">
-                                    <li
-                                        v-for="result in results"
-                                        :key="result.id"
-                                    >
-                                        <router-link
-                                            :to="
-                                                getProductLink(
-                                                    result.id,
-                                                    result.name,
-                                                    result.model_number,
-                                                    result.categories_json[0]
-                                                        .parent_name_with_slashes
-                                                )
-                                            "
-                                        >
-                                            <img
-                                                style="display: inline"
-                                                width="28"
-                                                :src="
-                                                    '/storage/' +
-                                                    result.main_image_path
-                                                "
-                                                class="rounded profile-img"
-                                                alt=""
-                                            />
+                                    <li v-for="result in results" :key="result.id">
+                                        <router-link :to="getProductLink(
+                                            result.id,
+                                            result.name,
+                                            result.model_number,
+                                            result.categories_json[0]
+                                                .parent_name_with_slashes
+                                        )
+                                            ">
+                                            <img style="display: inline" width="28" :src="'/storage/' +
+                                                result.main_image_path
+                                                " class="rounded profile-img" alt="" />
                                             {{ result.name }}
                                         </router-link>
                                     </li>
@@ -175,23 +112,15 @@
                 </div>
                 <div class="header-center">
                     <router-link to="/" class="logo">
-                        <img
-                            src="../assets/images/logo.png"
-                            alt="Sheffield Green Solutions Logo"
-                            width="245"
-                            height="auto"
-                        />
+                        <img src="../assets/images/logo.png" alt="Sheffield Green Solutions Logo" width="245"
+                            height="auto" />
                     </router-link>
                 </div>
                 <!-- End .header-left -->
 
                 <div class="header-right">
                     <!-- <a class="header_phone" href="tel:+254713777111">+254 713 777 111</a> -->
-                    <button
-                        @click="addClassToBody"
-                        id="mobile-menu-toggler"
-                        class="mobile-menu-toggler"
-                    >
+                    <button @click="addClassToBody" id="mobile-menu-toggler" class="mobile-menu-toggler">
                         <span class="sr-only">Toggle mobile menu</span>
                         <i class="icon-bars"></i>
                     </button>
@@ -213,101 +142,61 @@
         <main class="main1">
             <div class="container">
                 <div class="justify-content-center mt-4 home-design">
-                    <router-link
-                        class="home-first home-section home-section-cat"
-                        to="/about-us/sheffield-advantage"
-                    >
+                    <router-link class="home-first home-section home-section-cat" to="/about-us/sheffield-advantage">
                         <div class="home-section-white">
-                            <img
-                                src="assets/images/homepage/sheffield_engineer.jpg"
-                                alt="Sheffield Green Solutions - Commercial Kitchen Solutions, Cold-Storage Solutions and Launch Solutions"
-                            />
+                            <img src="assets/images/homepage/sheffield_engineer.jpg"
+                                alt="Sheffield Green Solutions - Commercial Kitchen Solutions, Cold-Storage Solutions and Launch Solutions" />
                         </div>
                     </router-link>
 
-                    <router-link
-                        class="home-cold-storage home-section home-section-cat"
-                        to="cold-storage"
-                    >
+                    <router-link class="home-cold-storage home-section home-section-cat" to="cold-storage">
                         <div class="home-section-white">
-                            <img
-                                src="assets/images/homepage/cold_storage_home.jpg"
-                                alt="Commercial Cold Storage Solutions"
-                            />
+                            <img src="assets/images/homepage/cold_storage_home.jpg"
+                                alt="Commercial Cold Storage Solutions" />
                         </div>
                     </router-link>
 
-                    <router-link
-                        class="home-kitchen home-section home-section-cat"
-                        to="/kitchen"
-                    >
+                    <router-link class="home-kitchen home-section home-section-cat" to="/kitchen">
                         <div class="home-section-white">
-                            <img
-                                src="assets/images/homepage/food_service_equipment.jpg"
-                                alt="Commercial Food Service Equipment Solutions"
-                            />
+                            <img src="assets/images/homepage/food_service_equipment.jpg"
+                                alt="Commercial Food Service Equipment Solutions" />
                         </div>
                     </router-link>
 
-                    <router-link
-                        class="home-laundry home-section home-section-cat"
-                        to="/laundry"
-                    >
+                    <router-link class="home-laundry home-section home-section-cat" to="/laundry">
                         <div class="home-section-white">
-                            <img
-                                src="assets/images/homepage/laundry_and_cleaning.jpg"
-                                alt="Commercial Laundry and Cleaning Solutions"
-                            />
+                            <img src="assets/images/homepage/laundry_and_cleaning.jpg"
+                                alt="Commercial Laundry and Cleaning Solutions" />
                         </div>
                     </router-link>
 
-                    <router-link
-                        class="home-last home-section home-section-cat"
-                        to="/projects"
-                    >
+                    <router-link class="home-last home-section home-section-cat" to="/projects">
                         <div class="home-section-white">
-                            <img
-                                src="assets/images/homepage/female_worker.jpg"
-                                alt="Commercial Laundry and Cleaning Solutions"
-                            />
+                            <img src="assets/images/homepage/female_worker.jpg"
+                                alt="Commercial Laundry and Cleaning Solutions" />
                         </div>
                     </router-link>
                 </div>
 
                 <div class="justify-content-center mt-4 home-design-mobile">
-                    <router-link
-                        class="home-kitchen home-section home-section-cat"
-                        to="/kitchen"
-                    >
+                    <router-link class="home-kitchen home-section home-section-cat" to="/kitchen">
                         <div class="home-section-white">
-                            <img
-                                src="assets/images/homepage/food_service_equipment.jpg"
-                                alt="Commercial Food Service Equipment"
-                            />
+                            <img src="assets/images/homepage/food_service_equipment.jpg"
+                                alt="Commercial Food Service Equipment" />
                         </div>
                     </router-link>
 
-                    <router-link
-                        class="home-cold-storage home-section home-section-cat"
-                        to="cold-storage"
-                    >
+                    <router-link class="home-cold-storage home-section home-section-cat" to="cold-storage">
                         <div class="home-section-white">
-                            <img
-                                src="assets/images/homepage/cold_storage_home.jpg"
-                                alt="Commercial Cold Storage Solutions"
-                            />
+                            <img src="assets/images/homepage/cold_storage_home.jpg"
+                                alt="Commercial Cold Storage Solutions" />
                         </div>
                     </router-link>
 
-                    <router-link
-                        class="home-laundry home-section home-section-cat"
-                        to="/laundry"
-                    >
+                    <router-link class="home-laundry home-section home-section-cat" to="/laundry">
                         <div class="home-section-white">
-                            <img
-                                src="assets/images/homepage/laundry_and_cleaning.jpg"
-                                alt="Commercial Laundry and Cleaning Solutions"
-                            />
+                            <img src="assets/images/homepage/laundry_and_cleaning.jpg"
+                                alt="Commercial Laundry and Cleaning Solutions" />
                         </div>
                     </router-link>
                 </div>
@@ -321,36 +210,29 @@
     <button id="scroll-top" title="Back to Top">
         <i class="icon-arrow-up"></i>
     </button>
-
-    <div class="popup-advert" v-if="showPopup">
-        <div class="popup-content">
-            <img
-                src="../assets/images/adverts/rotobake-ovens.jpg"
-                alt="Rotobake Ovens Solutions"
-                class="popup-image"
-            />
-            <div class="button-group">
-                <button
-                    @click="dismissPopup"
-                    class="btn btn-primary btn-footer mr-5"
-                >
-                    Cancel
-                </button>
-                <button
-                    @click="viewProduct"
-                    class="btn btn-secondary btn-footer ml-5"
-                >
-                    View
-                </button>
+    <template v-if="showPopup">
+        <div class="popup-advert">
+            <div class="popup-content">
+                <img src="../assets/images/adverts/rotobake-ovens.jpg" alt="Rotobake Ovens Solutions" class="popup-image" />
+                <div class="button-group">
+                    <button @click="dismissPopup" class="btn btn-primary btn-footer mr-5">
+                        Cancel
+                    </button>
+                    <button @click="viewProduct" class="btn btn-secondary btn-footer ml-5">
+                        View
+                    </button>
+                </div>
             </div>
         </div>
-    </div>
+    </template>
 </template>
 
 <script setup>
 import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { useHead } from "@unhead/vue";
+
+
 
 useHead({
     title: "Comprehensive Kitchen, Laundry, and Cold Room Solutions",
@@ -584,11 +466,12 @@ const handleButtonClick = () => {
 
 const dismissPopup = () => {
     showPopup.value = false;
-    localStorage.setItem("popupDismissed", "true");
+    // localStorage.setItem("popupDismissed", "true");
 };
 
 onMounted(() => {
-    const popupDismissed = localStorage.getItem("popupDismissed");
+    // const popupDismissed = localStorage.getItem("popupDismissed");
+    const popupDismissed = false;
     if (!popupDismissed) {
         showPopup.value = true;
     }
@@ -691,15 +574,18 @@ const viewProduct = () => {
 .row.vertical-divider {
     overflow: hidden;
 }
-.row.vertical-divider > div[class^="col-"] {
+
+.row.vertical-divider>div[class^="col-"] {
     padding-bottom: 100px;
     margin-bottom: -100px;
     border-left: 2px solid #ec1f25;
     border-right: 2px solid #ec1f25;
 }
+
 .row.vertical-divider div[class^="col-"]:first-child {
     border-left: none;
 }
+
 .row.vertical-divider div[class^="col-"]:last-child {
     border-right: none;
 }
@@ -725,9 +611,11 @@ const viewProduct = () => {
     min-width: 40%;
     margin: 0 1rem;
 }
+
 .searchListMainDiv h1 {
     margin-bottom: 1rem;
 }
+
 .searchListMainDiv ul {
     list-style: none;
     padding: 0;
@@ -747,14 +635,17 @@ const viewProduct = () => {
 .searchListMainDiv ul::-webkit-scrollbar {
     width: 5px;
 }
+
 .searchListMainDiv ul::-webkit-scrollbar-track {
     box-shadow: inset 0 0 5px #ddd;
     border-radius: 10px;
 }
+
 .searchListMainDiv ul::-webkit-scrollbar-thumb {
     background: rgb(183, 183, 183);
     border-radius: 10px;
 }
+
 .searchListMainDiv ul::-webkit-scrollbar-thumb:hover {
     background: #a2a2a2;
 }
@@ -769,6 +660,7 @@ const viewProduct = () => {
     cursor: pointer;
     overflow-wrap: break-word;
 }
+
 .searchListMainDiv ul li:last-child {
     border: none;
 }
@@ -804,6 +696,7 @@ const viewProduct = () => {
         opacity: 0;
         transform: translateX(-100%);
     }
+
     100% {
         opacity: 1;
         transform: translateX(0);
@@ -815,6 +708,7 @@ const viewProduct = () => {
         opacity: 0;
         transform: translateY(100%);
     }
+
     100% {
         opacity: 1;
         transform: translateY(0);
@@ -826,6 +720,7 @@ const viewProduct = () => {
         opacity: 0;
         transform: translateY(-100%);
     }
+
     100% {
         opacity: 1;
         transform: translateY(0);
@@ -837,6 +732,7 @@ const viewProduct = () => {
         opacity: 0;
         transform: translateX(100%);
     }
+
     100% {
         opacity: 1;
         transform: translateX(0);
@@ -1101,37 +997,59 @@ const viewProduct = () => {
             linear-gradient(29deg, #3b5dac 27.73%, transparent 39.5%);
     }
 }
+
 .button-group {
     display: flex;
     justify-content: space-between;
     margin-top: 1rem;
 }
+
 .popup-advert {
-    position: fixed; /* Use fixed positioning */
-    top: 0; /* Align to the top of the viewport */
-    left: 0; /* Align to the left of the viewport */
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
-    display: flex; /* Use flexbox to center the content */
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
-    z-index: 1000; /* High z-index to stay on top */
+    position: fixed;
+    /* Use fixed positioning */
+    top: 0;
+    /* Align to the top of the viewport */
+    left: 0;
+    /* Align to the left of the viewport */
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Semi-transparent background */
+    display: flex;
+    /* Use flexbox to center the content */
+    justify-content: center;
+    /* Center horizontally */
+    align-items: center;
+    /* Center vertically */
+    z-index: 1000;
+    /* High z-index to stay on top */
 }
 
 .popup-content {
-    background: white; /* Background for the popup content */
-    padding: 20px; /* Padding */
-    border-radius: 8px; /* Rounded corners */
-    text-align: center; /* Center text */
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); /* Optional shadow for depth */
-    max-width: 500px; /* Maximum width for the popup */
-    width: 90%; /* Full width up to max-width */
+    background: white;
+    /* Background for the popup content */
+    padding: 20px;
+    /* Padding */
+    border-radius: 8px;
+    /* Rounded corners */
+    text-align: center;
+    /* Center text */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    /* Optional shadow for depth */
+    max-width: 500px;
+    /* Maximum width for the popup */
+    width: 90%;
+    /* Full width up to max-width */
 }
 
 .popup-image {
-    max-width: 100%; /* Ensure the image is responsive */
-    height: auto; /* Keep the aspect ratio */
-    border-radius: 8px; /* Optional rounded corners for the image */
+    max-width: 100%;
+    /* Ensure the image is responsive */
+    height: auto;
+    /* Keep the aspect ratio */
+    border-radius: 8px;
+    /* Optional rounded corners for the image */
 }
 </style>

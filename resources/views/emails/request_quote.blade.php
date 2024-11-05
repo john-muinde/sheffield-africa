@@ -74,16 +74,17 @@
     </tr>
 
 
-    @foreach($formData["cartItems"] as $item)
-    <tr>
-        <td width="10%" style="padding: 5px;border: 1px solid black;">
-            <img width="100%" src="https://sheffield.com/storage/{{ $item['main_image_path'] }}" alt="Product Image">
-        </td>
-        <td style="padding: 5px;border: 1px solid black;">{{ $item['name'] }}</td>
-        <td style="padding: 5px;border: 1px solid black;">{{ $item['model_number'] }}</td>
-        <td style="padding: 5px;border: 1px solid black;">{{ $item['sku'] }}</td>
+    @foreach ($formData['cartItems'] as $item)
+        <tr>
+            <td width="10%" style="padding: 5px;border: 1px solid black;">
+                <img width="100%" src="https://sheffield.com/storage/{{ $item['main_image_path'] }}"
+                    alt="Product Image">
+            </td>
+            <td style="padding: 5px;border: 1px solid black;">{{ $item['name'] }}</td>
+            <td style="padding: 5px;border: 1px solid black;">{{ $item['model_number'] }}</td>
+            <td style="padding: 5px;border: 1px solid black;">{{ $item['sku'] }}</td>
 
-    </tr>
+        </tr>
     @endforeach
 
 </table>
