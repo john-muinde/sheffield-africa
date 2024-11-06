@@ -53,16 +53,14 @@ const routes = [
         path: "/",
         //beforeEnter: guest,
 
-        children: [
-            {
+        children: [{
                 path: "/login",
                 name: "frontend.login",
                 component: () => import("../apps/frontend/views/Login.vue"),
                 meta: {
                     layout: "frontend",
                     title: "Login to Sheffield",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -80,8 +78,7 @@ const routes = [
                 meta: {
                     layout: "frontend",
                     title: "Register to Sheffield Africa Website",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -99,8 +96,7 @@ const routes = [
                 meta: {
                     layout: "frontend",
                     title: "Home",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -116,21 +112,19 @@ const routes = [
                 name: "frontend.offers",
                 component: () =>
                     import(
-                        /* webpackChunkName: "offers" */ "../apps/frontend/views/Landing.vue"
+                        /* webpackChunkName: "offers" */
+                        "../apps/frontend/views/Landing.vue"
                     ),
                 meta: {
                     layout: "frontend",
                     title: "Offers",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
-                            content:
-                                "Here are our top offers offered at Sheffield Africa.",
+                            content: "Here are our top offers offered at Sheffield Africa.",
                         },
                         {
                             property: "og:description",
-                            content:
-                                "Here are our top offers at Sheffield Africa",
+                            content: "Here are our top offers at Sheffield Africa",
                         },
                     ],
                 },
@@ -141,13 +135,13 @@ const routes = [
                 name: "about",
                 component: () =>
                     import(
-                        /* webpackChunkName: "about" */ "../apps/frontend/views/About.vue"
+                        /* webpackChunkName: "about" */
+                        "../apps/frontend/views/About.vue"
                     ),
                 meta: {
                     layout: "frontend",
                     title: "About Us",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -163,13 +157,13 @@ const routes = [
                 name: "who-we-are",
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/WhoWeAre.vue"
+                        /* webpackChunkName: "index" */
+                        "../apps/frontend/views/WhoWeAre.vue"
                     ),
                 meta: {
                     layout: "frontend",
                     title: "Who We Are",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -185,13 +179,13 @@ const routes = [
                 name: "how-we-work",
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/HowWeWork.vue"
+                        /* webpackChunkName: "index" */
+                        "../apps/frontend/views/HowWeWork.vue"
                     ),
                 meta: {
                     layout: "frontend",
                     title: "How We Work",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -207,13 +201,13 @@ const routes = [
                 name: "company-culture",
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/CompanyCulture.vue"
+                        /* webpackChunkName: "index" */
+                        "../apps/frontend/views/CompanyCulture.vue"
                     ),
                 meta: {
                     layout: "frontend",
                     title: "Company Culture",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -229,13 +223,13 @@ const routes = [
                 name: "sheffield-advantage",
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/SheffieldAdvantage.vue"
+                        /* webpackChunkName: "index" */
+                        "../apps/frontend/views/SheffieldAdvantage.vue"
                     ),
                 meta: {
                     layout: "frontend",
                     title: "Sheffield Advantage",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -251,13 +245,13 @@ const routes = [
                 name: "our-leadership",
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/OurLeadership.vue"
+                        /* webpackChunkName: "index" */
+                        "../apps/frontend/views/OurLeadership.vue"
                     ),
                 meta: {
                     layout: "frontend",
                     title: "Our Leadership",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -273,13 +267,13 @@ const routes = [
                 name: "our-location-facilities",
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/OurLocationFacilities.vue"
+                        /* webpackChunkName: "index" */
+                        "../apps/frontend/views/OurLocationFacilities.vue"
                     ),
                 meta: {
                     layout: "frontend",
                     title: "Our Location Facilities",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -296,13 +290,13 @@ const routes = [
                 name: "media",
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/Media_Center.vue"
+                        /* webpackChunkName: "index" */
+                        "../apps/frontend/views/Media_Center.vue"
                     ),
                 meta: {
                     layout: "frontend",
                     title: "Our Blogs",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -319,13 +313,13 @@ const routes = [
                 name: "blogs",
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/Blogs.vue"
+                        /* webpackChunkName: "index" */
+                        "../apps/frontend/views/Blogs.vue"
                     ),
                 meta: {
                     layout: "frontend",
                     title: "Our Blogs",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -342,13 +336,13 @@ const routes = [
                 name: "blogs.pagenation",
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/Blogs.vue"
+                        /* webpackChunkName: "index" */
+                        "../apps/frontend/views/Blogs.vue"
                     ),
                 meta: {
                     layout: "frontend",
                     title: "Our Blogs",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -365,13 +359,13 @@ const routes = [
                 name: "blogs.detail",
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/BlogDetails.vue"
+                        /* webpackChunkName: "index" */
+                        "../apps/frontend/views/BlogDetails.vue"
                     ),
                 meta: {
                     layout: "frontend",
                     title: "Our Blogs",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -388,13 +382,13 @@ const routes = [
                 name: "media-videos",
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/Media_Videos.vue"
+                        /* webpackChunkName: "index" */
+                        "../apps/frontend/views/Media_Videos.vue"
                     ),
                 meta: {
                     layout: "frontend",
                     title: "Our Blogs",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -411,13 +405,13 @@ const routes = [
                 name: "media-in-the-news",
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/Media_In_The_News.vue"
+                        /* webpackChunkName: "index" */
+                        "../apps/frontend/views/Media_In_The_News.vue"
                     ),
                 meta: {
                     layout: "frontend",
                     title: "Our Blogs",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -434,13 +428,13 @@ const routes = [
                 name: "media-in-the-news.pages",
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/Media_In_The_News.vue"
+                        /* webpackChunkName: "index" */
+                        "../apps/frontend/views/Media_In_The_News.vue"
                     ),
                 meta: {
                     layout: "frontend",
                     title: "Our Blogs",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -457,13 +451,13 @@ const routes = [
                 name: "media-gallery",
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/Media_Gallery.vue"
+                        /* webpackChunkName: "index" */
+                        "../apps/frontend/views/Media_Gallery.vue"
                     ),
                 meta: {
                     layout: "frontend",
                     title: "Our Blogs",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -480,13 +474,13 @@ const routes = [
                 name: "blogs.gallery",
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/Media_Gallery.vue"
+                        /* webpackChunkName: "index" */
+                        "../apps/frontend/views/Media_Gallery.vue"
                     ),
                 meta: {
                     layout: "frontend",
                     title: "Our Gallery",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -503,13 +497,13 @@ const routes = [
                 name: "gallery.detail",
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/Media_Gallery_Details.vue"
+                        /* webpackChunkName: "index" */
+                        "../apps/frontend/views/Media_Gallery_Details.vue"
                     ),
                 meta: {
                     layout: "frontend",
                     title: "Our Gallery",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -526,13 +520,13 @@ const routes = [
                 name: "media-documents",
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/Media_Documents.vue"
+                        /* webpackChunkName: "index" */
+                        "../apps/frontend/views/Media_Documents.vue"
                     ),
                 meta: {
                     layout: "frontend",
                     title: "Our Blogs",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -549,13 +543,13 @@ const routes = [
                 name: "media-newsletters",
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/Media_Newsletters.vue"
+                        /* webpackChunkName: "index" */
+                        "../apps/frontend/views/Media_Newsletters.vue"
                     ),
                 meta: {
                     layout: "frontend",
                     title: "Newsletters",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -572,13 +566,13 @@ const routes = [
                 name: "faq",
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/FAQ.vue"
+                        /* webpackChunkName: "index" */
+                        "../apps/frontend/views/FAQ.vue"
                     ),
                 meta: {
                     layout: "frontend",
                     title: "FAQ",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -595,13 +589,13 @@ const routes = [
                 name: "Privacy Policy",
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/PrivacyPolicy.vue"
+                        /* webpackChunkName: "index" */
+                        "../apps/frontend/views/PrivacyPolicy.vue"
                     ),
                 meta: {
                     layout: "frontend",
                     title: "Privacy Policy",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -618,13 +612,13 @@ const routes = [
                 name: "Terms & Conditions",
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/TermsAndConditions.vue"
+                        /* webpackChunkName: "index" */
+                        "../apps/frontend/views/TermsAndConditions.vue"
                     ),
                 meta: {
                     layout: "frontend",
                     title: "Terms & Conditions",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -641,13 +635,13 @@ const routes = [
                 name: "Lease & Finance",
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/LeaseAndFinance.vue"
+                        /* webpackChunkName: "index" */
+                        "../apps/frontend/views/LeaseAndFinance.vue"
                     ),
                 meta: {
                     layout: "frontend",
                     title: "Lease & Finance",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -664,13 +658,13 @@ const routes = [
                 name: "Customer Service",
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/CustomerService.vue"
+                        /* webpackChunkName: "index" */
+                        "../apps/frontend/views/CustomerService.vue"
                     ),
                 meta: {
                     layout: "frontend",
                     title: "Customer Service",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -687,13 +681,13 @@ const routes = [
                 name: "Cookie Policy",
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/CookiePolicy.vue"
+                        /* webpackChunkName: "index" */
+                        "../apps/frontend/views/CookiePolicy.vue"
                     ),
                 meta: {
                     layout: "frontend",
                     title: "Cookie Policy",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -710,13 +704,13 @@ const routes = [
                 name: "warranty_terms",
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/WarrantyTerms.vue"
+                        /* webpackChunkName: "index" */
+                        "../apps/frontend/views/WarrantyTerms.vue"
                     ),
                 meta: {
                     layout: "frontend",
                     title: "Warranty Terms",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -735,8 +729,7 @@ const routes = [
                 meta: {
                     layout: "frontend",
                     title: "Delivery Information",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -754,8 +747,7 @@ const routes = [
                 meta: {
                     layout: "frontend",
                     title: "Contact Us",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -771,13 +763,13 @@ const routes = [
                 name: "career",
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/Career.vue"
+                        /* webpackChunkName: "index" */
+                        "../apps/frontend/views/Career.vue"
                     ),
                 meta: {
                     layout: "frontend",
                     title: "Career",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -793,13 +785,13 @@ const routes = [
                 name: "events",
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/Events.vue"
+                        /* webpackChunkName: "index" */
+                        "../apps/frontend/views/Events.vue"
                     ),
                 meta: {
                     layout: "frontend",
                     title: "Events",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -815,13 +807,13 @@ const routes = [
                 name: "projects",
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/Projects.vue"
+                        /* webpackChunkName: "index" */
+                        "../apps/frontend/views/Projects.vue"
                     ),
                 meta: {
                     layout: "frontend",
                     title: "Projects",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -837,13 +829,13 @@ const routes = [
                 name: "project.details",
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/ProjectDetails.vue"
+                        /* webpackChunkName: "index" */
+                        "../apps/frontend/views/ProjectDetails.vue"
                     ),
                 meta: {
                     layout: "frontend",
                     title: "Project Details",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -868,8 +860,7 @@ const routes = [
                 meta: {
                     layout: "frontend",
                     title: "Wishlist",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -887,8 +878,7 @@ const routes = [
                 meta: {
                     layout: "frontend",
                     title: "Cart",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -904,13 +894,13 @@ const routes = [
                 name: "request_quote",
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/RequestQuote.vue"
+                        /* webpackChunkName: "index" */
+                        "../apps/frontend/views/RequestQuote.vue"
                     ),
                 meta: {
                     layout: "frontend",
                     title: "Cart",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -928,8 +918,7 @@ const routes = [
                 meta: {
                     layout: "frontend",
                     title: "Checkout",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -947,8 +936,7 @@ const routes = [
                 meta: {
                     layout: "frontend",
                     title: "My Account",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -965,13 +953,13 @@ const routes = [
                 name: "Consultancy & Design",
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/Consultancy_Design.vue"
+                        /* webpackChunkName: "index" */
+                        "../apps/frontend/views/Consultancy_Design.vue"
                     ),
                 meta: {
                     layout: "frontend",
                     title: "Cart",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -988,13 +976,13 @@ const routes = [
                 name: "frontend.category",
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/ProductCategory.vue"
+                        /* webpackChunkName: "index" */
+                        "../apps/frontend/views/ProductCategory.vue"
                     ),
                 meta: {
                     layout: "frontend",
                     title: "Category",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -1011,13 +999,13 @@ const routes = [
                 name: "frontend.category.page",
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/ProductCategory.vue"
+                        /* webpackChunkName: "index" */
+                        "../apps/frontend/views/ProductCategory.vue"
                     ),
                 meta: {
                     layout: "frontend",
                     title: "Category",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -1034,13 +1022,13 @@ const routes = [
                 name: "frontend.kitchen.page",
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/Kitchen.vue"
+                        /* webpackChunkName: "index" */
+                        "../apps/frontend/views/Kitchen.vue"
                     ),
                 meta: {
                     layout: "frontend",
                     title: "Kitchen",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -1057,13 +1045,13 @@ const routes = [
                 name: "frontend.solution_kitchen.page",
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/KitchenSolution.vue"
+                        /* webpackChunkName: "index" */
+                        "../apps/frontend/views/KitchenSolution.vue"
                     ),
                 meta: {
                     layout: "frontend",
                     title: "Category",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -1080,13 +1068,13 @@ const routes = [
                 name: "frontend.category.kitchen",
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/ProductCategoryKitchen.vue"
+                        /* webpackChunkName: "index" */
+                        "../apps/frontend/views/ProductCategoryKitchen.vue"
                     ),
                 meta: {
                     layout: "frontend",
                     title: "Category",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -1103,13 +1091,13 @@ const routes = [
                 name: "frontend.kitchen.page.pagenation",
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/ProductCategoryKitchen.vue"
+                        /* webpackChunkName: "index" */
+                        "../apps/frontend/views/ProductCategoryKitchen.vue"
                     ),
                 meta: {
                     layout: "frontend",
                     title: "Category",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -1126,13 +1114,13 @@ const routes = [
                 name: "product.details.kitchen",
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/ProductDetails.vue"
+                        /* webpackChunkName: "index" */
+                        "../apps/frontend/views/ProductDetails.vue"
                     ),
                 meta: {
                     layout: "frontend",
                     title: "Product Details",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -1156,13 +1144,13 @@ const routes = [
                 name: "product.details.laundry",
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/ProductDetails.vue"
+                        /* webpackChunkName: "index" */
+                        "../apps/frontend/views/ProductDetails.vue"
                     ),
                 meta: {
                     layout: "frontend",
                     title: "Laundry",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -1186,13 +1174,13 @@ const routes = [
                 name: "product.details.cold-storage",
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/ProductDetails.vue"
+                        /* webpackChunkName: "index" */
+                        "../apps/frontend/views/ProductDetails.vue"
                     ),
                 meta: {
                     layout: "frontend",
                     title: "Cold Storage",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -1216,13 +1204,13 @@ const routes = [
                 name: "frontend.laundry.page",
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/Laundry.vue"
+                        /* webpackChunkName: "index" */
+                        "../apps/frontend/views/Laundry.vue"
                     ),
                 meta: {
                     layout: "frontend",
                     title: "Laundry",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -1239,13 +1227,13 @@ const routes = [
                 name: "frontend.solution_laundry.page",
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/LaundrySolution.vue"
+                        /* webpackChunkName: "index" */
+                        "../apps/frontend/views/LaundrySolution.vue"
                     ),
                 meta: {
                     layout: "frontend",
                     title: "Category",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -1262,13 +1250,13 @@ const routes = [
                 name: "frontend.category.laundry",
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/ProductCategoryLaundry.vue"
+                        /* webpackChunkName: "index" */
+                        "../apps/frontend/views/ProductCategoryLaundry.vue"
                     ),
                 meta: {
                     layout: "frontend",
                     title: "Category",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -1285,13 +1273,13 @@ const routes = [
                 name: "frontend.laundry.page.pagenation",
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/ProductCategoryLaundry.vue"
+                        /* webpackChunkName: "index" */
+                        "../apps/frontend/views/ProductCategoryLaundry.vue"
                     ),
                 meta: {
                     layout: "frontend",
                     title: "Category",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -1308,13 +1296,13 @@ const routes = [
                 name: "product.details.laundry",
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/ProductDetails.vue"
+                        /* webpackChunkName: "index" */
+                        "../apps/frontend/views/ProductDetails.vue"
                     ),
                 meta: {
                     layout: "frontend",
                     title: "Product Details",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -1338,13 +1326,13 @@ const routes = [
                 name: "frontend.coldroom.page",
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/Cold_Room.vue"
+                        /* webpackChunkName: "index" */
+                        "../apps/frontend/views/Cold_Room.vue"
                     ),
                 meta: {
                     layout: "frontend",
                     title: "Cold Room",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -1361,13 +1349,13 @@ const routes = [
                 name: "frontend.solution_cold_storage.page",
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/ColdRoomSolution.vue"
+                        /* webpackChunkName: "index" */
+                        "../apps/frontend/views/ColdRoomSolution.vue"
                     ),
                 meta: {
                     layout: "frontend",
                     title: "Category",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -1384,13 +1372,13 @@ const routes = [
                 name: "frontend.category.cold_storage",
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/ProductCategoryColdRoom.vue"
+                        /* webpackChunkName: "index" */
+                        "../apps/frontend/views/ProductCategoryColdRoom.vue"
                     ),
                 meta: {
                     layout: "frontend",
                     title: "Category",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -1407,13 +1395,13 @@ const routes = [
                 name: "frontend.cold-storage.page.pagenation",
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/ProductCategoryColdRoom.vue"
+                        /* webpackChunkName: "index" */
+                        "../apps/frontend/views/ProductCategoryColdRoom.vue"
                     ),
                 meta: {
                     layout: "frontend",
                     title: "Category",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -1430,13 +1418,13 @@ const routes = [
                 name: "product.details.cold_storage",
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/ProductDetails.vue"
+                        /* webpackChunkName: "index" */
+                        "../apps/frontend/views/ProductDetails.vue"
                     ),
                 meta: {
                     layout: "frontend",
                     title: "Product Details",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -1460,13 +1448,13 @@ const routes = [
                 name: "product.details",
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/ProductDetails.vue"
+                        /* webpackChunkName: "index" */
+                        "../apps/frontend/views/ProductDetails.vue"
                     ),
                 meta: {
                     layout: "frontend",
                     title: "Product Details",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -1490,13 +1478,13 @@ const routes = [
                 name: "showroom.details",
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/ShowroomDetails.vue"
+                        /* webpackChunkName: "index" */
+                        "../apps/frontend/views/ShowroomDetails.vue"
                     ),
                 meta: {
                     layout: "frontend",
                     title: "Showroom Details",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -1520,13 +1508,13 @@ const routes = [
                 name: "frontend.enquiry.product",
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/EnquiryProduct.vue"
+                        /* webpackChunkName: "index" */
+                        "../apps/frontend/views/EnquiryProduct.vue"
                     ),
                 meta: {
                     layout: "frontend",
                     title: "Enquiry Product",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -1545,8 +1533,7 @@ const routes = [
                 meta: {
                     layout: "frontend",
                     title: "404",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -1564,28 +1551,25 @@ const routes = [
         path: "/my-account",
         beforeEnter: requireLogin,
 
-        children: [
-            {
-                path: "/my-account",
-                name: "frontend.myaccount",
-                component: () =>
-                    import("../apps/frontend/views/myaccount/MyAccount.vue"),
-                meta: {
-                    layout: "frontend",
-                    title: "My Account",
-                    metaTags: [
-                        {
-                            name: "description",
-                            content: "The about page of our example app.",
-                        },
-                        {
-                            property: "og:description",
-                            content: "The about page of our example app.",
-                        },
-                    ],
-                },
+        children: [{
+            path: "/my-account",
+            name: "frontend.myaccount",
+            component: () =>
+                import("../apps/frontend/views/myaccount/MyAccount.vue"),
+            meta: {
+                layout: "frontend",
+                title: "My Account",
+                metaTags: [{
+                        name: "description",
+                        content: "The about page of our example app.",
+                    },
+                    {
+                        property: "og:description",
+                        content: "The about page of our example app.",
+                    },
+                ],
             },
-        ],
+        }, ],
     },
 
     // BACKEND ROUTES
@@ -1602,36 +1586,48 @@ const routes = [
         name: "admin.login",
         component: () =>
             import(
-                /* webpackChunkName: "auth-login" */ "../apps/admin/views/auth/login.vue"
+                /* webpackChunkName: "auth-login" */
+                "../apps/admin/views/auth/login.vue"
             ),
-        meta: { layout: "app" },
+        meta: {
+            layout: "app"
+        },
     },
     {
         path: "/admin/register",
         name: "register",
         component: () =>
             import(
-                /* webpackChunkName: "auth-register" */ "../apps/admin/views/auth/register.vue"
+                /* webpackChunkName: "auth-register" */
+                "../apps/admin/views/auth/register.vue"
             ),
-        meta: { layout: "app" },
+        meta: {
+            layout: "app"
+        },
     },
     {
         path: "/admin/lockscreen",
         name: "lockscreen",
         component: () =>
             import(
-                /* webpackChunkName: "auth-lockscreen" */ "../apps/admin/views/auth/lockscreen.vue"
+                /* webpackChunkName: "auth-lockscreen" */
+                "../apps/admin/views/auth/lockscreen.vue"
             ),
-        meta: { layout: "app" },
+        meta: {
+            layout: "app"
+        },
     },
     {
         path: "/admin/pass-recovery",
         name: "pass-recovery",
         component: () =>
             import(
-                /* webpackChunkName: "auth-pass-recovery" */ "../apps/admin/views/auth/pass_recovery.vue"
+                /* webpackChunkName: "auth-pass-recovery" */
+                "../apps/admin/views/auth/pass_recovery.vue"
             ),
-        meta: { layout: "app" },
+        meta: {
+            layout: "app"
+        },
     },
 
     {
@@ -1639,19 +1635,18 @@ const routes = [
         //redirect: { name: 'admin.login' },
         //component: ,
         beforeEnter: requireAdminLogin,
-        children: [
-            {
+        children: [{
                 path: "/admin",
                 name: "admin.dashboard",
                 component: () =>
                     import(
-                        /* webpackChunkName: "index2" */ "../apps/admin/views/index.vue"
+                        /* webpackChunkName: "index2" */
+                        "../apps/admin/views/index.vue"
                     ),
                 meta: {
                     layout: "app",
                     title: "Dashboard",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -1675,8 +1670,7 @@ const routes = [
                 meta: {
                     layout: "app",
                     title: "Categories",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -1696,8 +1690,7 @@ const routes = [
                 meta: {
                     layout: "app",
                     title: "Categories",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -1717,8 +1710,7 @@ const routes = [
                 meta: {
                     layout: "app",
                     title: "Create Category",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -1737,8 +1729,7 @@ const routes = [
                 meta: {
                     layout: "app",
                     title: "Edit Category",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -1760,8 +1751,7 @@ const routes = [
                 meta: {
                     layout: "app",
                     title: "Products",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -1781,8 +1771,7 @@ const routes = [
                 meta: {
                     layout: "app",
                     title: "Products",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -1802,8 +1791,7 @@ const routes = [
                 meta: {
                     layout: "app",
                     title: "Create Product",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -1822,8 +1810,7 @@ const routes = [
                 meta: {
                     layout: "app",
                     title: "Edit Product",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -1842,8 +1829,7 @@ const routes = [
                 meta: {
                     layout: "app",
                     title: "brands",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -1862,8 +1848,7 @@ const routes = [
                 meta: {
                     layout: "app",
                     title: "Create Brand",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -1881,8 +1866,7 @@ const routes = [
                 meta: {
                     layout: "app",
                     title: "Edit Brand",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -1904,8 +1888,7 @@ const routes = [
                 meta: {
                     layout: "app",
                     title: "showrooms",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -1924,8 +1907,7 @@ const routes = [
                 meta: {
                     layout: "app",
                     title: "Create Showroom",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -1944,8 +1926,7 @@ const routes = [
                 meta: {
                     layout: "app",
                     title: "Edit Showroom",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -1966,8 +1947,7 @@ const routes = [
                 meta: {
                     layout: "app",
                     title: "csrs",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -1985,8 +1965,7 @@ const routes = [
                 meta: {
                     layout: "app",
                     title: "Create CSRs",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -2004,8 +1983,7 @@ const routes = [
                 meta: {
                     layout: "app",
                     title: "Edit CSRs",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -2027,8 +2005,7 @@ const routes = [
                 meta: {
                     layout: "app",
                     title: "Categories",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -2047,8 +2024,7 @@ const routes = [
                 meta: {
                     layout: "app",
                     title: "Create Blog Category",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -2067,8 +2043,7 @@ const routes = [
                 meta: {
                     layout: "app",
                     title: "Edit Blog Category",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -2089,8 +2064,7 @@ const routes = [
                 meta: {
                     layout: "app",
                     title: "blogs",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -2108,8 +2082,7 @@ const routes = [
                 meta: {
                     layout: "app",
                     title: "Create Blogs",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -2127,8 +2100,7 @@ const routes = [
                 meta: {
                     layout: "app",
                     title: "Edit Blogs",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -2150,8 +2122,7 @@ const routes = [
                 meta: {
                     layout: "app",
                     title: "Publications",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -2170,8 +2141,7 @@ const routes = [
                 meta: {
                     layout: "app",
                     title: "Create Publications",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -2190,8 +2160,7 @@ const routes = [
                 meta: {
                     layout: "app",
                     title: "Edit Publications",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -2215,8 +2184,7 @@ const routes = [
                 meta: {
                     layout: "app",
                     title: "In the News",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -2235,8 +2203,7 @@ const routes = [
                 meta: {
                     layout: "app",
                     title: "Create In the News",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -2255,8 +2222,7 @@ const routes = [
                 meta: {
                     layout: "app",
                     title: "Edit In the News",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -2278,8 +2244,7 @@ const routes = [
                 meta: {
                     layout: "app",
                     title: "Videos",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -2298,8 +2263,7 @@ const routes = [
                 meta: {
                     layout: "app",
                     title: "Create Videos",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -2317,8 +2281,7 @@ const routes = [
                 meta: {
                     layout: "app",
                     title: "Edit Videos",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -2342,8 +2305,7 @@ const routes = [
                 meta: {
                     layout: "app",
                     title: "Gallery",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -2362,8 +2324,7 @@ const routes = [
                 meta: {
                     layout: "app",
                     title: "Create Gallery",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -2381,8 +2342,7 @@ const routes = [
                 meta: {
                     layout: "app",
                     title: "Edit Gallery",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -2406,8 +2366,7 @@ const routes = [
                 meta: {
                     layout: "app",
                     title: "solutions",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -2427,8 +2386,7 @@ const routes = [
                 meta: {
                     layout: "app",
                     title: "solutions",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -2450,8 +2408,7 @@ const routes = [
                 meta: {
                     layout: "app",
                     title: "solutions",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -2473,8 +2430,7 @@ const routes = [
                 meta: {
                     layout: "app",
                     title: "solutions",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -2494,8 +2450,7 @@ const routes = [
                 meta: {
                     layout: "app",
                     title: "Create Solutions",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -2514,8 +2469,7 @@ const routes = [
                 meta: {
                     layout: "app",
                     title: "Edit Solutions",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -2536,8 +2490,7 @@ const routes = [
                 meta: {
                     layout: "app",
                     title: "events",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -2556,8 +2509,7 @@ const routes = [
                 meta: {
                     layout: "app",
                     title: "Create events",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -2575,8 +2527,7 @@ const routes = [
                 meta: {
                     layout: "app",
                     title: "Edit events",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -2598,8 +2549,7 @@ const routes = [
                 meta: {
                     layout: "app",
                     title: "testimonials",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -2618,8 +2568,7 @@ const routes = [
                 meta: {
                     layout: "app",
                     title: "Create testimonials",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -2638,8 +2587,7 @@ const routes = [
                 meta: {
                     layout: "app",
                     title: "Edit testimonials",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -2661,8 +2609,7 @@ const routes = [
                 meta: {
                     layout: "app",
                     title: "careers",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -2681,8 +2628,7 @@ const routes = [
                 meta: {
                     layout: "app",
                     title: "Create careers",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -2700,8 +2646,7 @@ const routes = [
                 meta: {
                     layout: "app",
                     title: "Edit careers",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -2723,8 +2668,7 @@ const routes = [
                 meta: {
                     layout: "app",
                     title: "clients",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -2743,8 +2687,7 @@ const routes = [
                 meta: {
                     layout: "app",
                     title: "Create Clients",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -2762,8 +2705,7 @@ const routes = [
                 meta: {
                     layout: "app",
                     title: "Edit Clients",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -2787,8 +2729,7 @@ const routes = [
                 meta: {
                     layout: "app",
                     title: "projects",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -2807,8 +2748,7 @@ const routes = [
                 meta: {
                     layout: "app",
                     title: "Create Projects",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -2827,8 +2767,7 @@ const routes = [
                 meta: {
                     layout: "app",
                     title: "Edit Projects",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -2847,13 +2786,13 @@ const routes = [
                 name: "index2",
                 component: () =>
                     import(
-                        /* webpackChunkName: "index2" */ "../apps/admin/views/index2.vue"
+                        /* webpackChunkName: "index2" */
+                        "../apps/admin/views/index2.vue"
                     ),
                 meta: {
                     layout: "app",
                     title: "Dashboard",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -2870,13 +2809,13 @@ const routes = [
                 name: "tabs",
                 component: () =>
                     import(
-                        /* webpackChunkName: "components-tabs" */ "../apps/admin/views/components/tabs.vue"
+                        /* webpackChunkName: "components-tabs" */
+                        "../apps/admin/views/components/tabs.vue"
                     ),
                 meta: {
                     layout: "app",
                     title: "Tabs",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -2895,8 +2834,7 @@ const routes = [
                 meta: {
                     layout: "app",
                     title: "Accordations",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -2912,13 +2850,13 @@ const routes = [
                 name: "modals",
                 component: () =>
                     import(
-                        /* webpackChunkName: "components-modals" */ "../apps/admin/views/components/modals.vue"
+                        /* webpackChunkName: "components-modals" */
+                        "../apps/admin/views/components/modals.vue"
                     ),
                 meta: {
                     layout: "app",
                     title: "Modals",
-                    metaTags: [
-                        {
+                    metaTags: [{
                             name: "description",
                             content: "The about page of our example app.",
                         },
@@ -2939,7 +2877,8 @@ const routes = [
         name: "cards",
         component: () =>
             import(
-                /* webpackChunkName: "components-cards" */ "../apps/admin/views/components/cards.vue"
+                /* webpackChunkName: "components-cards" */
+                "../apps/admin/views/components/cards.vue"
             ),
     },
     {
@@ -2947,7 +2886,8 @@ const routes = [
         name: "admin.carousel",
         component: () =>
             import(
-                /* webpackChunkName: "components-carousel" */ "../apps/admin/views/components/carousel.vue"
+                /* webpackChunkName: "components-carousel" */
+                "../apps/admin/views/components/carousel.vue"
             ),
     },
 
@@ -2956,7 +2896,8 @@ const routes = [
         name: "timeline",
         component: () =>
             import(
-                /* webpackChunkName: "components-timeline" */ "../apps/admin/views/components/timeline.vue"
+                /* webpackChunkName: "components-timeline" */
+                "../apps/admin/views/components/timeline.vue"
             ),
     },
     {
@@ -2964,7 +2905,8 @@ const routes = [
         name: "media-object",
         component: () =>
             import(
-                /* webpackChunkName: "components-media-object" */ "../apps/admin/views/components/media_object.vue"
+                /* webpackChunkName: "components-media-object" */
+                "../apps/admin/views/components/media_object.vue"
             ),
     },
     {
@@ -2972,7 +2914,8 @@ const routes = [
         name: "list-group",
         component: () =>
             import(
-                /* webpackChunkName: "components-list-group" */ "../apps/admin/views/components/list_group.vue"
+                /* webpackChunkName: "components-list-group" */
+                "../apps/admin/views/components/list_group.vue"
             ),
     },
     {
@@ -2980,7 +2923,8 @@ const routes = [
         name: "pricing-table",
         component: () =>
             import(
-                /* webpackChunkName: "components-pricing-table" */ "../apps/admin/views/components/pricing_table.vue"
+                /* webpackChunkName: "components-pricing-table" */
+                "../apps/admin/views/components/pricing_table.vue"
             ),
     },
     {
@@ -2988,7 +2932,8 @@ const routes = [
         name: "notifications",
         component: () =>
             import(
-                /* webpackChunkName: "components-notifications" */ "../apps/admin/views/components/toast.vue"
+                /* webpackChunkName: "components-notifications" */
+                "../apps/admin/views/components/toast.vue"
             ),
     },
 
@@ -2997,7 +2942,8 @@ const routes = [
         name: "lightbox",
         component: () =>
             import(
-                /* webpackChunkName: "components-lightbox" */ "../apps/admin/views/components/lightbox.vue"
+                /* webpackChunkName: "components-lightbox" */
+                "../apps/admin/views/components/lightbox.vue"
             ),
     },
     {
@@ -3005,7 +2951,8 @@ const routes = [
         name: "countdown",
         component: () =>
             import(
-                /* webpackChunkName: "components-countdown" */ "../apps/admin/views/components/countdown.vue"
+                /* webpackChunkName: "components-countdown" */
+                "../apps/admin/views/components/countdown.vue"
             ),
     },
     {
@@ -3013,7 +2960,8 @@ const routes = [
         name: "counter",
         component: () =>
             import(
-                /* webpackChunkName: "components-counter" */ "../apps/admin/views/components/counter.vue"
+                /* webpackChunkName: "components-counter" */
+                "../apps/admin/views/components/counter.vue"
             ),
     },
     {
@@ -3021,7 +2969,8 @@ const routes = [
         name: "sweetalert",
         component: () =>
             import(
-                /* webpackChunkName: "components-sweetalert" */ "../apps/admin/views/components/sweetalert.vue"
+                /* webpackChunkName: "components-sweetalert" */
+                "../apps/admin/views/components/sweetalert.vue"
             ),
     },
 
@@ -3031,7 +2980,8 @@ const routes = [
         name: "font-icons",
         component: () =>
             import(
-                /* webpackChunkName: "font-icons" */ "../apps/admin/views/font_icons.vue"
+                /* webpackChunkName: "font-icons" */
+                "../apps/admin/views/font_icons.vue"
             ),
     },
 
@@ -3041,7 +2991,8 @@ const routes = [
         name: "helpdesk",
         component: () =>
             import(
-                /* webpackChunkName: "pages-helpdesk" */ "../apps/admin/views/pages/helpdesk.vue"
+                /* webpackChunkName: "pages-helpdesk" */
+                "../apps/admin/views/pages/helpdesk.vue"
             ),
     },
     {
@@ -3049,7 +3000,8 @@ const routes = [
         name: "contact-us",
         component: () =>
             import(
-                /* webpackChunkName: "pages-contact-us" */ "../apps/admin/views/pages/contact_us.vue"
+                /* webpackChunkName: "pages-contact-us" */
+                "../apps/admin/views/pages/contact_us.vue"
             ),
     },
     {
@@ -3057,7 +3009,8 @@ const routes = [
         name: "faq1",
         component: () =>
             import(
-                /* webpackChunkName: "pages-faq" */ "../apps/admin/views/pages/faq.vue"
+                /* webpackChunkName: "pages-faq" */
+                "../apps/admin/views/pages/faq.vue"
             ),
     },
     {
@@ -3065,7 +3018,8 @@ const routes = [
         name: "faq2",
         component: () =>
             import(
-                /* webpackChunkName: "pages-faq2" */ "../apps/admin/views/pages/faq2.vue"
+                /* webpackChunkName: "pages-faq2" */
+                "../apps/admin/views/pages/faq2.vue"
             ),
     },
     {
@@ -3073,7 +3027,8 @@ const routes = [
         name: "admin-privacy-policy",
         component: () =>
             import(
-                /* webpackChunkName: "pages-privacy-policy" */ "../apps/admin/views/pages/privacy_policy.vue"
+                /* webpackChunkName: "pages-privacy-policy" */
+                "../apps/admin/views/pages/privacy_policy.vue"
             ),
     },
     {
@@ -3081,52 +3036,68 @@ const routes = [
         name: "coming-soon",
         component: () =>
             import(
-                /* webpackChunkName: "pages-coming-soon" */ "../apps/admin/views/pages/coming_soon.vue"
+                /* webpackChunkName: "pages-coming-soon" */
+                "../apps/admin/views/pages/coming_soon.vue"
             ),
-        meta: { layout: "auth" },
+        meta: {
+            layout: "auth"
+        },
     },
     {
         path: "/admin/pages/error404",
         name: "error404",
         component: () =>
             import(
-                /* webpackChunkName: "pages-error404" */ "../apps/admin/views/pages/error404.vue"
+                /* webpackChunkName: "pages-error404" */
+                "../apps/admin/views/pages/error404.vue"
             ),
-        meta: { layout: "auth" },
+        meta: {
+            layout: "auth"
+        },
     },
     {
         path: "/admin/pages/error500",
         name: "error500",
         component: () =>
             import(
-                /* webpackChunkName: "pages-error500" */ "../apps/admin/views/pages/error500.vue"
+                /* webpackChunkName: "pages-error500" */
+                "../apps/admin/views/pages/error500.vue"
             ),
-        meta: { layout: "auth" },
+        meta: {
+            layout: "auth"
+        },
     },
     {
         path: "/admin/pages/error503",
         name: "error503",
         component: () =>
             import(
-                /* webpackChunkName: "pages-error503" */ "../apps/admin/views/pages/error503.vue"
+                /* webpackChunkName: "pages-error503" */
+                "../apps/admin/views/pages/error503.vue"
             ),
-        meta: { layout: "auth" },
+        meta: {
+            layout: "auth"
+        },
     },
     {
         path: "/admin/pages/maintenence",
         name: "maintenence",
         component: () =>
             import(
-                /* webpackChunkName: "pages-maintenence" */ "../apps/admin/views/pages/maintenence.vue"
+                /* webpackChunkName: "pages-maintenence" */
+                "../apps/admin/views/pages/maintenence.vue"
             ),
-        meta: { layout: "auth" },
+        meta: {
+            layout: "auth"
+        },
     },
     {
         path: "/admin/pages/blank-page",
         name: "blank-page",
         component: () =>
             import(
-                /* webpackChunkName: "pages-blank-page" */ "../apps/admin/views/pages/blank_page.vue"
+                /* webpackChunkName: "pages-blank-page" */
+                "../apps/admin/views/pages/blank_page.vue"
             ),
     },
     {
@@ -3134,7 +3105,8 @@ const routes = [
         name: "sample",
         component: () =>
             import(
-                /* webpackChunkName: "pages-sample" */ "../apps/admin/views/pages/sample.vue"
+                /* webpackChunkName: "pages-sample" */
+                "../apps/admin/views/pages/sample.vue"
             ),
     },
 
@@ -3144,7 +3116,8 @@ const routes = [
         name: "alerts",
         component: () =>
             import(
-                /* webpackChunkName: "elements-alerts" */ "../apps/admin/views/elements/alerts.vue"
+                /* webpackChunkName: "elements-alerts" */
+                "../apps/admin/views/elements/alerts.vue"
             ),
     },
     {
@@ -3152,7 +3125,8 @@ const routes = [
         name: "avatar",
         component: () =>
             import(
-                /* webpackChunkName: "elements-avatar" */ "../apps/admin/views/elements/avatar.vue"
+                /* webpackChunkName: "elements-avatar" */
+                "../apps/admin/views/elements/avatar.vue"
             ),
     },
     {
@@ -3160,7 +3134,8 @@ const routes = [
         name: "badges",
         component: () =>
             import(
-                /* webpackChunkName: "elements-badges" */ "../apps/admin/views/elements/badges.vue"
+                /* webpackChunkName: "elements-badges" */
+                "../apps/admin/views/elements/badges.vue"
             ),
     },
     {
@@ -3168,7 +3143,8 @@ const routes = [
         name: "breadcrumbs",
         component: () =>
             import(
-                /* webpackChunkName: "elements-breadcrumbs" */ "../apps/admin/views/elements/breadcrumbs.vue"
+                /* webpackChunkName: "elements-breadcrumbs" */
+                "../apps/admin/views/elements/breadcrumbs.vue"
             ),
     },
     {
@@ -3176,7 +3152,8 @@ const routes = [
         name: "buttons",
         component: () =>
             import(
-                /* webpackChunkName: "elements-buttons" */ "../apps/admin/views/elements/buttons.vue"
+                /* webpackChunkName: "elements-buttons" */
+                "../apps/admin/views/elements/buttons.vue"
             ),
     },
     {
@@ -3184,7 +3161,8 @@ const routes = [
         name: "buttons-group",
         component: () =>
             import(
-                /* webpackChunkName: "elements-buttons-group" */ "../apps/admin/views/elements/buttons_group.vue"
+                /* webpackChunkName: "elements-buttons-group" */
+                "../apps/admin/views/elements/buttons_group.vue"
             ),
     },
     {
@@ -3192,7 +3170,8 @@ const routes = [
         name: "color-library",
         component: () =>
             import(
-                /* webpackChunkName: "elements-color-library" */ "../apps/admin/views/elements/color_library.vue"
+                /* webpackChunkName: "elements-color-library" */
+                "../apps/admin/views/elements/color_library.vue"
             ),
     },
     {
@@ -3200,7 +3179,8 @@ const routes = [
         name: "dropdown",
         component: () =>
             import(
-                /* webpackChunkName: "elements-dropdown" */ "../apps/admin/views/elements/dropdown.vue"
+                /* webpackChunkName: "elements-dropdown" */
+                "../apps/admin/views/elements/dropdown.vue"
             ),
     },
     {
@@ -3208,7 +3188,8 @@ const routes = [
         name: "infobox",
         component: () =>
             import(
-                /* webpackChunkName: "elements-infobox" */ "../apps/admin/views/elements/infobox.vue"
+                /* webpackChunkName: "elements-infobox" */
+                "../apps/admin/views/elements/infobox.vue"
             ),
     },
     {
@@ -3216,7 +3197,8 @@ const routes = [
         name: "jumbotron",
         component: () =>
             import(
-                /* webpackChunkName: "elements-jumbotron" */ "../apps/admin/views/elements/jumbotron.vue"
+                /* webpackChunkName: "elements-jumbotron" */
+                "../apps/admin/views/elements/jumbotron.vue"
             ),
     },
     {
@@ -3224,7 +3206,8 @@ const routes = [
         name: "loader",
         component: () =>
             import(
-                /* webpackChunkName: "elements-loader" */ "../apps/admin/views/elements/loader.vue"
+                /* webpackChunkName: "elements-loader" */
+                "../apps/admin/views/elements/loader.vue"
             ),
     },
     {
@@ -3232,7 +3215,8 @@ const routes = [
         name: "pagination",
         component: () =>
             import(
-                /* webpackChunkName: "elements-pagination" */ "../apps/admin/views/elements/pagination.vue"
+                /* webpackChunkName: "elements-pagination" */
+                "../apps/admin/views/elements/pagination.vue"
             ),
     },
     {
@@ -3240,7 +3224,8 @@ const routes = [
         name: "popovers",
         component: () =>
             import(
-                /* webpackChunkName: "elements-popovers" */ "../apps/admin/views/elements/popovers.vue"
+                /* webpackChunkName: "elements-popovers" */
+                "../apps/admin/views/elements/popovers.vue"
             ),
     },
     {
@@ -3248,7 +3233,8 @@ const routes = [
         name: "progress-bar",
         component: () =>
             import(
-                /* webpackChunkName: "elements-progress-bar" */ "../apps/admin/views/elements/progress_bar.vue"
+                /* webpackChunkName: "elements-progress-bar" */
+                "../apps/admin/views/elements/progress_bar.vue"
             ),
     },
     {
@@ -3256,7 +3242,8 @@ const routes = [
         name: "search",
         component: () =>
             import(
-                /* webpackChunkName: "elements-search" */ "../apps/admin/views/elements/search.vue"
+                /* webpackChunkName: "elements-search" */
+                "../apps/admin/views/elements/search.vue"
             ),
     },
     {
@@ -3264,7 +3251,8 @@ const routes = [
         name: "tooltips",
         component: () =>
             import(
-                /* webpackChunkName: "elements-tooltips" */ "../apps/admin/views/elements/tooltips.vue"
+                /* webpackChunkName: "elements-tooltips" */
+                "../apps/admin/views/elements/tooltips.vue"
             ),
     },
     {
@@ -3272,7 +3260,8 @@ const routes = [
         name: "treeview",
         component: () =>
             import(
-                /* webpackChunkName: "elements-treeview" */ "../apps/admin/views/elements/treeview.vue"
+                /* webpackChunkName: "elements-treeview" */
+                "../apps/admin/views/elements/treeview.vue"
             ),
     },
     {
@@ -3280,7 +3269,8 @@ const routes = [
         name: "typography",
         component: () =>
             import(
-                /* webpackChunkName: "elements-typography" */ "../apps/admin/views/elements/typography.vue"
+                /* webpackChunkName: "elements-typography" */
+                "../apps/admin/views/elements/typography.vue"
             ),
     },
 
@@ -3290,7 +3280,8 @@ const routes = [
         name: "tables",
         component: () =>
             import(
-                /* webpackChunkName: "tables" */ "../apps/admin/views/tables.vue"
+                /* webpackChunkName: "tables" */
+                "../apps/admin/views/tables.vue"
             ),
     },
 
@@ -3300,7 +3291,8 @@ const routes = [
         name: "users.create",
         component: () =>
             import(
-                /* webpackChunkName: "users-profile" */ "../apps/admin/views/users/create_users.vue"
+                /* webpackChunkName: "users-profile" */
+                "../apps/admin/views/users/create_users.vue"
             ),
     },
 
@@ -3309,7 +3301,8 @@ const routes = [
         name: "users.edit",
         component: () =>
             import(
-                /* webpackChunkName: "users-profile" */ "../apps/admin/views/users/edit.vue"
+                /* webpackChunkName: "users-profile" */
+                "../apps/admin/views/users/edit.vue"
             ),
     },
     {
@@ -3317,7 +3310,8 @@ const routes = [
         name: "users.index",
         component: () =>
             import(
-                /* webpackChunkName: "users-profile" */ "../apps/admin/views/users/view_users.vue"
+                /* webpackChunkName: "users-profile" */
+                "../apps/admin/views/users/view_users.vue"
             ),
     },
     {
@@ -3325,7 +3319,8 @@ const routes = [
         name: "profile",
         component: () =>
             import(
-                /* webpackChunkName: "users-profile" */ "../apps/admin/views/users/profile.vue"
+                /* webpackChunkName: "users-profile" */
+                "../apps/admin/views/users/profile.vue"
             ),
     },
     {
@@ -3333,7 +3328,8 @@ const routes = [
         name: "account-setting",
         component: () =>
             import(
-                /* webpackChunkName: "users-account-setting" */ "../apps/admin/views/users/account_setting.vue"
+                /* webpackChunkName: "users-account-setting" */
+                "../apps/admin/views/users/account_setting.vue"
             ),
     },
 
@@ -3343,7 +3339,8 @@ const routes = [
         name: "create-seo",
         component: () =>
             import(
-                /* webpackChunkName: "create-seo" */ "../apps/admin/views/seo/create_seo.vue"
+                /* webpackChunkName: "create-seo" */
+                "../apps/admin/views/seo/create_seo.vue"
             ),
     },
     {
@@ -3351,7 +3348,8 @@ const routes = [
         name: "view-seo",
         component: () =>
             import(
-                /* webpackChunkName: "view-seo" */ "../apps/admin/views/seo/view_seo.vue"
+                /* webpackChunkName: "view-seo" */
+                "../apps/admin/views/seo/view_seo.vue"
             ),
     },
     {
@@ -3359,7 +3357,8 @@ const routes = [
         name: "edit-seo",
         component: () =>
             import(
-                /* webpackChunkName: "edit-seo" */ "../apps/admin/views/seo/edit.vue"
+                /* webpackChunkName: "edit-seo" */
+                "../apps/admin/views/seo/edit.vue"
             ),
     },
 
@@ -3369,7 +3368,8 @@ const routes = [
         name: "dragndrop",
         component: () =>
             import(
-                /* webpackChunkName: "dragndrop" */ "../apps/admin/views/dragndrop.vue"
+                /* webpackChunkName: "dragndrop" */
+                "../apps/admin/views/dragndrop.vue"
             ),
     },
 
@@ -3379,7 +3379,8 @@ const routes = [
         name: "apex-chart",
         component: () =>
             import(
-                /* webpackChunkName: "charts-apex-chart" */ "../apps/admin/views/charts/apex_chart.vue"
+                /* webpackChunkName: "charts-apex-chart" */
+                "../apps/admin/views/charts/apex_chart.vue"
             ),
     },
 
@@ -3389,7 +3390,8 @@ const routes = [
         name: "widgets",
         component: () =>
             import(
-                /* webpackChunkName: "widgets" */ "../apps/admin/views/widgets.vue"
+                /* webpackChunkName: "widgets" */
+                "../apps/admin/views/widgets.vue"
             ),
     },
 
@@ -3399,7 +3401,8 @@ const routes = [
         name: "basic",
         component: () =>
             import(
-                /* webpackChunkName: "forms-basic" */ "../apps/admin/views/forms/basic.vue"
+                /* webpackChunkName: "forms-basic" */
+                "../apps/admin/views/forms/basic.vue"
             ),
     },
     {
@@ -3407,7 +3410,8 @@ const routes = [
         name: "input-group",
         component: () =>
             import(
-                /* webpackChunkName: "forms-input-group" */ "../apps/admin/views/forms/input_group.vue"
+                /* webpackChunkName: "forms-input-group" */
+                "../apps/admin/views/forms/input_group.vue"
             ),
     },
     {
@@ -3415,7 +3419,8 @@ const routes = [
         name: "layouts",
         component: () =>
             import(
-                /* webpackChunkName: "forms-layouts" */ "../apps/admin/views/forms/layouts.vue"
+                /* webpackChunkName: "forms-layouts" */
+                "../apps/admin/views/forms/layouts.vue"
             ),
     },
     {
@@ -3423,7 +3428,8 @@ const routes = [
         name: "validation",
         component: () =>
             import(
-                /* webpackChunkName: "forms-validation" */ "../apps/admin/views/forms/validation.vue"
+                /* webpackChunkName: "forms-validation" */
+                "../apps/admin/views/forms/validation.vue"
             ),
     },
     {
@@ -3431,7 +3437,8 @@ const routes = [
         name: "checkbox-radio",
         component: () =>
             import(
-                /* webpackChunkName: "forms-checkbox-radio" */ "../apps/admin/views/forms/checkbox_radio.vue"
+                /* webpackChunkName: "forms-checkbox-radio" */
+                "../apps/admin/views/forms/checkbox_radio.vue"
             ),
     },
     {
@@ -3439,7 +3446,8 @@ const routes = [
         name: "switches",
         component: () =>
             import(
-                /* webpackChunkName: "forms-switches" */ "../apps/admin/views/forms/switches.vue"
+                /* webpackChunkName: "forms-switches" */
+                "../apps/admin/views/forms/switches.vue"
             ),
     },
     {
@@ -3447,7 +3455,8 @@ const routes = [
         name: "wizards",
         component: () =>
             import(
-                /* webpackChunkName: "forms-wizards" */ "../apps/admin/views/forms/wizards.vue"
+                /* webpackChunkName: "forms-wizards" */
+                "../apps/admin/views/forms/wizards.vue"
             ),
     },
     {
@@ -3455,7 +3464,8 @@ const routes = [
         name: "file-upload",
         component: () =>
             import(
-                /* webpackChunkName: "forms-file-upload" */ "../apps/admin/views/forms/fileupload.vue"
+                /* webpackChunkName: "forms-file-upload" */
+                "../apps/admin/views/forms/fileupload.vue"
             ),
     },
     {
@@ -3463,7 +3473,8 @@ const routes = [
         name: "clipboard",
         component: () =>
             import(
-                /* webpackChunkName: "forms-clipboard" */ "../apps/admin/views/forms/clipboard.vue"
+                /* webpackChunkName: "forms-clipboard" */
+                "../apps/admin/views/forms/clipboard.vue"
             ),
     },
     {
@@ -3471,7 +3482,8 @@ const routes = [
         name: "date-picker",
         component: () =>
             import(
-                /* webpackChunkName: "forms-date-picker" */ "../apps/admin/views/forms/date_range_picker.vue"
+                /* webpackChunkName: "forms-date-picker" */
+                "../apps/admin/views/forms/date_range_picker.vue"
             ),
     },
     {
@@ -3479,7 +3491,8 @@ const routes = [
         name: "input-mask",
         component: () =>
             import(
-                /* webpackChunkName: "forms-input-mask" */ "../apps/admin/views/forms/input_mask.vue"
+                /* webpackChunkName: "forms-input-mask" */
+                "../apps/admin/views/forms/input_mask.vue"
             ),
     },
     {
@@ -3487,7 +3500,8 @@ const routes = [
         name: "quill-editor",
         component: () =>
             import(
-                /* webpackChunkName: "forms-quill-editor" */ "../apps/admin/views/forms/quill_editor.vue"
+                /* webpackChunkName: "forms-quill-editor" */
+                "../apps/admin/views/forms/quill_editor.vue"
             ),
     },
     {
@@ -3495,7 +3509,8 @@ const routes = [
         name: "touchspin",
         component: () =>
             import(
-                /* webpackChunkName: "forms-touchspin" */ "../apps/admin/views/forms/touchspin.vue"
+                /* webpackChunkName: "forms-touchspin" */
+                "../apps/admin/views/forms/touchspin.vue"
             ),
     },
     {
@@ -3503,7 +3518,8 @@ const routes = [
         name: "markdown-editor",
         component: () =>
             import(
-                /* webpackChunkName: "forms-markdown-editor" */ "../apps/admin/views/forms/markdown_editor.vue"
+                /* webpackChunkName: "forms-markdown-editor" */
+                "../apps/admin/views/forms/markdown_editor.vue"
             ),
     },
     {
@@ -3511,7 +3527,8 @@ const routes = [
         name: "select2",
         component: () =>
             import(
-                /* webpackChunkName: "forms-select2" */ "../apps/admin/views/forms/select2.vue"
+                /* webpackChunkName: "forms-select2" */
+                "../apps/admin/views/forms/select2.vue"
             ),
     },
 
@@ -3521,7 +3538,8 @@ const routes = [
         name: "chat",
         component: () =>
             import(
-                /* webpackChunkName: "apps-chat" */ "../apps/admin/views/apps/chat.vue"
+                /* webpackChunkName: "apps-chat" */
+                "../apps/admin/views/apps/chat.vue"
             ),
     },
     {
@@ -3529,7 +3547,8 @@ const routes = [
         name: "mailbox",
         component: () =>
             import(
-                /* webpackChunkName: "apps-mailbox" */ "../apps/admin/views/apps/mailbox.vue"
+                /* webpackChunkName: "apps-mailbox" */
+                "../apps/admin/views/apps/mailbox.vue"
             ),
     },
     {
@@ -3537,7 +3556,8 @@ const routes = [
         name: "todo-list",
         component: () =>
             import(
-                /* webpackChunkName: "apps-todo-list" */ "../apps/admin/views/apps/todo_list.vue"
+                /* webpackChunkName: "apps-todo-list" */
+                "../apps/admin/views/apps/todo_list.vue"
             ),
     },
     {
@@ -3545,7 +3565,8 @@ const routes = [
         name: "contacts",
         component: () =>
             import(
-                /* webpackChunkName: "apps-contacts" */ "../apps/admin/views/apps/contacts.vue"
+                /* webpackChunkName: "apps-contacts" */
+                "../apps/admin/views/apps/contacts.vue"
             ),
     },
     {
@@ -3553,7 +3574,8 @@ const routes = [
         name: "notes",
         component: () =>
             import(
-                /* webpackChunkName: "apps-notes" */ "../apps/admin/views/apps/notes.vue"
+                /* webpackChunkName: "apps-notes" */
+                "../apps/admin/views/apps/notes.vue"
             ),
     },
     {
@@ -3561,7 +3583,8 @@ const routes = [
         name: "scrumboard",
         component: () =>
             import(
-                /* webpackChunkName: "apps-scrumboard" */ "../apps/admin/views/apps/scrumboard.vue"
+                /* webpackChunkName: "apps-scrumboard" */
+                "../apps/admin/views/apps/scrumboard.vue"
             ),
     },
     {
@@ -3569,7 +3592,8 @@ const routes = [
         name: "calendar",
         component: () =>
             import(
-                /* webpackChunkName: "apps-calendar" */ "../apps/admin/views/apps/calendar.vue"
+                /* webpackChunkName: "apps-calendar" */
+                "../apps/admin/views/apps/calendar.vue"
             ),
     },
     {
@@ -3577,7 +3601,8 @@ const routes = [
         name: "invoice-list",
         component: () =>
             import(
-                /* webpackChunkName: "apps-invoice-list" */ "../apps/admin/views/apps/invoice/list.vue"
+                /* webpackChunkName: "apps-invoice-list" */
+                "../apps/admin/views/apps/invoice/list.vue"
             ),
     },
     {
@@ -3585,7 +3610,8 @@ const routes = [
         name: "invoice-preview",
         component: () =>
             import(
-                /* webpackChunkName: "apps-invoice-preview" */ "../apps/admin/views/apps/invoice/preview.vue"
+                /* webpackChunkName: "apps-invoice-preview" */
+                "../apps/admin/views/apps/invoice/preview.vue"
             ),
     },
     {
@@ -3593,7 +3619,8 @@ const routes = [
         name: "invoice-add",
         component: () =>
             import(
-                /* webpackChunkName: "apps-invoice-add" */ "../apps/admin/views/apps/invoice/add.vue"
+                /* webpackChunkName: "apps-invoice-add" */
+                "../apps/admin/views/apps/invoice/add.vue"
             ),
     },
     {
@@ -3601,7 +3628,8 @@ const routes = [
         name: "invoice-edit",
         component: () =>
             import(
-                /* webpackChunkName: "apps-invoice-edit" */ "../apps/admin/views/apps/invoice/edit.vue"
+                /* webpackChunkName: "apps-invoice-edit" */
+                "../apps/admin/views/apps/invoice/edit.vue"
             ),
     },
 
@@ -3611,7 +3639,8 @@ const routes = [
         name: "table-v3-table-basic",
         component: () =>
             import(
-                /* webpackChunkName: "tables-basic" */ "../apps/admin/views/tables/v3-table/basic.vue"
+                /* webpackChunkName: "tables-basic" */
+                "../apps/admin/views/tables/v3-table/basic.vue"
             ),
     },
     {
@@ -3619,7 +3648,8 @@ const routes = [
         name: "v3-table-striped",
         component: () =>
             import(
-                /* webpackChunkName: "tables-v3-table-striped" */ "../apps/admin/views/tables/v3-table/striped.vue"
+                /* webpackChunkName: "tables-v3-table-striped" */
+                "../apps/admin/views/tables/v3-table/striped.vue"
             ),
     },
     {
@@ -3627,7 +3657,8 @@ const routes = [
         name: "v3-table-order-sorting",
         component: () =>
             import(
-                /* webpackChunkName: "tables-v3-table-order-sorting" */ "../apps/admin/views/tables/v3-table/order_sorting.vue"
+                /* webpackChunkName: "tables-v3-table-order-sorting" */
+                "../apps/admin/views/tables/v3-table/order_sorting.vue"
             ),
     },
     {
@@ -3635,7 +3666,8 @@ const routes = [
         name: "v3-table-multi-column",
         component: () =>
             import(
-                /* webpackChunkName: "tables-v3-table-multi-column" */ "../apps/admin/views/tables/v3-table/multi_column.vue"
+                /* webpackChunkName: "tables-v3-table-multi-column" */
+                "../apps/admin/views/tables/v3-table/multi_column.vue"
             ),
     },
     {
@@ -3643,7 +3675,8 @@ const routes = [
         name: "v3-table-multiple-tables",
         component: () =>
             import(
-                /* webpackChunkName: "tables-v3-table-multiple-tables" */ "../apps/admin/views/tables/v3-table/multiple_tables.vue"
+                /* webpackChunkName: "tables-v3-table-multiple-tables" */
+                "../apps/admin/views/tables/v3-table/multiple_tables.vue"
             ),
     },
     {
@@ -3651,7 +3684,8 @@ const routes = [
         name: "v3-table-alt-pagination",
         component: () =>
             import(
-                /* webpackChunkName: "tables-v3-table-alt-pagination" */ "../apps/admin/views/tables/v3-table/alt_pagination.vue"
+                /* webpackChunkName: "tables-v3-table-alt-pagination" */
+                "../apps/admin/views/tables/v3-table/alt_pagination.vue"
             ),
     },
     {
@@ -3659,7 +3693,8 @@ const routes = [
         name: "v3-table-custom",
         component: () =>
             import(
-                /* webpackChunkName: "tables-v3-table-custom" */ "../apps/admin/views/tables/v3-table/custom.vue"
+                /* webpackChunkName: "tables-v3-table-custom" */
+                "../apps/admin/views/tables/v3-table/custom.vue"
             ),
     },
     {
@@ -3667,7 +3702,8 @@ const routes = [
         name: "v3-table-range-search",
         component: () =>
             import(
-                /* webpackChunkName: "tables-v3-table-range-search" */ "../apps/admin/views/tables/v3-table/range_search.vue"
+                /* webpackChunkName: "tables-v3-table-range-search" */
+                "../apps/admin/views/tables/v3-table/range_search.vue"
             ),
     },
     {
@@ -3675,7 +3711,8 @@ const routes = [
         name: "v3-table-export",
         component: () =>
             import(
-                /* webpackChunkName: "tables-v3-table-export" */ "../apps/admin/views/tables/v3-table/export.vue"
+                /* webpackChunkName: "tables-v3-table-export" */
+                "../apps/admin/views/tables/v3-table/export.vue"
             ),
     },
     {
@@ -3683,7 +3720,8 @@ const routes = [
         name: "v3-table-live-dom-ordering",
         component: () =>
             import(
-                /* webpackChunkName: "tables-v3-table-live-dom-ordering" */ "../apps/admin/views/tables/v3-table/live_dom_ordering.vue"
+                /* webpackChunkName: "tables-v3-table-live-dom-ordering" */
+                "../apps/admin/views/tables/v3-table/live_dom_ordering.vue"
             ),
     },
     {
@@ -3691,7 +3729,8 @@ const routes = [
         name: "v3-table-miscellaneous",
         component: () =>
             import(
-                /* webpackChunkName: "tables-v3-table-miscellaneous" */ "../apps/admin/views/tables/v3-table/miscellaneous.vue"
+                /* webpackChunkName: "tables-v3-table-miscellaneous" */
+                "../apps/admin/views/tables/v3-table/miscellaneous.vue"
             ),
     },
     //vue3-datatable
@@ -3700,7 +3739,8 @@ const routes = [
         name: "table-vue3-datatable-basic",
         component: () =>
             import(
-                /* webpackChunkName: "tables-vue3-datatable-basic" */ "../apps/admin/views/tables/vue3-datatable/basic.vue"
+                /* webpackChunkName: "tables-vue3-datatable-basic" */
+                "../apps/admin/views/tables/vue3-datatable/basic.vue"
             ),
     },
     {
@@ -3708,7 +3748,8 @@ const routes = [
         name: "vue3-datatable-order-sorting",
         component: () =>
             import(
-                /* webpackChunkName: "tables-vue3-datatable-order-sorting" */ "../apps/admin/views/tables/vue3-datatable/order_sorting.vue"
+                /* webpackChunkName: "tables-vue3-datatable-order-sorting" */
+                "../apps/admin/views/tables/vue3-datatable/order_sorting.vue"
             ),
     },
     {
@@ -3716,7 +3757,8 @@ const routes = [
         name: "vue3-datatable-alt-pagination",
         component: () =>
             import(
-                /* webpackChunkName: "tables-vue3-datatable-alt-pagination" */ "../apps/admin/views/tables/vue3-datatable/alt_pagination.vue"
+                /* webpackChunkName: "tables-vue3-datatable-alt-pagination" */
+                "../apps/admin/views/tables/vue3-datatable/alt_pagination.vue"
             ),
     },
     {
@@ -3724,7 +3766,8 @@ const routes = [
         name: "vue3-datatable-search",
         component: () =>
             import(
-                /* webpackChunkName: "tables-vue3-datatable-search" */ "../apps/admin/views/tables/vue3-datatable/search.vue"
+                /* webpackChunkName: "tables-vue3-datatable-search" */
+                "../apps/admin/views/tables/vue3-datatable/search.vue"
             ),
     },
     {
@@ -3732,7 +3775,8 @@ const routes = [
         name: "vue3-datatable-checkbox",
         component: () =>
             import(
-                /* webpackChunkName: "tables-vue3-datatable-checkbox" */ "../apps/admin/views/tables/vue3-datatable/checkbox.vue"
+                /* webpackChunkName: "tables-vue3-datatable-checkbox" */
+                "../apps/admin/views/tables/vue3-datatable/checkbox.vue"
             ),
     },
     {
@@ -3740,7 +3784,8 @@ const routes = [
         name: "vue3-datatable-slot",
         component: () =>
             import(
-                /* webpackChunkName: "tables-vue3-datatable-slot" */ "../apps/admin/views/tables/vue3-datatable/slot.vue"
+                /* webpackChunkName: "tables-vue3-datatable-slot" */
+                "../apps/admin/views/tables/vue3-datatable/slot.vue"
             ),
     },
     {
@@ -3748,7 +3793,8 @@ const routes = [
         name: "vue3-datatable-column-filter",
         component: () =>
             import(
-                /* webpackChunkName: "tables-vue3-datatable-column-filter" */ "../apps/admin/views/tables/vue3-datatable/column-filter.vue"
+                /* webpackChunkName: "tables-vue3-datatable-column-filter" */
+                "../apps/admin/views/tables/vue3-datatable/column-filter.vue"
             ),
     },
     {
@@ -3756,7 +3802,8 @@ const routes = [
         name: "vue3-datatable-actions",
         component: () =>
             import(
-                /* webpackChunkName: "tables-vue3-datatable-actions" */ "../apps/admin/views/tables/vue3-datatable/actions.vue"
+                /* webpackChunkName: "tables-vue3-datatable-actions" */
+                "../apps/admin/views/tables/vue3-datatable/actions.vue"
             ),
     },
     {
@@ -3764,7 +3811,8 @@ const routes = [
         name: "vue3-datatable-sticky-header",
         component: () =>
             import(
-                /* webpackChunkName: "tables-vue3-datatable-sticky-header" */ "../apps/admin/views/tables/vue3-datatable/sticky-header.vue"
+                /* webpackChunkName: "tables-vue3-datatable-sticky-header" */
+                "../apps/admin/views/tables/vue3-datatable/sticky-header.vue"
             ),
     },
     {
@@ -3772,7 +3820,8 @@ const routes = [
         name: "vue3-datatable-column-chooser",
         component: () =>
             import(
-                /* webpackChunkName: "tables-vue3-datatable-column-chooser" */ "../apps/admin/views/tables/vue3-datatable/column-chooser.vue"
+                /* webpackChunkName: "tables-vue3-datatable-column-chooser" */
+                "../apps/admin/views/tables/vue3-datatable/column-chooser.vue"
             ),
     },
     {
@@ -3780,7 +3829,8 @@ const routes = [
         name: "vue3-datatable-advance",
         component: () =>
             import(
-                /* webpackChunkName: "tables-vue3-datatable-advance" */ "../apps/admin/views/tables/vue3-datatable/advance.vue"
+                /* webpackChunkName: "tables-vue3-datatable-advance" */
+                "../apps/admin/views/tables/vue3-datatable/advance.vue"
             ),
     },
 ];
