@@ -213,7 +213,8 @@
     <template v-if="showPopup">
         <div class="popup-advert">
             <div class="popup-content">
-                <img src="../assets/images/adverts/rotobake-ovens.jpg" alt="Rotobake Ovens Solutions" class="popup-image" />
+                <img src="../assets/images/adverts/rotobake-ovens.jpg" alt="Rotobake Ovens Solutions"
+                    class="popup-image" style="min-height: 460px;" />
                 <div class="button-group">
                     <button @click="dismissPopup" class="btn btn-primary btn-footer mr-5">
                         Cancel
@@ -482,6 +483,7 @@ const viewProduct = () => {
 </script>
 
 <style>
+
 .cat-banner-row .carousel__prev {
     height: 92% !important;
     color: #8a8a8a !important;
