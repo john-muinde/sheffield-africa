@@ -37,7 +37,8 @@
 
                         <div class="play-button">
                           <label :for="'checkbox' + video.id" class="label-play"
-                            @click="playVideo('/storage/' + video.file_path, 'checkbox' + video.id)">
+                            @click="playVideo('/storage/' + video.file_path, 'checkbox' + video.id)"
+                            ref="videoCheckBox">
                             <div class="play_pause_icon play"></div>
                           </label>
                           <input class="checkbox-play" type="checkbox" :id="'checkbox' + video.id">
@@ -70,7 +71,7 @@
 </template>
 
 <script setup>
-import { ref, computed, watch, onMounted, watchEffect } from 'vue';
+import { ref, computed, watch, onMounted, watchEffect, nextTick } from 'vue';
 // import axios from "axios";
 import { useRoute } from "vue-router";
 import { useMeta } from "../../admin/composables/use-meta";
@@ -91,26 +92,33 @@ const videos = ref([]);
 
 // Fetch products based on the current page
 const fetchMediaCenter = async () => {
-
   try {
     const response = await axios.get('/api/get-media-center-videos', {
-
     });
-
     videos.value = response.data.videos;
-
-    if (videos.value.length > 0) {
-      setTimeout(() => {
-        playVideo('/storage/' + videos.value[0].file_path, 'checkbox' + videos.value[0].id);
-      }, 1000);
-    }
   } catch (error) {
     console.error(error);
   }
 };
 
+const checkAndPlayVideo = () => {
+  nextTick(() => {
+    const videoCheckbox = this.$refs.videoCheckbox[0];
+    console.log(videoCheckbox);
+    console.log(this.$refs.videoPlayer);
+    console.log(videoPlayer)
+
+    if (videoPlayer && videoPlayer.contentWindow && videoCheckbox) {
+      setTimeout(() => {
+        videoCheckbox.click();
+      }, 1000);
+    }
+  });
+}
+
 onMounted(() => {
   fetchMediaCenter();
+  checkAndPlayVideo();
 });
 
 
@@ -148,7 +156,6 @@ const playVideo = (videoUrl, checkboxId) => {
       checkbox.checked = false;
     }
   });
-
 
 
 
