@@ -33,8 +33,7 @@ class UserController extends Controller
         if (!in_array($orderDirection, ['asc', 'desc'])) {
             $orderDirection = 'desc';
         }
-        $users = User::
-            when(request('search_id'), function ($query) {
+        $users = User::when(request('search_id'), function ($query) {
                 $query->where('id', request('search_id'));
             })
             ->when(request('search_title'), function ($query) {
@@ -44,7 +43,6 @@ class UserController extends Controller
                 $query->where(function ($q) {
                     $q->where('id', request('search_global'))
                         ->orWhere('name', 'like', '%' . request('search_global') . '%');
-
                 });
             })
             ->orderBy($orderColumn, $orderDirection)
@@ -113,7 +111,7 @@ class UserController extends Controller
 
         $user = User::findOrFail($id); // Assuming $id is the id of the user you want to update
 
-        $attributes = $request->validate([
+        $attributes =  $request->validate([
             'name' => 'required',
             'role' => 'required',
             'email' => ['required', 'email'],
@@ -192,7 +190,6 @@ class UserController extends Controller
         if (!$responseData['success']) {
 
             return response()->json(['message' => 'reCAPTCHA verification failed', 'status' => 'error']);
-
         } else {
 
             $request_type = $request->input('request_type');
@@ -221,26 +218,19 @@ class UserController extends Controller
                 'firstname' => $firstname,
                 'phone_number' => $phone_number,
                 'accept_terms_conditions' => $accept_terms_conditions,
-               
+
             ];
-           
+
 
             try {
-                
-                Mail::to('sheffieldafricamarketing@gmail.com')->cc($email)->send(new ContactUs($formData));
-           
-                return response()->json(['message' => 'Your message has been received', 'status' => 'success']);
 
-            } catch (\Exception $exception) {   
+                Mail::to('sheffieldafricamarketing@gmail.com')->cc($email)->send(new ContactUs($formData));
+
+                return response()->json(['message' => 'Your message has been received', 'status' => 'success']);
+            } catch (\Exception $exception) {
                 return response()->json(['message' => $exception->getMessage(), 'status' => 'success']);
             }
-
-
-
-            
-
         }
-
     }
 
 
@@ -263,7 +253,6 @@ class UserController extends Controller
         if (!$responseData['success']) {
 
             return response()->json(['message' => 'reCAPTCHA verification failed', 'status' => 'error']);
-
         } else {
 
             $name = $request->input('name');
@@ -274,7 +263,7 @@ class UserController extends Controller
 
             $cvFile = $request->file('cv');
             $supportingDocument = $request->file('supporting_document');
-            
+
 
             $formData = [
                 'name' => $name,
@@ -292,23 +281,19 @@ class UserController extends Controller
                     'name' => $supportingDocument->getClientOriginalName(),
                     'contents' => file_get_contents($supportingDocument->getRealPath()),
                 ],
-               
+
             ];
-           
+
 
             try {
-                
-                Mail::to('sheffieldafricamarketing@gmail.com')->cc($email)->send(new Career($formData));
-           
-                return response()->json(['message' => 'Your submission has been received', 'status' => 'success']);
 
-            } catch (\Exception $exception) {   
+                Mail::to('sheffieldafricamarketing@gmail.com')->cc($email)->send(new Career($formData));
+
+                return response()->json(['message' => 'Your submission has been received', 'status' => 'success']);
+            } catch (\Exception $exception) {
                 return response()->json(['message' => $exception->getMessage(), 'status' => 'success']);
             }
-            
-
         }
-
     }
 
 
@@ -331,10 +316,9 @@ class UserController extends Controller
         if (!$responseData['success']) {
 
             return response()->json(['message' => 'reCAPTCHA verification failed', 'status' => 'error']);
-
         } else {
 
-           
+
             $surname = $request->input('surname');
             $email = $request->input('email');
             $company_name = $request->input('company_name');
@@ -344,13 +328,13 @@ class UserController extends Controller
             $code = $request->input('code');
             $firstname = $request->input('firstname');
             $phone_number = $request->input('phone_number');
-            
+
             $shipping = $request->input('shipping');
             $installation = $request->input('installation');
             $cartItems = $request->input('cartItems');
             $cartItems = json_decode($cartItems, true);
 
-            
+
 
             $formData = [
                 'shipping' => $shipping,
@@ -365,27 +349,18 @@ class UserController extends Controller
                 'firstname' => $firstname,
                 'phone_number' => $phone_number,
                 'cartItems' => $cartItems,
-               
+
             ];
-           
+
 
             try {
-                
-                Mail::to('sheffieldafricamarketing@gmail.com')->cc($email)->send(new RequestQuote($formData));
-           
-                return response()->json(['message' => 'Your Request Quote has been received', 'status' => 'success']);
 
-            } catch (\Exception $exception) {   
+                Mail::to('sheffieldafricamarketing@gmail.com')->cc($email)->send(new RequestQuote($formData));
+
+                return response()->json(['message' => 'Your Request Quote has been received', 'status' => 'success']);
+            } catch (\Exception $exception) {
                 return response()->json(['message' => $exception->getMessage(), 'status' => 'success']);
             }
-
-
-
-            
-
         }
-
     }
-
-    
 }
