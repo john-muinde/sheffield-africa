@@ -213,7 +213,7 @@
     <template v-if="showPopup">
         <div class="popup-advert">
             <div class="popup-content">
-                <img src="../assets/images/adverts/rotobake-ovens.jpg" alt="Rotobake Ovens Solutions"
+                <img src="../assets/images/adverts/commercial-kitchen-laundry-cold-room.jpg" alt="Rotobake Ovens Solutions"
                     class="popup-image" style="min-height: 460px;" />
                 <div class="button-group">
                     <button @click="dismissPopup" class="btn btn-primary btn-footer mr-5">
