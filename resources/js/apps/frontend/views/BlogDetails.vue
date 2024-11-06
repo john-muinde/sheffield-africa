@@ -121,6 +121,7 @@
 </template>
 
 <script setup>
+<<<<<<< HEAD
 import { ref, computed, watch, onMounted, onUnmounted, watchEffect } from "vue";
 
 import { useRoute } from "vue-router";
@@ -136,6 +137,18 @@ const other_blogs = ref([]);
 const blog_id = ref(route.params.id ? parseInt(route.params.id) : 1);
 
 // Fetch showrooms based on the current page
+=======
+import { ref, computed, watch, onMounted, watchEffect } from "vue";
+import { useRoute } from "vue-router";
+import { useHead } from "@unhead/vue";
+
+const route = useRoute();
+const blog = ref({});
+const other_blogs = ref([]);
+const blog_id = ref(route.params.id ? parseInt(route.params.id) : 1);
+
+// Fetch blog details
+>>>>>>> b1327f8448e14b925438ec1cdeed9a33675301cb
 const fetchBlog = async () => {
     try {
         const response = await axios.get("/api/get-blog-details", {
@@ -145,12 +158,35 @@ const fetchBlog = async () => {
         });
         blog.value = response.data.blog;
         other_blogs.value = response.data.other_blogs;
+<<<<<<< HEAD
         useMeta({ title: blog.value.name + " | Blog" });
+=======
+        // Set meta information after fetching the blog
+        useHead({
+            title: `${blog.value.name} | Blog`,
+            meta: [
+                {
+                    name: "description",
+                    content:
+                        "Sheffield Steel Systems Limited specializes in comprehensive kitchen, laundry, and cold room solutions. Experience tailored services from design to installation in Nairobi.",
+                },
+                {
+                    name: "keywords",
+                    content:
+                        "Commercial Kitchen Solutions, Commercial laundry Solutions, Commercial Cold room Solutions",
+                },
+            ],
+        });
+>>>>>>> b1327f8448e14b925438ec1cdeed9a33675301cb
     } catch (error) {
         console.error(error);
     }
 };
 
+<<<<<<< HEAD
+=======
+// Get blog link
+>>>>>>> b1327f8448e14b925438ec1cdeed9a33675301cb
 const getBlogLink = (id, name) => {
     let transformedName = name.replace(/ /g, "-").replace(/\//g, "-");
     transformedName = transformedName.replace(/-+/g, "-");
@@ -160,11 +196,16 @@ const getBlogLink = (id, name) => {
     return `/media/blogs/${id}/${transformedName}`;
 };
 
+<<<<<<< HEAD
 // Initial fetch of showrooms
+=======
+// Initial fetch of blog
+>>>>>>> b1327f8448e14b925438ec1cdeed9a33675301cb
 onMounted(() => {
     fetchBlog();
 });
 
+<<<<<<< HEAD
 watchEffect(() => {
     const params = route.params;
     const query = route.query;
@@ -172,11 +213,21 @@ watchEffect(() => {
     if (params.id !== "" && blog_id.value !== params.id) {
         blog_id.value = params.id ? parseInt(params.id) : 1;
 
+=======
+// Watch for route changes to fetch blog again
+watchEffect(() => {
+    const params = route.params;
+    if (params.id !== "" && blog_id.value !== params.id) {
+        blog_id.value = params.id ? parseInt(params.id) : 1;
+>>>>>>> b1327f8448e14b925438ec1cdeed9a33675301cb
         fetchBlog();
     }
 });
 </script>
+<<<<<<< HEAD
 
+=======
+>>>>>>> b1327f8448e14b925438ec1cdeed9a33675301cb
 <style>
 .blog-page .about-us-lead {
     font-size: 2.2rem !important;

@@ -1,8 +1,16 @@
 import { createApp } from "vue";
+<<<<<<< HEAD
+=======
+import { createHead } from "@unhead/vue";
+>>>>>>> b1327f8448e14b925438ec1cdeed9a33675301cb
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 const app = createApp(App);
+<<<<<<< HEAD
+=======
+const head = createHead();
+>>>>>>> b1327f8448e14b925438ec1cdeed9a33675301cb
 
 // bootstrap
 import * as bootstrap from "bootstrap";
@@ -15,10 +23,13 @@ import "./apps/admin/assets/sass/components/custom-modal.scss";
 import PerfectScrollbar from "vue3-perfect-scrollbar";
 import "vue3-perfect-scrollbar/dist/vue3-perfect-scrollbar.css";
 
+<<<<<<< HEAD
 //vue-meta
 import { createHead } from "@vueuse/head";
 const head = createHead();
 
+=======
+>>>>>>> b1327f8448e14b925438ec1cdeed9a33675301cb
 //Sweetalert
 import Swal from "sweetalert2";
 window.Swal = Swal;
@@ -53,7 +64,25 @@ window.$appSetting = appSetting;
 window.$appSetting.init();
 
 //markdown editor
+<<<<<<< HEAD
 import VueEasymde from 'vue3-easymde';
 import "easymde/dist/easymde.min.css";
 
 app.use(store).use(router).use(i18n).use(PerfectScrollbar).use(VueNouislider).use(Maska).use(ClientTable).use(vue3JsonExcel).use(VueFormWizard).use(head).use(VueEasymde).mount("#app");
+=======
+import VueEasymde from "vue3-easymde";
+import "easymde/dist/easymde.min.css";
+
+app.use(store)
+    .use(router)
+    .use(i18n)
+    .use(PerfectScrollbar)
+    .use(VueNouislider)
+    .use(Maska)
+    .use(ClientTable)
+    .use(vue3JsonExcel)
+    .use(VueFormWizard)
+    .use(head)
+    .use(VueEasymde)
+    .mount("#app");
+>>>>>>> b1327f8448e14b925438ec1cdeed9a33675301cb

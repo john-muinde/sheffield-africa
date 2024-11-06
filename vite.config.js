@@ -15,6 +15,10 @@ export default defineConfig({
             write: "assets/manifest.json",
         },
         rollupOptions: {
+<<<<<<< HEAD
+=======
+            
+>>>>>>> b1327f8448e14b925438ec1cdeed9a33675301cb
             plugins: [commonjs()],
         },
     },
@@ -33,8 +37,12 @@ export default defineConfig({
                 "resources/js/apps/frontend/assets/css/skins/skin-demo-14.css",
                 "resources/js/apps/frontend/assets/css/demos/demo-14.css",
                 "resources/js/apps/frontend/assets/css/demos/demo-4.css",
+<<<<<<< HEAD
                 "resources/js/apps/frontend/assets/js/jquery.min.js", //this is disabled
                 "node_modules/jquery/src/jquery.js",
+=======
+                "resources/js/apps/frontend/assets/js/jquery-3.7.0.min.js",
+>>>>>>> b1327f8448e14b925438ec1cdeed9a33675301cb
                 "resources/js/apps/frontend/assets/js/bootstrap.bundle.min.js",
                 "resources/js/apps/frontend/assets/js/jquery.hoverIntent.min.js",
                 "resources/js/apps/frontend/assets/js/jquery.waypoints.min.js",

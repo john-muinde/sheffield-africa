@@ -4,6 +4,7 @@
             <div class="header-top header-top-color">
                 <div class="container">
                     <div class="header-left">
+<<<<<<< HEAD
                         <a href="tel:+254713777111"
                             ><i class="icon-phone"></i>+254 713 777 111</a
                         >
@@ -12,6 +13,12 @@
                             ><i class="icon-envelope"></i>
                             info@sheffieldafrica.com</a
                         >
+=======
+                        <a href="tel:+254713777111"><i class="icon-phone"></i>+254 713 777 111</a>
+
+                        <a class="ml-5" href="mailto:info@sheffieldafrica.com"><i class="icon-envelope"></i>
+                            info@sheffieldafrica.com</a>
+>>>>>>> b1327f8448e14b925438ec1cdeed9a33675301cb
                     </div>
                     <!-- End .header-left -->
 
@@ -20,7 +27,11 @@
                             <li>
                                 <a href="#">Links</a>
                                 <ul class="menus">
+<<<<<<< HEAD
                             <!-- <div class="header-dropdown">
+=======
+                                    <!-- <div class="header-dropdown">
+>>>>>>> b1327f8448e14b925438ec1cdeed9a33675301cb
                                       <a href="#">USD</a>
                                       <div class="header-menu">
                                         <ul>
@@ -31,11 +42,20 @@
 
                                     </div> -->
                                     <!-- End .header-dropdown -->
+<<<<<<< HEAD
                                  
                                     <li :class="{ 'active-li': isKitchenPage }">
                                         <router-link to="/kitchen">
                                             <span class="top-icon">
                                                 <img class="top-menu-icon" src="/assets/images/menu-icons/top-menu/kitchen.png" />
+=======
+
+                                    <li :class="{ 'active-li': isKitchenPage }">
+                                        <router-link to="/kitchen">
+                                            <span class="top-icon">
+                                                <img class="top-menu-icon"
+                                                    src="/assets/images/menu-icons/top-menu/kitchen.png" />
+>>>>>>> b1327f8448e14b925438ec1cdeed9a33675301cb
                                             </span>
                                             KITCHEN
                                         </router-link>
@@ -43,7 +63,12 @@
                                     <li :class="{ 'active-li': isLaundryPage }">
                                         <router-link to="/laundry">
                                             <span class="top-icon">
+<<<<<<< HEAD
                                                 <img class="top-menu-icon" src="/assets/images/menu-icons/top-menu/laundry.png" />
+=======
+                                                <img class="top-menu-icon"
+                                                    src="/assets/images/menu-icons/top-menu/laundry.png" />
+>>>>>>> b1327f8448e14b925438ec1cdeed9a33675301cb
                                             </span>
                                             LAUNDRY
                                         </router-link>
@@ -53,7 +78,12 @@
                                     <li :class="{ 'active-li': isColdRoomPage }">
                                         <router-link to="/cold-storage">
                                             <span class="top-icon">
+<<<<<<< HEAD
                                                 <img class="top-menu-icon" src="/assets/images/menu-icons/top-menu/cold-room.png" />
+=======
+                                                <img class="top-menu-icon"
+                                                    src="/assets/images/menu-icons/top-menu/cold-room.png" />
+>>>>>>> b1327f8448e14b925438ec1cdeed9a33675301cb
                                             </span>
                                             COLD STORAGE
                                         </router-link>
@@ -63,7 +93,12 @@
                                     <li :class="{ 'active-li': isConsultancyDesignPage }">
                                         <router-link to="/consultancy-and-Design">
                                             <span class="top-icon">
+<<<<<<< HEAD
                                                 <img class="top-menu-icon" src="/assets/images/menu-icons/consultancy-design.png" />
+=======
+                                                <img class="top-menu-icon"
+                                                    src="/assets/images/menu-icons/consultancy-design.png" />
+>>>>>>> b1327f8448e14b925438ec1cdeed9a33675301cb
                                             </span>
                                             Consultancy
                                         </router-link>
@@ -159,7 +194,11 @@
                                 </ul>
                             </li>
                         </ul>
+<<<<<<< HEAD
                         
+=======
+
+>>>>>>> b1327f8448e14b925438ec1cdeed9a33675301cb
                     </div>
                     <!-- End .header-right -->
 
@@ -188,12 +227,17 @@
                     <div class="row">
                         <div class="col-auto col-lg-3 col-xl-3">
                             <router-link to="/" class="logo">
+<<<<<<< HEAD
                                 <img
                                     src="../../assets/images/logo.png"
                                     alt="Sheffield Logo"
                                     width="190"
                                     height="auto"
                                 />
+=======
+                                <img src="../../assets/images/logo.png" alt="Sheffield Logo" width="190"
+                                    height="auto" />
+>>>>>>> b1327f8448e14b925438ec1cdeed9a33675301cb
                             </router-link>
                         </div>
                         <!-- End .col-xl-3 col-xxl-2 -->
@@ -202,6 +246,7 @@
                             <div class="row">
                                 <div class="col-lg-8 d-none d-lg-block">
                                     <div
+<<<<<<< HEAD
                                         class="header-search header-search-extended header-search-visible header-search-no-radius"
                                     >
                                         <a
@@ -259,15 +304,49 @@
                                                                 class="rounded profile-img"
                                                                 alt=""
                                                             />
+=======
+                                        class="header-search header-search-extended header-search-visible header-search-no-radius">
+                                        <a href="#" class="search-toggle" role="button"><i class="icon-search"></i></a>
+                                        <form action="#" method="get">
+                                            <div class="header-search-wrapper search-wrapper-wide searchListMainDiv">
+                                                <!-- End .select-custom -->
+                                                <label for="q" class="sr-only">Search</label>
+                                                <input type="search" v-model="query" @input="search"
+                                                    class="form-control" name="q" id="query2"
+                                                    placeholder="Search product ..." autocomplete="off" required />
+
+                                                <ul v-if="showResults" class="" ref="resultsList"
+                                                    @click.self="hideResults">
+                                                    <li v-for="result in results" :key="result.id">
+                                                        <router-link :to="getProductLink(
+                                                            result.id,
+                                                            result.name,
+                                                            result.model_number,
+                                                            result
+                                                                .categories_json[0]
+                                                                .parent_name_with_slashes
+                                                        )
+                                                            ">
+                                                            <img style="
+                                                                    display: inline;
+                                                                    height: 28px;
+                                                                " :src="'/storage/' +
+                                                                    result.main_image_path
+                                                                    " class="rounded profile-img" alt="" />
+>>>>>>> b1327f8448e14b925438ec1cdeed9a33675301cb
                                                             {{ result.name }}
                                                         </router-link>
                                                     </li>
                                                 </ul>
 
+<<<<<<< HEAD
                                                 <button
                                                     class="btn btn-primary"
                                                     type="submit"
                                                 >
+=======
+                                                <button class="btn btn-primary" type="submit">
+>>>>>>> b1327f8448e14b925438ec1cdeed9a33675301cb
                                                     <i class="icon-search"></i>
                                                 </button>
                                             </div>
@@ -278,6 +357,7 @@
                                 </div>
                                 <!-- End .col-xxl-4-5col -->
 
+<<<<<<< HEAD
                                 <div
                                     class="col-lg-4 d-flex justify-content-end align-items-center"
                                 >
@@ -303,6 +383,20 @@
                                             <div
                                                 class="dropdown-menu dropdown-menu-right"
                                             >
+=======
+                                <div class="col-lg-4 d-flex justify-content-end align-items-center">
+                                    <div class="header-dropdown-link">
+                                        <div class="dropdown compare-dropdown">
+                                            <router-link to="/myaccount" class="dropdown-toggle" role="button"
+                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                                data-display="static" title="Compare Products"
+                                                aria-label="Compare Products">
+                                                <i class="icon-user"></i>
+                                                <span class="compare-txt">Account</span>
+                                            </router-link>
+
+                                            <div class="dropdown-menu dropdown-menu-right">
+>>>>>>> b1327f8448e14b925438ec1cdeed9a33675301cb
                                                 <ul class="compare-products">
 
 
@@ -327,6 +421,7 @@
 
                                                     </li>
 
+<<<<<<< HEAD
                                                     
                                                 </ul>
 
@@ -339,13 +434,26 @@
                                                             class="icon-long-arrow-right"
                                                         ></i
                                                     ></a>
+=======
+
+                                                </ul>
+
+                                                <div class="compare-actions">
+                                                    <a href="javascript:void(0)" @click="logout"
+                                                        class="btn btn-outline-primary-2"><span>Logout</span><i
+                                                            class="icon-long-arrow-right"></i></a>
+>>>>>>> b1327f8448e14b925438ec1cdeed9a33675301cb
                                                 </div>
                                             </div>
                                             <!-- End .dropdown-menu -->
                                         </div>
                                         <!-- End .compare-dropdown -->
 
+<<<<<<< HEAD
                                        <!--  <router-link
+=======
+                                        <!--  <router-link
+>>>>>>> b1327f8448e14b925438ec1cdeed9a33675301cb
                                             to="/wishlist"
                                             class="wishlist-link"
                                         >
@@ -359,6 +467,7 @@
                                         </router-link> -->
 
                                         <div class="dropdown cart-dropdown">
+<<<<<<< HEAD
                                             <router-link
                                                 to="/request-for-quote"
                                                 class="dropdown-toggle"
@@ -443,6 +552,49 @@
                                                             <i
                                                                 class="icon-close"
                                                             ></i>
+=======
+                                            <router-link to="/request-for-quote" class="dropdown-toggle" role="button"
+                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                                data-display="static">
+                                                <i class="icon-shopping-cart"></i>
+                                                <span class="cart-count">{{
+                                                    cartItems.length
+                                                    }}</span>
+                                                <span class="cart-txt">Cart</span>
+                                            </router-link>
+
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <div class="dropdown-cart-products">
+                                                    <div class="product" v-for="(
+                                                            item, index
+                                                        ) in cartItems" :key="index">
+                                                        <div class="product-cart-details">
+                                                            <h4 class="product-title">
+                                                                {{ item.name }}
+                                                            </h4>
+
+                                                            <span class="cart-product-info">
+                                                                <span class="cart-product-qty">Qty :
+                                                                    {{
+                                                                        item.quantity
+                                                                    }}</span>
+                                                            </span>
+                                                        </div>
+
+                                                        <figure class="product-image-container">
+                                                            <a href="product.html" class="product-image">
+                                                                <img :src="'/storage/' +
+                                                                    item.main_image_path
+                                                                    " alt="product" />
+                                                            </a>
+                                                        </figure>
+                                                        <button type="button" class="btn-remove" @click="
+                                                            removeFromCart(
+                                                                index
+                                                            )
+                                                            " title="Remove Product">
+                                                            <i class="icon-close"></i>
+>>>>>>> b1327f8448e14b925438ec1cdeed9a33675301cb
                                                         </button>
                                                     </div>
                                                     <!-- End .product -->
@@ -458,6 +610,7 @@
                                                 </div> -->
                                                 <!-- End .dropdown-cart-total -->
 
+<<<<<<< HEAD
                                                 <div
                                                     class="dropdown-cart-action"
                                                 >
@@ -467,6 +620,13 @@
                                                         >Request for Quote</router-link
                                                     >
                                                     
+=======
+                                                <div class="dropdown-cart-action">
+                                                    <router-link to="/request-for-quote"
+                                                        class="btn btn-primary mt-2 float-right">Request for
+                                                        Quote</router-link>
+
+>>>>>>> b1327f8448e14b925438ec1cdeed9a33675301cb
                                                 </div>
                                                 <!-- End .dropdown-cart-total -->
                                             </div>
@@ -474,6 +634,7 @@
                                         </div>
                                         <!-- End .cart-dropdown -->
 
+<<<<<<< HEAD
                                         <button
                                             @click="addClassToBody"
                                             class="mobile-menu-toggler"
@@ -481,6 +642,10 @@
                                             <span class="sr-only"
                                                 >Toggle mobile menu</span
                                             >
+=======
+                                        <button @click="addClassToBody" class="mobile-menu-toggler">
+                                            <span class="sr-only">Toggle mobile menu</span>
+>>>>>>> b1327f8448e14b925438ec1cdeed9a33675301cb
                                             <i class="icon-bars"></i>
                                         </button>
                                     </div>
@@ -514,6 +679,7 @@
 
             <form action="#" method="get" class="mobile-search">
                 <label for="mobile-search" class="sr-only">Search</label>
+<<<<<<< HEAD
                 <input
                     type="search"
                     class="form-control"
@@ -522,11 +688,16 @@
                     placeholder="Search in..."
                     required
                 />
+=======
+                <input type="search" class="form-control" name="mobile-search" id="mobile-search"
+                    placeholder="Search in..." required />
+>>>>>>> b1327f8448e14b925438ec1cdeed9a33675301cb
                 <button class="btn btn-primary" type="submit">
                     <i class="icon-search"></i>
                 </button>
             </form>
 
+<<<<<<< HEAD
         
             <!-- End .mobile-nav -->
 
@@ -587,6 +758,28 @@
                     title="Youtube"
                     ><i class="icon-youtube"></i
                 ></a>
+=======
+
+            <!-- End .mobile-nav -->
+
+            <div class="social-icons">
+                <a href="https://www.facebook.com/SheffieldAfricaFacilitySolutions" class="social-icon" target="_blank"
+                    title="Facebook"><i class="icon-facebook-f"></i></a>
+                <a href="https://twitter.com/sheffield_afric/" class="social-icon" target="_blank" title="Twitter"><i
+                        class="icon-twitter"></i></a>
+                <a href="https://www.instagram.com/sheffieldafrica/" class="social-icon" target="_blank"
+                    title="Instagram"><i class="icon-instagram"></i></a>
+                <a href="https://www.youtube.com/channel/UCK-oWPdQazenIHndl4zABew" class="social-icon" target="_blank"
+                    title="Youtube"><i class="icon-youtube"></i></a>
+                <a href="https://www.facebook.com/SheffieldAfricaFacilitySolutions" class="social-icon" target="_blank"
+                    title="Facebook"><i class="icon-facebook-f"></i></a>
+                <a href="https://twitter.com/sheffield_afric/" class="social-icon" target="_blank" title="Twitter"><i
+                        class="icon-twitter"></i></a>
+                <a href="https://www.instagram.com/sheffieldafrica/" class="social-icon" target="_blank"
+                    title="Instagram"><i class="icon-instagram"></i></a>
+                <a href="https://www.youtube.com/channel/UCK-oWPdQazenIHndl4zABew" class="social-icon" target="_blank"
+                    title="Youtube"><i class="icon-youtube"></i></a>
+>>>>>>> b1327f8448e14b925438ec1cdeed9a33675301cb
             </div>
             <!-- End .social-icons -->
         </div>
@@ -738,6 +931,7 @@ const search = async () => {
 };
 
 const hideResults = (event) => {
+<<<<<<< HEAD
       // Check if the click is outside the ul
       if (!event.target.closest('#resultsList')) {
         showResults.value = false;
@@ -748,6 +942,18 @@ const hideResults = (event) => {
 
     // Add a global click event listener
     document.addEventListener('click', hideResults);
+=======
+    // Check if the click is outside the ul
+    if (!event.target.closest('#resultsList')) {
+        showResults.value = false;
+    }
+};
+
+
+
+// Add a global click event listener
+document.addEventListener('click', hideResults);
+>>>>>>> b1327f8448e14b925438ec1cdeed9a33675301cb
 
 const bodyClassAdded = ref(false);
 
@@ -785,9 +991,17 @@ const addClassToBody = () => {
     min-width: 40%;
     margin: 0 1rem;
 }
+<<<<<<< HEAD
 .searchListMainDiv h1 {
     margin-bottom: 1rem;
 }
+=======
+
+.searchListMainDiv h1 {
+    margin-bottom: 1rem;
+}
+
+>>>>>>> b1327f8448e14b925438ec1cdeed9a33675301cb
 .searchListMainDiv ul {
     list-style: none;
     padding: 0;
@@ -807,14 +1021,26 @@ const addClassToBody = () => {
 .searchListMainDiv ul::-webkit-scrollbar {
     width: 5px;
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> b1327f8448e14b925438ec1cdeed9a33675301cb
 .searchListMainDiv ul::-webkit-scrollbar-track {
     box-shadow: inset 0 0 5px #ddd;
     border-radius: 10px;
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> b1327f8448e14b925438ec1cdeed9a33675301cb
 .searchListMainDiv ul::-webkit-scrollbar-thumb {
     background: rgb(183, 183, 183);
     border-radius: 10px;
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> b1327f8448e14b925438ec1cdeed9a33675301cb
 .searchListMainDiv ul::-webkit-scrollbar-thumb:hover {
     background: #a2a2a2;
 }
@@ -829,12 +1055,24 @@ const addClassToBody = () => {
     cursor: pointer;
     overflow-wrap: break-word;
 }
+<<<<<<< HEAD
 .searchListMainDiv ul li a {
     color: #666;
 }
 .searchListMainDiv ul li a:hover {
     color: #c02434;
 }
+=======
+
+.searchListMainDiv ul li a {
+    color: #666;
+}
+
+.searchListMainDiv ul li a:hover {
+    color: #c02434;
+}
+
+>>>>>>> b1327f8448e14b925438ec1cdeed9a33675301cb
 .searchListMainDiv ul li:last-child {
     border: none;
 }
