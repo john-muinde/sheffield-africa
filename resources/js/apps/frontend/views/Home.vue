@@ -213,8 +213,8 @@
     <template v-if="showPopup">
         <div class="popup-advert">
             <div class="popup-content">
-                <img src="../assets/images/adverts/commercial-kitchen-laundry-cold-room.jpg" alt="Rotobake Ovens Solutions"
-                    class="popup-image" style="min-height: 460px;" />
+                <img src="../assets/images/adverts/commercial-kitchen-laundry-cold-room.jpg"
+                    alt="Rotobake Ovens Solutions" class="popup-image" style="min-height: 460px;" />
                 <div class="button-group">
                     <button @click="dismissPopup" class="btn btn-primary btn-footer mr-5">
                         Cancel
@@ -478,12 +478,11 @@ onMounted(() => {
     }
 });
 const viewProduct = () => {
-    router.push("/kitchen/93/rotary-ovens/page/1");
+    window.open("https://forms.gle/as8SvN2SNTKxSbKA9", "_blank");
 };
 </script>
 
 <style>
-
 .cat-banner-row .carousel__prev {
     height: 92% !important;
     color: #8a8a8a !important;

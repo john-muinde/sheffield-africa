@@ -1,9 +1,7 @@
-import Cookies from "js-cookie";
 import store from "../store";
 
 // Frontend Page Components
 import Home from "../apps/frontend/views/Home.vue";
-import HomeHEX from "../apps/frontend/views/Home-HEX.vue";
 import About from "../apps/frontend/views/About.vue";
 import FAQ from "../apps/frontend/views/FAQ.vue";
 import DeliveryInformation from "../apps/frontend/views/DeliveryInformation.vue";

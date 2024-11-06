@@ -30,43 +30,21 @@
                   <div class="row">
                     <div class="col-sm-12">
                       <label for="cname" class="label-contact">First Name *</label>
-                      <input
-                        v-model="contact.firstname"
-                        type="text"
-                        class="form-control"
-                        id="firstname"
-                        name="firstname"
-                        placeholder="Please enter your first name"
-                        required
-                      />
+                      <input v-model="contact.firstname" type="text" class="form-control" id="firstname"
+                        name="firstname" placeholder="Please enter your first name" required />
                     </div>
 
                     <div class="col-sm-12">
                       <label for="cname" class="label-contact">Surname *</label>
-                      <input
-                        v-model="contact.surname"
-                        type="text"
-                        class="form-control"
-                        id="surname"
-                        name="surname"
-                        placeholder="Please enter your surname"
-                        required
-                      />
+                      <input v-model="contact.surname" type="text" class="form-control" id="surname" name="surname"
+                        placeholder="Please enter your surname" required />
                     </div>
 
                     <div class="col-sm-12">
                       <label for="cname" class="label-contact">Phone Number *</label>
                       <div class="input-group">
-                        <div
-                          style="max-width: 35%; width: 35%"
-                          class="input-group-prepend"
-                        >
-                          <select
-                            required
-                            class="form-control"
-                            name="code"
-                            v-model="contact.code"
-                          >
+                        <div style="max-width: 35%; width: 35%" class="input-group-prepend">
+                          <select required class="form-control" name="code" v-model="contact.code">
                             <option value="">Select Code</option>
                             <option value="93">Afghanistan +93</option>
                             <option value="358">Aland Islands +358</option>
@@ -325,57 +303,27 @@
                             <option value="263">Zimbabwe +263</option>
                           </select>
                         </div>
-                        <input
-                          style="width: 65%"
-                          v-model="contact.phone_number"
-                          type="text"
-                          class="form-control"
-                          id="phone_number"
-                          name="phone_number"
-                          placeholder="Please enter your phone number"
-                          required
-                        />
+                        <input style="width: 65%" v-model="contact.phone_number" type="text" class="form-control"
+                          id="phone_number" name="phone_number" placeholder="Please enter your phone number" required />
                       </div>
                     </div>
 
                     <div class="col-sm-12">
                       <label for="email" class="label-contact">Email *</label>
-                      <input
-                        v-model="contact.email"
-                        type="email"
-                        class="form-control"
-                        id="email"
-                        name="email"
-                        placeholder="Please enter your email"
-                        required
-                      />
+                      <input v-model="contact.email" type="email" class="form-control" id="email" name="email"
+                        placeholder="Please enter your email" required />
                     </div>
 
                     <div class="col-sm-12">
-                      <label for="company_name" class="label-contact"
-                        >Company Name *</label
-                      >
-                      <input
-                        v-model="contact.company_name"
-                        type="company_name"
-                        class="form-control"
-                        id="company_name"
-                        name="company_name"
-                        placeholder="Please enter your company name"
-                        required
-                      />
+                      <label for="company_name" class="label-contact">Company Name *</label>
+                      <input v-model="contact.company_name" type="company_name" class="form-control" id="company_name"
+                        name="company_name" placeholder="Please enter your company name" required />
                     </div>
 
                     <div class="col-sm-12">
                       <label for="country" class="label-contact">Country *</label>
 
-                      <select
-                        v-model="contact.country"
-                        name="country"
-                        id="country"
-                        class="form-control"
-                        required
-                      >
+                      <select v-model="contact.country" name="country" id="country" class="form-control" required>
                         <option value="">Select an option</option>
                         <option value="Algeria">Algeria</option>
                         <option value="Angola">Angola</option>
@@ -440,25 +388,13 @@
 
                     <div class="col-lg-12">
                       <label for="request" class="label-contact">Location*</label>
-                      <textarea
-                        v-model="contact.location"
-                        class="form-control"
-                        cols="30"
-                        rows="4"
-                        id="request"
-                        name="request"
-                        required
-                        placeholder="Enter your location ..."
-                      ></textarea>
+                      <textarea v-model="contact.location" class="form-control" cols="30" rows="4" id="request"
+                        name="request" required placeholder="Enter your location ..."></textarea>
                     </div>
 
                     <div class="col-lg-12 mt-1">
-                      <vue-recaptcha
-                        ref="recaptcha"
-                        :sitekey="'6Ldyw1wpAAAAAGx6vRq1hhnnfKaKHPmcuJ0imPkT'"
-                        @verify="onRecaptchaVerify"
-                        size="normal"
-                      />
+                      <vue-recaptcha ref="recaptcha" :sitekey="'6Ldyw1wpAAAAAGx6vRq1hhnnfKaKHPmcuJ0imPkT'"
+                        @verify="onRecaptchaVerify" size="normal" />
                     </div>
                   </div>
                   <!-- End .row -->
@@ -478,11 +414,7 @@
 
                         <tr v-for="(item, index) in cartItems" :key="index">
                           <td width="20%">
-                            <img
-                              :src="'/storage/' + item.main_image_path"
-                              alt="product"
-                              style="max-width: 100%"
-                            />
+                            <img :src="'/storage/' + item.main_image_path" alt="product" style="max-width: 100%" />
                           </td>
                           <td>
                             <a href="#">{{ item.name }}</a>
@@ -508,21 +440,11 @@
                         <tr class="summary-shipping">
                           <td width="100%" style="min-width: 100% width: 100%">
                             <div class="custom-control custom-radio">
-                              <input
-                                type="radio"
-                                id="deliver"
-                                name="shipping"
-                                v-model="contact.shipping"
-                                class="custom-control-input"
-                                value="Deliver to my location"
-                                required
-                              />
-                              <label
-                                style="font-size: 1.4rem; font-weight: 450"
-                                class="custom-control-label float-left text-dark"
-                                for="deliver"
-                                >Deliver to my location</label
-                              >
+                              <input type="radio" id="deliver" name="shipping" v-model="contact.shipping"
+                                class="custom-control-input" value="Deliver to my location" required />
+                              <label style="font-size: 1.4rem; font-weight: 450"
+                                class="custom-control-label float-left text-dark" for="deliver">Deliver to my
+                                location</label>
                             </div>
                             <!-- End .custom-control -->
                           </td>
@@ -532,20 +454,11 @@
                         <tr class="">
                           <td style="min-width: 100% width: 100%">
                             <div class="custom-control custom-radio">
-                              <input
-                                type="radio"
-                                id="collect_from_sheffield"
-                                name="shipping"
-                                v-model="contact.shipping"
-                                class="custom-control-input"
-                                value="Collect from Sheffield"
-                                required
-                              />
-                              <label
-                                style="font-size: 1.4rem; font-weight: 450"
-                                class="custom-control-label float-left text-dark"
-                                for="collect_from_sheffield"
-                                >Collect from Sheffield
+                              <input type="radio" id="collect_from_sheffield" name="shipping" v-model="contact.shipping"
+                                class="custom-control-input" value="Collect from Sheffield" required />
+                              <label style="font-size: 1.4rem; font-weight: 450"
+                                class="custom-control-label float-left text-dark" for="collect_from_sheffield">Collect
+                                from Sheffield
                               </label>
                             </div>
                             <!-- End .custom-control -->
@@ -562,21 +475,10 @@
                         <tr class="summary-shipping">
                           <td width="100%" style="min-width: 100% width: 100%">
                             <div class="custom-control custom-radio">
-                              <input
-                                type="radio"
-                                id="installation_yes"
-                                name="installation"
-                                v-model="contact.installation"
-                                class="custom-control-input"
-                                value="Yes"
-                                required
-                              />
-                              <label
-                                style="font-size: 1.4rem; font-weight: 450"
-                                class="custom-control-label float-left text-dark"
-                                for="installation_yes"
-                                >Yes</label
-                              >
+                              <input type="radio" id="installation_yes" name="installation"
+                                v-model="contact.installation" class="custom-control-input" value="Yes" required />
+                              <label style="font-size: 1.4rem; font-weight: 450"
+                                class="custom-control-label float-left text-dark" for="installation_yes">Yes</label>
                             </div>
                             <!-- End .custom-control -->
                           </td>
@@ -586,21 +488,10 @@
                         <tr class="">
                           <td style="min-width: 100% width: 100%">
                             <div class="custom-control custom-radio">
-                              <input
-                                type="radio"
-                                id="installation_no"
-                                name="installation"
-                                v-model="contact.installation"
-                                class="custom-control-input"
-                                value="No"
-                                required
-                              />
-                              <label
-                                style="font-size: 1.4rem; font-weight: 450"
-                                class="custom-control-label float-left text-dark"
-                                for="installation_no"
-                                >No</label
-                              >
+                              <input type="radio" id="installation_no" name="installation"
+                                v-model="contact.installation" class="custom-control-input" value="No" required />
+                              <label style="font-size: 1.4rem; font-weight: 450"
+                                class="custom-control-label float-left text-dark" for="installation_no">No</label>
                             </div>
                             <!-- End .custom-control -->
                           </td>
@@ -614,11 +505,7 @@
                     </table>
                     <!-- End .table table-summary -->
 
-                    <button
-                      type="submit"
-                      :disabled="isLoading"
-                      class="btn btn-primary btn-block mt-2"
-                    >
+                    <button type="submit" :disabled="isLoading" class="btn btn-primary btn-block mt-2">
                       <div v-show="isLoading" class=""></div>
                       <span v-if="isLoading">Processing...</span>
                       <span v-else>SUBMIT</span>
@@ -745,13 +632,13 @@ const onRecaptchaVerify = async (token) => {
 };
 
 const submitForm = async () => {
-  try {   
+  try {
     const form = await validate();
     if (form.valid) {
       const recaptchaToken = await executeRecaptcha("request_quote_form");
       contact.recaptchaToken = recaptchaToken;
       contact.cartItems = JSON.stringify(cartItems);
-      
+
       storeContact(contact);
     }
   } catch (error) {
@@ -780,8 +667,7 @@ const submitForm = async () => {
   margin-bottom: 1rem;
 }
 
-.contact-images img::before {
-}
+.contact-images img::before {}
 
 .contact-form-div {
   background-color: #ffffff;
@@ -790,6 +676,7 @@ const submitForm = async () => {
   padding-left: 30px;
   padding-right: 30px;
 }
+
 .page-content-contact {
   background-image: ;
   /*linear-gradient(to right, #304296, #ec1f25);*/
