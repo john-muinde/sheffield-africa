@@ -1,5 +1,6 @@
 import { createI18n } from "vue-i18n";
-import messages from "@intlify/vite-plugin-vue-i18n/messages";
+import en from "./lang/en.json";
+import zh from "./lang/zh-CN.json";
 
 export default createI18n({
     legacy: false,
@@ -7,5 +8,8 @@ export default createI18n({
     locale: "en",
     globalInjection: true,
     fallbackLocale: "en",
-    messages,
+    messages: {
+        en,
+        zh,
+    },
 });

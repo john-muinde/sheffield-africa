@@ -9,10 +9,7 @@
                                 <li class="breadcrumb-item">
                                     <a href="javascript:;">Events</a>
                                 </li>
-                                <li
-                                    class="breadcrumb-item active"
-                                    aria-current="page"
-                                >
+                                <li class="breadcrumb-item active" aria-current="page">
                                     <span>Edit Event</span>
                                 </li>
                             </ol>
@@ -28,9 +25,7 @@
                     <div class="statbox panel box box-shadow">
                         <div class="panel-heading pb-0">
                             <div class="row">
-                                <div
-                                    class="col-xl-12 col-md-12 col-sm-12 col-12"
-                                >
+                                <div class="col-xl-12 col-md-12 col-sm-12 col-12">
                                     <h3><b>Edit Event</b></h3>
                                 </div>
                             </div>
@@ -39,48 +34,30 @@
                             <form @submit.prevent="submitForm">
                                 <div class="row">
                                     <div class="form-group col-md-6">
-                                        <label for="post-name"
-                                            >Event Name</label
-                                        >
-                                        <input
-                                            v-model="event.name"
-                                            id="post-name"
-                                            type="text"
-                                            class="form-control"
-                                            placeholder="Enter Event Name ..."
-                                        />
+                                        <label for="post-name">Event Name</label>
+                                        <input v-model="event.name" id="post-name" type="text" class="form-control"
+                                            placeholder="Enter Event Name ..." />
 
                                         <div class="text-danger mt-1">
                                             {{ errors.name }}
                                         </div>
                                         <div class="text-danger mt-1">
-                                            <div
-                                                v-for="message in validationErrors?.name"
-                                            >
+                                            <div v-for="message in validationErrors?.name">
                                                 {{ message }}
                                             </div>
                                         </div>
                                     </div>
 
                                     <div class="form-group col-md-6">
-                                        <label for="post-location"
-                                            >Event Location</label
-                                        >
-                                        <input
-                                            v-model="event.location"
-                                            id="post-location"
-                                            type="text"
-                                            class="form-control"
-                                            placeholder="Enter Event location ..."
-                                        />
+                                        <label for="post-location">Event Location</label>
+                                        <input v-model="event.location" id="post-location" type="text"
+                                            class="form-control" placeholder="Enter Event location ..." />
 
                                         <div class="text-danger mt-1">
                                             {{ errors.location }}
                                         </div>
                                         <div class="text-danger mt-1">
-                                            <div
-                                                v-for="message in validationErrors?.location"
-                                            >
+                                            <div v-for="message in validationErrors?.location">
                                                 {{ message }}
                                             </div>
                                         </div>
@@ -89,119 +66,66 @@
 
                                 <div class="row">
                                     <div class="form-group col-md-6">
-                                        {{ typeof(event.start_date) }}
-                                        <label for="start_date"
-                                            >Start Date</label
-                                        >
-                                        <flat-pickr
-                                            v-model="event.start_date"
-                                            class="form-control flatpickr active"
-                                            placeholder="Select Start Date"
-                                        ></flat-pickr>
+                                        {{ typeof (event.start_date) }}
+                                        <label for="start_date">Start Date</label>
+                                        <flat-pickr v-model="event.start_date" class="form-control flatpickr active"
+                                            placeholder="Select Start Date"></flat-pickr>
                                     </div>
 
                                     <div class="form-group col-md-6">
-                                        <label for="end_date"
-                                            >End Date</label
-                                        >
-                                        <flat-pickr
-                                            v-model="event.end_date"
-                                            class="form-control flatpickr active"
-                                            placeholder="Select End Date"
-                                        ></flat-pickr>
+                                        <label for="end_date">End Date</label>
+                                        <flat-pickr v-model="event.end_date" class="form-control flatpickr active"
+                                            placeholder="Select End Date"></flat-pickr>
                                     </div>
                                 </div>
 
                                 <div class="form-group col-md-6">
-                                    <label for="post-url"
-                                        >URL</label
-                                    >
-                                    <input
-                                        v-model="event.url"
-                                        id="post-url"
-                                        type="text"
-                                        class="form-control"
-                                        placeholder="Enter Event url ..."
-                                    />
+                                    <label for="post-url">URL</label>
+                                    <input v-model="event.url" id="post-url" type="text" class="form-control"
+                                        placeholder="Enter Event url ..." />
 
                                     <div class="text-danger mt-1">
                                         {{ errors.url }}
                                     </div>
                                     <div class="text-danger mt-1">
-                                        <div
-                                            v-for="message in validationErrors?.url"
-                                        >
+                                        <div v-for="message in validationErrors?.url">
                                             {{ message }}
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="post_description"
-                                        >Description</label
-                                    >
+                                    <label for="post_description">Description</label>
 
-                                    <quill-editor
-                                        v-model:value="event.description"
-                                        :options="options1"
-                                        placeholder="Enter Description..."
-                                    ></quill-editor>
+                                    <quill-editor v-model:value="event.description" :options="options1"
+                                        placeholder="Enter Description..."></quill-editor>
                                 </div>
 
                                 <div class="form-group">
-                                    <div
-                                        class="custom-file-container"
-                                        data-upload-id="myFirstImage"
-                                    >
-                                        <label
-                                            >Upload Event Logo
-                                            <a
-                                                id="event_image"
-                                                href="javascript:void(0)"
+                                    <div class="custom-file-container" data-upload-id="myFirstImage">
+                                        <label>Upload Event Logo
+                                            <a id="event_image" href="javascript:void(0)"
                                                 class="custom-file-container__image-clear"
-                                                title="Clear Image"
-                                                >x</a
-                                            ></label
-                                        >
-                                        <label
-                                            class="custom-file-container__custom-file"
-                                        >
-                                            <input
-                                                type="file"
+                                                title="Clear Image">x</a></label>
+                                        <label class="custom-file-container__custom-file">
+                                            <input type="file"
                                                 class="custom-file-container__custom-file__custom-file-input"
-                                                accept="image/*"
-                                                @change="
+                                                accept="image/*" @change="
                                                     event.main_image =
-                                                        $event.target.files[0]
-                                                "
-                                            />
-                                            <input
-                                                type="hidden"
-                                                name="MAX_FILE_SIZE"
-                                                value="10485760"
-                                            />
+                                                    $event.target.files[0]
+                                                    " />
+                                            <input type="hidden" name="MAX_FILE_SIZE" value="10485760" />
                                             <span
-                                                class="custom-file-container__custom-file__custom-file-control"
-                                            ></span>
+                                                class="custom-file-container__custom-file__custom-file-control"></span>
                                         </label>
-                                        <div
-                                            class="custom-file-container__image-preview"
-                                        ></div>
+                                        <div class="custom-file-container__image-preview"></div>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label
-                                        for="is_published"
-                                        class="col-form-label"
-                                        >Publishing Status</label
-                                    >
+                                    <label for="is_published" class="col-form-label">Publishing Status</label>
                                     <div>
-                                        <select
-                                            v-model="event.is_published"
-                                            id="is_published"
-                                            class="form-select"
-                                        >
+                                        <select v-model="event.is_published" id="is_published" class="form-select">
                                             <option selected value="1">
                                                 Published
                                             </option>
@@ -215,18 +139,13 @@
                                         {{ errors.is_published }}
                                     </div>
                                     <div class="text-danger mt-1">
-                                        <div
-                                            v-for="message in validationErrors?.is_published"
-                                        >
+                                        <div v-for="message in validationErrors?.is_published">
                                             {{ message }}
                                         </div>
                                     </div>
                                 </div>
 
-                                <button
-                                    :disabled="isLoading"
-                                    class="btn btn-primary mt-3"
-                                >
+                                <button :disabled="isLoading" class="btn btn-primary mt-3">
                                     <div v-show="isLoading" class=""></div>
                                     <span v-if="isLoading">Processing...</span>
                                     <span v-else>Update</span>

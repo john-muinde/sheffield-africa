@@ -9,10 +9,7 @@
                                 <li class="breadcrumb-item">
                                     <a href="javascript:;">Events</a>
                                 </li>
-                                <li
-                                    class="breadcrumb-item active"
-                                    aria-current="page"
-                                >
+                                <li class="breadcrumb-item active" aria-current="page">
                                     <span>View Events</span>
                                 </li>
                             </ol>
@@ -34,91 +31,44 @@
                     </div>
 
                     <div class="custom-table">
-                        <v-client-table
-                            :data="getTableData()"
-                            :columns="columns"
-                            :options="table_option"
-                        >
+                        <v-client-table :data="getTableData()" :columns="columns" :options="table_option">
                             <template #event_image="props">
-                                <img
-                                    :src="
-                                        '/storage/' + props.row.main_image_path
-                                    "
-                                    class="rounded profile-img"
-                                    alt="avatar"
-                                />
+                                <img :src="'/storage/' + props.row.main_image_path
+                                    " class="rounded profile-img" alt="avatar" />
                             </template>
                             <template #is_published="props">
-                                <span
-                                    v-if="props.row.is_published === 1"
-                                    class="badge badge-success inv-status"
-                                    >Published</span
-                                >
+                                <span v-if="props.row.is_published === 1"
+                                    class="badge badge-success inv-status">Published</span>
 
-                                <span
-                                    v-if="props.row.is_published !== 1"
-                                    class="badge badge-danger inv-status"
-                                    >Not Published</span
-                                >
+                                <span v-if="props.row.is_published !== 1" class="badge badge-danger inv-status">Not
+                                    Published</span>
                             </template>
 
                             <template #actions="props">
                                 <!-- v-if="can('event-edit')"  -->
 
-                                <router-link
-                                    :to="{
-                                        name: 'events.edit',
-                                        params: { id: props.row.id },
-                                    }"
-                                    class="badge bg-info"
-                                    data-bs-toggle="tooltip"
-                                    data-bs-placement="top"
-                                >
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width="24"
-                                        height="24"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        stroke-width="1.5"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        class="feather feather-edit-2"
-                                    >
-                                        <path
-                                            d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"
-                                        ></path>
+                                <router-link :to="{
+                                    name: 'events.edit',
+                                    params: { id: props.row.id },
+                                }" class="badge bg-info" data-bs-toggle="tooltip" data-bs-placement="top">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                        stroke-linejoin="round" class="feather feather-edit-2">
+                                        <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
                                     </svg>
                                 </router-link>
 
                                 <!--  v-if="can('event-delete')" -->
 
-                                <a
-                                    href="javascript:;"
-                                    @click.prevent="deleteEvent(props.row.id)"
-                                    class="ms-2 badge bg-danger"
-                                    data-bs-toggle="tooltip"
-                                    data-bs-placement="top"
-                                >
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width="24"
-                                        height="24"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        stroke-width="1.5"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        class="feather feather-trash"
-                                    >
-                                        <polyline
-                                            points="3 6 5 6 21 6"
-                                        ></polyline>
+                                <a href="javascript:;" @click.prevent="deleteEvent(props.row.id)"
+                                    class="ms-2 badge bg-danger" data-bs-toggle="tooltip" data-bs-placement="top">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                        stroke-linejoin="round" class="feather feather-trash">
+                                        <polyline points="3 6 5 6 21 6"></polyline>
                                         <path
-                                            d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"
-                                        ></path>
+                                            d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
+                                        </path>
                                     </svg>
                                 </a>
                             </template>
@@ -144,6 +94,7 @@ const { can } = useAbility();
 
 onMounted(() => {
     getEvents();
+    console.log("Events: ", events.value);
 });
 
 const getTableData = () => {

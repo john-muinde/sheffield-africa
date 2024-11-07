@@ -1,46 +1,25 @@
 <template>
-    <div
-        class="bg-gray-800 text-white h-full mt-28 fixed top-0 left-2 mr-6 w-56"
-    >
+    <div class="bg-gray-800 text-white h-full mt-28 fixed top-0 left-2 mr-6 w-56">
         <nav ref="menu" id="sidebar" class="h-full overflow-y-auto">
             <perfect-scrollbar class="menu-categories" tag="div">
-                <div
-                    v-for="(item, index) in menuItems"
-                    :key="index"
-                    class="menu mb-1"
-                >
-                    <div
-                        @click="toggleSubmenu(item.id)"
-                        class="cursor-pointer flex items-center justify-between p-2 text-gray-300 hover:bg-gray-700 hover:text-white transition duration-150"
-                    >
+                <div v-for="(item, index) in menuItems" :key="index" class="menu mb-1">
+                    <div @click="toggleSubmenu(item.id)"
+                        class="cursor-pointer flex items-center justify-between p-2 text-gray-300 hover:bg-gray-700 hover:text-white transition duration-150">
                         <div class="flex items-center">
                             <component :is="item.icon" class="w-4 h-4 mr-2" />
-                            <span>{{ $t(item.title) }}</span>
+                            <span>{{ $t(item.title.toLocaleLowerCase()) }}</span>
                         </div>
-                        <component
-                            :is="
-                                isSubmenuOpen(item.id)
-                                    ? ChevronDownIcon
-                                    : ChevronRightIcon
-                            "
-                            class="w-4 h-4"
-                        />
+                        <component :is="isSubmenuOpen(item.id)
+                            ? ChevronDownIcon
+                            : ChevronRightIcon
+                            " class="w-4 h-4" />
                     </div>
 
-                    <div
-                        v-show="isSubmenuOpen(item.id)"
-                        class="submenu pl-4 bg-gray-700"
-                    >
-                        <div
-                            v-for="(subItem, subIndex) in item.subItems"
-                            :key="subIndex"
-                        >
-                            <router-link
-                                :to="subItem.route"
-                                @click="toggleMobileMenu"
-                                class="block px-6 py-2 text-gray-300 hover:bg-gray-600 hover:text-white transition duration-150"
-                            >
-                                {{ $t(subItem.title) }}
+                    <div v-show="isSubmenuOpen(item.id)" class="submenu pl-4 bg-gray-700">
+                        <div v-for="(subItem, subIndex) in item.subItems" :key="subIndex">
+                            <router-link :to="subItem.route" @click="toggleMobileMenu"
+                                class="block px-6 py-2 text-gray-300 hover:bg-gray-600 hover:text-white transition duration-150">
+                                {{ $t(subItem.title.toLocaleLowerCase()) }}
                             </router-link>
                         </div>
                     </div>
