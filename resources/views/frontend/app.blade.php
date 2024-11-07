@@ -15,20 +15,18 @@
 
     <!-- Search Engine Optimization -->
     <title>Sheffield Steel Systems Limited - Transforming Ideas into Sustainable Realities</title>
-    <meta name="description"
-        content="Sheffield Steel Systems Limited is East Africa's leading solution and service provider for Commercial Kitchen, Laundry, and Cold Storage Solutions, specializing in Stainless Steel Fabrication and Customization.">
+    <meta name="description" content="Sheffield Steel Systems Limited is East Africa's leading solution and service provider for Commercial Kitchen, Laundry, and Cold Storage Solutions, specializing in Stainless Steel Fabrication and Customization.">
     <meta name="robots" content="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large">
     <link rel="canonical" href="{{ url()->current() }}">
     <meta property="og:locale" content="en_US">
     <meta property="og:type" content="website">
     <meta property="og:title" content="Sheffield Steel Systems Limited - Transforming Ideas into Sustainable Realities">
-    <meta property="og:description"
-        content="East Africa's leading solution and service provider for Commercial Kitchen, Laundry, and Cold Storage Solutions, specializing in Stainless Steel Fabrication and Customization.">
+    <meta property="og:description" content="East Africa's leading solution and service provider for Commercial Kitchen, Laundry, and Cold Storage Solutions, specializing in Stainless Steel Fabrication and Customization.">
     <meta property="og:url" content="{{ url()->current() }}">
     <meta property="og:site_name" content="Sheffield Steel Systems Limited">
     <meta property="og:updated_time" content="{{ now()->toIso8601String() }}">
-    <meta property="og:image" content="{{ asset('images/logo.png') }}">
-    <meta property="og:image:secure_url" content="{{ asset('images/logo.png') }}">
+    <meta property="og:image" content="{{ url('images/logo.png') }}">
+    <meta property="og:image:secure_url" content="{{ url('images/logo.png') }}">
     <meta property="og:image:width" content="1280">
     <meta property="og:image:height" content="622">
     <meta property="og:image:alt" content="Sheffield Steel Systems Limited">
@@ -36,13 +34,11 @@
     <meta property="article:published_time" content="2003-01-01T00:00:00+00:00">
     <meta property="article:modified_time" content="{{ now()->toIso8601String() }}">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title"
-        content="Sheffield Steel Systems Limited - Transforming Ideas into Sustainable Realities">
-    <meta name="twitter:description"
-        content="East Africa's leading solution and service provider for Commercial Kitchen, Laundry, and Cold Storage Solutions, specializing in Stainless Steel Fabrication and Customization.">
+    <meta name="twitter:title" content="Sheffield Steel Systems Limited - Transforming Ideas into Sustainable Realities">
+    <meta name="twitter:description" content="East Africa's leading solution and service provider for Commercial Kitchen, Laundry, and Cold Storage Solutions, specializing in Stainless Steel Fabrication and Customization.">
     <meta name="twitter:site" content="@SheffieldAfrica">
     <meta name="twitter:creator" content="@SheffieldAfrica">
-    <meta name="twitter:image" content="{{ asset('images/logo.png') }}">
+    <meta name="twitter:image" content="{{ url('images/logo.png') }}">
     <meta name="twitter:label1" content="Written by">
     <meta name="twitter:data1" content="Sheffield Steel Systems Limited">
     <meta name="twitter:label2" content="Time to read">
@@ -92,9 +88,9 @@
                 },
                 "logo": {
                     "@type": "ImageObject",
-                    "@id": "{{ asset('images/logo.png') }}",
-                    "url": "{{ asset('images/logo.png') }}",
-                    "contentUrl": "{{ asset('images/logo.png') }}",
+                    "@id": "{{ url('images/logo.png') }}",
+                    "url": "{{ url('images/logo.png') }}",
+                    "contentUrl": "{{ url('images/logo.png') }}",
                     "caption": "Sheffield Steel Systems Limited",
                     "inLanguage": "en-US",
                     "width": "300",
@@ -141,7 +137,7 @@
                     "@id": "{{ url()->current() }}#website"
                 },
                 "primaryImageOfPage": {
-                    "@id": "{{ asset('images/logo.png') }}"
+                    "@id": "{{ url('images/logo.png') }}"
                 },
                 "inLanguage": "en-US"
             },
@@ -151,8 +147,8 @@
                 "name": "Sheffield Steel Systems Limited",
                 "image": {
                     "@type": "ImageObject",
-                    "@id": "{{ asset('images/logo.png') }}",
-                    "url": "{{ asset('images/logo.png') }}",
+                    "@id": "{{ url('images/logo.png') }}",
+                    "url": "{{ url('images/logo.png') }}",
                     "caption": "Sheffield Steel Systems Limited",
                     "inLanguage": "en-US"
                 },
@@ -183,7 +179,7 @@
                     "@id": "{{ url()->current() }}#webpage"
                 },
                 "image": {
-                    "@id": "{{ asset('images/logo.png') }}"
+                    "@id": "{{ url('images/logo.png') }}"
                 },
                 "inLanguage": "en-US",
                 "mainEntityOfPage": {
@@ -195,9 +191,9 @@
     </script>
 
     <!-- Favicon -->
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('favicon.png') }}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon.png') }}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url('favicon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url('favicon.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url('favicon.png') }}">
 
     @vite('resources/css/app.css')
     @vite('resources/js/apps/frontend/assets/css/bootstrap.min.css')
@@ -233,8 +229,7 @@
     @vite('resources/js/apps/frontend/assets/js/main.js')
     @vite('resources/js/apps/frontend/assets/js/demos/demo-14.js')
     <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PDBMDPJZ" height="0" width="0"
-            style="display:none;visibility:hidden"></iframe></noscript>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PDBMDPJZ" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
 
 </body>
