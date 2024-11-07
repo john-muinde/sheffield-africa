@@ -109,7 +109,7 @@
 
           <div class="col-md-6 col-lg-4 round-category home_image_kitchen">
             <div class="banner">
-              <router-link to="/kitchen">
+              <router-link to="/commercial-kitchen">
                 <img class="rounded-circle" src="assets/gif/food_service.gif" alt="Banner">
               </router-link>
             

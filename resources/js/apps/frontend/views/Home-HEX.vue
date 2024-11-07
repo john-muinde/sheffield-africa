@@ -152,7 +152,7 @@
               </div>
 
               <div class="hexagon hex-kitchen">
-                 <router-link to="/kitchen">
+                 <router-link to="/commercial-kitchen">
                     <img class="" src="assets/images/homepage/commercial_kitchen.jpg" alt="Commercial Kitchen">
                   </router-link>
               </div>
@@ -182,7 +182,7 @@
 
           <div class="col-md-6 col-lg-4 round-category home_image_kitchen">
             <div class="banner">
-              <a href="/kitchen">
+              <a href="/commercial-kitchen">
                 <img class="rounded-circle" src="assets/images/homepage/commercial_kitchen.jpg" alt="Banner">
               </a>
             

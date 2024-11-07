@@ -17,7 +17,7 @@
                     </li>
 
                     <li class="breadcrumb-item">
-                        <router-link to="/kitchen">KITCHEN</router-link>
+                        <router-link to="/commercial-kitchen">KITCHEN</router-link>
                     </li>
 
                     <li class="breadcrumb-item active" aria-current="page">

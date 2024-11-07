@@ -1,133 +1,123 @@
 <template>
   <div>
     <footer class="footer mt-5">
-      <div 
-        class="mb-2 cta cta-horizontal cta-horizontal-box bg-dark bg-image cta-footer-boxed"
-        :style="{ backgroundImage: 'url(/assets/images/sheffield_stainless_steel_background.jpg)' }"
-      >
+      <div class="mb-2 cta cta-horizontal cta-horizontal-box bg-dark bg-image cta-footer-boxed"
+        :style="{ backgroundImage: 'url(/assets/images/sheffield_stainless_steel_background.jpg)' }">
         <div class="container-fluid ">
 
 
-           <div class="row mt-3">
+          <div class="row mt-3">
 
             <div class="col-xl-12 justify-content-center footer-banner mb-1">
+              <h1 class="cta-title cta-title-footer text-primary">SHEFFIELD STEEL SYSTEMS LIMITED</h1>
+            </div>
 
-               <span class="cta-title cta-title-footer text-primary">SHEFFIELD STEEL SYSTEMS LIMITED</span>
+            <div class="col-xl-3 footer-contacts-col mt-2">
 
-            </div>  
 
-             <div class="col-xl-3 footer-contacts-col mt-2"> 
-
-                    
               <div class="footer-contacts">
 
                 <h2 class="footer-banner-header">Nairobi</h2>
 
                 <ul class="mt-1 mb-2">
-                    <li class="my-footer-li">
-                       <img src="/assets/images/footer-icons/footer_location.png" alt="Icon 1">
-                      Off Old Mombasa Road before the Nairobi Standard Gauge Railway Station
-                    </li>
-                    <li class="my-footer-li">
-                       <img src="/assets/images/footer-icons/footer_postbox.png" alt="Icon 1">
+                  <li class="my-footer-li">
+                    <img src="/assets/images/footer-icons/footer_location.png" alt="Icon 1">
+                    Off Old Mombasa Road before the Nairobi Standard Gauge Railway Station
+                  </li>
+                  <li class="my-footer-li">
+                    <img src="/assets/images/footer-icons/footer_postbox.png" alt="Icon 1">
 
-                      P. O. Box 29 – 00606, Nairobi Kenya
-                    </li>
-                    <li class="my-footer-li">
-                      <img src="/assets/images/footer-icons/footer_phone.png" alt="Icon 1">
-                      <div><a href="tel:+254713777111">+254 713 777 111 </a></div> 
-                    </li>
-                    <li class="my-footer-li">
-                      <img src="/assets/images/footer-icons/footer_phone.png" alt="Icon 1">
-                      
-                      <div><a  href="tel:+254713444000">+254 713 444 000</a></div>
-                    </li>
-                    <li class="my-footer-li">
-                      <img src="/assets/images/footer-icons/footer_email.png" alt="Icon 1">
-                      <a href="mailto:info@sheffieldafrica.com"
-                        > info@sheffieldafrica.com</a
-                      >
-                    </li>
-                  </ul>
+                    P. O. Box 29 – 00606, Nairobi Kenya
+                  </li>
+                  <li class="my-footer-li">
+                    <img src="/assets/images/footer-icons/footer_phone.png" alt="Icon 1">
+                    <div><a href="tel:+254713777111">+254 713 777 111 </a></div>
+                  </li>
+                  <li class="my-footer-li">
+                    <img src="/assets/images/footer-icons/footer_phone.png" alt="Icon 1">
 
-                </div>
+                    <div><a href="tel:+254713444000">+254 713 444 000</a></div>
+                  </li>
+                  <li class="my-footer-li">
+                    <img src="/assets/images/footer-icons/footer_email.png" alt="Icon 1">
+                    <a href="mailto:info@sheffieldafrica.com"> info@sheffieldafrica.com</a>
+                  </li>
+                </ul>
+
+              </div>
 
             </div>
 
 
-            <div class="col-xl-3 footer-contacts-col mt-2"> 
+            <div class="col-xl-3 footer-contacts-col mt-2">
 
-                <div class="footer-contacts">
+              <div class="footer-contacts">
 
-                  <h2 class="footer-banner-header">Mombasa</h2>
+                <h2 class="footer-banner-header">Mombasa</h2>
 
                 <ul class="mt-1 mb-2">
-                    <li class="my-footer-li">
-                       <img src="/assets/images/footer-icons/footer_location.png" alt="Icon 1">
-                      Petrocity Complex 1st Floor-Off Links Road, Nyali, Mombasa
-                    </li>
-                    
-                    <li class="my-footer-li">
-                      <img src="/assets/images/footer-icons/footer_phone.png" alt="Icon 1">
-                      <div><a href="tel:+254713777111">+254 713 777 111 </a></div> 
-                    </li>
-                    <li class="my-footer-li">
-                      <img src="/assets/images/footer-icons/footer_phone.png" alt="Icon 1">
-                      
-                      <div><a  href="tel:+254716518450">+254 716 518 450 </a></div>
-                    </li>
-                    <li class="my-footer-li">
-                      <img src="/assets/images/footer-icons/footer_email.png" alt="Icon 1">
-                      <a href="mailto:info@sheffieldafrica.com"
-                        > info@sheffieldafrica.com</a
-                      >
-                    </li>
-                  </ul>
+                  <li class="my-footer-li">
+                    <img src="/assets/images/footer-icons/footer_location.png" alt="Icon 1">
+                    Petrocity Complex 1st Floor-Off Links Road, Nyali, Mombasa
+                  </li>
 
-                </div>
+                  <li class="my-footer-li">
+                    <img src="/assets/images/footer-icons/footer_phone.png" alt="Icon 1">
+                    <div><a href="tel:+254713777111">+254 713 777 111 </a></div>
+                  </li>
+                  <li class="my-footer-li">
+                    <img src="/assets/images/footer-icons/footer_phone.png" alt="Icon 1">
+
+                    <div><a href="tel:+254716518450">+254 716 518 450 </a></div>
+                  </li>
+                  <li class="my-footer-li">
+                    <img src="/assets/images/footer-icons/footer_email.png" alt="Icon 1">
+                    <a href="mailto:info@sheffieldafrica.com"> info@sheffieldafrica.com</a>
+                  </li>
+                </ul>
+
+              </div>
 
 
             </div>
 
 
-            <div class="col-xl-3 footer-contacts-col mt-2"> 
+            <div class="col-xl-3 footer-contacts-col mt-2">
 
-                <div class="footer-contacts">
+              <div class="footer-contacts">
 
-                  <h2 class="footer-banner-header">Kampala</h2>
+                <h2 class="footer-banner-header">Kampala</h2>
 
                 <ul class="mt-1 mb-2">
-                    <li class="my-footer-li">
-                       <img src="/assets/images/footer-icons/footer_location.png" alt="Icon 1">
-                       Bugalobi Hardware City Opposite Uganda Baati, Block 3 Room 102, Mulwana Road.
-                    </li>
-                    <!-- <li class="my-footer-li">
+                  <li class="my-footer-li">
+                    <img src="/assets/images/footer-icons/footer_location.png" alt="Icon 1">
+                    Bugalobi Hardware City Opposite Uganda Baati, Block 3 Room 102, Mulwana Road.
+                  </li>
+                  <!-- <li class="my-footer-li">
                        <img src="/assets/images/footer-icons/footer_postbox.png" alt="Icon 1">
 
                       P. O. Box 29 – 00606, Nairobi Kenya
                     </li> -->
-                    <li class="my-footer-li">
-                      <img src="/assets/images/footer-icons/footer_phone.png" alt="Icon 1">
-                      <a style="width: 100%" href="tel:+256741177711">+256 741 177 711 </a>
-                    </li>
-                    <li class="my-footer-li">
-                      <img src="/assets/images/footer-icons/footer_phone.png" alt="Icon 1">
-                      <a  href="tel:+256741177713">+256 741 177 713</a>
-                    </li>
-                    <li class="my-footer-li">
-                      <img src="/assets/images/footer-icons/footer_email.png" alt="Icon 1">
-                      <a href="mailto:sales@sheffieldafrica.com"
-                        > sales@sheffieldafrica.com</a
-                      >
-                    </li>
-                  </ul>
+                  <li class="my-footer-li">
+                    <img src="/assets/images/footer-icons/footer_phone.png" alt="Icon 1">
+                    <a style="width: 100%" href="tel:+256741177711">+256 741 177 711 </a>
+                  </li>
+                  <li class="my-footer-li">
+                    <img src="/assets/images/footer-icons/footer_phone.png" alt="Icon 1">
+                    <a href="tel:+256741177713">+256 741 177 713</a>
+                  </li>
+                  <li class="my-footer-li">
+                    <img src="/assets/images/footer-icons/footer_email.png" alt="Icon 1">
+                    <a href="mailto:sales@sheffieldafrica.com"> sales@sheffieldafrica.com</a>
+                  </li>
+                </ul>
 
-                </div>
+              </div>
 
 
             </div>
 
-            <div class="col-xl-3 footer-contacts-col mt-2"> 
+            <div class="col-xl-3 footer-contacts-col mt-2">
 
               <div class="footer-contacts">
 
@@ -137,31 +127,33 @@
 
 
                 <ul class="mt-1 mb-2">
-                    
-                    <li class="my-footer-li">
-                      <img src="/assets/images/footer-icons/footer_phone.png" alt="Icon 1">
-                      <a href="tel:+250790001231">+250 790 001 231 </a>
-                    </li>
-                    <li class="my-footer-li">
-                      <img src="/assets/images/footer-icons/footer_email.png" alt="Icon 1">
-                      <a href="mailto:sales1rwanda@sheffieldafrica.com"
-                        > sales1rwanda@sheffieldafrica.com</a
-                      >
-                    </li>
-                  </ul>
 
-                </div>
+                  <li class="my-footer-li">
+                    <img src="/assets/images/footer-icons/footer_phone.png" alt="Icon 1">
+                    <a href="tel:+250790001231">+250 790 001 231 </a>
+                  </li>
+                  <li class="my-footer-li">
+                    <img src="/assets/images/footer-icons/footer_email.png" alt="Icon 1">
+                    <a href="mailto:sales1rwanda@sheffieldafrica.com"> sales1rwanda@sheffieldafrica.com</a>
+                  </li>
+                </ul>
+
+              </div>
 
 
             </div>
 
             <div class="col-xl-12 justify-content-center footer-banner mt-4 mb-4">
 
-               <router-link to="/about-us" class="btn btn-primary btn-footer mr-5" style="border: solid 2px;"><span><b>About Us</b></span><i class="icon-long-arrow-right"></i></router-link>
+              <router-link to="/about-us" class="btn btn-primary btn-footer mr-5"
+                style="border: solid 2px;"><span><b>About Us</b></span><i
+                  class="icon-long-arrow-right"></i></router-link>
 
-               <router-link to="/contact-us" class="btn btn-primary btn-footer ml-5" style="border: solid 2px;"><span><b>Contact Us</b></span><i class="icon-long-arrow-right"></i></router-link>
+              <router-link to="/contact-us" class="btn btn-primary btn-footer ml-5"
+                style="border: solid 2px;"><span><b>Contact Us</b></span><i
+                  class="icon-long-arrow-right"></i></router-link>
 
-            </div>  
+            </div>
 
 
 
@@ -174,12 +166,12 @@
         <!-- End .container-fluid -->
       </div>
 
-     
+
 
       <!-- End .cta -->
       <div class="footer-middle border-0">
 
-      <!-- <div class="waves">
+        <!-- <div class="waves">
         <div class="wave" id="wave1"></div>
         <div class="wave" id="wave2"></div>
         <div class="wave" id="wave3"></div>
@@ -194,37 +186,45 @@
                 <h4 class="widget-title footer-title">Let's Get Social</h4>
 
 
-                  <div class="social-icons">
+                <div class="social-icons">
 
-                      <a href="https://www.facebook.com/SheffieldAfricaFacilitySolutions" style="border: 0.1rem solid #c02434;" class="social-icon mt-1" target="_blank" title="Facebook">
-                        <img src="/assets/images/social-icons/facebook.png">
-                      </a>
-                      <a href="https://www.instagram.com/sheffieldafrica/" style="border: 0.1rem solid #c02434;" class="social-icon mt-1" target="_blank" title="Instagram">
-                        <img src="/assets/images/social-icons/instagram.png">
-                      </a>
-                      <a href="https://www.threads.net/@sheffieldafrica" style="border: 0.1rem solid #c02434;" class="social-icon mt-1" target="_blank" title="Threads">
-                        <img src="/assets/images/social-icons/threads.png">
-                      </a>
-                      <a href="https://wa.me/+254114838130?text=Hello%20Sheffield, I need assistance in " style="border: 0.1rem solid #c02434;" class="social-icon mt-1" target="_blank" title="WhatsApp">
-                        <img src="/assets/images/social-icons/whatsapp.png">
-                      </a>
-                      <a href="https://twitter.com/sheffield_afric/" style="border: 0.1rem solid #c02434;" class="social-icon mt-1" target="_blank" title="X">
-                        <img src="/assets/images/social-icons/x.png">
-                      </a>
-                      <a href="https://www.linkedin.com/company/sheffield-steel-systems-ltd/mycompany" style="border: 0.1rem solid #c02434;" class="social-icon mt-1" target="_blank" title="Linkedin">
-                        <img src="/assets/images/social-icons/linkedin.png">
-                      </a>
-                      <a href="https://www.youtube.com/channel/UCK-oWPdQazenIHndl4zABew" style="border: 0.1rem solid #c02434;" class="social-icon mt-1" target="_blank" title="Youtube">
-                        <img src="/assets/images/social-icons/youtube.png">
-                      </a>
-                      <a href="http://tiktok.com/@sheffieldafrica" style="border: 0.1rem solid #c02434;" class="social-icon mt-1" target="_blank" title="TikTok">
-                        <img src="/assets/images/social-icons/tiktok.png">
-                      </a>
+                  <a href="https://www.facebook.com/SheffieldAfricaFacilitySolutions"
+                    style="border: 0.1rem solid #c02434;" class="social-icon mt-1" target="_blank" title="Facebook">
+                    <img src="/assets/images/social-icons/facebook.png">
+                  </a>
+                  <a href="https://www.instagram.com/sheffieldafrica/" style="border: 0.1rem solid #c02434;"
+                    class="social-icon mt-1" target="_blank" title="Instagram">
+                    <img src="/assets/images/social-icons/instagram.png">
+                  </a>
+                  <a href="https://www.threads.net/@sheffieldafrica" style="border: 0.1rem solid #c02434;"
+                    class="social-icon mt-1" target="_blank" title="Threads">
+                    <img src="/assets/images/social-icons/threads.png">
+                  </a>
+                  <a href="https://wa.me/+254114838130?text=Hello%20Sheffield, I need assistance in "
+                    style="border: 0.1rem solid #c02434;" class="social-icon mt-1" target="_blank" title="WhatsApp">
+                    <img src="/assets/images/social-icons/whatsapp.png">
+                  </a>
+                  <a href="https://twitter.com/sheffield_afric/" style="border: 0.1rem solid #c02434;"
+                    class="social-icon mt-1" target="_blank" title="X">
+                    <img src="/assets/images/social-icons/x.png">
+                  </a>
+                  <a href="https://www.linkedin.com/company/sheffield-steel-systems-ltd/mycompany"
+                    style="border: 0.1rem solid #c02434;" class="social-icon mt-1" target="_blank" title="Linkedin">
+                    <img src="/assets/images/social-icons/linkedin.png">
+                  </a>
+                  <a href="https://www.youtube.com/channel/UCK-oWPdQazenIHndl4zABew"
+                    style="border: 0.1rem solid #c02434;" class="social-icon mt-1" target="_blank" title="Youtube">
+                    <img src="/assets/images/social-icons/youtube.png">
+                  </a>
+                  <a href="http://tiktok.com/@sheffieldafrica" style="border: 0.1rem solid #c02434;"
+                    class="social-icon mt-1" target="_blank" title="TikTok">
+                    <img src="/assets/images/social-icons/tiktok.png">
+                  </a>
 
 
 
-                  </div><!-- End .soial-icons -->
-                </div>
+                </div><!-- End .soial-icons -->
+              </div>
 
               <!-- End .widget about-widget -->
             </div>
@@ -239,12 +239,13 @@
                   <li class="ec-footer-link">
                     <router-link to="/about-us">About us</router-link>
                   </li>
-                  
-                  <li class="ec-footer-link"><router-link to="/about-us/sheffield-advantage">Sheffield Advantages</router-link></li>
+
+                  <li class="ec-footer-link"><router-link to="/about-us/sheffield-advantage">Sheffield
+                      Advantages</router-link></li>
 
                   <li class="ec-footer-link"><router-link to="/projects">Project References</router-link></li>
 
-                 <li class="ec-footer-link"><router-link to="/events">Events</router-link></li>
+                  <li class="ec-footer-link"><router-link to="/events">Events</router-link></li>
                   <li class="ec-footer-link"><router-link to="/careers">Careers</router-link></li>
 
                   <li class="ec-footer-link"><router-link to="/faq">FAQ</router-link></li>
@@ -254,11 +255,11 @@
                   <li class="ec-footer-link">
                     <router-link to="/contact-us">Contact us</router-link>
                   </li>
-                  
-                 
-                  
-                 
-                  
+
+
+
+
+
                 </ul>
                 <!-- End .widget-list -->
               </div>
@@ -305,17 +306,17 @@
                   <li class="ec-footer-link">
                     <router-link to="/cookie-policy">Cookie Policy </router-link>
                   </li>
-                  
+
                   <li class="ec-footer-link">
                     <router-link to="/terms-and-conditions">Terms & Conditions</router-link>
                   </li>
 
                   <li class="ec-footer-link">
-                    <router-link to="/warranty-terms" > Warranty Terms </router-link>
+                    <router-link to="/warranty-terms"> Warranty Terms </router-link>
                   </li>
 
 
-                   <li class="ec-footer-link">
+                  <li class="ec-footer-link">
                     <router-link to="/lease-and-finance">Lease & Finance</router-link>
                   </li>
                 </ul>
@@ -336,13 +337,8 @@
 
                 <form action="#">
                   <div class="input-group">
-                    <input
-                      type="email"
-                      class="form-control"
-                      placeholder="Enter your Email Address"
-                      aria-label="Email Adress"
-                      required
-                    />
+                    <input type="email" class="form-control" placeholder="Enter your Email Address"
+                      aria-label="Email Adress" required />
                     <div class="input-group-append">
                       <button class="btn btn-dark" type="submit">
                         <i class="icon-long-arrow-right"></i>
@@ -378,23 +374,25 @@
     <!-- End .footer -->
   </div>
 
- <!--  <div class="whatsapp-chat">
+  <!--  <div class="whatsapp-chat">
     <a @click="openWhatsAppChat" href="#">
       <img src="whatsapp-icon.png" alt="WhatsApp Chat">
     </a>
   </div> -->
 
 
-   <div v-if="showPopup" class="cookie-policy-popup">
+  <div v-if="showPopup" class="cookie-policy-popup">
     <div class="cookie-policy-content">
       <h2>Cookie Policy</h2>
       <p>
-        This website uses cookies to ensure you get the best experience on our website. By using our site, you acknowledge that you have read and understand our
-        <router-link to="/privacy-policy">Privacy Policy</router-link> and <router-link to="/cookie-policy">Cookie Policy</router-link>.
+        This website uses cookies to ensure you get the best experience on our website. By using our site, you
+        acknowledge that you have read and understand our
+        <router-link to="/privacy-policy">Privacy Policy</router-link> and <router-link to="/cookie-policy">Cookie
+          Policy</router-link>.
       </p>
 
       <p>By clicking "Accept Cookies," you consent to the use of cookies on this website.</p>
-      <button class="btn btn-secondary mr-3" @click="acceptCookies">Accept <i class="icon-check"></i></button> 
+      <button class="btn btn-secondary mr-3" @click="acceptCookies">Accept <i class="icon-check"></i></button>
       <button class="btn btn-primary ml-3" @click="rejectCookies">Reject <i class="icon-close"></i></button>
     </div>
   </div>
@@ -403,82 +401,82 @@
 
 
   <div class="whatsapp-logo">
-        <a href="https://api.whatsapp.com/send/?phone=%2B254114838130&text=Hello+Sheffield%2C+I+need+assistance+in" target="_blank">
-            <i class="icon-whatsapp"></i>
-        </a>
-    </div>
+    <a href="https://api.whatsapp.com/send/?phone=%2B254114838130&text=Hello+Sheffield%2C+I+need+assistance+in"
+      target="_blank">
+      <i class="icon-whatsapp"></i>
+    </a>
+  </div>
 </template>
 
 <script setup>
-  import { ref, onMounted } from 'vue';
+import { ref, onMounted } from 'vue';
 
-  const showPopup = ref(false);
-  const showAd = ref(false);
+const showPopup = ref(false);
+const showAd = ref(false);
 
-  const acceptCookies = () => {
-    // Set a cookie to track user's choice to accept cookies
-    const expirationDate = new Date();
-    expirationDate.setDate(expirationDate.getDate() + 365); // Set expiration to 365 days from now
-    document.cookie = `cookiePolicyAccepted=true; expires=${expirationDate.toUTCString()}; path=/`;
-    showPopup.value = false;
-  };
+const acceptCookies = () => {
+  // Set a cookie to track user's choice to accept cookies
+  const expirationDate = new Date();
+  expirationDate.setDate(expirationDate.getDate() + 365); // Set expiration to 365 days from now
+  document.cookie = `cookiePolicyAccepted=true; expires=${expirationDate.toUTCString()}; path=/`;
+  showPopup.value = false;
+};
 
-  const rejectCookies = () => {
-    // Set a cookie to track user's choice to reject cookies for one week
-    const expirationDate = new Date();
-    expirationDate.setDate(expirationDate.getDate() + 7); // Set expiration to 7 days from now
-    document.cookie = `cookiePolicyRejected=true; expires=${expirationDate.toUTCString()}; path=/`;
-    showPopup.value = false;
-  };
+const rejectCookies = () => {
+  // Set a cookie to track user's choice to reject cookies for one week
+  const expirationDate = new Date();
+  expirationDate.setDate(expirationDate.getDate() + 7); // Set expiration to 7 days from now
+  document.cookie = `cookiePolicyRejected=true; expires=${expirationDate.toUTCString()}; path=/`;
+  showPopup.value = false;
+};
 
-  const isCookieExpired = (cookie) => {
-    const cookieData = cookie.split(';');
-    const expiresString = cookieData.find((item) => item.trim().startsWith('expires='));
-    if (expiresString) {
-      const expiresDate = new Date(expiresString.split('=')[1].trim());
-      return expiresDate < new Date();
-    }
-    return false;
-  };
+const isCookieExpired = (cookie) => {
+  const cookieData = cookie.split(';');
+  const expiresString = cookieData.find((item) => item.trim().startsWith('expires='));
+  if (expiresString) {
+    const expiresDate = new Date(expiresString.split('=')[1].trim());
+    return expiresDate < new Date();
+  }
+  return false;
+};
 
-  const setCookie = (name, value, minutes) => {
-    const date = new Date();
-    date.setTime(date.getTime() + minutes * 60 * 1000);
-    document.cookie = `${name}=${value};expires=${date.toUTCString()};path=/`;
-  };
+const setCookie = (name, value, minutes) => {
+  const date = new Date();
+  date.setTime(date.getTime() + minutes * 60 * 1000);
+  document.cookie = `${name}=${value};expires=${date.toUTCString()};path=/`;
+};
 
-  const getCookie = (name) => {
-    const value = `; ${document.cookie}`;
-    const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) return parts.pop().split(';').shift();
-  };
+const getCookie = (name) => {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop().split(';').shift();
+};
 
-  const closeAd = () => {
-    document.querySelector('.ad-policy-popup').style.display = 'none';
-    setCookie('adClosed', 'true', 30); // Set cookie for 30 minutes
+const closeAd = () => {
+  document.querySelector('.ad-policy-popup').style.display = 'none';
+  setCookie('adClosed', 'true', 30); // Set cookie for 30 minutes
+  showAd.value = false;
+};
+
+onMounted(() => {
+  // Check if the cookie policy has been accepted or rejected before showing the pop-up
+  const cookiePolicyAccepted = document.cookie.includes('cookiePolicyAccepted=true');
+  const cookiePolicyRejected = document.cookie.includes('cookiePolicyRejected=true');
+
+  if (!cookiePolicyAccepted && (!cookiePolicyRejected || isCookieExpired(document.cookie))) {
+    showPopup.value = true;
+  }
+
+  if (getCookie('adClosed')) {
     showAd.value = false;
-  };
-
-  onMounted(() => {
-    // Check if the cookie policy has been accepted or rejected before showing the pop-up
-    const cookiePolicyAccepted = document.cookie.includes('cookiePolicyAccepted=true');
-    const cookiePolicyRejected = document.cookie.includes('cookiePolicyRejected=true');
-    
-    if (!cookiePolicyAccepted && (!cookiePolicyRejected || isCookieExpired(document.cookie))) {
-      showPopup.value = true;
-    }
-
-    if (getCookie('adClosed')) {
-      showAd.value = false;
-    }else{
-      showAd.value = true;
-    }
-  });
+  } else {
+    showAd.value = true;
+  }
+});
 
 </script>
 
 <style scoped>
-
 .cookie-policy-popup {
   position: fixed;
   bottom: 0;
@@ -495,45 +493,63 @@
 
 /* Basic styling for the popup */
 .ad-policy-popup {
-    position: fixed; /* Ensures the popup stays in the same place when scrolling */
-    top: 42%; /* Positions the popup in the center vertically */
-    left: 50%; /* Positions the popup in the center horizontally */
-    transform: translate(-50%, -50%); /* Offsets the popup to perfectly center it */
-    width: 720px; /* Set the width of the popup */
-    height: 480px; /* Set the height of the popup */
-    background-color: white; /* Set a background color for the popup */
-    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow around the popup */
-    z-index: 1000; /* Ensures the popup appears above other content */
-    padding: 10px; /* Adds padding inside the popup */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border-radius: 8px; /* Adds rounded corners to the popup */
+  position: fixed;
+  /* Ensures the popup stays in the same place when scrolling */
+  top: 42%;
+  /* Positions the popup in the center vertically */
+  left: 50%;
+  /* Positions the popup in the center horizontally */
+  transform: translate(-50%, -50%);
+  /* Offsets the popup to perfectly center it */
+  width: 720px;
+  /* Set the width of the popup */
+  height: 480px;
+  /* Set the height of the popup */
+  background-color: white;
+  /* Set a background color for the popup */
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+  /* Adds a subtle shadow around the popup */
+  z-index: 1000;
+  /* Ensures the popup appears above other content */
+  padding: 10px;
+  /* Adds padding inside the popup */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  /* Adds rounded corners to the popup */
 }
 
 /* Styling for the image inside the popup */
 .ad-policy-popup img {
-    max-width: 100%; /* Ensures the image is fully visible */
-    max-height: 480px; /* Ensures the image is fully visible */
-    object-fit: contain; /* Scales the image appropriately without cropping */
-    border-radius: 8px;
+  max-width: 100%;
+  /* Ensures the image is fully visible */
+  max-height: 480px;
+  /* Ensures the image is fully visible */
+  object-fit: contain;
+  /* Scales the image appropriately without cropping */
+  border-radius: 8px;
 }
 
 /* Styling for the button */
 .ad-policy-popup button {
-    margin-top: 20px; /* Adds space above the button */
-    padding: 10px 20px; /* Adds padding inside the button */
-    background-color: #c02434; /* Sets the button color */
-    color: white; /* Sets the text color */
-    border: 1px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
+  margin-top: 20px;
+  /* Adds space above the button */
+  padding: 10px 20px;
+  /* Adds padding inside the button */
+  background-color: #c02434;
+  /* Sets the button color */
+  color: white;
+  /* Sets the text color */
+  border: 1px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
 }
 
 .ad-policy-popup button:hover {
-    background-color: #0056b3;
+  background-color: #0056b3;
 }
 
 
@@ -571,24 +587,26 @@
 
 
 .whatsapp-chat {
-    position: fixed;
-    bottom: 10px;
-    right: 20px;
-    z-index: 1000; /* Adjust as needed to ensure it appears above other elements */
+  position: fixed;
+  bottom: 10px;
+  right: 20px;
+  z-index: 1000;
+  /* Adjust as needed to ensure it appears above other elements */
 }
 
 .whatsapp-chat img {
-    width: 80px; /* Adjust the size as needed */
-    height: 80px;
-    border-radius: 50%;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    cursor: pointer;
+  width: 80px;
+  /* Adjust the size as needed */
+  height: 80px;
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
 }
 
-.cta-title-footer{
+.cta-title-footer {
 
-  background-color:#c02434 !important;
-  color:#ffffff !important;
+  background-color: #c02434 !important;
+  color: #ffffff !important;
   padding: 10px;
   margin-bottom: 15px;
 }
@@ -601,7 +619,7 @@
 
 }
 
-.my-footer-li{
+.my-footer-li {
 
   line-height: 25px;
   font-weight: 500;
@@ -610,44 +628,44 @@
 
 .my-footer-li a {
 
-    word-break: break-all;
+  word-break: break-all;
 
-  }
+}
 
 .cta-horizontal-box {
-    padding-top: 1.8rem;
-    padding-bottom: 1.6rem;
+  padding-top: 1.8rem;
+  padding-bottom: 1.6rem;
 }
 
 
 
 .whatsapp-logo {
-    position: fixed;
-    bottom: 10px;
-    right: 20px;
-    z-index: 999;
+  position: fixed;
+  bottom: 10px;
+  right: 20px;
+  z-index: 999;
 }
 
 .whatsapp-logo a {
-    display: block;
-    width: 80px;
-    height: 80px;
-    background-color: #25d366;
-    border-radius: 50%;
-    text-align: center;
-    line-height: 60px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    text-decoration: none;
+  display: block;
+  width: 80px;
+  height: 80px;
+  background-color: #25d366;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 60px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-decoration: none;
 }
 
 .whatsapp-logo img {
-    width: 50%;
-    height: auto;
+  width: 50%;
+  height: auto;
 }
 
 
 .whatsapp-logo a:hover {
-    background-color: #128c7e;
+  background-color: #128c7e;
 }
 
 .whatsapp-logo i {
@@ -656,17 +674,17 @@
 }
 
 @media only screen and (max-width: 768px) {
-    .cta-title-footer {
-        padding: 2px;
-    }
+  .cta-title-footer {
+    padding: 2px;
+  }
 
-    .cta-title {
-        font-size: 1.6rem;
-    }
+  .cta-title {
+    font-size: 1.6rem;
+  }
 
-    .my-footer-li {
-        font-size: 12px;
-    }
+  .my-footer-li {
+    font-size: 12px;
+  }
 }
 
 .wave {
@@ -708,21 +726,15 @@
 }
 
 @keyframes animateWaves {
-  0% {
-    
-  }
-  100% {
-    
-  }
+  0% {}
+
+  100% {}
 }
 
 @keyframes animate {
-  0% {
-    
-  }
-  100% {
-    
-  }
+  0% {}
+
+  100% {}
 }
 
 .footer-middle a {
@@ -744,13 +756,13 @@
   font-weight: 450;
 }
 
-.footer-title{ 
-    font-size: 1.95rem;
-    line-height: 2.75rem;
-    color: #fff;
-    border-left: 5px solid #c02434;
-    padding-left: 1.5rem;
-    height: fit-content;
+.footer-title {
+  font-size: 1.95rem;
+  line-height: 2.75rem;
+  color: #fff;
+  border-left: 5px solid #c02434;
+  padding-left: 1.5rem;
+  height: fit-content;
 }
 
 .widget-list {
@@ -781,7 +793,7 @@ input::placeholder {
   background-color: #c02434 !important;
 }
 
-.social-icon:hover img{
+.social-icon:hover img {
   filter: invert(99%) sepia(0%) saturate(2%) hue-rotate(132deg) brightness(111%) contrast(101%);
 }
 
@@ -811,18 +823,18 @@ input::placeholder {
 
 
 .footer-contacts li {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-    line-height: 20px;
-    font-size: 1.35rem;
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  line-height: 20px;
+  font-size: 1.35rem;
 }
 
 .footer-contacts img {
-    margin-right: 10px;
-    width: 20px; 
-    height: 20px;
-    filter: invert(20%) sepia(63%) saturate(3227%) hue-rotate(337deg) brightness(88%) contrast(94%);
+  margin-right: 10px;
+  width: 20px;
+  height: 20px;
+  filter: invert(20%) sepia(63%) saturate(3227%) hue-rotate(337deg) brightness(88%) contrast(94%);
 }
 
 
@@ -832,27 +844,25 @@ input::placeholder {
 }
 
 .footer-banner-header {
-    position: relative;
-    display: inline-block;
-    color: #c02434;
-    font-size: 2.5rem;
-    font-weight: 550;
+  position: relative;
+  display: inline-block;
+  color: #c02434;
+  font-size: 2.5rem;
+  font-weight: 550;
 
 }
 
 .footer-banner-header:after {
-    content: '';
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 100%;
-    margin-top: 5px;
-    margin-left: 2px;
-    width: 70%;
-    height: 2px;
-    background: #c02434;
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  margin-top: 5px;
+  margin-left: 2px;
+  width: 70%;
+  height: 2px;
+  background: #c02434;
 
 }
-
-
 </style>

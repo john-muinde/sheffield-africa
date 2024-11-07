@@ -122,7 +122,7 @@
         <div class="row justify-content-center mt-1">
                     <div class="col-md-6 col-lg-4">
                       <div class="banner">
-                        <a href="/kitchen">
+                        <a href="/commercial-kitchen">
                           <img class="home_image" src="assets/images/homepage/commercial_kitchen.jpg" alt="Banner">
                         </a>
 

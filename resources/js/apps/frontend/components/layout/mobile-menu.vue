@@ -62,7 +62,7 @@
                                 <router-link to="/">Home</router-link>
                             </li>
                             <li>
-                                <router-link to="/kitchen">Kitchen</router-link>
+                                <router-link to="/commercial-kitchen">Kitchen</router-link>
                                 <ul>
                                     <li v-for="category in mainKitchenCategories"
                                         :key="category.id">
@@ -168,7 +168,7 @@
                     <nav class="mobile-cats-nav">
                         <ul class="mobile-menu">
                             <li>
-                                <router-link to="/kitchen"
+                                <router-link to="/commercial-kitchen"
                                     >KITCHEN SOLUTIONS</router-link
                                 >
                                 <ul>

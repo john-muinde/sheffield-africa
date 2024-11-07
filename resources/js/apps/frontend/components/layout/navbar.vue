@@ -33,7 +33,7 @@
                                     <!-- End .header-dropdown -->
                                  
                                     <li :class="{ 'active-li': isKitchenPage }">
-                                        <router-link to="/kitchen">
+                                        <router-link to="/commercial-kitchen">
                                             <span class="top-icon">
                                                 <img class="top-menu-icon" src="/assets/images/menu-icons/top-menu/kitchen.png" />
                                             </span>
@@ -615,7 +615,7 @@ const isHomePage = computed(() => {
 });
 
 const isKitchenPage = computed(() => {
-    return route.path.includes("/kitchen");
+    return route.path.includes("/commercial-kitchen");
 });
 
 const isLaundryPage = computed(() => {

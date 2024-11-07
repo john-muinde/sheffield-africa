@@ -65,7 +65,7 @@
 
           <div class="col-md-6 col-lg-4 home-round-category home_kitchen">
             <div class="banner">
-              <router-link to="/kitchen" title="Click to open Food Service Equipment">
+              <router-link to="/commercial-kitchen" title="Click to open Food Service Equipment">
                 <img class="home-rounded-circle" src="assets/gif/food_service.gif" alt="Banner">
               </router-link>
             

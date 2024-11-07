@@ -43,7 +43,7 @@ const isHomePage = computed(() => {
 });
 
 const isKitchenPage = computed(() => {
-    return route.path.includes("/kitchen");
+    return route.path.includes("/commercial-kitchen");
 });
 
 const isLaundryPage = computed(() => {

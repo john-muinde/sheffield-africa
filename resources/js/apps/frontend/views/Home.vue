@@ -16,7 +16,7 @@
                                     <i class="icon-search"></i>
                                 </button>
                                 <input type="search" v-model="query" @input="search" class="form-control" name="q"
-                                  autocomplete="off" placeholder="Search product ..." required="" />
+                                    autocomplete="off" placeholder="Search product ..." required="" />
                                 <ul v-if="showResults" class="">
                                     <li v-for="result in results" :key="result.id">
                                         <router-link :to="getProductLink(
@@ -152,7 +152,7 @@
                         </div>
                     </router-link>
 
-                    <router-link class="home-kitchen home-section home-section-cat" to="/kitchen">
+                    <router-link class="home-kitchen home-section home-section-cat" to="/commercial-kitchen">
                         <div class="home-section-white">
                             <img src="assets/images/homepage/food_service_equipment.jpg"
                                 alt="Commercial Food Service Equipment" />
@@ -174,7 +174,7 @@
                 </div>
 
                 <div class="justify-content-center mt-4 home-design-mobile">
-                    <router-link class="home-kitchen home-section home-section-cat" to="/kitchen">
+                    <router-link class="home-kitchen home-section home-section-cat" to="/commercial-kitchen">
                         <div class="home-section-white">
                             <img src="assets/images/homepage/food_service_equipment.jpg"
                                 alt="Commercial Food Service Equipment" />

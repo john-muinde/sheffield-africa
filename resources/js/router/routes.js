@@ -1032,7 +1032,7 @@ const routes = [
             },
 
             {
-                path: "/kitchen",
+                path: "/commercial-kitchen",
                 name: "frontend.kitchen.page",
                 component: () =>
                     import(

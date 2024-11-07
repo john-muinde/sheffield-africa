@@ -14,17 +14,17 @@
     <link rel="profile" href="https://gmpg.org/xfn/11">
 
     <!-- Primary Meta Tags -->
-
-    <title>Sheffield Steel Systems Limited - East Africa's Premier Commercial Kitchen, Coldroom & Steel Fabrication
-        Expert | Top Equipment Manufacturer</title>
-
+    <title>Sheffield Steel Systems | East Africa's Leading Commercial Kitchen Equipment</title>
     <meta name="description"
-        content="Sheffield Steel Systems Limited is East Africa's leading solution and service provider for Commercial Kitchen, Laundry, and Cold Storage Solutions, specializing in Stainless Steel Fabrication and Customization. We have served clients like Java, Big Square, Sarova, and many more.">
+        content="East Africa's trusted manufacturer of commercial kitchen equipment, laundry, coldrooms & steel solutions. Serving top brands like Java & KFC across Kenya, Uganda & Tanzania.">
+    <meta name="author" content="Sheffield Steel Systems Limited">
+    <meta name="designer" content="Sheffield Steel Systems Limited">
+    <meta name="publisher" content="Sheffield Steel Systems Limited">
+    <meta name="copyright" content="Sheffield Steel Systems Limited">
+    <meta name="rating" content="general">
+    <meta name="distribution" content="global">
+    <meta name="revisit-after" content="1 day">
     <meta name="robots" content="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large">
-
-    <!-- Enhanced Meta Description with Service Areas -->
-    <meta name="description"
-        content="East Africa's leading commercial kitchen equipment manufacturer, coldroom specialist, and stainless steel fabricator. Trusted by Java, KFC, Carrefour, Sarova, Nairobi Hospital, and 500+ top brands. Expert solutions in commercial kitchen design, industrial laundry equipment, cold storage solutions, and custom stainless steel fabrication. Serving Kenya (Nairobi, Mombasa, Kisumu), Uganda, Tanzania, Rwanda, and all of East Africa. Specialized in restaurants, hotels, hospitals, schools, and industrial facilities. 20+ years of excellence in commercial kitchen solutions.">
 
     <!-- Comprehensive Keywords List -->
     <meta name="keywords"
@@ -97,12 +97,16 @@
             restaurant chain solutions, hotel group equipment,
             hospital kitchen systems, school catering equipment,
             industrial facility solutions, commercial setups">
+
+
+    <!-- Open Graph / Facebook -->
     <link rel="canonical" href="{{ url()->current() }}">
     <meta property="og:locale" content="en_US">
     <meta property="og:type" content="website">
     <meta property="og:title" content="Sheffield Steel Systems Limited - Transforming Ideas into Sustainable Realities">
     <meta property="og:description"
         content="East Africa's leading solution and service provider for Commercial Kitchen, commercial equipment, Laundry, and Cold Storage Solutions, specializing in Stainless Steel Fabrication and Customization. We have served clients like Java, Big Square, Sarova, and many more.">
+
     <meta property="og:url" content="{{ url()->current() }}">
     <meta property="og:site_name" content="Sheffield Steel Systems Limited">
     <meta property="og:updated_time" content="{{ now()->toIso8601String() }}">
@@ -114,6 +118,8 @@
     <meta property="og:image:type" content="image/png">
     <meta property="article:published_time" content="2003-01-01T00:00:00+00:00">
     <meta property="article:modified_time" content="{{ now()->toIso8601String() }}">
+
+    <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title"
         content="Sheffield Steel Systems Limited - Transforming Ideas into Sustainable Realities">
@@ -307,6 +313,24 @@
       ]
     }
     </script>
+
+    <!-- Schema.org markup for Google -->
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "name": "Sheffield Steel Systems Limited",
+            "description": "East Africa's leading commercial kitchen equipment manufacturer and steel fabricator",
+            "url": "{{ url('/') }}",
+            "areaServed": ["Kenya", "Uganda", "Tanzania", "Rwanda", "East Africa"],
+            "serviceType": [
+                "Commercial Kitchen Equipment",
+                "Cold Storage Solutions",
+                "Stainless Steel Fabrication",
+                "Industrial Laundry Equipment"
+            ]
+        }
+        </script>
 
     <!-- Service Areas Schema -->
     <script type="application/ld+json">
