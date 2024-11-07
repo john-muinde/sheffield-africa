@@ -24,7 +24,7 @@
     <meta property="og:title" content="Sheffield Steel Systems Limited - Transforming Ideas into Sustainable Realities">
     <meta property="og:description"
         content="East Africa's leading solution and service provider for Commercial Kitchen, Laundry, and Cold Storage Solutions, specializing in Stainless Steel Fabrication and Customization.">
-    <meta property="og:image" content="{{ asset('images/sheffield-logo.png') }}">
+    <meta property="og:image" content="{{ asset('images/logo.png') }}">
     <meta property="og:url" content="{{ url()->current() }}">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Sheffield Steel Systems Limited">
@@ -35,7 +35,7 @@
         content="Sheffield Steel Systems Limited - Transforming Ideas into Sustainable Realities">
     <meta name="twitter:description"
         content="East Africa's leading solution and service provider for Commercial Kitchen, Laundry, and Cold Storage Solutions, specializing in Stainless Steel Fabrication and Customization.">
-    <meta name="twitter:image" content="{{ asset('images/sheffield-logo.png') }}">
+    <meta name="twitter:image" content="{{ asset('images/logo.png') }}">
     <meta name="twitter:site" content="@SheffieldAfrica">
     <meta name="twitter:creator" content="@SheffieldAfrica">
 
