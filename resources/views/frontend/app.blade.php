@@ -16,7 +16,7 @@
     <!-- Primary Meta Tags -->
     <title>Sheffield Steel Systems | Commercial Kitchen, Laundry & Steel Solutions</title>
     <meta name="description"
-        content="Discover Sheffield Steel Systems, East Africa's leader in commercial kitchen equipment, laundry solutions, coldrooms, and steel fabrication. Trusted by top brands.">
+        content="Discover Sheffield Steel Systems, East Africa's leader in commercial kitchen equipment, laundry solutions, coldrooms, steel fabrication. Trusted by top brands.">
     <meta name="author" content="Sheffield Steel Systems Limited">
     <meta name="designer" content="Sheffield Steel Systems Limited">
     <meta name="publisher" content="Sheffield Steel Systems Limited">
