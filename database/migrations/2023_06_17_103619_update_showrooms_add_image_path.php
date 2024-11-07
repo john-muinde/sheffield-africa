@@ -22,10 +22,6 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('showrooms', function (Blueprint $table) {
-<<<<<<< HEAD
-=======
-            $table->dropColumn('main_image_path');
->>>>>>> b1327f8448e14b925438ec1cdeed9a33675301cb
             $table->dropColumn('document_path');
         });
     }
