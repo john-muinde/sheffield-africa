@@ -6,74 +6,191 @@
     ];
 @endphp
 <!DOCTYPE html>
-<html lang="{{ $locale }}">
+<html lang="{{ $locale }}" prefix="og: https://ogp.me/ns#">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="profile" href="https://gmpg.org/xfn/11">
+
+    <!-- Search Engine Optimization -->
+    <title>Sheffield Steel Systems Limited - Transforming Ideas into Sustainable Realities</title>
     <meta name="description"
         content="Sheffield Steel Systems Limited is East Africa's leading solution and service provider for Commercial Kitchen, Laundry, and Cold Storage Solutions, specializing in Stainless Steel Fabrication and Customization.">
-    <meta name="keywords"
-        content="coldrooms in Kenya, commercial kitchens in Kenya, Sheffield Africa, stainless steel fabrication, commercial laundry solutions, cold storage solutions">
-    <meta name="author" content="Sheffield Steel Systems Limited">
-    <meta name="google-site-verification" content="MDV6HhOKIgKRjiLA7URFOhZc0eOmt5-pZiZ7zvtKyGQ" />
-    <meta name="google-site-verification" content="HTu3UM8rSXb95ng7ySUN6dIa0OTHQtzcZiJa7C9T1pk" />
-
-    <!-- Open Graph Meta Tags -->
+    <meta name="robots" content="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large">
+    <link rel="canonical" href="{{ url()->current() }}">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:type" content="website">
     <meta property="og:title" content="Sheffield Steel Systems Limited - Transforming Ideas into Sustainable Realities">
     <meta property="og:description"
         content="East Africa's leading solution and service provider for Commercial Kitchen, Laundry, and Cold Storage Solutions, specializing in Stainless Steel Fabrication and Customization.">
-    <meta property="og:image" content="{{ asset('images/logo.png') }}">
     <meta property="og:url" content="{{ url()->current() }}">
-    <meta property="og:type" content="website">
     <meta property="og:site_name" content="Sheffield Steel Systems Limited">
-
-    <!-- Twitter Card Meta Tags -->
+    <meta property="og:updated_time" content="{{ now()->toIso8601String() }}">
+    <meta property="og:image" content="{{ asset('images/logo.png') }}">
+    <meta property="og:image:secure_url" content="{{ asset('images/logo.png') }}">
+    <meta property="og:image:width" content="1280">
+    <meta property="og:image:height" content="622">
+    <meta property="og:image:alt" content="Sheffield Steel Systems Limited">
+    <meta property="og:image:type" content="image/png">
+    <meta property="article:published_time" content="2003-01-01T00:00:00+00:00">
+    <meta property="article:modified_time" content="{{ now()->toIso8601String() }}">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title"
         content="Sheffield Steel Systems Limited - Transforming Ideas into Sustainable Realities">
     <meta name="twitter:description"
         content="East Africa's leading solution and service provider for Commercial Kitchen, Laundry, and Cold Storage Solutions, specializing in Stainless Steel Fabrication and Customization.">
-    <meta name="twitter:image" content="{{ asset('images/logo.png') }}">
     <meta name="twitter:site" content="@SheffieldAfrica">
     <meta name="twitter:creator" content="@SheffieldAfrica">
+    <meta name="twitter:image" content="{{ asset('images/logo.png') }}">
+    <meta name="twitter:label1" content="Written by">
+    <meta name="twitter:data1" content="Sheffield Steel Systems Limited">
+    <meta name="twitter:label2" content="Time to read">
+    <meta name="twitter:data2" content="4 minutes">
 
     <!-- JSON-LD Schema -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
-        "@type": "Organization",
-        "name": "Sheffield Steel Systems Limited",
-        "url": "{{ url()->current() }}",
-        "logo": "{{ asset('images/sheffield-logo.png') }}",
-        "sameAs": [
-            "https://www.facebook.com/SheffieldAfrica",
-            "https://twitter.com/SheffieldAfrica",
-            "https://www.linkedin.com/company/sheffield-africa"
-        ],
-        "contactPoint": {
-            "@type": "ContactPoint",
-            "telephone": "+254-20-232-0000",
-            "contactType": "Customer Service",
-            "areaServed": "KE",
-            "availableLanguage": "en"
-        },
-        "address": {
-            "@type": "PostalAddress",
-            "streetAddress": "Sheffield Steel Systems Limited, Nairobi",
-            "addressLocality": "Nairobi",
-            "addressRegion": "Nairobi",
-            "postalCode": "00100",
-            "addressCountry": "KE"
-        },
-        "description": "Sheffield Steel Systems Limited is East Africa's leading solution and service provider for Commercial Kitchen, Laundry, and Cold Storage Solutions, specializing in Stainless Steel Fabrication and Customization.",
-        "founder": {
-            "@type": "Person",
-            "name": "Dr. Suresh Kanotra"
-        },
-        "foundingDate": "2003",
-        "foundingLocation": "Nairobi, Kenya"
+        "@graph": [
+            {
+                "@type": "Place",
+                "@id": "{{ url()->current() }}#place",
+                "geo": {
+                    "@type": "GeoCoordinates",
+                    "latitude": "-1.286389",
+                    "longitude": "36.817223"
+                },
+                "hasMap": "https://www.google.com/maps/search/?api=1&query=-1.286389,36.817223",
+                "address": {
+                    "@type": "PostalAddress",
+                    "streetAddress": "Sheffield Steel Systems Limited, Nairobi",
+                    "addressLocality": "Nairobi",
+                    "addressRegion": "Nairobi",
+                    "postalCode": "00100",
+                    "addressCountry": "KE"
+                }
+            },
+            {
+                "@type": "Organization",
+                "@id": "{{ url()->current() }}#organization",
+                "name": "Sheffield Steel Systems Limited",
+                "url": "{{ url()->current() }}",
+                "sameAs": [
+                    "https://www.facebook.com/SheffieldAfrica",
+                    "https://twitter.com/SheffieldAfrica",
+                    "https://www.linkedin.com/company/sheffield-africa"
+                ],
+                "email": "info@sheffieldafrica.com",
+                "address": {
+                    "@type": "PostalAddress",
+                    "streetAddress": "Sheffield Steel Systems Limited, Nairobi",
+                    "addressLocality": "Nairobi",
+                    "addressRegion": "Nairobi",
+                    "postalCode": "00100",
+                    "addressCountry": "KE"
+                },
+                "logo": {
+                    "@type": "ImageObject",
+                    "@id": "{{ asset('images/logo.png') }}",
+                    "url": "{{ asset('images/logo.png') }}",
+                    "contentUrl": "{{ asset('images/logo.png') }}",
+                    "caption": "Sheffield Steel Systems Limited",
+                    "inLanguage": "en-US",
+                    "width": "300",
+                    "height": "79"
+                },
+                "contactPoint": [
+                    {
+                        "@type": "ContactPoint",
+                        "telephone": "+254-20-232-0000",
+                        "contactType": "customer support"
+                    }
+                ],
+                "location": {
+                    "@id": "{{ url()->current() }}#place"
+                }
+            },
+            {
+                "@type": "WebSite",
+                "@id": "{{ url()->current() }}#website",
+                "url": "{{ url()->current() }}",
+                "name": "Sheffield Steel Systems Limited",
+                "alternateName": "Sheffield Africa",
+                "publisher": {
+                    "@id": "{{ url()->current() }}#organization"
+                },
+                "inLanguage": "en-US",
+                "potentialAction": {
+                    "@type": "SearchAction",
+                    "target": "{{ url()->current() }}?s={search_term_string}",
+                    "query-input": "required name=search_term_string"
+                }
+            },
+            {
+                "@type": "WebPage",
+                "@id": "{{ url()->current() }}#webpage",
+                "url": "{{ url()->current() }}",
+                "name": "Sheffield Steel Systems Limited - Transforming Ideas into Sustainable Realities",
+                "datePublished": "2003-01-01T00:00:00+00:00",
+                "dateModified": "{{ now()->toIso8601String() }}",
+                "about": {
+                    "@id": "{{ url()->current() }}#organization"
+                },
+                "isPartOf": {
+                    "@id": "{{ url()->current() }}#website"
+                },
+                "primaryImageOfPage": {
+                    "@id": "{{ asset('images/logo.png') }}"
+                },
+                "inLanguage": "en-US"
+            },
+            {
+                "@type": "Person",
+                "@id": "{{ url()->current() }}#author",
+                "name": "Sheffield Steel Systems Limited",
+                "image": {
+                    "@type": "ImageObject",
+                    "@id": "{{ asset('images/logo.png') }}",
+                    "url": "{{ asset('images/logo.png') }}",
+                    "caption": "Sheffield Steel Systems Limited",
+                    "inLanguage": "en-US"
+                },
+                "sameAs": [
+                    "{{ url()->current() }}"
+                ],
+                "worksFor": {
+                    "@id": "{{ url()->current() }}#organization"
+                }
+            },
+            {
+                "@type": "Article",
+                "headline": "Sheffield Steel Systems Limited - Transforming Ideas into Sustainable Realities",
+                "keywords": "coldrooms in Kenya, commercial kitchens in Kenya, Sheffield Africa, stainless steel fabrication, commercial laundry solutions, cold storage solutions",
+                "datePublished": "2003-01-01T00:00:00+00:00",
+                "dateModified": "{{ now()->toIso8601String() }}",
+                "author": {
+                    "@id": "{{ url()->current() }}#author",
+                    "name": "Sheffield Steel Systems Limited"
+                },
+                "publisher": {
+                    "@id": "{{ url()->current() }}#organization"
+                },
+                "description": "Sheffield Steel Systems Limited is East Africa's leading solution and service provider for Commercial Kitchen, Laundry, and Cold Storage Solutions, specializing in Stainless Steel Fabrication and Customization.",
+                "name": "Sheffield Steel Systems Limited - Transforming Ideas into Sustainable Realities",
+                "@id": "{{ url()->current() }}#richSnippet",
+                "isPartOf": {
+                    "@id": "{{ url()->current() }}#webpage"
+                },
+                "image": {
+                    "@id": "{{ asset('images/logo.png') }}"
+                },
+                "inLanguage": "en-US",
+                "mainEntityOfPage": {
+                    "@id": "{{ url()->current() }}#webpage"
+                }
+            }
+        ]
     }
     </script>
 
