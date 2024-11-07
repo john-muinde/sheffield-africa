@@ -201,9 +201,6 @@
         <!-- End .main -->
     </div>
     <!-- End .page-wrapper -->
-    <button id="scroll-top" title="Back to Top">
-        <i class="icon-arrow-up"></i>
-    </button>
 
     <template v-if="showPopup">
         <div class="popup-advert">
@@ -221,6 +218,10 @@
             </div>
         </div>
     </template>
+    
+    <button id="scroll-top" title="Back to Top">
+        <i class="icon-arrow-up"></i>
+    </button>
 </template>
 
 <script setup>
@@ -323,7 +324,7 @@ onMounted(() => {
     }
 });
 const viewProduct = () => {
-    router.push("/kitchen/93/rotary-ovens/page/1");
+    window.open("https://forms.gle/as8SvN2SNTKxSbKA9", "_blank");
 };
 </script>
 
