@@ -157,6 +157,18 @@
                                     </li>
                                 </ul>
                             </li>
+
+                            <li>
+                                <router-link to="/cold-storage">PROMOTIONAL SOLUTIONS</router-link>
+                                <ul>
+                                    <li v-for="solution in mainColdRoomSolutions" :key="solution.id">
+                                        <router-link :to="getSolutionColdRoomLink(
+                                            solution.id,
+                                            solution.name
+                                        )">{{ solution.name }}</router-link>
+                                    </li>
+                                </ul>
+                            </li>
                         </ul>
                     </nav>
                     <!-- End .mobile-cats-nav -->
@@ -332,149 +344,65 @@ import axios from "axios";
 const mainKitchenSolutions = ref([]);
 const mainLaundrySolutions = ref([]);
 const mainColdRoomSolutions = ref([]);
+const mainPromotionalSolutions = ref([]);
+
 const mainKitchenCategories = ref([]);
 const mainLaundryCategories = ref([]);
 const mainColdRoomCategories = ref([]);
+const mainPromotionalCategories = ref([]);
 
-const fetchMainKitchenSolutions = async () => {
+const fetchData = async (url, stateVariable) => {
     try {
-        const response = await axios.get("/api/get-solutions/21", {});
-        mainKitchenSolutions.value = response.data.data;
-        console.log("the menu");
+        const response = await axios.get(url);
+        stateVariable.value = response.data.data;
     } catch (error) {
         console.error(error);
     }
 };
 
-const getSolutionKitchenLink = (id, name) => {
-    let transformedName = name.replace(/ /g, "-").replace(/\//g, "-");
-    transformedName = transformedName.replace(/-+/g, "-");
-    transformedName = transformedName.replace(/^-+|-+$/g, "");
-    transformedName = transformedName.toLowerCase();
+const generateLink = (basePath, id, name) => {
+    const transformedName = name
+        .toLowerCase()
+        .replace(/[\s/]+/g, "-")
+        .replace(/^-+|-+$/g, "");
 
-    return `/kitchen/solutions/${id}/${transformedName}`;
+    return `${basePath}/${id}/${transformedName}`;
 };
 
+const fetchMainKitchenSolutions = () => fetchData("/api/get-solutions/21", mainKitchenSolutions);
+const fetchMainLaundrySolutions = () => fetchData("/api/get-solutions/247", mainLaundrySolutions);
+const fetchMainColdRoomSolutions = () => fetchData("/api/get-solutions/301", mainColdRoomSolutions);
+const fetchMainPromotionalSolutions = () => fetchData("/api/get-solutions/302", mainPromotionalSolutions);
 
-const fetchMainLaundrySolutions = async () => {
-    try {
-        const response = await axios.get("/api/get-solutions/247", {});
-        mainLaundrySolutions.value = response.data.data;
+const getSolutionKitchenLink = (id, name) => generateLink("/kitchen/solutions", id, name);
+const getSolutionLaundryLink = (id, name) => generateLink("/laundry/solutions", id, name);
+const getSolutionColdRoomLink = (id, name) => generateLink("/cold-storage/solutions", id, name);
+const getSolutionPromotionalLink = (id, name) => generateLink("/promotional-solutions", id, name);
 
-    } catch (error) {
-        console.error(error);
-    }
-};
+const fetchMainKitchenCategories = () => fetchData("/api/get-main-categories/21", mainKitchenCategories);
+const fetchMainLaundryCategories = () => fetchData("/api/get-main-categories/247", mainLaundryCategories);
+const fetchMainColdRoomCategories = () => fetchData("/api/get-main-categories/301", mainColdRoomCategories);
+const fetchMainPromotionalCategories = () => fetchData("/api/get-main-categories/302", mainPromotionalCategories);
 
-const getSolutionLaundryLink = (id, name) => {
-    let transformedName = name.replace(/ /g, "-").replace(/\//g, "-");
-    transformedName = transformedName.replace(/-+/g, "-");
-    transformedName = transformedName.replace(/^-+|-+$/g, "");
-    transformedName = transformedName.toLowerCase();
-
-    return `/laundry/solutions/${id}/${transformedName}`;
-};
-
-const fetchMainColdRoomSolutions = async () => {
-    try {
-        const response = await axios.get("/api/get-solutions/301", {});
-        mainColdRoomSolutions.value = response.data.data;
-
-    } catch (error) {
-        console.error(error);
-    }
-};
-
-const getSolutionColdRoomLink = (id, name) => {
-    let transformedName = name.replace(/ /g, "-").replace(/\//g, "-");
-    transformedName = transformedName.replace(/-+/g, "-");
-    transformedName = transformedName.replace(/^-+|-+$/g, "");
-    transformedName = transformedName.toLowerCase();
-
-    return `/cold-storage/solutions/${id}/${transformedName}`;
-};
-
-//////////////////////////////////////////////
-
-
-
-// Fetch products based on the current page
-const fetchMainKitchenCategories = async () => {
-    try {
-        const response = await axios.get("/api/get-main-categories/21", {});
-        mainKitchenCategories.value = response.data.data;
-    } catch (error) {
-        console.error(error);
-    }
-};
-
-const getKitchenCategoryLink = (id, name, page) => {
-    let transformedName = name.replace(/ /g, "-").replace(/\//g, "-");
-    // Remove consecutive dashes
-    transformedName = transformedName.replace(/-+/g, "-");
-    // Remove leading and trailing dashes
-    transformedName = transformedName.replace(/^-+|-+$/g, "");
-    // Convert to lowercase
-    transformedName = transformedName.toLowerCase();
-
-    return `/kitchen/${id}/${transformedName}`;
-};
-
-// Fetch products based on the current page
-const fetchMainLaundryCategories = async () => {
-    try {
-        const response = await axios.get("/api/get-main-categories/247", {});
-        mainLaundryCategories.value = response.data.data;
-    } catch (error) {
-        console.error(error);
-    }
-};
-
-const getLaundryCategoryLink = (id, name, page) => {
-    let transformedName = name.replace(/ /g, "-").replace(/\//g, "-");
-    // Remove consecutive dashes
-    transformedName = transformedName.replace(/-+/g, "-");
-    // Remove leading and trailing dashes
-    transformedName = transformedName.replace(/^-+|-+$/g, "");
-    // Convert to lowercase
-    transformedName = transformedName.toLowerCase();
-
-    return `/laundry/${id}/${transformedName}`;
-};
-
-// Fetch products based on the current page
-const fetchMainColdRoomCategories = async () => {
-    try {
-        const response = await axios.get("/api/get-main-categories/301", {});
-        mainColdRoomCategories.value = response.data.data;
-    } catch (error) {
-        console.error(error);
-    }
-};
-
-const getColdRoomCategoryLink = (id, name, page) => {
-    let transformedName = name.replace(/ /g, "-").replace(/\//g, "-");
-    // Remove consecutive dashes
-    transformedName = transformedName.replace(/-+/g, "-");
-    // Remove leading and trailing dashes
-    transformedName = transformedName.replace(/^-+|-+$/g, "");
-    // Convert to lowercase
-    transformedName = transformedName.toLowerCase();
-
-    return `/cold-storage/${id}/${transformedName}`;
-};
+const getKitchenCategoryLink = (id, name) => generateLink("/kitchen", id, name);
+const getLaundryCategoryLink = (id, name) => generateLink("/laundry", id, name);
+const getColdRoomCategoryLink = (id, name) => generateLink("/cold-storage", id, name);
+const getPromotionalCategoryLink = (id, name) => generateLink("/promotional-solutions", id, name);
 
 onMounted(() => {
-
     fetchMainKitchenSolutions();
     fetchMainLaundrySolutions();
     fetchMainColdRoomSolutions();
+    fetchMainPromotionalSolutions();
+
+
     fetchMainKitchenCategories();
     fetchMainLaundryCategories();
     fetchMainColdRoomCategories();
-
+    fetchMainPromotionalCategories();
 });
 </script>
+
 
 <style scoped>
 .social-icons {

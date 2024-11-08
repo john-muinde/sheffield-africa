@@ -10,7 +10,7 @@
                             <span>{{ $t(item.title.toLocaleLowerCase()) }}</span>
                         </div>
                         <component :is="isSubmenuOpen(item.id)
-                            ? ChevronDownIcon
+                            ? ChevronDownIcon   
                             : ChevronRightIcon
                             " class="w-4 h-4" />
                     </div>

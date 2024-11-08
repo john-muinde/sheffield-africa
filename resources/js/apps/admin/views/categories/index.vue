@@ -9,10 +9,7 @@
                                 <li class="breadcrumb-item">
                                     <a href="javascript:;">Categories</a>
                                 </li>
-                                <li
-                                    class="breadcrumb-item active"
-                                    aria-current="page"
-                                >
+                                <li class="breadcrumb-item active" aria-current="page">
                                     <span>View Categories</span>
                                 </li>
                             </ol>
@@ -36,14 +33,8 @@
                     <div class="panel-body">
                         <div class="row">
                             <div class="form-group col-md-1">
-                                <label for="post-category" class="form-label"
-                                    >Per Page</label
-                                >
-                                <select
-                                    v-model="category.perPage"
-                                    id="perpage"
-                                    class="form-control form-select select"
-                                >
+                                <label for="post-category" class="form-label">Per Page</label>
+                                <select v-model="category.perPage" id="perpage" class="form-control form-select select">
                                     <option selected value="20">20</option>
                                     <option value="60">60</option>
                                     <option value="100">100</option>
@@ -54,55 +45,28 @@
                             </div>
 
                             <div class="form-group col-md-3">
-                                <label for="post-category" class="form-label"
-                                    >Segment</label
-                                >
+                                <label for="post-category" class="form-label">Segment</label>
 
-                                <multiselect
-                                    v-model="category.main_category"
-                                    :options="categoryMainList"
-                                    :reduce="(category) => category.id"
-                                    :searchable="true"
-                                    :preselect-first="true"
-                                    track-by="name"
-                                    label="name"
-                                    placeholder="Choose Segment ..."
-                                    selected-label=""
-                                    select-label=""
-                                    deselect-label=""
-                                ></multiselect>
+                                <multiselect v-model="category.main_category" :options="categoryMainList"
+                                    :reduce="(category) => category.id" :searchable="true" :preselect-first="true"
+                                    track-by="name" label="name" placeholder="Choose Segment ..." selected-label=""
+                                    select-label="" deselect-label=""></multiselect>
                             </div>
 
                             <div class="form-group col-md-3">
-                                <label for="post-category" class="form-label"
-                                    >Main Category</label
-                                >
+                                <label for="post-category" class="form-label">Main Category</label>
 
-                                <multiselect
-                                    v-model="category.filter_category_id"
-                                    :options="categoryList"
-                                    :reduce="(category) => category.id"
-                                    :searchable="true"
-                                    :preselect-first="true"
-                                    track-by="id"
-                                    label="name"
-                                    placeholder="Choose Category (Optional) ..."
-                                    selected-label=""
-                                    select-label=""
-                                    deselect-label=""
-                                >
+                                <multiselect v-model="category.filter_category_id" :options="categoryList"
+                                    :reduce="(category) => category.id" :searchable="true" :preselect-first="true"
+                                    track-by="id" label="name" placeholder="Choose Category (Optional) ..."
+                                    selected-label="" select-label="" deselect-label="">
                                 </multiselect>
                             </div>
 
                             <div class="form-group col-md-5">
                                 <label for="post-name">Search</label>
-                                <input
-                                    v-model="category.search"
-                                    id="post-name"
-                                    type="text"
-                                    class="form-control"
-                                    placeholder="Search ..."
-                                />
+                                <input v-model="category.search" id="post-name" type="text" class="form-control"
+                                    placeholder="Search ..." />
 
                                 <!-- <div class="text-danger mt-1">
                                     {{ errors.name }}
@@ -116,102 +80,48 @@
                         </div>
 
                         <div class="table-responsive">
-                            <table
-                                role="table"
-                                aria-busy="false"
-                                aria-colcount="5"
-                                class="table table-striped table-bordered"
-                                id="__BVID__415"
-                            >
+                            <table role="table" aria-busy="false" aria-colcount="5"
+                                class="table table-striped table-bordered" id="__BVID__415">
                                 <thead role="rowgroup">
                                     <tr role="row">
-                                        <th
-                                            role="columnheader"
-                                            scope="col"
-                                            aria-colindex="0"
-                                            v-if="category.main_category !== ''"
-                                        >
+                                        <th role="columnheader" scope="col" aria-colindex="0"
+                                            v-if="category.main_category !== ''">
                                             <div></div>
                                         </th>
-                                        <th
-                                            role="columnheader"
-                                            scope="col"
-                                            aria-colindex="1"
-                                        >
+                                        <th role="columnheader" scope="col" aria-colindex="1">
                                             <div>Name</div>
                                         </th>
-                                        <th
-                                            role="columnheader"
-                                            scope="col"
-                                            aria-colindex="2"
-                                        >
+                                        <th role="columnheader" scope="col" aria-colindex="2">
                                             <div>Description</div>
                                         </th>
-                                        <th
-                                            role="columnheader"
-                                            scope="col"
-                                            aria-colindex="3"
-                                        >
+                                        <th role="columnheader" scope="col" aria-colindex="3">
                                             <div>Parent Category</div>
                                         </th>
-                                        <th
-                                            role="columnheader"
-                                            scope="col"
-                                            aria-colindex="4"
-                                        >
+                                        <th role="columnheader" scope="col" aria-colindex="4">
                                             <div>Status</div>
                                         </th>
-                                        <th
-                                            role="columnheader"
-                                            scope="col"
-                                            aria-colindex="5"
-                                        >
+                                        <th role="columnheader" scope="col" aria-colindex="5">
                                             <div>Created At</div>
                                         </th>
-                                        <th
-                                            role="columnheader"
-                                            scope="col"
-                                            aria-colindex="6"
-                                            aria-label="Action"
-                                            class="text-center"
-                                        >
+                                        <th role="columnheader" scope="col" aria-colindex="6" aria-label="Action"
+                                            class="text-center">
                                             <div>action</div>
                                         </th>
                                     </tr>
                                 </thead>
                                 <tbody role="rowgroup">
-                                    <draggable
-                                        id="left-lovehandles"
-                                        class="drag-drop"
-                                        group="drag_handle"
-                                        handle=".handle"
-                                        ghost-class="gu-transit"
-                                        drag-class="el-drag-ex-5"
-                                        v-model="displayedProducts"
-                                        :animation="200"
-                                        @start="onDragStart"
-                                        @end="onDragEnd"
-                                    >
-                                        <tr
-                                            v-for="the_category in displayedProducts"
-                                            :key="the_category.id"
-                                            role="row"
-                                            class=""
-                                        >
-                                            <td
-                                                aria-colindex="0"
-                                                class="handle"
-                                                v-if="
-                                                    category.main_category !==
-                                                    ''
-                                                "
-                                            >
+                                    <draggable id="left-lovehandles" class="drag-drop" group="drag_handle"
+                                        handle=".handle" ghost-class="gu-transit" drag-class="el-drag-ex-5"
+                                        v-model="displayedProducts" :animation="200" @start="onDragStart"
+                                        @end="onDragEnd">
+                                        <tr v-for="the_category in displayedProducts" :key="the_category.id" role="row"
+                                            class="">
+                                            <td aria-colindex="0" class="handle" v-if="
+                                                category.main_category !==
+                                                ''
+                                            ">
                                                 <div>
-                                                    <span
-                                                        ><i
-                                                            class="far fa-clone"
-                                                        ></i
-                                                    ></span>
+                                                    <span><i class="far fa-clone"></i></span>
                                                 </div>
                                             </td>
 
@@ -225,98 +135,59 @@
                                                 {{
                                                     the_category.parent
                                                         ? the_category.parent
-                                                              .name
+                                                            .name
                                                         : "----"
                                                 }}
                                             </td>
                                             <td aria-colindex="4" role="cell">
-                                                <span
-                                                    v-if="
-                                                        the_category.is_published ===
-                                                        1
-                                                    "
-                                                    class="badge badge-success inv-status"
-                                                    >Published</span
-                                                >
+                                                <span v-if="
+                                                    the_category.is_published ===
+                                                    1
+                                                " class="badge badge-success inv-status">Published</span>
 
-                                                <span
-                                                    v-if="
-                                                        the_category.is_published !==
-                                                        1
-                                                    "
-                                                    class="badge badge-danger inv-status"
-                                                    >Not Published</span
-                                                >
+                                                <span v-if="
+                                                    the_category.is_published !==
+                                                    1
+                                                " class="badge badge-danger inv-status">Not Published</span>
                                             </td>
                                             <td aria-colindex="5" role="cell">
                                                 {{ the_category.created_at }}
                                             </td>
 
-                                            <td
-                                                aria-colindex="6"
-                                                role="cell"
-                                                class="text-center"
-                                            >
-                                                <router-link
-                                                    :to="{
-                                                        name: 'categories.edit',
-                                                        params: {
-                                                            id: the_category.id,
-                                                        },
-                                                    }"
-                                                    class="badge bg-info"
-                                                    data-bs-toggle="tooltip"
-                                                    data-bs-placement="top"
-                                                >
-                                                    <svg
-                                                        xmlns="http://www.w3.org/2000/svg"
-                                                        width="24"
-                                                        height="24"
-                                                        viewBox="0 0 24 24"
-                                                        fill="none"
-                                                        stroke="currentColor"
-                                                        stroke-width="1.5"
-                                                        stroke-linecap="round"
-                                                        stroke-linejoin="round"
-                                                        class="feather feather-edit-2"
-                                                    >
+                                            <td aria-colindex="6" role="cell" class="text-center">
+                                                <router-link :to="{
+                                                    name: 'categories.edit',
+                                                    params: {
+                                                        id: the_category.id,
+                                                    },
+                                                }" class="badge bg-info" data-bs-toggle="tooltip"
+                                                    data-bs-placement="top">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                        stroke-width="1.5" stroke-linecap="round"
+                                                        stroke-linejoin="round" class="feather feather-edit-2">
                                                         <path
-                                                            d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"
-                                                        ></path>
+                                                            d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z">
+                                                        </path>
                                                     </svg>
                                                 </router-link>
 
                                                 <!--  v-if="can('category-delete')" -->
 
-                                                <a
-                                                    href="javascript:;"
-                                                    @click.prevent="
-                                                        deleteCategory(
-                                                            the_category.id
-                                                        )
-                                                    "
-                                                    class="ms-2 badge bg-danger"
-                                                    data-bs-toggle="tooltip"
-                                                    data-bs-placement="top"
-                                                >
-                                                    <svg
-                                                        xmlns="http://www.w3.org/2000/svg"
-                                                        width="24"
-                                                        height="24"
-                                                        viewBox="0 0 24 24"
-                                                        fill="none"
-                                                        stroke="currentColor"
-                                                        stroke-width="1.5"
-                                                        stroke-linecap="round"
-                                                        stroke-linejoin="round"
-                                                        class="feather feather-trash"
-                                                    >
-                                                        <polyline
-                                                            points="3 6 5 6 21 6"
-                                                        ></polyline>
+                                                <a href="javascript:;" @click.prevent="
+                                                    deleteCategory(
+                                                        the_category.id
+                                                    )
+                                                    " class="ms-2 badge bg-danger" data-bs-toggle="tooltip"
+                                                    data-bs-placement="top">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                        stroke-width="1.5" stroke-linecap="round"
+                                                        stroke-linejoin="round" class="feather feather-trash">
+                                                        <polyline points="3 6 5 6 21 6"></polyline>
                                                         <path
-                                                            d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"
-                                                        ></path>
+                                                            d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
+                                                        </path>
                                                     </svg>
                                                 </a>
                                             </td>
@@ -326,28 +197,13 @@
                             </table>
                         </div>
 
-                        <nav
-                            aria-label="Page navigation"
-                            style="margin-top: 20px"
-                        >
+                        <nav aria-label="Page navigation" style="margin-top: 20px">
                             <ul class="pagination justify-content-center">
-                                <li
-                                    class="page-item"
-                                    :class="{ disabled: currentPage === 1 }"
-                                >
-                                    <router-link
-                                        class="page-link page-link-prev"
-                                        :to="
-                                            getCategoryLink(the_category.id, 1)
-                                        "
-                                        aria-label="Previous"
-                                        tabindex="-1"
-                                        aria-disabled="true"
-                                        @click="goToPreviousPage"
-                                    >
-                                        <span aria-hidden="true"
-                                            ><i class="icon-long-arrow-left"></i
-                                        ></span>
+                                <li class="page-item" :class="{ disabled: currentPage === 1 }">
+                                    <router-link class="page-link page-link-prev" :to="getCategoryLink(the_category.id, 1)
+                                        " aria-label="Previous" tabindex="-1" aria-disabled="true"
+                                        @click="goToPreviousPage">
+                                        <span aria-hidden="true"><i class="icon-long-arrow-left"></i></span>
                                         Prev
                                     </router-link>
                                 </li>
@@ -359,78 +215,43 @@
                                     </router-link>
                                   </li> -->
 
-                                <li
-                                    class="page-item"
-                                    v-for="page in generatePageLinks"
-                                    :key="page"
-                                    :class="{ active: page === currentPage }"
-                                >
+                                <li class="page-item" v-for="page in generatePageLinks" :key="page"
+                                    :class="{ active: page === currentPage }">
                                     <template v-if="isInteger(page)">
-                                        <router-link
-                                            class="page-link"
-                                            :to="
-                                                getCategoryLink(
-                                                    the_category.id,
-                                                    page
-                                                )
-                                            "
-                                            @click="goToThisPage(page)"
-                                        >
+                                        <router-link class="page-link" :to="getCategoryLink(
+                                            the_category.id,
+                                            page
+                                        )
+                                            " @click="goToThisPage(page)">
                                             {{ page }}
                                         </router-link>
                                     </template>
                                 </li>
                                 <!--  <li class="page-item page-item-total">of {{ totalPages }}</li> -->
 
-                                <li
-                                    class="page-item"
-                                    :class="{
-                                        disabled: currentPage === totalPages,
-                                    }"
-                                >
-                                    <router-link
-                                        class="page-link page-link-next"
-                                        :to="
-                                            getCategoryLink(
-                                                the_category.id,
-                                                totalPages
-                                            )
-                                        "
-                                        aria-label="Next"
-                                        @click="goToNextPage"
-                                    >
+                                <li class="page-item" :class="{
+                                    disabled: currentPage === totalPages,
+                                }">
+                                    <router-link class="page-link page-link-next" :to="getCategoryLink(
+                                        the_category.id,
+                                        totalPages
+                                    )
+                                        " aria-label="Next" @click="goToNextPage">
                                         Last
-                                        <span aria-hidden="true"
-                                            ><i
-                                                class="icon-long-arrow-right"
-                                            ></i
-                                        ></span>
+                                        <span aria-hidden="true"><i class="icon-long-arrow-right"></i></span>
                                     </router-link>
                                 </li>
 
-                                <li
-                                    class="page-item"
-                                    :class="{
-                                        disabled: currentPage === totalPages,
-                                    }"
-                                >
-                                    <router-link
-                                        class="page-link page-link-next"
-                                        :to="
-                                            getCategoryLink(
-                                                the_category.id,
-                                                currentPage + 1
-                                            )
-                                        "
-                                        aria-label="Next"
-                                        @click="goToNextPage"
-                                    >
+                                <li class="page-item" :class="{
+                                    disabled: currentPage === totalPages,
+                                }">
+                                    <router-link class="page-link page-link-next" :to="getCategoryLink(
+                                        the_category.id,
+                                        currentPage + 1
+                                    )
+                                        " aria-label="Next" @click="goToNextPage">
                                         Next
-                                        <span aria-hidden="true"
-                                            ><i
-                                                class="icon-long-arrow-right"
-                                            ></i
-                                        ></span>
+                                        <span aria-hidden="true"><i class="icon-long-arrow-right"></i></span>
                                     </router-link>
                                 </li>
                             </ul>
@@ -530,6 +351,17 @@ const fetchProducts = async () => {
         categories.value = response.data.categories.data;
     } catch (error) {
         console.error(error);
+    }
+};
+
+const deleteCategory = async (id) => {
+    if (confirm("Are you sure you want to delete this category?")) {
+        try {
+            const response = await axiosInstance.delete(`/api/categories/${id}`);
+            fetchProducts();
+        } catch (error) {
+            console.error(error);
+        }
     }
 };
 
