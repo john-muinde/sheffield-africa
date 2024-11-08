@@ -185,8 +185,8 @@
 
     import useCategories from "@/composables/categories";
 
-    import Multiselect from "@suadelabs/vue3-multiselect";
-    import "@suadelabs/vue3-multiselect/dist/vue3-multiselect.css";
+    
+    
 
     // const {solutions, getSolutions, deleteSolution} = useSolutions()
 

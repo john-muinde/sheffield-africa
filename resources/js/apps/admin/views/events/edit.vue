@@ -172,7 +172,7 @@ import flatPickr from "vue-flatpickr-component";
 import "flatpickr/dist/flatpickr.css";
 import "../../assets/sass/forms/custom-flatpickr.css";
 
-import "@suadelabs/vue3-multiselect/dist/vue3-multiselect.css";
+
 
 import { quillEditor } from "vue3-quill";
 import "vue3-quill/lib/vue3-quill.css";

@@ -1,8 +1,9 @@
-import './bootstrap';
+import "./bootstrap";
 import { createApp } from "vue";
 import App from "./App.vue";
 import router from "./router/index";
 import store from "./store";
+
 const app = createApp(App);
 
 // bootstrap
@@ -13,11 +14,11 @@ window.bootstrap = bootstrap;
 import "./apps/admin/assets/sass/components/custom-modal.scss";
 
 //scss
-import "./apps/admin/assets/sass/app.scss"
+import "./apps/admin/assets/sass/app.scss";
 
 // perfect scrollbar
-import PerfectScrollbar from "vue3-perfect-scrollbar";
-import "vue3-perfect-scrollbar/dist/vue3-perfect-scrollbar.css";
+import { PerfectScrollbarPlugin } from "vue3-perfect-scrollbar";
+import "vue3-perfect-scrollbar/style.css";
 
 //vue-meta
 import { createHead } from "@vueuse/head";
@@ -28,18 +29,25 @@ import Swal from "sweetalert2";
 window.Swal = Swal;
 
 import VueSweetalert2 from "vue-sweetalert2";
-import useAuth from './composables/auth';
-import { abilitiesPlugin } from '@casl/vue';
-import ability from './services/ability';
+app.use(VueSweetalert2);
+
+import useAuth from "./composables/auth";
+app.provide("useAuth", useAuth());
+
+import { abilitiesPlugin } from "@casl/vue";
+import ability from "./services/ability";
+app.use(abilitiesPlugin, ability);
+
+// vue select
 import vSelect from "vue-select";
-
-app.provide('useAuth', useAuth());
-
-app.use(VueSweetalert2)
-
-app.use(abilitiesPlugin, ability)
-//app.component('Pagination', LaravelVuePagination)
 app.component("v-select", vSelect);
+
+// Multiselect
+import Multiselect from "vue-multiselect";
+import "vue-multiselect/dist/vue-multiselect.min.css";
+app.component("Multiselect", Multiselect);
+
+//app.component('Pagination', LaravelVuePagination)
 
 // nouislider - later remove and add to page due to not working in page
 import VueNouislider from "vue3-nouislider";
@@ -70,10 +78,24 @@ import appSetting from "./app-setting";
 window.$appSetting = appSetting;
 window.$appSetting.init();
 
+window.showToast = showToast;
+
 //markdown editor
-import VueEasymde from 'vue3-easymde';
+import VueEasymde from "vue3-easymde";
 import "easymde/dist/easymde.min.css";
 
+import "ant-design-vue/dist/reset.css";
+import showToast from "./utils/notification";
 
-
-app.use(store).use(router).use(i18n).use(PerfectScrollbar).use(VueNouislider).use(Maska).use(ClientTable).use(vue3JsonExcel).use(VueFormWizard).use(head).use(VueEasymde).mount("#app");
+app.use(store)
+    .use(router)
+    .use(i18n)
+    .use(PerfectScrollbarPlugin)
+    .use(VueNouislider)
+    .use(Maska)
+    .use(ClientTable)
+    .use(vue3JsonExcel)
+    .use(VueFormWizard)
+    .use(head)
+    .use(VueEasymde)
+    .mount("#app");

@@ -34,13 +34,8 @@
               <form @submit.prevent="submitForm">
                 <div class="form-group">
                   <label for="post-name">Brand Name</label>
-                  <input
-                    v-model="brand.name"
-                    id="post-name"
-                    type="text"
-                    class="form-control"
-                    placeholder="Enter Brand Name ..."
-                  />
+                  <input v-model="brand.name" id="post-name" type="text" class="form-control"
+                    placeholder="Enter Brand Name ..." />
 
                   <div class="text-danger mt-1">
                     {{ errors.name }}
@@ -54,12 +49,8 @@
 
                 <div class="form-group">
                   <label for="post_description">Description</label>
-                  <textarea
-                    v-model="brand.description"
-                    id="post_description"
-                    class="form-control"
-                    placeholder="Enter Description ..."
-                  ></textarea>
+                  <textarea v-model="brand.description" id="post_description" class="form-control"
+                    placeholder="Enter Description ..."></textarea>
 
                   <div class="text-danger mt-1">
                     {{ errors.description }}
@@ -72,50 +63,24 @@
                 </div>
 
                 <div class="form-group">
-                  <div
-                    class="custom-file-container"
-                    data-upload-id="myFirstImage"
-                  >
-                    <label
-                      >Upload Brand Logo
-                      <a
-                        id="brand_image"
-                        href="javascript:void(0)"
-                        class="custom-file-container__image-clear"
-                        title="Clear Image"
-                        >x</a
-                      ></label
-                    >
+                  <div class="custom-file-container" data-upload-id="myFirstImage">
+                    <label>Upload Brand Logo
+                      <a id="brand_image" href="javascript:void(0)" class="custom-file-container__image-clear"
+                        title="Clear Image">x</a></label>
                     <label class="custom-file-container__custom-file">
-                      <input
-                        type="file"
-                        class="custom-file-container__custom-file__custom-file-input"
-                        accept="image/*"
-                        @change="brand.main_image = $event.target.files[0]"
-                      />
-                      <input
-                        type="hidden"
-                        name="MAX_FILE_SIZE"
-                        value="10485760"
-                      />
-                      <span
-                        class="custom-file-container__custom-file__custom-file-control"
-                      ></span>
+                      <input type="file" class="custom-file-container__custom-file__custom-file-input" accept="image/*"
+                        @change="brand.main_image = $event.target.files[0]" />
+                      <input type="hidden" name="MAX_FILE_SIZE" value="10485760" />
+                      <span class="custom-file-container__custom-file__custom-file-control"></span>
                     </label>
                     <div class="custom-file-container__image-preview"></div>
                   </div>
                 </div>
 
                 <div class="form-group">
-                  <label for="is_published" class="col-form-label"
-                    >Publishing Status</label
-                  >
+                  <label for="is_published" class="col-form-label">Publishing Status</label>
                   <div>
-                    <select
-                      v-model="brand.is_published"
-                      id="is_published"
-                      class="form-select"
-                    >
+                    <select v-model="brand.is_published" id="is_published" class="form-select">
                       <option selected value="1">Published</option>
                       <option value="0">Not Published</option>
                     </select>
@@ -155,10 +120,10 @@ import FileUploadWithPreview from "file-upload-with-preview";
 import "../../assets/sass/scrollspyNav.scss";
 import "../../assets/sass/forms/file-upload-with-preview.min.css";
 
-import Multiselect from "@suadelabs/vue3-multiselect";
-import "@suadelabs/vue3-multiselect/dist/vue3-multiselect.css";
 
-import { reactive, onMounted, ref } from "vue";
+
+
+import { reactive, onMounted, ref, watch } from "vue";
 import useBrands from "@/composables/brands";
 import { useForm, useField, defineRule } from "vee-validate";
 import { required, min } from "@/validation/rules";

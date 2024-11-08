@@ -12,8 +12,8 @@ window.bootstrap = bootstrap;
 import "./apps/admin/assets/sass/components/custom-modal.scss";
 
 // perfect scrollbar
-import PerfectScrollbar from "vue3-perfect-scrollbar";
-import "vue3-perfect-scrollbar/dist/vue3-perfect-scrollbar.css";
+import { PerfectScrollbarPlugin } from "vue3-perfect-scrollbar";
+import "vue3-perfect-scrollbar/style.css";
 
 //vue-meta
 import { createHead } from "@vueuse/head";
@@ -59,7 +59,7 @@ import "easymde/dist/easymde.min.css";
 app.use(store)
     .use(router)
     .use(i18n)
-    .use(PerfectScrollbar)
+    .use(PerfectScrollbarPlugin)
     .use(VueNouislider)
     .use(Maska)
     .use(ClientTable)

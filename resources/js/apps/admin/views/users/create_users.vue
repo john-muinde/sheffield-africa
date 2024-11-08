@@ -170,7 +170,7 @@ import "../../assets/sass/forms/file-upload-with-preview.min.css";
 
 
 
-import "@suadelabs/vue3-multiselect/dist/vue3-multiselect.css";
+
 
 import { reactive, onMounted, ref } from "vue";
 import useUsers from "@/composables/users";

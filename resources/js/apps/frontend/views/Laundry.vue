@@ -10,14 +10,9 @@
                     <div class="col-xl-2 col-xxl-2 slide-from-right">
                         <div class="cat-banner row no-gutters">
                             <div class="col-sm-12 col-xl-12 col-xxl-12">
-                                <div
-                                    class="banner banner-overlay solution-image"
-                                >
+                                <div class="banner banner-overlay solution-image">
                                     <a href="#">
-                                        <img
-                                            src="../assets/images/homepage/laundry_page.jpg"
-                                            alt="Banner img desc"
-                                        />
+                                        <img src="../assets/images/homepage/laundry_page.jpg" alt="Banner img desc" />
                                     </a>
 
                                     <!-- <div class="banner-content">
@@ -35,31 +30,20 @@
                     </div>
                     <!-- End .col-xl-3 -->
 
-                     <div class="col-xl-10 col-xxl-10 mt-1 slide-from-left">
+                    <div class="col-xl-10 col-xxl-10 mt-1 slide-from-left">
                         <div class="row">
-                            <div
-                                class="col-md-2 col-sm-4 slide-solutions"
-                                v-for="solution in mainSolutions"
-                                :key="solution.id"
-                            >
-                                <router-link
-                                    class="cat-block"
-                                    :to="
-                                        getSolutionLink(
-                                            solution.id,
-                                            solution.name
-                                        )
-                                    "
-                                >
+                            <div class="col-md-2 col-sm-4 slide-solutions" v-for="solution in mainSolutions"
+                                :key="solution.id">
+                                <router-link class="cat-block" :to="getSolutionLink(
+                                    solution.id,
+                                    solution.name
+                                )
+                                    ">
                                     <figure>
                                         <span>
-                                            <img
-                                                :src="
-                                                    '/storage/' +
-                                                    solution.main_image_path
-                                                "
-                                                alt="Category image"
-                                            />
+                                            <img :src="'/storage/' +
+                                                solution.main_image_path
+                                                " alt="Category image" />
                                         </span>
                                     </figure>
 
@@ -79,7 +63,7 @@
             </div>
             <!-- End .container -->
 
-         
+
         </main>
         <!-- End .main -->
     </div>
@@ -158,10 +142,10 @@ import { ref, onMounted, onUnmounted, reactive, nextTick, watch } from "vue";
 import { Carousel, Navigation, Slide, Pagination } from "vue3-carousel";
 import { useMeta } from "../../admin/composables/use-meta";
 
-useMeta({ 
+useMeta({
     title: "Laundry and floor cleaning equipment",
-    description:"We offer state of the art commercial laundry equipment for laundromats at Sheffield africa Ltd",
-    keywords:"Laundry washer, commercial laundry equipment, commercial laundry machines in kenya, commercial laundry machines for sale in kenya, laundromats in nairobi"
+    description: "We offer state of the art commercial laundry equipment for laundromats at Sheffield africa Ltd",
+    keywords: "Laundry washer, commercial laundry equipment, commercial laundry machines in kenya, commercial laundry machines for sale in kenya, laundromats in nairobi"
 });
 
 const name = "ExamplePagination";
@@ -338,7 +322,7 @@ onMounted(async () => {
 </style>
 
 <style scoped>
-.header-left > .category-dropdown {
+.header-left>.category-dropdown {
     pointer-events: none;
 }
 
@@ -369,8 +353,7 @@ onMounted(async () => {
     background-color: #555;
 }
 
-.menu-vertical .megamenu {
-}
+.menu-vertical .megamenu {}
 
 .scroll-track {
     position: absolute;
@@ -406,6 +389,7 @@ onMounted(async () => {
 .container {
     margin-top: 20px;
 }
+
 .box {
     height: 33px;
     background: #d9d6d6;
@@ -441,34 +425,34 @@ onMounted(async () => {
 }
 
 .slide-from-left .slide-solutions {
-  list-style: none;
-  opacity: 0;
-  transform: translateX(-100%);
-  animation: slideRight 1s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+    list-style: none;
+    opacity: 0;
+    transform: translateX(-100%);
+    animation: slideRight 1s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
 }
 
-.slide-from-right  {
-  opacity: 0;
-  transform: translateX(100%);
-  animation: slideRight 0.5s ease-in-out forwards;
+.slide-from-right {
+    opacity: 0;
+    transform: translateX(100%);
+    animation: slideRight 0.5s ease-in-out forwards;
 }
 
 @keyframes slideLeft {
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
 @keyframes slideRight {
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
 /* Add a delay for every "n" item */
 .slide-from-left .slide-solutions:nth-child(2n) {
-  animation-delay: 2ms;
+    animation-delay: 2ms;
 }
 </style>

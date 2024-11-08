@@ -181,7 +181,7 @@
 import "../../assets/sass/scrollspyNav.scss";
 import "../../assets/sass/scrollspyNav.scss";
 import "../../assets/sass/forms/file-upload-with-preview.min.css";
-import "@suadelabs/vue3-multiselect/dist/vue3-multiselect.css";
+
 import { reactive, onMounted, ref, watchEffect } from "vue";
 import useSeo from "@/composables/seo";
 import { useForm, useField, defineRule } from "vee-validate";

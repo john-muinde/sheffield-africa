@@ -126,8 +126,8 @@
     import { useForm, useField, defineRule } from "vee-validate";
     import { required, min } from "@/validation/rules"
 
-    import Multiselect from "@suadelabs/vue3-multiselect";
-    import "@suadelabs/vue3-multiselect/dist/vue3-multiselect.css";
+    
+    
 
     defineRule('required', required)
     defineRule('min', min);

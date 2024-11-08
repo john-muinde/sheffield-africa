@@ -158,8 +158,8 @@ import { required, min } from "@/validation/rules";
 import FileUploadWithPreview from "file-upload-with-preview";
 import "../../assets/sass/forms/file-upload-with-preview.min.css";
 
-import Multiselect from "@suadelabs/vue3-multiselect";
-import "@suadelabs/vue3-multiselect/dist/vue3-multiselect.css";
+
+
 
 defineRule("required", required);
 defineRule("min", min);

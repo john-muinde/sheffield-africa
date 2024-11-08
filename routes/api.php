@@ -137,3 +137,10 @@ Route::post('request-quote', [UserController::class, 'requestQuote']);
 Route::get('product_search/{search}', [ProductController::class, 'searchProduct']);
 
 Route::get('google_shopping_product_feed', [App\Http\Controllers\Api\SeoController::class, 'googleShoppingFeed']);
+
+// 404 route
+Route::get('*', function () {
+    return [
+        'message' => 'requested resource not found'
+    ];
+});

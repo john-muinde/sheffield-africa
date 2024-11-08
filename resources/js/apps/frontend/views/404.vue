@@ -11,22 +11,23 @@
                 </div><!-- End .container -->
             </nav><!-- End .breadcrumb-nav -->
 
-        	<div class="error-content text-center" style="background-image: url(assets/images/backgrounds/error-bg.jpg)">
-            	<div class="container">
-            		<h1 class="error-title">Error 404</h1><!-- End .error-title -->
-            		<p>We are sorry, the page you've requested is not available.</p>
-            		<router-link to="/" class="btn btn-outline-primary-2 btn-minwidth-lg">
-            			<span>BACK TO HOMEPAGE</span>
-            			<i class="icon-long-arrow-right"></i>
-            		</router-link>
-            	</div><!-- End .container -->
-        	</div><!-- End .error-content text-center -->
+            <div class="error-content text-center"
+                style="background-image: url(assets/images/backgrounds/error-bg.jpg)">
+                <div class="container">
+                    <h1 class="error-title">Error 404</h1><!-- End .error-title -->
+                    <p>We are sorry, the page you've requested is not available.</p>
+                    <router-link to="/" class="btn btn-outline-primary-2 btn-minwidth-lg">
+                        <span>BACK TO HOMEPAGE</span>
+                        <i class="icon-long-arrow-right"></i>
+                    </router-link>
+                </div><!-- End .container -->
+            </div><!-- End .error-content text-center -->
         </main>
     </div>
 </template>
 
 <script>
-    export default {
-        
-    }
+export default {
+
+}
 </script>

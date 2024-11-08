@@ -10,14 +10,9 @@
                     <div class="col-xl-2 col-xxl-2 slide-from-right">
                         <div class="cat-banner row no-gutters">
                             <div class="col-sm-12 col-xl-12 col-xxl-12">
-                                <div
-                                    class="banner banner-overlay solution-image"
-                                >
+                                <div class="banner banner-overlay solution-image">
                                     <a href="#">
-                                        <img
-                                            src="../assets/images/homepage/kitchen_page.jpg"
-                                            alt="Banner img desc"
-                                        />
+                                        <img src="../assets/images/homepage/kitchen_page.jpg" alt="Banner img desc" />
                                     </a>
 
                                     <!-- <div class="banner-content">
@@ -34,32 +29,20 @@
                         <!-- End .cat-banner -->
                     </div>
                     <!-- End .col-xl-3 -->
-
                     <div class="col-xl-10 col-xxl-10 mt-1 slide-from-left">
                         <div class="row">
-                            <div
-                                class="col-md-2 col-sm-4 slide-solutions"
-                                v-for="solution in mainSolutions"
-                                :key="solution.id"
-                            >
-                                <router-link
-                                    class="cat-block"
-                                    :to="
-                                        getSolutionLink(
-                                            solution.id,
-                                            solution.name
-                                        )
-                                    "
-                                >
+                            <div class="col-md-2 col-sm-4 slide-solutions" v-for="solution in mainSolutions"
+                                :key="solution.id">
+                                <router-link class="cat-block" :to="getSolutionLink(
+                                    solution.id,
+                                    solution.name
+                                )
+                                    ">
                                     <figure>
                                         <span>
-                                            <img
-                                                :src="
-                                                    '/storage/' +
-                                                    solution.main_image_path
-                                                "
-                                                alt="Category image"
-                                            />
+                                            <img :src="'/storage/' +
+                                                solution.main_image_path
+                                                " alt="Category image" />
                                         </span>
                                     </figure>
 
@@ -81,7 +64,7 @@
 
             <!-- End .container-fluid -->
 
-         
+
             <!-- End .container-fluid -->
         </main>
         <!-- End .main -->
@@ -161,10 +144,10 @@ import { ref, onMounted, onUnmounted, reactive, nextTick, watch } from "vue";
 import { Carousel, Navigation, Slide, Pagination } from "vue3-carousel";
 import { useMeta } from "../../admin/composables/use-meta";
 
-useMeta({ 
+useMeta({
     title: "Food service equipment",
-    description:"We offer state of the art commercial kitchen equipment at Sheffield africa Ltd",
-    keywords:"Industrial kitchen equipment,commercial oven,commercial kitchen machines and equipment, kitchen equipment kenya, cooking kitchen equipment"
+    description: "We offer state of the art commercial kitchen equipment at Sheffield africa Ltd",
+    keywords: "Industrial kitchen equipment,commercial oven,commercial kitchen machines and equipment, kitchen equipment kenya, cooking kitchen equipment"
 });
 
 const name = "ExamplePagination";
@@ -228,7 +211,7 @@ const fetchShowrooms = async () => {
     }
 };
 
-const mainCategories = ref([]);
+// const mainCategories = ref([]);
 const mainSolutions = ref([]);
 
 const fetchMainSolutions = async () => {
@@ -240,70 +223,37 @@ const fetchMainSolutions = async () => {
     }
 };
 
-const getShowroomLink = (id, name) => {
-    let transformedName = name.replace(/ /g, "-");
-    transformedName = transformedName.replace(/-+/g, "-");
-    transformedName = transformedName.replace(/^-+|-+$/g, "");
-    transformedName = transformedName.toLowerCase();
+// const getShowroomLink = (id, name) => {
+//     let transformedName = name.replace(/ /g, "-");
+//     transformedName = transformedName.replace(/-+/g, "-");
+//     transformedName = transformedName.replace(/^-+|-+$/g, "");
+//     transformedName = transformedName.toLowerCase();
 
-    return `/showroom/${id}/${transformedName}`;
-};
+//     return `/showroom/${id}/${transformedName}`;
+// };
 
-const productsColdroom = ref([]);
-const productsKitchen = ref([]);
-const productsLaundry = ref([]);
+// const productsColdroom = ref([]);
+// const productsKitchen = ref([]);
+// const productsLaundry = ref([]);
 
-const fetchFeaturedProducts = async () => {
-    try {
-        const response = await axios.get("/api/get-featured-products", {});
+// const fetchFeaturedProducts = async () => {
+//     try {
+//         const response = await axios.get("/api/get-featured-products", {});
 
-        productsColdroom.value = response.data.products_coldroom;
-        productsKitchen.value = response.data.products_kitchen;
-        productsLaundry.value = response.data.products_laundry;
-    } catch (error) {
-        console.error(error);
-    }
-};
+//         productsColdroom.value = response.data.products_coldroom;
+//         productsKitchen.value = response.data.products_kitchen;
+//         productsLaundry.value = response.data.products_laundry;
+//     } catch (error) {
+//         console.error(error);
+//     }
+// };
 
-const getProductLink = (id, name, model_number) => {
-    // Replace spaces with dashes
-    let transformedName = name.replace(/ /g, "-").replace(/\//g, "-");
-    // Remove consecutive dashes
-    transformedName = transformedName.replace(/-+/g, "-");
-    // Remove leading and trailing dashes
-    transformedName = transformedName.replace(/^-+|-+$/g, "");
-    // Convert to lowercase
-    transformedName = transformedName.toLowerCase();
-
-    let transformedModelNumber = model_number
-        .toLowerCase()
-        .replace(/ /g, "-")
-        .replace(/\//g, "-");
-    // Remove consecutive dashes
-    transformedModelNumber = transformedModelNumber.replace(/-+/g, "-");
-    // Remove leading and trailing dashes
-    transformedModelNumber = transformedModelNumber.replace(/^-+|-+$/g, "");
-
-    return `/product/${id}/${transformedName}-${transformedModelNumber}`;
-};
-
-const getCategoryLink = (id, name, page) => {
-    let transformedName = name.replace(/ /g, "-").replace(/\//g, "-");
-    // Remove consecutive dashes
-    transformedName = transformedName.replace(/-+/g, "-");
-    // Remove leading and trailing dashes
-    transformedName = transformedName.replace(/^-+|-+$/g, "");
-    // Convert to lowercase
-    transformedName = transformedName.toLowerCase();
-
-    return `/kitchen/${id}/${transformedName}`;
-};
 
 const getSolutionLink = (id, name) => {
-    let transformedName = name.replace(/ /g, "-").replace(/\//g, "-");
-    transformedName = transformedName.replace(/-+/g, "-");
-    transformedName = transformedName.replace(/^-+|-+$/g, "");
-    transformedName = transformedName.toLowerCase();
+    const transformedName = name
+        .toLowerCase()
+        .replace(/[\s/]+/g, "-")
+        .replace(/^-+|-+$/g, "");
 
     return `/kitchen/solutions/${id}/${transformedName}`;
 };
@@ -336,7 +286,7 @@ onMounted(async () => {
 </style>
 
 <style scoped>
-.header-left > .category-dropdown {
+.header-left>.category-dropdown {
     pointer-events: none;
 }
 
@@ -367,8 +317,7 @@ onMounted(async () => {
     background-color: #555;
 }
 
-.menu-vertical .megamenu {
-}
+.menu-vertical .megamenu {}
 
 .scroll-track {
     position: absolute;
@@ -404,6 +353,7 @@ onMounted(async () => {
 .container {
     margin-top: 20px;
 }
+
 .box {
     height: 33px;
     background: #d9d6d6;
@@ -439,34 +389,34 @@ onMounted(async () => {
 }
 
 .slide-from-left .slide-solutions {
-  list-style: none;
-  opacity: 0;
-  transform: translateX(-100%);
-  animation: slideRight 1s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+    list-style: none;
+    opacity: 0;
+    transform: translateX(-100%);
+    animation: slideRight 1s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
 }
 
-.slide-from-right  {
-  opacity: 0;
-  transform: translateX(100%);
-  animation: slideRight 0.5s ease-in-out forwards;
+.slide-from-right {
+    opacity: 0;
+    transform: translateX(100%);
+    animation: slideRight 0.5s ease-in-out forwards;
 }
 
 @keyframes slideLeft {
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
 @keyframes slideRight {
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
 /* Add a delay for every "n" item */
 .slide-from-left .slide-solutions:nth-child(2n) {
-  animation-delay: 2ms;
+    animation-delay: 2ms;
 }
 </style>

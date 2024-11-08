@@ -34,13 +34,8 @@
               <form @submit.prevent="submitForm">
                 <div class="form-group">
                   <label for="post-name">Blog Category Name</label>
-                  <input
-                    v-model="blogCategory.name"
-                    id="post-name"
-                    type="text"
-                    class="form-control"
-                    placeholder="Enter Blog Category Name ..."
-                  />
+                  <input v-model="blogCategory.name" id="post-name" type="text" class="form-control"
+                    placeholder="Enter Blog Category Name ..." />
 
                   <div class="text-danger mt-1">
                     {{ errors.name }}
@@ -54,12 +49,8 @@
 
                 <div class="form-group">
                   <label for="post_description">Description</label>
-                  <textarea
-                    v-model="blogCategory.description"
-                    id="post_description"
-                    class="form-control"
-                    placeholder="Enter Description ..."
-                  ></textarea>
+                  <textarea v-model="blogCategory.description" id="post_description" class="form-control"
+                    placeholder="Enter Description ..."></textarea>
 
                   <div class="text-danger mt-1">
                     {{ errors.description }}
@@ -72,15 +63,9 @@
                 </div>
 
                 <div class="form-group">
-                  <label for="is_published" class="col-form-label"
-                    >Publishing Status</label
-                  >
+                  <label for="is_published" class="col-form-label">Publishing Status</label>
                   <div>
-                    <select
-                      v-model="blogCategory.is_published"
-                      id="is_published"
-                      class="form-select"
-                    >
+                    <select v-model="blogCategory.is_published" id="is_published" class="form-select">
                       <option selected value="1">Published</option>
                       <option value="0">Not Published</option>
                     </select>
@@ -109,6 +94,8 @@
     </div>
   </div>
 </template>
+<!-- Add Multiselect CSS. Can be added as a static asset or inside a component. -->
+<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 <script setup>
 import { onMounted, reactive, watchEffect } from "vue";
 
@@ -118,8 +105,7 @@ import { useForm, useField, defineRule } from "vee-validate";
 import { required, min } from "@/validation/rules";
 import FileUploadWithPreview from "file-upload-with-preview";
 import "../../assets/sass/forms/file-upload-with-preview.min.css";
-
-import "@suadelabs/vue3-multiselect/dist/vue3-multiselect.css";
+import Multiselect from 'vue-multiselect';
 
 import { useMeta } from "../../composables/use-meta";
 useMeta({ title: "Edit Blog Category" });

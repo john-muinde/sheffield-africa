@@ -449,6 +449,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="{{ url('favicon.png') }}">
     <link rel="icon" type="image/png" sizes="16x16" href="{{ url('favicon.png') }}">
 
+
     @vite('resources/css/app.css')
     @vite('resources/js/apps/frontend/assets/css/bootstrap.min.css')
     @vite('resources/js/apps/frontend/assets/css/plugins/owl-carousel/owl.carousel.css')

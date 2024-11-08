@@ -36,25 +36,13 @@
                         <div class="products mb-3">
                             <div class="row">
                                 <div class="col-lg-12 col-md-12 mt-1">
-                                    <div
-                                        class="accordion"
-                                        id="accordion-1"
-                                        style="width: 100%"
-                                    >
+                                    <div class="accordion" id="accordion-1" style="width: 100%">
                                         <div class="card">
-                                            <div
-                                                class="card-header"
-                                                id="heading-2"
-                                            >
+                                            <div class="card-header" id="heading-2">
                                                 <h2 class="card-title">
-                                                    <a
-                                                        class="collapsed"
-                                                        role="button"
-                                                        data-toggle="collapse"
-                                                        href="#collapse-2"
-                                                        aria-expanded="false"
-                                                        aria-controls="collapse-2"
-                                                    >
+                                                    <a class="collapsed" role="button" data-toggle="collapse"
+                                                        href="#collapse-2" aria-expanded="false"
+                                                        aria-controls="collapse-2">
                                                         {{
                                                             solutionCategories.name
                                                         }}
@@ -63,19 +51,11 @@
                                                 </h2>
                                             </div>
                                             <!-- End .card-header -->
-                                            <div
-                                                id="collapse-2"
-                                                class="collapse"
-                                                aria-labelledby="heading-2"
-                                                data-parent="#accordion-1"
-                                                style=""
-                                            >
+                                            <div id="collapse-2" class="collapse" aria-labelledby="heading-2"
+                                                data-parent="#accordion-1" style="">
                                                 <div class="card-body">
-                                                    <span
-                                                        v-html="
-                                                            solutionCategories.description
-                                                        "
-                                                    ></span>
+                                                    <span v-html="solutionCategories.description
+                                                        "></span>
                                                 </div>
                                                 <!-- End .card-body -->
                                             </div>
@@ -84,56 +64,39 @@
                                     </div>
                                 </div>
 
-                                <div
-                                    class="col-6 col-md-3 col-lg-2 col-xl-2 image-container"
-                                    v-for="product in solutionCategoryProducts"
-                                    :key="product.id"
-                                >
+                                <div class="col-6 col-md-3 col-lg-2 col-xl-2 image-container"
+                                    v-for="product in solutionCategoryProducts" :key="product.id">
                                     <div class="product product-7 text-center">
                                         <figure class="product-media">
                                             <!-- <span class="product-label label-new">New</span>  -->
-                                            <router-link
-                                                :to="
-                                                    getProductLink(
-                                                        product.id,
-                                                        product.name,
-                                                        product.model_number
-                                                    )
-                                                "
-                                            >
-                                                <img
-                                                    :src="
-                                                        '/storage/' +
+                                            <router-link :to="getProductLink(
+                                                product.id,
+                                                product.name,
+                                                product.model_number
+                                            )
+                                                ">
+                                                <img :src="'/storage/' +
+                                                    product.main_image_path
+                                                    " v-lazy:src="'/storage/' +
                                                         product.main_image_path
-                                                    "
-                                                    v-lazy:src="
-                                                        '/storage/' +
-                                                        product.main_image_path
-                                                    "
-                                                    alt="Product image"
-                                                    class="product-image"
-                                                />
+                                                        " alt="Product image" class="product-image" />
                                             </router-link>
-                                            <div
-                                                class="product-action-vertical"
-                                            >
+                                            <div class="product-action-vertical">
                                                 <!-- <a
-                                       href="#"
-                                       class="btn-product-icon btn-wishlist btn-expandable" ><span>add to wishlist</span></a>  -->
+                                                    href="#"
+                                                    class="btn-product-icon btn-wishlist btn-expandable" ><span>add to wishlist</span></a>  -->
                                                 <!-- <a
-                                       href="popup/quickView.html" class="btn-product-icon btn-quickview" title="Quick view"
-                                       ><span>Quick view</span></a> -->
+                                                    href="popup/quickView.html" class="btn-product-icon btn-quickview" title="Quick view"
+                                                    ><span>Quick view</span></a> -->
                                                 <!-- <a
-                                       href="#"
-                                       class="btn-product-icon btn-compare" title="Compare" ><span>Compare</span></a> -->
+                                                    href="#"
+                                                    class="btn-product-icon btn-compare" title="Compare" ><span>Compare</span>
+                                                </a> -->
                                             </div>
                                             <!-- End .product-action-vertical -->
                                             <div class="product-action">
-                                                <button
-                                                    type="button"
-                                                    @click="addToCart(product)"
-                                                    class="btn-product btn-cart"
-                                                >
+                                                <button type="button" @click="addToCart(product)"
+                                                    class="btn-product btn-cart">
                                                     <span>Add to Cart</span>
                                                 </button>
                                             </div>
@@ -142,34 +105,26 @@
                                         <!-- End .product-media -->
                                         <div class="product-body">
                                             <div class="product-cat">
-                                                <router-link
-                                                    :to="
-                                                        getProductLink(
-                                                            product.id,
-                                                            product.name,
-                                                            product.model_number
-                                                        )
-                                                    "
-                                                    >{{
+                                                <router-link :to="getProductLink(
+                                                    product.id,
+                                                    product.name,
+                                                    product.model_number
+                                                )
+                                                    ">{{
                                                         product.product_brand
                                                             .name
-                                                    }}</router-link
-                                                >
+                                                    }}</router-link>
                                             </div>
                                             <!-- End .product-cat -->
                                             <h3 class="product-title">
-                                                <router-link
-                                                    :to="
-                                                        getProductLink(
-                                                            product.id,
-                                                            product.name,
-                                                            product.model_number
-                                                        )
-                                                    "
-                                                    >{{
+                                                <router-link :to="getProductLink(
+                                                    product.id,
+                                                    product.name,
+                                                    product.model_number
+                                                )
+                                                    ">{{
                                                         product.name
-                                                    }}</router-link
-                                                >
+                                                    }}</router-link>
                                             </h3>
                                             <!-- End .product-title -->
                                             <!-- <div class="product-price">$ {{ product.retail_price }}.00</div> -->
@@ -212,57 +167,31 @@
                     <aside class="col-lg-2 order-lg-first mt-2">
                         <div class="sidebar sidebar-shop sidebar-shop-solution">
                             <!-- End .widget widget-clean -->
-                            <div
-                                v-if="solutionCategoriesList.length"
-                                class="widget widget-collapsible widget-categories"
-                            >
+                            <div v-if="solutionCategoriesList.length"
+                                class="widget widget-collapsible widget-categories">
                                 <h3 class="widget-title">
-                                    <a
-                                        data-toggle="collapse"
-                                        href="#widget-1"
-                                        role="button"
-                                        aria-expanded="true"
-                                        aria-controls="widget-1"
-                                    >
+                                    <a data-toggle="collapse" href="#widget-1" role="button" aria-expanded="true"
+                                        aria-controls="widget-1">
                                         Product Categories
                                     </a>
                                 </h3>
                                 <!-- End .widget-title -->
                                 <div class="show" id="widget-1">
                                     <div class="widget-body">
-                                        <div
-                                            class="filter-items filter-items-count"
-                                        >
-                                            <div
-                                                class="filter-item"
-                                                v-for="category in solutionCategoriesList"
-                                                :key="category.id"
-                                            >
-                                                <div
-                                                    class="custom-control custom-checkbox"
-                                                >
-                                                    <input
-                                                        type="checkbox"
-                                                        class="custom-control-input"
-                                                        :id="
-                                                            'cat-' + category.id
-                                                        "
-                                                        :value="category.id"
-                                                        @change="
+                                        <div class="filter-items filter-items-count">
+                                            <div class="filter-item" v-for="category in solutionCategoriesList"
+                                                :key="category.id">
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" class="custom-control-input" :id="'cat-' + category.id
+                                                        " :value="category.id" @change="
                                                             handleCheckboxChange(
                                                                 category.id
                                                             )
-                                                        "
-                                                    />
-                                                    <label
-                                                        class="custom-control-label"
-                                                        :for="
-                                                            'cat-' + category.id
-                                                        "
-                                                        >{{
+                                                            " />
+                                                    <label class="custom-control-label" :for="'cat-' + category.id
+                                                        ">{{
                                                             category.name
-                                                        }}</label
-                                                    >
+                                                        }}</label>
                                                 </div>
                                             </div>
                                         </div>
@@ -276,17 +205,11 @@
                             <div class="widget widget-collapsible">
                                 <div class="show" id="widget-4">
                                     <div class="widget-body">
-                                        <img
-                                            :src="
-                                                '/storage/' +
+                                        <img :src="'/storage/' +
+                                            solutionCategories.main_image_path
+                                            " v-lazy:src="'/storage/' +
                                                 solutionCategories.main_image_path
-                                            "
-                                            v-lazy:src="
-                                                '/storage/' +
-                                                solutionCategories.main_image_path
-                                            "
-                                            alt="Product image"
-                                        />
+                                                " alt="Product image" />
                                         <!-- End .filter-items -->
                                     </div>
                                     <!-- End .widget-body -->
@@ -336,22 +259,16 @@ const addToCart = (product) => {
 };
 
 const route = useRoute();
-const currentRoute = ref(route);
 
 const currentPage = ref(route.params.page ? parseInt(route.params.page) : 1);
 const perPage = ref(12);
 const totalProducts = ref(0);
 const products = ref([]);
-const totalCountperPage = ref(0);
 const solution_id = ref(route.params.id ? parseInt(route.params.id) : 1);
-const categories = ref([]);
-const brands = ref([]);
-const the_category = ref([]);
 const solutionCategories = ref([]);
 const solutionCategoriesList = ref([]);
 
 const checkedCategoriesSolutions = ref([]);
-const mainCategorySelectedSolutions = ref([]);
 
 const fetchSolutionCategories = async () => {
     try {
@@ -594,7 +511,7 @@ watchEffect(() => {
     font-size: 1.5rem !important;
 }
 
-.swal2-container.swal2-bottom-end > .swal2-popup {
+.swal2-container.swal2-bottom-end>.swal2-popup {
     background-color: #c02434;
 }
 

@@ -191,8 +191,8 @@ import { required, min } from "@/validation/rules";
 import "../../assets/sass/forms/file-upload-with-preview.min.css";
 import FileUploadWithPreview from "file-upload-with-preview";
 
-import Multiselect from "@suadelabs/vue3-multiselect";
-import "@suadelabs/vue3-multiselect/dist/vue3-multiselect.css";
+
+
 
 import { quillEditor } from "vue3-quill";
 import "vue3-quill/lib/vue3-quill.css";

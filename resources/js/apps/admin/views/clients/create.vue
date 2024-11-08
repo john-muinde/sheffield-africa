@@ -220,7 +220,7 @@ import "../../assets/sass/forms/file-upload-with-preview.min.css";
 
 import FileUploadWithPreview from "file-upload-with-preview";
 
-import "@suadelabs/vue3-multiselect/dist/vue3-multiselect.css";
+
 
 import { reactive, onMounted, ref } from "vue";
 import useClients from "@/composables/clients";

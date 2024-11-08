@@ -1,7 +1,7 @@
 @php
     $config = [
         'appName' => config('app.name'),
-        'locale' => $locale = app()->getLocale(),
+        'locale' => ($locale = app()->getLocale()),
         'locales' => config('app.locales'),
     ];
 @endphp
@@ -13,7 +13,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="description" content="We offer commercial kitchen, laundry, cold room & stainless steel fabricated solutions from design, manufacturing, supply, installation & aftersales.">
+    <meta name="description"
+        content="We offer commercial kitchen, laundry, cold room & stainless steel fabricated solutions from design, manufacturing, supply, installation & aftersales.">
     <link rel="shortcut icon" href="{{ asset('favicon.png') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -21,21 +22,24 @@
     <title>Home | Admin Sheffield Steel Systemss </title>
     <meta name="google-site-verification" content="MDV6HhOKIgKRjiLA7URFOhZc0eOmt5-pZiZ7zvtKyGQ" />
     <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-4ERSL5DRTF"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4ERSL5DRTF"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
 
-  gtag('config', 'G-4ERSL5DRTF');
-</script>
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'G-4ERSL5DRTF');
+    </script>
     @vite('resources/css/app.css')
-    
+
 </head>
 
 <body>
     <div id="app">
-        
+
         <div id="breadcrumb"></div>
     </div>
 

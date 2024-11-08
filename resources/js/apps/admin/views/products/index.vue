@@ -494,8 +494,8 @@ import { useForm, useField, defineRule } from "vee-validate";
 
 import useCategories from "@/composables/categories";
 
-import Multiselect from "@suadelabs/vue3-multiselect";
-import "@suadelabs/vue3-multiselect/dist/vue3-multiselect.css";
+
+
 import axiosInstance from "../../../../axiosInstance";
 import useProducts from "../../../../composables/products";
 

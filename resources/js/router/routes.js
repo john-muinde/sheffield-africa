@@ -14,6 +14,7 @@ import Cart from "../apps/frontend/views/Cart.vue";
 import Checkout from "../apps/frontend/views/Checkout.vue";
 import MyAccount from "../apps/frontend/views/MyAccount.vue";
 import NotFound from "../apps/frontend/views/404.vue";
+import AdminNotFound from "../apps/admin/views/404.vue";
 
 function requireAdminLogin(to, from, next) {
     let isLogin = false;
@@ -1540,6 +1541,25 @@ const routes = [
                 },
             },
 
+            {
+                path: "/admin/:pathMatch(.*)*",
+                name: "admin.404",
+                component: AdminNotFound,
+                meta: {
+                    layout: "app",
+                    title: "404",
+                    metaTags: [
+                        {
+                            name: "description",
+                            content: "The about page of our example app.",
+                        },
+                        {
+                            property: "og:description",
+                            content: "The about page of our example app.",
+                        },
+                    ],
+                },
+            },
             {
                 path: "/:pathMatch(.*)*",
                 name: "404",
