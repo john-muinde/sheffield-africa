@@ -65,6 +65,7 @@ import i18n from "./i18n";
 
 // datatables
 import { ClientTable } from "v-tables-3";
+app.use(ClientTable, {}, "bootstrap3");
 
 // json to excel
 import vue3JsonExcel from "vue3-json-excel";
@@ -93,7 +94,6 @@ app.use(store)
     .use(PerfectScrollbarPlugin)
     .use(VueNouislider)
     .use(Maska)
-    .use(ClientTable)
     .use(vue3JsonExcel)
     .use(VueFormWizard)
     .use(head)

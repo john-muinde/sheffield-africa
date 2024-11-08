@@ -122,11 +122,6 @@ import { useMeta } from "../../composables/use-meta";
 useMeta({ title: "New Category" });
 
 import "../../assets/sass/scrollspyNav.scss";
-import highlight from "../../components/plugins/highlight.vue";
-
-
-
-
 
 import { reactive, onMounted } from "vue";
 import useCategories from "@/composables/categories";

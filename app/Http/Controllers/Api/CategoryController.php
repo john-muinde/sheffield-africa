@@ -42,7 +42,7 @@ class CategoryController extends Controller
 
     public function store(StoreCategoryRequest $request)
     {
-        $this->authorize('category-create');
+        $this->authorize(ability: 'category-create');
 
         // Check if the category with the same name already exists
         $existingCategory = Category::where('name', $request->name)->first();

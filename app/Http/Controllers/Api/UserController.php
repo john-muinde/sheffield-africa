@@ -9,8 +9,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
-use PharIo\Manifest\Email;
 
 use App\Mail\ContactUs;
 use App\Mail\Career;
@@ -18,11 +16,7 @@ use App\Mail\RequestQuote;
 
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return AnonymousResourceCollection
-     */
+
     public function index()
     {
         $orderColumn = request('order_column', 'created_at');
@@ -51,29 +45,22 @@ class UserController extends Controller
         return UserResource::collection($users);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
         //
+        $this->authorize('user-create');
+
         $attributes = $request->validate([
-            'name' => 'required',
+            'name' => 'required|string|max:255|min:3',
             'role' => 'required',
-            'email' => ['required', 'email'],
+            'email' => ['required', 'email', 'unique:users'],
             'password' => 'required',
         ]);
 
@@ -81,62 +68,29 @@ class UserController extends Controller
 
         $created_user = User::create($attributes);
 
-        $created_user->assignRole($user_role);
+        $created_user->assignRole((int)$user_role);
 
         return new UserResource($created_user);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function show(User $user)
     {
-        //
-        $this->authorize('product-edit');
+        $this->authorize('user-list');
         return new UserResource($user);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit(Request $request, $id)
     {
         //
 
-        $user = User::findOrFail($id); // Assuming $id is the id of the user you want to update
-
-        $attributes =  $request->validate([
-            'name' => 'required',
-            'role' => 'required',
-            'email' => ['required', 'email'],
-            'password' => 'required',
-        ]);
-
-        $user_role = $attributes["role"];
-
-        $user->update($attributes);
-
-        $user->syncRoles([$user_role]); // If you want to replace the user's roles with the new one
-
-        return new UserResource($user);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request, $id)
     {
-        //
+        $this->authorize('user-edit');
 
         $user = User::findOrFail($id);
 
@@ -144,27 +98,24 @@ class UserController extends Controller
             'name' => 'required',
             'role' => 'required',
             'email' => ['required', 'email'],
-            'password' => 'required',
+            // optional password 
+            'password' => ['nullable', 'min:6'],
         ]);
 
         $user_role = $attributes["role"];
 
+
         $user->update($attributes);
 
-        $user->syncRoles([$user_role]); // If you want to replace the user's roles with the new one
+        $user->syncRoles([(int)$user_role]);
 
         return new UserResource($user);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy(User $user)
     {
-        $this->authorize('product-delete');
+        $this->authorize('user-delete');
         $user->delete();
 
         return response()->noContent();
@@ -176,8 +127,8 @@ class UserController extends Controller
 
         $recaptchaToken = $request->input('recaptchaToken');
 
-        $recaptchaSecret = '6Ldyw1wpAAAAAIvn2LJHPIGK4JsebS2FvVZkN-Pk'; // Replace with your actual reCAPTCHA secret key
-        $recaptchaValueFromClient = $recaptchaToken; // Replace with the actual reCAPTCHA value from the client
+        $recaptchaSecret = '6Ldyw1wpAAAAAIvn2LJHPIGK4JsebS2FvVZkN-Pk';
+        $recaptchaValueFromClient = $recaptchaToken;
 
         $recaptchaUrl = 'https://www.google.com/recaptcha/api/siteverify?' . http_build_query([
             'secret' => $recaptchaSecret,
@@ -349,12 +300,10 @@ class UserController extends Controller
                 'firstname' => $firstname,
                 'phone_number' => $phone_number,
                 'cartItems' => $cartItems,
-
             ];
 
 
             try {
-
                 Mail::to('sheffieldafricamarketing@gmail.com')->cc($email)->send(new RequestQuote($formData));
 
                 return response()->json(['message' => 'Your Request Quote has been received', 'status' => 'success']);

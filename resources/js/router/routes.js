@@ -3339,7 +3339,7 @@ const routes = [
         name: "users.index",
         component: () =>
             import(
-                /* webpackChunkName: "users-profile" */ "../apps/admin/views/users/view_users.vue"
+                /* webpackChunkName: "users-profile" */ "../apps/admin/views/users/index.vue"
             ),
     },
     {

@@ -27,6 +27,7 @@ use App\Http\Controllers\Api\NewsController;
 use App\Http\Controllers\Api\GalleryController;
 use App\Http\Controllers\Api\GalleryImagesController;
 use App\Http\Controllers\SupportEmailController;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -138,9 +139,10 @@ Route::get('product_search/{search}', [ProductController::class, 'searchProduct'
 
 Route::get('google_shopping_product_feed', [App\Http\Controllers\Api\SeoController::class, 'googleShoppingFeed']);
 
-// 404 route
-Route::get('*', function () {
-    return [
-        'message' => 'requested resource not found'
-    ];
+Route::get('user-roles', function (Request $request) {
+    return User::with('roles')->get();
+});
+
+Route::fallback(function () {
+    abort(404, 'API resource not found');
 });

@@ -10,6 +10,7 @@ export const apiRequest = async (method, url, data = null, config = {}) => {
             data,
             ...config,
         });
+        console.log("step 3");
         return response.data;
     } catch (error) {
         console.error(error.response);

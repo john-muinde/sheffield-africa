@@ -1,6 +1,7 @@
-import { ref, inject } from "vue";
+import { ref } from "vue";
 import { useRouter } from "vue-router";
-import axiosInstance from "../axiosInstance";
+import { apiRequest } from "../utils/api";
+import { Modal } from "ant-design-vue";
 
 export default function useCategories() {
     const categories = ref([]);
@@ -8,14 +9,12 @@ export default function useCategories() {
     const categoryMainList = ref([]);
     const category = ref({
         name: "",
-        //parent_id: '',
         description: "",
     });
 
     const router = useRouter();
     const validationErrors = ref({});
     const isLoading = ref(false);
-    const swal = inject("$swal");
 
     const getCategories = async (
         page = 1,
@@ -26,32 +25,24 @@ export default function useCategories() {
         order_column = "created_at",
         order_direction = "desc"
     ) => {
-        axiosInstance
-            .get(
-                "/api/categories?page=" +
-                    page +
-                    "&search_id=" +
-                    search_id +
-                    "&search_title=" +
-                    search_title +
-                    "&search_parent_id=" +
-                    search_parent_id +
-                    "&search_global=" +
-                    search_global +
-                    "&order_column=" +
-                    order_column +
-                    "&order_direction=" +
-                    order_direction
-            )
-            .then((response) => {
-                categories.value = response.data;
-            });
+        try {
+            const response = await apiRequest(
+                "get",
+                `/api/categories?page=${page}&search_id=${search_id}&search_title=${search_title}&search_parent_id=${search_parent_id}&search_global=${search_global}&order_column=${order_column}&order_direction=${order_direction}`
+            );
+            categories.value = response;
+        } catch (errors) {
+            validationErrors.value = errors;
+        }
     };
 
     const getCategory = async (id) => {
-        axiosInstance.get("/api/categories/" + id).then((response) => {
-            category.value = response.data.data;
-        });
+        try {
+            const response = await apiRequest("get", `/api/categories/${id}`);
+            category.value = response.data;
+        } catch (errors) {
+            validationErrors.value = errors;
+        }
     };
 
     const storeCategory = async (category) => {
@@ -60,26 +51,19 @@ export default function useCategories() {
         isLoading.value = true;
         validationErrors.value = {};
 
-        axiosInstance
-            .post("/api/categories", category)
-            .then((response) => {
-                router.push({ name: "categories.create" });
-                // Reset the form values
-                category.name = null;
-                category.description = null;
-                //category.parent_id = null;
-                category.is_published = null;
-                swal({
-                    icon: "success",
-                    title: "Category saved successfully",
-                });
-            })
-            .catch((error) => {
-                if (error.response?.data) {
-                    validationErrors.value = error.response.data.errors;
-                }
-            })
-            .finally(() => (isLoading.value = false));
+        try {
+            await apiRequest("post", "/api/categories", category);
+            router.push({ name: "categories.create" });
+            // Reset the form values
+            category.name = null;
+            category.description = null;
+            category.is_published = null;
+            showToast("Category saved successfully", "success");
+        } catch (errors) {
+            validationErrors.value = errors;
+        } finally {
+            isLoading.value = false;
+        }
     };
 
     const updateCategory = async (category) => {
@@ -88,72 +72,69 @@ export default function useCategories() {
         isLoading.value = true;
         validationErrors.value = {};
 
-        axiosInstance
-            .put("/api/categories/" + category.id, category)
-            .then((response) => {
-                router.push({ name: "categories.index" });
-                swal({
-                    icon: "success",
-                    title: "Category updated successfully",
-                });
-            })
-            .catch((error) => {
-                if (error.response?.data) {
-                    validationErrors.value = error.response.data.errors;
-                }
-            })
-            .finally(() => (isLoading.value = false));
+        try {
+            await apiRequest("put", `/api/categories/${category.id}`, category);
+            router.push({ name: "categories.index" });
+            showToast("Category updated successfully", "success");
+        } catch (errors) {
+            validationErrors.value = errors;
+        } finally {
+            isLoading.value = false;
+        }
     };
 
     const deleteCategory = async (id) => {
-        swal({
+        Modal.confirm({
             title: "Are you sure?",
-            text: "You won't be able to revert this action!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonText: "Yes, delete it!",
-            confirmButtonColor: "#ef4444",
-            timer: 20000,
-            timerProgressBar: true,
-            reverseButtons: true,
-        }).then((result) => {
-            if (result.isConfirmed) {
-                axiosInstance
-                    .delete("/api/categories/" + id)
-                    .then((response) => {
+            content: "You won't be able to revert this action!",
+            okText: "Yes, delete it!",
+            okType: "danger",
+            cancelText: "No, cancel",
+            onOk() {
+                apiRequest("delete", `/api/categories/${id}`)
+                    .then(() => {
                         getCategories();
                         router.push({ name: "categories.index" });
-                        swal({
-                            icon: "success",
-                            title: "Category deleted successfully",
-                        });
+                        showToast("Category deleted successfully", "success");
                     })
-                    .catch((error) => {
-                        swal({
-                            icon: "error",
-                            title: "Something went wrong",
-                        });
+                    .catch((errors) => {
+                        validationErrors.value = errors;
                     });
-            }
+            },
+            onCancel() {
+                console.log("Cancel");
+            },
         });
     };
 
     const getCategoryList = async () => {
-        axiosInstance.get("/api/category-list").then((response) => {
-            categoryList.value = response.data.data;
-        });
+        try {
+            const response = await apiRequest("get", "/api/category-list");
+            categoryList.value = response.data;
+        } catch (errors) {
+            validationErrors.value = errors;
+        }
     };
 
     const getMainCategoryList = async () => {
-        axiosInstance.get("/api/category-main").then((response) => {
-            categoryMainList.value = response.data;
-        });
+        try {
+            const response = await apiRequest("get", "/api/category-main");
+            categoryMainList.value = response;
+        } catch (errors) {
+            validationErrors.value = errors;
+        }
     };
 
     const getSelectedCategoryList = async (id) => {
-        axiosInstance.get("/api/category-list/" + id).then((response) => {
-            categoryList.value = response.data.data;
-        });
+        try {
+            const response = await apiRequest(
+                "get",
+                `/api/category-list/${id}`
+            );
+            categoryList.value = response.data;
+        } catch (errors) {
+            validationErrors.value = errors;
+        }
     };
 
     return {

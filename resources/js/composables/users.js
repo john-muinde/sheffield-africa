@@ -1,17 +1,22 @@
-import { ref, inject } from "vue";
+import { ref } from "vue";
 import { useRouter } from "vue-router";
-import axiosInstance from "../axiosInstance";
+import { apiRequest } from "../utils/api";
+import { Modal } from "ant-design-vue";
 
 export default function useUsers() {
     const users = ref([]);
     const user = ref({
+        id: "",
         name: "",
+        email: "",
+        role: "",
+        password: "",
+        confirm_password: "",
     });
 
     const router = useRouter();
     const validationErrors = ref({});
     const isLoading = ref(false);
-    const swal = inject("$swal");
 
     const getUsers = async (
         page = 1,
@@ -21,30 +26,25 @@ export default function useUsers() {
         order_column = "created_at",
         order_direction = "desc"
     ) => {
-        axiosInstance
-            .get(
-                "/api/users?page=" +
-                    page +
-                    "&search_id=" +
-                    search_id +
-                    "&search_title=" +
-                    search_title +
-                    "&search_global=" +
-                    search_global +
-                    "&order_column=" +
-                    order_column +
-                    "&order_direction=" +
-                    order_direction
-            )
-            .then((response) => {
-                users.value = response.data;
-            });
+        try {
+            const response = await apiRequest(
+                "get",
+                `/api/users?page=${page}&search_id=${search_id}&search_title=${search_title}&search_global=${search_global}&order_column=${order_column}&order_direction=${order_direction}`
+            );
+            users.value = response.data;
+        } catch (errors) {
+            validationErrors.value = errors;
+        }
     };
 
     const getUser = async (id) => {
-        axiosInstance.get("/api/users/" + id).then((response) => {
-            user.value = response.data.data;
-        });
+        try {
+            const response = await apiRequest("get", `/api/users/${id}`);
+
+            user.value = response.data;
+        } catch (errors) {
+            validationErrors.value = errors;
+        }
     };
 
     const storeUser = async (user) => {
@@ -60,21 +60,19 @@ export default function useUsers() {
             }
         }
 
-        axiosInstance
-            .post("/api/users", serializedPost)
-            .then((response) => {
-                router.push({ name: "users.index" });
-                swal({
-                    icon: "success",
-                    title: "User saved successfully",
-                });
-            })
-            .catch((error) => {
-                if (error.response?.data) {
-                    validationErrors.value = error.response.data.errors;
-                }
-            })
-            .finally(() => (isLoading.value = false));
+        const config = {
+            headers: { "content-type": "multipart/form-data" },
+        };
+
+        try {
+            await apiRequest("post", "/api/users", serializedPost, config);
+            router.push({ name: "users.index" });
+            showToast("User saved successfully", "success");
+        } catch (errors) {
+            validationErrors.value = errors;
+        } finally {
+            isLoading.value = false;
+        }
     };
 
     const updateUser = async (user) => {
@@ -83,53 +81,38 @@ export default function useUsers() {
         isLoading.value = true;
         validationErrors.value = {};
 
-        axiosInstance
-            .put("/api/users/" + user.id, user)
-            .then((response) => {
-                router.push({ name: "users.index" });
-                swal({
-                    icon: "success",
-                    title: "User updated successfully",
-                });
-            })
-            .catch((error) => {
-                if (error.response?.data) {
-                    validationErrors.value = error.response.data.errors;
-                }
-            })
-            .finally(() => (isLoading.value = false));
+        try {
+            await apiRequest("put", `/api/users/${user.id}`, user);
+            router.push({ name: "users.index" });
+            showToast("User updated successfully", "success");
+        } catch (errors) {
+            validationErrors.value = errors;
+        } finally {
+            isLoading.value = false;
+        }
     };
 
     const deleteUser = async (id) => {
-        swal({
+        Modal.confirm({
             title: "Are you sure?",
-            text: "You won't be able to revert this action!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonText: "Yes, delete it!",
-            confirmButtonColor: "#ef4444",
-            timer: 20000,
-            timerProgressBar: true,
-            reverseButtons: true,
-        }).then((result) => {
-            if (result.isConfirmed) {
-                axiosInstance
-                    .delete("/api/users/" + id)
-                    .then((response) => {
+            content: "You won't be able to revert this action!",
+            okText: "Yes, delete it!",
+            okType: "danger",
+            cancelText: "No, cancel",
+            onOk() {
+                apiRequest("delete", `/api/users/${id}`)
+                    .then(() => {
                         getUsers();
                         router.push({ name: "users.index" });
-                        swal({
-                            icon: "success",
-                            title: "User deleted successfully",
-                        });
+                        showToast("User deleted successfully", "success");
                     })
-                    .catch((error) => {
-                        swal({
-                            icon: "error",
-                            title: "Something went wrong",
-                        });
+                    .catch(() => {
+                        showToast("Something went wrong", "error");
                     });
-            }
+            },
+            onCancel() {
+                console.log("Cancel");
+            },
         });
     };
 
