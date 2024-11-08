@@ -20,21 +20,19 @@ class CategoryController extends Controller
         if (!in_array($orderDirection, ['asc', 'desc'])) {
             $orderDirection = 'desc';
         }
-        $categories = Category::
-            when(request('search_id'), function ($query) {
-                $query->where('id', request('search_id'));
-            })
+        $categories = Category::when(request('search_id'), function ($query) {
+            $query->where('id', request('search_id'));
+        })
             ->when(request('search_title'), function ($query) {
-                $query->where('name', 'like', '%'.request('search_title').'%');
+                $query->where('name', 'like', '%' . request('search_title') . '%');
             })
             ->when(request('search_parent_id'), function ($query) {
-                $query->where('parent_id', 'like', '%'.request('search_parent_id').'%');
+                $query->where('parent_id', 'like', '%' . request('search_parent_id') . '%');
             })
             ->when(request('search_global'), function ($query) {
-                $query->where(function($q) {
+                $query->where(function ($q) {
                     $q->where('id', request('search_global'))
-                        ->orWhere('name', 'like', '%'.request('search_global').'%');
-
+                        ->orWhere('name', 'like', '%' . request('search_global') . '%');
                 });
             })
             ->orderBy($orderColumn, $orderDirection)
@@ -103,7 +101,8 @@ class CategoryController extends Controller
         return new CategoryResource($category);
     }
 
-    public function destroy(Category $category) {
+    public function destroy(Category $category)
+    {
         $this->authorize('category-delete');
         $category->delete();
 
@@ -112,10 +111,11 @@ class CategoryController extends Controller
 
     public function getList()
     {
-        return CategoryResource::collection(Category::WhereNotNull('parent_id')->get());
+        return CategoryResource::collection(Category::all());
     }
 
-    public function getCategoriesMain(){
+    public function getCategoriesMain()
+    {
 
         $categories = Category::WhereNull('parent_id')->get();
 
@@ -125,13 +125,13 @@ class CategoryController extends Controller
 
     public function getCategories()
     {
-        $perPage = request('per_page', 20); 
+        $perPage = request('per_page', 20);
         $categoryId = request('category_id', 21);
         $mainCategory = request('mainCategory');
         $filter_category_id = request('filter_category_id');
         $search = request('search');
 
-        if(isset($mainCategory)){
+        if (isset($mainCategory)) {
 
             $perPage = 1000;
         }
@@ -142,37 +142,31 @@ class CategoryController extends Controller
 
         if ($search != "") {
 
-            $category = $category->Where('name', 'like', '%'.$search.'%');
-            
+            $category = $category->Where('name', 'like', '%' . $search . '%');
         }
 
-        if($mainCategory != "" && $filter_category_id == "" ){
+        if ($mainCategory != "" && $filter_category_id == "") {
 
             $category = $category->Where('parent_id', '=', $mainCategory);
-            
         }
 
-        if($mainCategory != "" && $filter_category_id != "" ){
+        if ($mainCategory != "" && $filter_category_id != "") {
 
             $category = $category->Where('parent_id', '=', $filter_category_id);
-            
         }
-
-       
 
         $category = $category->OrderBy('order_index', 'ASC')->paginate($perPage);
 
-       
-
         $result = [
-            
+
             'categories' => $category
         ];
 
         return response()->json($result);
     }
 
-    public function getSidebarCategories(){
+    public function getSidebarCategories()
+    {
 
         //add kitchen id 21 add others later
 
@@ -181,16 +175,18 @@ class CategoryController extends Controller
         return response()->json($categories);
     }
 
-    
 
-    public function getMainCategories($id){
+
+    public function getMainCategories($id)
+    {
 
         $categories = Category::WhereIn('parent_id', [$id])->with('children.children')->Where('is_published', true)->orderBy('order_index', 'ASC')->get();
 
         return CategoryResource::collection($categories);
     }
 
-    public function getSelectedCategoryList($id){
+    public function getSelectedCategoryList($id)
+    {
 
         // $categories = Category::whereIn('parent_id', [$id])
         // ->with('children.children') // Eager load children and grandchildren
@@ -205,7 +201,8 @@ class CategoryController extends Controller
 
 
 
-    public function postNewOrderCategories() {
+    public function postNewOrderCategories()
+    {
 
         $data = request('data');
 
@@ -222,10 +219,6 @@ class CategoryController extends Controller
                 $Category->order_index = $key + 1;
                 $Category->save();
             }
-
-
         }
     }
-
-    
 }
