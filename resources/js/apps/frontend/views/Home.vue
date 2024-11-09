@@ -666,97 +666,97 @@ onMounted(() => {
 
     // Initial fetch of products
     // fetchProducts();
-    promotionProducts.value = [
-        {
-            id: 1,
-            name: 'Electric Pizza Oven',
-            description: 'Single Deck',
-            solution_category: 18,
-            main_image_path: '1.jpeg',
-            is_published: true,
-            model_number: '89-HJ',
-            product_brand: {
-                name: 'Hello'
-            },
-            categories_json: [
-                {
-                    parent_name_with_slashes: 'trial'
-                }
-            ],
-            solutionCategories: null,
-            the_category: null,
-            the_category_name: null,
-            created_at: '12/12/2024'
-        },
-        {
-            id: 2,
-            name: 'Gas Pizza Oven',
-            description: 'Single Deck',
-            solution_category: 18,
-            main_image_path: '2.jpg',
-            model_number: '89-HI',
-            product_brand: {
-                name: 'Hello'
-            },
-            categories_json: [
-                {
-                    parent_name_with_slashes: 'name'
-                }
-            ],
-            is_published: true,
-            product_categories_json: null,
-            solutionCategories: null,
-            the_category: null,
-            the_category_name: null,
-            created_at: '12/12/2024'
-        },
-        {
-            id: 3,
-            name: 'Electric Pizza Oven',
-            description: 'Double Deck',
-            solution_category: 18,
-            main_image_path: '3.jpeg',
-            is_published: true,
-            model_number: '89-HK',
-            product_brand: {
-                name: 'Hello'
-            },
-            categories_json: [
-                {
-                    parent_name_with_slashes: 'name'
-                }
-            ],
-            product_categories_json: null,
-            solutionCategories: null,
-            the_category: null,
-            the_category_name: null,
-            created_at: '12/12/2024'
-        },
+    // promotionProducts.value = [
+    //     {
+    //         id: 1,
+    //         name: 'Electric Pizza Oven',
+    //         description: 'Single Deck',
+    //         solution_category: 18,
+    //         main_image_path: '1.jpeg',
+    //         is_published: true,
+    //         model_number: '89-HJ',
+    //         product_brand: {
+    //             name: 'Hello'
+    //         },
+    //         categories_json: [
+    //             {
+    //                 parent_name_with_slashes: 'trial'
+    //             }
+    //         ],
+    //         solutionCategories: null,
+    //         the_category: null,
+    //         the_category_name: null,
+    //         created_at: '12/12/2024'
+    //     },
+    //     {
+    //         id: 2,
+    //         name: 'Gas Pizza Oven',
+    //         description: 'Single Deck',
+    //         solution_category: 18,
+    //         main_image_path: '2.jpg',
+    //         model_number: '89-HI',
+    //         product_brand: {
+    //             name: 'Hello'
+    //         },
+    //         categories_json: [
+    //             {
+    //                 parent_name_with_slashes: 'name'
+    //             }
+    //         ],
+    //         is_published: true,
+    //         product_categories_json: null,
+    //         solutionCategories: null,
+    //         the_category: null,
+    //         the_category_name: null,
+    //         created_at: '12/12/2024'
+    //     },
+    //     {
+    //         id: 3,
+    //         name: 'Electric Pizza Oven',
+    //         description: 'Double Deck',
+    //         solution_category: 18,
+    //         main_image_path: '3.jpeg',
+    //         is_published: true,
+    //         model_number: '89-HK',
+    //         product_brand: {
+    //             name: 'Hello'
+    //         },
+    //         categories_json: [
+    //             {
+    //                 parent_name_with_slashes: 'name'
+    //             }
+    //         ],
+    //         product_categories_json: null,
+    //         solutionCategories: null,
+    //         the_category: null,
+    //         the_category_name: null,
+    //         created_at: '12/12/2024'
+    //     },
 
-        {
-            id: 4,
-            name: 'Electric Pizza Oven',
-            description: 'Double Deck',
-            solution_category: 18,
-            main_image_path: '3.jpeg',
-            is_published: true,
-            model_number: '89-HK',
-            product_brand: {
-                name: 'Hello'
-            },
-            categories_json: [
-                {
-                    parent_name_with_slashes: 'name'
-                }
-            ],
-            product_categories_json: null,
-            solutionCategories: null,
-            the_category: null,
-            the_category_name: null,
-            created_at: '12/12/2024'
-        },
+    //     {
+    //         id: 4,
+    //         name: 'Electric Pizza Oven',
+    //         description: 'Double Deck',
+    //         solution_category: 18,
+    //         main_image_path: '3.jpeg',
+    //         is_published: true,
+    //         model_number: '89-HK',
+    //         product_brand: {
+    //             name: 'Hello'
+    //         },
+    //         categories_json: [
+    //             {
+    //                 parent_name_with_slashes: 'name'
+    //             }
+    //         ],
+    //         product_categories_json: null,
+    //         solutionCategories: null,
+    //         the_category: null,
+    //         the_category_name: null,
+    //         created_at: '12/12/2024'
+    //     },
 
-    ];
+    // ];
 });
 
 const viewProduct = () => {

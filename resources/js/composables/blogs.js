@@ -31,7 +31,7 @@ export default function useBlogs() {
                 "get",
                 `/api/blogs?page=${page}&search_id=${search_id}&search_title=${search_title}&search_parent_id=${search_parent_id}&search_global=${search_global}&order_column=${order_column}&order_direction=${order_direction}`
             );
-            blogs.value = response.data;
+            blogs.value = response;
         } catch (errors) {
             validationErrors.value = errors;
         }
@@ -40,7 +40,7 @@ export default function useBlogs() {
     const getBlog = async (id) => {
         try {
             const response = await apiRequest("get", `/api/blogs/${id}`);
-            blog.value = response.data.data;
+            blog.value = response;
         } catch (errors) {
             validationErrors.value = errors;
         }
@@ -171,15 +171,11 @@ export default function useBlogs() {
             okType: "danger",
             cancelText: "No, cancel",
             onOk() {
-                apiRequest("delete", `/api/blogs/${id}`)
-                    .then(() => {
-                        getBlogs();
-                        router.push({ name: "blogs.index" });
-                        showToast("Blog deleted successfully", "success");
-                    })
-                    .catch(() => {
-                        showToast("Something went wrong", "error");
-                    });
+                apiRequest("delete", `/api/blogs/${id}`).then(() => {
+                    getBlogs();
+                    router.push({ name: "blogs.index" });
+                    showToast("Blog deleted successfully", "success");
+                });
             },
             onCancel() {
                 console.log("Cancel");
@@ -195,15 +191,11 @@ export default function useBlogs() {
             okType: "danger",
             cancelText: "No, cancel",
             onOk() {
-                apiRequest("delete", `/api/blog-images/${id}`)
-                    .then(() => {
-                        getBlogs();
-                        router.go(0);
-                        showToast("Image deleted successfully", "success");
-                    })
-                    .catch(() => {
-                        showToast("Something went wrong", "error");
-                    });
+                apiRequest("delete", `/api/blog-images/${id}`).then(() => {
+                    getBlogs();
+                    router.go(0);
+                    showToast("Image deleted successfully", "success");
+                });
             },
             onCancel() {
                 console.log("Cancel");
@@ -214,7 +206,7 @@ export default function useBlogs() {
     const getBlogList = async () => {
         try {
             const response = await apiRequest("get", "/api/blog-list");
-            blogList.value = response.data.data;
+            blogList.value = response;
         } catch (errors) {
             validationErrors.value = errors;
         }

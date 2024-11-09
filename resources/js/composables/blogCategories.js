@@ -41,7 +41,7 @@ export default function useBlogCategories() {
                 "get",
                 `/api/blogCategories/${id}`
             );
-            blogCategory.value = response.data;
+            blogCategory.value = response;
         } catch (errors) {
             validationErrors.value = errors;
         }
@@ -126,18 +126,11 @@ export default function useBlogCategories() {
             okType: "danger",
             cancelText: "No, cancel",
             onOk() {
-                apiRequest("delete", `/api/blogCategories/${id}`)
-                    .then(() => {
-                        getBlogCategories();
-                        router.push({ name: "blogCategories.index" });
-                        showToast(
-                            "Blog Category deleted successfully",
-                            "success"
-                        );
-                    })
-                    .catch(() => {
-                        showToast("Something went wrong", "error");
-                    });
+                apiRequest("delete", `/api/blogCategories/${id}`).then(() => {
+                    getBlogCategories();
+                    router.push({ name: "blogCategories.index" });
+                    showToast("Blog Category deleted successfully", "success");
+                });
             },
             onCancel() {
                 console.log("Cancel");
@@ -148,7 +141,7 @@ export default function useBlogCategories() {
     const getBlogCategoryList = async () => {
         try {
             const response = await apiRequest("get", "/api/blogCategory-list");
-            blogCategoryList.value = response.data;
+            blogCategoryList.value = response;
         } catch (errors) {
             validationErrors.value = errors;
         }

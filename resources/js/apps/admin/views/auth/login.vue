@@ -50,7 +50,10 @@
                                         </div>
                                         <div class="field-wrapper">
                                             <button type="submit" class="btn btn-primary">
-                                                Log In
+
+                                                <span v-if="processing">Processing...</span>
+                                                <span v-else>Log in</span>
+
                                             </button>
                                         </div>
                                     </div>

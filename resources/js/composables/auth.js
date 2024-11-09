@@ -7,12 +7,11 @@ import { apiRequest } from "../utils/api";
 // import router
 import router from "../router";
 
-let user = ref({
-    name: "",
-    email: "",
-});
-
 export default function useAuth() {
+    let user = ref({
+        name: "",
+        email: "",
+    });
     const processing = ref(false);
     const validationErrors = ref({});
 
@@ -36,7 +35,7 @@ export default function useAuth() {
         validationErrors.value = {};
 
         try {
-            const data = await apiRequest("post", `/login`, loginForm);
+            await apiRequest("post", `/login`, loginForm);
             await store.dispatch("auth/getUser");
             showToast("success", "Login successfully");
             await router.push({ name: "frontend.myaccount" });

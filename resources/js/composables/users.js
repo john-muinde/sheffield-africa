@@ -31,7 +31,7 @@ export default function useUsers() {
                 "get",
                 `/api/users?page=${page}&search_id=${search_id}&search_title=${search_title}&search_global=${search_global}&order_column=${order_column}&order_direction=${order_direction}`
             );
-            users.value = response.data;
+            users.value = response;
         } catch (errors) {
             validationErrors.value = errors;
         }
@@ -41,7 +41,7 @@ export default function useUsers() {
         try {
             const response = await apiRequest("get", `/api/users/${id}`);
 
-            user.value = response.data;
+            user.value = response;
         } catch (errors) {
             validationErrors.value = errors;
         }
@@ -100,15 +100,11 @@ export default function useUsers() {
             okType: "danger",
             cancelText: "No, cancel",
             onOk() {
-                apiRequest("delete", `/api/users/${id}`)
-                    .then(() => {
-                        getUsers();
-                        router.push({ name: "users.index" });
-                        showToast("User deleted successfully", "success");
-                    })
-                    .catch(() => {
-                        showToast("Something went wrong", "error");
-                    });
+                apiRequest("delete", `/api/users/${id}`).then(() => {
+                    getUsers();
+                    router.push({ name: "users.index" });
+                    showToast("User deleted successfully", "success");
+                });
             },
             onCancel() {
                 console.log("Cancel");

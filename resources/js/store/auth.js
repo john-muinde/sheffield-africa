@@ -40,7 +40,6 @@ export default {
             return axiosInstance
                 .get("/api/user")
                 .then(({ data }) => {
-                    console.log("data", data);
                     if (data.success) {
                         commit("SET_USER", data.data);
                         commit("SET_AUTHENTICATED", true);

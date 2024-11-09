@@ -198,7 +198,7 @@
                       <a href="https://wa.me/+254114838130?text=Hello%20Sheffield, I need assistance in " style="border: 0.1rem solid #c02434;" class="social-icon mt-1" target="_blank" title="WhatsApp">
                         <img src="/assets/images/social-icons/whatsapp.png">
                       </a>
-                      
+
                     </div>
                     <div class="row">
                         <a href="https://twitter.com/sheffield_afric/" style="border: 0.1rem solid #c02434;" class="social-icon mt-1" target="_blank" title="X">
@@ -372,7 +372,7 @@ const generateLink = (basePath, id, name) => {
 const fetchMainKitchenSolutions = () => fetchData("/api/get-solutions/21", mainKitchenSolutions);
 const fetchMainLaundrySolutions = () => fetchData("/api/get-solutions/247", mainLaundrySolutions);
 const fetchMainColdRoomSolutions = () => fetchData("/api/get-solutions/301", mainColdRoomSolutions);
-const fetchMainPromotionalSolutions = () => fetchData("/api/get-solutions/302", mainPromotionalSolutions);
+const fetchMainPromotionalSolutions = () => fetchData("/api/get-solutions/370", mainPromotionalSolutions);
 
 const getSolutionKitchenLink = (id, name) => generateLink("/kitchen/solutions", id, name);
 const getSolutionLaundryLink = (id, name) => generateLink("/laundry/solutions", id, name);
@@ -382,7 +382,7 @@ const getSolutionPromotionalLink = (id, name) => generateLink("/promotional-solu
 const fetchMainKitchenCategories = () => fetchData("/api/get-main-categories/21", mainKitchenCategories);
 const fetchMainLaundryCategories = () => fetchData("/api/get-main-categories/247", mainLaundryCategories);
 const fetchMainColdRoomCategories = () => fetchData("/api/get-main-categories/301", mainColdRoomCategories);
-const fetchMainPromotionalCategories = () => fetchData("/api/get-main-categories/302", mainPromotionalCategories);
+const fetchMainPromotionalCategories = () => fetchData("/api/get-main-categories/370", mainPromotionalCategories);
 
 const getKitchenCategoryLink = (id, name) => generateLink("/kitchen", id, name);
 const getLaundryCategoryLink = (id, name) => generateLink("/laundry", id, name);

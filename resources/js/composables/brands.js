@@ -31,6 +31,7 @@ export default function useBrands() {
                 `/api/brands?page=${page}&search_id=${search_id}&search_title=${search_title}&search_global=${search_global}&order_column=${order_column}&order_direction=${order_direction}`
             );
             brands.value = data;
+            console.log(data);
         } catch (errors) {
             validationErrors.value = errors;
         } finally {
@@ -42,7 +43,7 @@ export default function useBrands() {
         isLoading.value = true;
         try {
             const data = await apiRequest("get", `/api/brands/${id}`);
-            brand.value = data.data;
+            brand.value = data;
         } catch (errors) {
             validationErrors.value = errors;
         } finally {
@@ -69,7 +70,7 @@ export default function useBrands() {
 
         try {
             await apiRequest("post", "/api/brands", serializedPost, config);
-            router.push({ name: "brands.create" });
+            router.push({ name: "brands.index" });
             showToast("Brand created successfully", "success");
             // Reset the form values
             brand.name = "";
@@ -126,15 +127,11 @@ export default function useBrands() {
             okType: "danger",
             cancelText: "No, cancel",
             onOk() {
-                apiRequest("delete", `/api/brands/${id}`)
-                    .then(() => {
-                        getBrands();
-                        router.push({ name: "brands.index" });
-                        showToast("Brand deleted successfully", "success");
-                    })
-                    .catch((errors) => {
-                        validationErrors.value = errors;
-                    });
+                apiRequest("delete", `/api/brands/${id}`).then(() => {
+                    getBrands();
+                    router.push({ name: "brands.index" });
+                    showToast("Brand deleted successfully", "success");
+                });
             },
             onCancel() {
                 console.log("Cancel");
@@ -145,7 +142,7 @@ export default function useBrands() {
     const getBrandList = async () => {
         try {
             const data = await apiRequest("get", "/api/brand-list");
-            brandList.value = data.data;
+            brandList.value = data;
         } catch (errors) {
             validationErrors.value = errors;
         }

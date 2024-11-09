@@ -39,7 +39,7 @@ export default function useCategories() {
     const getCategory = async (id) => {
         try {
             const response = await apiRequest("get", `/api/categories/${id}`);
-            category.value = response.data;
+            category.value = response;
         } catch (errors) {
             validationErrors.value = errors;
         }
@@ -53,11 +53,7 @@ export default function useCategories() {
 
         try {
             await apiRequest("post", "/api/categories", category);
-            router.push({ name: "categories.create" });
-            // Reset the form values
-            category.name = null;
-            category.description = null;
-            category.is_published = null;
+            router.push({ name: "categories.index" });
             showToast("Category saved successfully", "success");
         } catch (errors) {
             validationErrors.value = errors;
@@ -91,15 +87,11 @@ export default function useCategories() {
             okType: "danger",
             cancelText: "No, cancel",
             onOk() {
-                apiRequest("delete", `/api/categories/${id}`)
-                    .then(() => {
-                        getCategories();
-                        router.push({ name: "categories.index" });
-                        showToast("Category deleted successfully", "success");
-                    })
-                    .catch((errors) => {
-                        validationErrors.value = errors;
-                    });
+                apiRequest("delete", `/api/categories/${id}`).then(() => {
+                    getCategories();
+                    router.push({ name: "categories.index" });
+                    showToast("Category deleted successfully", "success");
+                });
             },
             onCancel() {
                 console.log("Cancel");
@@ -110,7 +102,7 @@ export default function useCategories() {
     const getCategoryList = async () => {
         try {
             const response = await apiRequest("get", "/api/category-list");
-            categoryList.value = response.data;
+            categoryList.value = response;
         } catch (errors) {
             validationErrors.value = errors;
         }
@@ -131,7 +123,7 @@ export default function useCategories() {
                 "get",
                 `/api/category-list/${id}`
             );
-            categoryList.value = response.data;
+            categoryList.value = response;
         } catch (errors) {
             validationErrors.value = errors;
         }

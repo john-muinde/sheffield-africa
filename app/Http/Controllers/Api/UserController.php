@@ -98,12 +98,11 @@ class UserController extends Controller
             'name' => 'required',
             'role' => 'required',
             'email' => ['required', 'email'],
-            // optional password 
+            // optional password
             'password' => ['nullable', 'min:6'],
         ]);
 
         $user_role = $attributes["role"];
-
 
         $user->update($attributes);
 
