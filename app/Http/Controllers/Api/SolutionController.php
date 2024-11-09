@@ -31,8 +31,8 @@ class SolutionController extends Controller
             $orderDirection = 'desc';
         }
         $solutions = Solution::when(request('search_id'), function ($query) {
-                $query->where('id', request('search_id'));
-            })
+            $query->where('id', request('search_id'));
+        })
             ->when(request('search_title'), function ($query) {
                 $query->where('name', 'like', '%' . request('search_title') . '%');
             })
@@ -535,7 +535,7 @@ class SolutionController extends Controller
 
         $solutions = $Solution->solutionCategories;
 
-        // $page = request()->get('page', 1); 
+        // $page = request()->get('page', 1);
         // $allCategories = $Solution->solutionCategories;
         // $total = $allCategories->count();
         // $categories = $allCategories->slice(($page - 1) * $perPage, $perPage)->all();

@@ -26,13 +26,12 @@ class SolutionResource extends JsonResource
             'solution_category' => $this->solution_category,
             'main_image_path' => $this->main_image_path,
             'is_published' => $this->is_published,
-            'product_categories_json' => $this->solutionCategories ? CategoryResource::collection($this->solutionCategories->pluck('category')) : null,
+            'product_categories_json' =>
+            $this->solutionCategories ? CategoryResource::collection($this->solutionCategories->pluck('category')) : null,
             //'product_categories_json' => $this->solutionCategories ? $this->solutionCategories : null,
             'the_category' => $this->solutionCategory ? $this->solutionCategory : null,
             'the_category_name' => $this->solutionCategory ? $this->solutionCategory->name : null,
             'created_at' => $this->created_at->toDateString()
         ];
     }
-
-   
 }

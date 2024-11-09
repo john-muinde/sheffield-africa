@@ -14,13 +14,6 @@
                                     <a href="#">
                                         <img src="../assets/images/homepage/kitchen_page.jpg" alt="Banner img desc" />
                                     </a>
-
-                                    <!-- <div class="banner-content">
-                                <h4 class="banner-subtitle text-white"><a href="#">Best Deals</a></h4>
-                                <h4 class="banner-title text-white"><a href="#">Commercial <br>Kitchen
-                                </a></h4>
-                                <a href="#" class="banner-link">Shop Now <i class="icon-long-arrow-right"></i></a>
-                            </div> -->
                                 </div>
                                 <!-- End .banner -->
                             </div>
@@ -73,75 +66,10 @@
     <button id="scroll-top" title="Back to Top">
         <i class="icon-arrow-up"></i>
     </button>
-    <!-- <div
-    class="container newsletter-popup-container mfp-hide"
-    id="newsletter-popup-form"
-  >
-    <div class="row justify-content-center">
-      <div class="col-10">
-        <div class="row no-gutters bg-white newsletter-popup-content">
-          <div class="col-xl-3-5col col-lg-7 banner-content-wrap">
-            <div class="banner-content text-center">
-              <img
-                src="../assets/images/logo.png"
-                class="logo"
-                alt="logo"
-                width="180"
-                height="auto"
-              />
-              <h2 class="banner-title">
-                get <span>Best<light> </light></span> Deals
-              </h2>
-              <p>
-                Subscribe to the Sheffield newsletter to receive timely updates
-                from your favorite products.
-              </p>
-              <form action="#">
-                <div class="input-group input-group-round">
-                  <input
-                    type="email"
-                    class="form-control form-control-white"
-                    placeholder="Your Email Address"
-                    aria-label="Email Adress"
-                    required
-                  />
-                  <div class="input-group-append">
-                    <button class="btn" type="submit"><span>go</span></button>
-                  </div>
-
-                </div>
-
-              </form>
-              <div class="custom-control custom-checkbox">
-                <input
-                  type="checkbox"
-                  class="custom-control-input"
-                  id="register-policy-2"
-                  required
-                />
-                <label class="custom-control-label" for="register-policy-2"
-                  >Do not show this popup again</label
-                >
-              </div>
-
-            </div>
-          </div>
-          <div class="col-xl-2-5col col-lg-5">
-            <img
-              src="../assets/images/popup/newsletter/sheffield-popup.jpg"
-              class="newsletter-img"
-              alt="newsletter"
-            />
-          </div>
-        </div>
-      </div>
-    </div>
-  </div> -->
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted, reactive, nextTick, watch } from "vue";
-import { Carousel, Navigation, Slide, Pagination } from "vue3-carousel";
+import { ref, onMounted, reactive, nextTick } from "vue";
 import { useMeta } from "../../admin/composables/use-meta";
 
 useMeta({
@@ -200,16 +128,6 @@ const fetchCategories = () => {
 //showrooms
 
 const showrooms = ref([]);
-
-// Fetch products based on the current page
-const fetchShowrooms = async () => {
-    try {
-        const response = await axios.get("/api/get-showrooms", {});
-        showrooms.value = response.data;
-    } catch (error) {
-        console.error(error);
-    }
-};
 
 // const mainCategories = ref([]);
 const mainSolutions = ref([]);

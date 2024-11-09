@@ -1,247 +1,260 @@
+<script></script>
+
+<style></style>
+
 <template>
-    <main class="main">
-        <nav aria-label="breadcrumb" class="breadcrumb-nav border-0 mb-0">
-            <div class="container d-flex align-items-center">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item">
-                        <router-link to="/">HOME</router-link>
-                    </li>
-
-                    <li class="breadcrumb-item">
-                        <router-link to="/promotional-solutions">PROMOTIONS</router-link>
-                    </li>
-
-                    <li class="breadcrumb-item active" aria-current="page">
-                        {{ solutionCategories.name }}
-                    </li>
-                </ol>
-            </div>
-        </nav>
-        <!-- End .page-header -->
-
-        <div class="page-content">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-9">
-                        <!-- End .toolbox -->
-                        <div class="products mb-3">
-                            <div class="row">
-                                <div class="col-lg-12 col-md-12 mt-1">
-                                    <div class="accordion" id="accordion-1" style="width: 100%">
-                                        <div class="card">
-                                            <div class="card-header" id="heading-2">
-                                                <h2 class="card-title">
-                                                    <a class="collapsed" role="button" data-toggle="collapse"
-                                                        href="#collapse-2" aria-expanded="false"
-                                                        aria-controls="collapse-2">
-                                                        {{
-                                                            solutionCategories.name
-                                                        }}
-                                                        - SOLUTION
-                                                    </a>
-                                                </h2>
-                                            </div>
-                                            <!-- End .card-header -->
-                                            <div id="collapse-2" class="collapse" aria-labelledby="heading-2"
-                                                data-parent="#accordion-1" style=""></div>
-                                        </div>
-                                    </div>
+    <div class="page-wrapper">
+        <main class="main">
+            <div class="container" style="margin-top: 1px">
+                <div class="row cat-banner-row">
+                    <div class="col-xl-2 col-xxl-2 slide-from-right">
+                        <div class="cat-banner row no-gutters">
+                            <div class="col-sm-12 col-xl-12 col-xxl-12">
+                                <div class="banner banner-overlay solution-image">
+                                    <a href="#">
+                                        <img src="/assets/images/events/november-promo.png" alt="Banner img desc" />
+                                    </a>
                                 </div>
-
-                                <div class="col-12 col-md-6 col-lg-6 col-xl-6 image-container">
-                                    <div class="card-body middle-section">
-                                        <span v-html="solutionCategories.description
-                                            "></span>
-                                    </div>
-                                </div>
-
-                                <div class="col-12 col-md-6 col-lg-4 col-xl-4 image-container laundry-image">
-                                    <img :src="'/storage/' +
-                                        solutionCategories.main_image_path
-                                        " v-lazy:src="'/storage/' +
-                                            solutionCategories.main_image_path
-                                            " alt="Product image" />
-                                </div>
-
-                                <!-- End .col-sm-6 col-lg-4 col-xl-3 -->
+                                <!-- End .banner -->
                             </div>
-                            <!-- End .row -->
+                            <!-- End .col-sm-6 -->
                         </div>
-                        <!-- End .products -->
+                        <!-- End .cat-banner -->
                     </div>
-                    <!-- End .col-lg-9 -->
+                    <!-- End .col-xl-3 -->
+                    <div class="col-xl-10 col-xxl-10 mt-1 slide-from-left">
+                        <div class="row">
+                            <div class="col-md-2 col-sm-4 slide-solutions" v-for="solution in mainSolutions"
+                                :key="solution.id">
+                                <router-link class="cat-block" :to="getSolutionLink(
+                                    solution.id,
+                                    solution.name
+                                )
+                                    ">
+                                    <figure>
+                                        <span>
+                                            <img :src="'/storage/' +
+                                                solution.main_image_path
+                                                " alt="Category image" />
+                                        </span>
+                                    </figure>
 
-                    <aside class="col-lg-3 order-lg-first mt-2">
-                        <div class="sidebar sidebar-shop sidebar-shop-solution">
-                            <!-- End .widget widget-clean -->
-
-                            <div class="widget widget-cats widget-categories">
-                                <h3 class="widget-title">Relevant Products</h3>
-                                <!-- End .widget-title -->
-
-                                <hr />
-
-                                <ul v-for="category in solutionCategoriesList" :key="category.id">
-                                    <li class="" style="
-                                            border-bottom: 1px solid #ccc;
-                                            padding: 10px;
-                                        ">
-                                        <router-link :to="getCategoryLink(
-                                            category.id,
-                                            category.name,
-                                            currentPage - 1
-                                        )
-                                            ">{{ category.name
-                                            }}<span>>></span></router-link>
-                                    </li>
-                                </ul>
-
-                                <div class="widget-body mt-5">
-                                    <router-link to="/contact-us" class="btn btn-secondary btn-block">Need
-                                        Advise?</router-link>
-                                </div>
+                                    <h3 class="cat-block-title">
+                                        {{ solution.name }}
+                                    </h3>
+                                    <!-- End .cat-block-title -->
+                                </router-link>
                             </div>
+
+                            <!-- End .col-sm-4 col-lg-2 -->
                         </div>
-                        <!-- End .sidebar sidebar-shop -->
-                    </aside>
-                    <!-- End .col-lg-3 -->
+                    </div>
+                    <!-- End .col-xl-9 -->
                 </div>
-                <!-- End .row -->
+                <!-- End .row cat-banner-row -->
             </div>
             <!-- End .container -->
-        </div>
-        <!-- End .page-content -->
-    </main>
+            <!-- End .container-fluid -->
+        </main>
+        <!-- End .main -->
+    </div>
+    <!-- End .page-wrapper -->
+    <button id="scroll-top" title="Back to Top">
+        <i class="icon-arrow-up"></i>
+    </button>
 </template>
 
 <script setup>
-import { ref, computed, watch, onMounted, watchEffect } from "vue";
-import { useRoute } from "vue-router";
-
+import { ref, onMounted, nextTick } from "vue";
 import { useMeta } from "../../admin/composables/use-meta";
 
-const route = useRoute();
-
-const currentPage = ref(route.params.page ? parseInt(route.params.page) : 1);
-const perPage = ref(12);
-const totalProducts = ref(0);
-const products = ref([]);
-const solution_id = ref(route.params.id ? parseInt(route.params.id) : 1);
-const solutionCategories = ref([]);
-const solutionCategoriesList = ref([]);
-
-
-const fetchSolutionCategories = async () => {
-    try {
-        const response = await axios.get("/api/get-solution-categories", {
-            params: {
-                solution_id: solution_id.value,
-            },
-        });
-        solutionCategories.value = response.data.data;
-        solutionCategoriesList.value =
-            response.data.data.product_categories_json;
-
-        //console.log(solutionCategoriesList.value);
-
-        useMeta({
-            title: solutionCategories.value.name + " | Promotions",
-        });
-    } catch (error) {
-        console.error(error);
-    }
-};
-
-const solutionCategoryProducts = ref([]);
-
-const fetchSolutionCategoryProducts = async () => {
-    try {
-        const response = await axios.get(
-            "/api/get-solution-category-products",
-            {
-                params: {
-                    solution_id: solution_id.value,
-                    checkedCategoriesSolutions:
-                        checkedCategoriesSolutions.value,
-                },
-            }
-        );
-        solutionCategoryProducts.value = response.data.products.data;
-
-        //console.log(solutionCategoryProducts.value);
-    } catch (error) {
-        console.error(error);
-    }
-};
-
-
-// Displayed products based on the current page
-const displayedProducts = ref([]);
-
-const getCategoryLink = (id, name) => {
-    let transformedName = name.replace(/ /g, "-").replace(/\//g, "-");
-    // Remove consecutive dashes
-    transformedName = transformedName.replace(/-+/g, "-");
-    // Remove leading and trailing dashes
-    transformedName = transformedName.replace(/^-+|-+$/g, "");
-    // Convert to lowercase
-    transformedName = transformedName.toLowerCase();
-
-    return `/promotional-solutions/${id}/${transformedName}`;
-};
-
-// Update displayedProducts based on the current page and products
-const updateDisplayedProducts = () => {
-    const startIndex = 0;
-    displayedProducts.value = products.value.slice(
-        startIndex,
-        startIndex + perPage.value
-    );
-};
-
-
-// Initial fetch of products
-onMounted(() => {
-    //fetchProducts();
-    fetchSolutionCategories();
-    fetchSolutionCategoryProducts();
+useMeta({
+    title: "Food service equipment",
+    description: "We offer state of the art commercial kitchen equipment at Sheffield africa Ltd",
+    keywords: "Industrial kitchen equipment,commercial oven,commercial kitchen machines and equipment, kitchen equipment kenya, cooking kitchen equipment"
 });
 
-// Watch for changes in the products and update displayedProducts
-watch(products, updateDisplayedProducts);
+
+// const mainCategories = ref([]);
+const mainSolutions = ref([]);
+
+const fetchMainSolutions = async () => {
+    try {
+        const response = await axios.get("/api/get-solutions/370", {});
+        mainSolutions.value = response.data.data;
+    } catch (error) {
+        console.error(error);
+    }
+};
+
+const getSolutionLink = (id, name) => {
+    const transformedName = name
+        .toLowerCase()
+        .replace(/[\s/]+/g, "-")
+        .replace(/^-+|-+$/g, "");
+
+    return `/promotional-solutions/solutions/${id}/${transformedName}`;
+};
+
+onMounted(async () => {
+    //fetchShowrooms();
+    fetchMainSolutions();
+    await nextTick();
+});
 </script>
 
 <style>
-.product-item {
-    margin-bottom: 20px;
+.cat-banner-row .carousel__prev {
+    height: 92% !important;
+    color: #8a8a8a !important;
+    background-color: #ffffff !important;
+    border: .2992px solid !important;
+    border-radius: 0 !important;
+    top: 49% !important;
 }
 
-.product-title a {
-    font-weight: 550 !important;
+.cat-banner-row .carousel__next {
+    height: 92% !important;
+    color: #8a8a8a !important;
+    background-color: #ffffff !important;
+    border: .2992px solid !important;
+    border-radius: 0 !important;
+    top: 49% !important;
+}
+</style>
+
+<style scoped>
+.header-left>.category-dropdown {
+    pointer-events: none;
 }
 
-.middle-section p {
-    font-size: 1.5rem;
+.theClass1 {
+    position: absolute;
+    width: 94.8% !important;
 }
 
-.laundry-image img {
-    box-shadow: 14px -9px 5px 0px rgba(0, 0, 0, 0.3);
-    filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.3));
+.megamenu-scrollable {
+    overflow-y: auto;
+    direction: rtl;
 }
 
-.sidebar-shop-solution .filter-items-count .filter-item {
-    padding-right: 0rem !important;
+.megamenu-container {
+    direction: ltr;
 }
 
-.swal2-popup.swal2-toast .swal2-title {
-    font-size: 1.5rem !important;
+.megamenu-scrollable::-webkit-scrollbar {
+    width: 8px;
 }
 
-.swal2-container.swal2-bottom-end>.swal2-popup {
-    background-color: #c02434;
+.megamenu-scrollable::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 4px;
 }
 
-.swal2-popup.swal2-toast .swal2-title {
-    color: #ffffff;
+.megamenu-scrollable::-webkit-scrollbar-thumb:hover {
+    background-color: #555;
+}
+
+.menu-vertical .megamenu {}
+
+.scroll-track {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 16px;
+    background-color: #f0f0f0;
+}
+
+.scroll-arrow {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50%;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.up-arrow {
+    border-bottom: 1px solid #ccc;
+}
+
+.down-arrow {
+    border-top: 1px solid #ccc;
+}
+
+.scroll-arrow:hover {
+    background-color: #ccc;
+    color: #fff;
+}
+
+.container {
+    margin-top: 20px;
+}
+
+.box {
+    height: 33px;
+    background: #d9d6d6;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    /* max-width: 330px; */
+    border: 1px solid #9d9d9d;
+}
+
+.box p {
+    font-size: 1.1rem;
+    color: #012e66;
+}
+
+.elements {
+    position: relative;
+    /*background-image: url(/assets/images/sheffield_stainless_steel_background.jpg);*/
+    background-size: cover;
+    overflow: hidden;
+    margin-bottom: 15px;
+}
+
+.slide-solutions a:hover .cat-block-title {
+
+    color: #c02435;
+
+}
+
+@media only screen and (max-width: 768px) {
+    .solution-image {
+        display: none;
+    }
+}
+
+.slide-from-left .slide-solutions {
+    list-style: none;
+    opacity: 0;
+    transform: translateX(-100%);
+    animation: slideRight 1s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+}
+
+.slide-from-right {
+    opacity: 0;
+    transform: translateX(100%);
+    animation: slideRight 0.5s ease-in-out forwards;
+}
+
+@keyframes slideLeft {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideRight {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Add a delay for every "n" item */
+.slide-from-left .slide-solutions:nth-child(2n) {
+    animation-delay: 2ms;
 }
 </style>
