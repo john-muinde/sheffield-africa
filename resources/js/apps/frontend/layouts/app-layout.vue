@@ -33,6 +33,7 @@ import MobileMenu from "../components/layout/mobile-menu.vue";
 import KitchenMenu from "../components/layout/KitchenMenu.vue";
 import LaundryMenu from "../components/layout/LaundryMenu.vue";
 import ColdRoomMenu from "../components/layout/ColdRoomMenu.vue";
+import PromotionalMenu from "../components/layout/PromotionalMenu.vue";
 
 import { ref, computed } from "vue";
 import { useRoute } from "vue-router";
