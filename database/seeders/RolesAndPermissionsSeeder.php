@@ -6,6 +6,9 @@ use App\Models\User;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 class RolesAndPermissionsSeeder extends Seeder
 {
@@ -13,6 +16,15 @@ class RolesAndPermissionsSeeder extends Seeder
     {
         // Reset cached roles and permissions
         app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
+
+        // Clear existing records to prevent duplicate entries
+        Schema::disableForeignKeyConstraints();
+        DB::table('role_has_permissions')->truncate();
+        DB::table('model_has_roles')->truncate();
+        DB::table('model_has_permissions')->truncate();
+        Permission::truncate();
+        Role::truncate();
+        Schema::enableForeignKeyConstraints();
 
         // Define all permissions grouped by module
         $permissions = [
@@ -115,29 +127,32 @@ class RolesAndPermissionsSeeder extends Seeder
             'project-delete',
         ];
 
-        // Create permissions with web guard
+        // Create permissions
+        $createdPermissions = collect();
         foreach ($permissions as $permission) {
-            Permission::createOrFirst([
+            $createdPermissions->push(Permission::create([
                 'name' => $permission,
                 'guard_name' => 'web'
-            ]);
+            ]));
         }
 
         // Create Admin role
-        $adminRole = Role::createOrFirst([
+        $adminRole = Role::create([
             'name' => 'Admin',
             'guard_name' => 'web'
         ]);
 
         // Give all permissions to Admin
-        $adminRole->syncPermissions(Permission::all());
+        $adminRole->givePermissionTo($createdPermissions);
 
-        // Create Manager role with limited permissions
-        $managerRole = Role::createOrFirst([
+        // Create Manager role
+        $managerRole = Role::create([
             'name' => 'Manager',
             'guard_name' => 'web'
         ]);
-        $managerRole->givePermissionTo([
+
+        // Manager permissions
+        $managerPermissions = [
             'product-list',
             'product-edit',
             'category-list',
@@ -150,14 +165,17 @@ class RolesAndPermissionsSeeder extends Seeder
             'client-edit',
             'testimonial-list',
             'testimonial-edit'
-        ]);
+        ];
+        $managerRole->givePermissionTo($managerPermissions);
 
-        // Create Editor role with limited permissions
-        $editorRole = Role::createOrFirst([
+        // Create Editor role
+        $editorRole = Role::create([
             'name' => 'Editor',
             'guard_name' => 'web'
         ]);
-        $editorRole->givePermissionTo([
+
+        // Editor permissions
+        $editorPermissions = [
             'blog-list',
             'blog-create',
             'blog-edit',
@@ -167,25 +185,19 @@ class RolesAndPermissionsSeeder extends Seeder
             'event-list',
             'event-create',
             'event-edit'
-        ]);
+        ];
+        $editorRole->givePermissionTo($editorPermissions);
 
-        // if exists with same email then update password, otherwise create new user
-
-        $adminUser = User::where('email', 'admin@admin.com')->first();
-
-        if ($adminUser) {
-            $adminUser->update([
+        // Create or update admin user
+        $adminUser = User::updateOrCreate(
+            ['email' => 'admin@admin.com'],
+            [
                 'name' => 'Admin',
-                'password' => '1234'
-            ]);
-        } else {
-            $adminUser = User::create([
-                'name' => 'Admin',
-                'email' => 'admin@admin.com',
-                'password' => '1234',
-            ]);
-        }
+                'password' => Hash::make('1234')  // Always hash passwords!
+            ]
+        );
 
-        $adminUser->assignRole($adminRole);
+        // Assign admin role
+        $adminUser->syncRoles([$adminRole]);
     }
 }
