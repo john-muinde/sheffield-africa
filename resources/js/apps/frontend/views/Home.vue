@@ -284,9 +284,22 @@
                         <!-- Products Section -->
                         <div class="col-xl-9 col-lg-8 col-md-12" style="height: 100%">
                             <!-- Animated Date Banner -->
-                            <div class="bg-danger text-xl-right text-center text-uppercase fw-bold p-1"
-                                style="color: white; border-radius: 4px; position: relative; overflow: hidden; font-weight: bold;">
-                                VALID 1ST - 30TH NOVEMBER, 2024
+                            <div class="row d-flex justify-content-between">
+                                <div class="bg-danger text-xl-right text-center text-uppercase fw-bold p-1 col-xl-9 pr-2"
+                                    style="color: white; border-radius: 4px; position: relative; overflow: hidden; font-weight: bold;">
+                                    VALID 1ST - 30TH NOVEMBER, 2024
+                                </div>
+                                <div
+                                    class="view-all-slide align-items-center justify-content-center h-100 d-none d-lg-flex col-3">
+                                    <router-link to="/promotional-solutions"
+                                        class="btn btn-dark btn-md view-all-button">
+                                        View All Products
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                            class="ms-2" width="16" height="16">
+                                            <path d="M12 2L10.59 3.41 17.17 10H2v2h15.17l-6.58 6.59L12 22l10-10z" />
+                                        </svg>
+                                    </router-link>
+                                </div>
                             </div>
 
                             <hr class="divider">
@@ -372,25 +385,11 @@
                                         </div>
                                     </div>
                                 </swiper-slide>
-
-                                <!-- Empty slide for "View All" button -->
-                                <swiper-slide>
-                                    <div class="view-all-slide d-flex align-items-center justify-content-center h-100 d-block"
-                                        style="margin-top: 45%">
-                                        <router-link to="/products" class="btn btn-dark btn-lg view-all-button">
-                                            View All Products
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                                fill="currentColor" class="ms-2" width="16" height="16">
-                                                <path d="M12 2L10.59 3.41 17.17 10H2v2h15.17l-6.58 6.59L12 22l10-10z" />
-                                            </svg>
-                                        </router-link>
-                                    </div>
-                                </swiper-slide>
                             </swiper>
 
                             <!-- Mobile View All Button -->
                             <div class="d-md-none text-center mt-4">
-                                <router-link to="/products" class="btn btn-dark btn-block">
+                                <router-link to="/promotional-solutions" class="btn btn-dark btn-block">
                                     View All Products
                                 </router-link>
                             </div>
@@ -666,97 +665,98 @@ onMounted(() => {
 
     // Initial fetch of products
     fetchProducts();
-    // promotionProducts.value = [
-    //     {
-    //         id: 1,
-    //         name: 'Electric Pizza Oven',
-    //         description: 'Single Deck',
-    //         solution_category: 18,
-    //         main_image_path: '1.jpeg',
-    //         is_published: true,
-    //         model_number: '89-HJ',
-    //         product_brand: {
-    //             name: 'Hello'
-    //         },
-    //         categories_json: [
-    //             {
-    //                 parent_name_with_slashes: 'trial'
-    //             }
-    //         ],
-    //         solutionCategories: null,
-    //         the_category: null,
-    //         the_category_name: null,
-    //         created_at: '12/12/2024'
-    //     },
-    //     {
-    //         id: 2,
-    //         name: 'Gas Pizza Oven',
-    //         description: 'Single Deck',
-    //         solution_category: 18,
-    //         main_image_path: '2.jpg',
-    //         model_number: '89-HI',
-    //         product_brand: {
-    //             name: 'Hello'
-    //         },
-    //         categories_json: [
-    //             {
-    //                 parent_name_with_slashes: 'name'
-    //             }
-    //         ],
-    //         is_published: true,
-    //         product_categories_json: null,
-    //         solutionCategories: null,
-    //         the_category: null,
-    //         the_category_name: null,
-    //         created_at: '12/12/2024'
-    //     },
-    //     {
-    //         id: 3,
-    //         name: 'Electric Pizza Oven',
-    //         description: 'Double Deck',
-    //         solution_category: 18,
-    //         main_image_path: '3.jpeg',
-    //         is_published: true,
-    //         model_number: '89-HK',
-    //         product_brand: {
-    //             name: 'Hello'
-    //         },
-    //         categories_json: [
-    //             {
-    //                 parent_name_with_slashes: 'name'
-    //             }
-    //         ],
-    //         product_categories_json: null,
-    //         solutionCategories: null,
-    //         the_category: null,
-    //         the_category_name: null,
-    //         created_at: '12/12/2024'
-    //     },
+    promotionProducts.value = [
+        {
+            id: 1,
+            name: 'Electric Pizza Oven',
+            description: 'Single Deck',
+            solution_category: 18,
+            main_image_path: '1.jpeg',
+            is_published: true,
+            model_number: '89-HJ',
+            product_brand: {
+                name: 'Hello'
+            },
+            categories_json: [
+                {
+                    parent_name_with_slashes: 'trial'
+                }
+            ],
+            solutionCategories: null,
+            the_category: null,
+            the_category_name: null,
+            created_at: '12/12/2024'
+        },
+        {
+            id: 2,
+            name: 'Gas Pizza Oven',
+            description: 'Single Deck',
+            solution_category: 18,
+            main_image_path: '2.jpg',
+            model_number: '89-HI',
+            product_brand: {
+                name: 'Hello'
+            },
+            categories_json: [
+                {
+                    parent_name_with_slashes: 'name'
+                }
+            ],
+            is_published: true,
+            product_categories_json: null,
+            solutionCategories: null,
+            the_category: null,
+            the_category_name: null,
+            created_at: '12/12/2024'
+        },
+        {
+            id: 3,
+            name: 'Electric Pizza Oven',
+            description: 'Double Deck',
+            solution_category: 18,
+            main_image_path: '3.jpeg',
+            is_published: true,
+            model_number: '89-HK',
+            product_brand: {
+                name: 'Hello'
+            },
+            categories_json: [
+                {
+                    parent_name_with_slashes: 'name'
+                }
+            ],
+            product_categories_json: null,
+            solutionCategories: null,
+            the_category: null,
+            the_category_name: null,
+            created_at: '12/12/2024'
+        },
 
-    //     {
-    //         id: 4,
-    //         name: 'Electric Pizza Oven',
-    //         description: 'Double Deck',
-    //         solution_category: 18,
-    //         main_image_path: '3.jpeg',
-    //         is_published: true,
-    //         model_number: '89-HK',
-    //         product_brand: {
-    //             name: 'Hello'
-    //         },
-    //         categories_json: [
-    //             {
-    //                 parent_name_with_slashes: 'name'
-    //             }
-    //         ],
-    //         product_categories_json: null,
-    //         solutionCategories: null,
-    //         the_category: null,
-    //         the_category_name: null,
-    //         created_at: '12/12/2024'
-    //     },
+        {
+            id: 4,
+            name: 'Electric Pizza Oven',
+            description: 'Double Deck',
+            solution_category: 18,
+            main_image_path: '3.jpeg',
+            is_published: true,
+            model_number: '89-HK',
+            product_brand: {
+                name: 'Hello'
+            },
+            categories_json: [
+                {
+                    parent_name_with_slashes: 'name'
+                }
+            ],
+            product_categories_json: null,
+            solutionCategories: null,
+            the_category: null,
+            the_category_name: null,
+            created_at: '12/12/2024'
+        },
 
-    // ];
+    ];
+
 });
 
 const viewProduct = () => {
