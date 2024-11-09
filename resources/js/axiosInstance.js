@@ -10,8 +10,12 @@ axiosInstance.interceptors.request.use(
         if (token) {
             config.headers.Authorization = `Bearer ${token}`;
         }
-        // add headers
-        config.headers["Content-Type"] = "application/json";
+
+        // add content type to headers if it's not already there
+        if (!config.headers["Content-Type"]) {
+            config.headers["Content-Type"] = "application/json";
+        }
+
         return config;
     },
     (error) => {
