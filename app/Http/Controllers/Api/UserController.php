@@ -174,7 +174,7 @@ class UserController extends Controller
 
             try {
 
-                Mail::to('sheffieldafricamarketing@gmail.com')->cc($email)->send(new ContactUs($formData));
+                Mail::to('ann.ajode@sheffieldafrica.com')->cc($email)->send(new ContactUs($formData));
 
                 return response()->json(['message' => 'Your message has been received', 'status' => 'success']);
             } catch (\Exception $exception) {
@@ -237,7 +237,7 @@ class UserController extends Controller
 
             try {
 
-                Mail::to('sheffieldafricamarketing@gmail.com')->cc($email)->send(new Career($formData));
+                Mail::to('ann.ajode@sheffieldafrica.com')->cc($email)->send(new Career($formData));
 
                 return response()->json(['message' => 'Your submission has been received', 'status' => 'success']);
             } catch (\Exception $exception) {
@@ -303,7 +303,7 @@ class UserController extends Controller
 
 
             try {
-                Mail::to('sheffieldafricamarketing@gmail.com')->cc($email)->send(new RequestQuote($formData));
+                Mail::to('ann.ajode@sheffieldafrica.com')->cc($email)->send(new RequestQuote($formData));
 
                 return response()->json(['message' => 'Your Request Quote has been received', 'status' => 'success']);
             } catch (\Exception $exception) {
