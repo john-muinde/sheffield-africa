@@ -333,7 +333,7 @@
                                             <!-- Description with ellipsis -->
                                             <span class="text-start text-muted product-description"
                                                 style="font-size: 1.1rem; margin-bottom: 12px;">
-                                                {{ product.description }}
+                                                {{ product.model_number }}
                                             </span>
 
                                             <!-- Pricing Section -->
@@ -624,7 +624,7 @@ const promotionProducts = ref([]);
 const fetchProducts = async () => {
     try {
         const response = await axios.get(
-            "/api/get-promotion-products",
+            "/api/get-products",
             {
                 params: {
                     promotion_id: promotionId.value,
@@ -662,10 +662,10 @@ onMounted(() => {
         showPopup.value = true;
     }
 
-    promotionId.value = 12;
+    promotionId.value = 371;
 
     // Initial fetch of products
-    // fetchProducts();
+    fetchProducts();
     // promotionProducts.value = [
     //     {
     //         id: 1,

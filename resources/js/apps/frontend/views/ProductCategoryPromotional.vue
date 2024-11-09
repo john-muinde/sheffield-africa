@@ -256,7 +256,7 @@
                                                 <!-- End .custom-checkbox -->
                                                 <span class="item-count">{{
                                                     category.category_products_count
-                                                    }}</span>
+                                                }}</span>
                                             </div>
                                         </div>
                                         <!-- End .filter-items -->

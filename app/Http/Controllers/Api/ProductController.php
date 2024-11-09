@@ -433,7 +433,7 @@ class ProductController extends Controller
 
         //kitchen
 
-        $products_kitchen_id = 88; // 
+        $products_kitchen_id = 88; //
 
         $category = Category::find($products_kitchen_id);
         $allChildrenIds = $category->getAllChildrenIds();
@@ -445,7 +445,7 @@ class ProductController extends Controller
             })
             ->take(10)->get();
 
-        //laundry   
+        //laundry
 
         $products_laundry_id = 100; //dishwash;
 
