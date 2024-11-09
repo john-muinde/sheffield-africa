@@ -153,7 +153,7 @@
                                                     </li>
                                                 </ul>
                                             </div>
-                                            
+
                                         </div>
                                     </li> -->
                                 </ul>
@@ -175,7 +175,7 @@
                                 </router-link>
                             </li>
                         </ul>
-                        
+
                     </div> -->
                     <!-- End .header-right -->
                 </div>
@@ -365,7 +365,6 @@
                                                     <router-link to="/request-for-quote"
                                                         class="btn btn-primary mt-2 float-right">Request for
                                                         Quote</router-link>
-
                                                 </div>
                                                 <!-- End .dropdown-cart-total -->
                                             </div>

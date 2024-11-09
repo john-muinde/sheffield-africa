@@ -7,7 +7,7 @@
          <div class="container">
             <h1 class="page-title">{{ the_category.name }}<span>View our amazing products under this section</span></h1>
          </div>
-       
+
       </div> -->
         <nav aria-label="breadcrumb" class="breadcrumb-nav border-0 mb-0">
             <div class="container d-flex align-items-center">
@@ -17,9 +17,7 @@
                     </li>
 
                     <li class="breadcrumb-item">
-                        <router-link to="/laundry"
-                            >LAUNDRY & FLOOR CLEANING</router-link
-                        >
+                        <router-link to="/laundry">LAUNDRY & FLOOR CLEANING</router-link>
                     </li>
 
                     <li class="breadcrumb-item active" aria-current="page">
@@ -37,10 +35,8 @@
                             <div class="toolbox-left">
                                 <div class="toolbox-info">
                                     Showing
-                                    <span
-                                        >{{ totalCountperPage }} of
-                                        {{ totalProducts }}</span
-                                    >
+                                    <span>{{ totalCountperPage }} of
+                                        {{ totalProducts }}</span>
                                     Products
                                 </div>
                                 <!-- End .toolbox-info -->
@@ -50,12 +46,8 @@
                                 <div class="toolbox-sort">
                                     <label for="sortby">Sort by:</label>
                                     <div class="select-custom">
-                                        <select
-                                            name="sortby"
-                                            id="sortby"
-                                            class="form-control"
-                                            v-model="selectedSortOption"
-                                        >
+                                        <select name="sortby" id="sortby" class="form-control"
+                                            v-model="selectedSortOption">
                                             <option value="">Default</option>
                                             <option value="name_asc">
                                                 Name A - Z
@@ -80,40 +72,25 @@
                         <!-- End .toolbox -->
                         <div class="products mb-3 products-section">
                             <div class="row">
-                                <div
-                                    class="col-6 col-md-3 col-lg-2 col-xl-2"
-                                    v-for="product in displayedProducts"
-                                    :key="product.id"
-                                >
+                                <div class="col-6 col-md-3 col-lg-2 col-xl-2" v-for="product in displayedProducts"
+                                    :key="product.id">
                                     <div class="product product-7 text-center">
                                         <figure class="product-media">
                                             <!-- <span class="product-label label-new">New</span>  -->
-                                            <router-link
-                                                :to="
-                                                    getProductLink(
-                                                        product.id,
-                                                        product.name,
-                                                        product.model_number,
-                                                        the_category.name
-                                                    )
-                                                "
-                                            >
-                                                <img
-                                                    :src="
-                                                        '/storage/' +
+                                            <router-link :to="getProductLink(
+                                                product.id,
+                                                product.name,
+                                                product.model_number,
+                                                the_category.name
+                                            )
+                                                ">
+                                                <img :src="'/storage/' +
+                                                    product.main_image_path
+                                                    " v-lazy:src="'/storage/' +
                                                         product.main_image_path
-                                                    "
-                                                    v-lazy:src="
-                                                        '/storage/' +
-                                                        product.main_image_path
-                                                    "
-                                                    alt="Product image"
-                                                    class="product-image"
-                                                />
+                                                        " alt="Product image" class="product-image" />
                                             </router-link>
-                                            <div
-                                                class="product-action-vertical"
-                                            >
+                                            <div class="product-action-vertical">
                                                 <!-- <a
                                        href="#"
                                        class="btn-product-icon btn-wishlist btn-expandable" ><span>add to wishlist</span></a
@@ -126,11 +103,8 @@
                                             </div>
                                             <!-- End .product-action-vertical -->
                                             <div class="product-action">
-                                                <button
-                                                    type="button"
-                                                    @click="addToCart(product)"
-                                                    class="btn-product btn-cart"
-                                                >
+                                                <button type="button" @click="addToCart(product)"
+                                                    class="btn-product btn-cart">
                                                     <span>Add to Cart</span>
                                                 </button>
                                             </div>
@@ -139,36 +113,28 @@
                                         <!-- End .product-media -->
                                         <div class="product-body">
                                             <div class="product-cat">
-                                                <router-link
-                                                    :to="
-                                                        getProductLink(
-                                                            product.id,
-                                                            product.name,
-                                                            product.model_number,
-                                                            the_category.name
-                                                        )
-                                                    "
-                                                    >{{
+                                                <router-link :to="getProductLink(
+                                                    product.id,
+                                                    product.name,
+                                                    product.model_number,
+                                                    the_category.name
+                                                )
+                                                    ">{{
                                                         product.product_brand
                                                             .name
-                                                    }}</router-link
-                                                >
+                                                    }}</router-link>
                                             </div>
                                             <!-- End .product-cat -->
                                             <h3 class="product-title">
-                                                <router-link
-                                                    :to="
-                                                        getProductLink(
-                                                            product.id,
-                                                            product.name,
-                                                            product.model_number,
-                                                            the_category.name
-                                                        )
-                                                    "
-                                                    >{{
+                                                <router-link :to="getProductLink(
+                                                    product.id,
+                                                    product.name,
+                                                    product.model_number,
+                                                    the_category.name
+                                                )
+                                                    ">{{
                                                         product.name
-                                                    }}</router-link
-                                                >
+                                                    }}</router-link>
                                             </h3>
                                             <!-- End .product-title -->
                                             <!-- <div class="product-price">$ {{ product.retail_price }}.00</div> -->
@@ -208,48 +174,27 @@
 
                         <nav aria-label="Page navigation">
                             <ul class="pagination justify-content-center">
-                                <li
-                                    class="page-item"
-                                    :class="{ disabled: currentPage === 1 }"
-                                >
-                                    <router-link
-                                        class="page-link page-link-prev"
-                                        :to="
-                                            getCategoryLink(
-                                                the_category.id,
-                                                the_category.name,
-                                                currentPage - 1
-                                            )
-                                        "
-                                        aria-label="Previous"
-                                        tabindex="-1"
-                                        aria-disabled="true"
-                                        @click="goToPreviousPage"
-                                    >
-                                        <span aria-hidden="true"
-                                            ><i class="icon-long-arrow-left"></i
-                                        ></span>
+                                <li class="page-item" :class="{ disabled: currentPage === 1 }">
+                                    <router-link class="page-link page-link-prev" :to="getCategoryLink(
+                                        the_category.id,
+                                        the_category.name,
+                                        currentPage - 1
+                                    )
+                                        " aria-label="Previous" tabindex="-1" aria-disabled="true"
+                                        @click="goToPreviousPage">
+                                        <span aria-hidden="true"><i class="icon-long-arrow-left"></i></span>
                                         Prev
                                     </router-link>
                                 </li>
-                                <li
-                                    class="page-item"
-                                    v-for="page in generatePageLinks"
-                                    :key="page"
-                                    :class="{ active: page === currentPage }"
-                                >
+                                <li class="page-item" v-for="page in generatePageLinks" :key="page"
+                                    :class="{ active: page === currentPage }">
                                     <template v-if="isInteger(page)">
-                                        <router-link
-                                            class="page-link"
-                                            :to="
-                                                getCategoryLink(
-                                                    the_category.id,
-                                                    the_category.name,
-                                                    page
-                                                )
-                                            "
-                                            @click="goToThisPage(page)"
-                                        >
+                                        <router-link class="page-link" :to="getCategoryLink(
+                                            the_category.id,
+                                            the_category.name,
+                                            page
+                                        )
+                                            " @click="goToThisPage(page)">
                                             {{ page }}
                                         </router-link>
                                     </template>
@@ -257,30 +202,17 @@
                                 <li class="page-item-total">
                                     of {{ totalPages }}
                                 </li>
-                                <li
-                                    class="page-item"
-                                    :class="{
-                                        disabled: currentPage === totalPages,
-                                    }"
-                                >
-                                    <router-link
-                                        class="page-link page-link-next"
-                                        :to="
-                                            getCategoryLink(
-                                                the_category.id,
-                                                the_category.name,
-                                                currentPage + 1
-                                            )
-                                        "
-                                        aria-label="Next"
-                                        @click="goToNextPage"
-                                    >
+                                <li class="page-item" :class="{
+                                    disabled: currentPage === totalPages,
+                                }">
+                                    <router-link class="page-link page-link-next" :to="getCategoryLink(
+                                        the_category.id,
+                                        the_category.name,
+                                        currentPage + 1
+                                    )
+                                        " aria-label="Next" @click="goToNextPage">
                                         Next
-                                        <span aria-hidden="true"
-                                            ><i
-                                                class="icon-long-arrow-right"
-                                            ></i
-                                        ></span>
+                                        <span aria-hidden="true"><i class="icon-long-arrow-right"></i></span>
                                     </router-link>
                                 </li>
                             </ul>
@@ -291,71 +223,40 @@
                         <div class="sidebar sidebar-shop sidebar-shop-category">
                             <div class="widget widget-clean">
                                 <label>Filters:</label>
-                                <button
-                                    @click="resetSortValues"
-                                    class="btn btn-primary btn-sm sidebar-filter-clear"
-                                >
+                                <button @click="resetSortValues" class="btn btn-primary btn-sm sidebar-filter-clear">
                                     Clean All
                                 </button>
                             </div>
 
                             <!-- End .widget widget-clean -->
-                            <div
-                                v-if="categories.length"
-                                class="widget widget-collapsible"
-                            >
+                            <div v-if="categories.length" class="widget widget-collapsible">
                                 <h3 class="widget-title">
-                                    <a
-                                        data-toggle="collapse"
-                                        href="#widget-1"
-                                        role="button"
-                                        aria-expanded="true"
-                                        aria-controls="widget-1"
-                                    >
+                                    <a data-toggle="collapse" href="#widget-1" role="button" aria-expanded="true"
+                                        aria-controls="widget-1">
                                         Category
                                     </a>
                                 </h3>
                                 <!-- End .widget-title -->
                                 <div class="show" id="widget-1">
                                     <div class="widget-body">
-                                        <div
-                                            class="filter-items filter-items-count"
-                                        >
-                                            <div
-                                                class="filter-item"
-                                                v-for="category in categories"
-                                                :key="category.id"
-                                            >
-                                                <div
-                                                    class="custom-control custom-checkbox"
-                                                >
-                                                    <input
-                                                        type="checkbox"
-                                                        class="custom-control-input"
-                                                        :id="
-                                                            'cat-' + category.id
-                                                        "
-                                                        :value="category.id"
-                                                        @change="
+                                        <div class="filter-items filter-items-count">
+                                            <div class="filter-item" v-for="category in categories" :key="category.id">
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" class="custom-control-input" :id="'cat-' + category.id
+                                                        " :value="category.id" @change="
                                                             handleCheckboxChange(
                                                                 category.id
                                                             )
-                                                        "
-                                                    />
-                                                    <label
-                                                        class="custom-control-label"
-                                                        :for="
-                                                            'cat-' + category.id
-                                                        "
-                                                        >{{
+                                                            " />
+                                                    <label class="custom-control-label" :for="'cat-' + category.id
+                                                        ">{{
                                                             category.name
-                                                        }}</label
-                                                    >
+                                                        }}</label>
                                                 </div>
                                                 <!-- End .custom-checkbox -->
                                                 <span class="item-count">{{
                                                     category.category_products_count
-                                                }}</span>
+                                                    }}</span>
                                             </div>
                                         </div>
                                         <!-- End .filter-items -->
@@ -366,12 +267,7 @@
                             </div>
                             <div class="widget widget-collapsible">
                                 <h3 class="widget-title">
-                                    <a
-                                        href="#widget-4"
-                                        role="button"
-                                        aria-expanded="true"
-                                        aria-controls="widget-4"
-                                    >
+                                    <a href="#widget-4" role="button" aria-expanded="true" aria-controls="widget-4">
                                         Brand
                                     </a>
                                 </h3>
@@ -380,46 +276,27 @@
                                 <div class="show" id="widget-4">
                                     <div class="widget-body">
                                         <div class="filter-items">
-                                            <div
-                                                v-for="brand in brands"
-                                                :key="brand.id"
-                                                class="filter-item"
-                                            >
-                                                <div
-                                                    class="custom-control custom-checkbox"
-                                                >
-                                                    <input
-                                                        type="checkbox"
-                                                        class="custom-control-input"
-                                                        :id="
-                                                            'brand-' +
-                                                            brand.product_brand
+                                            <div v-for="brand in brands" :key="brand.id" class="filter-item">
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" class="custom-control-input" :id="'brand-' +
+                                                        brand.product_brand
+                                                            .id
+                                                        " :value="brand.product_brand
                                                                 .id
-                                                        "
-                                                        :value="
-                                                            brand.product_brand
-                                                                .id
-                                                        "
-                                                        @change="
+                                                            " @change="
                                                             handleCheckboxBrandChange(
                                                                 brand
                                                                     .product_brand
                                                                     .id
                                                             )
-                                                        "
-                                                    />
-                                                    <label
-                                                        class="custom-control-label"
-                                                        :for="
-                                                            'brand-' +
-                                                            brand.product_brand
-                                                                .id
-                                                        "
-                                                        >{{
+                                                            " />
+                                                    <label class="custom-control-label" :for="'brand-' +
+                                                        brand.product_brand
+                                                            .id
+                                                        ">{{
                                                             brand.product_brand
                                                                 .name
-                                                        }}</label
-                                                    >
+                                                        }}</label>
                                                 </div>
                                                 <!-- End .custom-checkbox -->
                                             </div>
@@ -438,23 +315,23 @@
                               > Price
                            </a>
                         </h3>
-                       
+
                         <div class="collapse show" id="widget-5">
                            <div class="widget-body">
                               <div class="filter-price">
                                  <div class="filter-price-text">
                                     Price Range:
-                                    <span id="filter-price-range"></span> 
+                                    <span id="filter-price-range"></span>
                                  </div>
-                                 
+
                                  <div id="price-slider"></div>
-                               
+
                               </div>
-                              
+
                            </div>
-                           
+
                         </div>
-                       
+
                      </div> -->
                         </div>
                         <!-- End .sidebar sidebar-shop -->
@@ -778,6 +655,7 @@ useMetaLaundry({ title: title.value + "Laundry & Floor Cleaning" });
 .custom-control-label {
     margin-right: 0rem;
 }
+
 .sidebar-shop-category .filter-items-count .filter-item {
     padding-right: 4rem !important;
 }
@@ -786,7 +664,7 @@ useMetaLaundry({ title: title.value + "Laundry & Floor Cleaning" });
     font-size: 1.5rem !important;
 }
 
-.swal2-container.swal2-bottom-end > .swal2-popup {
+.swal2-container.swal2-bottom-end>.swal2-popup {
     background-color: #c02434;
 }
 

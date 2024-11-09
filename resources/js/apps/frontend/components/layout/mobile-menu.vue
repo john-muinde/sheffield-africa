@@ -375,6 +375,8 @@ const fetchData = async (url, stateVariable) => {
 const generateLink = (basePath, id, name) => {
     const transformedName = name
         .toLowerCase()
+        // remove any previous hyphens
+        .replace(/-/g, " ")
         .replace(/[\s/]+/g, "-")
         .replace(/^-+|-+$/g, "");
 

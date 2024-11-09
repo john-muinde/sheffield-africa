@@ -1336,6 +1336,130 @@ const routes = [
                 },
             },
 
+            // promotional solutions
+
+            {
+                path: "/promotional-solutions",
+                name: "frontend.promotional-solutions.page",
+                component: () =>
+                    import(
+                        /* webpackChunkName: "index" */ "../apps/frontend/views/PromotionalSolutions.vue"
+                    ),
+                meta: {
+                    layout: "frontend",
+                    title: "Promotional Solutions",
+                    metaTags: [
+                        {
+                            name: "description",
+                            content: "The about page of our example app.",
+                        },
+                        {
+                            property: "og:description",
+                            content: "The about page of our example app.",
+                        },
+                    ],
+                },
+            },
+
+            {
+                path: "/promotional-solutions/solutions/:id/:name",
+                name: "frontend.solution_promotional.page",
+                component: () =>
+                    import(
+                        /* webpackChunkName: "index" */ "../apps/frontend/views/PromotionalSolutions.vue"
+                    ),
+                meta: {
+                    layout: "frontend",
+                    title: "Category",
+                    metaTags: [
+                        {
+                            name: "description",
+                            content: "The about page of our example app.",
+                        },
+                        {
+                            property: "og:description",
+                            content: "The about page of our example app.",
+                        },
+                    ],
+                },
+            },
+
+            {
+                path: "/promotional-solutions/:id/:name",
+                name: "frontend.category.promotional",
+                component: () =>
+                    import(
+                        /* webpackChunkName: "index" */ "../apps/frontend/views/ProductCategoryPromotional.vue"
+                    ),
+                meta: {
+                    layout: "frontend",
+                    title: "Category",
+                    metaTags: [
+                        {
+                            name: "description",
+                            content: "The about page of our example app.",
+                        },
+                        {
+                            property: "og:description",
+                            content: "The about page of our example app.",
+                        },
+                    ],
+                },
+            },
+
+            {
+                path: "/promotional-solutions/:id/:name/page/:page",
+                name: "frontend.laundry.page.pagenation",
+                component: () =>
+                    import(
+                        /* webpackChunkName: "index" */ "../apps/frontend/views/ProductCategoryPromotional.vue"
+                    ),
+                meta: {
+                    layout: "frontend",
+                    title: "Category",
+                    metaTags: [
+                        {
+                            name: "description",
+                            content: "The about page of our example app.",
+                        },
+                        {
+                            property: "og:description",
+                            content: "The about page of our example app.",
+                        },
+                    ],
+                },
+            },
+
+            {
+                path: "/promotional-solutions/product/:id/:name",
+                name: "product.details.promotional-solutions",
+                component: () =>
+                    import(
+                        /* webpackChunkName: "index" */ "../apps/frontend/views/ProductDetails.vue"
+                    ),
+                meta: {
+                    layout: "frontend",
+                    title: "Product Details",
+                    metaTags: [
+                        {
+                            name: "description",
+                            content: "The about page of our example app.",
+                        },
+                        {
+                            property: "og:description",
+                            content: "The about page of our example app.",
+                        },
+                    ],
+                },
+                beforeEnter: (to, from, next) => {
+                    // Transform the name parameter by replacing dashes with spaces
+                    const name = to.params.name.replace(/-/g, " ");
+                    // Add the transformed name to the route's params object
+                    to.params.transformedName = name;
+                    next();
+                },
+            },
+
             {
                 path: "/cold-storage",
                 name: "frontend.coldroom.page",

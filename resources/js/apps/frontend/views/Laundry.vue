@@ -268,22 +268,6 @@ const getProductLink = (id, name, model_number) => {
     return `/product/${id}/${transformedName}-${transformedModelNumber}`;
 };
 
-const getCategoryLink = (id, name, page) => {
-    //Replace spaces with dashes
-    //console.log(id);
-    //console.log(name);
-    //console.log(page);
-    let transformedName = name.replace(/ /g, "-").replace(/\//g, "-");
-    // Remove consecutive dashes
-    transformedName = transformedName.replace(/-+/g, "-");
-    // Remove leading and trailing dashes
-    transformedName = transformedName.replace(/^-+|-+$/g, "");
-    // Convert to lowercase
-    transformedName = transformedName.toLowerCase();
-
-    return `/laundry/${id}/${transformedName}`;
-};
-
 const getSolutionLink = (id, name) => {
     let transformedName = name.replace(/ /g, "-").replace(/\//g, "-");
     transformedName = transformedName.replace(/-+/g, "-");

@@ -36,25 +36,13 @@
                         <div class="products mb-3">
                             <div class="row">
                                 <div class="col-lg-12 col-md-12 mt-1">
-                                    <div
-                                        class="accordion"
-                                        id="accordion-1"
-                                        style="width: 100%"
-                                    >
+                                    <div class="accordion" id="accordion-1" style="width: 100%">
                                         <div class="card">
-                                            <div
-                                                class="card-header"
-                                                id="heading-2"
-                                            >
+                                            <div class="card-header" id="heading-2">
                                                 <h2 class="card-title">
-                                                    <a
-                                                        class="collapsed"
-                                                        role="button"
-                                                        data-toggle="collapse"
-                                                        href="#collapse-2"
-                                                        aria-expanded="false"
-                                                        aria-controls="collapse-2"
-                                                    >
+                                                    <a class="collapsed" role="button" data-toggle="collapse"
+                                                        href="#collapse-2" aria-expanded="false"
+                                                        aria-controls="collapse-2">
                                                         {{
                                                             solutionCategories.name
                                                         }}
@@ -63,43 +51,25 @@
                                                 </h2>
                                             </div>
                                             <!-- End .card-header -->
-                                            <div
-                                                id="collapse-2"
-                                                class="collapse"
-                                                aria-labelledby="heading-2"
-                                                data-parent="#accordion-1"
-                                                style=""
-                                            ></div>
+                                            <div id="collapse-2" class="collapse" aria-labelledby="heading-2"
+                                                data-parent="#accordion-1" style=""></div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div
-                                    class="col-12 col-md-6 col-lg-6 col-xl-6 image-container"
-                                >
+                                <div class="col-12 col-md-6 col-lg-6 col-xl-6 image-container">
                                     <div class="card-body middle-section">
-                                        <span
-                                            v-html="
-                                                solutionCategories.description
-                                            "
-                                        ></span>
+                                        <span v-html="solutionCategories.description
+                                            "></span>
                                     </div>
                                 </div>
 
-                                <div
-                                    class="col-12 col-md-6 col-lg-4 col-xl-4 image-container laundry-image"
-                                >
-                                    <img
-                                        :src="
-                                            '/storage/' +
+                                <div class="col-12 col-md-6 col-lg-4 col-xl-4 image-container laundry-image">
+                                    <img :src="'/storage/' +
+                                        solutionCategories.main_image_path
+                                        " v-lazy:src="'/storage/' +
                                             solutionCategories.main_image_path
-                                        "
-                                        v-lazy:src="
-                                            '/storage/' +
-                                            solutionCategories.main_image_path
-                                        "
-                                        alt="Product image"
-                                    />
+                                            " alt="Product image" />
                                 </div>
 
                                 <!-- End .col-sm-6 col-lg-4 col-xl-3 -->
@@ -120,37 +90,24 @@
 
                                 <hr />
 
-                                <ul
-                                    v-for="category in solutionCategoriesList"
-                                    :key="category.id"
-                                >
-                                    <li
-                                        class=""
-                                        style="
+                                <ul v-for="category in solutionCategoriesList" :key="category.id">
+                                    <li class="" style="
                                             border-bottom: 1px solid #ccc;
                                             padding: 10px;
-                                        "
-                                    >
-                                        <router-link
-                                            :to="
-                                                getCategoryLink(
-                                                    category.id,
-                                                    category.name,
-                                                    currentPage - 1
-                                                )
-                                            "
-                                            >{{ category.name
-                                            }}<span>>></span></router-link
-                                        >
+                                        ">
+                                        <router-link :to="getCategoryLink(
+                                            category.id,
+                                            category.name,
+                                            currentPage - 1
+                                        )
+                                            ">{{ category.name
+                                            }}<span>>></span></router-link>
                                     </li>
                                 </ul>
 
                                 <div class="widget-body mt-5">
-                                    <router-link
-                                        to="/contact-us"
-                                        class="btn btn-secondary btn-block"
-                                        >Need Advise?</router-link
-                                    >
+                                    <router-link to="/contact-us" class="btn btn-secondary btn-block">Need
+                                        Advise?</router-link>
                                 </div>
                             </div>
                         </div>
@@ -403,7 +360,7 @@ watch(products, updateDisplayedProducts);
     font-size: 1.5rem !important;
 }
 
-.swal2-container.swal2-bottom-end > .swal2-popup {
+.swal2-container.swal2-bottom-end>.swal2-popup {
     background-color: #c02434;
 }
 
