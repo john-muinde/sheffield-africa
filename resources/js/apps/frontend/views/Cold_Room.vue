@@ -5,42 +5,6 @@
 <template>
     <div class="page-wrapper">
         <main class="main">
-            <!-- <div class="mb-lg-2"></div> -->
-            <!-- End .mb-lg-2 -->
-
-            <!-- <div class="container-fluid container-fluid-max-width pb-4">
-        <div class="row">
-          <div class="col-12 border-with-company-colors">
-            <div class="banner banner-big">
-              <a href="#">
-                <img src="../assets/images/sheffield-stainless-steel.jpg" alt="Banner" v-if="isDesktop" />
-                <img src="../assets/images/sheffield_stainless_steel_background.jpg" alt="Banner" v-if="!isDesktop" />
-              </a>
-
-              <div class="banner-content">
-                <h3 class="banner-title text-primary">
-                  About Sheffield Africa
-                </h3>
-                <h4 class="banner-subtitle text-dark">Who we are</h4>
-
-                <p class="text-dark">
-                  Sheffield is an end to end Kitchen, Laundry and Cold-room
-                  solution provider, offering innovative products and services
-                  through concept development, designing, sourcing, fabrication
-                  and installation to after-sales service.
-                </p>
-
-                <router-link to="/about" class="btn btn-primary btn-rounded"
-                  ><span>View More</span><i class="icon-long-arrow-right"></i
-                ></router-link>
-              </div>
-
-            </div>
-
-          </div>
-
-        </div>
-      </div> -->
 
             <div class="container" style="margin-top: 1px">
                 <div class="row cat-banner-row">
@@ -117,7 +81,7 @@
 
             <!-- End .container-fluid -->
 
-          
+
             <!-- End .container-fluid -->
         </main>
         <!-- End .main -->
@@ -197,7 +161,7 @@ import { ref, onMounted, onUnmounted, reactive, nextTick, watch } from "vue";
 import { Carousel, Navigation, Slide, Pagination } from "vue3-carousel";
 import { useMeta } from "../../admin/composables/use-meta";
 
-useMeta({ 
+useMeta({
     title: "Cold Room",
     description:"We offer cold storage rooms in Kenya for sale. Get in touch with us today",
     keywords:"Cold storage warehouse,commercial cold room,cold room panels,cold rooms for sale,cold room price,cold rooms in kenya"

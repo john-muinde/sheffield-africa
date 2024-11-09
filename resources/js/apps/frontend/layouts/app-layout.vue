@@ -6,6 +6,7 @@
         <KitchenMenu v-if="isKitchenPage"> </KitchenMenu>
         <LaundryMenu v-if="isLaundryPage"> </LaundryMenu>
         <ColdRoomMenu v-if="isColdRoomPage"> </ColdRoomMenu>
+        <PromotionalMenu v-if="isPromotionalPage"> </PromotionalMenu>
         <!--  END NAVBAR  -->
         <!--  BEGIN CONTENT AREA  -->
         <router-view />
@@ -52,5 +53,9 @@ const isLaundryPage = computed(() => {
 
 const isColdRoomPage = computed(() => {
     return route.path.includes("/cold-storage");
+});
+
+const isPromotionalPage = computed(() => {
+    return route.path.includes("/promotional");
 });
 </script>

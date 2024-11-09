@@ -1,73 +1,46 @@
 <template>
     <div class="container">
         <div class="row elements categories">
-            <div
-                class="col-xs-3 col-sm-4 col-md-2 white-bg"
-                v-for="category in mainCategories"
-                :key="category.id"
-            >
-                <router-link
-                    class="element-type"
-                    :to="getCategoryLink(category.id, category.name, 1)"
-                >
+            <div class="col-xs-3 col-sm-4 col-md-2 white-bg" v-for="category in mainCategories" :key="category.id">
+                <router-link class="element-type" :to="getCategoryLink(category.id, category.name, 1)">
                     <div class="element box">
-                         <p><img class="menu-icon" :src="`/assets/images/menu-icons/${formattedName(category.name)}.png`">{{ category.name }}</p>
+                        <p><img class="menu-icon"
+                                :src="`/assets/images/menu-icons/${formattedName(category.name)}.png`">{{ category.name
+                            }}</p>
                     </div>
                 </router-link>
             </div>
 
-            <div
-                class="col-xs-3 col-sm-4 col-md-2 white-bg"
-            >
-                <router-link
-                    class="element-type router-link-active active"
-                    to="/consultancy-and-design"
-                >
+            <div class="col-xs-3 col-sm-4 col-md-2 white-bg">
+                <router-link class="element-type router-link-active active" to="/consultancy-and-design">
                     <div class="element box box2 box3">
-                        <p><img class="menu-icon" src="/assets/images/menu-icons/consultancy-design.png">Consultancy & Design </p>
+                        <p><img class="menu-icon" src="/assets/images/menu-icons/consultancy-design.png">Consultancy &
+                            Design </p>
                     </div>
                 </router-link>
             </div>
         </div>
     </div>
     <div class="mobile-categories">
-        <button
-            class="btn btn-default dropdown-toggle button"
-            type="button"
-            id="menu1"
-            data-toggle="dropdown"
-        >
+        <button class="btn btn-default dropdown-toggle button" type="button" id="menu1" data-toggle="dropdown">
             BROWSE CATEGORIES <span class="caret"></span>
         </button>
-        <ul
-            class="dropdown-menu browse-categories mobile-menu"
-            role="menu"
-            aria-labelledby="menu1"
-        >
-            <li
-                role="presentation"
-                v-for="category in mainCategories"
-                :key="category.id"
-            >
-                <router-link
-                    class="element-type"
-                    :to="getCategoryLink(category.id, category.name, 1)"
-                >
+        <ul class="dropdown-menu browse-categories mobile-menu" role="menu" aria-labelledby="menu1">
+            <li role="presentation" v-for="category in mainCategories" :key="category.id">
+                <router-link class="element-type" :to="getCategoryLink(category.id, category.name, 1)">
                     <div class="sf-with-ul">
-                        <p class="category"><img class="mobile-menu-icon" :src="`/assets/images/menu-icons/${formattedName(category.name)}.png`"> {{ category.name }}</p>
+                        <p class="category"><img class="mobile-menu-icon"
+                                :src="`/assets/images/menu-icons/${formattedName(category.name)}.png`"> {{ category.name
+                            }}</p>
                     </div>
                 </router-link>
             </li>
 
-            <li
-                role="presentation"
-            >
-                <router-link
-                    class="element-type"
-                    to="/consultancy-and-design"
-                >
+            <li role="presentation">
+                <router-link class="element-type" to="/consultancy-and-design">
                     <div class="sf-with-ul">
-                        <p class="category"><img class="mobile-menu-icon" src="/assets/images/menu-icons/consultancy-design.png"> Consultancy & Design</p>
+                        <p class="category"><img class="mobile-menu-icon"
+                                src="/assets/images/menu-icons/consultancy-design.png"> Consultancy & Design</p>
                     </div>
                 </router-link>
 
@@ -109,8 +82,8 @@ onMounted(async () => {
     fetchMainCategories();
 });
 
-const formattedName = (category_name) => {    
-  return category_name.toLowerCase().replace(/\s/g, '-');
+const formattedName = (category_name) => {
+    return category_name.toLowerCase().replace(/\s/g, '-');
 };
 
 const route = useRoute();
@@ -128,7 +101,7 @@ const linkClass = computed(() => {
 </script>
 
 <style scoped>
-.header-left > .category-dropdown {
+.header-left>.category-dropdown {
     pointer-events: none;
 }
 
@@ -159,8 +132,7 @@ const linkClass = computed(() => {
     background-color: #555;
 }
 
-.menu-vertical .megamenu {
-}
+.menu-vertical .megamenu {}
 
 .scroll-track {
     position: absolute;
@@ -196,6 +168,7 @@ const linkClass = computed(() => {
 .container {
     margin-top: 20px;
 }
+
 .box {
     height: 33px;
     background: #3d62ad;
@@ -250,7 +223,7 @@ const linkClass = computed(() => {
 }
 
 .mobile-menu-icon {
-    width:35px;
+    width: 35px;
     padding-left: 5px;
     padding-right: 10px;
     display: inline-block;
@@ -270,6 +243,7 @@ const linkClass = computed(() => {
         background-color: #3d62ad;
         border-radius: 0px;
     }
+
     .categories {
         display: none;
     }
@@ -295,7 +269,7 @@ const linkClass = computed(() => {
 
 @media (max-width: 1367px) {
 
-    .box p{
+    .box p {
 
         font-size: 1rem;
 

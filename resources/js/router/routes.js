@@ -1184,35 +1184,7 @@ const routes = [
                 },
             },
 
-            {
-                path: "/cold-storage/product/:id/:name",
-                name: "product.details.cold-storage",
-                component: () =>
-                    import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/ProductDetails.vue"
-                    ),
-                meta: {
-                    layout: "frontend",
-                    title: "Cold Storage",
-                    metaTags: [
-                        {
-                            name: "description",
-                            content: "The about page of our example app.",
-                        },
-                        {
-                            property: "og:description",
-                            content: "The about page of our example app.",
-                        },
-                    ],
-                },
-                beforeEnter: (to, from, next) => {
-                    // Transform the name parameter by replacing dashes with spaces
-                    const name = to.params.name.replace(/-/g, " ");
-                    // Add the transformed name to the route's params object
-                    to.params.transformedName = name;
-                    next();
-                },
-            },
+
 
             {
                 path: "/laundry",
