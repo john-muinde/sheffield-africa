@@ -161,8 +161,8 @@
                             <li>
                                 <router-link to="/cold-storage">PROMOTIONAL SOLUTIONS</router-link>
                                 <ul>
-                                    <li v-for="solution in mainColdRoomSolutions" :key="solution.id">
-                                        <router-link :to="getSolutionColdRoomLink(
+                                    <li v-for="solution in mainPromotionalSolutions" :key="solution.id">
+                                        <router-link :to="getSolutionPromotionalLink(
                                             solution.id,
                                             solution.name
                                         )">{{ solution.name }}</router-link>
