@@ -1,6 +1,7 @@
-import { ref, inject } from "vue";
+import { ref } from "vue";
 import { useRouter } from "vue-router";
-import axiosInstance from "../axiosInstance";
+import { apiRequest } from "../utils/api";
+import { Modal } from "ant-design-vue";
 
 export default function useSolutions() {
     const solutions = ref([]);
@@ -15,7 +16,6 @@ export default function useSolutions() {
     const router = useRouter();
     const validationErrors = ref({});
     const isLoading = ref(false);
-    const swal = inject("$swal");
 
     const getSolutions = async (
         page = 1,
@@ -26,38 +26,28 @@ export default function useSolutions() {
         order_column = "created_at",
         order_direction = "desc"
     ) => {
-        axiosInstance
-            .get(
-                "/api/solutions?page=" +
-                    page +
-                    "&search_id=" +
-                    search_id +
-                    "&search_title=" +
-                    search_title +
-                    "&search_parent_id=" +
-                    search_parent_id +
-                    "&search_global=" +
-                    search_global +
-                    "&order_column=" +
-                    order_column +
-                    "&order_direction=" +
-                    order_direction
-            )
-            .then((response) => {
-                solutions.value = response.data;
-            });
+        try {
+            const response = await apiRequest(
+                "get",
+                `/api/solutions?page=${page}&search_id=${search_id}&search_title=${search_title}&search_parent_id=${search_parent_id}&search_global=${search_global}&order_column=${order_column}&order_direction=${order_direction}`
+            );
+            solutions.value = response;
+        } catch (errors) {
+            validationErrors.value = errors;
+        }
     };
 
     const getSolution = async (id) => {
-        axiosInstance.get("/api/solutions/" + id).then((response) => {
-            solution.value = response.data.data;
-        });
+        try {
+            const response = await apiRequest("get", `/api/solutions/${id}`);
+            solution.value = response;
+        } catch (errors) {
+            validationErrors.value = errors;
+        }
     };
 
     const storeSolution = async (solution, files) => {
         if (isLoading.value) return;
-
-        console.log(solution);
 
         isLoading.value = true;
         validationErrors.value = {};
@@ -68,10 +58,8 @@ export default function useSolutions() {
         serializedPost.append("categories", categoryIds);
 
         for (let item in solution) {
-            if (solution.hasOwnProperty(item)) {
-                if (solution.hasOwnProperty(item) && item !== "categories") {
-                    serializedPost.append(item, solution[item]);
-                }
+            if (solution.hasOwnProperty(item) && item !== "categories") {
+                serializedPost.append(item, solution[item]);
             }
         }
 
@@ -79,28 +67,22 @@ export default function useSolutions() {
             headers: { "content-type": "multipart/form-data" },
         };
 
-        axiosInstance
-            .post("/api/solutions", serializedPost, config)
-            .then((response) => {
-                router.push({ name: "solutions.create" });
-                // Reset the form values
-                solution.name = null;
-                solution.solution_category = null;
-                solution.description = null;
-                solution.is_published = null;
-                solution.main_image = null;
+        try {
+            await apiRequest("post", "/api/solutions", serializedPost, config);
+            router.push({ name: "solutions.index" });
+            // Reset the form values
+            solution.name = null;
+            solution.solution_category = null;
+            solution.description = null;
+            solution.is_published = null;
+            solution.main_image = null;
 
-                swal({
-                    icon: "success",
-                    title: "Solution saved successfully",
-                });
-            })
-            .catch((error) => {
-                if (error.response?.data) {
-                    validationErrors.value = error.response.data.errors;
-                }
-            })
-            .finally(() => (isLoading.value = false));
+            showToast("Solution saved successfully", "success");
+        } catch (errors) {
+            validationErrors.value = errors;
+        } finally {
+            isLoading.value = false;
+        }
     };
 
     const updateSolution = async (solution, files) => {
@@ -110,16 +92,13 @@ export default function useSolutions() {
         validationErrors.value = {};
 
         let serializedPost = new FormData();
-
         const categoryIds = solution.categories.map((category) => category.id);
 
         serializedPost.append("categories", categoryIds);
 
         for (let item in solution) {
-            if (solution.hasOwnProperty(item)) {
-                if (solution.hasOwnProperty(item) && item !== "categories") {
-                    serializedPost.append(item, solution[item]);
-                }
+            if (solution.hasOwnProperty(item) && item !== "categories") {
+                serializedPost.append(item, solution[item]);
             }
         }
 
@@ -129,96 +108,69 @@ export default function useSolutions() {
 
         serializedPost.append("_method", "put");
 
-        console.log(serializedPost);
-
-        await axiosInstance
-            .post("/api/solutions/" + solution.id, serializedPost, config)
-            .then((response) => {
-                router.push({ name: "solutions.index" });
-                swal({
-                    icon: "success",
-                    title: "Solution updated successfully",
-                });
-            })
-            .catch((error) => {
-                if (error.response?.data) {
-                    validationErrors.value = error.response.data.errors;
-                }
-            })
-            .finally(() => (isLoading.value = false));
+        try {
+            await apiRequest(
+                "post",
+                `/api/solutions/${solution.id}`,
+                serializedPost,
+                config
+            );
+            router.push({ name: "solutions.index" });
+            showToast("Solution updated successfully", "success");
+        } catch (errors) {
+            validationErrors.value = errors;
+        } finally {
+            isLoading.value = false;
+        }
     };
 
     const deleteSolution = async (id) => {
-        swal({
+        Modal.confirm({
             title: "Are you sure?",
-            text: "You won't be able to revert this action!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonText: "Yes, delete it!",
-            confirmButtonColor: "#ef4444",
-            timer: 20000,
-            timerProgressBar: true,
-            reverseButtons: true,
-        }).then((result) => {
-            if (result.isConfirmed) {
-                axiosInstance
-                    .delete("/api/solutions/" + id)
-                    .then((response) => {
-                        getSolutions();
-                        router.push({ name: "solutions.index" });
-                        swal({
-                            icon: "success",
-                            title: "Solution deleted successfully",
-                        });
-                    })
-                    .catch((error) => {
-                        swal({
-                            icon: "error",
-                            title: "Something went wrong",
-                        });
-                    });
-            }
+            content: "You won't be able to revert this action!",
+            okText: "Yes, delete it!",
+            okType: "danger",
+            cancelText: "No, cancel",
+            onOk() {
+                apiRequest("delete", `/api/solutions/${id}`).then(() => {
+                    getSolutions();
+                    router.push({ name: "solutions.index" });
+                    showToast("Solution deleted successfully", "success");
+                });
+            },
+            onCancel() {
+                console.log("Cancel");
+            },
         });
     };
 
     const deleteSolutionImage = async (id) => {
-        swal({
+        Modal.confirm({
             title: "Are you sure?",
-            text: "You won't be able to revert this action!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonText: "Yes, delete it!",
-            confirmButtonColor: "#ef4444",
-            timer: 20000,
-            timerProgressBar: true,
-            reverseButtons: true,
-        }).then((result) => {
-            if (result.isConfirmed) {
-                axiosInstance
-                    .delete("/api/solution-images/" + id)
-                    .then((response) => {
-                        getSolutions();
-                        //router.push({name: 'solutions.index'})
-                        router.go(0);
-                        swal({
-                            icon: "success",
-                            title: "Image deleted successfully",
-                        });
-                    })
-                    .catch((error) => {
-                        swal({
-                            icon: "error",
-                            title: "Something went wrong",
-                        });
-                    });
-            }
+            content: "You won't be able to revert this action!",
+            okText: "Yes, delete it!",
+            okType: "danger",
+            cancelText: "No, cancel",
+            onOk() {
+                apiRequest("delete", `/api/solution-images/${id}`).then(() => {
+                    getSolutions();
+                    router.go(0);
+                    showToast("Image deleted successfully", "success");
+                });
+            },
+            onCancel() {
+                console.log("Cancel");
+            },
         });
     };
 
     const getSolutionList = async () => {
-        axiosInstance.get("/api/solution-list").then((response) => {
-            solutionList.value = response.data.data;
-        });
+        try {
+            const response = await apiRequest("get", "/api/solution-list");
+            solutionList.value = response;
+        } catch (errors) {
+            validationErrors.value = errors;
+        }
     };
 
     return {

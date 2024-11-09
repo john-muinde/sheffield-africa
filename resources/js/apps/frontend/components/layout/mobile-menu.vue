@@ -78,7 +78,7 @@
                             </li>
 
                             <li>
-                                <router-link to="/promotions">Promotions</router-link>
+                                <router-link to="/promotional-solutions">Promotions</router-link>
                                 <ul>
                                     <li v-for="category in mainPromotionalCategories" :key="category.id">
                                         <router-link :to="getPromotionalCategoryLink(
@@ -171,7 +171,7 @@
                             </li>
 
                             <li>
-                                <router-link to="/promotions">PROMOTIONAL SOLUTIONS</router-link>
+                                <router-link to="/promotional-solutions">PROMOTIONAL SOLUTIONS</router-link>
                                 <ul>
                                     <li v-for="solution in mainPromotionalSolutions" :key="solution.id">
                                         <router-link :to="getSolutionPromotionalLink(
