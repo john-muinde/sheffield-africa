@@ -12,15 +12,8 @@
                             <div class="col-sm-12 col-xl-12 col-xxl-12">
                                 <div class="banner banner-overlay solution-image">
                                     <a href="#">
-                                        <img src="../assets/images/homepage/laundry_page.jpg" alt="Banner img desc" />
+                                        <img src="/assets/images/events/november-promo.png" alt="Banner img desc" />
                                     </a>
-
-                                    <!-- <div class="banner-content">
-                                <h4 class="banner-subtitle text-white"><a href="#">Best Deals</a></h4>
-                                <h4 class="banner-title text-white"><a href="#">Commercial <br>Laundry
-                                </a></h4>
-                                <a href="#" class="banner-link">Shop Now <i class="icon-long-arrow-right"></i></a>
-                            </div> -->
                                 </div>
                                 <!-- End .banner -->
                             </div>
@@ -29,7 +22,6 @@
                         <!-- End .cat-banner -->
                     </div>
                     <!-- End .col-xl-3 -->
-
                     <div class="col-xl-10 col-xxl-10 mt-1 slide-from-left">
                         <div class="row">
                             <div class="col-md-2 col-sm-4 slide-solutions" v-for="solution in mainSolutions"
@@ -62,6 +54,7 @@
                 <!-- End .row cat-banner-row -->
             </div>
             <!-- End .container -->
+            <!-- End .container-fluid -->
         </main>
         <!-- End .main -->
     </div>
@@ -76,38 +69,36 @@ import { ref, onMounted, nextTick } from "vue";
 import { useMeta } from "../../admin/composables/use-meta";
 
 useMeta({
-    title: "Laundry and floor cleaning equipment",
-    description: "We offer state of the art commercial laundry equipment for laundromats at Sheffield africa Ltd",
-    keywords: "Laundry washer, commercial laundry equipment, commercial laundry machines in kenya, commercial laundry machines for sale in kenya, laundromats in nairobi"
+    title: "Food service equipment",
+    description: "We offer state of the art commercial kitchen equipment at Sheffield africa Ltd",
+    keywords: "Industrial kitchen equipment,commercial oven,commercial kitchen machines and equipment, kitchen equipment kenya, cooking kitchen equipment"
 });
 
 
+// const mainCategories = ref([]);
 const mainSolutions = ref([]);
 
 const fetchMainSolutions = async () => {
     try {
-        const response = await axios.get("/api/get-solutions/371", {});
+        const response = await axios.get("/api/get-solutions/370", {});
         mainSolutions.value = response.data.data;
     } catch (error) {
         console.error(error);
     }
 };
 
-
-
 const getSolutionLink = (id, name) => {
-    let transformedName = name.replace(/ /g, "-").replace(/\//g, "-");
-    transformedName = transformedName.replace(/-+/g, "-");
-    transformedName = transformedName.replace(/^-+|-+$/g, "");
-    transformedName = transformedName.toLowerCase();
+    const transformedName = name
+        .toLowerCase()
+        .replace(/[\s/]+/g, "-")
+        .replace(/^-+|-+$/g, "");
 
-    return `/laundry/solutions/${id}/${transformedName}`;
+    return `/promotional-solutions/solutions/${id}/${transformedName}`;
 };
 
 onMounted(async () => {
     //fetchShowrooms();
     fetchMainSolutions();
-
     await nextTick();
 });
 </script>
@@ -117,7 +108,7 @@ onMounted(async () => {
     height: 92% !important;
     color: #8a8a8a !important;
     background-color: #ffffff !important;
-    border: 0.3px solid !important;
+    border: .2992px solid !important;
     border-radius: 0 !important;
     top: 49% !important;
 }
@@ -126,7 +117,7 @@ onMounted(async () => {
     height: 92% !important;
     color: #8a8a8a !important;
     background-color: #ffffff !important;
-    border: 0.3px solid !important;
+    border: .2992px solid !important;
     border-radius: 0 !important;
     top: 49% !important;
 }
@@ -225,7 +216,7 @@ onMounted(async () => {
 
 .slide-solutions a:hover .cat-block-title {
 
-    color: #7ab337;
+    color: #c02435;
 
 }
 

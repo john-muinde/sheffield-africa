@@ -1343,7 +1343,7 @@ const routes = [
                 name: "frontend.promotional-solutions.page",
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/PromotionalSolutions.vue"
+                        /* webpackChunkName: "index" */ "../apps/frontend/views/Promotional.vue"
                     ),
                 meta: {
                     layout: "frontend",
