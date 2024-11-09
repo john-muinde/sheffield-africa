@@ -380,6 +380,15 @@ const fetchProducts = async () => {
         };
         checkedBrands.value = newCheckedBrands;
 
+        console.log({
+            page: currentPage.value,
+            per_page: perPage.value,
+            category_id: category_id.value,
+            checkedCategories: checkedCategories.value,
+            checkedBrands: checkedBrands.value,
+            selectedSortOption: selectedSortOption.value,
+        });
+
         const response = await axios.get("/api/get-products", {
             params: {
                 page: currentPage.value,
