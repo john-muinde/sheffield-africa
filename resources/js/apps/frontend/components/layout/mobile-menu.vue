@@ -78,6 +78,18 @@
                             </li>
 
                             <li>
+                                <router-link to="/promotions">Promotions</router-link>
+                                <ul>
+                                    <li v-for="category in mainPromotionalCategories" :key="category.id">
+                                        <router-link :to="getPromotionalCategoryLink(
+                                            category.id,
+                                            category.name
+                                        )">{{ category.name }}</router-link>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            <li>
                                 <router-link to="/consultancy-and-design" class="sf-with-ul">
                                     Consultancy & Design
                                 </router-link>
@@ -159,7 +171,7 @@
                             </li>
 
                             <li>
-                                <router-link to="/cold-storage">PROMOTIONAL SOLUTIONS</router-link>
+                                <router-link to="/promotions">PROMOTIONAL SOLUTIONS</router-link>
                                 <ul>
                                     <li v-for="solution in mainPromotionalSolutions" :key="solution.id">
                                         <router-link :to="getSolutionPromotionalLink(
