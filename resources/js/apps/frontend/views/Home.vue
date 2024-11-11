@@ -354,20 +354,21 @@
                                                 <!-- Original Price -->
                                                 <span class="fw-bold text-center text-muted"
                                                     style="text-decoration: line-through; font-size: 1.4rem; font-weight: bold;">
-                                                    KES {{ formatPrice(product.price || 56350.00) }}
+                                                    KES {{ formatPrice(product.cost_price || 56350.00) }}
                                                 </span>
 
                                                 <!-- Savings Badge -->
                                                 <span class="savings-badge"
                                                     style="position: absolute; right: 10px; top: 10px;">
-                                                    Save {{ calculateDiscount(product.price, product.discounted_price)
+                                                    Save {{ calculateDiscount(product.cost_price,
+                                                        product.retail_price)
                                                     }}%
                                                 </span>
 
                                                 <!-- Discounted Price with animation -->
                                                 <div class="price-tag bg-danger fw-bold text-uppercase"
                                                     style="width: 80%; color: white; text-align: center; border-radius: 10px; margin: 10px auto;">
-                                                    KES {{ formatPrice(product.discounted_price || 45080.00) }}
+                                                    KES {{ formatPrice(product.retail_price || 45080.00) }}
                                                 </div>
                                             </div>
                                         </div>

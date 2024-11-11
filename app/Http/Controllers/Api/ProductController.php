@@ -13,6 +13,7 @@ use App\Models\ProductImage;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Log;
 
 class ProductController extends Controller
 {
@@ -377,8 +378,7 @@ class ProductController extends Controller
         return response()->json($result);
     }
 
-
-    public function getproductsAdmin()
+    public function getProductsAdmin()
     {
         $perPage = request('per_page', 20);
         $categoryId = request('category_id', 21);
@@ -391,8 +391,6 @@ class ProductController extends Controller
             $perPage = 1000;
         }
 
-        //dd($perPage);
-
         $Product = Product::with('productBrand');
 
         if ($search != "") {
@@ -402,31 +400,21 @@ class ProductController extends Controller
 
         if ($mainCategory != "" && $filter_category_id == "") {
             $Product = $Product->whereHas('productCategories', function ($query) use ($mainCategory) {
-                //$query->whereIn('category_id', $mainCategory);
                 $query->where('category_id', '=', $mainCategory);
             });
         }
 
         if ($mainCategory != "" && $filter_category_id != "") {
             $Product = $Product->whereHas('productCategories', function ($query) use ($filter_category_id) {
-                //$query->whereIn('category_id', $mainCategory);
                 $query->where('category_id', '=', $filter_category_id);
             });
         }
 
-
-        $Product = $Product->OrderBy('order_index', 'ASC')->paginate($perPage);
+        $Product = $Product->orderBy('order_index', 'ASC')->paginate($perPage);
 
         $result = [
             'categories' => $Product
         ];
-
-        // save the request and the response to the log
-        Storage::disk('local')
-            ->append(
-                'product.log',
-                'Request: ' . json_encode(request()->all()) . ' Response: ' . json_encode($result['categories']['data'][0] ?? [])
-            );
 
         return response()->json($result);
     }
