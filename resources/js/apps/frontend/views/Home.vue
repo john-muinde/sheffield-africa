@@ -290,7 +290,7 @@
                                 </div>
                                 <div
                                     class="view-all-slide align-items-center justify-content-center h-100 d-none d-lg-flex col-3">
-                                    <router-link to="/promotional-solutions"
+                                    <router-link to="/promotional-solutions/371/nov-1-nov-31-2024-promotions"
                                         class="btn btn-dark btn-md view-all-button">
                                         View All Products
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -331,9 +331,8 @@
                                                 :to="getProductLink(product.id, product.name, product.model_number)"
                                                 class="d-flex justify-content-center align-items-center mt-2">
                                                 <div class="image-skeleton" v-if="!imageLoaded"></div>
-                                                <img v-lazy="'/storage/' + product.main_image_path"
-                                                    :alt="product.name" class="img img-fluid product-image"
-                                                    @load="imageLoaded = true">
+                                                <img v-lazy="'/storage/' + product.main_image_path" :alt="product.name"
+                                                    class="img img-fluid product-image" @load="imageLoaded = true">
                                             </router-link>
                                         </div>
 
@@ -375,13 +374,13 @@
                                                 </button>
                                             </div>
                                         </div>
-
                                 </swiper-slide>
                             </swiper>
 
                             <!-- Mobile View All Button -->
                             <div class="d-md-none text-center mt-4">
-                                <router-link to="/promotional-solutions" class="btn btn-dark btn-block">
+                                <router-link to="/promotional-solutions/371/nov-1-nov-31-2024-promotions"
+                                    class="btn btn-dark btn-block">
                                     View All Products
                                 </router-link>
                             </div>
@@ -632,7 +631,6 @@ const fetchProducts = async () => {
         );
 
         if (!response.data.products) {
-
             return;
         }
 
@@ -656,302 +654,6 @@ const fetchProducts = async () => {
 
         //console.log(promotionProducts)
     } catch (error) {
-        // promotionProducts.value = [
-        //     {
-        //         "id": 717,
-        //         "name": "SPIRAL DOUGH MIXER \tIBT 20L",
-        //         "brand": "63",
-        //         "model_number": "IBT 20L",
-        //         "sku": "IMG/PAS/00012",
-        //         "quantity": "0",
-        //         "cost_price": "0.00",
-        //         "retail_price": "0.00",
-        //         "weight": 0,
-        //         "length": 385,
-        //         "width": 415,
-        //         "height": 795,
-        //         "short_description": "<p><strong>ITEM NO. IMG/PAS/00012</strong></p><p><strong>MODEL NO.&nbsp;&nbsp;IBT 20L</strong></p>",
-        //         "description": "<ul><li>Spiral Mixer;&nbsp;Ideal equipment for pizzerias, pastry- shops, bakeries and families.</li><li>Shape of the spiral allows obtaining a perfectly mixed dough in few minutes.</li><li>The bowl, the spiral, the central column and the protection grid are made of stainless steel.</li><li>The gearbox is particulary silent as it is made of oil bath gearmotor.</li><li>All the equipment are equipped with dough-breaker.</li><li>The mixers can be equipped with a singlephase motor or a three phases one.</li><li>On request, two speeds are available on three-phases motors.</li><li>Dough weight 17kgs,</li><li>Capacity 22 liters,</li><li>Dough/hour&nbsp;56kgs,&nbsp;</li><li>Bowl diametre 36cm,</li><li>Power supply 230 | 400V,</li><li>Single-phase motor power 230Volts,&nbsp;</li><li>Three-phase motor power 400 volts,&nbsp;</li><li>Net weight 65kgs</li></ul>",
-        //         "terms_of_operation": "<p>null</p>",
-        //         "is_published": 1,
-        //         "created_by": null,
-        //         "created_at": "2023-09-15T15:50:32.000000Z",
-        //         "updated_at": "2024-11-09T08:27:17.000000Z",
-        //         "main_image_path": "uploads/1694803832_IBT 20-60 LITRES.jpg",
-        //         "document_path": null,
-        //         "technical_specification": "<ul><li>LENGTH: 385MM</li><li>WIDTH:\t415MM</li><li>HEIGHT: 795MM</li><li>VOLTAGE: 230 | 400V</li><li>CAPACITY:\t22L</li><li>OUTPUT:\t56 KG/HOUR</li></ul>",
-        //         "order_index": 1,
-        //         "focus_keyword": null,
-        //         "meta_description": null,
-        //         "main_image_alt_attribute": null,
-        //         "pivot": {
-        //             "category_id": 371,
-        //             "product_id": 717
-        //         },
-        //         "product_brand": {
-        //             "id": 63,
-        //             "name": "PRISMA FOOD",
-        //             "description": "PRISMA FOOD",
-        //             "created_by": null,
-        //             "created_at": "2023-09-15T15:04:26.000000Z",
-        //             "updated_at": "2023-09-15T15:44:30.000000Z",
-        //             "main_image_path": null,
-        //             "is_published": 1
-        //         }
-        //     },
-        //     {
-        //         "id": 1093,
-        //         "name": "PORTABLE ELECTRIC SINGLE DECK-PIZZA OVEN",
-        //         "brand": "77",
-        //         "model_number": "CG-P340A",
-        //         "sku": "IMG/OVE/00199",
-        //         "quantity": "0",
-        //         "cost_price": "56350.00",
-        //         "retail_price": "45080.00",
-        //         "weight": 0,
-        //         "length": 400,
-        //         "width": 425,
-        //         "height": 475,
-        //         "short_description": "<p>PORTABLE ELECTRIC SINGLE DECK-PIZZA OVEN&nbsp;</p>",
-        //         "description": "<p>Commercial&nbsp;Portable&nbsp;Countertop&nbsp;Electric Pizza Oven</p><p>Stainless Steel Double Layer with 12 inch Pizza Stone</p><p>Made of stainless steel material, durable in use.</p><p>The pizza oven has a flexible design, and it is sturdy and durable.</p><p>Ergonomic handle, comfortable to hold, portable, strong, and durable.</p>",
-        //         "terms_of_operation": "<p>2000W</p>",
-        //         "is_published": 1,
-        //         "created_by": null,
-        //         "created_at": "2024-08-28T06:51:19.000000Z",
-        //         "updated_at": "2024-11-11T07:49:28.000000Z",
-        //         "main_image_path": "uploads/1724827879_images.jpeg",
-        //         "document_path": null,
-        //         "technical_specification": "<p>Electric 12'' Pizza oven</p><p>Voltage 220V</p><p>Power 800W</p><p>Package Weight:14.1kg</p>",
-        //         "order_index": 2,
-        //         "focus_keyword": null,
-        //         "meta_description": null,
-        //         "main_image_alt_attribute": null,
-        //         "pivot": {
-        //             "category_id": 371,
-        //             "product_id": 1093
-        //         },
-        //         "product_brand": {
-        //             "id": 77,
-        //             "name": "DIQIAN",
-        //             "description": "DIQIAN",
-        //             "created_by": null,
-        //             "created_at": "2024-08-28T06:52:16.000000Z",
-        //             "updated_at": "2024-08-28T06:52:16.000000Z",
-        //             "main_image_path": "uploads/1724827936__brand_The Sheffield Green Solutions Logo_Transparent.png",
-        //             "is_published": 1
-        //         }
-        //     },
-        //     {
-        //         "id": 688,
-        //         "name": "1 DECK ELECTRIC PIZZA OVEN",
-        //         "brand": "58",
-        //         "model_number": "Basic 1/50 Vetro",
-        //         "sku": "IMG/OVE/00017",
-        //         "quantity": "0",
-        //         "cost_price": "215625.00",
-        //         "retail_price": "172500.00",
-        //         "weight": 0,
-        //         "length": 915,
-        //         "width": 690,
-        //         "height": 355,
-        //         "short_description": "<p><strong>ITEM NO. - IMG/OVE/00017</strong></p><p><strong>MODEL NO. - Basic 1/50 Vetro</strong></p>",
-        //         "description": "<ul><li>1 deck Electric Pizza Oven;&nbsp;</li><li>Internal&nbsp;Dimension (mm) 620x500x120.</li><li>Temperature (ºC) 50 - 500.</li><li>Power Supply (V) 230/1/50&nbsp;</li><li>Motor power (Kw) 5</li><li>Capacity (Pcs) 4 per cycle</li><li>Cooking surface in refractory stones</li><li>Sheathed heating elements</li><li>Internal lighting</li><li>Rock wool insulation</li><li>Standard power supply is 400 Volt three-phases + neutral.</li></ul>",
-        //         "terms_of_operation": "<p>null</p>",
-        //         "is_published": 1,
-        //         "created_by": null,
-        //         "created_at": "2023-09-14T21:42:16.000000Z",
-        //         "updated_at": "2024-11-11T07:50:13.000000Z",
-        //         "main_image_path": "uploads/1694738536_BASIC 150.png",
-        //         "document_path": null,
-        //         "technical_specification": "<ul><li>LENGTH: 915MM</li><li>WIDTH:\t690MM</li><li>HEIGHT: 355MM</li><li>VOLTAGE(V): 230/1/50</li><li>WATTAGE: 5 Kw</li><li>CAPACITY:\t4 PCS PER CYCLE</li></ul>",
-        //         "order_index": 4,
-        //         "focus_keyword": null,
-        //         "meta_description": null,
-        //         "main_image_alt_attribute": null,
-        //         "pivot": {
-        //             "category_id": 371,
-        //             "product_id": 688
-        //         },
-        //         "product_brand": {
-        //             "id": 58,
-        //             "name": "PRISMA",
-        //             "description": "PRISMA",
-        //             "created_by": null,
-        //             "created_at": "2023-09-14T21:34:41.000000Z",
-        //             "updated_at": "2023-09-14T21:34:41.000000Z",
-        //             "main_image_path": null,
-        //             "is_published": 1
-        //         }
-        //     },
-        //     {
-        //         "id": 690,
-        //         "name": "1 DECK GAS PIZZA OVEN",
-        //         "brand": "58",
-        //         "model_number": "GAS 4",
-        //         "sku": "IMG/OVE/00019",
-        //         "quantity": "0",
-        //         "cost_price": "44850.00",
-        //         "retail_price": "35880.00",
-        //         "weight": 0,
-        //         "length": 1005,
-        //         "width": 930,
-        //         "height": 560,
-        //         "short_description": "<p><strong>ITEM NO. IMG/OVE/00019</strong></p><p><strong>MODEL NO. GAS 4</strong></p>",
-        //         "description": "<ul><li>1 deck Gas Pizza Oven;&nbsp;</li><li>Internal&nbsp;Dimension (mm)&nbsp;&nbsp;620x620x560</li><li>Temperature (ºC) 0 - 450</li><li>Power Supply (V) 230/1/50</li><li>Motor power (Kw) 16.1</li><li>Capacity (Pcs) 4 per cycle</li><li>Cooking surface in refractory stones</li><li>Sheathed heating elements&nbsp;</li><li>Internal lighting</li><li>Rock wool insulation&nbsp;</li><li>Standard power supply is 400 Volt three-phases + neutral.</li></ul>",
-        //         "terms_of_operation": "<p>null</p>",
-        //         "is_published": 1,
-        //         "created_by": null,
-        //         "created_at": "2023-09-14T21:51:09.000000Z",
-        //         "updated_at": "2024-11-11T06:54:25.000000Z",
-        //         "main_image_path": "uploads/1694739069_GAS 4.jpg",
-        //         "document_path": null,
-        //         "technical_specification": "<ul><li>LENGTH: 1005MM</li><li>WIDTH:\t930MM</li><li>HEIGHT: 560MM</li><li>VOLTAGE(V): 230/1/50</li><li>WATTAGE: 16.1 Kw</li><li>CAPACITY: 4 PCS PER CYCLE</li></ul>",
-        //         "order_index": 5,
-        //         "focus_keyword": null,
-        //         "meta_description": null,
-        //         "main_image_alt_attribute": null,
-        //         "pivot": {
-        //             "category_id": 371,
-        //             "product_id": 690
-        //         },
-        //         "product_brand": {
-        //             "id": 58,
-        //             "name": "PRISMA",
-        //             "description": "PRISMA",
-        //             "created_by": null,
-        //             "created_at": "2023-09-14T21:34:41.000000Z",
-        //             "updated_at": "2023-09-14T21:34:41.000000Z",
-        //             "main_image_path": null,
-        //             "is_published": 1
-        //         }
-        //     },
-        //     {
-        //         "id": 689,
-        //         "name": "2 DECK ELECTRIC PIZZA OVEN",
-        //         "brand": "58",
-        //         "model_number": "Basic medium 44",
-        //         "sku": "IMG/OVE/00018",
-        //         "quantity": "0",
-        //         "cost_price": "409687.00",
-        //         "retail_price": "327750.00",
-        //         "weight": 0,
-        //         "length": 900,
-        //         "width": 760,
-        //         "height": 745,
-        //         "short_description": "<p><strong>ITEM NO. IMG/OVE/00018</strong></p><p><strong>MODEL NO. Basic medium 44</strong></p>",
-        //         "description": "<ul><li>2 deck Electric Pizza Oven;&nbsp;</li><li>Internal&nbsp;Dimension (mm)&nbsp;&nbsp;660x660x140.</li><li>Temperature (ºC) 50 - 500</li><li>Power Supply (V) 230/1/50</li><li>Motor power (Kw) 9.4&nbsp;</li><li>Capacity (Pcs) 4+4 per cycle&nbsp;</li><li>Cooking surface in refractory stones</li><li>Sheathed heating elements</li><li>Internal lighting</li><li>Rock wool insulation&nbsp;</li><li>Standard power supply is 400 Volt three-phases + neutral</li></ul>",
-        //         "terms_of_operation": "<p>null</p>",
-        //         "is_published": 1,
-        //         "created_by": null,
-        //         "created_at": "2023-09-14T21:46:13.000000Z",
-        //         "updated_at": "2024-11-11T07:50:54.000000Z",
-        //         "main_image_path": "uploads/1694738772_BASIC MEDIUM 44.jpg",
-        //         "document_path": null,
-        //         "technical_specification": "<ul><li>LENGTH: 900MM</li><li>WIDTH:\t760MM</li><li>HEIGHT: 745MM</li><li>VOLTAGE(V): 230/1/50</li><li>WATTAGE: 9.4 Kw</li><li>CAPACITY: 4+4 PCS PER CYCLE</li></ul>",
-        //         "order_index": 6,
-        //         "focus_keyword": null,
-        //         "meta_description": null,
-        //         "main_image_alt_attribute": null,
-        //         "pivot": {
-        //             "category_id": 371,
-        //             "product_id": 689
-        //         },
-        //         "product_brand": {
-        //             "id": 58,
-        //             "name": "PRISMA",
-        //             "description": "PRISMA",
-        //             "created_by": null,
-        //             "created_at": "2023-09-14T21:34:41.000000Z",
-        //             "updated_at": "2023-09-14T21:34:41.000000Z",
-        //             "main_image_path": null,
-        //             "is_published": 1
-        //         }
-        //     },
-        //     {
-        //         "id": 691,
-        //         "name": "C/50 CONVEYOR PIZZA OVEN",
-        //         "brand": "58",
-        //         "model_number": "TUNNEL C/50",
-        //         "sku": "IMG/OVE/00020",
-        //         "quantity": "0",
-        //         "cost_price": "2867812.50",
-        //         "retail_price": "2294250.00",
-        //         "weight": 0,
-        //         "length": 1210,
-        //         "width": 1860,
-        //         "height": 500,
-        //         "short_description": "<p><strong>ITEM NO. IMG/OVE/00020</strong></p><p><strong>MODEL NO. TUNNEL C/50</strong></p>",
-        //         "description": "<ul><li>20\" Belt Electric Conveyor Pizza Oven;</li><li>Designed to give outstanding performance day after day in all circumstances and provide excellent value for money and reliability. capable of cooking up to 130 x 8\"</li><li>145g pizzas an hour, this great value oven will soon pay for itself in no time at all.</li><li>Stackable conveyor pizza oven.</li><li>Cool touch exterior.</li><li>Premium quality stainless steel construction.</li><li>Stainless steel conveyor belt.</li><li>Digital control panel.</li><li>Adjustable conveyor time.</li><li>Adjustable temperature.</li><li>Multi lingual programming.</li><li>Easy disassembly for cleaning.</li><li>Integrated stacking kit - no need to purchase anything extra.</li><li>Electric 14.2kW.</li><li>Single phase electric. 2 x 2800w top elements, 2 x 4100w bottom elements.</li></ul>",
-        //         "terms_of_operation": "<p>null</p>",
-        //         "is_published": 1,
-        //         "created_by": null,
-        //         "created_at": "2023-09-14T21:56:48.000000Z",
-        //         "updated_at": "2024-11-11T08:03:21.000000Z",
-        //         "main_image_path": "uploads/1694739407_TUNNEL C-50.jpg",
-        //         "document_path": null,
-        //         "technical_specification": "<ul><li>LENGTH: 1210MM</li><li>WIDTH:\t1860MM</li><li>HEIGHT: 500MM</li><li>VOLTAGE: (V) 230/1/50</li><li>WATTAGE: 14.2 Kw</li><li>CAPACITY:\tup to 130 x 8\" - 145g pizzas an hour</li></ul>",
-        //         "order_index": 7,
-        //         "focus_keyword": null,
-        //         "meta_description": null,
-        //         "main_image_alt_attribute": null,
-        //         "pivot": {
-        //             "category_id": 371,
-        //             "product_id": 691
-        //         },
-        //         "product_brand": {
-        //             "id": 58,
-        //             "name": "PRISMA",
-        //             "description": "PRISMA",
-        //             "created_by": null,
-        //             "created_at": "2023-09-14T21:34:41.000000Z",
-        //             "updated_at": "2023-09-14T21:34:41.000000Z",
-        //             "main_image_path": null,
-        //             "is_published": 1
-        //         }
-        //     },
-        //     {
-        //         "id": 1106,
-        //         "name": "DIGITAL CONVEYOR PIZZA OVEN",
-        //         "brand": "5",
-        //         "model_number": "HX-1SA",
-        //         "sku": "IMG/OVE/00217",
-        //         "quantity": "0",
-        //         "cost_price": "495000.00",
-        //         "retail_price": "420750.00",
-        //         "weight": 0,
-        //         "length": 1380,
-        //         "width": 420,
-        //         "height": 555,
-        //         "short_description": "<p><span style=\"color: rgb(81, 83, 101);\">DIGITAL CONVEYOR PIZZA OVEN</span></p>",
-        //         "description": "<p>Automatic cool down mode to protect control circuit.</p><p>Individual top and bottom temperature control.</p><p>Digital set point of conveyor speed and temperature.</p><p>Touch control panel prevents accidental adjustment.</p><p>350mm wide conveyor makes this oven extremely flexible and ideal for pizzas or sub sandwiches.</p><p>Reversible conveyor allows for workflow customization.</p>",
-        //         "terms_of_operation": "<p>null</p>",
-        //         "is_published": 1,
-        //         "created_by": null,
-        //         "created_at": "2024-09-19T06:07:35.000000Z",
-        //         "updated_at": "2024-11-11T07:51:30.000000Z",
-        //         "main_image_path": "uploads/1726726055_images (1).jpeg",
-        //         "document_path": null,
-        //         "technical_specification": "<p>POWER ; 6.7kw.</p><p>VOLTAGE; 230v-50Hz-2Phase.</p><p>UNIT (W x D x H) ; 1380*555*420mm.</p><p>.NET WEIGHT; 46kg.</p><p>GROSS WEIGHT; 57kg.</p><p>CONVEYOR WIDTH; 350mm.</p>",
-        //         "order_index": 9,
-        //         "focus_keyword": null,
-        //         "meta_description": null,
-        //         "main_image_alt_attribute": null,
-        //         "pivot": {
-        //             "category_id": 371,
-        //             "product_id": 1106
-        //         },
-        //         "product_brand": {
-        //             "id": 5,
-        //             "name": "H-KITCHEN",
-        //             "description": "H-KITCHEN",
-        //             "created_by": 1,
-        //             "created_at": "2023-06-12T21:00:00.000000Z",
-        //             "updated_at": "2023-08-30T09:44:18.000000Z",
-        //             "main_image_path": "uploads/1693399457__brand_h-kitchen.jpg",
-        //             "is_published": 1
-        //         }
-        //     }
-        // ];
         console.error(error);
     }
 };
