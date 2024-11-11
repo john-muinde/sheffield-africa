@@ -1,13 +1,18 @@
-import { ref, inject } from "vue";
+import { ref } from "vue";
 import { useRouter } from "vue-router";
-import axiosInstance from "../axiosInstance";
+import { apiRequest } from "../utils/api";
+import { Modal } from "ant-design-vue";
 
 export default function useEvents() {
     const events = ref([]);
     const eventList = ref([]);
     const event = ref({
         name: "",
-        // main_image: "",
+        location: "",
+        start_date: "",
+        end_date: "",
+        main_image_path: "",
+        url: "",
         is_published: "",
         description: "",
     });
@@ -15,7 +20,6 @@ export default function useEvents() {
     const router = useRouter();
     const validationErrors = ref({});
     const isLoading = ref(false);
-    const swal = inject("$swal");
 
     const getEvents = async (
         page = 1,
@@ -25,34 +29,40 @@ export default function useEvents() {
         order_column = "created_at",
         order_direction = "desc"
     ) => {
-        axiosInstance
-            .get(
-                "/api/events?page=" +
-                    page +
-                    "&search_id=" +
-                    search_id +
-                    "&search_title=" +
-                    search_title +
-                    "&search_global=" +
-                    search_global +
-                    "&order_column=" +
-                    order_column +
-                    "&order_direction=" +
-                    order_direction
-            )
-            .then((response) => {
-                events.value = response.data;
-            });
+        isLoading.value = true;
+        try {
+            const response = await apiRequest(
+                "get",
+                `/api/events?page=${page}
+                &search_id=${search_id}
+                &search_title=${search_title}
+                &search_global=${search_global}
+                &order_column=${order_column}
+                &order_direction=${order_direction}`
+            );
+            events.value = response;
+        } catch (errors) {
+            validationErrors.value = errors;
+        } finally {
+            isLoading.value = false;
+        }
     };
 
     const getEvent = async (id) => {
-        axiosInstance.get("/api/events/" + id).then((response) => {
-            event.value = response.data.data;
-        });
+        isLoading.value = true;
+        try {
+            const response = await apiRequest("get", `/api/events/${id}`);
+            event.value = response;
+        } catch (errors) {
+            validationErrors.value = errors;
+        } finally {
+            isLoading.value = false;
+        }
     };
 
     const storeEvent = async (event) => {
         console.log(event);
+        console.log("updating events");
         if (isLoading.value) return;
 
         isLoading.value = true;
@@ -70,39 +80,26 @@ export default function useEvents() {
             headers: { "content-type": "multipart/form-data" },
         };
 
-        console.log(serializedPost);
-        const token = localStorage.getItem("token");
-        if (token) {
-            axiosInstance.defaults.headers.common["Authorization"] =
-                "Bearer " + token;
+        try {
+            await apiRequest("post", "/api/events", serializedPost, config);
+            router.push({ name: "events.index" });
+            // Reset the form values
+            event.name = null;
+            event.location = null;
+            event.startDate = null;
+            event.endDate = null;
+            event.description = null;
+            event.main_image_path = null;
+            event.is_published = null;
+            showToast("Event saved successfully", "success");
+        } catch (errors) {
+            validationErrors.value = errors;
+        } finally {
+            isLoading.value = false;
         }
-        axiosInstance
-            .post("/api/events", serializedPost, config)
-            .then((response) => {
-                router.push({ name: "events.create" });
-                // Reset the form values
-                event.name = null;
-                event.location = null;
-                event.startDate = null;
-                event.endDate = null;
-                event.description = null;
-                event.main_image = null;
-                event.is_published = null;
-                swal({
-                    icon: "success",
-                    title: "Event saved successfully",
-                });
-            })
-            .catch((error) => {
-                if (error.response?.data) {
-                    validationErrors.value = error.response.data.errors;
-                }
-            })
-            .finally(() => (isLoading.value = false));
     };
 
     const updateEvent = async (event) => {
-        console.log(event);
         if (isLoading.value) return;
 
         isLoading.value = true;
@@ -112,70 +109,62 @@ export default function useEvents() {
 
         for (let item in event) {
             if (event.hasOwnProperty(item)) {
+                console.log(`Appending ${item}:`, event[item]);
                 serializedPost.append(item, event[item]);
             }
         }
 
+        // Log the FormData object
+        for (let pair of serializedPost.entries()) {
+            console.log(pair[0] + ": " + pair[1]);
+        }
+
         const config = {
-            headers: { "content-type": "multipart/form-data" },
+            headers: { "Content-Type": "multipart/form-data" },
         };
 
-        console.log(serializedPost);
-
-        axiosInstance
-            .put("/api/events/" + event.id, event)
-            .then((response) => {
-                router.push({ name: "events.index" });
-                swal({
-                    icon: "success",
-                    title: "Event updated successfully",
-                });
-            })
-            .catch((error) => {
-                if (error.response?.data) {
-                    validationErrors.value = error.response.data.errors;
-                }
-            })
-            .finally(() => (isLoading.value = false));
+        try {
+            await apiRequest(
+                "put",
+                `/api/events/${event.id}`,
+                serializedPost,
+                config
+            );
+            router.push({ name: "events.index" });
+            showToast("Event updated successfully", "success");
+        } catch (errors) {
+            validationErrors.value = errors;
+        } finally {
+            isLoading.value = false;
+        }
     };
 
     const deleteEvent = async (id) => {
-        swal({
+        isLoading.value = true;
+        Modal.confirm({
             title: "Are you sure?",
-            text: "You won't be able to revert this action!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonText: "Yes, delete it!",
-            confirmButtonColor: "#ef4444",
-            timer: 20000,
-            timerProgressBar: true,
-            reverseButtons: true,
-        }).then((result) => {
-            if (result.isConfirmed) {
-                axiosInstance
-                    .delete("/api/events/" + id)
-                    .then((response) => {
-                        getEvents();
-                        router.push({ name: "events.index" });
-                        swal({
-                            icon: "success",
-                            title: "Event deleted successfully",
-                        });
-                    })
-                    .catch((error) => {
-                        swal({
-                            icon: "error",
-                            title: "Something went wrong",
-                        });
-                    });
-            }
+            content: "You won't be able to revert this action!",
+            okText: "Yes, delete it!",
+            okType: "danger",
+            cancelText: "No, cancel",
+            onOk() {
+                apiRequest("delete", `/api/events/${id}`).then(() => {
+                    getEvents();
+                    router.push({ name: "events.index" });
+                    showToast("Event deleted successfully", "success");
+                });
+            },
+            onCancel() {},
         });
     };
 
     const getEventList = async () => {
-        axiosInstance.get("/api/event-list").then((response) => {
-            eventList.value = response.data.data;
-        });
+        try {
+            const response = await apiRequest("get", "/api/event-list");
+            eventList.value = response;
+        } catch (errors) {
+            validationErrors.value = errors;
+        }
     };
 
     return {

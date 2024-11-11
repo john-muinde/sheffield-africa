@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Api;
 
-use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
 
 use App\Http\Controllers\Controller;

@@ -7,6 +7,10 @@ const { logoutAdmin } = useAuth();
 
 export const apiRequest = async (method, url, data = null, config = {}) => {
     try {
+        if (method === "put") {
+            method = "post";
+            data.append("_method", "put");
+        }
         const response = await axiosInstance({
             method,
             url,

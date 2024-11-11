@@ -5,10 +5,11 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreEventRequest;
 use App\Http\Resources\EventResource;
-use Intervention\Image\Facades\Image;
-use Illuminate\Support\Facades\Storage;
 use App\Models\Event;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Storage;
 
 class EventController extends Controller
 {
@@ -43,20 +44,24 @@ class EventController extends Controller
     {
         $this->authorize('event-create');
 
-        // Check if the event with the same name already exists
-        $existingEvent = Event::where('name', $request->name)->first();
-        if ($existingEvent) {
-            return response()->json(['errors' => ['name' => ['Event with the same name already exists.']]], 409);
-        }
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255|unique:events',
+            'description' => 'required|string',
+            'start_date' => 'required|date',
+            'end_date' => 'required|date',
+            'url' => 'required|url',
+            'location' => 'required|string|max:255',
+            'main_image_path' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'is_published' => 'required|boolean',
+        ]);
 
-        $validatedData = $request->validated();
         $validatedData['created_by'] = auth()->user()->id;
 
         if ($request->hasFile('main_image')) {
 
-            $file = $request->file('main_image');
+            $file = $request->file('main_image_path');
 
-            $file_name = time() . '_' . '_event_' . $request->file('main_image')->getClientOriginalName();
+            $file_name = time() . '_' . '_event_' . $request->file('main_image_path')->getClientOriginalName();
             $file_path = 'uploads/' . $file_name;
 
             // Resize and optimize the image
@@ -67,7 +72,7 @@ class EventController extends Controller
 
             // Store the optimized image
             Storage::disk('public')->put($file_path, $image);
-            //$file_path = $request->file('main_image')->storeAs('uploads', $file_name, 'public');
+            //$file_path = $request->file('main_image_path')->storeAs('uploads', $file_name, 'public');
 
             $validatedData['main_image_path'] = $file_path;
         }
@@ -83,35 +88,42 @@ class EventController extends Controller
         return new EventResource($event);
     }
 
-    public function update(Event $event, StoreEventRequest $request)
+    public function update(Request $request, $id)
     {
         $this->authorize('event-edit');
+        Log::info('Logging' . json_encode($request->all()));
 
-        // Check if the event with the same name already exists (excluding the current event)
-        $existingEvent = Event::where('name', $request->name)
-            ->where('id', '!=', $event->id)
-            ->first();
-        if ($existingEvent) {
-            return response()->json(['errors' => ['name' => ['Event with the same name already exists.']]], 409);
-        }
-        $validatedData = $request->validated();
+        $validatedData = $request->validate([
+            'name' => ['required', 'string', 'max:255', 'unique:events,name,' . $id],
+            'description' => 'required|string',
+            'start_date' => 'required|date',
+            'end_date' => 'required|date',
+            'url' => 'required|url',
+            'location' => 'required|string|max:255',
+            'is_published' => 'required|boolean',
+        ]);
 
-        if ($request->hasFile('main_image')) {
+        $event = Event::findOrFail($id);
 
-            $file = $request->file('main_image');
+        if ($request->hasFile('main_image_path')) {
 
-            $file_name = time() . '_' . '_event_' . $request->file('main_image')->getClientOriginalName();
+            $request->validate([
+                'main_image_path' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
+
+            $file = $request->file('main_image_path');
+
+            $file_name = time() . '_' . '_event_' . $request->file('main_image_path')->getClientOriginalName();
             $file_path = 'uploads/' . $file_name;
 
             // Resize and optimize the image
             $image = Image::make($file)->resize(800, null, function ($constraint) {
                 $constraint->aspectRatio();
                 $constraint->upsize();
-            })->encode('jpg', 85); // Specify the desired encoding format and quality (80% in this example)
+            })->encode('jpg', 85);
 
             // Store the optimized image
             Storage::disk('public')->put($file_path, $image);
-            //$file_path = $request->file('main_image')->storeAs('uploads', $file_name, 'public');
 
             $validatedData['main_image_path'] = $file_path;
         }

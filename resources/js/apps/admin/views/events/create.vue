@@ -63,23 +63,40 @@
                                         </div>
                                     </div>
                                 </div>
-                                <pre>
-                                Selected date is {{ event.start_date }}
-                                </pre>
+
                                 <div class="row">
                                     <div class="form-group col-md-6">
                                         {{ typeof event.start_date }}
                                         <label for="post-start_date">Start Date</label>
                                         <flat-pickr v-model="event.start_date" :config="config"
-                                            class="form-control flatpickr active"
-                                            placeholder="Select Start Date"></flat-pickr>
+                                            class="form-control flatpickr active" placeholder="Select Start Date">
+                                        </flat-pickr>
+                                        <div class="text-danger mt-1">
+                                            {{ errors.end_date }}
+                                        </div>
+
+                                        <div class="text-danger mt-1">
+                                            <div v-for="message in validationErrors?.end_date">
+                                                {{ message }}
+                                            </div>
+                                        </div>
                                     </div>
 
                                     <div class="form-group col-md-6">
                                         <label for="post-end_date">End Date</label>
                                         <flat-pickr v-model="event.end_date" :config="config"
-                                            class="form-control flatpickr active"
-                                            placeholder="Select End Date"></flat-pickr>
+                                            class="form-control flatpickr active" placeholder="Select End Date">
+                                        </flat-pickr>
+
+                                        <div class="text-danger mt-1">
+                                            {{ errors.end_date }}
+                                        </div>
+
+                                        <div class="text-danger mt-1">
+                                            <div v-for="message in validationErrors?.end_date">
+                                                {{ message }}
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -101,10 +118,19 @@
                                 <div class="form-group">
                                     <label for="post_description">Description</label>
 
-                                    <quill-editor v-model:value="event.description" :options="options1"
+                                    <quill-editor v-model:value="event.description"
                                         placeholder="Enter Description..."></quill-editor>
-                                </div>
 
+                                    <div class="text-danger mt-1">
+                                        {{ errors.description }}
+                                    </div>
+
+                                    <div class="text-danger mt-1">
+                                        <div v-for="message in validationErrors?.description">
+                                            {{ message }}
+                                        </div>
+                                    </div>
+                                </div>
 
 
                                 <div class="form-group">
@@ -117,7 +143,7 @@
                                             <input type="file"
                                                 class="custom-file-container__custom-file__custom-file-input"
                                                 accept="image/*" @change="
-                                                    event.main_image =
+                                                    event.main_image_path =
                                                     $event.target.files[0]
                                                     " />
                                             <input type="hidden" name="MAX_FILE_SIZE" value="10485760" />
@@ -175,17 +201,16 @@ import FileUploadWithPreview from "file-upload-with-preview";
 import "../../assets/sass/scrollspyNav.scss";
 import "../../assets/sass/forms/file-upload-with-preview.min.css";
 
-import flatPickr from "vue-flatpickr-component";
-import "flatpickr/dist/flatpickr.css";
+
+import flatPickr from 'vue-flatpickr-component';
+import 'flatpickr/dist/flatpickr.css';
+
 import "../../assets/sass/forms/custom-flatpickr.css";
-
-
-
 
 import { quillEditor } from "vue3-quill";
 import "vue3-quill/lib/vue3-quill.css";
 
-import { reactive, onMounted, ref } from "vue";
+import { onMounted, ref } from "vue";
 import useEvents from "@/composables/events";
 import { useForm, useField, defineRule } from "vee-validate";
 import { required, min } from "@/validation/rules";
@@ -231,27 +256,27 @@ const { value: is_published } = useField("is_published", null, {
 
 const { storeEvent, validationErrors, isLoading, getEventList, eventList } =
     useEvents();
-const event = reactive({
+
+const event = ref({
     name,
     location,
     url,
     start_date,
     end_date,
     description,
-    main_image: "",
+    main_image_path: "",
     is_published,
 });
 
-const options1 = ref({
-    modules: {
-        //toolbar: [[{ header: [1, 2, false] }], ["bold", "italic", "underline"], ["image", "code-block"]],
-    },
-});
-
 function submitForm() {
+    console.log(event.value);
     validate().then((form) => {
         if (form.valid) {
-            storeEvent(event);
+            storeEvent(event.value);
+        } else {
+            let errors = form.errors;
+            console.log(errors);
+            showToast("Please fill all fields to proceed", "error");
         }
     });
 }

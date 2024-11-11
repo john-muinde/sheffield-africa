@@ -40,7 +40,6 @@ export default function useUsers() {
     const getUser = async (id) => {
         try {
             const response = await apiRequest("get", `/api/users/${id}`);
-
             user.value = response;
         } catch (errors) {
             validationErrors.value = errors;

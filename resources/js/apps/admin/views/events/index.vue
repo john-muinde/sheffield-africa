@@ -31,7 +31,7 @@
                     </div>
 
                     <div class="custom-table">
-                        <v-client-table :data="getTableData()" :columns="columns" :options="table_option">
+                        <v-client-table :data="tableData" :columns="columns" :options="table_option">
                             <template #event_image="props">
                                 <img :src="'/storage/' + props.row.main_image_path
                                     " class="rounded profile-img" alt="avatar" />
@@ -81,7 +81,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, watch } from "vue";
+import { ref, onMounted, watch, computed } from "vue";
 
 import { useMeta } from "../../composables/use-meta";
 useMeta({ title: "View Events" });
@@ -97,11 +97,9 @@ onMounted(() => {
     console.log("Events: ", events.value);
 });
 
-const getTableData = () => {
-    return events.value && Array.isArray(events.value.data)
-        ? events.value.data
-        : [];
-};
+const tableData = computed(() => {
+    return Array.isArray(events.value) ? events.value : [];
+});
 
 const columns = ref([
     "id",

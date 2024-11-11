@@ -37,14 +37,8 @@
                                         <label for="post-name">Event Name</label>
                                         <input v-model="event.name" id="post-name" type="text" class="form-control"
                                             placeholder="Enter Event Name ..." />
-
-                                        <div class="text-danger mt-1">
-                                            {{ errors.name }}
-                                        </div>
-                                        <div class="text-danger mt-1">
-                                            <div v-for="message in validationErrors?.name">
-                                                {{ message }}
-                                            </div>
+                                        <div v-for="message in validationErrors?.name" class="text-danger mt-1">
+                                            {{ message }}
                                         </div>
                                     </div>
 
@@ -52,10 +46,6 @@
                                         <label for="post-location">Event Location</label>
                                         <input v-model="event.location" id="post-location" type="text"
                                             class="form-control" placeholder="Enter Event location ..." />
-
-                                        <div class="text-danger mt-1">
-                                            {{ errors.location }}
-                                        </div>
                                         <div class="text-danger mt-1">
                                             <div v-for="message in validationErrors?.location">
                                                 {{ message }}
@@ -70,12 +60,24 @@
                                         <label for="start_date">Start Date</label>
                                         <flat-pickr v-model="event.start_date" class="form-control flatpickr active"
                                             placeholder="Select Start Date"></flat-pickr>
+
+                                        <div class="text-danger mt-1">
+                                            <div v-for="message in validationErrors?.start_date">
+                                                {{ message }}
+                                            </div>
+                                        </div>
                                     </div>
 
                                     <div class="form-group col-md-6">
                                         <label for="end_date">End Date</label>
                                         <flat-pickr v-model="event.end_date" class="form-control flatpickr active"
                                             placeholder="Select End Date"></flat-pickr>
+
+                                        <div class="text-danger mt-1">
+                                            <div v-for="message in validationErrors?.end_date">
+                                                {{ message }}
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -83,10 +85,6 @@
                                     <label for="post-url">URL</label>
                                     <input v-model="event.url" id="post-url" type="text" class="form-control"
                                         placeholder="Enter Event url ..." />
-
-                                    <div class="text-danger mt-1">
-                                        {{ errors.url }}
-                                    </div>
                                     <div class="text-danger mt-1">
                                         <div v-for="message in validationErrors?.url">
                                             {{ message }}
@@ -97,8 +95,14 @@
                                 <div class="form-group">
                                     <label for="post_description">Description</label>
 
-                                    <quill-editor v-model:value="event.description" :options="options1"
+                                    <quill-editor v-model:value="event.description"
                                         placeholder="Enter Description..."></quill-editor>
+
+                                    <div class="text-danger mt-1">
+                                        <div v-for="message in validationErrors?.description">
+                                            {{ message }}
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <div class="form-group">
@@ -111,7 +115,7 @@
                                             <input type="file"
                                                 class="custom-file-container__custom-file__custom-file-input"
                                                 accept="image/*" @change="
-                                                    event.main_image =
+                                                    event.main_image_path =
                                                     $event.target.files[0]
                                                     " />
                                             <input type="hidden" name="MAX_FILE_SIZE" value="10485760" />
@@ -134,10 +138,6 @@
                                             </option>
                                         </select>
                                     </div>
-
-                                    <div class="text-danger mt-1">
-                                        {{ errors.is_published }}
-                                    </div>
                                     <div class="text-danger mt-1">
                                         <div v-for="message in validationErrors?.is_published">
                                             {{ message }}
@@ -159,12 +159,11 @@
     </div>
 </template>
 <script setup>
-import { onMounted, reactive, watchEffect } from "vue";
+import { onMounted, watchEffect, watch } from "vue";
 
 import { useRoute } from "vue-router";
 import useEvents from "@/composables/events";
-import { useForm, useField, defineRule } from "vee-validate";
-import { required, min } from "@/validation/rules";
+
 import FileUploadWithPreview from "file-upload-with-preview";
 import "../../assets/sass/forms/file-upload-with-preview.min.css";
 
@@ -180,97 +179,44 @@ import "vue3-quill/lib/vue3-quill.css";
 import { useMeta } from "../../composables/use-meta";
 useMeta({ title: "Edit Event" });
 
-defineRule("required", required);
-defineRule("min", min);
-
-// Define a validation schema
-const schema = {
-    name: "required|min:3",
-    location: "required|min:3",
-    start_date: "required",
-    end_date: "required",
-    url: "required",
-    description: "required|min:3",
-    is_published: "required",
-};
-
-// Create a form context with the validation schema
-const { validate, errors, resetForm } = useForm({ validationSchema: schema });
-// Define actual fields for validation
-
-const {
-    event: postData,
-    getEvent,
-    updateEvent,
-    validationErrors,
-    isLoading,
-    getEventList,
-} = useEvents();
-
-const { value: name } = useField("name", null, { initialValue: "" });
-const { value: location } = useField("location", null, { initialValue: "" });
-const { value: url } = useField("url", null, { initialValue: "" });
-const { value: start_date } = useField("start_date", null, { initialValue: new Date() });
-const { value: end_date } = useField("end_date", null, { initialValue: new Date() });
-const { value: description } = useField("description", null, {
-    initialValue: "",
-});
-const { value: is_published } = useField("is_published", null, {
-    initialValue: "",
-});
-
-const event = reactive({
-    name,
-    location,
-    start_date,
-    url,
-    end_date,
-    description,
-    is_published,
-});
 const route = useRoute();
+
+const { event, isLoading, getEvent, updateEvent, validationErrors } = useEvents();
+
 function submitForm() {
-    validate().then((form) => {
-        console.log(form.valid);
-        if (form.valid) {
-            updateEvent(event);
-        }
-    });
+    updateEvent(event.value);
 }
+
 onMounted(() => {
     getEvent(route.params.id);
-    getEventList();
-
-    watchEffect(() => {
-        if (postData.value && postData.value.main_image_path) {
-            const mainImagePath = postData.value.main_image_path;
-
-            // Define the variable
-            const mainImage = "/storage/" + mainImagePath;
-
-            // Create the configuration object with the variable value
-            const fileUploadConfig = {
-                images: {
-                    baseImage: mainImage,
-                    backgroundImage: "",
-                },
-            };
-
-            // Pass the configuration object to FileUploadWithPreview
-            new FileUploadWithPreview("myFirstImage", fileUploadConfig);
-        }
-    });
 });
-// https://vuejs.org/api/reactivity-core.html#watcheffect
+
+watch(() => route.params.id, (id) => {
+    getEvent(route.params.id);
+});
 
 watchEffect(() => {
-    event.id = postData.value.id;
-    event.name = postData.value.name;
-    event.url = postData.value.url;
-    event.location = postData.value.location;
-    event.start_date = postData.value.start_date;
-    event.end_date = postData.value.end_date;
-    event.description = postData.value.description;
-    event.is_published = postData.value.is_published;
-});
+    if (event.value.main_image_path) {
+        const upload = new FileUploadWithPreview("myFirstImage");
+
+        const mainImagePath = event.value.main_image_path;
+
+        // Define the variable
+        const mainImage = "/storage/" + mainImagePath;
+
+        // Create the configuration object with the variable value
+        const fileUploadConfig = {
+            images: {
+                baseImage: mainImage,
+                backgroundImage: "",
+            },
+        };
+
+        // Pass the configuration object to FileUploadWithPreview
+        new FileUploadWithPreview("myFirstImage", fileUploadConfig);
+    }
+})
+
+
+
 </script>

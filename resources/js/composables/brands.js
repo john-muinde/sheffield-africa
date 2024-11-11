@@ -28,7 +28,12 @@ export default function useBrands() {
         try {
             const data = await apiRequest(
                 "get",
-                `/api/brands?page=${page}&search_id=${search_id}&search_title=${search_title}&search_global=${search_global}&order_column=${order_column}&order_direction=${order_direction}`
+                `/api/brands?page=${page}
+                &search_id=${search_id}
+                &search_title=${search_title}
+                &search_global=${search_global}
+                &order_column=${order_column}
+                &order_direction=${order_direction}`
             );
             brands.value = data;
             console.log(data);

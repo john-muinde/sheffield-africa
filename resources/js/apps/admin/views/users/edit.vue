@@ -1,117 +1,117 @@
 <template>
-  <div class="container">
-    <teleport to="#breadcrumb">
-      <ul class="navbar-nav flex-row">
-        <li>
-          <div class="page-header">
-            <nav class="breadcrumb-one" aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item">
-                  <a href="javascript:;">Users</a>
-                </li>
-                <li class="breadcrumb-item active" aria-current="page">
-                  <span>Edit User</span>
-                </li>
-              </ol>
-            </nav>
-          </div>
-        </li>
-      </ul>
-    </teleport>
-
     <div class="container">
-      <div class="row">
-        <div id="" class="col-lg-12 layout-spacing layout-top-spacing">
-          <div class="statbox panel box box-shadow">
-            <div class="panel-heading pb-0">
-              <div class="row">
-                <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                  <h3><b>Edit User</b></h3>
+        <teleport to="#breadcrumb">
+            <ul class="navbar-nav flex-row">
+                <li>
+                    <div class="page-header">
+                        <nav class="breadcrumb-one" aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item">
+                                    <a href="javascript:;">Users</a>
+                                </li>
+                                <li class="breadcrumb-item active" aria-current="page">
+                                    <span>Edit User</span>
+                                </li>
+                            </ol>
+                        </nav>
+                    </div>
+                </li>
+            </ul>
+        </teleport>
+
+        <div class="container">
+            <div class="row">
+                <div id="" class="col-lg-12 layout-spacing layout-top-spacing">
+                    <div class="statbox panel box box-shadow">
+                        <div class="panel-heading pb-0">
+                            <div class="row">
+                                <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                                    <h3><b>Edit User</b></h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <form @submit.prevent="submitForm">
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <label for="post-name"> Name</label>
+                                        <input v-model="user.name" id="post-name" type="text" class="form-control"
+                                            placeholder="Enter Name ..." />
+
+
+                                        <div class="text-danger mt-1">
+                                            <div v-for="message in validationErrors?.name">
+                                                {{ message }}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <label for="post-email">User Email</label>
+                                        <input v-model="user.email" id="post-email" type="email" class="form-control"
+                                            placeholder="Enter User Email ..." />
+
+                                        <div class="text-danger mt-1">
+                                            <div v-for="message in validationErrors?.email">
+                                                {{ message }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <label for="post-password">Password</label>
+                                        <input v-model="user.password" id="post-password" type="password"
+                                            class="form-control" placeholder="Enter Password ..." />
+
+                                        <div class="text-danger mt-1">
+                                            <div v-for="message in validationErrors?.password">
+                                                {{ message }}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <label for="post-address">Confirm Password</label>
+                                        <input v-model="user.confirm_password" id="post-address" type="password"
+                                            class="form-control" placeholder="Enter Confirm Password ..." />
+
+                                        <div class="text-danger mt-1">
+                                            <div v-for="message in validationErrors?.confirm_password">
+                                                {{ message }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-6">
+                                    <label for="is_published" class="col-form-label">Role</label>
+                                    <div>
+                                        <select v-model="user.role" id="role" class="form-select">
+                                            <option selected value="1">Admin</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="text-danger mt-1">
+                                        <div v-for="message in validationErrors?.role">
+                                            {{ message }}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <button :disabled="isLoading" class="btn btn-primary mt-3">
+                                    <div v-show="isLoading" class=""></div>
+                                    <span v-if="isLoading">Processing...</span>
+                                    <span v-else>Save</span>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
-            <div class="panel-body">
-              <form @submit.prevent="submitForm">
-                <div class="row">
-                  <div class="form-group col-md-6">
-                    <label for="post-name"> Name</label>
-                    <input v-model="user.name" id="post-name" type="text" class="form-control"
-                      placeholder="Enter Name ..." />
-
-
-                    <div class="text-danger mt-1">
-                      <div v-for="message in validationErrors?.name">
-                        {{ message }}
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="form-group col-md-6">
-                    <label for="post-email">User Email</label>
-                    <input v-model="user.email" id="post-email" type="email" class="form-control"
-                      placeholder="Enter User Email ..." />
-
-                    <div class="text-danger mt-1">
-                      <div v-for="message in validationErrors?.email">
-                        {{ message }}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="row">
-                  <div class="form-group col-md-6">
-                    <label for="post-password">Password</label>
-                    <input v-model="user.password" id="post-password" type="password" class="form-control"
-                      placeholder="Enter Password ..." />
-
-                    <div class="text-danger mt-1">
-                      <div v-for="message in validationErrors?.password">
-                        {{ message }}
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="form-group col-md-6">
-                    <label for="post-address">Confirm Password</label>
-                    <input v-model="user.confirm_password" id="post-address" type="password" class="form-control"
-                      placeholder="Enter Confirm Password ..." />
-
-                    <div class="text-danger mt-1">
-                      <div v-for="message in validationErrors?.confirm_password">
-                        {{ message }}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="form-group col-md-6">
-                  <label for="is_published" class="col-form-label">Role</label>
-                  <div>
-                    <select v-model="user.role" id="role" class="form-select">
-                      <option selected value="1">Admin</option>
-                    </select>
-                  </div>
-
-                  <div class="text-danger mt-1">
-                    <div v-for="message in validationErrors?.role">
-                      {{ message }}
-                    </div>
-                  </div>
-                </div>
-
-                <button :disabled="isLoading" class="btn btn-primary mt-3">
-                  <div v-show="isLoading" class=""></div>
-                  <span v-if="isLoading">Processing...</span>
-                  <span v-else>Save</span>
-                </button>
-              </form>
-            </div>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
 </template>
 
 <script setup>
@@ -128,19 +128,19 @@ const route = useRoute();
 
 
 const { user, getUser, updateUser, validationErrors, isLoading, getUserList, userList } =
-  useUsers();
+    useUsers();
 
 function submitForm() {
-  updateUser(user.value);
+    updateUser(user.value);
 }
 
 onMounted(() => {
-  getUser(route.params.id);
+    getUser(route.params.id);
 });
 
 watch(() => route.params.id, (id) => {
-  getUser(route.params.id);
-  console.log(user.value)
+    getUser(route.params.id);
+    console.log(user.value)
 });
 
 //console.log(blogCategoryList);
