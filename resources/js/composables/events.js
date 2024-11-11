@@ -77,7 +77,7 @@ export default function useEvents() {
         }
 
         const config = {
-            headers: { "content-type": "multipart/form-data" },
+            headers: { "Content-Type": "multipart/form-data" },
         };
 
         try {
