@@ -75,7 +75,7 @@
                             <i class="icon-shopping-cart"></i>
                             <span class="cart-count">{{
                                 cartItems.length
-                            }}</span>
+                                }}</span>
                             <span class="cart-txt">Cart</span>
                         </router-link>
 
@@ -318,8 +318,7 @@
                                     disableOnInteraction: false,
                                     pauseOnMouseEnter: true,
                                 }" @swiper="onSwiper" class="products-container">
-                                <swiper-slide v-for="product in promotionProducts" :key="product.id"
-                                    v-if="product?.cost_price">
+                                <swiper-slide v-for="product in promotionProducts" :key="product.id">
                                     <div class="own-product position-relative px-2"
                                         style="border-radius: 12px; transition: all 0.3s ease;">
                                         <!-- Product Image with loading skeleton -->
@@ -649,12 +648,20 @@ const fetchProducts = async () => {
         promotionProducts.value = response.data.products.data;
 
         promotionProducts.value = promotionProducts.value.map((product) => {
+            if (convertToNumber(product.cost_price) <= 0) {
+                product.cost_price = convertToNumber(product.retail_price);
+            }
+
+            if (convertToNumber(product.cost_price) <= 0) {
+                return null;
+            }
+
             return {
                 ...product,
                 cost_price: convertToNumber(product.cost_price),
                 retail_price: convertToNumber(product.retail_price),
             };
-        });
+        }).filter((product) => product !== null);
 
         //console.log(promotionProducts)
     } catch (error) {
@@ -685,6 +692,8 @@ onMounted(() => {
 const viewProduct = () => {
     window.open("https://forms.gle/as8SvN2SNTKxSbKA9", "_blank");
 };
+
+
 
 
 </script>
