@@ -86,8 +86,11 @@ import VueEasymde from "vue3-easymde";
 import "easymde/dist/easymde.min.css";
 
 // ant design
+import Antd from "ant-design-vue";
 import "ant-design-vue/dist/reset.css";
 import showToast from "./utils/notification";
+
+app.use(Antd);
 
 app.use(store)
     .use(router)

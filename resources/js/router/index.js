@@ -1,12 +1,9 @@
 import { createRouter, createWebHistory } from "vue-router";
-import routes from './routes.js'
+import routes from "./routes.js";
 import store from "../store";
 
-
-
-
 const router = createRouter({
-    // mode: 'history',
+    mode: 'history',
     history: createWebHistory(),
     linkExactActiveClass: "active",
     routes,
