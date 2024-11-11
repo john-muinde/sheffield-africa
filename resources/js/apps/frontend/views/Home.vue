@@ -906,7 +906,7 @@ const viewProduct = () => {
 }
 </style>
 
-<style>
+<style scoped>
 .cat-banner-row .carousel__prev {
     height: 92% !important;
     color: #8a8a8a !important;
