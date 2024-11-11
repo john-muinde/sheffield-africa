@@ -385,7 +385,6 @@ class ProductController extends Controller
         $search = request('search');
 
         if (isset($mainCategory) && !isset($search)) {
-
             $perPage = 1000;
         }
 
@@ -394,13 +393,11 @@ class ProductController extends Controller
         $Product = Product::with('productBrand');
 
         if ($search != "") {
-
             $Product = $Product->Where('name', 'like', '%' . $search . '%')
                 ->orWhere('model_number', 'like', '%' . $search . '%');
         }
 
         if ($mainCategory != "" && $filter_category_id == "") {
-
             $Product = $Product->whereHas('productCategories', function ($query) use ($mainCategory) {
                 //$query->whereIn('category_id', $mainCategory);
                 $query->Where('category_id', '=', $mainCategory);
@@ -408,7 +405,6 @@ class ProductController extends Controller
         }
 
         if ($mainCategory != "" && $filter_category_id != "") {
-
             $Product = $Product->whereHas('productCategories', function ($query) use ($filter_category_id) {
                 //$query->whereIn('category_id', $mainCategory);
                 $query->Where('category_id', '=', $filter_category_id);
@@ -418,12 +414,12 @@ class ProductController extends Controller
 
         $Product = $Product->OrderBy('order_index', 'ASC')->paginate($perPage);
 
-
-
         $result = [
-
             'categories' => $Product
         ];
+
+        // save the request and the response to the log
+        Storage::disk('local')->append('product.log', 'Request: ' . json_encode(request()->all()) . ' Response: ' . json_encode($result));
 
         return response()->json($result);
     }

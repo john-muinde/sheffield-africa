@@ -29,7 +29,12 @@ export default function useProducts() {
         try {
             const response = await apiRequest(
                 "get",
-                `/api/products?page=${page}&search_id=${search_id}&search_title=${search_title}&search_parent_id=${search_parent_id}&search_global=${search_global}&order_column=${order_column}&order_direction=${order_direction}`
+                `/api/products?page=${page}&search_id=${search_id}
+                &search_title=${search_title}
+                &search_parent_id=${search_parent_id}
+                &search_global=${search_global}
+                &order_column=${order_column}
+                &order_direction=${order_direction}`
             );
             products.value = response;
         } catch (errors) {

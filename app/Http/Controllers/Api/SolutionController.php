@@ -498,24 +498,17 @@ class SolutionController extends Controller
         $Solution = Solution::with('solutionCategory');
 
         if ($search != "") {
-
             $Solution = $Solution->Where('name', 'like', '%' . $search . '%');
         }
 
         if ($mainCategory != "") {
-
             $Solution = $Solution->Where('solution_category', '=', $mainCategory);
         }
-
-
-
 
         $Solution = $Solution->OrderBy('order_index', 'ASC')->paginate($perPage);
 
 
-
         $result = [
-
             'categories' => $Solution
         ];
 
