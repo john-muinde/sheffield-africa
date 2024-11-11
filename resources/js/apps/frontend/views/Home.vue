@@ -75,7 +75,7 @@
                             <i class="icon-shopping-cart"></i>
                             <span class="cart-count">{{
                                 cartItems.length
-                            }}</span>
+                                }}</span>
                             <span class="cart-txt">Cart</span>
                         </router-link>
 
@@ -316,14 +316,12 @@
                                     delay: 5000,
                                     disableOnInteraction: false,
                                     pauseOnMouseEnter: true,
-                                }" @swiper="onSwiper" class="products-container">
+                                }" :slides-per-group="slidesPerView" @swiper="onSwiper" class="products-container">
                                 <swiper-slide v-for="product in promotionProducts" :key="product.id">
-
                                     <div class="own-product position-relative px-2 product-card">
                                         <!-- Savings Badge -->
                                         <span class="savings-badge">
-                                            Save {{ calculateDiscount(product.cost_price, product.retail_price)
-                                            }}%
+                                            Save {{ calculateDiscount(product.cost_price, product.retail_price) }}%
                                         </span>
                                         <!-- Product Image with loading skeleton -->
                                         <div class="product-image-container">
@@ -332,16 +330,14 @@
                                                 class="d-flex justify-content-center align-items-center mt-2">
                                                 <div class="image-skeleton" v-if="!imageLoaded"></div>
                                                 <img v-lazy="'/storage/' + product.main_image_path" :alt="product.name"
-                                                    class="img img-fluid product-image" @load="imageLoaded = true">
+                                                    class="img img-fluid product-image" @load="imageLoaded = true" />
                                             </router-link>
                                         </div>
 
                                         <!-- Product Details with improved spacing -->
                                         <div class="product-details">
                                             <!-- Product Name with ellipsis -->
-                                            <span class="text-start product-name">
-                                                {{ product.name }}
-                                            </span>
+                                            <span class="text-start product-name">{{ product.name }}</span>
 
                                             <!-- Description with ellipsis -->
                                             <span class="text-start text-muted product-description">
@@ -358,14 +354,17 @@
 
                                             <!-- Discounted Price with animation -->
                                             <div class="price-tag bg-danger fw-bold text-uppercase">
-                                                KES {{ formatPrice(product.retail_price <= 0 ? product.cost_price :
-                                                    product.retail_price) }} </div>
+                                                KES
+                                                {{
+                                                    formatPrice(
+                                                        product.retail_price <= 0 ? product.cost_price : product.retail_price)
+                                                }} </div>
                                             </div>
 
                                             <!-- Enhanced Add to Cart Button -->
                                             <div class="product-action-image">
                                                 <button @click="addToCart(product)" class="btn-product btn-cart"
-                                                    :class="{ 'adding': isAdding }" @mouseenter="showTooltip = true"
+                                                    :class="{ adding: isAdding }" @mouseenter="showTooltip = true"
                                                     @mouseleave="showTooltip = false">
                                                     <span class="btn-text">{{ addToCartText }}</span>
                                                     <div class="btn-loading-icon" v-if="isAdding">
@@ -376,7 +375,6 @@
                                         </div>
                                 </swiper-slide>
                             </swiper>
-
                             <!-- Mobile View All Button -->
                             <div class="d-md-none text-center mt-4">
                                 <router-link to="/promotional-solutions/371/nov-1-nov-31-2024-promotions"
@@ -451,6 +449,7 @@ const slidesPerView = computed(() => {
     if (width < 1200) return 3 // Medium desktop
     return 4 // Large desktop
 })
+
 
 const addToCartText = computed(() => {
     return isAdding.value ? 'Adding...' : 'Add to Cart'
