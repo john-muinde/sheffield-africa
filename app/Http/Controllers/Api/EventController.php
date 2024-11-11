@@ -59,6 +59,10 @@ class EventController extends Controller
 
         if ($request->hasFile('main_image')) {
 
+            $request->validate([
+                'main_image_path' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
+
             $file = $request->file('main_image_path');
 
             $file_name = time() . '_' . '_event_' . $request->file('main_image_path')->getClientOriginalName();
@@ -68,11 +72,10 @@ class EventController extends Controller
             $image = Image::make($file)->resize(800, null, function ($constraint) {
                 $constraint->aspectRatio();
                 $constraint->upsize();
-            })->encode('jpg', 85); // Specify the desired encoding format and quality (80% in this example)
+            })->encode('jpg', 85);
 
             // Store the optimized image
             Storage::disk('public')->put($file_path, $image);
-            //$file_path = $request->file('main_image_path')->storeAs('uploads', $file_name, 'public');
 
             $validatedData['main_image_path'] = $file_path;
         }
