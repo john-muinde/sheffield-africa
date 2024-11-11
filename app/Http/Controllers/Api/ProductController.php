@@ -380,6 +380,7 @@ class ProductController extends Controller
     {
         $perPage = request('per_page', 20);
         $categoryId = request('category_id', 21);
+
         $mainCategory = request('mainCategory');
         $filter_category_id = request('filter_category_id');
         $search = request('search');
@@ -393,7 +394,7 @@ class ProductController extends Controller
         $Product = Product::with('productBrand');
 
         if ($search != "") {
-            $Product = $Product->Where('name', 'like', '%' . $search . '%')
+            $Product = $Product->where('name', 'like', '%' . $search . '%')
                 ->orWhere('model_number', 'like', '%' . $search . '%');
         }
 
@@ -407,7 +408,7 @@ class ProductController extends Controller
         if ($mainCategory != "" && $filter_category_id != "") {
             $Product = $Product->whereHas('productCategories', function ($query) use ($filter_category_id) {
                 //$query->whereIn('category_id', $mainCategory);
-                $query->Where('category_id', '=', $filter_category_id);
+                $query->where('category_id', '=', $filter_category_id);
             });
         }
 
