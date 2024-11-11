@@ -158,7 +158,6 @@ class CategoryController extends Controller
         $category = $category->OrderBy('order_index', 'ASC')->paginate($perPage);
 
         $result = [
-
             'categories' => $category
         ];
 

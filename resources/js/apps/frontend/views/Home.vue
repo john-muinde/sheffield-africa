@@ -75,7 +75,7 @@
                             <i class="icon-shopping-cart"></i>
                             <span class="cart-count">{{
                                 cartItems.length
-                                }}</span>
+                            }}</span>
                             <span class="cart-txt">Cart</span>
                         </router-link>
 
@@ -320,7 +320,7 @@
                                 }" @swiper="onSwiper" class="products-container">
                                 <swiper-slide v-for="product in promotionProducts" :key="product.id">
                                     <div class="own-product position-relative px-2"
-                                        style="border-radius: 12px; transition: all 0.3s ease;">
+                                        style="border-radius: 12px; transition: all 0.3s ease; height: 100%;">
                                         <!-- Product Image with loading skeleton -->
                                         <div class="product-image-container" style="flex: 2;">
                                             <router-link

@@ -42,6 +42,7 @@ class ProductController extends Controller
                         ->orWhere('name', 'like', '%' . request('search_global') . '%');
                 });
             })
+            ->where('is_published', true)
             ->orderBy($orderColumn, $orderDirection)
             ->paginate(10000);
         return ProductResource::collection($products);
@@ -254,130 +255,108 @@ class ProductController extends Controller
 
     public function getProducts()
     {
-        $perPage = request('per_page', 12);
-        $categoryId = request('category_id', 21);
-        $checkedCategories = request('checkedCategories');
-        $checkedBrands = request('checkedBrands');
+        $perPage = request('per_page');
+        $categoryId = request('category_id');
+        $checkedCategories = request('checkedCategories', []);
+        $checkedBrands = request('checkedBrands', []);
         $selectedSortOption = request('selectedSortOption');
 
-        $allChildrenIds = [];
+        if (!$categoryId) {
+            return response()->json(['error' => 'Category ID is required'], 400);
+        }
 
-        $category = Category::find($categoryId);
-        $the_category = $category;
+        $category = Category::where('id', $categoryId)->where('is_published', true)->first();
+
+        if (!$category) {
+            return response()->json(['error' => 'Category not found or not published'], 404);
+        }
+
         $allChildrenIds = $category->getAllChildrenIds();
 
-        if (!isset($checkedCategories[$categoryId])) {
+        $the_category_ids = isset($checkedCategories[$categoryId]) ? $this->getCheckedCategoryIds($checkedCategories[$categoryId]) : $allChildrenIds;
 
-            $the_category_ids = $allChildrenIds;
-        } else {
+        $allbrands = $checkedBrands[$categoryId] ?? [];
 
-            $allcats = [];
+        $category_products = Category::whereIn('id', $the_category_ids)
+            ->orWhere('id', $categoryId)
+            ->where('is_published', true)
+            ->with(['products' => function ($query) use ($allbrands, $selectedSortOption) {
+                if (!empty($allbrands)) {
+                    $query->whereIn("brand", $allbrands);
+                }
 
-            foreach ($checkedCategories[$categoryId] as  $key => $value) {
+                $query->with('productBrand');
 
-                $categorycat = Category::find($value);
-                $allChildrenIdscat = $categorycat->getAllChildrenIds();
-                $allcats = array_merge($allcats, [$value]);
-                $allcats = array_merge($allcats, $allChildrenIdscat);
-            }
+                if ($selectedSortOption) {
+                    switch ($selectedSortOption) {
+                        case 'name_asc':
+                            $query->orderBy('name', 'ASC');
+                            break;
+                        case 'name_desc':
+                            $query->orderBy('name', 'DESC');
+                            break;
+                        case 'created_at_asc':
+                            $query->orderBy('created_at', 'ASC');
+                            break;
+                        case 'created_at_desc':
+                            $query->orderBy('created_at', 'DESC');
+                            break;
+                        default:
+                            $query->orderBy('order_index');
+                            break;
+                    }
+                }
 
-            $the_category_ids =  $allcats;
-        }
-
-        $allbrands = [];
-
-        if (isset($checkedBrands[$categoryId])) {
-
-            $allbrands = $checkedBrands[$categoryId];
-        }
-
-
-        $category_products = Category::whereIn('id', $the_category_ids);
-
-        if (!isset($checkedCategories[$categoryId])) {
-
-            $category_products = $category_products->orWhere('id', '=', $categoryId);
-        }
-
-        $category_products = $category_products->with(['products' => function ($query) use ($allbrands, $selectedSortOption) {
-
-            if (count($allbrands) > 0) {
-                $query = $query->WhereIn("brand", $allbrands);
-            }
-
-
-            $query = $query->with('productBrand');
-
-            if ($selectedSortOption != null) {
-
-                // if($selectedSortOption == "name_asc"){
-
-                //     $query = $query->orderBy('name', 'ASC');
-
-                // }
-
-                // if($selectedSortOption == "name_desc"){
-
-                //     $query = $query->orderBy('name', 'DESC');
-                // }
-
-                // if($selectedSortOption == "created_at_asc"){
-
-                //     $query = $query->orderBy('created_at', 'ASC');
-                // }
-
-                // if($selectedSortOption == "created_at_desc"){
-
-                //     $query = $query->orderBy('created_at', 'DESC');
-                // }
-
-            } else {
-
-                $query = $query->orderBy('order_index');
-            }
-        }])
+                $query->where('is_published', true);
+            }])
             ->orderBy('order_index')
             ->get();
 
-        // Number of products per page
-        $page = request()->get('page', 1); // Get the current page from the request
-
-        // Manually paginate the products
+        $page = request()->get('page', 1);
         $allProducts = $category_products->flatMap->products;
         $total = $allProducts->count();
         $products = $allProducts->slice(($page - 1) * $perPage, $perPage)->all();
 
-
         $products = new LengthAwarePaginator($products, $total, $perPage, $page);
 
-
-        $category = Category::withCount('categoryProducts')
+        $categories = Category::withCount('categoryProducts')
             ->where('parent_id', $categoryId)
-            ->orderBy('order_index', 'ASC')->get();
+            ->where('is_published', true)
+            ->orderBy('order_index', 'ASC')
+            ->get();
 
         $productBrands = Product::with('productBrand')
             ->whereHas('productCategories', function ($query) use ($categoryId, $allChildrenIds) {
-                $query->whereIn('category_id', $allChildrenIds);
-                $query->orWhere('category_id', '=', $categoryId);
+                $query->whereIn('category_id', $allChildrenIds)
+                    ->orWhere('category_id', $categoryId);
             })
             ->select('brand')
             ->orderBy('brand', 'ASC')
-            ->groupBy('brand')->get();
-
-        // $productBrands = $products_main_query->select('brand')
-        //     ->orderBy('brand', 'ASC')
-        //     ->groupBy('brand')->get();
+            ->groupBy('brand')
+            ->get();
 
         $result = [
             'products' => $products,
-            'categories' => $category,
+            'categories' => $categories,
             'brands' => $productBrands,
-            'the_category' => $the_category,
+            'the_category' => $category,
         ];
 
         return response()->json($result);
     }
 
+    private function getCheckedCategoryIds(array $checkedCategories)
+    {
+        $allcats = [];
+
+        foreach ($checkedCategories as $value) {
+            $category = Category::find($value);
+            $allChildrenIds = $category->getAllChildrenIds();
+            $allcats = array_merge($allcats, [$value], $allChildrenIds);
+        }
+
+        return $allcats;
+    }
     public function getProductsAdmin()
     {
         $perPage = request('per_page', 20);
