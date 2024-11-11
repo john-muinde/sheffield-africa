@@ -211,7 +211,7 @@ class SolutionController extends Controller
 
     public function getMainSolutions($id)
     {
-        $solutions = Solution::Where('solution_category', '=', $id)->orderBy('order_index', 'ASC')->get();
+        $solutions = Solution::where('solution_category', '=', $id)->orderBy('order_index', 'ASC')->get();
         $data = [];
         $data["data"] = $solutions;
         return $data;
@@ -236,7 +236,7 @@ class SolutionController extends Controller
             })
             ->paginate($perPage);
 
-        $category = Category::withCount('categorySolutions')->Where('parent_id', $categoryId)->orderBy('name', 'ASC')->get();
+        $category = Category::withCount('categorySolutions')->where('parent_id', $categoryId)->orderBy('name', 'ASC')->get();
 
         $solutionBrands = Solution::with('solutionBrand')
             ->whereHas('solutionCategories', function ($query) use ($categoryId, $allChildrenIds) {
@@ -262,7 +262,7 @@ class SolutionController extends Controller
     {
         $solution_id = request('solution_id', 1);
 
-        $solution = Solution::Where('id', '=', $solution_id)->first();
+        $solution = Solution::where('id', '=', $solution_id)->first();
 
         return new SolutionResource($solution);
     }
@@ -358,7 +358,7 @@ class SolutionController extends Controller
         ///new
 
 
-        // $SolutionCategory = SolutionCategory::Where("solution_id", "=", $solution_id);
+        // $SolutionCategory = SolutionCategory::where("solution_id", "=", $solution_id);
 
         // $SolutionCategory = $SolutionCategory->with(['category' => function ($query) use($allChildrenIds) {
 
@@ -376,7 +376,7 @@ class SolutionController extends Controller
 
 
 
-        $SolutionCategory = SolutionCategory::Where("solution_id", "=", $solution_id)->orderBy("order_index", "ASC")->get();
+        $SolutionCategory = SolutionCategory::where("solution_id", "=", $solution_id)->orderBy("order_index", "ASC")->get();
 
 
         if (!isset($checkedCategoriesSolutions[$solution_id])) {
@@ -498,11 +498,11 @@ class SolutionController extends Controller
         $Solution = Solution::with('solutionCategory');
 
         if ($search != "") {
-            $Solution = $Solution->Where('name', 'like', '%' . $search . '%');
+            $Solution = $Solution->where('name', 'like', '%' . $search . '%');
         }
 
         if ($mainCategory != "") {
-            $Solution = $Solution->Where('solution_category', '=', $mainCategory);
+            $Solution = $Solution->where('solution_category', '=', $mainCategory);
         }
 
         $Solution = $Solution->OrderBy('order_index', 'ASC')->paginate($perPage);
@@ -523,7 +523,7 @@ class SolutionController extends Controller
         $perPage = 1000;
 
 
-        $Solution = Solution::with('solutionCategories.category')->Where('id', '=', $solution_id)->first();
+        $Solution = Solution::with('solutionCategories.category')->where('id', '=', $solution_id)->first();
 
 
         $solutions = $Solution->solutionCategories;

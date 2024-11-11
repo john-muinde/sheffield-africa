@@ -142,17 +142,17 @@ class CategoryController extends Controller
 
         if ($search != "") {
 
-            $category = $category->Where('name', 'like', '%' . $search . '%');
+            $category = $category->where('name', 'like', '%' . $search . '%');
         }
 
         if ($mainCategory != "" && $filter_category_id == "") {
 
-            $category = $category->Where('parent_id', '=', $mainCategory);
+            $category = $category->where('parent_id', '=', $mainCategory);
         }
 
         if ($mainCategory != "" && $filter_category_id != "") {
 
-            $category = $category->Where('parent_id', '=', $filter_category_id);
+            $category = $category->where('parent_id', '=', $filter_category_id);
         }
 
         $category = $category->OrderBy('order_index', 'ASC')->paginate($perPage);
@@ -180,7 +180,7 @@ class CategoryController extends Controller
     public function getMainCategories($id)
     {
 
-        $categories = Category::WhereIn('parent_id', [$id])->with('children.children')->Where('is_published', true)->orderBy('order_index', 'ASC')->get();
+        $categories = Category::WhereIn('parent_id', [$id])->with('children.children')->where('is_published', true)->orderBy('order_index', 'ASC')->get();
 
         return CategoryResource::collection($categories);
     }

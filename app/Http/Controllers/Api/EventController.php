@@ -136,7 +136,7 @@ class EventController extends Controller
 
     public function getEvents()
     {
-        $events = Event::Where('end_date', '>=', now())->get();
+        $events = Event::where('end_date', '>=', now())->get();
 
         return response()->json($events);
     }

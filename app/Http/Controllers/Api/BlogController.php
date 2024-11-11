@@ -316,8 +316,9 @@ class BlogController extends Controller
 
         $blogs = Blog::orderBy('created_at', 'DESC')->limit(9)->get();
         $videos = Video::orderBy('created_at', 'DESC')->get();
-        $newsletters = Publication::Where('type', '=', 'Newsletter')->orderBy('created_at', 'DESC')->get();
-        $brochures = Publication::Where('type', '=', 'Brochures')->orderBy('created_at', 'DESC')->get();
+
+        $newsletters = Publication::where('type', '=', 'Newsletter')->orderBy('created_at', 'DESC')->get();
+        $brochures = Publication::where('type', '=', 'Brochures')->orderBy('created_at', 'DESC')->get();
 
 
 
@@ -350,7 +351,7 @@ class BlogController extends Controller
     {
 
         $perPage = request('per_page', 9);
-        $Gallerys = Gallery::Where('is_published', '=', true)->orderBy('created_at', 'DESC')->paginate($perPage);
+        $Gallerys = Gallery::where('is_published', '=', true)->orderBy('created_at', 'DESC')->paginate($perPage);
 
         return $Gallerys;
     }
@@ -370,7 +371,7 @@ class BlogController extends Controller
     {
 
         $perPage = request('per_page', 9);
-        $News = News::Where('is_published', '=', true)->orderBy('created_at', 'DESC')->paginate($perPage);
+        $News = News::where('is_published', '=', true)->orderBy('created_at', 'DESC')->paginate($perPage);
 
         return $News;
     }

@@ -350,7 +350,9 @@ class ProductController extends Controller
         $products = new LengthAwarePaginator($products, $total, $perPage, $page);
 
 
-        $category = Category::withCount('categoryProducts')->Where('parent_id', $categoryId)->orderBy('order_index', 'ASC')->get();
+        $category = Category::withCount('categoryProducts')
+            ->where('parent_id', $categoryId)
+            ->orderBy('order_index', 'ASC')->get();
 
         $productBrands = Product::with('productBrand')
             ->whereHas('productCategories', function ($query) use ($categoryId, $allChildrenIds) {
@@ -401,7 +403,7 @@ class ProductController extends Controller
         if ($mainCategory != "" && $filter_category_id == "") {
             $Product = $Product->whereHas('productCategories', function ($query) use ($mainCategory) {
                 //$query->whereIn('category_id', $mainCategory);
-                $query->Where('category_id', '=', $mainCategory);
+                $query->where('category_id', '=', $mainCategory);
             });
         }
 
@@ -420,7 +422,11 @@ class ProductController extends Controller
         ];
 
         // save the request and the response to the log
-        Storage::disk('local')->append('product.log', 'Request: ' . json_encode(request()->all()) . ' Response: ' . json_encode($result));
+        Storage::disk('local')
+            ->append(
+                'product.log',
+                'Request: ' . json_encode(request()->all()) . ' Response: ' . json_encode($result['categories']['data'][0] ?? [])
+            );
 
         return response()->json($result);
     }
@@ -499,7 +505,7 @@ class ProductController extends Controller
     public function searchProduct($searchProduct)
     {
 
-        $products = Product::Where('name', 'like', '%' . $searchProduct . '%')->orderByRaw("LOCATE('$searchProduct', name)")->get();
+        $products = Product::where('name', 'like', '%' . $searchProduct . '%')->orderByRaw("LOCATE('$searchProduct', name)")->get();
 
         return ProductResource::collection($products);
     }
