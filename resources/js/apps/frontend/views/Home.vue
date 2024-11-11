@@ -319,7 +319,7 @@
                                     pauseOnMouseEnter: true,
                                 }" @swiper="onSwiper" class="products-container">
                                 <swiper-slide v-for="product in promotionProducts" :key="product.id"
-                                    v-if="product.cost_price">
+                                    v-if="product?.cost_price">
                                     <div class="own-product position-relative px-2"
                                         style="border-radius: 12px; transition: all 0.3s ease;">
                                         <!-- Product Image with loading skeleton -->
@@ -689,7 +689,7 @@ const viewProduct = () => {
 
 </script>
 
-<style>
+<style scoped>
 /* Enhanced Animations and Styling */
 .promo-image-wrapper {
     overflow: hidden;
