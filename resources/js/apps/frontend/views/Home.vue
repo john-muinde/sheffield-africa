@@ -75,7 +75,7 @@
                             <i class="icon-shopping-cart"></i>
                             <span class="cart-count">{{
                                 cartItems.length
-                                }}</span>
+                            }}</span>
                             <span class="cart-txt">Cart</span>
                         </router-link>
 
@@ -318,9 +318,9 @@
                                     disableOnInteraction: false,
                                     pauseOnMouseEnter: true,
                                 }" @swiper="onSwiper" class="products-container">
-                                <swiper-slide v-if="Number(product.cost_price) > 0" v-for="product in promotionProducts"
-                                    :key="product.id">
-                                    <div class="own-product position-relative px-2 h-100"
+                                <swiper-slide v-for="product in promotionProducts" :key="product.id"
+                                    v-if="product.cost_price">
+                                    <div class="own-product position-relative px-2"
                                         style="border-radius: 12px; transition: all 0.3s ease;">
                                         <!-- Product Image with loading skeleton -->
                                         <div class="product-image-container" style="flex: 2;">
@@ -369,8 +369,9 @@
                                                 <!-- Discounted Price with animation -->
                                                 <div class="price-tag bg-danger fw-bold text-uppercase"
                                                     style="width: 80%; color: white; text-align: center; border-radius: 10px; margin: 10px auto;">
-                                                    KES {{ formatPrice(Number(product.retail_price) <= 0 ?
-                                                        product.cost_price : product.retail_price ) }} </div>
+                                                    KES {{ formatPrice(
+                                                        product.retail_price <= 0 ? product.cost_price :
+                                                            product.retail_price) }} </div>
                                                 </div>
                                             </div>
 
@@ -472,9 +473,13 @@ const formatPrice = (price) => {
 }
 
 const calculateDiscount = (original, discounted) => {
-    if (!original || !discounted) return 0
-    return Math.round(((original - discounted) / original) * 100)
-}
+    return Math.round(((original - discounted) / original) * 100);
+};
+
+const convertToNumber = (value) => {
+    let num = Number(value);
+    return isNaN(num) ? 0 : num;
+};
 
 // const getProductLink = (id, name, modelNumber) => {
 //     return {
@@ -642,6 +647,14 @@ const fetchProducts = async () => {
         }
 
         promotionProducts.value = response.data.products.data;
+
+        promotionProducts.value = promotionProducts.value.map((product) => {
+            return {
+                ...product,
+                cost_price: convertToNumber(product.cost_price),
+                retail_price: convertToNumber(product.retail_price),
+            };
+        });
 
         //console.log(promotionProducts)
     } catch (error) {
