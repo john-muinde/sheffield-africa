@@ -317,6 +317,10 @@ class ProductController extends Controller
         $total = $allProducts->count();
         $products = $allProducts->slice(($page - 1) * $perPage, $perPage)->all();
 
+        if ($total == 0) {
+            return response()->json(['error' => 'No products found'], 404);
+        }
+
         $products = new LengthAwarePaginator($products, $total, $perPage, $page);
 
         $categories = Category::withCount('categoryProducts')

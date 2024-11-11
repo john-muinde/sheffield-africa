@@ -461,7 +461,9 @@ class SolutionController extends Controller
         // $products = $allProducts->slice(($page - 1) * $perPage, $perPage)->all();
 
 
-
+        if (empty($products)) {
+            $products = [];
+        }
 
         $my_products = new LengthAwarePaginator($products, $total, $perPage, $page);
 
