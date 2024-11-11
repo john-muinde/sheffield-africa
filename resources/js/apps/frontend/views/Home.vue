@@ -75,7 +75,7 @@
                             <i class="icon-shopping-cart"></i>
                             <span class="cart-count">{{
                                 cartItems.length
-                                }}</span>
+                            }}</span>
                             <span class="cart-txt">Cart</span>
                         </router-link>
 
@@ -319,7 +319,7 @@
                                 }" @swiper="onSwiper" class="products-container">
                                 <swiper-slide v-for="product in promotionProducts" :key="product.id">
                                     <div class="own-product position-relative px-2"
-                                        style="border-radius: 12px; transition: all 0.3s ease; height: 100%;">
+                                        style="border-radius: 12px; transition: all 0.3s ease; min-height: 380px !important;">
                                         <!-- Product Image with loading skeleton -->
                                         <div class="product-image-container" style="flex: 2;">
                                             <router-link
@@ -712,6 +712,33 @@ const viewProduct = () => {
 
 </script>
 
+<style>
+/* Swiper Navigation Enhancements */
+.swiper-button-next,
+.swiper-button-prev {
+    background-color: rgba(255, 255, 255, 0.9);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.swiper-button-next:after,
+.swiper-button-prev:after {
+    font-size: 18px !important;
+    color: #333;
+}
+
+.swiper-pagination-bullet {
+    transition: all 0.3s ease;
+}
+
+.swiper-pagination-bullet-active {
+    background: #dc3545 !important;
+    transform: scale(1.2);
+}
+</style>
+
 <style scoped>
 /* Enhanced Animations and Styling */
 .promo-image-wrapper {
@@ -902,33 +929,6 @@ const viewProduct = () => {
     .quick-view-button {
         opacity: 1;
     }
-}
-</style>
-
-<style>
-/* Swiper Navigation Enhancements */
-.swiper-button-next,
-.swiper-button-prev {
-    background-color: rgba(255, 255, 255, 0.9);
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-}
-
-.swiper-button-next:after,
-.swiper-button-prev:after {
-    font-size: 18px !important;
-    color: #333;
-}
-
-.swiper-pagination-bullet {
-    transition: all 0.3s ease;
-}
-
-.swiper-pagination-bullet-active {
-    background: #dc3545 !important;
-    transform: scale(1.2);
 }
 </style>
 
