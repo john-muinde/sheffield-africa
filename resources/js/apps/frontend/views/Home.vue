@@ -318,7 +318,8 @@
                                     disableOnInteraction: false,
                                     pauseOnMouseEnter: true,
                                 }" @swiper="onSwiper" class="products-container">
-                                <swiper-slide v-for="product in promotionProducts" :key="product.id">
+                                <swiper-slide v-if="Number(product.cost_price) > 0" v-for="product in promotionProducts"
+                                    :key="product.id">
                                     <div class="own-product position-relative px-2 h-100"
                                         style="border-radius: 12px; transition: all 0.3s ease;">
                                         <!-- Product Image with loading skeleton -->
@@ -354,7 +355,7 @@
                                                 <!-- Original Price -->
                                                 <span class="fw-bold text-center text-muted"
                                                     style="text-decoration: line-through; font-size: 1.4rem; font-weight: bold;">
-                                                    KES {{ formatPrice(product.cost_price || 56350.00) }}
+                                                    KES {{ formatPrice(product.cost_price) }}
                                                 </span>
 
                                                 <!-- Savings Badge -->
@@ -368,23 +369,23 @@
                                                 <!-- Discounted Price with animation -->
                                                 <div class="price-tag bg-danger fw-bold text-uppercase"
                                                     style="width: 80%; color: white; text-align: center; border-radius: 10px; margin: 10px auto;">
-                                                    KES {{ formatPrice(product.retail_price || 45080.00) }}
+                                                    KES {{ formatPrice(Number(product.retail_price) <= 0 ?
+                                                        product.cost_price : product.retail_price ) }} </div>
                                                 </div>
                                             </div>
-                                        </div>
 
-                                        <!-- Enhanced Add to Cart Button -->
-                                        <div class="product-action-image">
-                                            <button @click="addToCart(product)" class="btn-product btn-cart"
-                                                :class="{ 'adding': isAdding }" @mouseenter="showTooltip = true"
-                                                @mouseleave="showTooltip = false">
-                                                <span class="btn-text">{{ addToCartText }}</span>
-                                                <div class="btn-loading-icon" v-if="isAdding">
-                                                    <span class="spinner"></span>
-                                                </div>
-                                            </button>
+                                            <!-- Enhanced Add to Cart Button -->
+                                            <div class="product-action-image">
+                                                <button @click="addToCart(product)" class="btn-product btn-cart"
+                                                    :class="{ 'adding': isAdding }" @mouseenter="showTooltip = true"
+                                                    @mouseleave="showTooltip = false">
+                                                    <span class="btn-text">{{ addToCartText }}</span>
+                                                    <div class="btn-loading-icon" v-if="isAdding">
+                                                        <span class="spinner"></span>
+                                                    </div>
+                                                </button>
+                                            </div>
                                         </div>
-                                    </div>
                                 </swiper-slide>
                             </swiper>
 
