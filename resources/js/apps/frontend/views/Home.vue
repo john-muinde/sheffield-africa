@@ -75,7 +75,7 @@
                             <i class="icon-shopping-cart"></i>
                             <span class="cart-count">{{
                                 cartItems.length
-                                }}</span>
+                            }}</span>
                             <span class="cart-txt">Cart</span>
                         </router-link>
 
@@ -331,8 +331,9 @@
                                                 :to="getProductLink(product.id, product.name, product.model_number)"
                                                 class="d-flex justify-content-center align-items-center mt-2">
                                                 <div class="image-skeleton" v-if="!imageLoaded"></div>
-                                                <img v-lazy="'/storage/' + product.main_image_path" :alt="product.name"
-                                                    class="img img-fluid product-image" @load="imageLoaded = true">
+                                                <img v-lazy="'/storage/' + product.main_image_path"
+                                                    :alt="product.name" class="img img-fluid product-image"
+                                                    @load="imageLoaded = true">
                                             </router-link>
                                         </div>
 
@@ -1009,7 +1010,6 @@ const viewProduct = () => {
     transition: all 0.3s ease;
     height: 380px !important;
     margin: 10px 0px 20px 0px;
-    /* height: 100%; */
 }
 
 .product-image-container {
@@ -1017,11 +1017,13 @@ const viewProduct = () => {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: 10px;
 }
 
 .product-image {
     object-fit: contain;
     width: 80%;
+    height: 150px !important;
     border-radius: 10px;
 }
 
@@ -1052,7 +1054,6 @@ const viewProduct = () => {
     align-items: center;
     justify-content: end;
     position: relative;
-    padding: 10px 0;
 }
 
 .original-price {
@@ -1337,10 +1338,6 @@ const viewProduct = () => {
     font-size: 20px !important;
     font-weight: 700 !important;
     color: #3e5cac !important;
-}
-
-.product-image {
-    height: auto !important;
 }
 
 #myVideo {
