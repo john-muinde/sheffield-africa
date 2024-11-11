@@ -75,7 +75,7 @@
                             <i class="icon-shopping-cart"></i>
                             <span class="cart-count">{{
                                 cartItems.length
-                            }}</span>
+                                }}</span>
                             <span class="cart-txt">Cart</span>
                         </router-link>
 
@@ -273,7 +273,6 @@
             <template v-if="promotionProducts.length">
                 <div class="container-fluid">
                     <div class="d-flex align-items-center mt-1 row" style="min-height: 500px !important;">
-                        <!-- Promo Image Section with zoom effect -->
                         <div class="image-container col-xl-3 col-lg-4 col-md-12 mb-md-4" style="height: 100%">
                             <div class="promo-image-wrapper">
                                 <img src="/assets/images/events/november-promo.png" alt="Promotion Banner"
@@ -687,7 +686,22 @@ onMounted(() => {
 
     // Initial fetch of products
     fetchProducts();
+    maxHeights();
 });
+
+const maxHeights = () => {
+    const ownProducts = document.querySelectorAll('.own-product');
+    let maxHeight = 0;
+    ownProducts.forEach((product) => {
+        if (product.clientHeight > maxHeight) {
+            maxHeight = product.clientHeight;
+        }
+    });
+
+    ownProducts.forEach((product) => {
+        product.style.height = `${maxHeight}px`;
+    });
+};
 
 const viewProduct = () => {
     window.open("https://forms.gle/as8SvN2SNTKxSbKA9", "_blank");
