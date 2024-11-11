@@ -621,6 +621,7 @@ const fetchProducts = async () => {
             {
                 params: {
                     category_id: promotionId.value,
+                    per_page: 30,
                 },
                 headers: {
                     'Content-Type': 'application/json'
