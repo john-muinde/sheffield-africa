@@ -462,7 +462,7 @@ class SolutionController extends Controller
 
 
         if (empty($products)) {
-            $products = [];
+            return response()->json(['products' => [], 'total' => 0]);
         }
 
         $my_products = new LengthAwarePaginator($products, $total, $perPage, $page);

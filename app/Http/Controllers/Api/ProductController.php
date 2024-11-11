@@ -255,10 +255,10 @@ class ProductController extends Controller
 
     public function getProducts()
     {
-        $perPage = request('per_page');
-        $categoryId = request('category_id');
-        $checkedCategories = request('checkedCategories', []);
-        $checkedBrands = request('checkedBrands', []);
+        $perPage = request('per_page', 12);
+        $categoryId = request('category_id', 21);
+        $checkedCategories = request('checkedCategories');
+        $checkedBrands = request('checkedBrands');
         $selectedSortOption = request('selectedSortOption');
 
         if (!$categoryId) {
@@ -316,10 +316,6 @@ class ProductController extends Controller
         $allProducts = $category_products->flatMap->products;
         $total = $allProducts->count();
         $products = $allProducts->slice(($page - 1) * $perPage, $perPage)->all();
-
-        if ($total == 0) {
-            return response()->json(['error' => 'No products found'], 404);
-        }
 
         $products = new LengthAwarePaginator($products, $total, $perPage, $page);
 
