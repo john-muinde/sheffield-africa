@@ -697,9 +697,6 @@ const viewProduct = () => {
     window.open("https://forms.gle/as8SvN2SNTKxSbKA9", "_blank");
 };
 
-
-
-
 </script>
 
 <style scoped>

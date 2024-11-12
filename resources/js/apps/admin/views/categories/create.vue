@@ -52,7 +52,6 @@
                                         placeholder="Choose Parent Category (Optional) ..." selected-label=""
                                         select-label="" deselect-label=""></multiselect>
 
-
                                     <div class="text-danger mt-1">
                                         {{ errors.parent_id }}
                                     </div>
@@ -77,8 +76,6 @@
                                         </div>
                                     </div>
                                 </div>
-
-
 
                                 <div class="form-group">
                                     <label for="is_published" class="col-form-label">Publishing Status</label>

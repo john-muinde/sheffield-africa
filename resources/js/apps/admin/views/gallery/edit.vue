@@ -296,7 +296,7 @@ import { useMeta } from "../../composables/use-meta";
 useMeta({ title: "Edit Gallery" });
 
 import { useRoute } from "vue-router";
-import useGallerys from "@/composables/gallerys";
+import useGalleries from "@/composables/galleries";
 
 import { useForm, useField, defineRule } from "vee-validate";
 import { required, min } from "@/validation/rules";
@@ -333,7 +333,7 @@ const {
     getGalleryList,
     galleryList,
     deleteGalleryImage,
-} = useGallerys();
+} = useGalleries();
 
 // Define actual fields for validation
 const { value: name } = useField("name", null, { initialValue: "" });
@@ -429,7 +429,7 @@ watchEffect(() => {
     gallery.name = postData.value.name;
     gallery.gallery_introduction = postData.value.gallery_introduction;
     gallery.gallery_type = postData.value.gallery_type;
-   
+
     gallery.is_published = postData.value.is_published;
 
     //gallery_images

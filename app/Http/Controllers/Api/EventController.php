@@ -94,7 +94,6 @@ class EventController extends Controller
     public function update(Request $request, $id)
     {
         $this->authorize('event-edit');
-        Log::info('Logging' . json_encode($request->all()));
 
         $validatedData = $request->validate([
             'name' => ['required', 'string', 'max:255', 'unique:events,name,' . $id],

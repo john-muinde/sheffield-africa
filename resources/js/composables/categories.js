@@ -16,21 +16,30 @@ export default function useCategories() {
     const validationErrors = ref({});
     const isLoading = ref(false);
 
-    const getCategories = async (
+    const getCategories = async ({
         page = 1,
-        search_id = "",
-        search_title = "",
-        search_parent_id = "",
-        search_global = "",
-        order_column = "created_at",
-        order_direction = "desc"
-    ) => {
+        per_page = 20,
+        category_id = null,
+        mainCategory = null,
+        search = null,
+        filter_category_id = "",
+    } = {}) => {
         try {
-            const response = await apiRequest(
-                "get",
-                `/api/categories?page=${page}&search_id=${search_id}&search_title=${search_title}&search_parent_id=${search_parent_id}&search_global=${search_global}&order_column=${order_column}&order_direction=${order_direction}`
-            );
+            const url = `/api/get-categories?page=${page}&per_page=${per_page}&category_id=${category_id}&mainCategory=${mainCategory}&search=${search}&filter_category_id=${filter_category_id}`;
+            const response = await apiRequest("get", url);
             categories.value = response;
+        } catch (errors) {
+            validationErrors.value = errors;
+        }
+    };
+
+    const updateDatabaseOrder = async (formData) => {
+        try {
+            // Make a POST request using Axios
+            await apiRequest("post", "/api/categories-update-order", {
+                data: formData,
+            });
+            showToast("Category order updated successfully", "success");
         } catch (errors) {
             validationErrors.value = errors;
         }
@@ -39,6 +48,7 @@ export default function useCategories() {
     const getCategory = async (id) => {
         try {
             const response = await apiRequest("get", `/api/categories/${id}`);
+            console.log(response);
             category.value = response;
         } catch (errors) {
             validationErrors.value = errors;
@@ -88,7 +98,7 @@ export default function useCategories() {
             cancelText: "No, cancel",
             onOk() {
                 apiRequest("delete", `/api/categories/${id}`).then(() => {
-                    getCategories();
+                    // getCategories();
                     router.push({ name: "categories.index" });
                     showToast("Category deleted successfully", "success");
                 });
@@ -99,10 +109,14 @@ export default function useCategories() {
         });
     };
 
-    const getCategoryList = async () => {
+    const getCategoryList = async (id = "") => {
         try {
-            const response = await apiRequest("get", "/api/category-list");
+            const response = await apiRequest(
+                "get",
+                "/api/category-list?exclude_id=" + id
+            );
             categoryList.value = response;
+            console.log(categoryList.value);
         } catch (errors) {
             validationErrors.value = errors;
         }
@@ -134,6 +148,7 @@ export default function useCategories() {
         categoryMainList,
         categories,
         category,
+        updateDatabaseOrder,
         getCategories,
         getMainCategoryList,
         getSelectedCategoryList,

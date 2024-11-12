@@ -16,9 +16,7 @@
         </teleport>
 
         <div class="container">
-         
-
-            <div  class="row">
+            <div class="row">
                 <div id="" class="col-lg-12 layout-spacing layout-top-spacing">
                     <div class="statbox panel box box-shadow">
                         <div class="panel-heading pb-0">
@@ -31,12 +29,13 @@
                         <div class="panel-body">
 
                             <form @submit.prevent="submitForm">
-                               
 
-                              
+
+
                                 <div class="form-group">
                                     <label for="post-name">Category Name</label>
-                                    <input v-model="category.name" id="post-name" type="text" class="form-control" placeholder="Enter Category Name ..." />
+                                    <input v-model="category.name" id="post-name" type="text" class="form-control"
+                                        placeholder="Enter Category Name ..." />
 
                                     <div class="text-danger mt-1">
                                         {{ errors.name }}
@@ -47,12 +46,16 @@
                                         </div>
                                     </div>
                                 </div>
-                                
 
-                                 <div class="form-group">
-                                    <label for="post-category" class="form-label">Category  (Optional)</label>
 
-                                    <multiselect v-model="category.parent_id" :options="categoryList" :reduce="category => category.id" :searchable="true" :preselect-first="true" track-by="id" label="parent_name_with_dashes" placeholder="Choose Parent Category (Optional) ..." selected-label="" select-label="" deselect-label=""></multiselect>
+                                <div class="form-group">
+                                    <label for="post-category" class="form-label">Category (Optional)</label>
+
+                                    <multiselect v-model="category.parent_id" :options="categoryList"
+                                        :reduce="category => category.id" :searchable="true" :preselect-first="true"
+                                        track-by="id" label="parent_name_with_dashes"
+                                        placeholder="Choose Parent Category (Optional) ..." selected-label=""
+                                        select-label="" deselect-label=""></multiselect>
 
 
                                     <div class="text-danger mt-1">
@@ -67,7 +70,8 @@
 
                                 <div class="form-group">
                                     <label for="post_description">Description</label>
-                                    <textarea v-model="category.description" id="post_description" class="form-control" placeholder="Enter Description ..."></textarea> 
+                                    <textarea v-model="category.description" id="post_description" class="form-control"
+                                        placeholder="Enter Description ..."></textarea>
 
                                     <div class="text-danger mt-1">
                                         {{ errors.description }}
@@ -79,7 +83,7 @@
                                     </div>
                                 </div>
 
-                                
+
 
                                 <div class="form-group">
                                     <label for="is_published" class="col-form-label">Publishing Status</label>
@@ -99,8 +103,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                
-                               
+
+
                                 <button :disabled="isLoading" class="btn btn-primary mt-3">
                                     <div v-show="isLoading" class=""></div>
                                     <span v-if="isLoading">Processing...</span>
@@ -116,90 +120,78 @@
     </div>
 </template>
 <script setup>
-    import { onMounted, reactive, watchEffect } from "vue";
+import { onMounted, reactive, watchEffect } from "vue";
 
-    import { useMeta } from "../../composables/use-meta";
-    useMeta({ title: "Edit Category" });
+import { useMeta } from "../../composables/use-meta";
+useMeta({ title: "Edit Category" });
 
-    import { useRoute } from "vue-router";
-    import useCategories from "@/composables/categories";
-    import { useForm, useField, defineRule } from "vee-validate";
-    import { required, min } from "@/validation/rules"
-
-    
-    
-
-    defineRule('required', required)
-    defineRule('min', min);
-
-    // Define a validation schema
-    const schema = {
-        name: 'required|min:3',
-        description: 'required|min:3',
-        is_published: 'required'
-    }
-
-    // Create a form context with the validation schema
-    const { validate, errors, resetForm } = useForm({ validationSchema: schema })
-    // Define actual fields for validation
+import { useRoute } from "vue-router";
+import useCategories from "@/composables/categories";
+import { useForm, useField, defineRule } from "vee-validate";
+import { required, min } from "@/validation/rules"
 
 
-    const { category: postData, getCategory, updateCategory, validationErrors, isLoading, getCategoryList, categoryList } = useCategories()
 
-    const { value: name } = useField('name', null, { initialValue: '' });
-    const { value: parent_id } = useField('parent_id', null, { initialValue: postData.value.parent_parent_name_with_dashes });
-    const { value: description } = useField('description', null, { initialValue: '' });
-    const { value: is_published } = useField('is_published', null, { initialValue: '' });
 
-    
-    const category = reactive({
-        name,
-        parent_id,
-        description,
-        is_published,
-    })
-    const route = useRoute()
-    function submitForm() {
-        validate().then(form => { 
+defineRule('required', required)
+defineRule('min', min);
 
-            if (form.valid) {
+// Define a validation schema
+const schema = {
+    name: 'required|min:3',
+    description: 'required|min:3',
+    is_published: 'required'
+}
 
-                if (category.parent_id && category.parent_id.id) {
+// Create a form context with the validation schema
+const { validate, errors, resetForm } = useForm({ validationSchema: schema })
+// Define actual fields for validation
 
-                    category.parent_id = category.parent_id.id;
 
-                }else{
+const { category: postData, getCategory, updateCategory, validationErrors, isLoading, getCategoryList, categoryList } = useCategories()
 
-                    category.parent_id = null;
-                }
+const { value: name } = useField('name', null, { initialValue: '' });
+const { value: parent_id } = useField('parent_id', null, { initialValue: postData.value.parent_parent_name_with_dashes });
+const { value: description } = useField('description', null, { initialValue: '' });
+const { value: is_published } = useField('is_published', null, { initialValue: '' });
 
-                updateCategory(category) 
 
+const category = reactive({
+    name,
+    parent_id,
+    description,
+    is_published,
+})
+const route = useRoute()
+function submitForm() {
+    validate().then(form => {
+
+        if (form.valid) {
+            if (category.parent_id && category.parent_id.id) {
+                category.parent_id = category.parent_id.id;
+            } else {
+                category.parent_id = null;
             }
 
-        })
-    }
-    onMounted(() => {
-        getCategoryList();
-        getCategory(route.params.id);
-        
+            updateCategory(category)
+
+        }
+
     })
-    // https://vuejs.org/api/reactivity-core.html#watcheffect
+}
+onMounted(() => {
+    getCategoryList(route.params.id);
+    getCategory(route.params.id);
+
+})
+// https://vuejs.org/api/reactivity-core.html#watcheffect
 
 
-    watchEffect(() => {
-
-        category.id = postData.value.id
-        category.name = postData.value.name
-        category.description = postData.value.description
-        category.is_published = postData.value.is_published
-        //category.parent_id = category.parent_id = postData.value.parent_parent_name_with_dashes ? { id: postData.value.parent_parent_name_with_dashes } : null;
-
-        category.parent_id = postData.value.parent_json;
-;
-
-        console.log(postData.value.parent_json);
-
-   
-    });
+watchEffect(() => {
+    category.id = postData.value.id
+    category.name = postData.value.name
+    category.description = postData.value.description
+    category.is_published = postData.value.is_published
+    category.parent_id = postData.value.parent_json;
+});
 </script>

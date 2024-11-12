@@ -143,7 +143,6 @@ class NewsController extends Controller
 
     public function destroy(News $news)
     {
-        Log::info('News id' . $news->id);
         $this->authorize('product-delete');
         $news->delete();
 

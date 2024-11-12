@@ -1184,8 +1184,6 @@ const routes = [
                 },
             },
 
-
-
             {
                 path: "/laundry",
                 name: "frontend.laundry.page",
@@ -2494,7 +2492,7 @@ const routes = [
             },
             {
                 path: "/admin/gallery/edit/:id",
-                name: "gallerys.edit",
+                name: "galleries.edit",
                 component: () => import("../apps/admin/views/gallery/edit.vue"),
                 meta: {
                     layout: "app",

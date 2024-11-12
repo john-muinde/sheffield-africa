@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('location')->nullable();
             $table->string('longitude')->nullable();
             $table->string('latitude')->nullable();
+            $table->string('document_path')->nullable();
             $table->string('phone_number1')->nullable();
             $table->string('phone_number2')->nullable();
             $table->string('email')->nullable();

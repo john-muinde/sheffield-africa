@@ -16,6 +16,12 @@ return new class extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->text('description')->nullable();
+            $table->foreignId('parent_id')
+                ->nullable()->constrained('categories')->onDelete('CASCADE');
+            $table->integer('order_index')->nullable();
+            $table->boolean('is_published')->default(true);
+            $table->integer('created_by')->nullable();
             $table->timestamps();
         });
     }

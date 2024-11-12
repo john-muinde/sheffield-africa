@@ -6,7 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Resources\CategoryResource;
 use App\Models\Category;
-use Illuminate\Http\Request;
+use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
 {
@@ -42,36 +43,17 @@ class CategoryController extends Controller
 
     public function store(StoreCategoryRequest $request)
     {
+
         $this->authorize(ability: 'category-create');
 
-        // Check if the category with the same name already exists
-        $existingCategory = Category::where('name', $request->name)->first();
-        // if ($existingCategory) {
-        //     return response()->json(['errors' => ['name' => ['Category with the same name already exists.']]], 409);
-        // }
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255|unique:categories',
+            'description' => 'required|string',
+            'parent_id' => 'nullable|exists:categories,id',
+            'is_published' => 'required|boolean',
+        ]);
 
-        $validatedData = $request->validated();
         $validatedData['created_by'] = auth()->user()->id;
-
-        if ($request->hasFile('main_image')) {
-
-            $file = $request->file('main_image');
-
-            $file_name = time() . '_' . '_category_' . $request->file('main_image')->getClientOriginalName();
-            $file_path = 'uploads/' . $file_name;
-
-            // Resize and optimize the image
-            $image = Image::make($file)->resize(800, null, function ($constraint) {
-                $constraint->aspectRatio();
-                $constraint->upsize();
-            })->encode('jpg', 85); // Specify the desired encoding format and quality (80% in this example)
-
-            // Store the optimized image
-            Storage::disk('public')->put($file_path, $image);
-            //$file_path = $request->file('main_image')->storeAs('uploads', $file_name, 'public');
-
-            $validatedData['main_image_path'] = $file_path;
-        }
 
         $category = Category::create($validatedData);
 
@@ -88,15 +70,14 @@ class CategoryController extends Controller
     {
         $this->authorize('category-edit');
 
-        // Check if the category with the same name already exists (excluding the current category)
-        $existingCategory = Category::where('name', $request->name)
-            ->where('id', '!=', $category->id)
-            ->first();
-        if ($existingCategory) {
-            return response()->json(['errors' => ['name' => ['Category with the same name already exists.']]], 409);
-        }
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255|unique:categories,name,' . $category->id,
+            'description' => 'required|string',
+            'parent_id' => 'nullable|exists:categories,id',
+            'is_published' => 'required|boolean',
+        ]);
 
-        $category->update($request->validated());
+        $category->update($validatedData);
 
         return new CategoryResource($category);
     }
@@ -111,13 +92,21 @@ class CategoryController extends Controller
 
     public function getList()
     {
-        return CategoryResource::collection(Category::all());
-    }
+        $result = Category::when(
+            request('exclude_id'),
+            function ($query, $excludeId) {
+                return $query->where('id', '<>', $excludeId);
+            }
+        )
+            ->whereNull('parent_id')
+            ->get();
 
+        return CategoryResource::collection($result);
+    }
     public function getCategoriesMain()
     {
 
-        $categories = Category::WhereNull('parent_id')->get();
+        $categories = Category::whereNull('parent_id')->get();
 
         return response()->json($categories);
     }

@@ -31,7 +31,7 @@
                     </div>
 
                     <div class="panel-body">
-                        <div class="row">
+                        <div class="row d-flex align-items-center justify-content-between">
                             <div class="form-group col-md-1">
                                 <label for="post-category" class="form-label">Per Page</label>
                                 <select v-model="category.perPage" id="perpage" class="form-control form-select select">
@@ -46,7 +46,6 @@
 
                             <div class="form-group col-md-3">
                                 <label for="post-category" class="form-label">Segment</label>
-
                                 <multiselect v-model="category.main_category" :options="categoryMainList"
                                     :reduce="(category) => category.id" :searchable="true" :preselect-first="true"
                                     track-by="name" label="name" placeholder="Choose Segment ..." selected-label=""
@@ -55,7 +54,6 @@
 
                             <div class="form-group col-md-3">
                                 <label for="post-category" class="form-label">Main Category</label>
-
                                 <multiselect v-model="category.filter_category_id" :options="categoryList"
                                     :reduce="(category) => category.id" :searchable="true" :preselect-first="true"
                                     track-by="id" label="name" placeholder="Choose Category (Optional) ..."
@@ -63,7 +61,7 @@
                                 </multiselect>
                             </div>
 
-                            <div class="form-group col-md-5">
+                            <div class="form-group col-md-4">
                                 <label for="post-name">Search</label>
                                 <input v-model="category.search" id="post-name" type="text" class="form-control"
                                     placeholder="Search ..." />
@@ -151,7 +149,7 @@
                                                 " class="badge badge-danger inv-status">Not Published</span>
                                             </td>
                                             <td aria-colindex="5" role="cell">
-                                                {{ the_category.created_at }}
+                                                {{ formatDate(the_category.created_at) }}
                                             </td>
 
                                             <td aria-colindex="6" role="cell" class="text-center">
@@ -271,10 +269,9 @@ import "../../assets/sass/drag-drop/drag-drop.css";
 import "../../assets/sass/font-icons/fontawesome/css/regular.css";
 import "../../assets/sass/font-icons/fontawesome/css/fontawesome.css";
 import { VueDraggableNext as draggable } from "vue-draggable-next";
-
+import formatDate from "@/utils/date";
 import { useRoute } from "vue-router";
 
-import highlight from "../../components/plugins/highlight.vue";
 
 import { useMeta } from "../../composables/use-meta";
 useMeta({ title: "View Categories" });
@@ -296,16 +293,18 @@ const {
     getMainCategoryList,
     categoryMainList,
     getSelectedCategoryList,
+    deleteCategory,
+    updateDatabaseOrder,
 } = useCategories();
 
 const route = useRoute();
 const currentRoute = ref(route);
 
-const currentPage = ref(route.params.page ? parseInt(route.params.page) : 1);
+const currentPage = ref(route.params.page ? convertToNumberOrNull(route.params.page) : 1);
 //const perPage = ref(20);
 const totalProducts = ref(0);
 const totalCountperPage = ref(0);
-const category_id = ref(route.params.id ? parseInt(route.params.id) : 1);
+const category_id = ref(route.params.id ? convertToNumberOrNull(route.params.id) : 1);
 const categories = ref([]);
 const the_category = ref([]);
 
@@ -326,7 +325,7 @@ const category = reactive({
 });
 
 // Fetch products based on the current page
-const fetchProducts = async () => {
+const fetchCategories = async () => {
     try {
         if (category.main_category != "" && category.search == "") {
             category.perPage = 10000;
@@ -339,10 +338,7 @@ const fetchProducts = async () => {
                 category_id: category_id.value,
                 mainCategory: category.main_category.id,
                 search: category.search,
-                filter_category_id:
-                    (category.filter_category_id &&
-                        category.filter_category_id.id) ||
-                    null,
+                filter_category_id: category.filter_category_id?.id || null,
             },
         });
 
@@ -351,17 +347,6 @@ const fetchProducts = async () => {
         categories.value = response.data.categories.data;
     } catch (error) {
         console.error(error);
-    }
-};
-
-const deleteCategory = async (id) => {
-    if (confirm("Are you sure you want to delete this category?")) {
-        try {
-            const response = await axiosInstance.delete(`/api/categories/${id}`);
-            fetchProducts();
-        } catch (error) {
-            console.error(error);
-        }
     }
 };
 
@@ -443,12 +428,12 @@ const getCategoryLink = (id, page) => {
 
 // Initial fetch of products
 onMounted(() => {
-    fetchProducts();
+    fetchCategories();
     getMainCategoryList();
 });
 
 // Watch for changes in the currentPage and fetch products accordingly
-watch(currentPage, fetchProducts);
+watch([currentPage, category], fetchCategories);
 
 watch(main_category, (newValue) => {
     //console.log('Solution object:', newValue.solution_category.id);
@@ -463,67 +448,31 @@ watch(main_category, (newValue) => {
     }
 });
 
-watch(category, updateDisplayedProducts);
+watch([category, main_category, filter_category_id, categories], updateDisplayedProducts);
 
-watch(main_category, updateDisplayedProducts);
-
-watch(filter_category_id, updateDisplayedProducts);
-
-// Watch for changes in the products and update displayedProducts
-watch(categories, updateDisplayedProducts);
+const convertToNumberOrNull = (value) => {
+    const val = value === "" ? null : parseInt(value);
+    return isNaN(val) ? null : val;
+};
 
 watchEffect(() => {
-    const params = route.params; // Access the route parameters
-    const query = route.query; // Access the query parameters
-
-    if (params.id !== "" && category_id !== params.id) {
+    const params = route.params;
+    if (params.id !== "" && category_id.value !== convertToNumberOrNull(params.id)) {
         currentPage.value = 1;
-        category_id.value = params.id ? parseInt(params.id) : 1;
-
-        if (params.page !== "" && currentPage !== params.page) {
-            currentPage.value = params.page ? parseInt(params.page) : 1;
-        }
-
-        // Call a method or update component data based on the new route
-        fetchProducts();
+        category_id.value = convertToNumberOrNull(params.id);
+        fetchCategories();
     }
 });
 
-const updateDatabaseOrder = async (formData) => {
-    try {
-        // Make a POST request using Axios
-        const response = await axiosInstance.post(
-            "/api/categories-update-order",
-            {
-                data: formData,
-            }
-        );
-    } catch (error) {
-        // Handle errors
-        console.error("Error saving data:", error);
-    }
-};
-
 const onDragStart = () => {
-    // Reset the order property for each category when dragging starts
     displayedProducts.value.forEach((category) => {
-        category.order = null; // You can set it to any initial value you prefer
+        category.order = null;
     });
 };
 
-// Function called when the dragging operation ends
 const onDragEnd = (event) => {
-    // Get the new order of items
-
     const newOrder = displayedProducts.value.map((category) => category.id);
-
-    // console.log(newOrder);
-
-    // Update the database for each item with its new order
-
     updateDatabaseOrder(newOrder);
-
-    // Optionally, update the displayedProducts array with the new order
     displayedProducts.value.forEach((category) => {
         const index = newOrder.indexOf(category.id);
         category.order = index + 1;

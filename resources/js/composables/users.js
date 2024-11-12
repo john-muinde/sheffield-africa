@@ -18,14 +18,14 @@ export default function useUsers() {
     const validationErrors = ref({});
     const isLoading = ref(false);
 
-    const getUsers = async (
+    const getUsers = async ({
         page = 1,
         search_id = "",
         search_title = "",
         search_global = "",
         order_column = "created_at",
-        order_direction = "desc"
-    ) => {
+        order_direction = "desc",
+    }) => {
         try {
             const response = await apiRequest(
                 "get",

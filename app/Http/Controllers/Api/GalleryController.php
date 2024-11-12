@@ -24,7 +24,7 @@ class GalleryController extends Controller
         if (!in_array($orderDirection, ['asc', 'desc'])) {
             $orderDirection = 'desc';
         }
-        $gallerys = Gallery::when(request('search_id'), function ($query) {
+        $galleries = Gallery::when(request('search_id'), function ($query) {
             $query->where('id', request('search_id'));
         })
             ->when(request('search_title'), function ($query) {
@@ -41,30 +41,27 @@ class GalleryController extends Controller
             })
             ->orderBy($orderColumn, $orderDirection)
             ->paginate(10000);
-        return GalleryResource::collection($gallerys);
+        return GalleryResource::collection($galleries);
     }
 
     public function store(StoreGalleryRequest $request)
     {
         $this->authorize('product-create');
 
-        //dd($request);
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255|unique:galleries',
+            'main_image_path' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'gallery_type' => 'required|string|max:255',
+            'gallery_introduction' => 'nullable|string|max:255',
+        ]);
 
-        // Check if the gallery with the same name already exists
-        $existingGallery = Gallery::where('name', $request->name)->first();
-        if ($existingGallery) {
-            return response()->json(['errors' => ['name' => ['Gallery with the same name already exists.']]], 409);
-        }
-
-
-        $validatedData = $request->validated();
         $validatedData['created_by'] = auth()->user()->id;
 
-        if ($request->hasFile('main_image')) {
+        if ($request->hasFile('main_image_path')) {
 
-            $file = $request->file('main_image');
+            $file = $request->file('main_image_path');
 
-            $file_name = time() . '_' . $request->file('main_image')->getClientOriginalName();
+            $file_name = time() . '_' . $request->file('main_image_path')->getClientOriginalName();
             $file_path = 'uploads/' . $file_name;
 
             // Resize and optimize the image
@@ -75,7 +72,7 @@ class GalleryController extends Controller
 
             // Store the optimized image
             Storage::disk('public')->put($file_path, $image);
-            //$file_path = $request->file('main_image')->storeAs('uploads', $file_name, 'public');
+            //$file_path = $request->file('main_image_path')->storeAs('uploads', $file_name, 'public');
 
             $validatedData['main_image_path'] = $file_path;
         }
@@ -138,11 +135,11 @@ class GalleryController extends Controller
             return response()->json(['errors' => ['name' => ['Gallery with the same name already exists.']]], 409);
         }
 
-        if ($request->hasFile('main_image')) {
+        if ($request->hasFile('main_image_path')) {
 
-            $file = $request->file('main_image');
+            $file = $request->file('main_image_path');
 
-            $file_name = time() . '_' . $request->file('main_image')->getClientOriginalName();
+            $file_name = time() . '_' . $request->file('main_image_path')->getClientOriginalName();
             $file_path = 'uploads/' . $file_name;
 
             // Resize and optimize the image
@@ -153,7 +150,7 @@ class GalleryController extends Controller
 
             // Store the optimized image
             Storage::disk('public')->put($file_path, $image);
-            //$file_path = $request->file('main_image')->storeAs('uploads', $file_name, 'public');
+            //$file_path = $request->file('main_image_path')->storeAs('uploads', $file_name, 'public');
 
             $validatedData['main_image_path'] = $file_path;
         }
@@ -221,12 +218,12 @@ class GalleryController extends Controller
         return GalleryResource::collection(Gallery::all());
     }
 
-    public function getGallerys()
+    public function getGalleries()
     {
         $perPage = request('per_page', 12);
-        $gallerys = Gallery::with('showroomBrand')->paginate($perPage);
+        $galleries = Gallery::with('showroomBrand')->paginate($perPage);
 
 
-        return response()->json($gallerys);
+        return response()->json($galleries);
     }
 }

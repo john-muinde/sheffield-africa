@@ -351,9 +351,9 @@ class BlogController extends Controller
     {
 
         $perPage = request('per_page', 9);
-        $Gallerys = Gallery::where('is_published', '=', true)->orderBy('created_at', 'DESC')->paginate($perPage);
+        $Galleries = Gallery::where('is_published', '=', true)->orderBy('created_at', 'DESC')->paginate($perPage);
 
-        return $Gallerys;
+        return $Galleries;
     }
 
     public function getMediaCenterGalleriesDetails()

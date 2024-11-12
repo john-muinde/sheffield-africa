@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('csrs', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable();
+            $table->string('main_image_path')->nullable();
             $table->text('csr_introduction')->nullable();
             $table->text('company_involvement')->nullable();
             $table->text('collaborations_and_partnership')->nullable();

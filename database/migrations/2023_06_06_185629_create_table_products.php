@@ -30,6 +30,12 @@ return new class extends Migration
             $table->text('terms_of_operation')->nullable();
             $table->boolean('is_published')->nullable();
             $table->integer('created_by')->nullable();
+
+            $table->string('main_image_path')->nullable();
+            $table->string('document_path')->nullable();
+
+            $table->text('technical_specification')->nullable();
+
             $table->timestamps();
         });
     }
