@@ -75,7 +75,7 @@
                             <i class="icon-shopping-cart"></i>
                             <span class="cart-count">{{
                                 cartItems.length
-                                }}</span>
+                            }}</span>
                             <span class="cart-txt">Cart</span>
                         </router-link>
 
@@ -324,7 +324,7 @@
                                 }" :slides-per-group="slidesPerView" @swiper="onSwiper" class="products-container">
                                 <swiper-slide v-for="product in promotionProducts" :key="product.id">
                                     <ProductCard :product="product" />
-                                    {{ product.name }}
+
                                 </swiper-slide>
                             </swiper>
                             <!-- Mobile View All Button -->
