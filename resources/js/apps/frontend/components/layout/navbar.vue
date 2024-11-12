@@ -1,6 +1,6 @@
 <template>
     <div>
-        <header class="header header-14 sticky-header fixed">
+        <header class="header header-14 sticky-header fixed custom">
             <div class="header-top header-top-color">
                 <div class="container">
                     <div class="header-left">
@@ -607,6 +607,11 @@ const addClassToBody = () => {
 </script>
 
 <style scoped>
+.custom{
+    z-index: 9999;
+    top: -1px;
+}
+
 .menu-vertical-browse .megamenu-container {
     border-bottom: Solid 1px #ececec;
 }
