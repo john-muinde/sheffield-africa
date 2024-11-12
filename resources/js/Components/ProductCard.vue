@@ -67,6 +67,10 @@ const props = defineProps({
 
 const product = props.product;
 
+import { useStore } from "vuex"; // Import the store
+
+const store = useStore();
+
 
 const isAdding = ref(false)
 const showTooltip = ref(false)

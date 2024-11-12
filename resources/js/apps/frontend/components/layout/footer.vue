@@ -123,11 +123,7 @@
 
                                 <h2 class="footer-banner-header">Kigali</h2>
 
-
-
-
                                 <ul class="mt-1 mb-2">
-
                                     <li class="my-footer-li">
                                         <img src="/assets/images/footer-icons/footer_phone.png" alt="Icon 1">
                                         <a href="tel:+250790001231">+250 790 001 231 </a>
@@ -138,10 +134,7 @@
                                             sales1rwanda@sheffieldafrica.com</a>
                                     </li>
                                 </ul>
-
                             </div>
-
-
                         </div>
 
                         <div class="col-xl-12 justify-content-center footer-banner mt-4 mb-4"
@@ -155,12 +148,6 @@
                                     class="icon-long-arrow-right"></i></router-link>
 
                         </div>
-
-
-
-
-
-
                     </div><!-- End .row -->
 
                 </div>
