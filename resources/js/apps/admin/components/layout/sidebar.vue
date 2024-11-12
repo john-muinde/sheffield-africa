@@ -1,6 +1,10 @@
-<template>
-    <div class="bg-gray-800 text-white h-full mt-28 fixed top-0 left-2 mr-6 w-56">
-        <nav ref="menu" id="sidebar" class="h-full overflow-y-auto">
+<template :show="store.state.is_show_sidebar">
+    <div class="bg-gray-800 text-white h-full mt-28 fixed top-0 left-2 mr-6 w-56" style="z-index: 1035">
+        <nav id="sidebar" class="overflow-y-auto" style="
+                height: 88vh !important;
+                scroll-behavior: smooth;
+                z-index: 1035;
+            ">
             <perfect-scrollbar class="menu-categories" tag="div">
                 <div v-for="(item, index) in menuItems" :key="index" class="menu mb-1">
                     <div @click="toggleSubmenu(item.id)"
@@ -10,7 +14,7 @@
                             <span>{{ $t(item.title.toLocaleLowerCase()) }}</span>
                         </div>
                         <component :is="isSubmenuOpen(item.id)
-                            ? ChevronDownIcon   
+                            ? ChevronDownIcon
                             : ChevronRightIcon
                             " class="w-4 h-4" />
                     </div>

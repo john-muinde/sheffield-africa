@@ -608,7 +608,7 @@ const addClassToBody = () => {
 
 <style scoped>
 .custom{
-    z-index: 9999;
+    z-index: 1035;
     top: -1px;
 }
 

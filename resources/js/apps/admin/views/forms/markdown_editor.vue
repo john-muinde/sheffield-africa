@@ -120,7 +120,7 @@
     }
     .vue-easymde .CodeMirror-fullscreen,
     .vue-easymde .editor-preview-side {
-        z-index: 9999 !important;
+        z-index: 1035 !important;
         margin-top: 0 !important;
     }
 </style>

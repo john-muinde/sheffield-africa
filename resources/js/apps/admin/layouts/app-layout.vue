@@ -7,42 +7,24 @@
         <!--  END NAVBAR  -->
 
         <!--  BEGIN MAIN CONTAINER  -->
-        <div
-            class="main-container"
-            id="container"
-            :class="[
-                !$store.state.is_show_sidebar ? 'sidebar-closed sbar-open' : '',
-                $store.state.menu_style === 'collapsible-vertical'
-                    ? 'collapsible-vertical-mobile'
-                    : '',
-            ]"
-        >
+        <div class="main-container" id="container" :class="[
+            !$store.state.is_show_sidebar ? 'sidebar-closed sbar-open' : '',
+            $store.state.menu_style === 'collapsible-vertical'
+                ? 'collapsible-vertical-mobile'
+                : '',
+        ]">
             <!--  BEGIN OVERLAY  -->
-            <div
-                class="overlay"
-                :class="{ show: !$store.state.is_show_sidebar }"
-                @click="
-                    $store.commit(
-                        'toggleSideBar',
-                        !$store.state.is_show_sidebar
-                    )
-                "
-            ></div>
-            <div
-                class="search-overlay"
-                :class="{ show: $store.state.is_show_search }"
-                @click="
-                    $store.commit('toggleSearch', !$store.state.is_show_search)
-                "
-            ></div>
+            <div class="search-overlay" :class="{ show: $store.state.is_show_search }" @click="
+                $store.commit('toggleSearch', !$store.state.is_show_search)
+                "></div>
             <!-- END OVERLAY -->
 
             <!--  BEGIN SIDEBAR  -->
-            <Sidebar v-if="user?.name"></Sidebar>
+            <Sidebar v-if="$store.state.is_show_sidebar"></Sidebar>
             <!--  END SIDEBAR  -->
 
             <!--  BEGIN CONTENT AREA  -->
-            <div id="content" class="main-content">
+            <div id="content" class="main-content" @click="handleClickOutside">
                 <router-view />
 
                 <!-- BEGIN FOOTER -->
@@ -61,6 +43,33 @@
 <script>
 export default {
     name: "app-layout",
+    mounted() {
+        this.addClickOutsideListener();
+    },
+    beforeUnmount() {
+        this.removeClickOutsideListener();
+    },
+    methods: {
+        addClickOutsideListener() {
+            this.clickOutsideHandler = (event) => {
+                this.handleClickOutside(event);
+            };
+            document.addEventListener('click', this.clickOutsideHandler);
+        },
+        removeClickOutsideListener() {
+            document.removeEventListener('click', this.clickOutsideHandler);
+        },
+        handleClickOutside(event) {
+            if (
+                this.$store.state.is_show_sidebar &&
+                !this.$el.contains(event.target) &&
+                !event.target.closest('.sidebar') &&
+                !event.target.closest('.sidebarCollapse')
+            ) {
+                this.$store.commit('toggleSideBar', false);
+            }
+        },
+    },
 };
 </script>
 

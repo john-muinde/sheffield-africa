@@ -60,7 +60,7 @@
                         <div class="panel-body">
                             <button type="button" class="btn btn-primary" @click="toastBasic.show()">Open Toast</button>
 
-                            <div style="position: absolute; top: 0; right: 0; z-index: 9999; margin-left: 20px; margin-right: 20px">
+                            <div style="position: absolute; top: 0; right: 0; z-index: 1035; margin-left: 20px; margin-right: 20px">
                                 <div ref="toastBasic" class="toast toast-primary" role="alert" aria-live="assertive" aria-atomic="true">
                                     <div class="toast-header">
                                         <strong class="me-auto">Bootstrap</strong>
@@ -79,7 +79,7 @@
                                         <pre>
 &lt;button type=&quot;button&quot; class=&quot;btn btn-primary&quot; @click=&quot;toastBasic.show()&quot;&gt;Open Toast&lt;/button&gt;
 
-&lt;div style=&quot;position: absolute; top: 0; right: 0; z-index: 9999; margin-left: 20px; margin-right: 20px&quot;&gt;
+&lt;div style=&quot;position: absolute; top: 0; right: 0; z-index: 1035; margin-left: 20px; margin-right: 20px&quot;&gt;
     &lt;div ref=&quot;toastBasic&quot; class=&quot;toast toast-primary&quot; role=&quot;alert&quot; aria-live=&quot;assertive&quot; aria-atomic=&quot;true&quot;&gt;
         &lt;div class=&quot;toast-header&quot;&gt;
             &lt;strong class=&quot;me-auto&quot;&gt;Bootstrap&lt;/strong&gt;
