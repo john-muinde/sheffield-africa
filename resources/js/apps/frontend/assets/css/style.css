@@ -11148,7 +11148,7 @@ a:focus {
     font-size: 1.4rem;
     line-height: 1.5;
     letter-spacing: -0.01em;
-    min-width: 170px;
+    max-width: 170px;
     border-radius: 0;
     white-space: normal;
     transition: all 0.3s;
@@ -12316,7 +12316,7 @@ a:focus {
     .own-product {
         margin-bottom: 20px;
     }
-    
+
     .product-action-image {
         width: 70%;
     }
