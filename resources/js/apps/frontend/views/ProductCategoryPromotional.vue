@@ -74,95 +74,7 @@
                             <div class="row">
                                 <div class="col-6 col-md-3 col-lg-2 col-xl-2" v-for="product in displayedProducts"
                                     :key="product.id">
-                                    <div class="product product-7 text-center">
-                                        <figure class="product-media">
-                                            <!-- <span class="product-label label-new">New</span>  -->
-                                            <router-link :to="getProductLink(
-                                                product.id,
-                                                product.name,
-                                                product.model_number,
-                                                the_category.name
-                                            )
-                                                ">
-                                                <img :src="'/storage/' +
-                                                    product.main_image_path
-                                                    " v-lazy:src="'/storage/' +
-                                                        product.main_image_path
-                                                        " alt="Product image" class="product-image" />
-                                            </router-link>
-                                            <div class="product-action-vertical">
-                                                <!-- <a
-                                       href="#"
-                                       class="btn-product-icon btn-wishlist btn-expandable" ><span>add to wishlist</span></a
-                                       > <a
-                                       href="popup/quickView.html" class="btn-product-icon btn-quickview" title="Quick view"
-                                       ><span>Quick view</span></a>  <a
-                                       href="#"
-                                       class="btn-product-icon btn-compare" title="Compare" ><span>Compare</span></a
-                                       > -->
-                                            </div>
-                                            <!-- End .product-action-vertical -->
-                                            <div class="product-action">
-                                                <button type="button" @click="addToCart(product)"
-                                                    class="btn-product btn-cart">
-                                                    <span>Add to Cart</span>
-                                                </button>
-                                            </div>
-                                            <!-- End .product-action -->
-                                        </figure>
-                                        <!-- End .product-media -->
-                                        <div class="product-body">
-                                            <div class="product-cat">
-                                                <router-link :to="getProductLink(
-                                                    product.id,
-                                                    product.name,
-                                                    product.model_number,
-                                                    the_category.name
-                                                )
-                                                    ">{{
-                                                        product.product_brand
-                                                            .name
-                                                    }}</router-link>
-                                            </div>
-                                            <!-- End .product-cat -->
-                                            <h3 class="product-title">
-                                                <router-link :to="getProductLink(
-                                                    product.id,
-                                                    product.name,
-                                                    product.model_number,
-                                                    the_category.name
-                                                )
-                                                    ">{{
-                                                        product.name
-                                                    }}</router-link>
-                                            </h3>
-                                            <!-- End .product-title -->
-                                            <!-- <div class="product-price">$ {{ product.retail_price }}.00</div> -->
-                                            <!-- End .product-price -->
-                                            <div class="ratings-container">
-                                                <!-- <div class="ratings">
-                                       <div class="ratings-val" style="width: 20%"></div>
-                                    </div> -->
-                                                <!-- End .ratings -->
-                                                <!--  <span class="ratings-text">( 2 Reviews )</span> -->
-                                            </div>
-                                            <!-- End .rating-container -->
-                                            <!-- <div class="product-nav product-nav-thumbs"> <a href="#" class="active">
-                                    <img src="../assets/images/products/product6.webp" alt="product desc"
-                                       /> </a>
-                                    <a href="#"> <img
-                                       src="../assets/images/products/product4.webp"
-                                       alt="product desc" />
-                                    </a>
-                                    <a href="#"> <img
-                                       src="../assets/images/products/product1.webp"
-                                       alt="product desc" />
-                                    </a>
-                                 </div> -->
-                                            <!-- End .product-nav -->
-                                        </div>
-                                        <!-- End .product-body -->
-                                    </div>
+                                    <ProductCard :product="product" />
                                     <!-- End .product -->
                                 </div>
 
@@ -327,28 +239,9 @@ import { ref, computed, watch, onMounted, watchEffect } from "vue";
 import { useRoute } from "vue-router";
 import { useMetaLaundry } from "../../admin/composables/use-meta";
 
-import { useStore } from "vuex"; // Import the store
 
-const store = useStore();
+import ProductCard from '@/Components/ProductCard.vue';
 
-const addToCart = (product) => {
-    const toast = window.Swal.mixin({
-        toast: true,
-        position: "bottom-end",
-        showConfirmButton: false,
-        timer: 4000,
-        padding: "2em",
-    });
-    toast.fire({
-        icon: "success",
-        title: "Item added to cart",
-        padding: "2em",
-        customClass: {
-            title: "swal-title-class",
-        },
-    });
-    store.dispatch("cart/addToCart", product);
-};
 
 const route = useRoute();
 
@@ -487,29 +380,6 @@ const goToNextPage = () => {
 
 const goToThisPage = (page) => {
     currentPage.value = page;
-};
-
-const getProductLink = (id, name, model_number, parent_cat) => {
-    let transformedName = name.replace(/ /g, "-").replace(/\//g, "-");
-    transformedName = transformedName.replace(/-+/g, "-");
-    transformedName = transformedName.replace(/^-+|-+$/g, "");
-    transformedName = transformedName.toLowerCase();
-
-    let transformedName_cat = parent_cat.replace(/ /g, "-").replace(/\//g, "-");
-    transformedName_cat = transformedName_cat.replace(/-+/g, "-");
-    transformedName_cat = transformedName_cat.replace(/^-+|-+$/g, "");
-    transformedName_cat = transformedName_cat.toLowerCase();
-
-    let transformedModelNumber = model_number
-        .toLowerCase()
-        .replace(/ /g, "-")
-        .replace(/\//g, "-");
-    // Remove consecutive dashes
-    transformedModelNumber = transformedModelNumber.replace(/-+/g, "-");
-    // Remove leading and trailing dashes
-    transformedModelNumber = transformedModelNumber.replace(/^-+|-+$/g, "");
-
-    return `/promotional-solutions/product/${id}/${transformedName}-${transformedModelNumber}`;
 };
 
 const getCategoryLink = (id, name, page) => {

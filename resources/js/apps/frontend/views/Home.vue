@@ -284,9 +284,14 @@
                         <div class="col-xl-9 col-lg-8 col-md-12" style="height: 100%;">
                             <!-- Animated Date Banner -->
                             <div class="row d-flex justify-content-between">
-                                <div class="bg-danger text-xl-right text-center text-uppercase fw-bold p-1 col-xl-9 pr-2"
+                                <div class="bg-danger d-flex justify-content-between text-uppercase fw-bold p-1 col-xl-9 pr-2"
                                     style="color: white; border-radius: 4px; position: relative; overflow: hidden; font-weight: bold;">
-                                    VALID 1ST - 30TH NOVEMBER, 2024
+                                    <span>
+                                        Pizzeria NOVEMBER PROMOTIONS
+                                    </span>
+                                    <span>
+                                        VALID 1ST - 30TH NOVEMBER, 2024
+                                    </span>
                                 </div>
                                 <div
                                     class="view-all-slide align-items-center justify-content-center h-100 d-none d-lg-flex col-3">
@@ -318,61 +323,7 @@
                                     pauseOnMouseEnter: true,
                                 }" :slides-per-group="slidesPerView" @swiper="onSwiper" class="products-container">
                                 <swiper-slide v-for="product in promotionProducts" :key="product.id">
-                                    <div class="own-product position-relative px-2 product-card">
-                                        <!-- Savings Badge -->
-                                        <span class="savings-badge">
-                                            Save {{ calculateDiscount(product.cost_price, product.retail_price) }}%
-                                        </span>
-                                        <!-- Product Image with loading skeleton -->
-                                        <div class="product-image-container">
-                                            <router-link
-                                                :to="getProductLink(product.id, product.name, product.model_number)"
-                                                class="d-flex justify-content-center align-items-center mt-2">
-                                                <div class="image-skeleton" v-if="!imageLoaded"></div>
-                                                <img v-lazy="'/storage/' + product.main_image_path" :alt="product.name"
-                                                    class="img img-fluid product-image" @load="imageLoaded = true" />
-                                            </router-link>
-                                        </div>
-
-                                        <!-- Product Details with improved spacing -->
-                                        <div class="product-details">
-                                            <!-- Product Name with ellipsis -->
-                                            <span class="text-start product-name">{{ product.name }}</span>
-
-                                            <!-- Description with ellipsis -->
-                                            <span class="text-start text-muted product-description">
-                                                {{ product.model_number }}
-                                            </span>
-                                        </div>
-
-                                        <!-- Pricing Section -->
-                                        <div class="pricing-section">
-                                            <!-- Original Price -->
-                                            <span class="fw-bold text-center text-muted original-price">
-                                                KES {{ formatPrice(product.cost_price) }}
-                                            </span>
-
-                                            <!-- Discounted Price with animation -->
-                                            <div class="price-tag bg-danger fw-bold text-uppercase">
-                                                KES
-                                                {{
-                                                    formatPrice(
-                                                        product.retail_price <= 0 ? product.cost_price : product.retail_price)
-                                                }} </div>
-                                            </div>
-
-                                            <!-- Enhanced Add to Cart Button -->
-                                            <div class="product-action-image">
-                                                <button @click="addToCart(product)" class="btn-product btn-cart"
-                                                    :class="{ adding: isAdding }" @mouseenter="showTooltip = true"
-                                                    @mouseleave="showTooltip = false">
-                                                    <span class="btn-text">{{ addToCartText }}</span>
-                                                    <div class="btn-loading-icon" v-if="isAdding">
-                                                        <span class="spinner"></span>
-                                                    </div>
-                                                </button>
-                                            </div>
-                                        </div>
+                                    <ProductCard :product="product" />
                                 </swiper-slide>
                             </swiper>
                             <!-- Mobile View All Button -->
@@ -386,7 +337,6 @@
                     </div>
                 </div>
             </template>
-
         </main>
         <!-- End .main -->
     </div>
@@ -409,9 +359,7 @@
         </div>
     </template>
 
-    <button id="scroll-top" title="Back to Top">
-        <i class="icon-arrow-up"></i>
-    </button>
+
 </template>
 
 <script setup>
@@ -425,6 +373,7 @@ import { ref, onMounted, onBeforeUnmount, computed } from "vue";
 import { useRouter } from "vue-router";
 
 import { useMeta } from "../../admin/composables/use-meta";
+import ProductCard from '@/Components/ProductCard.vue';
 useMeta({
     title: "Home",
     description:
@@ -436,9 +385,12 @@ import { useStore } from "vuex"; // Import the store
 
 const store = useStore();
 
-const imageLoaded = ref(false)
-const isAdding = ref(false)
-const showTooltip = ref(false)
+const cartItems = store.state.cart.cartItems;
+
+const removeFromCart = (index) => {
+    store.dispatch("cart/removeFromCart", index);
+};
+
 const swiperInstance = ref(null)
 
 const slidesPerView = computed(() => {
@@ -451,32 +403,6 @@ const slidesPerView = computed(() => {
 })
 
 
-const addToCartText = computed(() => {
-    return isAdding.value ? 'Adding...' : 'Add to Cart'
-})
-
-const formatPrice = (price) => {
-    return new Intl.NumberFormat('en-KE').format(price)
-}
-
-const calculateDiscount = (original, discounted) => {
-    return Math.round(((original - discounted) / original) * 100);
-};
-
-const convertToNumber = (value) => {
-    let num = Number(value);
-    return isNaN(num) ? 0 : num;
-};
-
-// const getProductLink = (id, name, modelNumber) => {
-//     return {
-//         name: 'product-details',
-//         params: {
-//             id,
-//             slug: `${name}-${modelNumber}`.toLowerCase().replace(/\s+/g, '-')
-//         }
-//     }
-// }
 
 const onSwiper = (swiper) => {
     swiperInstance.value = swiper
@@ -490,75 +416,12 @@ const handleResize = () => {
     }
 }
 
-const addToCart = (product) => {
-    if (isAdding.value) return;
-    isAdding.value = true
-    try {
-        const toast = window.Swal.mixin({
-            toast: true,
-            position: "bottom-end",
-            showConfirmButton: false,
-            timer: 4000,
-            padding: "2em",
-        });
-        store.dispatch("cart/addToCart", product);
-        toast.fire({
-            icon: "success",
-            title: "Item added to cart",
-            padding: "2em",
-            customClass: {
-                title: "swal-title-class",
-            },
-        });
-    } catch (error) {
-        console.error(error)
-        toast.fire({
-            icon: "error",
-            title: "Failed to add item to cart",
-            padding: "2em",
-            customClass: {
-                title: "swal-title-class",
-            },
-        });
-    } finally {
-        isAdding.value = false
-    }
-}
-
-const cartItems = store.state.cart.cartItems;
-
-const removeFromCart = (index) => {
-    store.dispatch("cart/removeFromCart", index);
-};
-
-const getProductLink = (id, name, model_number, main_second_parent_cat) => {
-    // Replace spaces with dashes
-    let transformedName = name.replace(/ /g, "-").replace(/\//g, "-");
-    // Remove consecutive dashes
-    transformedName = transformedName.replace(/-+/g, "-");
-    // Remove leading and trailing dashes
-    transformedName = transformedName.replace(/^-+|-+$/g, "");
-    // Convert to lowercase
-    transformedName = transformedName.toLowerCase();
-
-    let transformedModelNumber = model_number
-        .toLowerCase()
-        .replace(/ /g, "-")
-        .replace(/\//g, "-");
-    // Remove consecutive dashes
-    transformedModelNumber = transformedModelNumber.replace(/-+/g, "-");
-    // Remove leading and trailing dashes
-    transformedModelNumber = transformedModelNumber.replace(/^-+|-+$/g, "");
-
-    return `/kitchen/product/${id}/${transformedName}-${transformedModelNumber}`;
-};
 
 const query = ref("");
 const results = ref([]);
 const showResults = ref(false);
 const searchLoading = ref(false);
 const showPopup = ref(false);
-const router = useRouter();
 
 const search = async () => {
     if (query.value.trim().length) {
@@ -592,13 +455,10 @@ const addClassToBody = () => {
 
     const targetElement = document.querySelector(".the_main_div");
     targetElement.classList.add("mmenu-active");
-    //bodyClassAdded.value = !bodyClassAdded.value;
-    //document.body.classList.toggle('mmenu-active', bodyClassAdded.value);
 };
 
 document.addEventListener("DOMContentLoaded", () => {
     document.body.classList.toggle("mmenu-active1", true);
-    //document.body.classList.toggle('mmenu-active', false);
 });
 
 const handleButtonClick = () => {
@@ -676,22 +536,7 @@ onMounted(() => {
 
     // Initial fetch of products
     fetchProducts();
-    maxHeights();
 });
-
-const maxHeights = () => {
-    const ownProducts = document.querySelectorAll('.own-product');
-    let maxHeight = 0;
-    ownProducts.forEach((product) => {
-        if (product.clientHeight > maxHeight) {
-            maxHeight = product.clientHeight;
-        }
-    });
-
-    ownProducts.forEach((product) => {
-        product.style.height = `${maxHeight}px`;
-    });
-};
 
 const viewProduct = () => {
     window.open("https://forms.gle/as8SvN2SNTKxSbKA9", "_blank");
@@ -699,91 +544,7 @@ const viewProduct = () => {
 
 </script>
 
-<style scoped>
-.product-card {
-    display: flex;
-    position: relative;
-    flex-direction: column;
-    justify-content: space-between;
-    border-radius: 12px;
-    transition: all 0.3s ease;
-    height: 380px !important;
-    margin: 10px 0px 20px 0px;
-}
 
-.product-image-container {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 10px;
-}
-
-.product-image {
-    object-fit: contain;
-    width: 80%;
-    height: 150px !important;
-    border-radius: 10px;
-}
-
-.product-details {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: start;
-    padding: 10px 0;
-    margin-bottom: 0px;
-}
-
-.product-name {
-    margin-bottom: 8px;
-    color: black;
-    font-weight: bold;
-}
-
-.product-description {
-    font-size: 1.1rem;
-    /* margin-bottom: 12px; */
-}
-
-.pricing-section {
-    display: flex;
-    flex: 1;
-    flex-direction: column;
-    align-items: center;
-    justify-content: end;
-    position: relative;
-}
-
-.original-price {
-    text-decoration: line-through;
-    font-size: 1.4rem;
-    font-weight: bold;
-}
-
-.price-tag {
-    width: 80%;
-    color: white;
-    text-align: center;
-    border-radius: 10px;
-    margin: 10px auto;
-}
-
-.product-action-image {
-    display: flex;
-    justify-content: center;
-    padding: 10px 0;
-}
-
-.btn-product {
-    position: relative;
-}
-
-.btn-loading-icon {
-    position: absolute;
-    right: 10px;
-}
-</style>
 
 <style>
 /* Swiper Navigation Enhancements */
@@ -809,196 +570,6 @@ const viewProduct = () => {
 .swiper-pagination-bullet-active {
     background: #dc3545 !important;
     transform: scale(1.2);
-}
-</style>
-
-<style scoped>
-/* Enhanced Animations and Styling */
-.promo-image-wrapper {
-    overflow: hidden;
-    border-radius: 12px;
-}
-
-.promo-image {
-    transition: transform 0.5s ease;
-}
-
-.promo-image-wrapper:hover .promo-image {
-    transform: scale(1.05);
-}
-
-/* Banner animation */
-.banner-animate {
-    position: relative;
-}
-
-.banner-shine {
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 50%;
-    height: 100%;
-    background: linear-gradient(to right,
-            rgba(255, 255, 255, 0) 0%,
-            rgba(255, 255, 255, 0.3) 50%,
-            rgba(255, 255, 255, 0) 100%);
-    animation: shine 3s infinite;
-}
-
-@keyframes shine {
-    to {
-        left: 200%;
-    }
-}
-
-/* Product Card Enhancements */
-.own-product {
-    background: white;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
-}
-
-.own-product:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
-}
-
-.image-skeleton {
-    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-    background-size: 200% 100%;
-    animation: loading 1.5s infinite;
-    height: 200px;
-    border-radius: 10px;
-}
-
-@keyframes loading {
-    to {
-        background-position: -200% 0;
-    }
-}
-
-/* Enhanced Add to Cart Button */
-.product-action-image {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 40%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: rgba(255, 255, 255, 0.95);
-    width: 50%;
-    border-radius: 10px;
-    margin: auto;
-    z-index: 10;
-    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(50%);
-}
-
-.btn-product span,
-.btn-product {
-    color: #c02434 !important;
-}
-
-.btn-product {
-
-    background: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-}
-
-.btn-product:hover {
-    background: #f8f9fa;
-}
-
-.btn-product.adding {
-    pointer-events: none;
-    opacity: 0.8;
-}
-
-/* Loading Spinner */
-.spinner {
-    width: 20px;
-    height: 20px;
-    border: 2px solid #f3f3f3;
-    border-top: 2px solid #dc3545;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-    to {
-        transform: rotate(360deg);
-    }
-}
-
-/* Price Tag Animation */
-.price-tag {
-    position: relative;
-    overflow: hidden;
-    transition: transform 0.3s ease;
-}
-
-.price-tag:hover {
-    transform: scale(1.05);
-}
-
-/* Savings Badge */
-.savings-badge {
-    position: absolute;
-    right: 10px;
-    top: 10px;
-    background: #28a745;
-    color: white;
-    padding: 4px 8px;
-    border-radius: 4px;
-    font-size: 0.8rem;
-    font-weight: bold;
-}
-
-/* Quick View Button */
-.quick-view-button {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.own-product:hover .quick-view-button {
-    opacity: 1;
-}
-
-/* View All Button */
-.view-all-button {
-    transition: all 0.3s ease;
-}
-
-.view-all-button:hover {
-    transform: translateX(5px);
-}
-
-
-/* Responsive Adjustments */
-@media (max-width: 768px) {
-    .product-action-image {
-        width: 70%;
-    }
-
-    .own-product {
-        margin-bottom: 20px;
-    }
-
-    .quick-view-button {
-        opacity: 1;
-    }
 }
 </style>
 
