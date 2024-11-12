@@ -1001,6 +1001,8 @@ const fetchProducts = async () => {
         //     }
         // ];
 
+        promotionProducts.value = response.data.products.data;
+
         promotionProducts.value = promotionProducts.value.map((product) => {
             if (convertToNumber(product.cost_price) <= 0) {
                 product.cost_price = convertToNumber(product.retail_price);
