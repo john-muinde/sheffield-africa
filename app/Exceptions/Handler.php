@@ -55,8 +55,8 @@ class Handler extends ExceptionHandler
      * @param  \Throwable  $e
      * @return bool
      */
-    protected function shouldReturnJson($request, Throwable $e)
-    {
-        return true;
-    }
+    //protected function shouldReturnJson($request, Throwable $e)
+    //{
+    //    return true;
+    //}
 }
