@@ -13,7 +13,7 @@
                                 Pictures</p>
                             <!-- Add the filter component -->
                             <DynamicFilters :items="products" filter-column="gallery_type"
-                                @update:displayedProducts="updateDisplayedProducts" />
+                                @update:displayedProducts="handleUpdateDisplayedProducts" />
                             <div class="row">
                                 <div class="entry-item col-sm-6 col-lg-4" v-for="product in displayedProducts"
                                     :key="product.id">
@@ -100,6 +100,7 @@ const totalProducts = ref(0);
 const products = ref([]);
 const category_id = ref(route.params.id ? parseInt(route.params.id) : 1);
 const displayedProducts = ref([]);
+const selectedFilters = ref([]);
 
 // Fetch products based on the current page
 const fetchProducts = async () => {
@@ -109,6 +110,7 @@ const fetchProducts = async () => {
                 page: currentPage.value,
                 per_page: perPage.value,
                 category_id: category_id.value,
+                gallery_type: selectedFilters.value,
             },
         });
         products.value = response.data.data;
@@ -156,6 +158,11 @@ const goToThisPage = (page) => {
 
 const updateDisplayedProducts = (filteredProducts) => {
     displayedProducts.value = filteredProducts;
+};
+
+const handleUpdateDisplayedProducts = ({ filteredData, selectedFilters }) => {
+    updateDisplayedProducts(filteredData);
+    selectedFilters.value = selectedFilters;
 };
 
 const isInteger = (value) => {

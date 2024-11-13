@@ -347,13 +347,21 @@ class BlogController extends Controller
     }
 
 
+
     public function getMediaCenterGalleries()
     {
-
         $perPage = request('per_page', 9);
-        $Galleries = Gallery::where('is_published', '=', true)->orderBy('created_at', 'DESC')->paginate($perPage);
+        $galleryFilters = request('gallery_type', []);
 
-        return $Galleries;
+        $query = Gallery::where('is_published', true);
+
+        if (!empty($galleryFilters)) {
+            $query->whereIn('gallery_type', $galleryFilters);
+        }
+
+        $galleries = $query->orderBy('created_at', 'DESC')->paginate($perPage);
+
+        return $galleries;
     }
 
     public function getMediaCenterGalleriesDetails()

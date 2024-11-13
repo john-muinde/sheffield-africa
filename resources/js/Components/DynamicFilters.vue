@@ -81,7 +81,7 @@ const handleFilterChange = () => {
             selectedFilters.value.includes(item[props.filterColumn])
         );
     }
-    emit('update:displayedProducts', dataRef.value);
+    emit('update:displayedProducts', { filteredData: dataRef.value, selectedFilters: selectedFilters.value });
 };
 
 watch(() => props.items, () => {
