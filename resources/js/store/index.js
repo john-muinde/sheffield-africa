@@ -1,14 +1,15 @@
 import { createStore } from "vuex";
 import i18n from "../i18n";
-import createPersistedState from 'vuex-persistedstate'
-import auth from '../store/auth'
-import cart from '../store/cart';
-//import lang from '../store/lang'
+import createPersistedState from "vuex-persistedstate";
+import auth from "../store/auth";
+import cart from "../store/cart";
+
+const isMobile = window.innerWidth < 992;
 
 const store = createStore({
     state: {
         layout: "app",
-        is_show_sidebar: true,
+        is_show_sidebar: !isMobile, // Default to closed on mobile
         is_show_search: false,
         is_dark_mode: false,
         dark_mode: "light",
@@ -83,6 +84,10 @@ const store = createStore({
             localStorage.setItem("menu_style", value);
             state.menu_style = value;
             if (!value || value === "vertical") {
+                if (isMobile) {
+                    state.is_show_sidebar = false;
+                    return;
+                }
                 state.is_show_sidebar = true;
             } else if (value === "collapsible-vertical") {
                 state.is_show_sidebar = false;
@@ -101,14 +106,12 @@ const store = createStore({
             return state.layout;
         },
     },
-    plugins:[
-        createPersistedState()
-    ],
-    modules:{
+    plugins: [createPersistedState()],
+    modules: {
         auth,
         cart,
         //lang
-    }
+    },
 });
 
-export default store
+export default store;

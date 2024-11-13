@@ -1,12 +1,13 @@
 <template :show="store.state.is_show_sidebar">
-    <div class="bg-gray-800 text-white h-full mt-28 fixed top-0 left-2 mr-6 w-56" style="z-index: 1035">
+    <div class="bg-gray-800 text-white h-full mt-28 fixed top-0 left-2 mr-6 w-56" style="z-index: 1035"
+        id="sidebar-parent">
         <nav id="sidebar" class="overflow-y-auto" style="
-                height: 88vh !important;
-                scroll-behavior: smooth;
+                height: 80vh !important;
+                scrollbar-width: none;
                 z-index: 1035;
             ">
-            <perfect-scrollbar class="menu-categories" tag="div">
-                <div v-for="(item, index) in menuItems" :key="index" class="menu mb-1">
+            <perfect-scrollbar class="menu-categories mb-4" tag="div">
+                <div v-for="(item, index) in menuItems" :key="index" class="menu">
                     <div @click="toggleSubmenu(item.id)"
                         class="cursor-pointer flex items-center justify-between p-2 text-gray-300 hover:bg-gray-700 hover:text-white transition duration-150">
                         <div class="flex items-center">
