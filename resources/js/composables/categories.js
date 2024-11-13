@@ -116,7 +116,6 @@ export default function useCategories() {
                 "/api/category-list?exclude_id=" + id
             );
             categoryList.value = response;
-            console.log(categoryList.value);
         } catch (errors) {
             validationErrors.value = errors;
         }

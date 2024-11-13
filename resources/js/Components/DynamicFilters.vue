@@ -36,7 +36,7 @@
 </template>
 
 <script setup>
-import { ref, computed, watch, defineEmits } from 'vue';
+import { ref, computed, watch } from 'vue';
 
 const emit = defineEmits(['update:displayedProducts']);
 
@@ -48,13 +48,25 @@ const props = defineProps({
     filterColumn: {
         type: String,
         required: true
+    },
+    filters: {
+        type: Array,
+        required: false,
+        default: []
+    },
+    selectedFilters: {
+        type: Array,
+        required: false,
+        default: []
     }
 });
 
-const selectedFilters = ref([]);
+const selectedFilters = ref(props.selectedFilters && Array.isArray(props.selectedFilters) ? props.selectedFilters : []);
 const dataRef = ref(props.items);
 
 const uniqueValues = computed(() => {
+    if (props.filters.length) return props.filters;
+    if ((!props.items?.length && !props.filters?.length) && !props.filterColumn) return [];
     if (!props.items?.length || !props.filterColumn) return [];
     return [...new Set(props.items
         .map(item => item[props.filterColumn])
@@ -103,7 +115,7 @@ watch(() => props.items, () => {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    font-size: 1.1rem;
+    font-size: 1.6rem;
     font-weight: 600;
     color: #1a1a1a;
     margin-bottom: 1.25rem;
@@ -186,7 +198,7 @@ watch(() => props.items, () => {
 }
 
 .filter-label {
-    font-size: 0.925rem;
+    font-size: 1.5rem;
     color: #374151;
     font-weight: 500;
 }
@@ -195,7 +207,7 @@ watch(() => props.items, () => {
     background-color: #f3f4f6;
     padding: 0.25rem 0.5rem;
     border-radius: 1rem;
-    font-size: 0.75rem;
+    font-size: 1.5rem;
     color: #6b7280;
     font-weight: 500;
 }

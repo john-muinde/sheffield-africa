@@ -13,8 +13,9 @@
                                 Pictures</p>
                             <!-- Add the filter component -->
                             <DynamicFilters :items="products" filter-column="gallery_type"
-                                @update:displayedProducts="handleUpdateDisplayedProducts" />
-                            <div class="row">
+                                @update:displayedProducts="handleUpdateDisplayedProducts" :filters="filters"
+                                :selected-filters="selectedFilters" />
+                            <div class="row mt-2">
                                 <div class="entry-item col-sm-6 col-lg-4" v-for="product in displayedProducts"
                                     :key="product.id">
                                     <article class="entry entry-mask">
@@ -45,32 +46,29 @@
                                 <div class="col-lg-12 mt-3">
                                     <nav aria-label="Page navigation">
                                         <ul class="pagination justify-content-center">
-                                            <li class="page-item" :class="{ disabled: currentPage === 1 }">
-                                                <router-link class="page-link page-link-prev"
-                                                    :to="getBlogPageLink(currentPage - 1)" aria-label="Previous"
-                                                    tabindex="-1" aria-disabled="true" @click="goToPreviousPage">
+                                            <li class="page-item" :class="{ disabled: !pagination?.prev_page_url }">
+                                                <a class="page-link page-link-prev"
+                                                    @click.prevent="goToPage(pagination?.prev_page_url)"
+                                                    aria-label="Previous" tabindex="-1" aria-disabled="true">
                                                     <span aria-hidden="true"><i class="icon-long-arrow-left"></i></span>
                                                     Prev
-                                                </router-link>
+                                                </a>
                                             </li>
-                                            <li class="page-item" v-for="page in generatePageLinks" :key="page"
-                                                :class="{ active: page === currentPage }">
-                                                <template v-if="isInteger(page)">
-                                                    <router-link class="page-link" :to="getBlogPageLink(page)"
-                                                        @click="goToThisPage(page)">
-                                                        {{ page }}
-                                                    </router-link>
-                                                </template>
+                                            <li class="page-item" v-for="(page, index ) in pagination?.links"
+                                                :key="page.label" :class="{ active: page.active }">
+                                                <a class="page-link" @click.prevent="goToPage(page.url)"
+                                                    v-if="page.url && Number.isInteger(Number(page.label))">
+                                                    {{ page.label }}
+                                                </a>
                                             </li>
-                                            <li class="page-item-total">of {{ totalPages }}</li>
-                                            <li class="page-item" :class="{ disabled: currentPage === totalPages }">
-                                                <router-link class="page-link page-link-next"
-                                                    :to="getBlogPageLink(currentPage + 1)" aria-label="Next"
-                                                    @click="goToNextPage">
+                                            <li class="page-item" :class="{ disabled: !pagination?.next_page_url }">
+                                                <a class="page-link page-link-next"
+                                                    @click.prevent="goToPage(pagination?.next_page_url)"
+                                                    aria-label="Next">
                                                     Next
                                                     <span aria-hidden="true"><i
                                                             class="icon-long-arrow-right"></i></span>
-                                                </router-link>
+                                                </a>
                                             </li>
                                         </ul>
                                     </nav>
@@ -85,14 +83,16 @@
 </template>
 
 <script setup>
-import { ref, computed, watch, onMounted, watchEffect } from 'vue';
-import { useRoute } from "vue-router";
+import { ref, watch, onMounted, watchEffect } from 'vue';
+import { useRoute, useRouter } from "vue-router";
 import { useMeta } from "../../admin/composables/use-meta";
 import DynamicFilters from '@/Components/DynamicFilters.vue';
+import axios from 'axios';
 
 useMeta({ title: "Gallery | Media Center" });
 
 const route = useRoute();
+const router = useRouter();
 
 const currentPage = ref(route.params.page ? parseInt(route.params.page) : 1);
 const perPage = ref(12);
@@ -101,11 +101,21 @@ const products = ref([]);
 const category_id = ref(route.params.id ? parseInt(route.params.id) : 1);
 const displayedProducts = ref([]);
 const selectedFilters = ref([]);
+const pagination = ref({});
+const filters = ref([
+    'CSR',
+    'EVENT',
+    'PROJECT'
+]);
 
 // Fetch products based on the current page
-const fetchProducts = async () => {
+const fetchProducts = async (url = null) => {
+    if (typeof url == 'string' && url.includes('http')) {
+        url = url.split('/api/').pop();
+        console.log(url);
+    }
     try {
-        const response = await axios.get('/api/get-media-center-galleries', {
+        const response = await axios.get(url || '/api/get-media-center-galleries', {
             params: {
                 page: currentPage.value,
                 per_page: perPage.value,
@@ -113,8 +123,15 @@ const fetchProducts = async () => {
                 gallery_type: selectedFilters.value,
             },
         });
-        products.value = response.data.data;
-        totalProducts.value = response.data.total;
+        const data = response.data;
+        products.value = data.data;
+        totalProducts.value = data.total;
+        pagination.value = {
+            next_page_url: data.next_page_url,
+            prev_page_url: data.prev_page_url,
+            links: data.links
+        };
+        console.log(pagination.value)
         updateDisplayedProducts(products.value);
     } catch (error) {
         console.error(error);
@@ -129,31 +146,16 @@ const getBlogLink = (id, name) => {
     return `/media/gallery/${id}/${transformedName}`;
 };
 
-const getBlogPageLink = (page) => {
-    return `/media/gallery/page/${page}`;
-};
-
-// Determine the total number of pages
-const totalPages = computed(() => {
-    return Math.ceil(totalProducts.value / perPage.value);
-});
-
-// Go to the previous page
-const goToPreviousPage = () => {
-    if (currentPage.value > 1) {
-        currentPage.value--;
+// Go to the specified page
+const goToPage = (url) => {
+    if (url) {
+        const urlParams = new URLSearchParams(url.split('?')[1]);
+        const page = urlParams.get('page');
+        if (page) {
+            currentPage.value = parseInt(page);
+            router.push(`/media/gallery/page/${currentPage.value}`);
+        }
     }
-};
-
-// Go to the next page
-const goToNextPage = () => {
-    if (currentPage.value < totalPages.value) {
-        currentPage.value++;
-    }
-};
-
-const goToThisPage = (page) => {
-    currentPage.value = page;
 };
 
 const updateDisplayedProducts = (filteredProducts) => {
@@ -165,87 +167,29 @@ const handleUpdateDisplayedProducts = ({ filteredData, selectedFilters }) => {
     selectedFilters.value = selectedFilters;
 };
 
-const isInteger = (value) => {
-    return Number.isInteger(value);
-};
-
-// Generate the page links
-const generatePageLinks = computed(() => {
-    const pageLinks = [];
-    const maxVisiblePages = 5; // Maximum number of visible page links
-
-    // Add previous link
-    if (currentPage.value > 1) {
-        pageLinks.push('Prev');
-    }
-
-    // Add current page and surrounding pages
-    let startPage = Math.max(1, currentPage.value - Math.floor(maxVisiblePages / 2));
-    let endPage = Math.min(startPage + maxVisiblePages - 1, totalPages.value);
-
-    if (endPage - startPage < maxVisiblePages - 1) {
-        startPage = Math.max(1, endPage - maxVisiblePages + 1);
-    }
-
-    for (let page = startPage; page <= endPage; page++) {
-        pageLinks.push(page);
-    }
-
-    // Add next link
-    if (currentPage.value < totalPages.value) {
-        pageLinks.push('Next');
-    }
-
-    return pageLinks;
-});
-
 // Initial fetch of products
 onMounted(() => {
     fetchProducts();
 });
 
-// Watch for changes in the currentPage and fetch products accordingly
-watch(currentPage, fetchProducts);
-
 // Watch for changes in the products and update displayedProducts
 watch(products, updateDisplayedProducts);
 
 watchEffect(() => {
-    const params = route.params; // Access the route parameters
-    const query = route.query; // Access the query parameters
+    const params = route.params;
 
-    if (params.id !== '' && category_id !== params.id) {
-        currentPage.value = 1;
-        category_id.value = params.id ? parseInt(params.id) : 1;
+    const newCategoryId = params.id ? parseInt(params.id) : 1;
+    const newPage = params.page ? parseInt(params.page) : 1;
 
-        if (params.page !== '' && currentPage !== params.page) {
-            currentPage.value = params.page ? parseInt(params.page) : 1;
-        }
-
-        // Call a method or update component data based on the new route
+    if (category_id.value !== newCategoryId || currentPage.value !== newPage) {
+        category_id.value = newCategoryId;
+        currentPage.value = newPage;
         fetchProducts();
     }
 });
 </script>
 
 <style scoped>
-@media screen and (min-width: 768px) {
-    .blogs .entry-list .entry-media {
-        max-height: 190px;
-        overflow: hidden;
-    }
-
-    .blogs .entry-title {
-        font-size: 2.3rem;
-    }
-}
-
-.posts-list li {
-    margin-bottom: 2rem;
-    display: flex;
-    align-items: center;
-}
-
 .gallery-main-page-section .entry-gallery a {
     padding-bottom: 70.67%;
     overflow: hidden;
@@ -256,5 +200,9 @@ watchEffect(() => {
     object-fit: cover;
     width: 100%;
     height: 100%;
+}
+
+.page-link {
+    cursor: pointer;
 }
 </style>

@@ -95,10 +95,9 @@ class CategoryController extends Controller
         $result = Category::when(
             request('exclude_id'),
             function ($query, $excludeId) {
-                return $query->where('id', '<>', $excludeId);
+                return $query->where('id', '<>', $excludeId)->whereNull('parent_id');
             }
         )
-            ->whereNull('parent_id')
             ->get();
 
         return CategoryResource::collection($result);

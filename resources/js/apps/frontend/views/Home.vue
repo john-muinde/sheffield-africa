@@ -75,7 +75,7 @@
                             <i class="icon-shopping-cart"></i>
                             <span class="cart-count">{{
                                 cartItems.length
-                            }}</span>
+                                }}</span>
                             <span class="cart-txt">Cart</span>
                         </router-link>
 
@@ -347,7 +347,7 @@
         <div class="popup-advert">
             <div class="popup-content">
                 <img src="/storage/images/commercial-kitchen-coldroom-optimized-2.webp" alt="Rotobake Ovens Solutions"
-                    class="popup-image" style="min-height: 460px;" />
+                    class="popup-image" />
                 <div class="button-group row">
                     <button @click="dismissPopup" class="btn btn-primary btn-footer col-4">
                         Cancel
@@ -360,8 +360,21 @@
         </div>
     </template>
 
-
 </template>
+<style scoped>
+.popup-image {
+    width: 100%;
+    height: 60vh !important;
+}
+
+/* Target devices with typical mobile/tablet characteristics */
+@media only screen and (max-width: 800px) and (max-aspect-ratio: 4/3) and (orientation: portrait),
+only screen and (max-width: 800px) and (max-aspect-ratio: 3/2) and (orientation: landscape) {
+    .popup-image {
+        height: auto !important;
+    }
+}
+</style>
 
 <script setup>
 import { Navigation, Pagination, Autoplay } from 'swiper/modules'
