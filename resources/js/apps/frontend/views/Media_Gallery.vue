@@ -46,14 +46,14 @@
                                 <div class="col-lg-12 mt-3">
                                     <nav aria-label="Page navigation">
                                         <ul class="pagination justify-content-center">
-                                            <li class="page-item" :class="{ disabled: !pagination?.prev_page_url }">
+                                            <!-- <li class="page-item" :class="{ disabled: !pagination?.prev_page_url }">
                                                 <a class="page-link page-link-prev"
                                                     @click.prevent="goToPage(pagination?.prev_page_url)"
                                                     aria-label="Previous" tabindex="-1" aria-disabled="true">
                                                     <span aria-hidden="true"><i class="icon-long-arrow-left"></i></span>
                                                     Prev
                                                 </a>
-                                            </li>
+                                            </li> -->
                                             <li class="page-item" v-for="(page, index ) in pagination?.links"
                                                 :key="page.label" :class="{ active: page.active }">
                                                 <a class="page-link" @click.prevent="goToPage(page.url)"
@@ -61,7 +61,7 @@
                                                     {{ page.label }}
                                                 </a>
                                             </li>
-                                            <li class="page-item" :class="{ disabled: !pagination?.next_page_url }">
+                                            <!-- <li class="page-item" :class="{ disabled: !pagination?.next_page_url }">
                                                 <a class="page-link page-link-next"
                                                     @click.prevent="goToPage(pagination?.next_page_url)"
                                                     aria-label="Next">
@@ -69,7 +69,7 @@
                                                     <span aria-hidden="true"><i
                                                             class="icon-long-arrow-right"></i></span>
                                                 </a>
-                                            </li>
+                                            </li> -->
                                         </ul>
                                     </nav>
                                 </div>
@@ -117,7 +117,7 @@ const fetchProducts = async (url = null) => {
         const response = await axios.get(url || '/api/get-media-center-galleries', {
             params: {
                 page: currentPage.value,
-                per_page: perPage.value,
+                // per_page: perPage.value,
                 category_id: category_id.value,
                 gallery_type: selectedFilters.value,
             },

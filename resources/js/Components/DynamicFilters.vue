@@ -28,7 +28,7 @@
                         </div>
                         <span class="filter-label">{{ value }}</span>
                     </div>
-                    <span class="filter-count">{{ getCount(value) }}</span>
+                    <span v-if="showNumbers" class="filter-count">{{ getCount(value) }}</span>
                 </div>
             </label>
         </div>
@@ -58,11 +58,15 @@ const props = defineProps({
         type: Array,
         required: false,
         default: []
+    },
+    showNumbers: {
+        type: Boolean,
+        default: false
     }
 });
 
 const selectedFilters = ref(props.selectedFilters);
-console.log(selectedFilters)
+const showNumbers = ref(props.showNumbers);
 const dataRef = ref(props.items);
 
 const uniqueValues = computed(() => {

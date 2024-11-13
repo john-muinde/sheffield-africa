@@ -337,10 +337,8 @@ class BlogController extends Controller
     {
 
         $videos = Video::orderBy('created_at', 'DESC')->get();
-
         return response()->json(
             [
-
                 'videos' => $videos,
             ]
         );
@@ -350,7 +348,7 @@ class BlogController extends Controller
 
     public function getMediaCenterGalleries()
     {
-        $perPage = request('per_page', 9);
+        $perPage = (int) request('per_page', '0');
         $galleryFilters = request('gallery_type', []);
 
         $query = Gallery::where('is_published', true);
@@ -359,9 +357,15 @@ class BlogController extends Controller
             $query->whereIn('gallery_type', $galleryFilters);
         }
 
-        $galleries = $query->orderBy('created_at', 'DESC')->paginate($perPage);
+        $galleries = $query->orderBy('created_at', 'DESC');
 
-        return $galleries;
+        if ($perPage > 0) {
+            $galleries = $query->paginate($perPage);
+        } else {
+            $galleries = $query->get();
+        }
+
+        return ['data' => $galleries];
     }
 
     public function getMediaCenterGalleriesDetails()
