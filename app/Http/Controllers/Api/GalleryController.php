@@ -98,7 +98,6 @@ class GalleryController extends Controller
                 // Store the optimized image
                 Storage::disk('public')->put($file_path, $image);
 
-
                 return $file_path;
             })->toArray();
 
@@ -123,22 +122,19 @@ class GalleryController extends Controller
     {
         $this->authorize('product-edit');
 
-        $validatedData = $request->validated();
-
-
-        // Check if the gallery with the same name already exists (excluding the current gallery)
-        $existingGallery = Gallery::where('name', $request->name)
-            // ->where('brand', '=', $gallery->brand)
-            ->where('id', '!=', $gallery->id)
-            ->first();
-        if ($existingGallery) {
-            return response()->json(['errors' => ['name' => ['Gallery with the same name already exists.']]], 409);
-        }
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255|unique:galleries,name,' . $gallery->id,
+            'gallery_type' => 'required|string|max:255',
+            'gallery_introduction' => 'nullable|string|max:255',
+        ]);
 
         if ($request->hasFile('main_image_path')) {
 
-            $file = $request->file('main_image_path');
+            $request->validate([
+                'main_image_path' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
 
+            $file = $request->file('main_image_path');
             $file_name = time() . '_' . $request->file('main_image_path')->getClientOriginalName();
             $file_path = 'uploads/' . $file_name;
 
@@ -162,17 +158,12 @@ class GalleryController extends Controller
             $validatedData['document_path'] = $file_path;
         }
 
-
-
-
-
         $gallery->update($validatedData);
 
 
 
 
         if ($request->hasFile('gallery_gallery')) {
-
             $galleryGallery = collect($request->file('gallery_gallery'))->map(function ($file) {
 
                 $file_name = time() . '_' . '_gallery_' . $file->getClientOriginalName();
@@ -186,7 +177,6 @@ class GalleryController extends Controller
 
                 // Store the optimized image
                 Storage::disk('public')->put($file_path, $image);
-
 
                 return $file_path;
             })->toArray();

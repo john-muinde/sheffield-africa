@@ -9,10 +9,7 @@
                                 <li class="breadcrumb-item">
                                     <a href="javascript:;">Galleries</a>
                                 </li>
-                                <li
-                                    class="breadcrumb-item active"
-                                    aria-current="page"
-                                >
+                                <li class="breadcrumb-item active" aria-current="page">
                                     <span>Edit Gallery</span>
                                 </li>
                             </ol>
@@ -28,9 +25,7 @@
                     <div class="statbox panel box box-shadow">
                         <div class="panel-heading pb-0">
                             <div class="row">
-                                <div
-                                    class="col-xl-12 col-md-12 col-sm-12 col-12"
-                                >
+                                <div class="col-xl-12 col-md-12 col-sm-12 col-12">
                                     <h3><b>Edit Gallery</b></h3>
                                 </div>
                             </div>
@@ -39,42 +34,25 @@
                             <form @submit.prevent="submitForm">
                                 <div class="row">
                                     <div class="form-group col-md-12">
-                                        <label for="post-name"
-                                            >Gallery Name</label
-                                        >
-                                        <input
-                                            v-model="gallery.name"
-                                            id="post-name"
-                                            type="text"
-                                            class="form-control"
-                                            placeholder="Enter Gallery Name ..."
-                                        />
+                                        <label for="post-name">Gallery Name</label>
+                                        <input v-model="gallery.name" id="post-name" type="text" class="form-control"
+                                            placeholder="Enter Gallery Name ..." />
 
                                         <div class="text-danger mt-1">
                                             {{ errors.name }}
                                         </div>
                                         <div class="text-danger mt-1">
-                                            <div
-                                                v-for="message in validationErrors?.name"
-                                            >
+                                            <div v-for="message in validationErrors?.name">
                                                 {{ message }}
                                             </div>
                                         </div>
                                     </div>
 
                                     <div class="form-group col-md-12">
-                                        <label
-                                            for="gallery_type"
-                                            class="col-form-label"
-                                            >Gallery Type </label
-                                        >
+                                        <label for="gallery_type" class="col-form-label">Gallery Type </label>
                                         <div>
-                                            <select
-                                                v-model="gallery.gallery_type"
-                                                id="gallery_type"
-                                                class="form-select"
-                                                required
-                                            >
+                                            <select v-model="gallery.gallery_type" id="gallery_type" class="form-select"
+                                                required>
                                                 <option value="">
                                                     Select Gallery Type ...
                                                 </option>
@@ -95,148 +73,77 @@
                                             {{ errors.gallery_type }}
                                         </div>
                                         <div class="text-danger mt-1">
-                                            <div
-                                                v-for="message in validationErrors?.gallery_type"
-                                            >
+                                            <div v-for="message in validationErrors?.gallery_type">
                                                 {{ message }}
                                             </div>
                                         </div>
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="gallery_introduction"
-                                            >Gallery Introduction</label
-                                        >
+                                        <label for="gallery_introduction">Gallery Introduction</label>
 
-                                        <quill-editor
-                                            v-model:value="
-                                                gallery.gallery_introduction
-                                            "
-                                            id="gallery_introduction"
-                                            :options="options1"
-                                            placeholder="Enter Short Description ..."
-                                        ></quill-editor>
+                                        <quill-editor v-model:value="gallery.gallery_introduction
+                                            " id="gallery_introduction" :options="options1"
+                                            placeholder="Enter Short Description ..."></quill-editor>
                                     </div>
 
-                                    <div
-                                        class="custom-file-container"
-                                        data-upload-id="myFirstImage"
-                                    >
-                                        <label
-                                            >Upload Main Gallery Image
-                                            <a
-                                                href="javascript:void(0)"
-                                                class="custom-file-container__image-clear"
-                                                title="Clear Image"
-                                                >x</a
-                                            ></label
-                                        >
-                                        <label
-                                            class="custom-file-container__custom-file"
-                                            for="main_image"
-                                        >
-                                            <input
-                                                type="file"
+                                    <div class="custom-file-container" data-upload-id="myFirstImage">
+                                        <label>Upload Main Gallery Image
+                                            <a href="javascript:void(0)" class="custom-file-container__image-clear"
+                                                title="Clear Image">x</a></label>
+                                        <label class="custom-file-container__custom-file" for="main_image_path">
+                                            <input type="file"
                                                 class="custom-file-container__custom-file__custom-file-input"
-                                                accept="image/*"
-                                                @change="
-                                                    gallery.main_image =
-                                                        $event.target.files[0]
-                                                "
-                                                id="main_image"
-                                            />
-                                            <input
-                                                type="hidden"
-                                                name="MAX_FILE_SIZE"
-                                                value="10485760"
-                                            />
+                                                accept="image/*" @change="
+                                                    gallery.main_image_path =
+                                                    $event.target.files[0]
+                                                    " id="main_image_path" />
+                                            <input type="hidden" name="MAX_FILE_SIZE" value="10485760" />
                                             <span
-                                                class="custom-file-container__custom-file__custom-file-control"
-                                            ></span>
+                                                class="custom-file-container__custom-file__custom-file-control"></span>
                                         </label>
-                                        <div
-                                            class="custom-file-container__image-preview"
-                                        ></div>
+                                        <div class="custom-file-container__image-preview"></div>
                                     </div>
 
-                                    <div
-                                        class="custom-file-container"
-                                        data-upload-id="myGallery"
-                                    >
-                                        <label
-                                            >Gallery Gallery (multiple images
+                                    <div class="custom-file-container" data-upload-id="myGallery">
+                                        <label>Gallery Gallery (multiple images
                                             allowed)
-                                            <a
-                                                href="javascript:void(0)"
-                                                class="custom-file-container__image-clear"
-                                                title="Clear Image"
-                                                >x</a
-                                            ></label
-                                        >
-                                        <label
-                                            class="custom-file-container__custom-file"
-                                            for="gallery_gallery"
-                                        >
-                                            <input
-                                                type="file"
+                                            <a href="javascript:void(0)" class="custom-file-container__image-clear"
+                                                title="Clear Image">x</a></label>
+                                        <label class="custom-file-container__custom-file" for="gallery_gallery">
+                                            <input type="file"
                                                 class="custom-file-container__custom-file__custom-file-input"
-                                                accept="image/*"
-                                                ref="gallery_gallery"
-                                                multiple
-                                                id="gallery_gallery"
-                                            />
-                                            <input
-                                                type="hidden"
-                                                name="MAX_FILE_SIZE"
-                                                value="10485760"
-                                            />
+                                                accept="image/*" ref="gallery_gallery" multiple id="gallery_gallery" />
+                                            <input type="hidden" name="MAX_FILE_SIZE" value="10485760" />
                                             <span
-                                                class="custom-file-container__custom-file__custom-file-control"
-                                            ></span>
+                                                class="custom-file-container__custom-file__custom-file-control"></span>
                                         </label>
-                                        <div
-                                            class="custom-file-container__image-preview"
-                                        >
-                                            <div
-                                                v-for="item in gallery.gallery_images"
-                                                :key="item.id"
-                                                class="custom-file-container__image-multi-preview"
-                                                :style="
-                                                    'background-image: url(/storage/' +
+                                        <div class="custom-file-container__image-preview">
+                                            <div v-for="item in gallery.gallery_images" :key="item.id"
+                                                class="custom-file-container__image-multi-preview" :style="'background-image: url(/storage/' +
                                                     item.name +
                                                     ')'
-                                                "
-                                            >
+                                                    ">
                                                 <span
                                                     class="custom-file-container__image-multi-preview__single-image-clear"
                                                     @click="
                                                         deleteGalleryImage(
                                                             item.id
                                                         )
-                                                    "
-                                                >
+                                                        ">
                                                     <span
                                                         class="custom-file-container__image-multi-preview__single-image-clear__icon"
-                                                        data-upload-token=""
-                                                        >×</span
-                                                    >
+                                                        data-upload-token="">×</span>
                                                 </span>
                                             </div>
                                         </div>
                                     </div>
 
                                     <div class="form-group col-md-4">
-                                        <label
-                                            for="is_published"
-                                            class="col-form-label"
-                                            >Publishing Status</label
-                                        >
+                                        <label for="is_published" class="col-form-label">Publishing Status</label>
                                         <div>
-                                            <select
-                                                v-model="gallery.is_published"
-                                                id="is_published"
-                                                class="form-select"
-                                            >
+                                            <select v-model="gallery.is_published" id="is_published"
+                                                class="form-select">
                                                 <option value="">
                                                     Select Publishing Status ...
                                                 </option>
@@ -253,19 +160,14 @@
                                             {{ errors.is_published }}
                                         </div>
                                         <div class="text-danger mt-1">
-                                            <div
-                                                v-for="message in validationErrors?.is_published"
-                                            >
+                                            <div v-for="message in validationErrors?.is_published">
                                                 {{ message }}
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <button
-                                    :disabled="isLoading"
-                                    class="btn btn-primary mt-3"
-                                >
+                                <button :disabled="isLoading" class="btn btn-primary mt-3">
                                     <div v-show="isLoading" class=""></div>
                                     <span v-if="isLoading">Processing...</span>
                                     <span v-else>Update</span>
@@ -353,7 +255,7 @@ const gallery = reactive({
     gallery_introduction,
     is_published,
     gallery_type,
-    main_image: "",
+    main_image_path: "",
     gallery_gallery: "",
 });
 
@@ -383,7 +285,7 @@ function deleteImage(imageId) {
     deleteGalleryImage(imageId);
 }
 
-const initializeFileUpload = async () => {};
+const initializeFileUpload = async () => { };
 
 onMounted(() => {
     getGallery(route.params.id);

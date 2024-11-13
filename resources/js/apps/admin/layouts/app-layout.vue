@@ -71,10 +71,11 @@ const handleClickOutside = (event) => {
     }
 }
 
+const clickOutsideHandler = (event) => {
+    handleClickOutside(event);
+};
+
 onMounted(() => {
-    const clickOutsideHandler = (event) => {
-        handleClickOutside(event);
-    };
     document.addEventListener('click', clickOutsideHandler);
 });
 

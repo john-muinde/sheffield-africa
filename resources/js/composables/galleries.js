@@ -127,11 +127,9 @@ export default function useGallery() {
             headers: { "Content-Type": "multipart/form-data" },
         };
 
-        serializedPost.append("_method", "put");
-
         try {
             await apiRequest(
-                "post",
+                "put",
                 `/api/galleries/${gallery.id}`,
                 serializedPost,
                 config
