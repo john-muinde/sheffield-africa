@@ -101,6 +101,45 @@ const linkClass = computed(() => {
 </script>
 
 <style scoped>
+/* Make columns equal width and more flexible */
+.row.elements.categories {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+/* Remove original column classes or override them */
+.col-xs-3,
+.col-sm-4,
+.col-md-2 {
+    width: 100%;
+    max-width: 100%;
+}
+
+/* Style the cards */
+.element.box {
+    width: 100%;
+    padding: 1rem;
+}
+
+/* Style the content */
+.element p {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    font-size: clamp(12px, 1vw, 16px);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Ensure images don't overflow */
+.menu-icon {
+    width: auto;
+    height: 20px;
+    flex-shrink: 0;
+}
+
 .header-left>.category-dropdown {
     pointer-events: none;
 }
