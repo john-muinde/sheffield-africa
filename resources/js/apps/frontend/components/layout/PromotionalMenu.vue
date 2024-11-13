@@ -92,8 +92,12 @@ const route = useRoute();
 /* Make columns equal width and more flexible */
 .row.elements.categories {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    /* Adjust to show 4-5 items per row by default */
+    grid-template-columns: repeat(auto-fit, minmax(180px, 220px));
     gap: 1rem;
+    justify-content: center; /* Center the grid items */
+    width: 100%;
+    margin: 0 auto;
 }
 
 /* Remove original column classes or override them */
@@ -101,13 +105,16 @@ const route = useRoute();
 .col-sm-4,
 .col-md-2 {
     width: 100%;
-    max-width: 100%;
+    max-width: 220px; /* Enforce maximum width */
+    min-width: 180px; /* Ensure minimum width */
 }
 
 /* Style the cards */
 .element.box {
     width: 100%;
-    padding: 1rem;
+    padding: 0.75rem 1rem;
+    max-width: 220px; /* Match the column max-width */
+    margin: 0 auto;
 }
 
 /* Style the content */
@@ -115,18 +122,32 @@ const route = useRoute();
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
-    font-size: clamp(12px, 1vw, 16px);
+    font-size: clamp(12px, 1vw, 14px);
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    margin: 0;
 }
 
-/* Ensure images don't overflow */
-.menu-icon {
-    width: auto;
-    height: 20px;
-    flex-shrink: 0;
+/* Add responsive adjustments */
+@media (max-width: 768px) {
+    .row.elements.categories {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 0.5rem;
+    }
+
+    .col-xs-3,
+    .col-sm-4,
+    .col-md-2 {
+        max-width: 180px;
+    }
+
+    .element.box {
+        max-width: 180px;
+    }
 }
+
+/* All the other css changes */
 
 .header-left>.category-dropdown {
     pointer-events: none;

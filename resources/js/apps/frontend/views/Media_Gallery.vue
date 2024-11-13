@@ -10,7 +10,9 @@
                                     class="icon-long-arrow-left"></i><span>Back to Media Center</span></router-link>
                             <p class="lead about-us-lead text-primary mb-3">Journey Through the Lens: Our Story in
                                 Pictures</p>
-
+                            <!-- Add the filter component -->
+                            <DynamicFilters :items="products" filter-column="gallery_type"
+                                :data-ref="displayedProducts" />
                             <div class="row">
                                 <div class="entry-item col-sm-6 col-lg-4" v-for="product in displayedProducts"
                                     :key="product.id">
@@ -86,40 +88,24 @@ import { ref, computed, watch, onMounted, watchEffect } from 'vue';
 // import axios from "axios";
 import { useRoute } from "vue-router";
 import { useMeta } from "../../admin/composables/use-meta";
+import DynamicFilters from '@/Components/DynamicFilters.vue';
 
 useMeta({ title: "Gallery | Media Center" });
 
 
 const route = useRoute()
-const currentRoute = ref(route);
 
 const currentPage = ref(route.params.page ? parseInt(route.params.page) : 1);
 const perPage = ref(12);
 const totalProducts = ref(0);
 const products = ref([]);
-const totalCountperPage = ref(0);
 const category_id = ref(route.params.id ? parseInt(route.params.id) : 1);
-const categories = ref([]);
-const other_blogs = ref([]);
-const the_category = ref([]);
-
-
-const checkedCategories = ref([]);
-const mainCategorySelected = ref([]);
-const checkedBrands = ref([]);
-const selectedSortOption = ref('');
-
-
 
 
 // Fetch products based on the current page
 const fetchProducts = async () => {
 
     try {
-
-
-
-
         const response = await axios.get('/api/get-media-center-galleries', {
             params: {
                 page: currentPage.value,
