@@ -87,20 +87,17 @@ class BrandController extends Controller
     {
         $this->authorize('brand-edit');
 
-        // Check if the brand with the same name already exists (excluding the current brand)
-        $existingBrand = Brand::where('name', $request->name)
-            ->where('id', '!=', $brand->id)
-            ->first();
-        if ($existingBrand) {
-            return response()->json(['errors' => ['name' => ['Brand with the same name already exists.']]], 409);
-        }
-        $validatedData = $request->validated();
-
-        //dd("ik1o");
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255|unique:brands,name,' . $brand->id,
+            'description' => 'required|string|max:255',
+            'is_published' => 'required|string|max:255',
+        ]);
 
         if ($request->hasFile('main_image')) {
 
-            //dd("iko");
+            $validatedData = $request->validate([
+                'main_image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+            ]);
 
             $file = $request->file('main_image');
 

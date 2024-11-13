@@ -9,10 +9,7 @@
                                 <li class="breadcrumb-item">
                                     <a href="javascript:;">Video</a>
                                 </li>
-                                <li
-                                    class="breadcrumb-item active"
-                                    aria-current="page"
-                                >
+                                <li class="breadcrumb-item active" aria-current="page">
                                     <span>Create Video</span>
                                 </li>
                             </ol>
@@ -28,9 +25,7 @@
                     <div class="statbox panel box box-shadow">
                         <div class="panel-heading pb-0">
                             <div class="row">
-                                <div
-                                    class="col-xl-12 col-md-12 col-sm-12 col-12"
-                                >
+                                <div class="col-xl-12 col-md-12 col-sm-12 col-12">
                                     <h3><b>Create Video</b></h3>
                                 </div>
                             </div>
@@ -40,187 +35,100 @@
                                 <div class="row">
                                     <div class="form-group col-md-12">
                                         <label for="post-name">Title</label>
-                                        <input
-                                            v-model="blog.name"
-                                            id="post-name"
-                                            type="text"
-                                            class="form-control"
-                                            placeholder="Enter Title ..."
-                                        />
-
+                                        <input v-model="video.name" id="post-name" type="text" class="form-control"
+                                            placeholder="Enter Title ..." />
                                         <div class="text-danger mt-1">
-                                            {{ errors.name }}
-                                        </div>
-                                        <div class="text-danger mt-1">
-                                            <div
-                                                v-for="message in validationErrors?.name"
-                                            >
+                                            <div v-for="message in validationErrors?.name">
                                                 {{ message }}
                                             </div>
                                         </div>
                                     </div>
 
-                                    
+
 
                                     <div class="form-group">
-                                        <label for="post-content"
-                                            > Description</label
-                                        >
+                                        <label for="post-content"> Description</label>
 
-                                        <quill-editor
-                                            v-model:value="blog.content"
-                                            :options="options1"
-                                            placeholder="Enter Blog Content ..."
-                                        ></quill-editor>
+                                        <quill-editor v-model:value="video.content"
+                                            placeholder="Enter video Content ..."></quill-editor>
+
+                                        <div class="text-danger mt-1">
+                                            <div v-for="message in validationErrors?.content">
+                                                {{ message }}
+                                            </div>
+                                        </div>
                                     </div>
 
-                                    <div
-                                        class="custom-file-container"
-                                        data-upload-id="mySecondImage"
-                                    >
-                                        <label
-                                            >Brand Logo (Must be image)
-                                            <a
-                                                href="javascript:void(0)"
-                                                class="custom-file-container__image-clear"
-                                                title="Clear File"
-                                                >x</a
-                                            ></label
-                                        >
-                                        <label
-                                            class="custom-file-container__custom-file"
-                                            for="main_image"
-                                        >
-                                            <input
-                                                type="file"
+                                    <div class="custom-file-container" data-upload-id="mySecondImage">
+                                        <label>Brand Logo (Must be image)
+                                            <a href="javascript:void(0)" class="custom-file-container__image-clear"
+                                                title="Clear File">x</a></label>
+                                        <label class="custom-file-container__custom-file" for="main_image_path">
+                                            <input type="file"
                                                 class="custom-file-container__custom-file__custom-file-input"
-                                                accept="image/jpeg, image/png"
-                                                @change="
-                                                    blog.main_image =
-                                                        $event.target.files[0]
-                                                "
-                                                id="main_image"
-                                            />
-                                            <input
-                                                type="hidden"
-                                                name="MAX_FILE_SIZE"
-                                                value="10485760"
-                                            />
+                                                accept="image/jpeg, image/png" @change="
+                                                    video.main_image_path =
+                                                    $event.target.files[0]
+                                                    " id="main_image_path" />
+                                            <input type="hidden" name="MAX_FILE_SIZE" value="10485760" />
                                             <span
-                                                class="custom-file-container__custom-file__custom-file-control"
-                                            ></span>
+                                                class="custom-file-container__custom-file__custom-file-control"></span>
                                         </label>
-                                        <div
-                                            class="custom-file-container__image-preview"
-                                        ></div>
+                                        <div class="custom-file-container__image-preview"></div>
                                     </div>
 
                                     <div class="form-group">
-                                        <label
-                                            for="post-category"
-                                            class="form-label"
-                                            >Type</label
-                                        >
+                                        <label for="post-category" class="form-label">Type</label>
 
-                                        <select class="form-select form-control" name="type" id="type" v-model="blog.type" @change="handleTypeChange">
+                                        <select class="form-select form-control" name="type" id="type"
+                                            v-model="video.type" @change="handleTypeChange">
                                             <option value="">Select Type</option>
                                             <option value="Upload">Upload</option>
                                             <option value="Youtube Url">Youtube Url</option>
                                         </select>
-
                                         <div class="text-danger mt-1">
-                                            {{ errors.type }}
-                                        </div>
-                                        <div class="text-danger mt-1">
-                                            <div
-                                                v-for="message in validationErrors?.type"
-                                            >
+                                            <div v-for="message in validationErrors?.type">
                                                 {{ message }}
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div
-                                        class="custom-file-container"
-                                        data-upload-id="myFirstImage"
-
-                                        v-if="blog.type == 'Upload'"
-
-                                        ref="uploadContainer"
-                                    >
-                                        <label
-                                            >Upload Video (Must be mp4)
-                                            <a
-                                                href="javascript:void(0)"
-                                                class="custom-file-container__image-clear"
-                                                title="Clear File"
-                                                >x</a
-                                            ></label
-                                        >
-                                        <label
-                                            class="custom-file-container__custom-file"
-                                            for="file_path"
-                                        >
-                                            <input
-                                                type="file"
+                                    <div class="custom-file-container" data-upload-id="myFirstImage"
+                                        v-if="video.type == 'Upload'" ref="uploadContainer">
+                                        <label>Upload Video (Must be mp4)
+                                            <a href="javascript:void(0)" class="custom-file-container__image-clear"
+                                                title="Clear File">x</a></label>
+                                        <label class="custom-file-container__custom-file" for="file_path">
+                                            <input type="file"
                                                 class="custom-file-container__custom-file__custom-file-input"
-                                                accept="video/mp4"
-                                                @change="
-                                                    blog.file_path =
-                                                        $event.target.files[0]
-                                                "
-                                                id="file_path"
-                                            />
-                                            <input
-                                                type="hidden"
-                                                name="MAX_FILE_SIZE"
-                                                value="10485760"
-                                            />
+                                                accept="video/mp4" @change="
+                                                    video.file_path =
+                                                    $event.target.files[0]
+                                                    " id="file_path" />
+                                            <input type="hidden" name="MAX_FILE_SIZE" value="10485760" />
                                             <span
-                                                class="custom-file-container__custom-file__custom-file-control"
-                                            ></span>
+                                                class="custom-file-container__custom-file__custom-file-control"></span>
                                         </label>
-                                        <div
-                                            class="custom-file-container__image-preview"
-                                        ></div>
+                                        <div class="custom-file-container__image-preview"></div>
                                     </div>
 
 
-                                    <div class="form-group col-md-12" v-if="blog.type == 'Youtube Url'">
+                                    <div class="form-group col-md-12" v-if="video.type == 'Youtube Url'">
                                         <label for="post-name">Youtube Video Url</label>
-                                        <input
-                                            v-model="blog.video_url"
-                                            id="post-name"
-                                            type="text"
-                                            class="form-control"
-                                            placeholder="Enter Youtube Video Url ..."
-                                            @input="validateYoutubeUrl"
-                                        />
-
+                                        <input v-model="video.video_url" id="post-name" type="text" class="form-control"
+                                            placeholder="Enter Youtube Video Url ..." />
                                         <div class="text-danger mt-1">
-                                            {{ errors.video_url }}
-                                        </div>
-                                        <div class="text-danger mt-1">
-                                            <div
-                                                v-for="message in validationErrors?.video_url"
-                                            >
+                                            <div v-for="message in validationErrors?.video_url">
                                                 {{ message }}
                                             </div>
                                         </div>
                                     </div>
 
                                     <div class="form-group col-md-12">
-                                        <label
-                                            for="is_published"
-                                            class="col-form-label"
-                                            >Shown in About Us</label
-                                        >
+                                        <label for="is_published" class="col-form-label">Shown in About Us</label>
                                         <div>
-                                            <select
-                                                v-model="blog.shown_in_about_us"
-                                                id="shown_in_about_us"
-                                                class="form-select"
-                                            >
+                                            <select v-model="video.shown_in_about_us" id="shown_in_about_us"
+                                                class="form-select">
                                                 <option value="">
                                                     Select Shown Status ...
                                                 </option>
@@ -232,34 +140,16 @@
                                                 </option>
                                             </select>
                                         </div>
-
                                         <div class="text-danger mt-1">
-                                            {{ errors.shown_in_about_us }}
-                                        </div>
-                                        <div class="text-danger mt-1">
-                                            <div
-                                                v-for="message in validationErrors?.shown_in_about_us"
-                                            >
+                                            <div v-for="message in validationErrors?.shown_in_about_us">
                                                 {{ message }}
                                             </div>
                                         </div>
                                     </div>
-                              
-
-                                   
-
                                     <div class="form-group col-md-12">
-                                        <label
-                                            for="is_published"
-                                            class="col-form-label"
-                                            >Publishing Status</label
-                                        >
+                                        <label for="is_published" class="col-form-label">Publishing Status</label>
                                         <div>
-                                            <select
-                                                v-model="blog.is_published"
-                                                id="is_published"
-                                                class="form-select"
-                                            >
+                                            <select v-model="video.is_published" id="is_published" class="form-select">
                                                 <option value="">
                                                     Select Publishing Status ...
                                                 </option>
@@ -273,22 +163,14 @@
                                         </div>
 
                                         <div class="text-danger mt-1">
-                                            {{ errors.is_published }}
-                                        </div>
-                                        <div class="text-danger mt-1">
-                                            <div
-                                                v-for="message in validationErrors?.is_published"
-                                            >
+                                            <div v-for="message in validationErrors?.is_published">
                                                 {{ message }}
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <button
-                                    :disabled="isLoading"
-                                    class="btn btn-primary mt-3"
-                                >
+                                <button :disabled="isLoading" class="btn btn-primary mt-3">
                                     <div v-show="isLoading" class=""></div>
                                     <span v-if="isLoading">Processing...</span>
                                     <span v-else>Save</span>
@@ -318,7 +200,6 @@ import { useMeta } from "../../composables/use-meta";
 useMeta({ title: "Create Video" });
 
 import "../../assets/sass/scrollspyNav.scss";
-import highlight from "../../components/plugins/highlight.vue";
 
 import "../../assets/sass/forms/file-upload-with-preview.min.css";
 import FileUploadWithPreview from "file-upload-with-preview";
@@ -326,116 +207,39 @@ import FileUploadWithPreview from "file-upload-with-preview";
 import { quillEditor } from "vue3-quill";
 import "vue3-quill/lib/vue3-quill.css";
 
-import { reactive, onMounted, ref } from "vue";
+import { onMounted } from "vue";
 import useVideo from "@/composables/videos";
-
-import { useForm, useField, defineRule } from "vee-validate";
-import { required, min } from "@/validation/rules";
-
-defineRule("required", required);
-defineRule("min", min);
-
-// Define a validation schema
-const schema = {
-    name: "required|min:3",
-    type: "required",
-    is_published: "required"
-};
-
-// Create a form context with the validation schema
-const { validate, errors } = useForm({ validationSchema: schema });
-// Define actual fields for validation
-const { value: name } = useField("name", null, { initialValue: "" });
-const { value: type } = useField("type", null, {
-    initialValue: "",
-});
-const { value: content } = useField("content", null, {
-    initialValue: "",
-});
-const { value: main_image } = useField("main_image", null, {
-    initialValue: "",
-});
-const { value: file_path } = useField("file_path", null, {
-    initialValue: "",
-});
-const { value: is_published } = useField("is_published", null, {
-    initialValue: "",
-});
-const { value: shown_in_about_us } = useField("shown_in_about_us", null, {
-    initialValue: "",
-});
-
 
 const {
     storeVideo,
+    video,
     validationErrors,
     isLoading,
     getPublictionList,
     videoList,
 } = useVideo();
 
-
-const blog = reactive({
-    name,
-    type,
-    content,
-    is_published,
-    shown_in_about_us,
-    main_image: "",
-    file_path: "",
-});
-
-
 const handleTypeChange = () => {
 
-    if (blog.type === 'Upload') {
-        console.log("test");
+    if (video.type === 'Upload') {
         const fileUploadContainer = new FileUploadWithPreview("myFirstImage", {
-          images: {
-            baseImage: "/assets/images/video_preview.jpg",
-            backgroundImage: "",
-          },
+            images: {
+                baseImage: "/assets/images/video_preview.jpg",
+                backgroundImage: "",
+            },
         });
-        
+
         // Append the file upload container to the specified ref element
         fileUploadContainer.appendTo(document.getElementById('uploadContainer'));
     }
-
 };
 
-
-const validateYoutubeUrl = () => {
-  const youtubeUrlPattern = /^(https?:\/\/)?(www\.)?youtube\.com\/watch\?v=/i;
-  
-  if (!youtubeUrlPattern.test(blog.video_url)) {
-    errors.value.video_url = "Please enter a valid YouTube Video URL in the format https://www.youtube.com/watch?v=";
-  } else {
-    errors.value.video_url = null;
-  }
-};
-
-
-const options1 = ref({
-    modules: {
-        //toolbar: [[{ header: [1, 2, false] }], ["bold", "italic", "underline"], ["image", "code-block"]],
-    },
-});
 
 function submitForm() {
-
-    console.log(blog);
-
-
-    validate().then((form) => {
-        if (form.valid) {
-           
-            storeVideo(blog);
-        }
-    });
+    storeVideo(video.value);
 }
 
 onMounted(() => {
-
     //single file upload
     new FileUploadWithPreview("mySecondImage", {
         images: {
@@ -443,15 +247,5 @@ onMounted(() => {
             backgroundImage: "",
         },
     });
-
-
-
-   
 });
-
-// console.log("test")
-// console.log(brandList);
-
-// console.log("test")
-// console.log(blogCategoryList);
 </script>
