@@ -67,6 +67,9 @@ import { ClientTable } from "v-tables-3";
 
 app.use(ClientTable);
 
+import { setupRouterProgress } from "./axiosInstance";
+setupRouterProgress(router);
+
 app.use(VueReCaptcha, { siteKey: "6Ldyw1wpAAAAAGx6vRq1hhnnfKaKHPmcuJ0imPkT" })
     .provide("useAuth", useAuth())
     .use(VueLazyload)

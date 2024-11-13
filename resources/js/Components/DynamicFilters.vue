@@ -61,7 +61,8 @@ const props = defineProps({
     }
 });
 
-const selectedFilters = ref(props.selectedFilters && Array.isArray(props.selectedFilters) ? props.selectedFilters : []);
+const selectedFilters = ref(props.selectedFilters);
+console.log(selectedFilters)
 const dataRef = ref(props.items);
 
 const uniqueValues = computed(() => {
@@ -96,9 +97,28 @@ const handleFilterChange = () => {
     emit('update:displayedProducts', { filteredData: dataRef.value, selectedFilters: selectedFilters.value });
 };
 
-watch(() => props.items, () => {
-    selectedFilters.value = [];
-    dataRef.value = props.items;
+
+// Modified watch that preserves filters
+watch(() => props.items, (newItems) => {
+    dataRef.value = newItems;
+
+    // Apply existing filters to new items
+    if (selectedFilters.value.length > 0) {
+        const filteredData = newItems.filter(item =>
+            selectedFilters.value.includes(item[props.filterColumn])
+        );
+
+        emit('update:displayedProducts', {
+            filteredData,
+            selectedFilters: selectedFilters.value
+        });
+    } else {
+        // If no filters are selected, show all items
+        emit('update:displayedProducts', {
+            filteredData: newItems,
+            selectedFilters: []
+        });
+    }
 }, { deep: true });
 </script>
 

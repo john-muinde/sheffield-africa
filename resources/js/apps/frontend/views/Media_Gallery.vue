@@ -112,7 +112,6 @@ const filters = ref([
 const fetchProducts = async (url = null) => {
     if (typeof url == 'string' && url.includes('http')) {
         url = url.split('/api/').pop();
-        console.log(url);
     }
     try {
         const response = await axios.get(url || '/api/get-media-center-galleries', {
@@ -131,7 +130,6 @@ const fetchProducts = async (url = null) => {
             prev_page_url: data.prev_page_url,
             links: data.links
         };
-        console.log(pagination.value)
         updateDisplayedProducts(products.value);
     } catch (error) {
         console.error(error);

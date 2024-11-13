@@ -97,8 +97,7 @@ class CategoryController extends Controller
             function ($query, $excludeId) {
                 return $query->where('id', '<>', $excludeId)->whereNull('parent_id');
             }
-        )
-            ->get();
+        )->get();
 
         return CategoryResource::collection($result);
     }
