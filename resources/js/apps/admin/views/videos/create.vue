@@ -60,7 +60,7 @@
                                     </div>
 
                                     <div class="custom-file-container" data-upload-id="mySecondImage">
-                                        <label>Brand Logo (Must be image)
+                                        <label>Main Image (Must be image)
                                             <a href="javascript:void(0)" class="custom-file-container__image-clear"
                                                 title="Clear File">x</a></label>
                                         <label class="custom-file-container__custom-file" for="main_image_path">

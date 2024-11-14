@@ -55,7 +55,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::apiResource('publications', PublicationController::class);
     Route::apiResource('videos', VideoController::class);
     Route::apiResource('galleries', GalleryController::class);
-    Route::apiResource('newss', NewsController::class);
+    Route::apiResource('news', NewsController::class);
     Route::apiResource('gallery-images', GalleryImagesController::class);
     Route::get('category-list', [CategoryController::class, 'getList']);
     Route::get('category-main', [CategoryController::class, 'getCategoriesMain']);

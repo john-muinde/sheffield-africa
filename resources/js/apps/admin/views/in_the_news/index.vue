@@ -9,10 +9,7 @@
                                 <li class="breadcrumb-item">
                                     <a href="javascript:;">In the News</a>
                                 </li>
-                                <li
-                                    class="breadcrumb-item active"
-                                    aria-current="page"
-                                >
+                                <li class="breadcrumb-item active" aria-current="page">
                                     <span>View In the News</span>
                                 </li>
                             </ol>
@@ -33,91 +30,45 @@
                         </div>
                     </div>
                     <div class="custom-table">
-                        <v-client-table
-                            :data="getTableData()"
-                            :columns="columns"
-                            :options="table_option"
-                        >
+                        <v-client-table :data="getTableData()" :columns="columns" :options="table_option">
                             <template #video_file="props">
-                                <a
-                                    class="btn btn-primary"
-                                    :href="'/storage/' + props.row.file_path"
-                                    target="_blank"
-                                    >View file</a
-                                >
+                                <a class="btn btn-primary" :href="'/storage/' + props.row.file_path"
+                                    target="_blank">View file</a>
                             </template>
 
                             <template #is_published="props">
-                                <span
-                                    v-if="props.row.is_published === 1"
-                                    class="badge badge-success inv-status"
-                                    >Published</span
-                                >
+                                <span v-if="props.row.is_published === 1"
+                                    class="badge badge-success inv-status">Published</span>
 
-                                <span
-                                    v-if="props.row.is_published !== 1"
-                                    class="badge badge-danger inv-status"
-                                    >Not Published</span
-                                >
+                                <span v-if="props.row.is_published !== 1" class="badge badge-danger inv-status">Not
+                                    Published</span>
                             </template>
 
                             <template #actions="props">
                                 <!-- v-if="can('category-edit')"  -->
 
-                                <router-link
-                                    :to="{
-                                        name: 'news.edit',
-                                        params: { id: props.row.id },
-                                    }"
-                                    class="badge bg-info"
-                                    data-bs-toggle="tooltip"
-                                    data-bs-placement="top"
-                                >
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width="24"
-                                        height="24"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        stroke-width="1.5"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        class="feather feather-edit-2"
-                                    >
-                                        <path
-                                            d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"
-                                        ></path>
+                                <router-link :to="{
+                                    name: 'news.edit',
+                                    params: { id: props.row.id },
+                                }" class="badge bg-info" data-bs-toggle="tooltip" data-bs-placement="top">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                        stroke-linejoin="round" class="feather feather-edit-2">
+                                        <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
                                     </svg>
                                 </router-link>
 
                                 <!--  v-if="can('category-delete')" -->
 
-                                <a
-                                    href="javascript:;"
-                                    @click.prevent="deleteNews(props.row.id)"
-                                    class="ms-2 badge bg-danger"
-                                    data-bs-toggle="tooltip"
-                                    data-bs-placement="top"
-                                >
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width="24"
-                                        height="24"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        stroke-width="1.5"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        class="feather feather-trash"
-                                    >
-                                        <polyline
-                                            points="3 6 5 6 21 6"
-                                        ></polyline>
+                                <a href="javascript:;" @click.prevent="deleteNews(props.row.id)"
+                                    class="ms-2 badge bg-danger" data-bs-toggle="tooltip" data-bs-placement="top">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                        stroke-linejoin="round" class="feather feather-trash">
+                                        <polyline points="3 6 5 6 21 6"></polyline>
                                         <path
-                                            d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"
-                                        ></path>
+                                            d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
+                                        </path>
                                     </svg>
                                 </a>
                             </template>
@@ -138,7 +89,7 @@ useMeta({ title: "View News" });
 import useNews from "@/composables/news";
 import { useAbility } from "@casl/vue";
 
-const { newss, getNewss, deleteNews } = useNews();
+const { news, getNewss, deleteNews } = useNews();
 const { can } = useAbility();
 
 onMounted(() => {
@@ -146,12 +97,12 @@ onMounted(() => {
 });
 
 const getTableData = () => {
-    return newss.value && Array.isArray(newss.value.data)
-        ? newss.value.data
+    return news.value && Array.isArray(news.value.data)
+        ? news.value.data
         : [];
 };
 
-console.log(newss);
+console.log(news);
 
 const columns = ref([
     "name",

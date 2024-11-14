@@ -23,7 +23,7 @@ class NewsController extends Controller
         if (!in_array($orderDirection, ['asc', 'desc'])) {
             $orderDirection = 'desc';
         }
-        $newss = News::when(request('search_id'), function ($query) {
+        $news = News::when(request('search_id'), function ($query) {
             $query->where('id', request('search_id'));
         })
             ->when(request('search_title'), function ($query) {
@@ -37,7 +37,7 @@ class NewsController extends Controller
             })
             ->orderBy($orderColumn, $orderDirection)
             ->paginate(50);
-        return NewsResource::collection($newss);
+        return NewsResource::collection($news);
     }
 
     public function store(StoreNewsRequest $request)

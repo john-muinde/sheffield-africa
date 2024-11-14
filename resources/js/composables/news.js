@@ -3,13 +3,16 @@ import { useRouter } from "vue-router";
 import axiosInstance from "../axiosInstance";
 
 export default function useNewss() {
-    const newss = ref([]);
+    const allNews = ref([]);
     const newsList = ref([]);
     const news = ref({
         name: "",
-        // main_image: "",
+        type: "",
+        content: "",
         is_published: "",
-        description: "",
+        main_image_path: "",
+        file_path: "",
+        url: "",
     });
 
     const router = useRouter();
@@ -27,7 +30,7 @@ export default function useNewss() {
     ) => {
         axiosInstance
             .get(
-                "/api/newss?page=" +
+                "/api/news?page=" +
                     page +
                     "&search_id=" +
                     search_id +
@@ -41,12 +44,12 @@ export default function useNewss() {
                     order_direction
             )
             .then((response) => {
-                newss.value = response.data;
+                allNews.value = response.data;
             });
     };
 
     const getNews = async (id) => {
-        axiosInstance.get("/api/newss/" + id).then((response) => {
+        axiosInstance.get("/api/news/" + id).then((response) => {
             news.value = response.data.data;
         });
     };
@@ -73,13 +76,13 @@ export default function useNewss() {
         console.log(serializedPost);
 
         axiosInstance
-            .post("/api/newss", serializedPost, config)
+            .post("/api/news", serializedPost, config)
             .then((response) => {
                 router.push({ name: "news.create" });
                 // Reset the form values
                 news.name = null;
                 news.description = null;
-                news.main_image = null;
+                news.main_image_path = null;
                 news.is_published = null;
                 news.video = null;
                 swal({
@@ -119,7 +122,7 @@ export default function useNewss() {
         console.log(serializedPost);
 
         axiosInstance
-            .post("/api/newss/" + news.id, serializedPost, config)
+            .post("/api/news/" + news.id, serializedPost, config)
             .then((response) => {
                 router.push({ name: "news.index" });
                 swal({
@@ -149,7 +152,7 @@ export default function useNewss() {
         }).then((result) => {
             if (result.isConfirmed) {
                 axiosInstance
-                    .delete("/api/newss/" + id)
+                    .delete("/api/news/" + id)
                     .then((response) => {
                         getNewss();
                         router.push({ name: "news.index" });
