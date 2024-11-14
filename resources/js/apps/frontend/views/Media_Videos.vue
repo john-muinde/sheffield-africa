@@ -24,13 +24,18 @@
                                     <div class="video-player w-full">
                                         <vue-plyr ref="plyr" :options="plyrOptions" @ready="handlePlayerReady"
                                             @playing="handlePlaying" @pause="handlePause" @ended="handleEnded">
-                                            <div v-if="isYouTubeVideo" id="player" data-plyr-provider="youtube"
-                                                :data-plyr-embed-id="`${getYoutubeId(selectedVideo?.video_url)}`"></div>
-                                            <video v-else :poster="getVideoPoster(selectedVideo)" controls crossorigin
-                                                loop autoplay playsinline>
-                                                <source v-if="selectedVideo" :src="videoSrc(selectedVideo)"
-                                                    type="video/mp4" />
-                                            </video>
+                                            <template v-if="isYouTubeVideo">
+                                                <div data-plyr-provider="youtube"
+                                                    :data-plyr-embed-id="getYoutubeId(selectedVideo?.video_url)">
+                                                </div>
+                                            </template>
+                                            <template v-else>
+                                                <video :poster="getVideoPoster(selectedVideo)" controls crossorigin loop
+                                                    autoplay muted>
+                                                    <source v-if="selectedVideo" :src="videoSrc(selectedVideo)"
+                                                        type="video/mp4" />
+                                                </video>
+                                            </template>
                                         </vue-plyr>
                                     </div>
                                 </div>
@@ -115,6 +120,7 @@ const plyrOptions = {
     ],
     autoplay: true,
     hideControls: false,
+    muted: true,
     quality: { default: 720, options: [4320, 2880, 2160, 1440, 1080, 720, 576, 480, 360, 240] }
 };
 
@@ -159,12 +165,11 @@ const fetchMediaCenter = async () => {
     }
 };
 
-const autoplayFirstVideo = () => {
-    nextTick(() => {
-        if (videos.value.length > 0) {
-            playVideo(videos.value[0]);
-        }
-    });
+const autoplayFirstVideo = async () => {
+    await nextTick();
+    if (videos.value.length > 0) {
+        playVideo(videos.value[0]);
+    }
 };
 
 const playVideo = async (video) => {
@@ -188,34 +193,57 @@ const playVideo = async (video) => {
     if (plyr.value) {
         const player = plyr.value.player;
         await nextTick();
-        player.play().catch(() => {
-            isPaused.value = true;
-        });
+        if (isYouTubeVideo.value) {
+            player.source = {
+                type: 'video',
+                sources: [{
+                    src: getYoutubeId(video.video_url),
+                    provider: 'youtube'
+                }]
+            };
+        } else {
+            player.source = {
+                type: 'video',
+                sources: [{
+                    src: videoSrc(video),
+                    type: 'video/mp4'
+                }]
+            };
+        }
+        await player.play();
     }
 };
 
 // Player event handlers
-const handlePlayerReady = (player) => {
+const handlePlayerReady = async (player) => {
+    console.log('Ready product ', player)
     if (player && selectedVideo.value) {
-        player.play().catch(() => {
-            isPaused.value = true;
-        });
+        player.muted = true;
+        await player.play();
+        isPaused.value = true;
     }
 };
 
+
 const handlePlaying = () => {
+    console.log('playing')
     isPaused.value = false;
 };
 
 const handlePause = () => {
+    console.log('paused')
     isPaused.value = true;
 };
 
 const handleEnded = () => {
+    console.log('ended')
     isPaused.value = true;
 };
 
 onMounted(() => {
+    if (plyr.value?.player) {
+        plyr.value.player.muted = true;
+    }
     fetchMediaCenter();
 });
 </script>
