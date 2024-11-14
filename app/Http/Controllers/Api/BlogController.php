@@ -335,8 +335,9 @@ class BlogController extends Controller
 
     public function getMediaCenterVideos()
     {
-
-        $videos = Video::orderBy('created_at', 'DESC')->get();
+        $videos = Video::orderBy('created_at', 'DESC')
+            ->where('is_published', 1)
+            ->get();
         return response()->json(
             [
                 'videos' => $videos,
