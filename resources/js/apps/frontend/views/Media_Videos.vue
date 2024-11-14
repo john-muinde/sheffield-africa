@@ -6,7 +6,7 @@
                     <div class="row">
                         <div class="col-lg-10 offset-lg-1 media-video">
                             <!-- Header Section -->
-                            <div class="flex justify-between items-center mb-8">
+                            <div class="flex justify-between items-center">
                                 <div>
                                     <h2 class="about-us-title text-3xl font-bold">Videos</h2>
                                     <p class="lead about-us-lead text-primary mb-3">Explore our videos</p>
@@ -24,13 +24,10 @@
                                     <div class="video-player w-full">
                                         <vue-plyr ref="plyr" :options="plyrOptions" @ready="handlePlayerReady"
                                             @playing="handlePlaying" @pause="handlePause" @ended="handleEnded">
-                                            <div v-if="isYouTubeVideo" class="plyr__video-embed" id="player">
-                                                <iframe
-                                                    :src="`https://www.youtube.com/embed/${getYoutubeId(selectedVideo?.video_url)}?origin=https://plyr.io&amp;iv_load_policy=3&amp;modestbranding=1&amp;playsinline=1&amp;showinfo=0&amp;rel=0&amp;enablejsapi=1`"
-                                                    allowfullscreen allowtransparency allow="autoplay"></iframe>
-                                            </div>
+                                            <div v-if="isYouTubeVideo" id="player" data-plyr-provider="youtube"
+                                                :data-plyr-embed-id="`${getYoutubeId(selectedVideo?.video_url)}`"></div>
                                             <video v-else :poster="getVideoPoster(selectedVideo)" controls crossorigin
-                                                playsinline>
+                                                loop autoplay playsinline>
                                                 <source v-if="selectedVideo" :src="videoSrc(selectedVideo)"
                                                     type="video/mp4" />
                                             </video>
