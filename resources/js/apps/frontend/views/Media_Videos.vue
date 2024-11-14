@@ -31,10 +31,10 @@
                                                         <div class="play_pause_icon play"></div>
                                                     </label>
                                                     <input class="checkbox-play" type="checkbox"
-                                                        :id="'checkbox' + video.id" :checked="selectedVideo?.id == video.id
-                                                            ? 'checked' : ''" />
+                                                        :id="'checkbox' + video.id" :checked="selectedVideo?.id && selectedVideo?.id == video.id
+                                                            ? true : false" />
                                                 </div>
-                                                <span>{{ video.name }} ({{ video.type }})</span>
+                                                <span>{{ video.name }}</span>
                                             </li>
                                         </ul>
                                     </div>
