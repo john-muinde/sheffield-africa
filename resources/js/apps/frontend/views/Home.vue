@@ -346,7 +346,7 @@
     <template v-if="showPopup">
         <div class="popup-advert">
             <div class="popup-content">
-                <img src="/assets/images/events/november-promo.png" alt="Rotobake Ovens Solutions" class="popup-image"
+                <img src="/assets/images/events/Showroom Bonanza_Pizzeria Solutions Promotion-01.webp" alt="Rotobake Ovens Solutions" class="popup-image"
                     style="  width: 100%; min-height: 480px;" />
                 <div class="button-group row">
                     <button @click="dismissPopup" class="btn btn-primary btn-footer col-4">

@@ -241,7 +241,7 @@ const generateThumbnail = async (video) => {
 
         videoElement.addEventListener('loadeddata', () => {
             // Seek to 5 seconds if the video is longer than 5 seconds
-            const seekTime = Math.min(5, videoElement.duration);
+            const seekTime = Math.min(4, videoElement.duration);
             videoElement.currentTime = seekTime;
         });
 
