@@ -227,7 +227,8 @@ const plyrOptions = {
     autoplay: true,
     hideControls: false,
     muted: true,
-    quality: { default: 720, options: [4320, 2880, 2160, 1440, 1080, 720, 576, 480, 360, 240] }
+    markers: { show: false },
+    quality: { default: 1080, options: [4320, 2880, 2160, 1440, 1080, 720, 576, 480, 360, 240] }
 };
 
 const isYouTubeVideo = computed(() => {
