@@ -18,7 +18,6 @@
         <div class="product-details">
             <!-- Product Name with ellipsis -->
             <span class="text-start product-name">{{ product.name }}</span>
-
             <!-- Description with ellipsis -->
             <span class="text-start text-muted product-description">
                 {{ product.model_number }}
@@ -396,7 +395,7 @@ const getProductLink = (id, name, model_number, main_second_parent_cat) => {
     color: white;
     padding: 4px 8px;
     border-radius: 4px;
-    font-size: 0.8rem;
+    font-size: 1.1rem;
     font-weight: bold;
 }
 

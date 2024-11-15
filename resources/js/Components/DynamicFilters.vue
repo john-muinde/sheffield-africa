@@ -1,6 +1,6 @@
 <!-- DynamicFilter.vue -->
 <template>
-    <div v-if="uniqueValues.length" class="filter-container">
+    <div v-if="filters.length" class="filter-container">
         <h4 class="filter-heading">
             <span class="filter-icon">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
@@ -11,8 +11,8 @@
             </span>
             {{ formatTitle(filterColumn) }}
         </h4>
-        <div class="filter-options-container">
-            <label v-for="value in uniqueValues" :key="value" class="filter-card"
+        <div class="filter-options-container" :class="props.classes">
+            <label v-for="(value,index) in filters" :key="value" class="filter-card"
                 :class="{ 'filter-card-selected': selectedFilters.includes(value) }">
                 <input type="checkbox" :value="value" v-model="selectedFilters" @change="handleFilterChange"
                     class="filter-checkbox" />
@@ -26,7 +26,7 @@
                                     clip-rule="evenodd" />
                             </svg>
                         </div>
-                        <span class="filter-label">{{ value }}</span>
+                        <span class="filter-label">{{ titles[index] }}</span>
                     </div>
                     <span v-if="showNumbers" class="filter-count">{{ getCount(value) }}</span>
                 </div>
@@ -62,21 +62,45 @@ const props = defineProps({
     showNumbers: {
         type: Boolean,
         default: false
+    },
+    searchTerm: {
+        type: String,
+        default: ''
+    },
+    classes: {
+        type: String,
+        default: ''
     }
 });
 
 const selectedFilters = ref(props.selectedFilters);
 const showNumbers = ref(props.showNumbers);
 const dataRef = ref(props.items);
+const searchTerm = ref(props.searchTerm);
+
+const filters = ref([]);
+const titles = ref([]);
+
+if (props.filters.length > 0) {
+    if (typeof props.filters[0] === 'object') {
+        filters.value = props.filters.map(filter => Object.keys(filter)[0]);
+        titles.value = props.filters.map(filter => Object.values(filter)[0]);
+    } else {
+        filters.value = props.filters;
+        titles.value = props.filters;
+    }
+}
 
 const uniqueValues = computed(() => {
-    if (props.filters.length) return props.filters;
-    if ((!props.items?.length && !props.filters?.length) && !props.filterColumn) return [];
+    if (filters.value.length) return filters.value;
+    if ((!props.items?.length && !filters?.length) && !props.filterColumn) return [];
     if (!props.items?.length || !props.filterColumn) return [];
-    return [...new Set(props.items
+
+    filters.value = [...new Set(props.items
         .map(item => item[props.filterColumn])
         .filter(Boolean))]
         .sort();
+    titles.value = filters.value;
 });
 
 const getCount = (value) => {
@@ -98,9 +122,24 @@ const handleFilterChange = () => {
             selectedFilters.value.includes(item[props.filterColumn])
         );
     }
+
+    // try to search for the search term using name, description, and tags, if not then filtercolumn
+    if (searchTerm.value) {
+        dataRef.value = dataRef.value.filter(item =>
+            item.name?.toLowerCase().includes(searchTerm.value.toLowerCase()) ||
+            item.description?.toLowerCase().includes(searchTerm.value.toLowerCase()) ||
+            item.tags?.toLowerCase().includes(searchTerm.value.toLowerCase()) ||
+            item[props.filterColumn].toLowerCase().includes(searchTerm.value.toLowerCase())
+        );
+    }
+
     emit('update:displayedProducts', { filteredData: dataRef.value, selectedFilters: selectedFilters.value });
 };
 
+watch(() => props.searchTerm, (newSearchTerm) => {
+    searchTerm.value = newSearchTerm;
+    handleFilterChange();
+});
 
 // Modified watch that preserves filters
 watch(() => props.items, (newItems) => {

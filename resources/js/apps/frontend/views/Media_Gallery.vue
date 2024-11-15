@@ -13,8 +13,7 @@
                                 Pictures</p>
                             <!-- Add the filter component -->
                             <DynamicFilters :items="products" filter-column="gallery_type"
-                                @update:displayedProducts="handleUpdateDisplayedProducts" :filters="filters"
-                                :selected-filters="selectedFilters" />
+                                @update:displayedProducts="handleUpdateDisplayedProducts" :filters="filters" />
                             <div class="row mt-2">
                                 <div class="entry-item col-sm-6 col-lg-4" v-for="product in displayedProducts"
                                     :key="product.id">

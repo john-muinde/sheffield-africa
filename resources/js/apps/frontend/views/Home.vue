@@ -346,13 +346,14 @@
     <template v-if="showPopup">
         <div class="popup-advert">
             <div class="popup-content">
-                <img src="/storage/images/commercial-kitchen-coldroom-optimized-2.webp" alt="Rotobake Ovens Solutions"
-                    class="popup-image" style="  width: 100%; min-height: 480px;" />
+                <img src="/assets/images/events/november-promo.png" alt="Rotobake Ovens Solutions" class="popup-image"
+                    style="  width: 100%; min-height: 480px;" />
                 <div class="button-group row">
                     <button @click="dismissPopup" class="btn btn-primary btn-footer col-4">
                         Cancel
                     </button>
-                    <button @click="viewProduct" class="btn btn-secondary btn-footer col-4">
+                    <button @click="viewProduct('/promotional-solutions/371/nov-1-nov-31-2024-promotions')"
+                        class="btn btn-secondary btn-footer col-4">
                         View
                     </button>
                 </div>
@@ -373,6 +374,10 @@ import { ref, onMounted, onBeforeUnmount, computed } from "vue";
 
 import { useMeta } from "../../admin/composables/use-meta";
 import ProductCard from '@/Components/ProductCard.vue';
+
+import { useRoute, useRouter } from 'vue-router';
+
+
 useMeta({
     title: "Home",
     description:
@@ -381,6 +386,8 @@ useMeta({
 });
 
 import { useStore } from "vuex"; // Import the store
+
+const router = useRouter();
 
 const store = useStore();
 
@@ -1049,7 +1056,11 @@ onMounted(() => {
     fetchProducts();
 });
 
-const viewProduct = () => {
+const viewProduct = (route = null) => {
+    if (route) {
+        router.push(route);
+        return;
+    }
     window.open("https://forms.gle/as8SvN2SNTKxSbKA9", "_blank");
 };
 
