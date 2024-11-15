@@ -230,7 +230,7 @@ const handleImageError = (event) => {
 };
 
 const generateThumbnail = async (video) => {
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
         const videoElement = document.createElement('video');
         videoElement.src = videoSrc(video);
         videoElement.crossOrigin = 'anonymous';
@@ -240,6 +240,12 @@ const generateThumbnail = async (video) => {
         });
 
         videoElement.addEventListener('loadeddata', () => {
+            // Seek to 5 seconds if the video is longer than 5 seconds
+            const seekTime = Math.min(5, videoElement.duration);
+            videoElement.currentTime = seekTime;
+        });
+
+        videoElement.addEventListener('seeked', () => {
             const canvas = document.createElement('canvas');
             canvas.width = videoElement.videoWidth;
             canvas.height = videoElement.videoHeight;
@@ -247,6 +253,11 @@ const generateThumbnail = async (video) => {
             context.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
             video.thumbnail = canvas.toDataURL('image/png');
             resolve();
+        });
+
+        videoElement.addEventListener('error', (error) => {
+            console.error('Error generating thumbnail:', error);
+            reject(error);
         });
     });
 };
