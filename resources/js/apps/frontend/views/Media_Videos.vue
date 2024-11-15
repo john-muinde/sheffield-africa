@@ -94,112 +94,6 @@
     </div>
 </template>
 
-<style scoped>
-.main-container {
-    height: 500px;
-    display: flex;
-}
-
-.video-content-container {
-    flex: 3;
-    width: 100%;
-}
-
-.video-player-list {
-    flex: 1;
-    width: 100%;
-}
-
-.video-player {
-    aspect-ratio: 16/9;
-    background: #000;
-    width: 100%;
-    height: 100%;
-    /* Set a maximum height for the video player */
-}
-
-@media (max-width: 1500px) {
-    .main-container {
-        height: unset;
-        flex-direction: column;
-    }
-
-    .ul-pdf-view-videos {
-        max-height: unset !important;
-        overflow-y: unset;
-    }
-}
-
-:deep(.plyr) {
-    --plyr-color-main: #304296;
-    width: 100%;
-    height: 100%;
-}
-
-.ul-pdf-view-videos {
-    overflow-y: auto;
-    background-color: #f8f9fa;
-    padding: 0;
-    max-height: 45vh;
-}
-
-.video-item {
-    padding: 0.75rem 1rem;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    border-bottom: 1px solid #e9ecef;
-}
-
-.video-item:hover {
-    background-color: #f1f3f5;
-}
-
-.video-item.active {
-    background-color: #e9ecef;
-}
-
-.play_pause_icon {
-    width: 24px;
-    height: 24px;
-    background: white;
-    transition: all 0.2s ease;
-}
-
-.play {
-    clip-path: polygon(20% 0, 20% 100%, 90% 50%, 90% 50%);
-}
-
-.pause {
-    clip-path: polygon(0 0, 0 100%, 33.33% 100%, 33.33% 0, 66.66% 0, 100% 0, 100% 100%, 66.66% 100%, 66.66% 0);
-}
-
-.video-title {
-    color: #333;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-}
-
-/* Custom scrollbar */
-.ul-pdf-view-videos::-webkit-scrollbar {
-    width: 6px;
-}
-
-.ul-pdf-view-videos::-webkit-scrollbar-track {
-    background: #f1f1f1;
-}
-
-.ul-pdf-view-videos::-webkit-scrollbar-thumb {
-    background: #888;
-    border-radius: 3px;
-}
-
-.ul-pdf-view-videos::-webkit-scrollbar-thumb:hover {
-    background: #555;
-}
-</style>
-
 <script setup>
 import { ref, onMounted, computed, nextTick } from 'vue';
 import axios from 'axios';
@@ -222,16 +116,12 @@ const plyrOptions = {
         'captions',
         'settings',
         'pip',
-        'fullscreen',
-        'captions',
+        'fullscreen'
     ],
     autoplay: true,
-    hideControls: true,
+    hideControls: false,
     muted: true,
-    markers: { show: true },
-    tooltips: { controls: true, seek: true },
-    captions: { active: true, language: 'auto', update: true },
-    quality: { default: 1080, options: [4320, 2880, 2160, 1440, 1080, 720, 576, 480, 360, 240] }
+    quality: { default: '1080p', options: [4320, 2880, 2160, 1440, 1080, 720, 576, 480, 360, 240] }
 };
 
 const isYouTubeVideo = computed(() => {
@@ -303,28 +193,21 @@ const playVideo = async (video) => {
     if (plyr.value) {
         const player = plyr.value.player;
         await nextTick();
-        console.log('Player', Object.keys(player));
         if (isYouTubeVideo.value) {
             player.source = {
                 type: 'video',
-                sources: [
-                    {
-                        src: getYoutubeId(video.video_url),
-                        provider: 'youtube',
-                        size: 1080
-                    }
-                ]
+                sources: [{
+                    src: getYoutubeId(video.video_url),
+                    provider: 'youtube'
+                }]
             };
         } else {
             player.source = {
                 type: 'video',
-                sources: [
-                    {
-                        src: videoSrc(video),
-                        type: 'video/mp4',
-                        size: 1080,
-                    }
-                ]
+                sources: [{
+                    src: videoSrc(video),
+                    type: 'video/mp4'
+                }]
             };
         }
         await player.play();
@@ -364,3 +247,86 @@ onMounted(() => {
     fetchMediaCenter();
 });
 </script>
+
+<style scoped>
+.video-content-container {
+    width: 100%;
+}
+
+.video-player {
+    aspect-ratio: 16/9;
+    background: #000;
+    width: 100%;
+    max-height: 500px;
+    /* Set a maximum height for the video player */
+}
+
+:deep(.plyr) {
+    --plyr-color-main: #304296;
+    width: 100%;
+    height: 100%;
+}
+
+.ul-pdf-view-videos {
+    max-height: calc(100vh - 200px);
+    overflow-y: auto;
+    background-color: #f8f9fa;
+    padding: 0;
+}
+
+.video-item {
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.video-item:hover {
+    background-color: #f1f3f5;
+}
+
+.video-item.active {
+    background-color: #e9ecef;
+}
+
+.play_pause_icon {
+    width: 24px;
+    height: 24px;
+    background: white;
+    transition: all 0.2s ease;
+}
+
+.play {
+    clip-path: polygon(20% 0, 20% 100%, 90% 50%, 90% 50%);
+}
+
+.pause {
+    clip-path: polygon(0 0, 0 100%, 33.33% 100%, 33.33% 0, 66.66% 0, 100% 0, 100% 100%, 66.66% 100%, 66.66% 0);
+}
+
+.video-title {
+    color: #333;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Custom scrollbar */
+.ul-pdf-view-videos::-webkit-scrollbar {
+    width: 6px;
+}
+
+.ul-pdf-view-videos::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.ul-pdf-view-videos::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 3px;
+}
+
+.ul-pdf-view-videos::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+</style>
