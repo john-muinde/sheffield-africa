@@ -43,8 +43,8 @@
                                     :search-term="searchTerm" classes="row" />
                             </div>
 
-                            <!-- Video Grid -->
-                            <TransitionGroup tag="div" class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6"
+                            <TransitionGroup tag="div"
+                                class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-6"
                                 :css="false" @before-enter="onBeforeEnter" @enter="onEnter" @leave="onLeave">
                                 <div v-for="video in filteredVideos" :key="video.id" :data-index="video.id"
                                     class="group relative rounded-xl overflow-hidden shadow-lg bg-white hover:shadow-xl transition-all duration-300">
@@ -240,8 +240,8 @@ const generateThumbnail = async (video) => {
         });
 
         videoElement.addEventListener('loadeddata', () => {
-            // Seek to 5 seconds if the video is longer than 5 seconds
-            const seekTime = Math.min(4, videoElement.duration);
+            // Seek to 4.5 seconds if the video is longer than 4.5 seconds
+            const seekTime = Math.min(4.5, videoElement.duration);
             videoElement.currentTime = seekTime;
         });
 
