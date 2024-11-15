@@ -196,10 +196,12 @@ const playVideo = async (video) => {
         if (isYouTubeVideo.value) {
             player.source = {
                 type: 'video',
-                sources: [{
-                    src: getYoutubeId(video.video_url),
-                    provider: 'youtube'
-                }]
+                sources: [
+                    {
+                        src: getYoutubeId(video.video_url),
+                        provider: 'youtube'
+                    }
+                ]
             };
         } else {
             player.source = {
