@@ -222,12 +222,15 @@ const plyrOptions = {
         'captions',
         'settings',
         'pip',
-        'fullscreen'
+        'fullscreen',
+        'captions',
     ],
     autoplay: true,
-    hideControls: false,
+    hideControls: true,
     muted: true,
-    markers: { show: false },
+    markers: { show: true },
+    tooltips: { controls: true, seek: true },
+    captions: { active: true, language: 'auto', update: true },
     quality: { default: 1080, options: [4320, 2880, 2160, 1440, 1080, 720, 576, 480, 360, 240] }
 };
 
@@ -300,21 +303,28 @@ const playVideo = async (video) => {
     if (plyr.value) {
         const player = plyr.value.player;
         await nextTick();
+        console.log('Player', Object.keys(player));
         if (isYouTubeVideo.value) {
             player.source = {
                 type: 'video',
-                sources: [{
-                    src: getYoutubeId(video.video_url),
-                    provider: 'youtube'
-                }]
+                sources: [
+                    {
+                        src: getYoutubeId(video.video_url),
+                        provider: 'youtube',
+                        size: 1080
+                    }
+                ]
             };
         } else {
             player.source = {
                 type: 'video',
-                sources: [{
-                    src: videoSrc(video),
-                    type: 'video/mp4'
-                }]
+                sources: [
+                    {
+                        src: videoSrc(video),
+                        type: 'video/mp4',
+                        size: 1080,
+                    }
+                ]
             };
         }
         await player.play();
