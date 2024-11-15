@@ -68,15 +68,16 @@
 
                                     <!-- Video Info -->
                                     <div class="p-4">
-                                        <h3 class="text-lg font-semibold text-gray-900 mb-2 line-clamp-2">{{ video.name
-                                            }}</h3>
-                                        <p class="text-sm text-gray-600 line-clamp-2">
+                                        <h4 class="font-semibold text-gray-900 mb-2 line-clamp-2"
+                                            style="font-size: 1.6rem;">{{ video.name
+                                            }}</h4>
+                                        <p class="text-gray-600 line-clamp-2" style="font-size: 1.5rem;">
                                             {{ video.description || 'No description available'
                                             }}
                                         </p>
-                                        <div class="mt-3 flex items-center justify-between">
-                                            <span class="text-sm text-blue-600">{{ video.duration || '00:00' }}</span>
-                                            <span class="text-sm text-gray-500">{{ video.category }}</span>
+                                        <div class="mt-3 flex items-center justify-between" style="font-size: 1.1rem;">
+                                            <span class="text-blue-600">{{ video.duration || '00:00' }}</span>
+                                            <span class="text-gray-500">{{ video.category }}</span>
                                         </div>
                                     </div>
                                 </div>

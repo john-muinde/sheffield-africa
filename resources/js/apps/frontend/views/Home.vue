@@ -75,7 +75,7 @@
                             <i class="icon-shopping-cart"></i>
                             <span class="cart-count">{{
                                 cartItems.length
-                                }}</span>
+                            }}</span>
                             <span class="cart-txt">Cart</span>
                         </router-link>
 
