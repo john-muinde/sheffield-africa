@@ -94,7 +94,7 @@ const { can } = useAbility();
 
 onMounted(() => {
     getEvents();
-    console.log("Events: ", events.value);
+
 });
 
 const tableData = computed(() => {

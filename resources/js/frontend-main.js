@@ -1,5 +1,5 @@
 import "./bootstrap";
-import { createApp } from "vue";
+import { createApp, markRaw } from "vue";
 
 import App from "./App.vue";
 import router from "./router/index";
@@ -63,9 +63,10 @@ app.use(v3gmaps, {
   });*/
 
 // datatables
-import { ClientTable } from "v-tables-3";
-
-app.use(ClientTable);
+import { ServerTable, ClientTable, EventBus } from "v-tables-3";
+app.use(ClientTable, {}, "bootstrap4", {
+    genericFilter: markRaw({}),
+});
 
 import { setupRouterProgress } from "./axiosInstance";
 setupRouterProgress(router);

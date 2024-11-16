@@ -280,7 +280,7 @@
                                                     "
                                                 ></div>
                                             </div>
-                                            
+
                                         </div> -->
                     <!-- .End .tab-pane -->
                   </div>
@@ -289,7 +289,7 @@
 
                 <!-- <div class="product-details-footer">
                                     <div class="product-cat"></div>
-                                   
+
                                     <div class="social-icons social-icons-sm">
                                         <span class="social-label">Share:</span>
                                         <a
@@ -351,27 +351,27 @@
               />
             </a>
           </figure>
-        
+
           <h4 class="product-title">
             <a href="product.html">{{ product.name }}</a>
           </h4>
-         
+
         </div>
         <div class="col-6 justify-content-end">
-         
+
 
           <div class="product-details-action">
             <router-link :to="'/enquiry/product/' + product_id" class="btn btn-primary"
               ><span>Enquire Product</span><i class="icon-long-arrow-right"></i
             ></router-link>
           </div>
-          
+
         </div>
-        
+
       </div>
-    
+
     </div>
-   
+
   </div> -->
 </template>
 
@@ -441,7 +441,7 @@ const showSingle = () => {
 };
 
 const showMultiple = async () => {
-  console.log(rootUrl);
+
   imgs.value = product.value.product_images.map(
     (item) => rootUrl + "/storage/" + item.name
   );

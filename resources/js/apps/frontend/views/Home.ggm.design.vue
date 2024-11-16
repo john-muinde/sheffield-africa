@@ -9,12 +9,12 @@
       <!-- End .mb-lg-2 -->
       <div class="container-fluid">
         <div class="row home-row">
-         
+
           <div class="col-lg-12">
 
              <!-- start -->
 
-            
+
               <carousel ref="scrollableContainerCarosel" @load="adjustTheClass1Height" class="carousel-wrapper" :perPage="1" :autoplay="5000" :wrap-around="true" :pauseAutoplayOnHover ="true">
                   <slide v-for="(item, index) in items" :key="index">
 
@@ -23,7 +23,7 @@
 
                    <!--  <div class="intro-content">
                       <h1 class="intro-title" v-html="item.intro.title">
-                        
+
                       </h1>
 
                       <h3 class="intro-subtitle">
@@ -42,7 +42,7 @@
                     <Pagination />
                   </template>
               </carousel>
-        
+
 
             <!-- end -->
 
@@ -50,7 +50,7 @@
           </div>
           <!-- End .col-xl-9 col-xxl-10 -->
 
-          
+
 
         </div>
         <!-- End .row -->
@@ -71,7 +71,7 @@
                   About Sheffield Africa
                 </h3>
                 <h4 class="banner-subtitle text-dark">Who we are</h4>
-                
+
                 <p class="text-dark">
                   Sheffield is an end to end Kitchen, Laundry and Cold-room
                   solution provider, offering innovative products and services
@@ -83,11 +83,11 @@
                   ><span>View More</span><i class="icon-long-arrow-right"></i
                 ></router-link>
               </div>
-              
+
             </div>
-            
+
           </div>
-         
+
         </div>
       </div> -->
 
@@ -95,11 +95,11 @@
 
       <div class="container-fluid pb-4 pt-5">
         <div class="headings">
-          
+
           <h3 class="heading text-primary">DISCOVER SOLUTIONS</h3>
           <h4 class="sub-heading">Find Your Perfect Fit </h4>
         </div>
-         
+
         <div class="row">
             <div class="col">
                 <a href="category.html" class="cat-block">
@@ -294,11 +294,11 @@
                     <h3 class="cat-block-title">Bakery</h3><!-- End .cat-block-title -->
                 </a>
             </div><!-- End .col-sm-4 col-lg-2 -->
-            
+
 
         </div>
 
-        
+
 
       </div>
 
@@ -321,9 +321,9 @@
 
       <div class="container">
 
-       
 
-       
+
+
 
         <div class="row cat-banner-row ">
             <div class="col-xl-2 col-xxl-3">
@@ -361,23 +361,23 @@
             </div><!-- End .col-xl-3 -->
 
             <div class="col-xl-10 col-xxl-9">
-               
+
               <carousel ref="scrollableContainerCarosel" @load="adjustTheClass1Height" :breakpoints="breakpoints" class="carousel-wrapper owl-full carousel-equal-height carousel-with-shadow"  :autoplay="5000" :wrap-around="true" :pauseAutoplayOnHover ="true">
                   <slide v-for="(item, index) in productsKitchen" :key="index">
-                  
+
                       <div class="product text-center">
                         <figure class="product-media">
                             <!-- <span class="product-label label-sale">Sale</span> -->
                              <router-link :to="getProductLink(item.id, item.name, item.model_number)">
-                                
+
                                 <img :src="'/storage/' + item.main_image_path" v-lazy:src="'/storage/' + item.main_image_path" alt="Product image" class="product-image"
-                                       /> 
+                                       />
                             </router-link>
 
                             <div class="product-action-vertical">
                                 <a href="#" class="btn-product-icon btn-wishlist" title="Add to wishlist"><span>add to wishlist</span></a>
                                 <a href="popup/quickView.html" class="btn-product-icon btn-quickview" title="Quick view"><span>Quick view</span></a>
-                               
+
                             </div><!-- End .product-action-vertical -->
 
                             <div class="product-action">
@@ -395,7 +395,7 @@
                             </div><!-- End .product-price -->
 
                             <br>
-                            
+
                         </div><!-- End .product-body -->
                     </div><!-- End .product -->
 
@@ -404,7 +404,7 @@
                   <template #addons>
                     <Navigation />
                   </template>
-                 
+
                 </carousel><!-- End .owl-carousel -->
 
             </div><!-- End .col-xl-9 -->
@@ -446,23 +446,23 @@
             </div><!-- End .col-xl-3 -->
 
             <div class="col-xl-10 col-xxl-9">
-               
+
               <carousel ref="scrollableContainerCarosel" @load="adjustTheClass1Height" :breakpoints="breakpoints" class="carousel-wrapper owl-full carousel-equal-height carousel-with-shadow"  :autoplay="5000" :wrap-around="true" :pauseAutoplayOnHover ="true">
                   <slide v-for="(item, index) in productsColdroom" :key="index">
-                  
+
                    <div class="product text-center">
                         <figure class="product-media">
                             <!-- <span class="product-label label-sale">Sale</span> -->
                              <router-link :to="getProductLink(item.id, item.name, item.model_number)">
-                                
+
                                 <img :src="'/storage/' + item.main_image_path" v-lazy:src="'/storage/' + item.main_image_path" alt="Product image" class="product-image"
-                                       /> 
+                                       />
                             </router-link>
 
                             <div class="product-action-vertical">
                                 <a href="#" class="btn-product-icon btn-wishlist" title="Add to wishlist"><span>add to wishlist</span></a>
                                 <a href="popup/quickView.html" class="btn-product-icon btn-quickview" title="Quick view"><span>Quick view</span></a>
-                               
+
                             </div><!-- End .product-action-vertical -->
 
                             <div class="product-action">
@@ -480,7 +480,7 @@
                             </div><!-- End .product-price -->
 
                             <br>
-                            
+
                         </div><!-- End .product-body -->
                     </div><!-- End .product -->
 
@@ -490,7 +490,7 @@
                   <template #addons>
                     <Navigation />
                   </template>
-                 
+
                 </carousel><!-- End .owl-carousel -->
 
             </div><!-- End .col-xl-9 -->
@@ -533,23 +533,23 @@
             </div><!-- End .col-xl-3 -->
 
             <div class="col-xl-10 col-xxl-9">
-               
+
               <carousel ref="scrollableContainerCarosel" @load="adjustTheClass1Height" :breakpoints="breakpoints" class="carousel-wrapper owl-full carousel-equal-height carousel-with-shadow"  :autoplay="5000" :wrap-around="true" :pauseAutoplayOnHover ="true">
                   <slide v-for="(item, index) in productsLaundry" :key="index">
-                  
+
                     <div class="product text-center">
                         <figure class="product-media">
                             <!-- <span class="product-label label-sale">Sale</span> -->
                              <router-link :to="getProductLink(item.id, item.name, item.model_number)">
-                                
+
                                 <img :src="'/storage/' + item.main_image_path" v-lazy:src="'/storage/' + item.main_image_path" alt="Product image" class="product-image"
-                                       /> 
+                                       />
                             </router-link>
 
                             <div class="product-action-vertical">
                                 <a href="#" class="btn-product-icon btn-wishlist" title="Add to wishlist"><span>add to wishlist</span></a>
                                 <a href="popup/quickView.html" class="btn-product-icon btn-quickview" title="Quick view"><span>Quick view</span></a>
-                               
+
                             </div><!-- End .product-action-vertical -->
 
                             <div class="product-action">
@@ -567,7 +567,7 @@
                             </div><!-- End .product-price -->
 
                             <br>
-                            
+
                         </div><!-- End .product-body -->
                     </div><!-- End .product -->
 
@@ -577,7 +577,7 @@
                   <template #addons>
                     <Navigation />
                   </template>
-                 
+
                 </carousel><!-- End .owl-carousel -->
 
             </div><!-- End .col-xl-9 -->
@@ -586,7 +586,7 @@
 
       <div class="container-fluid pb-4 pt-5">
         <div class="headings">
-          
+
           <h3 class="heading text-primary">Our Showrooms</h3>
           <h4 class="sub-heading">Welcome to Sheffield showrooms</h4>
         </div>
@@ -603,7 +603,7 @@
               </figure><!-- End .entry-media -->
 
               <div class="entry-body text-center pt-1">
-                
+
                 <h2 class="entry-title">
                    <router-link :to="getShowroomLink(showroom.id, showroom.name)">{{ showroom.name }}</router-link>
                 </h2><!-- End .entry-title -->
@@ -611,38 +611,38 @@
                 <div class="entry-content">
                   <p>
                     <span >
-                      <i style="color:rgb(223, 31, 49);" class="icon-phone "></i> 
+                      <i style="color:rgb(223, 31, 49);" class="icon-phone "></i>
                       <b>
 
-                        <a style="color: #777; text-decoration: none;" 
-                           onmouseover="this.style.color='#c02434'" 
-                           onmouseout="this.style.color='#777'" class="text-grey pl-3" :href="'tel:' + showroom.phone_number1">{{ showroom.phone_number1 }}</a>, 
+                        <a style="color: #777; text-decoration: none;"
+                           onmouseover="this.style.color='#c02434'"
+                           onmouseout="this.style.color='#777'" class="text-grey pl-3" :href="'tel:' + showroom.phone_number1">{{ showroom.phone_number1 }}</a>,
 
-                        <a style="color: #777; text-decoration: none;" 
-                           onmouseover="this.style.color='#c02434'" 
+                        <a style="color: #777; text-decoration: none;"
+                           onmouseover="this.style.color='#c02434'"
                            onmouseout="this.style.color='#777'" class="text-grey" :href="'tel:' + showroom.phone_number2">{{ showroom.phone_number2 }}</a>
-                           
+
                       </b>
-                    </span><br> 
+                    </span><br>
                     <span>
-                      <i style="color:rgb(223, 31, 49);" class="icon-envelope "></i>  
-                      <b> 
-                        <a style="color: #777; text-decoration: none;" 
-                           onmouseover="this.style.color='#c02434'" 
-                           onmouseout="this.style.color='#777'" class="text-grey pl-3" :href="'mailto:'+showroom.email">{{ showroom.email }} </a> 
+                      <i style="color:rgb(223, 31, 49);" class="icon-envelope "></i>
+                      <b>
+                        <a style="color: #777; text-decoration: none;"
+                           onmouseover="this.style.color='#c02434'"
+                           onmouseout="this.style.color='#777'" class="text-grey pl-3" :href="'mailto:'+showroom.email">{{ showroom.email }} </a>
                       </b>
-                    </span><br> 
-                     {{ showroom.location }}</p> 
-                  
+                    </span><br>
+                     {{ showroom.location }}</p>
+
                   <router-link :to="getShowroomLink(showroom.id, showroom.name)" class="btn btn-outline-primary"><span>View More</span><i class="icon-long-arrow-right"></i></router-link>
                 </div><!-- End .entry-content -->
               </div><!-- End .entry-body -->
             </article><!-- End .entry -->
           </div><!-- End .col-lg-3 -->
-          
-          
+
+
         </div><!-- End .row -->
-    
+
       </div>
       <!-- End .container-fluid -->
 
@@ -804,7 +804,7 @@
                 <h3 class="heading text-primary">Testimonials</h3>
                 <h4 class="sub-heading">What clients say about us</h4>
               </div>
-               
+
                <carousel :perPage="1" :autoplay="10000" :wrap-around="true" :pauseAutoplayOnHover ="true" >
                   <slide v-for="(item, index) in testimonials" :key="index">
 
@@ -828,10 +828,10 @@
                   </slide>
                   <template #addons>
                     <Navigation />
-                    
+
                   </template>
               </carousel>
-                      
+
             </div>
           </div>
           <!-- End .col-lg-9 col-xxl-10 -->
@@ -928,7 +928,7 @@
 
     const categories = reactive([]);
 
-    
+
     const fetchCategories = () => {
       axios.get('/api/get-sidebar-categories')
         .then(response => {
@@ -941,7 +941,7 @@
               subcategories: [
                 {
                   id: 1, // You can assign any unique ID for the subcategory
-                 
+
                   items: category.children.map(child => {
                     return {
                       id: child.id,
@@ -959,7 +959,7 @@
           console.error('Failed to fetch categories:', error);
         });
     };
-    
+
     onMounted(() => {
       fetchCategories();
     });
@@ -968,45 +968,45 @@
 
 
   const items = [
-    { 
-      image: basePath + 'frontend/images/slider/slider1.webp', 
+    {
+      image: basePath + 'frontend/images/slider/slider1.webp',
       mobileImage: basePath + 'frontend/images/slider/slider1-mobile.jpg',
-      alt: 'Commercial Kitchen Solutions', 
+      alt: 'Commercial Kitchen Solutions',
       intro : {
         title : "Commercial <span>Kitchen</span> <br />Solutions",
         subtitle : "We offer the best kitchen solutions",
         url : "#",
-      } 
+      }
     },
-    { 
+    {
       image: basePath + 'frontend/images/slider/slider2.webp',
-      mobileImage: basePath + 'frontend/images/slider/slider2-mobile.jpg', 
-      alt: 'Commercial Cold Room Solutions', 
+      mobileImage: basePath + 'frontend/images/slider/slider2-mobile.jpg',
+      alt: 'Commercial Cold Room Solutions',
       intro : {
         title : " Commercial <span>Cold  <br />Room</span> Solutions",
         subtitle : "We offer the best cold room solutions",
         url : "#",
-      } 
+      }
     },
-    { 
+    {
       image: basePath + 'frontend/images/slider/slider1.webp',
-      mobileImage: basePath + 'frontend/images/slider/slider3-mobile.jpg', 
-      alt: 'Commercial Laundry Solutions', 
+      mobileImage: basePath + 'frontend/images/slider/slider3-mobile.jpg',
+      alt: 'Commercial Laundry Solutions',
       intro : {
         title : "Commercial <span>Laundry</span> <br /> Solutions",
         subtitle : "We offer the best laundry solutions",
         url : "#",
-      } 
+      }
     },
-    { 
+    {
       image: basePath + 'frontend/images/slider/slider2.webp',
-      mobileImage: basePath + 'frontend/images/slider/slider4-mobile.jpg', 
-      alt: 'Commercial Health Care Solutions', 
+      mobileImage: basePath + 'frontend/images/slider/slider4-mobile.jpg',
+      alt: 'Commercial Health Care Solutions',
       intro : {
         title : "Commercial <span>Health <br /> Care</span> Solutions",
         subtitle : "We offer the best health care solutions",
         url : "#",
-      } 
+      }
     },
 ];
 
@@ -1042,40 +1042,40 @@
       }
   };
 
-    console.log(breakpoints);
+
 
 const testimonials = [
 
-     { 
+     {
       image: basePath + 'frontend/images/testimonials/user-2.jpg',
-      message: "As a professional chef, I understand the importance of having a reliable commercial kitchen. Sheffield's commercial kitchen solutions have exceeded my expectations. The equipment is durable and has improved the efficiency of my kitchen. I highly recommend Sheffield to anyone in need of commercial kitchen solutions.", 
-      name: 'Dan Njoroge', 
-      company: 'Company X', 
-      job_title: 'Customer', 
+      message: "As a professional chef, I understand the importance of having a reliable commercial kitchen. Sheffield's commercial kitchen solutions have exceeded my expectations. The equipment is durable and has improved the efficiency of my kitchen. I highly recommend Sheffield to anyone in need of commercial kitchen solutions.",
+      name: 'Dan Njoroge',
+      company: 'Company X',
+      job_title: 'Customer',
     },
 
-    { 
+    {
       image: basePath + 'frontend/images/testimonials/user-1.jpg',
-      message: "I was extremely impressed with Sheffield's commercial cold room solutions. As a restaurant owner, having reliable refrigeration is crucial to the success of my business. Sheffield's team delivered and installed the cold room in a timely manner and it has been working perfectly ever since.", 
-      name: 'Dan Njoroge', 
-      company: 'Company X', 
-      job_title: 'Customer', 
+      message: "I was extremely impressed with Sheffield's commercial cold room solutions. As a restaurant owner, having reliable refrigeration is crucial to the success of my business. Sheffield's team delivered and installed the cold room in a timely manner and it has been working perfectly ever since.",
+      name: 'Dan Njoroge',
+      company: 'Company X',
+      job_title: 'Customer',
     },
 
-    { 
+    {
       image: basePath + 'frontend/images/testimonials/user-2.jpg',
-      message: "Sheffield's commercial healthcare solutions have been a game changer for our facility. Their team helped us design and install the perfect healthcare solution that is both efficient and reliable. We can now focus on providing quality care to our patients without worrying about equipment malfunctions.", 
-      name: 'Dan Njoroge', 
-      company: 'Company X', 
-      job_title: 'Customer', 
+      message: "Sheffield's commercial healthcare solutions have been a game changer for our facility. Their team helped us design and install the perfect healthcare solution that is both efficient and reliable. We can now focus on providing quality care to our patients without worrying about equipment malfunctions.",
+      name: 'Dan Njoroge',
+      company: 'Company X',
+      job_title: 'Customer',
     },
 
-    { 
+    {
       image: basePath + 'frontend/images/testimonials/user-1.jpg',
-      message: "I recently purchased a commercial laundry solution from Sheffield and I couldn't be happier with the results. The laundry solution is energy-efficient and has dramatically reduced our utility bills. The team at Sheffield were knowledgeable and professional throughout the entire process.", 
-      name: 'Dan Njoroge', 
-      company: 'Company X', 
-      job_title: 'Customer', 
+      message: "I recently purchased a commercial laundry solution from Sheffield and I couldn't be happier with the results. The laundry solution is energy-efficient and has dramatically reduced our utility bills. The team at Sheffield were knowledgeable and professional throughout the entire process.",
+      name: 'Dan Njoroge',
+      company: 'Company X',
+      job_title: 'Customer',
     },
 ];
 
@@ -1105,13 +1105,13 @@ const updateUlHeight = () => {
     if(containerHeight == 0){
 
       ulHeight.value = '417px';
-      
+
     }else{
 
       ulHeight.value = `${containerHeight}px`;
 
     }
-    console.log(ulHeight);
+
   }
 };
 
@@ -1128,7 +1128,7 @@ const handleCarouselLoad = () => {
 };
 onMounted(() => {
   carouselRef.value = document.querySelector('.carousel-wrapper');
-    console.log("on mounted");
+
   carouselRef.value.addEventListener('load', handleCarouselLoad);
 });
 
@@ -1143,7 +1143,7 @@ window.onload = () => {
 };
 
 onMounted(async () => {
-  
+
   await nextTick();
   window.addEventListener('resize', handleResize);
 
@@ -1173,7 +1173,7 @@ const adjustTheClass1Height = () => {
 
 /////////////
 
-//showrooms 
+//showrooms
 
 const showrooms = ref([]);
 
@@ -1182,7 +1182,7 @@ const fetchShowrooms = async () => {
 
   try {
     const response = await axios.get('/api/get-showrooms', {
-      
+
     });
     showrooms.value = response.data;
 
@@ -1194,7 +1194,7 @@ const fetchShowrooms = async () => {
 
 
 const getShowroomLink = (id, name ) => {
-    
+
   let transformedName = name.replace(/ /g, '-');
   transformedName = transformedName.replace(/-+/g, '-');
   transformedName = transformedName.replace(/^-+|-+$/g, '');
@@ -1217,7 +1217,7 @@ const fetchFeaturedProducts = async () => {
     productsKitchen.value = response.data.products_kitchen;
     productsLaundry.value = response.data.products_laundry;
 
-   
+
 
   } catch (error) {
     console.error(error);
@@ -1247,7 +1247,7 @@ const getProductLink = (id, name, model_number) => {
 
 
 onMounted(async () => {
-  
+
   fetchFeaturedProducts();
   fetchShowrooms();
   await nextTick();
@@ -1255,7 +1255,7 @@ onMounted(async () => {
 
 });
 
-    
+
 
 </script>
 
@@ -1285,7 +1285,7 @@ onMounted(async () => {
 
 <style scoped>
 
-  
+
 
   .header-left > .category-dropdown {
     pointer-events: none;
@@ -1321,7 +1321,7 @@ onMounted(async () => {
 
   .menu-vertical .megamenu {
 
-   
+
   }
 
 
@@ -1357,5 +1357,5 @@ onMounted(async () => {
 }
 
 
-  
+
 </style>

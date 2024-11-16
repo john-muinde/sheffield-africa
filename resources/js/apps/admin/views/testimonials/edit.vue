@@ -314,7 +314,7 @@ const testimonial = reactive({
 const route = useRoute();
 function submitForm() {
     validate().then((form) => {
-        console.log(form.valid);
+
         if (form.valid) {
             updateTestimonial(testimonial);
         }
@@ -355,6 +355,6 @@ watchEffect(() => {
     testimonial.description = postData.value.description;
     testimonial.is_published = postData.value.is_published;
 
-    console.log(postData.value);
+
 });
 </script>

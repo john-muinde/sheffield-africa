@@ -178,7 +178,7 @@ const fetchSolutionCategories = async () => {
         solutionCategoriesList.value =
             response.data.data.product_categories_json;
 
-        //console.log(solutionCategoriesList.value);
+        //
 
         useMeta({
             title: solutionCategories.value.name + " | Laundry Solution",
@@ -204,7 +204,7 @@ const fetchSolutionCategoryProducts = async () => {
         );
         solutionCategoryProducts.value = response.data.products.data;
 
-        //console.log(solutionCategoryProducts.value);
+        //
     } catch (error) {
         console.error(error);
     }
@@ -260,9 +260,9 @@ const getProductLink = (id, name, model_number, main_second_parent_cat) => {
 
 const getCategoryLink = (id, name) => {
     //Replace spaces with dashes
-    //console.log(id);
-    //console.log(name);
-    //console.log(page);
+    //
+    //
+    //
     let transformedName = name.replace(/ /g, "-").replace(/\//g, "-");
     // Remove consecutive dashes
     transformedName = transformedName.replace(/-+/g, "-");

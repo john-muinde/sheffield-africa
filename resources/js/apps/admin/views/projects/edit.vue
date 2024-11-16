@@ -428,6 +428,6 @@ watchEffect(() => {
 
     project.project_images = postData.value.project_images;
 
-    console.log(postData.value);
+
 });
 </script>

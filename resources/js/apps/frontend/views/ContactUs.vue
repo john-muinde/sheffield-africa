@@ -10,7 +10,7 @@
             Contact us<span class="text-white">keep in touch with us</span>
           </h1>
         </div>
-       
+
       </div> -->
       <!-- <nav aria-label="breadcrumb" class="breadcrumb-nav border-0 mb-0">
         <div class="container">
@@ -21,7 +21,7 @@
             </li>
           </ol>
         </div>
-        
+
       </nav> -->
       <!-- End .breadcrumb-nav -->
 
@@ -29,7 +29,7 @@
         <!--  <img class="my-header-image mb-1" src="/assets/images/contact_us_banner.jpg">
             <div class="container">
                 <div class="row justify-content-center mb-4">
-                   
+
                 </div>
               </div> -->
 
@@ -46,11 +46,11 @@
 
               <!--   <div class="col-lg-10 offset-lg-1">
 
-                        
+
                         <p class="mb-t">
                           Use the form below to get in touch with our team
                         </p>
-                      
+
                     </div> -->
               <div class="offset-lg-1 col-lg-5 mb-3 mb-lg-0 contact-form-div">
                 <form
@@ -656,7 +656,7 @@
                   </div>
 
                   <div class="mb-2" style="height: 400px">
-                      
+
                       <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7977.404283237157!2d36.897868854447694!3d-1.3553081986318496!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f0d988832605f%3A0x9fbb9391696ca583!2sSheffield%20Steel%20Systems%20Limited!5e0!3m2!1sen!2ske!4v1707294139960!5m2!1sen!2ske" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                     <!-- gmaps-map requires a height to fill -->
                     <!--<gmaps-map :zoom="16" :center="{ lat: -1.3553082, lng: 36.9030187 }">-->
@@ -766,7 +766,7 @@ const { execute, loaded } = useReCaptcha();
 
 const onRecaptchaVerify = async (token) => {
 
-  console.log("reCAPTCHA verified. Token:", token);
+
   await submitForm();
 };
 
@@ -780,7 +780,7 @@ const submitForm = async () => {
       storeContact(contact);
     }
   } catch (error) {
-   
+
     console.error("Validation error:", error);
   }
 };

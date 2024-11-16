@@ -645,7 +645,7 @@ const contact = reactive({
 const { execute, loaded } = useReCaptcha();
 
 const onRecaptchaVerify = async (token) => {
-    console.log("reCAPTCHA verified. Token:", token);
+
     await submitForm();
 };
 
@@ -657,7 +657,7 @@ const submitForm = async () => {
             contact.recaptchaToken = recaptchaToken;
             contact.cartItems = JSON.stringify(cartItems);
 
-            console.log(contact);
+
 
             storeContact(contact);
         }

@@ -855,6 +855,6 @@ watchEffect(() => {
 
     product.product_images = postData.value.product_images;
 
-    console.log(postData.value);
+
 });
 </script>

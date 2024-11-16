@@ -218,7 +218,7 @@ const playVideo = async (video) => {
 
 // Player event handlers
 const handlePlayerReady = async (player) => {
-    console.log('Ready product ', player)
+
     if (player && selectedVideo.value) {
         player.muted = true;
         await player.play();
@@ -228,17 +228,17 @@ const handlePlayerReady = async (player) => {
 
 
 const handlePlaying = () => {
-    console.log('playing')
+
     isPaused.value = false;
 };
 
 const handlePause = () => {
-    console.log('paused')
+
     isPaused.value = true;
 };
 
 const handleEnded = () => {
-    console.log('ended')
+
     isPaused.value = true;
 };
 

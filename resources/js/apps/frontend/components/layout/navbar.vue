@@ -454,7 +454,7 @@ const route = useRoute();
 
 const toggleIsShown = () => {
     isShown = !isShown;
-    console.log(isShown);
+
 };
 
 const isHomePage = computed(() => {
@@ -574,9 +574,9 @@ const search = async () => {
                 `/api/product_search` + `/${query.value}`
             );
             results.value = response.data.data;
-            //console.log(results.value);
+            //
             showResults.value = true;
-            //console.log(showResults.value);
+            //
         } catch (error) {
             console.error(error);
         }

@@ -269,13 +269,13 @@ const event = ref({
 });
 
 function submitForm() {
-    console.log(event.value);
+
     validate().then((form) => {
         if (form.valid) {
             storeEvent(event.value);
         } else {
             let errors = form.errors;
-            console.log(errors);
+
             showToast("Please fill all fields to proceed", "error");
         }
     });

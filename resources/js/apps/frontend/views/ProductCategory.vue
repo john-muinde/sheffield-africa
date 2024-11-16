@@ -7,7 +7,7 @@
          <div class="container">
             <h1 class="page-title">{{ the_category.name }}<span>View our amazing products under this section</span></h1>
          </div>
-       
+
       </div> -->
         <!-- End .page-header -->
         <div class="page-content mt-4">
@@ -382,23 +382,23 @@
                               > Price
                            </a>
                         </h3>
-                       
+
                         <div class="collapse show" id="widget-5">
                            <div class="widget-body">
                               <div class="filter-price">
                                  <div class="filter-price-text">
                                     Price Range:
-                                    <span id="filter-price-range"></span> 
+                                    <span id="filter-price-range"></span>
                                  </div>
-                                 
+
                                  <div id="price-slider"></div>
-                               
+
                               </div>
-                              
+
                            </div>
-                           
+
                         </div>
-                       
+
                      </div> -->
                         </div>
                         <!-- End .sidebar sidebar-shop -->
@@ -505,9 +505,9 @@ const getProductLink = (id, name, model_number) => {
 
 const getCategoryLink = (id, name, page) => {
     //Replace spaces with dashes
-    //console.log(id);
-    //console.log(name);
-    //console.log(page);
+    //
+    //
+    //
     let transformedName = name.replace(/ /g, "-").replace(/\//g, "-");
     // Remove consecutive dashes
     transformedName = transformedName.replace(/-+/g, "-");

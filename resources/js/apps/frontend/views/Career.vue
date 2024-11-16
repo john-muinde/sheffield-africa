@@ -118,7 +118,7 @@
                                             <p class="who-we-are-p">Sheffield Africa is an equal opportunity employer with opportunities to guide your career. We are always sourcing for problem solvers and creative thinkers from engineers to sales and marketing personnel.
                                             Put your talents to use where opportunities are limitless and every day makes a difference. Whether you’re an experienced professional or a recent graduate, working with Sheffield Africa will be a rewarding experience that will grow your career.
                                             </p>
-                                            
+
                                         </div> -->
 
                     <div class="col-lg-8 offset-lg-1 who-we-are">
@@ -403,7 +403,7 @@ const career = reactive({
 const { execute, loaded } = useReCaptcha();
 
 const onRecaptchaVerify = async (token) => {
-  console.log("reCAPTCHA verified. Token:", token);
+
   await submitForm();
 };
 

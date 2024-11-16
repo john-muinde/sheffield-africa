@@ -7,7 +7,7 @@
          <div class="container">
             <h1 class="page-title">{{ solutionCategories.name }}<span v-html="solutionCategories.description"></span></h1>
          </div>
-        
+
       </div> -->
 
         <nav aria-label="breadcrumb" class="breadcrumb-nav border-0 mb-0">
@@ -281,7 +281,7 @@ const fetchSolutionCategories = async () => {
         solutionCategoriesList.value =
             response.data.data.product_categories_json;
 
-        //console.log(solutionCategoriesList.value);
+        //
 
         useMeta({
             title: solutionCategories.value.name + " | Kitchen Solution",
@@ -312,7 +312,7 @@ const fetchSolutionCategoryProducts = async () => {
         );
         solutionCategoryProducts.value = response.data.products.data;
 
-        //console.log(solutionCategoryProducts)
+        //
     } catch (error) {
         console.error(error);
     }
@@ -321,7 +321,7 @@ const fetchSolutionCategoryProducts = async () => {
 function handleCheckboxChange(categoryId) {
     let mainCategoryId = solution_id.value;
 
-    console.log(mainCategoryId);
+
 
     if (!(mainCategoryId in checkedCategoriesSolutions.value)) {
         checkedCategoriesSolutions.value[mainCategoryId] = [];
@@ -400,9 +400,9 @@ const getProductLink = (id, name, model_number, main_second_parent_cat) => {
 
 const getCategoryLink = (id, name) => {
     //Replace spaces with dashes
-    //console.log(id);
-    //console.log(name);
-    //console.log(page);
+    //
+    //
+    //
     let transformedName = name.replace(/ /g, "-").replace(/\//g, "-");
     // Remove consecutive dashes
     transformedName = transformedName.replace(/-+/g, "-");
@@ -489,7 +489,7 @@ watchEffect(() => {
         // Call a method or update component data based on the new route
 
         fetchSolutionCategoryProducts();
-        //console.log("test "+the_cat_name.value);
+        //
     }
 });
 </script>

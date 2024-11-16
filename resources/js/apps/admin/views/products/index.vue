@@ -456,7 +456,7 @@ onMounted(() => {
 watch(currentPage, fetchProducts);
 
 watch(main_category, (newValue) => {
-    //console.log('Solution object:', newValue.solution_category.id);
+    //
     if (main_category) {
         const selectedCategoryId = category.main_category.id;
 
@@ -519,7 +519,7 @@ const onDragEnd = (event) => {
 
     const newOrder = displayedProducts.value.map((category) => category.id);
 
-    // console.log(newOrder);
+    //
 
     // Update the database for each item with its new order
 

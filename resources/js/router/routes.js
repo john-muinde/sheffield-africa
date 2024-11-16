@@ -2325,7 +2325,7 @@ const routes = [
 
             {
                 path: "/admin/in-the-news",
-                name: "in_the_news.index",
+                name: "news.index",
                 component: () =>
                     import("../apps/admin/views/in_the_news/index.vue"),
                 meta: {

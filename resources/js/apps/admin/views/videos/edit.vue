@@ -291,7 +291,7 @@ const blog = reactive({
 const handleTypeChange = () => {
 
     if (blog.type === 'Upload') {
-        console.log("test");
+
         const fileUploadContainer = new FileUploadWithPreview("myFirstImage", {
             images: {
                 baseImage: "/assets/images/video_preview.jpg",

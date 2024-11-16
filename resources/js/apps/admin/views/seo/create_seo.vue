@@ -73,7 +73,7 @@
                   </div>
                 </div>
 
-             
+
                 </div>
 
                 <div class="row">
@@ -240,5 +240,5 @@ function submitForm() {
 
 
 
-//console.log(blogCategoryList);
+//
 </script>

@@ -7,7 +7,7 @@
                         <nav class="breadcrumb-one" aria-label="breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="javascript:;">Solutions</a></li>
-                                
+
                                 <li class="breadcrumb-item active" aria-current="page"><span>Update Solution Category Sequence</span></li>
                             </ol>
                         </nav>
@@ -45,14 +45,14 @@
                                     <option value="500">500</option>
                                     <option value="1000">1000</option>
                                     <option value="10000">10000</option>
-                                    
+
                                 </select>
 
-                            </div>  
+                            </div>
 
                             <div class="form-group col-md-3" style="display:none;">
                                 <label for="post-category" class="form-label">Segment</label>
-                                
+
                                 <multiselect
                                   v-model="category.main_category"
                                   :options="categoryMainList"
@@ -71,22 +71,22 @@
                             <div class="form-group col-md-3" style="display:none;">
                                 <label for="post-category" class="form-label">Main Category</label>
 
-                                 <multiselect 
-                                    v-model="category.filter_category_id" 
-                                    :options="categoryList" 
-                                    :reduce="category => category.id" 
-                                    :searchable="true" 
-                                    :preselect-first="true" 
-                                    track-by="id" 
-                                    label="name" 
-                                    placeholder="Choose Category (Optional) ..." 
-                                    selected-label="" 
-                                    select-label="" 
+                                 <multiselect
+                                    v-model="category.filter_category_id"
+                                    :options="categoryList"
+                                    :reduce="category => category.id"
+                                    :searchable="true"
+                                    :preselect-first="true"
+                                    track-by="id"
+                                    label="name"
+                                    placeholder="Choose Category (Optional) ..."
+                                    selected-label=""
+                                    select-label=""
                                     deselect-label="">
-                                        
+
                                  </multiselect>
 
-                            </div>    
+                            </div>
 
                             <div class="form-group offset-md-6 col-md-5 ">
                                 <!-- <label for="post-name">Search</label>
@@ -107,23 +107,23 @@
 
                             <div class="table-responsive">
 
-                                
+
 
 
                                     <table role="table" aria-busy="false" aria-colcount="5" class="table table-striped table-bordered" id="__BVID__415">
                                         <thead role="rowgroup">
                                             <tr role="row">
                                                 <th role="columnheader" scope="col" aria-colindex="0"><div></div></th>
-                                                
+
                                                 <th role="columnheader" scope="col" aria-colindex="1"><div>Name</div></th>
-                                                
+
                                             </tr>
                                         </thead>
                                         <tbody role="rowgroup">
 
                                             <draggable id="left-lovehandles" class="drag-drop" group="drag_handle" handle=".handle" ghost-class="gu-transit" drag-class="el-drag-ex-5" v-model="displayedProducts" :animation="200" @start="onDragStart" @end="onDragEnd">
 
-                                       
+
 
                                             <tr v-for="the_category in displayedProducts"  :key="category.id" role="row" class="">
 
@@ -133,28 +133,28 @@
                                                     </div>
                                                 </td>
 
-                                             
-                                                
+
+
                                                 <td aria-colindex="1" role="cell">{{ the_category.category.name }}</td>
 
-                                               
 
-                                             
+
+
                                             </tr>
-                                           
+
                                             </draggable>
                                         </tbody>
                                     </table>
 
-                                
+
                             </div>
 
 
-                           
+
 
                         </div>
 
-                   
+
                 </div>
             </div>
         </div>
@@ -162,7 +162,7 @@
 </template>
 
 <script setup>
-   
+
     import { ref, reactive, computed, watch, onMounted, watchEffect } from 'vue';
 
     import "../../assets/sass/scrollspyNav.scss";
@@ -185,8 +185,8 @@
 
     import useCategories from "@/composables/categories";
 
-    
-    
+
+
 
     // const {solutions, getSolutions, deleteSolution} = useSolutions()
 
@@ -194,10 +194,10 @@
 
 
     const { getCategoryList, categoryList, getMainCategoryList, categoryMainList, getSelectedCategoryList } = useCategories();
-    
 
-    
-    
+
+
+
     const route = useRoute()
     const currentRoute = ref(route);
 
@@ -218,7 +218,7 @@
     const { value: search } = useField('search', null, { initialValue: '' });
 
 
-    const category = reactive({      
+    const category = reactive({
         perPage,
         filter_category_id,
         main_category,
@@ -234,7 +234,7 @@
                 category.perPage = 10000;
             }
 
-            console.log(solution_id);
+
 
             const response = await axios.get('/api/get-solutions-categories', {
                 params: {
@@ -246,7 +246,7 @@
                     search: category.search,
                 },
             });
-    
+
             // totalProducts.value = response.data.categories.total;
             // totalCountperPage.value = response.data.categories.data.length;
             categories.value = response.data.categories;
@@ -254,7 +254,7 @@
 
 
 
-    
+
 
         } catch (error) {
             console.error(error);
@@ -275,7 +275,7 @@
   // const goToPreviousPage = () => {
   //   if (currentPage.value > 1) {
   //     currentPage.value--;
-      
+
   //   }
   // };
 
@@ -283,7 +283,7 @@
   // const goToNextPage = () => {
   //   if (currentPage.value < totalPages.value) {
   //     currentPage.value++;
-     
+
   //   }
   // };
 
@@ -298,7 +298,7 @@
   const updateDisplayedProducts = () => {
     const startIndex = 0;
     displayedProducts.value = categories.value.slice(startIndex, startIndex + perPage.value);
-    
+
   };
 
   const isInteger = (value) => {
@@ -338,7 +338,7 @@
 
 
   const getCategoryLink = (id, page) => {
-    
+
 
 
     return `/admin/solutions/page/${page}`;
@@ -353,10 +353,10 @@
   // Watch for changes in the currentPage and fetch products accordingly
   watch(currentPage, fetchProducts);
 
-  
+
 
   watch(main_category, (newValue) => {
-      //console.log('Solution object:', newValue.solution_category.id);
+      //
      if (main_category) {
         const selectedCategoryId = category.main_category.id;
 
@@ -364,7 +364,7 @@
 
             const selectedCategoryList = getSelectedCategoryList(selectedCategoryId);
             //solution.categories = selectedCategoryList; //
-        
+
       }
     });
 
@@ -421,15 +421,15 @@
     // Function called when the dragging operation ends
   const onDragEnd = (event) => {
       // Get the new order of items
-      
+
       const newOrder = displayedProducts.value.map(category => category.id);
 
-      console.log(newOrder);
+
 
       // // Update the database for each item with its new order
-      
+
       updateDatabaseOrder(newOrder);
-      
+
 
       // // Optionally, update the displayedProducts array with the new order
       // displayedProducts.value.forEach(category => {

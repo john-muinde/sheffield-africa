@@ -134,7 +134,7 @@ const fetchProducts = async () => {
         products.value = response.data.data;
         totalProducts.value = response.data.total;
 
-        console.log(totalProducts.value);
+
     } catch (error) {
         console.error(error);
     }

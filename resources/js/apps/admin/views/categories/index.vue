@@ -436,7 +436,7 @@ onMounted(() => {
 watch([currentPage, category], fetchCategories);
 
 watch(main_category, (newValue) => {
-    //console.log('Solution object:', newValue.solution_category.id);
+    //
     if (main_category) {
         const selectedCategoryId = category.main_category.id;
 

@@ -147,7 +147,7 @@
                                         ></div>
                                     </div>
 
-                                   
+
 
                                     <div class="form-group col-md-4">
                                         <label
@@ -292,7 +292,7 @@ function submitForm() {
     validate().then((form) => {
         if (form.valid) {
 
-            updatePublication(blog, []);            
+            updatePublication(blog, []);
         }
     });
 }
@@ -304,7 +304,7 @@ function deleteImage(imageId) {
 const initializeFileUpload = async () => {};
 
 onMounted(() => {
-    
+
     getPublication(route.params.id);
 
     watchEffect(() => {
@@ -333,7 +333,7 @@ onMounted(() => {
             });
         }
     });
- 
+
 });
 // https://vuejs.org/api/reactivity-core.html#watcheffect
 
@@ -346,6 +346,6 @@ watchEffect(() => {
     blog.main_image = postData.value.publication_file;
 
 
-    console.log(postData.value);
+
 });
 </script>

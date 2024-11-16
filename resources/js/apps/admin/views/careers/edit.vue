@@ -402,7 +402,7 @@ const career = reactive({
 const route = useRoute();
 function submitForm() {
     validate().then((form) => {
-        console.log(form.valid);
+
         if (form.valid) {
             updateCareer(career);
         }
@@ -435,6 +435,6 @@ watchEffect(() => {
     career.document = postData.value.document;
     career.is_published = postData.value.is_published;
 
-    console.log(postData.value);
+
 });
 </script>

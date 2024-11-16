@@ -331,7 +331,7 @@ new window.Swal({
     }
 }).then((result)=> {
     if (result.dismiss === new window.Swal.DismissReason.timer) {
-        console.log('I was closed by the timer');
+
     }
 });
                                         </pre>
@@ -781,7 +781,7 @@ toast.fire({
                 },
             }).then((result) => {
                 if (result.dismiss === window.Swal.DismissReason.timer) {
-                    console.log("I was closed by the timer");
+
                 }
             });
         } else if (type === 8) {

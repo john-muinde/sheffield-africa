@@ -15,15 +15,15 @@
       </nav><!-- End .breadcrumb-nav -->
 
 
-            
+
 
         <div class="page-content pb-0">
 
-         
+
 
             <div class="container">
               <div class="row">
-            
+
 
               <div class="col-lg-6 mb-2 mb-lg-0">
                 <h2 class="heading text-primary mb-1">{{ project.name }}</h2><!-- End .title mb-2 -->
@@ -54,12 +54,12 @@
                     </div><!-- End .contact-info -->
                   </div><!-- End .col-sm-7 -->
 
-               
+
                 </div><!-- End .row -->
               </div><!-- End .col-lg-6 -->
 
-           
-              
+
+
             </div><!-- End .row -->
 
             <div class="row">
@@ -74,7 +74,7 @@
                                   </a>
                               </figure><!-- End .entry-media -->
 
-                              
+
                           </article><!-- End .entry -->
                       </div><!-- End .entry-item -->
 
@@ -89,9 +89,9 @@
 
                   </div>
 
-             
-                </div>  
-              </div>    
+
+                </div>
+              </div>
 
             <hr class="mt-4 mb-5">
 
@@ -109,7 +109,7 @@
                       </figure><!-- End .entry-media -->
 
                       <div class="entry-body text-center pt-1">
-                        
+
                         <h2 class="entry-title">
                            <router-link :to="getshowroomLink(project.id, project.name)">{{ project.name }}</router-link>
                         </h2><!-- End .entry-title -->
@@ -117,36 +117,36 @@
                         <div class="entry-content">
                           <p>
                             <span >
-                              <i style="color:rgb(223, 31, 49);" class="icon-phone "></i> 
+                              <i style="color:rgb(223, 31, 49);" class="icon-phone "></i>
                               <b>
 
-                                <a style="color: #777; text-decoration: none;" 
-                                   onmouseover="this.style.color='#c02434'" 
-                                   onmouseout="this.style.color='#777'" class="text-grey pl-3" :href="'tel:' + project.phone_number1">{{ project.phone_number1 }}</a>, 
+                                <a style="color: #777; text-decoration: none;"
+                                   onmouseover="this.style.color='#c02434'"
+                                   onmouseout="this.style.color='#777'" class="text-grey pl-3" :href="'tel:' + project.phone_number1">{{ project.phone_number1 }}</a>,
 
-                                <a style="color: #777; text-decoration: none;" 
-                                   onmouseover="this.style.color='#c02434'" 
+                                <a style="color: #777; text-decoration: none;"
+                                   onmouseover="this.style.color='#c02434'"
                                    onmouseout="this.style.color='#777'" class="text-grey" :href="'tel:' + project.phone_number2">{{ project.phone_number2 }}</a>
-                                   
+
                               </b>
-                            </span><br> 
+                            </span><br>
                             <span>
-                              <i style="color:rgb(223, 31, 49);" class="icon-envelope "></i>  
-                              <b> 
-                                <a style="color: #777; text-decoration: none;" 
-                                   onmouseover="this.style.color='#c02434'" 
-                                   onmouseout="this.style.color='#777'" class="text-grey pl-3" :href="'mailto:'+project.email">{{ project.email }} </a> 
+                              <i style="color:rgb(223, 31, 49);" class="icon-envelope "></i>
+                              <b>
+                                <a style="color: #777; text-decoration: none;"
+                                   onmouseover="this.style.color='#c02434'"
+                                   onmouseout="this.style.color='#777'" class="text-grey pl-3" :href="'mailto:'+project.email">{{ project.email }} </a>
                               </b>
-                            </span><br> 
-                             {{ project.location }}</p> 
-                          
+                            </span><br>
+                             {{ project.location }}</p>
+
                           <router-link :to="getshowroomLink(project.id, project.name)" class="btn btn-outline-primary"><span>View More</span><i class="icon-long-arrow-right"></i></router-link>
                         </div><!-- End .entry-content -->
                       </div><!-- End .entry-body -->
                     </article><!-- End .entry -->
                   </div><!-- End .col-lg-3 -->
 
-                
+
                 <!-- <div class="col-lg-6">
                   <div class="store">
                     <div class="row">
@@ -172,7 +172,7 @@
                   </div>
                 </div>
 
-             
+
                 <div class="col-lg-6">
                   <div class="store">
                     <div class="row">
@@ -201,10 +201,10 @@
               </div><!-- End .row -->
             </div><!-- End .stores -->
           </div><!-- End .container -->
-        
+
       </div><!-- End .page-content -->
   </main>
-  
+
 </template>
 
 
@@ -223,11 +223,11 @@
   import { useMeta } from "../../admin/composables/use-meta";
   useMeta({ title: "Project Details" });
 
-  
+
   const route = useRoute()
   const currentRoute = ref(route);
-  
- 
+
+
   const project = ref([]);
   const other_projects = ref([]);
   const project_id = ref(route.params.id ? parseInt(route.params.id) : 1);
@@ -241,7 +241,7 @@
           project_id: project_id.value,
         },
       });
-      console.log(response.data);
+
       project.value = response.data.project;
       other_projects.value = response.data.other_projects;
       useMeta({ title: project.value.name + " | Project" });
@@ -252,13 +252,13 @@
 
   const imgs = ref([]);
   const rootUrl = window.location.protocol + '//' + window.location.host;
- 
+
   const showSingle = () => {
      imgs.value = 'https://media.istockphoto.com/id/1189903200/photo/red-generic-sedan-car-isolated-on-white-background-3d-illustration.jpg?s=612x612&w=0&k=20&c=uRu3o_h5FVljLQHS9z0oyz-XjXzzXN_YkyGXwhdMrjs=';
     show()
   }
 
-  
+
   const showMultiple = async (index) => {
     imgs.value = project.value.project_images.map(item => rootUrl + "/storage/" +item.name);
     show(index);
@@ -287,11 +287,11 @@
     // Convert to lowercase
     transformedName = transformedName.toLowerCase();
 
-    
+
 
     return `/project/${id}/${transformedName}`;
   };
-  
+
   const getCategoryLink = (id, name, page) => {
     //Replace spaces with dashes
     let transformedName = name.replace(/ /g, '-');
@@ -302,7 +302,7 @@
     // Convert to lowercase
     transformedName = transformedName.toLowerCase();
 
-   
+
 
     return `/category/${id}/${transformedName}/page/${page}`;
   };
@@ -311,7 +311,7 @@
   //     return { __html: html };
   // };
 
-  
+
   // Initial fetch of projects
   onMounted(() => {
     fetchshowroom();
@@ -342,14 +342,14 @@
     const query = route.query; // Access the query parameters
 
     if( params.id !== "" && project_id.value !== params.id ){
-       
+
         project_id.value = params.id ? parseInt(params.id) : 1;
 
         fetchshowroom();
 
     }
 });
-  
+
 </script>
 
 

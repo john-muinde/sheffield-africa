@@ -28,7 +28,7 @@
     					                                  </a>
     					                              </figure><!-- End .entry-media -->
 
-    					                              
+
     					                          </article><!-- End .entry -->
     					                      </div><!-- End .entry-item -->
 
@@ -56,7 +56,7 @@
 </template>
 
 <script setup>
-	
+
 import { ref, computed, watch, onMounted, onUnmounted, watchEffect } from 'vue';
 
   import { useRoute } from "vue-router";
@@ -64,11 +64,11 @@ import { ref, computed, watch, onMounted, onUnmounted, watchEffect } from 'vue';
   import { useMeta } from "../../admin/composables/use-meta";
   //useMeta({ title: "Showroom Details" });
 
-  
+
   const route = useRoute();
   const currentRoute = ref(route);
-  
- 
+
+
   const showroom = ref([]);
   const other_showrooms = ref([]);
   const showroom_id = ref(route.params.id ? parseInt(route.params.id) : 1);
@@ -77,7 +77,7 @@ import { ref, computed, watch, onMounted, onUnmounted, watchEffect } from 'vue';
 
    import VueEasyLightbox from 'vue-easy-lightbox'
 
-  console.log(showroom_id);
+
 
   // Fetch showrooms based on the current page
   const fetchShowroom = async () => {
@@ -89,7 +89,7 @@ import { ref, computed, watch, onMounted, onUnmounted, watchEffect } from 'vue';
         },
       });
       showroom.value = response.data.showroom;
-     
+
       //useMeta({ title: showroom.value.name + " | Gallery" });
     } catch (error) {
       console.error(error);
@@ -98,9 +98,9 @@ import { ref, computed, watch, onMounted, onUnmounted, watchEffect } from 'vue';
 
   const imgs = ref([]);
   const rootUrl = window.location.protocol + '//' + window.location.host;
- 
-  
-  
+
+
+
   const showMultiple = async (index) => {
     imgs.value = showroom.value.gallery_images.map(item => rootUrl + "/storage/" +item.name);
     show(index);
@@ -129,11 +129,11 @@ import { ref, computed, watch, onMounted, onUnmounted, watchEffect } from 'vue';
     // Convert to lowercase
     transformedName = transformedName.toLowerCase();
 
-    
+
 
     return `/showroom/${id}/${transformedName}`;
   };
-  
+
   const getCategoryLink = (id, name, page) => {
     //Replace spaces with dashes
     let transformedName = name.replace(/ /g, '-');
@@ -144,7 +144,7 @@ import { ref, computed, watch, onMounted, onUnmounted, watchEffect } from 'vue';
     // Convert to lowercase
     transformedName = transformedName.toLowerCase();
 
-   
+
 
     return `/category/${id}/${transformedName}/page/${page}`;
   };
@@ -153,7 +153,7 @@ import { ref, computed, watch, onMounted, onUnmounted, watchEffect } from 'vue';
   //     return { __html: html };
   // };
 
-  
+
   // Initial fetch of showrooms
   onMounted(() => {
     fetchShowroom();
@@ -184,12 +184,12 @@ import { ref, computed, watch, onMounted, onUnmounted, watchEffect } from 'vue';
     const query = route.query; // Access the query parameters
 
     if( params.id !== "" && showroom_id.value !== params.id ){
-       
+
         showroom_id.value = params.id ? parseInt(params.id) : 1;
 
         fetchShowroom();
 
     }
 });
-  
+
 </script>

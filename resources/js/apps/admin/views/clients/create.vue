@@ -283,5 +283,5 @@ onMounted(() => {
   });
 });
 
-//console.log(blogCategoryList);
+//
 </script>

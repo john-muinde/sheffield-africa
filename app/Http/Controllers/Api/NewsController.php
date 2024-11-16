@@ -44,50 +44,11 @@ class NewsController extends Controller
     {
         $this->authorize('product-create');
 
-        // Check if the news with the same name already exists
-        $existingNews = News::where('name', $request->name)->first();
-        if ($existingNews) {
-            return response()->json(['errors' => ['name' => ['News with the same name already exists.']]], 409);
-        }
-
-        $validatedData = $request->validated();
+        $validatedData = $this->validateRequest($request);
         $validatedData['created_by'] = auth()->user()->id;
-
-        if ($request->hasFile('main_image')) {
-
-            $file = $request->file('main_image');
-
-            $file_name = time() . '_' . '_news_' . $request->file('main_image')->getClientOriginalName();
-            $file_path = 'uploads/' . $file_name;
-
-            // Resize and optimize the image
-            $image = Image::make($file)->resize(800, null, function ($constraint) {
-                $constraint->aspectRatio();
-                $constraint->upsize();
-            })->encode('jpg', 85); // Specify the desired encoding format and quality (80% in this example)
-
-            // Store the optimized image
-            Storage::disk('public')->put($file_path, $image);
-            //$file_path = $request->file('main_image')->storeAs('uploads', $file_name, 'public');
-
-            $validatedData['main_image_path'] = $file_path;
-        }
-
-        if ($request->hasFile('file_path')) {
-
-            $file_name = time() . '_' . $request->file('file_path')->getClientOriginalName();
-            $file_path = $request->file('file_path')->storeAs('uploads', $file_name, 'public');
-            $validatedData['file_path'] = $file_path;
-        }
 
         $news = News::create($validatedData);
 
-        return new NewsResource($news);
-    }
-
-    public function show(News $news)
-    {
-        $this->authorize('product-edit');
         return new NewsResource($news);
     }
 
@@ -95,51 +56,73 @@ class NewsController extends Controller
     {
         $this->authorize('product-edit');
 
-        // Check if the news with the same name already exists (excluding the current news)
-        $existingNews = News::where('name', $request->name)
-            ->where('id', '!=', $news->id)
-            ->first();
-        if ($existingNews) {
-            return response()->json(['errors' => ['name' => ['News with the same name already exists.']]], 409);
+        $validatedData = $this->validateRequest($request);
+
+        $news->update($validatedData);
+
+        return new NewsResource($news);
+    }
+
+    private function validateRequest(Request $request)
+    {
+        $rules = [
+            'name' => 'required|string|max:255|unique:news,name,' . $request->id,
+            'description' => 'required|string',
+            'type' => 'required|in:Image,Video',
+            'main_image_path' => 'nullable|image|mimes:jpeg,png,jpg|max:10240',
+            'file_path' => 'nullable',
+            'url' => 'nullable|url',
+            'is_published' => 'required|boolean',
+        ];
+
+        if ($request->type === 'Image') {
+            $rules['file_path'] = 'required_without:main_image_path|image|mimes:jpeg,png,jpg|max:10240';
+        } elseif ($request->type === 'Video') {
+            $rules['file_path'] = 'required|url';
         }
 
-        $validatedData = $request->validated();
+        $validatedData = $request->validate($rules);
 
-        //dd("ik1o");
+        return $this->handleRequest($request, $validatedData);
+    }
 
-        if ($request->hasFile('main_image')) {
-
-            //dd("iko");
-
-            $file = $request->file('main_image');
-
-            $file_name = time() . '_' . '_news_' . $request->file('main_image')->getClientOriginalName();
+    private function handleRequest(Request $request, array $validatedData)
+    {
+        if ($request->hasFile('main_image_path')) {
+            $file = $request->file('main_image_path');
+            $file_name = time() . '_news_' . $file->getClientOriginalName();
             $file_path = 'uploads/' . $file_name;
 
             // Resize and optimize the image
             $image = Image::make($file)->resize(800, null, function ($constraint) {
                 $constraint->aspectRatio();
                 $constraint->upsize();
-            })->encode('jpg', 85); // Specify the desired encoding format and quality (80% in this example)
+            })->encode('jpg', 85);
 
             // Store the optimized image
             Storage::disk('public')->put($file_path, $image);
-            //$file_path = $request->file('main_image')->storeAs('uploads', $file_name, 'public');
 
             $validatedData['main_image_path'] = $file_path;
         }
 
-        if ($request->hasFile('file_path')) {
-
-            $file_name = time() . '_' . $request->file('file_path')->getClientOriginalName();
-            $file_path = $request->file('file_path')->storeAs('uploads', $file_name, 'public');
+        if ($request->hasFile('file_path') && $request->type === 'Image') {
+            $file = $request->file('file_path');
+            $file_name = time() . '_' . $file->getClientOriginalName();
+            $file_path = $file->storeAs('uploads', $file_name, 'public');
             $validatedData['file_path'] = $file_path;
         }
 
-        $news->update($validatedData);
+        return $validatedData;
+    }
 
+
+
+    public function show(News $news)
+    {
+        $this->authorize('product-edit');
         return new NewsResource($news);
     }
+
 
     public function destroy(News $news)
     {

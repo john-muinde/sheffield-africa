@@ -57,7 +57,7 @@ class EventController extends Controller
 
         $validatedData['created_by'] = auth()->user()->id;
 
-        if ($request->hasFile('main_image')) {
+        if ($request->hasFile('main_image_path')) {
 
             $request->validate([
                 'main_image_path' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',

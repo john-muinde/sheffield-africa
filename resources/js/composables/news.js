@@ -68,12 +68,12 @@ export default function useNews() {
         }
 
         const config = {
-            headers: { "content-type": "multipart/form-data" },
+            headers: { "Content-Type": "multipart/form-data" },
         };
 
         try {
             await apiRequest("post", "/api/news", serializedPost, config);
-            router.push({ name: "news.create" });
+            router.push({ name: "news.index" });
             // Reset the form values
             news.name = null;
             news.description = null;

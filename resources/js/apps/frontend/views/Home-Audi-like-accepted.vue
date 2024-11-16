@@ -5,7 +5,7 @@
 <template>
 
         <header class="header header-6 header-transparent">
-            
+
             <div class="header-middle mt-2">
                 <div class="container">
                     <div class="header-left">
@@ -46,7 +46,7 @@
                     </div>
                 </div><!-- End .container -->
             </div><!-- End .header-middle -->
-           
+
         </header>
 
 
@@ -59,7 +59,7 @@
 
   <div class="page-wrapper">
     <main class="main">
-           
+
       <div class="container">
         <div class="row justify-content-center mt-2 home_page_category">
 
@@ -68,7 +68,7 @@
               <router-link to="/commercial-kitchen" title="Click to open Food Service Equipment">
                 <img class="home-rounded-circle" src="assets/gif/food_service.gif" alt="Banner">
               </router-link>
-            
+
             </div><!-- End .banner -->
           </div><!-- End .col-md-6 -->
 
@@ -76,7 +76,7 @@
             <div class="banner">
               <router-link to="/laundry" title="Click to open Laundry & Floor Cleaning">
                 <img class="home-rounded-circle" src="assets/gif/laundry.gif" alt="Banner">
-              </router-link> 
+              </router-link>
             </div><!-- End .banner -->
           </div><!-- End .col-md-6 -->
 
@@ -91,12 +91,12 @@
         </div>
       </div><!-- End .container -->
 
-     
+
       <!-- End .container-fluid -->
 
 
 
-     
+
     </main>
     <!-- End .main -->
   </div>
@@ -131,7 +131,7 @@
                         <div class="md-form mb-0">
                           <label for="name" class="">Your name</label>
                             <input type="text" id="name" name="name" class="form-control" placeholder="Enter your name here ...">
-                            
+
                         </div>
                     </div>
                     <!--Grid column-->
@@ -141,7 +141,7 @@
                         <div class="md-form mb-0">
                             <label for="email" class="">Your email</label>
                             <input type="text" id="email" name="email" class="form-control" placeholder="Enter your email here ...">
-                            
+
                         </div>
                     </div>
                     <!--Grid column-->
@@ -155,7 +155,7 @@
                         <div class="md-form mb-0">
                             <label for="subject" class="">Subject</label>
                             <input type="text" id="subject" name="subject" class="form-control" placeholder="Enter your subject here ...">
-                            
+
                         </div>
                     </div>
                 </div>
@@ -170,7 +170,7 @@
                         <div class="md-form">
                             <label for="message">Your message</label>
                             <textarea type="text" id="message" name="message" rows="2" class="form-control md-textarea" placeholder="Enter your message here ..."></textarea>
-                            
+
                         </div>
 
                     </div>
@@ -186,7 +186,7 @@
 
                         <div class="md-form">
                             <button class="btn btn-primary">Send</button>
-                            
+
                         </div>
 
                     </div>
@@ -194,7 +194,7 @@
                 <!--Grid row-->
 
             </form>
-              
+
             </div>
             <div class="col-md-6">
 
@@ -202,18 +202,18 @@
                   <div class="canvas-map mb-30">
                       <iframe
                         width="90%"
-                        height="200" 
+                        height="200"
                         src="https://maps.google.com/maps?q=sheffield-steel-limited-mombasa-rd&amp;t=&amp;z=13&amp;ie=UTF8&amp;iwloc=&amp;output=embed"
                         frameborder="0"
-                        allowfullscreen 
+                        allowfullscreen
                       ></iframe>
                   </div>
                  <ul class="contact-section mt-2">
-                    <li style="font-size:20px; font-weight:500;" class="mb-3 text-dark"><i class="flaticon-pin"></i><span> 
+                    <li style="font-size:20px; font-weight:500;" class="mb-3 text-dark"><i class="flaticon-pin"></i><span>
                       Off Mombasa Road before Standard gauge railway<br>
                       P. O. Box 29 – 00606, Nairobi Kenya
                     </span></li>
-                    <li class=""><i class="icon-phone" style="font-size: 35px; padding-right:15px; color: #000;"></i> 
+                    <li class=""><i class="icon-phone" style="font-size: 35px; padding-right:15px; color: #000;"></i>
                      <a class="text-dark" style="font-size:25px; font-weight:550;" href="tel:+254713777111">+254 713 777 111</a>
                     </li>
                     <li class="mb-3" ><i class="icon-envelope" style="font-size: 35px; padding-right:15px; color: #000;"></i>
@@ -227,19 +227,19 @@
                      <li><a href="index.html#"><i class="fa fa-linkedin"></i></a></li>
                  </ul>
              </div>
-              
+
             </div>
           </div>
         </div>
-        
+
       </div>
     </div>
   </div>
 
   <!-- Modal -->
 
-  
-  
+
+
 </template>
 
 <script setup>
@@ -270,7 +270,7 @@
 
 
     onMounted(async () => {
-     
+
 
     });
 
@@ -285,9 +285,9 @@
         try {
           const response = await axios.get(`/api/product_search`+`/${query.value}`);
           results.value = response.data.data;
-          //console.log(results.value);
+          //
           showResults.value = true;
-          //console.log(showResults.value);
+          //
         } catch (error) {
           //console.error(error);
         }
@@ -297,7 +297,7 @@
       }
     };
 
-    
+
 
 </script>
 
@@ -322,7 +322,7 @@
   }
 
 
-  
+
   .home-round-category {
 
     margin-right:-60px;
@@ -339,9 +339,9 @@
 
   }
 
-  
+
   .banner img:hover {
-    
+
   }
 
 
@@ -353,7 +353,7 @@
       inset 0 0 0 0.625px black,
       inset -0.625px -0.625px 0.625px 0.375px white,
       inset 0 0 0 1.125px #6c6d70,
-      inset 0 0 0 1.25px grey; 
+      inset 0 0 0 1.25px grey;
     z-index : 99 !important;
   }
 
@@ -365,12 +365,12 @@
       inset 0 0 0 0.625px black,
       inset -0.625px -0.625px 0.625px 0.375px white,
       inset 0 0 0 1.125px #6c6d70,
-      inset 0 0 0 1.25px grey; 
+      inset 0 0 0 1.25px grey;
     z-index : 99 !important;
   }
 
   .home_cold_room .banner:hover{
-    border : 6.5px solid #4f5054 !important; 
+    border : 6.5px solid #4f5054 !important;
     box-shadow:
       inset 0.25px 0.25px 0.25px 0 white,
       inset 0 0 0 0.5px #4f5054,
@@ -388,31 +388,31 @@
 
   .home_kitchen .banner {
       border : 3.5px solid #ec1f25 !important;
-      box-shadow: inset 0.25px 0.25px 0.25px 0 #ec1f25, 
-      inset 0 0 0 0.5px #ec1f25, 
-      inset 0 0 0 0.625px #ec1f25, 
-      inset -0.625px -0.625px 0.625px 0.375px #ec1f25, 
-      inset 0 0 0 1.125px #ec1f25, 
+      box-shadow: inset 0.25px 0.25px 0.25px 0 #ec1f25,
+      inset 0 0 0 0.5px #ec1f25,
+      inset 0 0 0 0.625px #ec1f25,
+      inset -0.625px -0.625px 0.625px 0.375px #ec1f25,
+      inset 0 0 0 1.125px #ec1f25,
       inset 0 0 0 1.25px #ec1f25 !important;
   }
 
   .home_cold_room .banner {
       border : 3.5px solid #3a5eab !important;
-      box-shadow: inset 0.25px 0.25px 0.25px 0 #3a5eab, 
-      inset 0 0 0 0.5px #3a5eab, 
-      inset 0 0 0 0.625px #3a5eab, 
-      inset -0.625px -0.625px 0.625px 0.375px #3a5eab, 
-      inset 0 0 0 1.125px #3a5eab, 
+      box-shadow: inset 0.25px 0.25px 0.25px 0 #3a5eab,
+      inset 0 0 0 0.5px #3a5eab,
+      inset 0 0 0 0.625px #3a5eab,
+      inset -0.625px -0.625px 0.625px 0.375px #3a5eab,
+      inset 0 0 0 1.125px #3a5eab,
       inset 0 0 0 1.25px #3a5eab;
   }
 
   .home_laundry .banner {
       border : 3.5px solid #72b535 !important;
-      box-shadow: inset 0.25px 0.25px 0.25px 0 #72b535, 
-      inset 0 0 0 0.5px #72b535, 
-      inset 0 0 0 0.625px #72b535, 
-      inset -0.625px -0.625px 0.625px 0.375px #72b535, 
-      inset 0 0 0 1.125px #72b535, 
+      box-shadow: inset 0.25px 0.25px 0.25px 0 #72b535,
+      inset 0 0 0 0.5px #72b535,
+      inset 0 0 0 0.625px #72b535,
+      inset -0.625px -0.625px 0.625px 0.375px #72b535,
+      inset 0 0 0 1.125px #72b535,
       inset 0 0 0 1.25px #72b535;
   }
 
@@ -447,7 +447,7 @@
     position: fixed;
     right: 0;
     bottom: 0;
-    min-width: 100%; 
+    min-width: 100%;
     min-height: 100%;
     z-index: -15;
   }
@@ -465,12 +465,12 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(255, 255, 255, 0.7); 
-    pointer-events: none; 
+    background-color: rgba(255, 255, 255, 0.7);
+    pointer-events: none;
   }
 
 
-  
+
   .app{
     position: fixed;
     bottom: 0;
@@ -494,7 +494,7 @@
 
 
     .header-transparent{
-      background-color: transparent;  
+      background-color: transparent;
     }
 
     /*My home modal*/
@@ -502,7 +502,7 @@
       overflow: hidden;
     }
     .row.vertical-divider > div[class^="col-"] {
-      
+
       padding-bottom: 100px;
       margin-bottom: -100px;
       border-left: 2px solid #ec1f25;

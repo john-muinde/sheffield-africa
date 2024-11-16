@@ -426,6 +426,6 @@ watchEffect(() => {
 
     csr.csr_images = postData.value.csr_images;
 
-    console.log(postData.value);
+
 });
 </script>

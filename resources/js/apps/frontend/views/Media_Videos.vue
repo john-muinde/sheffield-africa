@@ -187,7 +187,7 @@ const fetchVideos = async () => {
 
 //     try {
 //         const response = await fetch(url);
-//         console.log(url)
+//
 //         const duration = response.data.items[0].contentDetails.duration;
 //         video.duration = formatYouTubeDuration(duration);
 //     } catch (error) {

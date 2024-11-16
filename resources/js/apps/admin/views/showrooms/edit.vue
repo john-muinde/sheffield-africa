@@ -238,6 +238,6 @@ watchEffect(() => {
   showroom.description = postData.value.description;
   showroom.is_published = postData.value.is_published;
 
-  console.log(postData.value);
+
 });
 </script>

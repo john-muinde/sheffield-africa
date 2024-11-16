@@ -549,7 +549,7 @@ const getCategoryLink = (id, name, page) => {
 
 // Update displayedProducts based on the current page and products
 const updateDisplayedProducts = () => {
-    console.log(products);
+
     const startIndex = 0;
     displayedProducts.value = products.value;
 };
@@ -618,7 +618,7 @@ watchEffect(() => {
         // Call a method or update component data based on the new route
 
         fetchProducts();
-        //console.log("test "+the_cat_name.value);
+        //
     }
 });
 
@@ -628,10 +628,10 @@ const title = ref("");
 watch(
     () => the_category.value.name,
     (newName, oldName) => {
-        console.log(newName);
-        console.log(oldName);
+
+
         if (newName !== oldName) {
-            console.log("changing it");
+
             // Update the title when the_category.value.name changes
             title.value = newName;
         }

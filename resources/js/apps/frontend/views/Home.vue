@@ -438,9 +438,9 @@ const search = async () => {
                 `/api/product_search` + `/${query.value}`
             );
             results.value = response.data.data;
-            //console.log(results.value);
+            //
             showResults.value = true;
-            //console.log(showResults.value);
+            //
         } catch (error) {
             console.error(error);
         } finally {
@@ -456,8 +456,8 @@ const bodyClassAdded = ref(true);
 
 // Function to toggle the class on document.body
 const addClassToBody = () => {
-    console.log("clicked");
-    console.log("Before toggle:", bodyClassAdded.value);
+
+
 
     const targetElement = document.querySelector(".the_main_div");
     targetElement.classList.add("mmenu-active");
@@ -1025,7 +1025,7 @@ const fetchProducts = async () => {
             };
         }).filter((product) => product !== null);
 
-        //console.log(promotionProducts)
+        //
     } catch (error) {
         console.error(error);
     }

@@ -338,6 +338,6 @@ watchEffect(() => {
 
     gallery.gallery_images = postData.value.gallery_images;
 
-    console.log(postData.value);
+
 });
 </script>

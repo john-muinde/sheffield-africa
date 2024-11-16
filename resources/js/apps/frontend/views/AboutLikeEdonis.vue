@@ -168,7 +168,7 @@
                             <div class="col-md-12 ">
 
                                 <!-- <ol class="disc-list mt-5 pb-4">
-              
+
                                   <li>
                                     <span>IMPORTATION</span>
                                     <svg class="pointer">
@@ -192,7 +192,7 @@
                                     <svg class="pointer">
                                       <path d="M6.25,1.25L11.25,11.25L1.25,11.25L6.25,1.25Z"/>
                                     </svg>
-                                  </li> 
+                                  </li>
                                   <li>
                                     <span>QUALITY CONTROL & TESTING</span>
                                     <svg class="pointer">
@@ -211,8 +211,8 @@
                                       <path d="M6.25,1.25L11.25,11.25L1.25,11.25L6.25,1.25Z"/>
                                     </svg>
                                   </li>
-                                  
-                                  
+
+
                                 </ol> -->
 
                             </div>
@@ -1068,7 +1068,7 @@ const fetchClientList = async () => {
 
         clientList.value = response.data.data;
 
-        console.log(clientList.value);
+
     } catch (error) {
         console.error(error);
     }
@@ -1137,7 +1137,7 @@ h3 {
     overflow: visible;
 }
 
-/* Setup the rainbow colours on the discs 
+/* Setup the rainbow colours on the discs
   - #00AFC0
   - #00A3E1
   - #27579C

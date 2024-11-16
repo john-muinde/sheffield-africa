@@ -1,5 +1,5 @@
 import "./bootstrap";
-import { createApp } from "vue";
+import { createApp, markRaw } from "vue";
 import App from "./App.vue";
 import router from "./router/index";
 import store from "./store";
@@ -64,8 +64,10 @@ registerScrollSpy(app, { offset: 118 });
 import i18n from "./i18n";
 
 // datatables
-import { ClientTable } from "v-tables-3";
-app.use(ClientTable, {}, "bootstrap3");
+import { ServerTable, ClientTable, EventBus } from "v-tables-3";
+app.use(ClientTable, {}, "bootstrap4", {
+    genericFilter: markRaw({}),
+});
 
 // json to excel
 import vue3JsonExcel from "vue3-json-excel";

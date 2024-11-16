@@ -326,7 +326,7 @@ const fetchProducts = async () => {
         products.value = response.data.data;
         totalProducts.value = response.data.total;
 
-        console.log(totalProducts.value);
+
     } catch (error) {
         console.error(error);
     }
@@ -471,7 +471,7 @@ watchEffect(() => {
         // Call a method or update component data based on the new route
 
         fetchProducts();
-        //console.log("test "+the_cat_name.value);
+        //
     }
 });
 </script>

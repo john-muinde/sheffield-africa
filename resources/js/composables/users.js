@@ -25,7 +25,7 @@ export default function useUsers() {
         search_global = "",
         order_column = "created_at",
         order_direction = "desc",
-    }) => {
+    } = {}) => {
         try {
             const response = await apiRequest(
                 "get",

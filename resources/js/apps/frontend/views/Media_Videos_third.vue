@@ -182,7 +182,7 @@ const initializePlyr = () => {
             player = new Plyr(videoElement.value, plyrOptions);
 
             player.on('ready', () => {
-                console.log('Hello there')
+
                 player.muted = true;
                 if (selectedVideo.value) {
                     if (isYouTubeVideo.value) {

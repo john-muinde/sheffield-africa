@@ -16,7 +16,7 @@
         </teleport>
 
         <div class="container">
-         
+
 
             <div  class="row">
                 <div id="" class="col-lg-12 layout-spacing layout-top-spacing">
@@ -25,13 +25,13 @@
                             <div class="row">
                                 <div class="col-xl-12 col-md-12 col-sm-12 col-12">
                                     <h3><b>Create Solution</b></h3>
-                                  
+
                                 </div>
                             </div>
                         </div>
                         <div class="panel-body">
 
-                            
+
 
                             <form @submit.prevent="submitForm">
 
@@ -39,7 +39,7 @@
 
                                     <div class="form-group col-md-4">
                                         <label for="post-name">Solution Category</label>
-                                        
+
                                         <multiselect
                                           v-model="solution.solution_category"
                                           :options="categoryMainList"
@@ -64,7 +64,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                   
+
                                     <div class="form-group col-md-8">
                                         <label for="post-name">Solution Name</label>
                                         <input v-model="solution.name" id="post-name" type="text" class="form-control" placeholder="Enter Solution Name ..." />
@@ -78,7 +78,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    
+
 
                                     <div class="form-group">
                                         <label for="post-category" class="form-label">Select Product Category</label>
@@ -95,19 +95,19 @@
                                             </div>
                                         </div>
                                     </div>
-                                    
+
 
 
                                     <div class="form-group">
 
                                         <label for="post_description">Solution Description</label>
-                                        
+
                                         <quill-editor v-model:value="solution.description" :options="options1" placeholder="Enter Description ..."></quill-editor>
 
                                     </div>
 
-                                   
-                                 
+
+
 
 
                                     <div class="custom-file-container" data-upload-id="myFirstImage">
@@ -121,8 +121,8 @@
                                     </div>
 
 
-                                
-                                 
+
+
                                     <div class="form-group col-md-4">
                                         <label for="is_published" class="col-form-label">Publishing Status</label>
                                         <div>
@@ -143,16 +143,16 @@
                                         </div>
                                     </div>
 
-                                </div>    
-                                    
-                                   
+                                </div>
+
+
                                     <button :disabled="isLoading" class="btn btn-primary mt-3">
                                         <div v-show="isLoading" class=""></div>
                                         <span v-if="isLoading">Processing...</span>
                                         <span v-else>Save</span>
                                     </button>
 
-                                
+
                             </form>
 
                         </div>
@@ -171,7 +171,7 @@
     }
 
     .custom-file-container__image-multi-preview {
-    
+
         height: 200px !important;
     }
 
@@ -189,13 +189,13 @@
     import "../../assets/sass/forms/file-upload-with-preview.min.css";
     import FileUploadWithPreview from "file-upload-with-preview";
 
-    
-    
+
+
 
     import { quillEditor } from "vue3-quill";
     import "vue3-quill/lib/vue3-quill.css";
 
- 
+
 
 
     import { reactive, onMounted, ref, watch } from "vue";
@@ -242,12 +242,12 @@
             //toolbar: [[{ header: [1, 2, false] }], ["bold", "italic", "underline"], ["image", "code-block"]],
         },
     });
-    
+
     watch(solution, (newValue) => {
-      //console.log('Solution object:', newValue.solution_category.id);
+      //
      if (newValue.solution_category) {
         const selectedCategoryId = newValue.solution_category.id;
-        
+
         if (newValue.solution_category) {
 
             const selectedCategoryList = getSelectedCategoryList(selectedCategoryId);
@@ -284,14 +284,14 @@
                 backgroundImage: "",
             },
         });
-        
+
     })
 
-    // console.log("test")
-    // console.log(brandList);
+    //
+    //
 
-    // console.log("test")
-    // console.log(categoryMainList);
+    //
+    //
 
 
 </script>

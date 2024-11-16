@@ -287,10 +287,4 @@ onMounted(() => {
         });
     }
 });
-
-// console.log("test")
-// console.log(brandList);
-
-// console.log("test")
-// console.log(blogCategoryList);
 </script>

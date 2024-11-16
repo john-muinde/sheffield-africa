@@ -1,6 +1,6 @@
 <template>
     <main class="main">
-       
+
 <!-- style="background-image: url(/assets/images/projects_sheffield.jpg)" -->
         <div class="my-projects-banner bg-image text-center" >
             <div class="container justify-content-center mt-2 mb-1">
@@ -15,7 +15,7 @@
 
                     <div class="col-lg-12 my-projects-section justify-content-center">
 
-                       
+
 
 
 
@@ -45,11 +45,11 @@
 
 
 
-                
+
                     <div class="col-lg-12 tab-content  mt-5 mb-5 pb-5">
 
                         <!-- <div v-for="(item, index) in projects" :key="index" class="tab-pane p-0 fade" id="top-fur-tab" role="tabpanel" aria-labelledby="top-fur-link">
-                        
+
                         </div> -->
 
                         <div v-for="(segment, segmentIndex) in segmentsData" :key="segmentIndex" class="tab-pane p-0 fade "  :class="{ 'show active': segment.name === 'Hotels' }" :id="segment.name" role="tabpanel" :aria-labelledby="segment.name">
@@ -61,37 +61,37 @@
                                     <div class="col-md-10 offset-lg-1">
 
                                         <div class="row justify-content-center projects-row">
-                              
+
                                             <div class="col-md-2 " v-for="(project, projectIndex) in segment.projects" :key="projectIndex">
 
                                                 <article class="">
                                                     <figure class="">
                                                         <!-- <a href=""> -->
                                                             <img :src="'/storage/' + project.main_image_path" alt="image desc">
-                                                            
+
                                                        <!--  </a> -->
                                                     </figure><!-- End .entry-media -->
-                                                    
+
                                                 </article><!-- End .entry -->
-                                          
+
                                             </div>
                                         </div>
 
-                                    </div>    
+                                    </div>
                                 </div>
 
                             </div>
 
                         </div>
-                        
+
                     </div>
-                    
+
                 </div>
-                
+
             </div>
         </div>
 
-        
+
     </main>
 
 </template>
@@ -147,9 +147,9 @@
         try {
             const response = await axios.get("/api/get-clients", {});
             projects.value = response.data;
-            console.log(projects.value);
+
             segmentsData.value = segmentedProjects();
-        
+
         } catch (error) {
             console.error(error);
         }
@@ -179,62 +179,62 @@
     };
 
 
-    
 
 
 
-    const projectsMenu = [            
 
-        
-        { 
-          image: '/assets/images/projects/hotel.png', 
+    const projectsMenu = [
+
+
+        {
+          image: '/assets/images/projects/hotel.png',
           title: "Hotels",
-          
+
         },
-        { 
-          image: '/assets/images/projects/restaurant.png', 
+        {
+          image: '/assets/images/projects/restaurant.png',
           title: "Restaurants",
-         
-          
+
+
         },
-        { 
-          image: '/assets/images/projects/coffee-shop.png', 
+        {
+          image: '/assets/images/projects/coffee-shop.png',
           title: "Coffee Shops",
-          
+
         },
-        { 
-          image: '/assets/images/projects/retail.png', 
+        {
+          image: '/assets/images/projects/retail.png',
           title: "Retail",
-          
+
         },
-        { 
-          image: '/assets/images/projects/corporate.png', 
+        {
+          image: '/assets/images/projects/corporate.png',
           title: "Corporates",
-          
+
         },
-        { 
-          image: '/assets/images/projects/institutions.png', 
+        {
+          image: '/assets/images/projects/institutions.png',
           title: "Institutions",
-          
+
         },
-        { 
-          image: '/assets/images/projects/hospital.png', 
+        {
+          image: '/assets/images/projects/hospital.png',
           title: "Healthcare",
-          
+
         }
-        
-        
-        
+
+
+
 
     ];
 
 
 
-    
+
 
     const currentSlide = ref(0);
 
-   
+
     const slideTo = (val) => {
 
         currentSlide.value = val
@@ -264,11 +264,11 @@
         // const selectedItemDefault = projectsMenu[0];
         // const selectedTitleDefault = selectedItemDefault.title;
 
-        // console.log(selectedTitleDefault);
+        //
 
         // const selectedElementDefault = document.getElementById(selectedTitleDefault);
 
-        // console.log(selectedElementDefault);
+        //
         // if (selectedElementDefault) {
         //     selectedElementDefault.classList.add('active');
         //     selectedElementDefault.classList.add('show');
@@ -307,7 +307,7 @@
 }
 
 :root {
-    --delay-increment: 1s; 
+    --delay-increment: 1s;
 }
 
 .entry-item {
@@ -380,7 +380,7 @@
     filter: invert(67%) sepia(1%) saturate(0%) hue-rotate(17deg) brightness(89%) contrast(85%);
     padding-left: 25px;
     padding-right: 25px;
-    
+
 }
 
 .my-projects-carousel .carousel__slide {
@@ -388,7 +388,7 @@
 }
 
 .my-projects-carousel .carousel__slide--active {
-    
+
 }
 
 .carousel__prev, .carousel__next {
@@ -402,7 +402,7 @@
     height: 35px;
 }
 
-.my-projects-carousel .carousel__slide--active img{ 
+.my-projects-carousel .carousel__slide--active img{
     filter: brightness(0.9) invert(1) sepia(0) hue-rotate(0deg) saturate(0);
     padding-left: 25px;
     padding-right: 25px;
@@ -472,7 +472,7 @@
     border-radius: 25px;
     margin-left: 7.5px;
     margin-right: 7.5px;
-   
+
 }
 
 .my-projects-carousel .carousel__slide--active .carousel-div-image  {
@@ -480,16 +480,16 @@
     background-color: #c02435;
     margin-top: -10px;
     margin-bottom: -10px;
-    
+
 
 }
 
 .carousel__slide {
-   
+
 }
 
 .carousel__slide--active {
-    
+
 }
 
 .carousel__pagination {
@@ -501,8 +501,8 @@
 
 .main-clients {
   /*display:flex;*/
-  /*--s: 186px; */ 
-  /*--m: 5px;  */  
+  /*--s: 186px; */
+  /*--m: 5px;  */
   /*--r: calc(var(--s) + 4*var(--m) - 2px);*/
 }
 
@@ -522,7 +522,7 @@
   /*border-left: 1px solid black;*/
   /*justify-content: center; */
   /*    align-items: center;*/
-      
+
 }
 
 .clients-container::before {
@@ -530,8 +530,8 @@
   /*width: calc(var(--s)/2 + var(--m));*/
   /*float: left;*/
   /*height: 140%;*/
-  /*shape-outside: repeating-linear-gradient(     
-                   #0000 0 calc(var(--r) - 3px),      
+  /*shape-outside: repeating-linear-gradient(
+                   #0000 0 calc(var(--r) - 3px),
                    #000  0 var(--r));*/
 
 }
@@ -541,12 +541,12 @@
 
     max-width: 100%;
     width: 100%;
-    
+
 }
 
 @media (max-width: 767px) {
     .main-clients {
-    
+
         --s: 359px;
     }
 

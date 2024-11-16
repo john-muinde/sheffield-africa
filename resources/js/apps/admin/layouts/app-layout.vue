@@ -60,7 +60,6 @@ const handleClickOutside = (event) => {
         store.state.is_show_sidebar &&
         !sidebarRef.value.$el.contains(event.target)
     ) {
-        console.log(store.state.is_show_sidebar);
         if (event.target.closest('.sidebarCollapse')) {
             return;
         }

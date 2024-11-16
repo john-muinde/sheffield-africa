@@ -155,7 +155,7 @@ const getTableData = () => {
         : [];
 };
 
-console.log(publications);
+
 
 const columns = ref([
     "name",

@@ -178,6 +178,4 @@ onMounted(() => {
         },
     });
 });
-
-//console.log(brandList);
 </script>

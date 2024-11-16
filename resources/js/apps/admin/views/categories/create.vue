@@ -170,7 +170,7 @@ onMounted(() => {
     getCategoryList()
 })
 
-//console.log(categoryList);
+//
 
 
 </script>

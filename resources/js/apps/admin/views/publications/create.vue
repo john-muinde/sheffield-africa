@@ -138,7 +138,7 @@
                                         ></div>
                                     </div>
 
-                                   
+
 
                                     <div class="form-group col-md-4">
                                         <label
@@ -276,12 +276,12 @@ const options1 = ref({
 
 function submitForm() {
 
-    console.log(blog);
+
 
 
     validate().then((form) => {
         if (form.valid) {
-           
+
             storePublication(blog);
         }
     });
@@ -297,12 +297,12 @@ onMounted(() => {
         },
     });
 
-   
+
 });
 
-// console.log("test")
-// console.log(brandList);
+//
+//
 
-// console.log("test")
-// console.log(blogCategoryList);
+//
+//
 </script>

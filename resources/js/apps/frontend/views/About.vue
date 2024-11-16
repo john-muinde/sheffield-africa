@@ -22,42 +22,42 @@
                                             <p class="lead about-us-lead text-primary mb-1">Transforming Ideas into Sustainable Realities</p>
                                             <p class="who-we-are-p">Sheffield Steel Systems Limited was founded in 2003 and has since expanded to become East Africa’s leading solution and service provider for Commercial Kitchen, Laundry, and Cold Storage Solutions, with a distinct specialization in Stainless Steel Fabrication and Customization. We are a Kenyan company headquartered in Nairobi, with additional offices in Uganda and Rwanda. Our project executions span the continent, reaching from Ethiopia, Burundi, South Sudan, and Nigeria to Congo, as we explore new territories and business lines. We are a Pan-African company dedicated to providing solutions built to last in Africa. </p>
 
-                                           
+
                                         </div><!-- End .col-lg-5 -->
 
                                         <div class="col-lg-6 ">
                                             <div class="banner video-banner-about">
                                                 <div  class="video-banner video-banner-bg bg-image text-center" style="">
                                                     <div class="container container-video-button">
-                                                        
+
                                                         <a @click="showVideoPopup" class="btn-video btn-iframe"><i class="icon-play"></i></a>
 
                                                         <video-popup :show-popup="isVideoPopupVisible" :video-url="videoUrl" @close="hideVideoPopup" />
-                                                        
+
                                                     </div>
 
                                                     <span class="view-sheffield"><a @click="showVideoPopup" class="">View Sheffield</a></span>
                                                 </div>
                                             </div>
                                         </div>
-                                        
+
                                     </div>
-                                    
+
                                 </div>
-                                
+
                             </div><!-- End .row -->
                         </div><!-- End .container -->
                     </div>
 
                 </div>
 
-                
+
 
             </div>
 
         </div>
 
-       
+
 
         <div class="page-content pg-white">
 
@@ -66,7 +66,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">
-                           
+
                             <h2 class="our-history-title">Our History</h2>
 <!--                             <p class="lead about-us-lead text-primary mb-1">Transforming Ideas into Sustainable Realities</p> -->
 
@@ -89,17 +89,17 @@
             </div>
         </div>
 
-        
 
 
-        <div class="page-content bg-image-breaker  bg-image-breaker2">  
-           
+
+        <div class="page-content bg-image-breaker  bg-image-breaker2">
+
         </div>
 
-        
-        
 
-      
+
+
+
 
 
         <div class="page-content pt-5 our-methodology-section" id="our-methodology-section" :style="{ backgroundImage: 'url(/assets/images/methodology-gray.jpg)' }">
@@ -117,7 +117,7 @@
 </p>
                             <div class="row">
 
-                                <div class="col-md-12 justify-content-center">  
+                                <div class="col-md-12 justify-content-center">
 
                                     <div class="row justify-content-left links-container mt-3 mb-3">
 
@@ -142,8 +142,8 @@
 
                                         </div>
 
-                                       
-                                        
+
+
 
                                     </div>
 
@@ -155,18 +155,18 @@
 
                     </div>
 
-                </div> 
+                </div>
 
             </div>
 
         </div>
 
-       
 
-      
+
+
 
          <div class="page-content pb-0 page-content-counter" :style="{ backgroundImage: 'url(/assets/images/sheffield_stainless_steel_background.jpg)',}">
-            
+
 
             <div class="container mt-0 counter-section" ref="counterSection" :class="{ 'visible': isSectionInView }">
                 <div class="row text-center icon-boxes-container" >
@@ -224,7 +224,7 @@
                 </div>
             </div>
 
-            
+
         </div>
         <!-- End .page-content -->
 
@@ -278,19 +278,19 @@
             </div>
         </div>
 
-      
 
 
 
 
 
 
-        
 
-        <div class="page-content bg-image-breaker bg-image-breaker3">  
-            
+
+
+        <div class="page-content bg-image-breaker bg-image-breaker3">
+
         </div>
-     
+
 
          <div class="page-content pg-my-grey  pt-5 leadership-section">
 
@@ -298,22 +298,22 @@
                 <div class="row">
                     <div class="col-md-10 offset-lg-1">
                         <div class="row">
-                           
 
-                            <div class="col-md-12 pt-5">     
+
+                            <div class="col-md-12 pt-5">
 
                                     <h2 class="about-us-title">Leadership</h2><!-- End .title -->
-                                    <p class="lead about-us-lead text-primary mb-1">Meet the Minds Behind Our Success</p>   
+                                    <p class="lead about-us-lead text-primary mb-1">Meet the Minds Behind Our Success</p>
 
                                     <p class="about-us-p">Our leadership team is made up of dedicated, focused, and experienced executives working with each other and their teams to implement Sheffield’s strategy and vision, their knowledge and experience come together to make a difference for all our stakeholders.</p>
-                                    
-                                
+
+
                             </div>
 
-                           
+
                         </div>
                     </div>
-                    
+
                 </div>
 
                 <div class="row">
@@ -334,7 +334,7 @@
                                         Dr. Suresh Kanotra, the founder of Sheffield Africa, envisioned the need in the African market for solutions & services in the food and beverage industry. With an engineering background, he started Sheffield Steel Systems Limited and continuously seeks to innovate & tailor-make durable, efficient, and smart solutions.
                                     </div>
                                 </div>
-                                
+
                             </div>
 
                             <div class="col-md-3 mt-4">
@@ -353,7 +353,7 @@
 
                                      </div>
                                 </div>
-                                
+
                             </div>
 
                             <div class="col-md-3 mt-4">
@@ -372,7 +372,7 @@
 
                                      </div>
                                 </div>
-                                
+
                             </div>
                         </div>
 
@@ -392,7 +392,7 @@
                                          As the Business Development Head, Vikas drives the organization's business growth strategies and enhances the current portfolio to explore new business opportunities. With a rich experience ranging from Strategic Management, Marketing, and Brand Management that has had a positive impact on Sheffield’s operations, he efficiently executes business strategies that are in line with the organizational objectives.
                                      </div>
                                 </div>
-                                
+
                             </div>
 
                             <div class="col mt-4">
@@ -409,7 +409,7 @@
                                          A Mechanical Engineer by profession, Simon specializes in product design 3D & 2D, plant maintenance, lean Six Sigma manufacturing, workshop practices, and structural design and integrity. He leads the team of 2D & 3D design engineers, research & development, and project planning.
                                      </div>
                                 </div>
-                                
+
                             </div>
 
                             <div class="col mt-4">
@@ -425,10 +425,10 @@
                                     <div class="description description-text-right">
                                          Ann is a proactive & efficient and customer relations professional with over 12 years of experience in business development, sales, marketing, and operations coordination with a background in International Relations.
                                         She facilitates smooth workflow processes, communication, and integration to enhance customer satisfaction through quality management systems. The customer is the top most priority for her and her team who ensure communication and support through the contact points from enquiries, job processing, execution and after sales support.
- 
+
                                      </div>
                                 </div>
-                                
+
                             </div>
 
                             <div class="col mt-4">
@@ -447,10 +447,10 @@
 
                                      </div>
                                 </div>
-                                
+
                             </div>
 
-                            
+
 
                             <div class="col mt-4">
 
@@ -466,7 +466,7 @@
                                          Hari has over 20 Years of experience in Business Development, Distribution, Market Expansion, Penetration and Product Development. He drives the Sheffield sales team to realize the organization's sales goals by leading from the front as the Sales Head to a team that covers the East African Region and Segments. He is responsible for the successful prospecting, planning, execution, monitoring, and closure of sales projects.
                                      </div>
                                 </div>
-                                
+
                             </div>
 
 
@@ -474,17 +474,17 @@
                         </div>
                     </div>
                 </div>
-        
+
             </div>
 
-        </div> 
+        </div>
 
           <div class="page-content our-culture" :style="{ backgroundImage: 'url(/assets/images/about-us/our-culture.jpg)' }">
 
-            
+
             <div class="row no-margin">
 
-                <div class="col-md-12">  
+                <div class="col-md-12">
 
                     <div class="cuture-image">
 
@@ -499,16 +499,16 @@
                             <p class="our-culture-p">At Sheffield, we cultivate a collaborative work culture with an open-door policy that fosters interaction and underscores our commitment to collective teamwork dynamics. This cultural synergy is nurtured by inspirational leaders who are unafraid to take calculated risks for the betterment of the organization. As a company that thrives on fresh ideas in both product and concept design, Sheffield's environment promotes open-mindedness, innovation, and a sense of purpose among our dedicated and driven employees.</p>
 
                             <router-link class="btn btn-primary btn-round mt-4" to="/careers"><b>View Sheffield Careers</b></router-link>
-                            
+
                         </div>
 
                     </div>
 
 
                 </div>
-                   
+
             </div>
-        
+
         </div>
 
 
@@ -546,7 +546,7 @@
                                         <div class="csr-icon-image">
                                             <img src="/assets/images/about-us/csr/environment.png">
                                         </div>
-                                        
+
                                     </div>
                                 </div>
 
@@ -563,15 +563,15 @@
                                         <div class="csr-icon-image">
 
                                             <img src="/assets/images/about-us/csr/social-impact.png">
-                                            
+
                                         </div>
-                                        
-                                        
+
+
                                     </div>
-                                    
+
                                 </div>
 
-                                
+
 
                             </div>
 
@@ -584,12 +584,12 @@
 
 
 
-        <div class="page-content bg-image-breaker bg-image-breaker4">  
-            
+        <div class="page-content bg-image-breaker bg-image-breaker4">
+
         </div>
 
 
-        
+
         <div class="page-content bg-about-white div-after-bg-image-breaker">
 
             <div class="pt-6 mb-lg-8">
@@ -606,58 +606,58 @@
                                     <h2 class="about-us-title">Partners</h2><!-- End .title -->
                                     <p class="lead about-us-lead text-primary mb-1">Nurturing Innovation, Embracing Unity</p>
 
-                                  
+
                                 </div>
-                                
+
                             </div>
 
-                           
+
 
 
                             <div class="row partners-logos">
 
-                                
+
 
                                 <div class="col-lg-2 col-sm-6 col-xs-6">
-                            
+
                                     <img width="100%" src="/assets/images/partners/partners1.jpg">
 
                                 </div><!-- End .col-lg-6 -->
 
                                 <div class="col-lg-2 col-sm-6 col-xs-6">
-                            
+
                                     <img width="100%" src="/assets/images/partners/partners2.jpg">
 
                                 </div><!-- End .col-lg-6 -->
 
                                 <div class="col-lg-2 col-sm-6 col-xs-6">
-                            
+
                                     <img width="100%" src="/assets/images/partners/partners3.jpg">
 
                                 </div><!-- End .col-lg-6 -->
 
                                 <div class="col-lg-2 col-sm-6 col-xs-6">
-                            
+
                                     <img width="100%" src="/assets/images/partners/partners4.jpg">
 
                                 </div><!-- End .col-lg-6 -->
 
                                 <div class="col-lg-2 col-sm-6 col-xs-6">
-                            
+
                                     <img width="100%" src="/assets/images/partners/partners5.jpg">
 
                                 </div><!-- End .col-lg-6 -->
 
                                 <div class="col-lg-2 col-sm-6 col-xs-6">
-                            
+
                                     <img width="100%" src="/assets/images/partners/partners6.jpg">
 
                                 </div><!-- End .col-lg-6 -->
-                                
+
                             </div>
-                            
+
                         </div>
-                        
+
                     </div><!-- End .row -->
                 </div><!-- End .container -->
             </div>
@@ -665,7 +665,7 @@
 
         </div>
 
-       
+
 
         <div class="page-content pg-my-grey">
             <div class="container">
@@ -680,16 +680,16 @@
                                 <h2 class="about-us-title">Clients</h2><!-- End .title -->
                                 <p class="lead about-us-lead text-primary mb-1">Partnering with Industry Leaders</p>
 
-                                 
 
-                        
+
+
                             </div>
-                            
+
                         </div>
 
                         <div class="row main-clients">
-                        
-                        
+
+
 
                             <div class="clients-container mt-3 mb-5"
                             >
@@ -701,20 +701,20 @@
                                                 <img :src="'/storage/' + client.main_image_path" alt="image desc">
                                            <!--  </a> -->
                                         </figure><!-- End .entry-media -->
-                                        
+
                                     </article><!-- End .entry -->
                                 </div><!-- End .entry-item -->
 
-                               
+
                             </div><!-- End .entry-container -->
 
                         </div>
 
-                    </div>    
+                    </div>
 
-                </div>    
+                </div>
 
-            
+
             </div><!-- End .container -->
         </div><!-- End .page-content -->
 
@@ -735,9 +735,9 @@
                                     <h2 class="about-us-title">Partners</h2><!-- End .title -->
                                     <p class="lead about-us-lead text-primary mb-1">Nurturing Innovation, Embracing Unity</p>
 
-                                  
+
                                 </div>
-                                
+
                             </div>
 
                             <div class="row mt-3">
@@ -748,7 +748,7 @@
                                       <video controls src="/assets/images/about-us/video/iCombi.mp4" ref="videoPlayer" loop ></video>
                                       <!-- i removed controls attribute in the above to remove the play pause buttons -->
                                     </div>
-                                    
+
                                 </div>
 
                                 <div class="col-md-6 offset-md-1">
@@ -757,15 +757,15 @@
 
                                         <h2 class="about-us-title"><router-link to="/media">Media</router-link></h2><!-- End .title -->
                                         <p class="lead about-us-lead text-primary mb-1">Explore Insights from the Media gallery of Sheffield</p>
-                                        
+
                                     </div>
 
-                                    
+
 
                                     <p class="about-us-p mb-4 ml-2 mr-2">Embark on a dynamic exploration through our MEDIA section, revealing a curated collection of
                                         blogs, partner videos, company insights, and essential technical resources. Uncover a world of
                                         knowledge that empowers and inspires, seamlessly tailored to fuel your curiosity and drive
-                                        innovation. 
+                                        innovation.
                                     </p>
 
                                      <div class="my-carosel-section">
@@ -784,7 +784,7 @@
                                                 </div>
 
 
-                                                
+
 
                                             </slide>
                                             <template #addons>
@@ -798,7 +798,7 @@
 
                                 </div>
 
-                               
+
 
                             </div>
 
@@ -808,7 +808,7 @@
                 </div>
             </div>
         </div>
-    
+
     </main>
 </template>
 
@@ -1019,7 +1019,7 @@ const fetchClientList = async () => {
 
         clientList.value = response.data.data;
 
-        console.log(clientList.value);
+
     } catch (error) {
         console.error(error);
     }
@@ -1056,70 +1056,70 @@ onMounted(async () => {
 
 //// start methodology
 
-const methodology = [            
+const methodology = [
 
-    { 
-      image: '/assets/images/methodology/methodology01.png', 
+    {
+      image: '/assets/images/methodology/methodology01.png',
       title: "CUSTOMER BRIEF",
-      text: "Sheffield Staff conducts a site visit for a scope of work brief to understand the client's requirements, space, and concept.", 
-      
+      text: "Sheffield Staff conducts a site visit for a scope of work brief to understand the client's requirements, space, and concept.",
+
     },
-    { 
-      image: '/assets/images/methodology/methodology02.png', 
+    {
+      image: '/assets/images/methodology/methodology02.png',
       title: "DESIGN & DEVELOPMENT",
-      text: "A site survey is conducted by a technical sales engineer and our design team develops an equipment layout.", 
-      
+      text: "A site survey is conducted by a technical sales engineer and our design team develops an equipment layout.",
+
     },
-    { 
-      image: '/assets/images/methodology/methodology03.png', 
+    {
+      image: '/assets/images/methodology/methodology03.png',
       title: "PLANNING",
-      text: "Our planning team ensures efficient and effective execution through project management.", 
-      
+      text: "Our planning team ensures efficient and effective execution through project management.",
+
     },
-    { 
-      image: '/assets/images/methodology/methodology05.png', 
+    {
+      image: '/assets/images/methodology/methodology05.png',
       title: "MANUFACTURING & IMPORTS",
-      text: "We have partnerships with international suppliers. Sheffield has an in-house stainless steel and cold room manufacturing plant for custom solutions.", 
-      
+      text: "We have partnerships with international suppliers. Sheffield has an in-house stainless steel and cold room manufacturing plant for custom solutions.",
+
     },
-    { 
-      image: '/assets/images/methodology/methodology06.png', 
+    {
+      image: '/assets/images/methodology/methodology06.png',
       title: "TESTING",
-      text: "Each step of manufacturing is checked by our Quality Control Team and upon completion, testing is done.", 
-      
+      text: "Each step of manufacturing is checked by our Quality Control Team and upon completion, testing is done.",
+
     },
-    { 
-      image: '/assets/images/methodology/methodology07.png', 
+    {
+      image: '/assets/images/methodology/methodology07.png',
       title: "DELIVERY",
-      text: "Delivery is scheduled after testing and inspection by the Sheffield logistics team in liaison with the client based on the terms agreed upon.", 
-      
+      text: "Delivery is scheduled after testing and inspection by the Sheffield logistics team in liaison with the client based on the terms agreed upon.",
+
     },
-    { 
-      image: '/assets/images/methodology/methodology08.png', 
+    {
+      image: '/assets/images/methodology/methodology08.png',
       title: "INSTALLATION",
-      text: "The installation process is done against the layout drawings and the project manager’s supervision with his installation technical team.", 
-      
+      text: "The installation process is done against the layout drawings and the project manager’s supervision with his installation technical team.",
+
     },
-    { 
-      image: '/assets/images/methodology/methodology09.png', 
+    {
+      image: '/assets/images/methodology/methodology09.png',
       title: "TRAINING",
-      text: "Sheffield ensures that users at the client’s site are properly trained to operate the installed equipment.", 
-      
+      text: "Sheffield ensures that users at the client’s site are properly trained to operate the installed equipment.",
+
     },
-    { 
-      image: '/assets/images/methodology/methodology10.png', 
+    {
+      image: '/assets/images/methodology/methodology10.png',
       title: "COMMISSIONING",
-      text: "Commissioning and handover is conducted to ascertain the completion of works and operations of the equipment.", 
-      
+      text: "Commissioning and handover is conducted to ascertain the completion of works and operations of the equipment.",
+
     },
-    { 
-      image: '/assets/images/methodology/methodology11.png', 
+    {
+      image: '/assets/images/methodology/methodology11.png',
       title: "AFTER-SALES SERVICES",
-      text: "A Service Contract is extended to the client to support the maintenance and warranty terms. Sheffield stocks original spares for the equipment supplied.", 
-      
+      text: "A Service Contract is extended to the client to support the maintenance and warranty terms. Sheffield stocks original spares for the equipment supplied.",
+
     }
-    
-    
+
+
 
 ];
 
@@ -1215,71 +1215,71 @@ const basePath = window.location.origin + window.location.pathname; //laravel ba
 
 
 
-const partnersSlider = [            
+const partnersSlider = [
 
-    { 
-      image: '/assets/images/about-us/video/logos/rational.png', 
+    {
+      image: '/assets/images/about-us/video/logos/rational.png',
       mobileImage: '/assets/images/about-us/video/logos/rational.png',
-      url: '/assets/images/about-us/video/iCombi.mp4', 
-      
+      url: '/assets/images/about-us/video/iCombi.mp4',
+
     },
-    { 
-      image: '/assets/images/about-us/video/logos/Prisma Food.jpg', 
+    {
+      image: '/assets/images/about-us/video/logos/Prisma Food.jpg',
       mobileImage: '/assets/images/about-us/video/logos/Prisma Food.jpg',
-      url: '/assets/images/about-us/video/Prismafood.mp4', 
-      
+      url: '/assets/images/about-us/video/Prismafood.mp4',
+
     },
-    { 
-      image: '/assets/images/about-us/video/logos/broaster.jpg', 
+    {
+      image: '/assets/images/about-us/video/logos/broaster.jpg',
       mobileImage: '/assets/images/about-us/video/logos/broaster.jpg',
-      url: '/assets/images/about-us/video/PressureFryers.mp4', 
-      
+      url: '/assets/images/about-us/video/PressureFryers.mp4',
+
     },
-    { 
-      image: '/assets/images/about-us/video/logos/f4e.jpg', 
+    {
+      image: '/assets/images/about-us/video/logos/f4e.jpg',
       mobileImage: '/assets/images/about-us/video/logos/f4e.jpg',
-      url: '/assets/images/about-us/video/FOOD_FOR_EDUCATION_GIGA_KITCHEN.mp4', 
-      
+      url: '/assets/images/about-us/video/FOOD_FOR_EDUCATION_GIGA_KITCHEN.mp4',
+
     },
-    { 
-      image: '/assets/images/about-us/video/logos/mambo_safi_.jpg', 
+    {
+      image: '/assets/images/about-us/video/logos/mambo_safi_.jpg',
       mobileImage: '/assets/images/about-us/video/logos/mambo_safi_.jpg',
-      url: '/assets/images/about-us/video/Mambo_Safi_Laundromat.mp4', 
-      
+      url: '/assets/images/about-us/video/Mambo_Safi_Laundromat.mp4',
+
     },
-    { 
-      image: '/assets/images/about-us/video/logos/sheffield.jpg', 
+    {
+      image: '/assets/images/about-us/video/logos/sheffield.jpg',
       mobileImage: '/assets/images/about-us/video/logos/sheffield.jpg',
-      url: '/assets/images/about-us/video/Sheffield_Africa_Suresh_Kanotra.mp4', 
-      
+      url: '/assets/images/about-us/video/Sheffield_Africa_Suresh_Kanotra.mp4',
+
     },
-    // { 
-    //   image: '/assets/images/about-us/video/logos/TASKI.jpg', 
+    // {
+    //   image: '/assets/images/about-us/video/logos/TASKI.jpg',
     //   mobileImage: '/assets/images/about-us/video/logos/TASKI.jpg',
-    //   url: '/assets/images/about-us/test1.mp4', 
-      
+    //   url: '/assets/images/about-us/test1.mp4',
+
     // },
-    // { 
-    //   image: '/assets/images/about-us/video/logos/EGRO.jpg', 
+    // {
+    //   image: '/assets/images/about-us/video/logos/EGRO.jpg',
     //   mobileImage: '/assets/images/about-us/video/logos/EGRO.jpg',
-    //   url: '/assets/images/about-us/test1.mp4', 
-      
+    //   url: '/assets/images/about-us/test1.mp4',
+
     // },
-    
-    // { 
-    //   image: '/assets/images/about-us/video/logos/Tecnodom.jpg', 
+
+    // {
+    //   image: '/assets/images/about-us/video/logos/Tecnodom.jpg',
     //   mobileImage: '/assets/images/about-us/video/logos/Tecnodom.jpg',
-    //   url: '/assets/images/about-us/test1.mp4', 
-      
+    //   url: '/assets/images/about-us/test1.mp4',
+
     // },
-    // { 
-    //   image: '/assets/images/about-us/video/logos/Dr. Coffee.jpg', 
+    // {
+    //   image: '/assets/images/about-us/video/logos/Dr. Coffee.jpg',
     //   mobileImage: '/assets/images/about-us/video/logos/Dr. Coffee.jpg',
-    //   url: '/assets/images/about-us/test1.mp4', 
-      
+    //   url: '/assets/images/about-us/test1.mp4',
+
     // },
-    
-    
+
+
 
 ];
 
@@ -1302,105 +1302,105 @@ const handleResize = () => {
 
 
 const items1 = [
-    { 
-      image: '/assets/images/about-us/slider/history1.jpg', 
+    {
+      image: '/assets/images/about-us/slider/history1.jpg',
       mobileImage: '/assets/images/about-us/slider/history1.jpg',
-      alt: 'Our History at Sheffield first slide', 
+      alt: 'Our History at Sheffield first slide',
       intro : {
         title : "Our History at Sheffield first slide",
-      } 
+      }
     },
-    { 
-      image: '/assets/images/about-us/slider/history2.jpg', 
+    {
+      image: '/assets/images/about-us/slider/history2.jpg',
       mobileImage: '/assets/images/about-us/slider/history3.jpg',
-      alt: 'Our History at Sheffield first slide', 
+      alt: 'Our History at Sheffield first slide',
       intro : {
         title : "Our History at Sheffield first slide",
-      } 
+      }
     },
-    { 
-      image: '/assets/images/about-us/slider/history3.jpg', 
+    {
+      image: '/assets/images/about-us/slider/history3.jpg',
       mobileImage: '/assets/images/about-us/slider/history3.jpg',
-      alt: 'Our History at Sheffield first slide', 
+      alt: 'Our History at Sheffield first slide',
       intro : {
         title : "Our History at Sheffield first slide",
-      } 
+      }
     },
 ];
 
 
 const items2 = [
-    { 
-      image: '/assets/images/about-us/slider/mob-slider1.jpg', 
+    {
+      image: '/assets/images/about-us/slider/mob-slider1.jpg',
       mobileImage: '/assets/images/about-us/slider/mob-slider1.jpg',
-      alt: 'Our History at Sheffield first slide', 
+      alt: 'Our History at Sheffield first slide',
       intro : {
         title : "Our History at Sheffield first slide",
-      } 
+      }
     },
-    { 
-      image: '/assets/images/about-us/slider/mob-slider2.jpg', 
+    {
+      image: '/assets/images/about-us/slider/mob-slider2.jpg',
       mobileImage: '/assets/images/about-us/slider/mob-slider2.jpg',
-      alt: 'Our History at Sheffield first slide', 
+      alt: 'Our History at Sheffield first slide',
       intro : {
         title : "Our History at Sheffield first slide",
-      } 
+      }
     },
-    { 
-      image: '/assets/images/about-us/slider/mob-slider3.jpg', 
+    {
+      image: '/assets/images/about-us/slider/mob-slider3.jpg',
       mobileImage: '/assets/images/about-us/slider/mob-slider3.jpg',
-      alt: 'Our History at Sheffield first slide', 
+      alt: 'Our History at Sheffield first slide',
       intro : {
         title : "Our History at Sheffield first slide",
-      } 
+      }
     },
-    { 
-      image: '/assets/images/about-us/slider/mob-slider4.jpg', 
+    {
+      image: '/assets/images/about-us/slider/mob-slider4.jpg',
       mobileImage: '/assets/images/about-us/slider/mob-slider4.jpg',
-      alt: 'Our History at Sheffield first slide', 
+      alt: 'Our History at Sheffield first slide',
       intro : {
         title : "Our History at Sheffield first slide",
-      } 
+      }
     },
-    { 
-      image: '/assets/images/about-us/slider/mob-slider5.jpg', 
+    {
+      image: '/assets/images/about-us/slider/mob-slider5.jpg',
       mobileImage: '/assets/images/about-us/slider/mob-slider5.jpg',
-      alt: 'Our History at Sheffield first slide', 
+      alt: 'Our History at Sheffield first slide',
       intro : {
         title : "Our History at Sheffield first slide",
-      } 
+      }
     },
-    { 
-      image: '/assets/images/about-us/slider/mob-slider6.jpg', 
+    {
+      image: '/assets/images/about-us/slider/mob-slider6.jpg',
       mobileImage: '/assets/images/about-us/slider/mob-slider6.jpg',
-      alt: 'Our History at Sheffield first slide', 
+      alt: 'Our History at Sheffield first slide',
       intro : {
         title : "Our History at Sheffield first slide",
-      } 
+      }
     },
-    { 
-      image: '/assets/images/about-us/slider/mob-slider7.jpg', 
+    {
+      image: '/assets/images/about-us/slider/mob-slider7.jpg',
       mobileImage: '/assets/images/about-us/slider/mob-slider7.jpg',
-      alt: 'Our History at Sheffield first slide', 
+      alt: 'Our History at Sheffield first slide',
       intro : {
         title : "Our History at Sheffield first slide",
-      } 
+      }
     },
-    { 
-      image: '/assets/images/about-us/slider/mob-slider8.jpg', 
+    {
+      image: '/assets/images/about-us/slider/mob-slider8.jpg',
       mobileImage: '/assets/images/about-us/slider/mob-slider8.jpg',
-      alt: 'Our History at Sheffield first slide', 
+      alt: 'Our History at Sheffield first slide',
       intro : {
         title : "Our History at Sheffield first slide",
-      } 
+      }
     },
-    { 
-      image: '/assets/images/about-us/slider/mob-slider9.jpg', 
+    {
+      image: '/assets/images/about-us/slider/mob-slider9.jpg',
       mobileImage: '/assets/images/about-us/slider/mob-slider9.jpg',
-      alt: 'Our History at Sheffield first slide', 
+      alt: 'Our History at Sheffield first slide',
       intro : {
         title : "Our History at Sheffield first slide",
-      } 
+      }
     },
 ];
 
@@ -1419,13 +1419,13 @@ const updateUlHeight = () => {
     if(containerHeight == 0){
 
         ulHeight.value = '417px';
-      
+
     }else{
 
         ulHeight.value = `${containerHeight}px`;
 
     }
-    console.log(ulHeight);
+
   }
 };
 
@@ -1443,7 +1443,7 @@ const handleCarouselLoad = () => {
 
 onMounted(() => {
     carouselRef.value = document.querySelector('.carousel-wrapper');
-    console.log("on mounted");
+
     carouselRef.value.addEventListener('load', handleCarouselLoad);
 });
 
@@ -1458,7 +1458,7 @@ window.onload = () => {
 };
 
 onMounted(async () => {
-  
+
   await nextTick();
   window.addEventListener('resize', handleResize);
 
@@ -1500,11 +1500,11 @@ const isVideoPaused = (videoUrl) => {
 };
 
 
-    
+
 
 const playVideo = (videoUrl, checkboxId) => {
 
-    //console.log("checkboxId:"+checkboxId);
+    //
 
     const videoButtons = document.querySelectorAll('.play-button');
 
@@ -1519,9 +1519,9 @@ const playVideo = (videoUrl, checkboxId) => {
       }
     });
 
-    
-    
-    
+
+
+
     const fullNewVideoURL = videoBasePath+videoUrl;
 
     if (videoPlayer.value.src === fullNewVideoURL) {
@@ -1544,7 +1544,7 @@ const playVideo = (videoUrl, checkboxId) => {
         }
 
     } else {
-        
+
         videoPlayer.value.src = videoUrl;
         videoPlayer.value.play();
 
@@ -1788,7 +1788,7 @@ p {
 top: 50%;
 text-align: center;
 text-transform: uppercase;
-    
+
 }
 
 #hexGrid .img {
@@ -1873,7 +1873,7 @@ transition: 0.8s;
   }
 }
 
-@media (max-width: 900px) and (min-width:601px) { 
+@media (max-width: 900px) and (min-width:601px) {
   #hexGrid{
     padding-bottom: 7.4%;
     font-size: 14px;
@@ -1881,12 +1881,12 @@ transition: 0.8s;
   .hex {
     width: 33.333%; /* = 100 / 3 */
   }
-  .hex:nth-child(5n+4){ 
-    margin-left:16.666%;  
+  .hex:nth-child(5n+4){
+    margin-left:16.666%;
   }
 }
 
-@media (max-width: 600px) { 
+@media (max-width: 600px) {
   #hexGrid{
     padding-bottom: 11.2%;
     font-size: 12px;
@@ -1894,8 +1894,8 @@ transition: 0.8s;
   .hex {
     width: 50%; /* = 100 / 3 */
   }
-  .hex:nth-child(3n+3){ 
-    margin-left:25%;  
+  .hex:nth-child(3n+3){
+    margin-left:25%;
   }
 }
 
@@ -1903,7 +1903,7 @@ transition: 0.8s;
     #hexGrid {
         font-size: 8px;
     }
- 
+
 }
 
 
@@ -1939,7 +1939,7 @@ transition: 0.8s;
 
 .about-team {
   position: relative;
-  width: 100%; 
+  width: 100%;
   padding: 4.2%;
   border-radius: 50%;
   background: linear-gradient(251deg, #c02434 14.71%, transparent 26.89%), linear-gradient(106deg, #c02434 11.34%, transparent 42.02%);
@@ -1948,7 +1948,7 @@ transition: 0.8s;
 
 .about-team-white {
     margin: 0.8%;
-    border: 15px solid #ffffff; 
+    border: 15px solid #ffffff;
     border-radius: 50%;
     background-color: #ffffff;
 }
@@ -1960,8 +1960,8 @@ transition: 0.8s;
     box-shadow: 0 0 20px 1px #000;
     width: 100%;
     height: 100%;
-    object-fit: cover; 
-    border-radius: 50%; 
+    object-fit: cover;
+    border-radius: 50%;
 }
 
 .details{
@@ -2009,14 +2009,14 @@ transition: 0.8s;
 }
 
 .about-team-container .description-text-right {
-    
+
     margin-right: -160%;
     margin-left: 95% !important;
     margin-top: 30% !important;
 }
 
 .about-team-container2 .description-text-right {
-    
+
     margin-right: -250% !important;
     margin-left: 95% !important;
     margin-top: 30% !important;
@@ -2028,7 +2028,7 @@ transition: 0.8s;
     margin-right: 95%;
     margin-left: -160%;
     margin-top: 30%;
-  
+
 }
 
 .about-team-container2 .description-text-left {
@@ -2036,7 +2036,7 @@ transition: 0.8s;
     margin-right: 95%;
     margin-left: -250% !important;
     margin-top: 30%;
-  
+
 }
 
 
@@ -2056,7 +2056,7 @@ transition: 0.8s;
 }
 
 .csr-image {
-  
+
 }
 .csr-image img {
     width: 50%;
@@ -2071,24 +2071,24 @@ transition: 0.8s;
 .masonry {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(68px, 1fr));
-  grid-gap: 10px; 
+  grid-gap: 10px;
 }
 
 
 .masonry-item {
-  margin-bottom: 20px; 
+  margin-bottom: 20px;
 }
 
 
 @media (max-width: 576px) {
   .masonry {
-    grid-gap: 10px; 
+    grid-gap: 10px;
   }
 }
 
 @media (max-width: 768px) {
   .masonry {
-    grid-template-columns: repeat(auto-fill, minmax(40px, 1fr)); 
+    grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
   }
 }
 
@@ -2132,7 +2132,7 @@ transition: 0.8s;
 }
 
 .clients-container {
-  font-size: 0; /*disable white space between inline block element */ 
+  font-size: 0; /*disable white space between inline block element */
 }
 
 .clients-container div {
@@ -2146,7 +2146,7 @@ transition: 0.8s;
   margin-bottom: calc(var(--m) - var(--s)*0.5);
   justify-content: center; /* Center horizontally */
       align-items: center;
-      
+
 }
 .clients-container div:nth-child(odd) {
   /*background:green;*/
@@ -2156,8 +2156,8 @@ transition: 0.8s;
   width: calc(var(--s)/2 + var(--m));
   float: left;
   height: 140%;
-  shape-outside: repeating-linear-gradient(     
-                   #0000 0 calc(var(--r) - 3px),      
+  shape-outside: repeating-linear-gradient(
+                   #0000 0 calc(var(--r) - 3px),
                    #000  0 var(--r));
 
 }
@@ -2167,7 +2167,7 @@ transition: 0.8s;
 
     max-width: 100%;
     width: 100%;
-    
+
 }
 
 .methodology-item {
@@ -2183,7 +2183,7 @@ transition: 0.8s;
 
 
 .methodology-item {
-    
+
     position: relative;
     float: left;
     margin: 20px;
@@ -2348,7 +2348,7 @@ transition: 0.8s;
 
     display: flex;
     /*box-shadow: -3px 0px 2px #d0c4c4;*/
-    
+
     margin-top: 0px;
     align-items: center;
     justify-content: center;
@@ -2370,7 +2370,7 @@ transition: 0.8s;
     text-align: center;
     margin-top:-12px;
     padding-bottom: 10px;
-    
+
 }
 
 .met-description span{
@@ -2397,11 +2397,11 @@ transition: 0.8s;
 
 
 .links-container {
-    
+
 }
 
 .links-container .link {
-  
+
   background-color: #f0efef;
   border-radius: 60px;
   border-bottom: 4px solid #c02434;
@@ -2510,7 +2510,7 @@ transition: 0.8s;
 .link-half-2 {
 
      margin-left: 2%;
-    
+
 }
 
 .link span {
@@ -2564,7 +2564,7 @@ transition: 0.8s;
     position:absolute;
     left:0; right:0;
     top:100%;
-    margin-top:10px;    
+    margin-top:10px;
     margin-left: 4px;
     width: 70%;
     height: 2px;
@@ -2584,9 +2584,9 @@ transition: 0.8s;
 }
 
 .bottom-title {
-    display: flex; 
-    justify-content: center; 
-    align-items: center; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: #c02434;
 }
 
@@ -2630,7 +2630,7 @@ transition: 0.8s;
 .cuture-image img {
 
     width: 100%;
-    
+
 }
 
 .our-culture {
@@ -2640,16 +2640,16 @@ transition: 0.8s;
 }
 
 .culture-text-box {
-    position: absolute; 
+    position: absolute;
     top: 14%;
     right: 7%;
     background: rgba(255, 255, 255, 0.93);
-    padding-top: 50px; 
-    padding-bottom: 50px; 
-    padding-right: 30px;  
-    padding-left: 30px; 
-    max-width: 35%; 
-    z-index: 0; 
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 30px;
+    padding-left: 30px;
+    max-width: 35%;
+    z-index: 0;
     border-radius: 6%;
 }
 
@@ -2686,7 +2686,7 @@ transition: 0.8s;
     font-size: 1.2rem;
     color: #464646;
     right: 0;
-    
+
 }
 
 .our-people-section .staff {
@@ -2863,7 +2863,7 @@ transition: 0.8s;
 }
 
 .video-logo img {
-   
+
 }
 
 .video-player video {
@@ -2942,7 +2942,7 @@ a:not([href]):not([tabindex]):focus, a:not([href]):not([tabindex]):hover {
 }
 
 .carousel-div-image {
-   
+
     height: 200px;
     padding-left:10px;
     display: flex;
@@ -3061,7 +3061,7 @@ a:not([href]):not([tabindex]):focus, a:not([href]):not([tabindex]):hover {
 
     .csr_image_impact .text-block {
 
-      
+
         width: 50%;
 
     }
@@ -3092,11 +3092,11 @@ a:not([href]):not([tabindex]):focus, a:not([href]):not([tabindex]):hover {
         margin-left: 15%;
         margin-bottom: 10px;
         left: 0;
-       
+
     }
 
     .view-sheffield a {
-   
+
         font-size: 1.7rem;
     }
 
@@ -3139,7 +3139,7 @@ a:not([href]):not([tabindex]):focus, a:not([href]):not([tabindex]):hover {
     }
 
     .main-clients {
-    
+
         --s: 129px;
     }
 
@@ -3207,7 +3207,7 @@ a:not([href]):not([tabindex]):focus, a:not([href]):not([tabindex]):hover {
         height: 70px;
         color: white;
     }
-  
+
 }
 
 @media (max-width: 1367px) {
@@ -3222,7 +3222,7 @@ a:not([href]):not([tabindex]):focus, a:not([href]):not([tabindex]):hover {
 }
 
 
-                             
+
 
 
 

@@ -254,7 +254,7 @@ const news = reactive({
 
 const handleTypeChange = () => {
     if (news.type === "Image") {
-        console.log("test");
+
         const fileUploadContainer = new FileUploadWithPreview("myFirstImage", {
             images: {
                 baseImage: "/assets/images/file-preview.png",

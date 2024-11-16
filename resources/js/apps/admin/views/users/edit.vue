@@ -140,8 +140,8 @@ onMounted(() => {
 
 watch(() => route.params.id, (id) => {
     getUser(route.params.id);
-    console.log(user.value)
+
 });
 
-//console.log(blogCategoryList);
+//
 </script>

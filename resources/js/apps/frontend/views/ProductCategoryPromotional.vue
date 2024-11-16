@@ -168,7 +168,7 @@
                                                 <!-- End .custom-checkbox -->
                                                 <span class="item-count">{{
                                                     category.category_products_count
-                                                }}</span>
+                                                    }}</span>
                                             </div>
                                         </div>
                                         <!-- End .filter-items -->
@@ -272,15 +272,6 @@ const fetchProducts = async () => {
             [category_id.value]: checkedBrands.value[category_id.value] || [],
         };
         checkedBrands.value = newCheckedBrands;
-
-        console.log({
-            page: currentPage.value,
-            per_page: perPage.value,
-            category_id: category_id.value,
-            checkedCategories: checkedCategories.value,
-            checkedBrands: checkedBrands.value,
-            selectedSortOption: selectedSortOption.value,
-        });
 
         const response = await axios.get("/api/get-products", {
             params: {
@@ -402,7 +393,7 @@ const getCategoryLink = (id, name, page) => {
 
 // Update displayedProducts based on the current page and products
 const updateDisplayedProducts = () => {
-    console.log(products);
+
     displayedProducts.value = products.value;
 };
 
@@ -470,7 +461,7 @@ watchEffect(() => {
         // Call a method or update component data based on the new route
 
         fetchProducts();
-        //console.log("test "+the_cat_name.value);
+        //
     }
 });
 
@@ -480,10 +471,10 @@ const title = ref("");
 watch(
     () => the_category.value.name,
     (newName, oldName) => {
-        console.log(newName);
-        console.log(oldName);
+
+
         if (newName !== oldName) {
-            console.log("changing it");
+
             // Update the title when the_category.value.name changes
             title.value = newName;
         }

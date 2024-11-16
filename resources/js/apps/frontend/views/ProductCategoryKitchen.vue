@@ -7,7 +7,7 @@
          <div class="container">
             <h1 class="page-title">{{ the_category.name }}<span>View our amazing products under this section</span></h1>
          </div>
-       
+
       </div> -->
         <nav aria-label="breadcrumb" class="breadcrumb-nav border-0 mb-0">
             <div class="container d-flex align-items-center">
@@ -437,23 +437,23 @@
                               > Price
                            </a>
                         </h3>
-                       
+
                         <div class="collapse show" id="widget-5">
                            <div class="widget-body">
                               <div class="filter-price">
                                  <div class="filter-price-text">
                                     Price Range:
-                                    <span id="filter-price-range"></span> 
+                                    <span id="filter-price-range"></span>
                                  </div>
-                                 
+
                                  <div id="price-slider"></div>
-                               
+
                               </div>
-                              
+
                            </div>
-                           
+
                         </div>
-                       
+
                      </div> -->
                         </div>
                         <!-- End .sidebar sidebar-shop -->
@@ -605,7 +605,7 @@ function resetSortValues() {
 }
 
 const testFunction = () => {
-    console.log("Testing useMetaKitchen");
+
     useMetaKitchen({ title: "Test Title" });
 };
 
@@ -746,7 +746,7 @@ watchEffect(() => {
         // Call a method or update component data based on the new route
 
         fetchProducts();
-        //console.log("test "+the_cat_name.value);
+        //
     }
 });
 
@@ -756,10 +756,10 @@ const title = ref("");
 watch(
     () => the_category.value.name,
     (newName, oldName) => {
-        console.log(newName);
-        console.log(oldName);
+
+
         if (newName !== oldName) {
-            console.log("changing it");
+
             // Update the title when the_category.value.name changes
             title.value = newName;
         }

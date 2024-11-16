@@ -141,7 +141,7 @@ const fetchSolutionCategories = async () => {
         solutionCategoriesList.value =
             response.data.data.product_categories_json;
 
-        //console.log(solutionCategoriesList.value);
+        //
 
         useMeta({
             title: solutionCategories.value.name + " | Promotions",
@@ -167,7 +167,7 @@ const fetchSolutionCategoryProducts = async () => {
         );
         solutionCategoryProducts.value = response.data.products.data;
 
-        //console.log(solutionCategoryProducts.value);
+        //
     } catch (error) {
         console.error(error);
     }

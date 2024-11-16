@@ -46,7 +46,7 @@
                             </div>
                         </div>
 
-                        
+
                     </div>
                 </div>
             </div> -->
@@ -90,7 +90,7 @@
                     </div>
                 </div><!-- End .container -->
             </div><!-- End .header-middle -->
-           
+
         </header>
 
 
@@ -103,7 +103,7 @@
 
   <div class="page-wrapper">
     <main class="main">
-           
+
       <div class="container">
         <div class="row justify-content-center mt-2 home_page_category">
 
@@ -112,7 +112,7 @@
               <router-link to="/commercial-kitchen">
                 <img class="rounded-circle" src="assets/gif/food_service.gif" alt="Banner">
               </router-link>
-            
+
             </div><!-- End .banner -->
           </div><!-- End .col-md-6 -->
 
@@ -120,7 +120,7 @@
             <div class="banner">
               <router-link to="/laundry">
                 <img class="rounded-circle" src="assets/gif/laundry.gif" alt="Banner">
-              </router-link> 
+              </router-link>
             </div><!-- End .banner -->
           </div><!-- End .col-md-6 -->
 
@@ -135,12 +135,12 @@
         </div>
       </div><!-- End .container -->
 
-     
+
       <!-- End .container-fluid -->
 
 
 
-     
+
     </main>
     <!-- End .main -->
   </div>
@@ -175,7 +175,7 @@
                         <div class="md-form mb-0">
                           <label for="name" class="">Your name</label>
                             <input type="text" id="name" name="name" class="form-control" placeholder="Enter your name here ...">
-                            
+
                         </div>
                     </div>
                     <!--Grid column-->
@@ -185,7 +185,7 @@
                         <div class="md-form mb-0">
                             <label for="email" class="">Your email</label>
                             <input type="text" id="email" name="email" class="form-control" placeholder="Enter your email here ...">
-                            
+
                         </div>
                     </div>
                     <!--Grid column-->
@@ -199,7 +199,7 @@
                         <div class="md-form mb-0">
                             <label for="subject" class="">Subject</label>
                             <input type="text" id="subject" name="subject" class="form-control" placeholder="Enter your subject here ...">
-                            
+
                         </div>
                     </div>
                 </div>
@@ -214,7 +214,7 @@
                         <div class="md-form">
                             <label for="message">Your message</label>
                             <textarea type="text" id="message" name="message" rows="2" class="form-control md-textarea" placeholder="Enter your message here ..."></textarea>
-                            
+
                         </div>
 
                     </div>
@@ -230,7 +230,7 @@
 
                         <div class="md-form">
                             <button class="btn btn-primary">Send</button>
-                            
+
                         </div>
 
                     </div>
@@ -238,7 +238,7 @@
                 <!--Grid row-->
 
             </form>
-              
+
             </div>
             <div class="col-md-6">
 
@@ -246,18 +246,18 @@
                   <div class="canvas-map mb-30">
                       <iframe
                         width="90%"
-                        height="200" 
+                        height="200"
                         src="https://maps.google.com/maps?q=sheffield-steel-limited-mombasa-rd&amp;t=&amp;z=13&amp;ie=UTF8&amp;iwloc=&amp;output=embed"
                         frameborder="0"
-                        allowfullscreen 
+                        allowfullscreen
                       ></iframe>
                   </div>
                  <ul class="contact-section mt-2">
-                    <li style="font-size:20px; font-weight:500;" class="mb-3 text-dark"><i class="flaticon-pin"></i><span> 
+                    <li style="font-size:20px; font-weight:500;" class="mb-3 text-dark"><i class="flaticon-pin"></i><span>
                       Off Mombasa Road before Standard gauge railway<br>
                       P. O. Box 29 – 00606, Nairobi Kenya
                     </span></li>
-                    <li class=""><i class="icon-phone" style="font-size: 35px; padding-right:15px; color: #000;"></i> 
+                    <li class=""><i class="icon-phone" style="font-size: 35px; padding-right:15px; color: #000;"></i>
                      <a class="text-dark" style="font-size:25px; font-weight:550;" href="tel:+254713777111">+254 713 777 111</a>
                     </li>
                     <li class="mb-3" ><i class="icon-envelope" style="font-size: 35px; padding-right:15px; color: #000;"></i>
@@ -271,19 +271,19 @@
                      <li><a href="index.html#"><i class="fa fa-linkedin"></i></a></li>
                  </ul>
              </div>
-              
+
             </div>
           </div>
         </div>
-        
+
       </div>
     </div>
   </div>
 
   <!-- Modal -->
 
-  
-  
+
+
 </template>
 
 <script setup>
@@ -302,7 +302,7 @@
 
     const categories = reactive([]);
 
-    
+
     const fetchCategories = () => {
       axios.get('/api/get-sidebar-categories')
         .then(response => {
@@ -315,7 +315,7 @@
               subcategories: [
                 {
                   id: 1, // You can assign any unique ID for the subcategory
-                 
+
                   items: category.children.map(child => {
                     return {
                       id: child.id,
@@ -333,7 +333,7 @@
           console.error('Failed to fetch categories:', error);
         });
     };
-    
+
     onMounted(() => {
       fetchCategories();
     });
@@ -342,45 +342,45 @@
 
 
   const items = [
-    { 
-      image: basePath + 'frontend/images/slider/slider1.webp', 
+    {
+      image: basePath + 'frontend/images/slider/slider1.webp',
       mobileImage: basePath + 'frontend/images/slider/slider1-mobile.jpg',
-      alt: 'Commercial Kitchen Solutions', 
+      alt: 'Commercial Kitchen Solutions',
       intro : {
         title : "Commercial <span>Kitchen</span> <br />Solutions",
         subtitle : "We offer the best kitchen solutions",
         url : "#",
-      } 
+      }
     },
-    { 
+    {
       image: basePath + 'frontend/images/slider/slider2.webp',
-      mobileImage: basePath + 'frontend/images/slider/slider2-mobile.jpg', 
-      alt: 'Commercial Cold Room Solutions', 
+      mobileImage: basePath + 'frontend/images/slider/slider2-mobile.jpg',
+      alt: 'Commercial Cold Room Solutions',
       intro : {
         title : " Commercial <span>Cold  <br />Room</span> Solutions",
         subtitle : "We offer the best cold room solutions",
         url : "#",
-      } 
+      }
     },
-    { 
+    {
       image: basePath + 'frontend/images/slider/slider1.webp',
-      mobileImage: basePath + 'frontend/images/slider/slider3-mobile.jpg', 
-      alt: 'Commercial Laundry Solutions', 
+      mobileImage: basePath + 'frontend/images/slider/slider3-mobile.jpg',
+      alt: 'Commercial Laundry Solutions',
       intro : {
         title : "Commercial <span>Laundry</span> <br /> Solutions",
         subtitle : "We offer the best laundry solutions",
         url : "#",
-      } 
+      }
     },
-    { 
+    {
       image: basePath + 'frontend/images/slider/slider2.webp',
-      mobileImage: basePath + 'frontend/images/slider/slider4-mobile.jpg', 
-      alt: 'Commercial Health Care Solutions', 
+      mobileImage: basePath + 'frontend/images/slider/slider4-mobile.jpg',
+      alt: 'Commercial Health Care Solutions',
       intro : {
         title : "Commercial <span>Health <br /> Care</span> Solutions",
         subtitle : "We offer the best health care solutions",
         url : "#",
-      } 
+      }
     },
 ];
 
@@ -389,36 +389,36 @@
 
 const testimonials = [
 
-     { 
+     {
       image: basePath + 'frontend/images/testimonials/user-2.jpg',
-      message: "As a professional chef, I understand the importance of having a reliable commercial kitchen. Sheffield's commercial kitchen solutions have exceeded my expectations. The equipment is durable and has improved the efficiency of my kitchen. I highly recommend Sheffield to anyone in need of commercial kitchen solutions.", 
-      name: 'Dan Njoroge', 
-      company: 'Company X', 
-      job_title: 'Customer', 
+      message: "As a professional chef, I understand the importance of having a reliable commercial kitchen. Sheffield's commercial kitchen solutions have exceeded my expectations. The equipment is durable and has improved the efficiency of my kitchen. I highly recommend Sheffield to anyone in need of commercial kitchen solutions.",
+      name: 'Dan Njoroge',
+      company: 'Company X',
+      job_title: 'Customer',
     },
 
-    { 
+    {
       image: basePath + 'frontend/images/testimonials/user-1.jpg',
-      message: "I was extremely impressed with Sheffield's commercial cold room solutions. As a restaurant owner, having reliable refrigeration is crucial to the success of my business. Sheffield's team delivered and installed the cold room in a timely manner and it has been working perfectly ever since.", 
-      name: 'Dan Njoroge', 
-      company: 'Company X', 
-      job_title: 'Customer', 
+      message: "I was extremely impressed with Sheffield's commercial cold room solutions. As a restaurant owner, having reliable refrigeration is crucial to the success of my business. Sheffield's team delivered and installed the cold room in a timely manner and it has been working perfectly ever since.",
+      name: 'Dan Njoroge',
+      company: 'Company X',
+      job_title: 'Customer',
     },
 
-    { 
+    {
       image: basePath + 'frontend/images/testimonials/user-2.jpg',
-      message: "Sheffield's commercial healthcare solutions have been a game changer for our facility. Their team helped us design and install the perfect healthcare solution that is both efficient and reliable. We can now focus on providing quality care to our patients without worrying about equipment malfunctions.", 
-      name: 'Dan Njoroge', 
-      company: 'Company X', 
-      job_title: 'Customer', 
+      message: "Sheffield's commercial healthcare solutions have been a game changer for our facility. Their team helped us design and install the perfect healthcare solution that is both efficient and reliable. We can now focus on providing quality care to our patients without worrying about equipment malfunctions.",
+      name: 'Dan Njoroge',
+      company: 'Company X',
+      job_title: 'Customer',
     },
 
-    { 
+    {
       image: basePath + 'frontend/images/testimonials/user-1.jpg',
-      message: "I recently purchased a commercial laundry solution from Sheffield and I couldn't be happier with the results. The laundry solution is energy-efficient and has dramatically reduced our utility bills. The team at Sheffield were knowledgeable and professional throughout the entire process.", 
-      name: 'Dan Njoroge', 
-      company: 'Company X', 
-      job_title: 'Customer', 
+      message: "I recently purchased a commercial laundry solution from Sheffield and I couldn't be happier with the results. The laundry solution is energy-efficient and has dramatically reduced our utility bills. The team at Sheffield were knowledgeable and professional throughout the entire process.",
+      name: 'Dan Njoroge',
+      company: 'Company X',
+      job_title: 'Customer',
     },
 ];
 
@@ -446,13 +446,13 @@ const updateUlHeight = () => {
     if(containerHeight == 0){
 
       ulHeight.value = '417px';
-      
+
     }else{
 
       ulHeight.value = `${containerHeight}px`;
 
     }
-    console.log(ulHeight);
+
   }
 };
 
@@ -470,7 +470,7 @@ window.onload = () => {
 };
 
 onMounted(async () => {
-  
+
   await nextTick();
   window.addEventListener('resize', handleResize);
 
@@ -576,9 +576,9 @@ const search = async () => {
     try {
       const response = await axios.get(`/api/product_search`+`/${query.value}`);
       results.value = response.data.data;
-      console.log(results.value);
+
       showResults.value = true;
-      console.log(showResults.value);
+
     } catch (error) {
       console.error(error);
     }
@@ -588,7 +588,7 @@ const search = async () => {
   }
 };
 
-    
+
 
 </script>
 
@@ -613,7 +613,7 @@ const search = async () => {
   }
 
 
-  
+
   .round-category {
 
     margin-right:-60px;
@@ -630,24 +630,24 @@ const search = async () => {
 
   }
 
-  
+
   .banner img:hover {
-    
+
   }
 
 
   .home_image_kitchen .banner:hover{
-    border : 3.5px solid #ec1f25 !important; 
+    border : 3.5px solid #ec1f25 !important;
     z-index : 99 !important;
   }
 
   .home_image_laundry .banner:hover{
-    border : 3.5px solid #72b535 !important; 
+    border : 3.5px solid #72b535 !important;
     z-index : 99 !important;
   }
 
   .home_image_cold_room .banner:hover{
-    border : 3.5px solid #3a5eab !important; 
+    border : 3.5px solid #3a5eab !important;
     z-index : 99 !important;
   }
 
@@ -682,7 +682,7 @@ const search = async () => {
     position: fixed;
     right: 0;
     bottom: 0;
-    min-width: 100%; 
+    min-width: 100%;
     min-height: 100%;
     z-index: -15;
   }
@@ -700,12 +700,12 @@ const search = async () => {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(255, 255, 255, 0.7); 
-    pointer-events: none; 
+    background-color: rgba(255, 255, 255, 0.7);
+    pointer-events: none;
   }
 
 
-  
+
   .app{
     position: fixed;
     bottom: 0;
@@ -739,7 +739,7 @@ const search = async () => {
 
 
     .header-transparent{
-      background-color: transparent;  
+      background-color: transparent;
     }
 
     /*My home modal*/
@@ -747,7 +747,7 @@ const search = async () => {
       overflow: hidden;
     }
     .row.vertical-divider > div[class^="col-"] {
-      
+
       padding-bottom: 100px;
       margin-bottom: -100px;
       border-left: 2px solid #ec1f25;

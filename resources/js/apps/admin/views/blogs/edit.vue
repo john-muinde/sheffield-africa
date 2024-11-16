@@ -322,6 +322,5 @@ watchEffect(() => {
 
     blog.blog_images = postData.value.blog_images;
 
-    console.log(postData.value);
 });
 </script>

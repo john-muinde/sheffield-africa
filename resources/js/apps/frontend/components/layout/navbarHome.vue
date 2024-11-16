@@ -23,7 +23,7 @@
                                     @input="search"
                                     class="form-control"
                                     name="q"
-                                   
+
                                     autocomplete="off"
                                     placeholder="Search product ..."
                                     required=""
@@ -206,9 +206,9 @@ const search = async () => {
                 `/api/product_search` + `/${query.value}`
             );
             results.value = response.data.data;
-            //console.log(results.value);
+            //
             showResults.value = true;
-            //console.log(showResults.value);
+            //
         } catch (error) {
             //console.error(error);
         }
@@ -223,16 +223,16 @@ const bodyClassAdded = ref(true);
 // Function to toggle the class on document.body
     const addClassToBody = () => {
 
-      
-      console.log("clicked");
-      console.log('Before toggle:', bodyClassAdded.value);
+
+
+
       //bodyClassAdded.value = !bodyClassAdded.value;
       document.body.classList.toggle('mmenu-active', bodyClassAdded.value);
- 
-      
+
+
     };
 
-    
+
     document.addEventListener('DOMContentLoaded', () => {
       document.body.classList.toggle('mmenu-active1', true);
     });
