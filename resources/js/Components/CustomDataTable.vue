@@ -1,25 +1,34 @@
-<!-- DataTable.vue -->
 <template>
     <div class="custom-datatable">
         <div class="card">
             <div class="card-body">
                 <DataTable :options="mergedOptions" :columns="columns" :data="data"
                     class="table table-striped nowrap w-100">
-                    <slot></slot>
+                    <!-- Forward all slots -->
+                    <template v-for="(slotContent, slotName) in $slots" :key="slotName" v-slot:[slotName]="scope">
+                        <slot :name="slotName" v-bind="scope"></slot>
+                    </template>
                 </DataTable>
             </div>
         </div>
     </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
 import { ref, computed } from 'vue';
 import DataTable from 'datatables.net-vue3';
+import DataTablesLib from 'datatables.net';
 import DataTablesCore from 'datatables.net-bs5';
 import 'datatables.net-buttons-bs5';
 import 'datatables.net-buttons/js/buttons.html5.mjs';
 import 'datatables.net-buttons/js/buttons.print.mjs';
 import 'datatables.net-responsive-bs5';
+
+import jszip from 'jszip';
+import pdfmake from 'pdfmake';
+
+DataTablesLib.Buttons.jszip(jszip);
+DataTablesLib.Buttons.pdfMake(pdfmake);
 
 DataTable.use(DataTablesCore);
 
@@ -39,7 +48,11 @@ const props = defineProps({
 });
 
 const defaultOptions = {
-    responsive: true,
+    responsive: {
+        details: {
+            renderer: DataTablesCore.Responsive.renderer.listHiddenNodes(),
+        },
+    },
     dom: '<"row mb-3"<"col-sm-12 col-md-6"B><"col-sm-12 col-md-6 d-flex justify-content-end"f>>' +
         '<"row"<"col-sm-12"tr>>' +
         '<"row mt-3"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',
@@ -54,7 +67,38 @@ const defaultOptions = {
                     className: 'dropdown-item',
                     text: '<i class="fas fa-file-excel me-2"></i>Excel',
                     exportOptions: {
-                        columns: ':not(:last-child)'
+                        columns: ':not(:last-child)',
+                        format: {
+                            body: function (data, row, column, node) {
+                                if (node && node.querySelector('a')) {
+                                    const link = node.querySelector('a');
+                                    const text = link.textContent || link.innerText;
+                                    const href = link.href;
+                                    return `${text} (${href})`;
+                                }
+                                if (node && typeof data === 'object' && data !== null) {
+                                    return node.textContent || node.innerText || '';
+                                }
+                                if (typeof data === 'string') {
+                                    const parser = new DOMParser();
+                                    const doc = parser.parseFromString(data, 'text/html');
+                                    const link = doc.querySelector('a');
+                                    const img = doc.querySelector('img');
+                                    if (link) {
+                                        const text = link.textContent || link.innerText;
+                                        const href = link.href;
+                                        return `${text} (${href})`;
+                                    }
+                                    if (img) {
+                                        const src = img.src;
+                                        const alt = img.alt || 'image';
+                                        return `![${alt}](${src})`;
+                                    }
+                                    return doc.body.textContent || doc.body.innerText || '';
+                                }
+                                return data;
+                            }
+                        }
                     }
                 },
                 {
@@ -62,7 +106,38 @@ const defaultOptions = {
                     className: 'dropdown-item',
                     text: '<i class="fas fa-file-pdf me-2"></i>PDF',
                     exportOptions: {
-                        columns: ':not(:last-child)'
+                        columns: ':not(:last-child)',
+                        format: {
+                            body: function (data, row, column, node) {
+                                if (node && node.querySelector('a')) {
+                                    const link = node.querySelector('a');
+                                    const text = link.textContent || link.innerText;
+                                    const href = link.href;
+                                    return `${text} (${href})`;
+                                }
+                                if (node && typeof data === 'object' && data !== null) {
+                                    return node.textContent || node.innerText || '';
+                                }
+                                if (typeof data === 'string') {
+                                    const parser = new DOMParser();
+                                    const doc = parser.parseFromString(data, 'text/html');
+                                    const link = doc.querySelector('a');
+                                    const img = doc.querySelector('img');
+                                    if (link) {
+                                        const text = link.textContent || link.innerText;
+                                        const href = link.href;
+                                        return `${text} (${href})`;
+                                    }
+                                    if (img) {
+                                        const src = img.src;
+                                        const alt = img.alt || 'image';
+                                        return `![${alt}](${src})`;
+                                    }
+                                    return doc.body.textContent || doc.body.innerText || '';
+                                }
+                                return data;
+                            }
+                        }
                     }
                 },
                 {
@@ -70,7 +145,51 @@ const defaultOptions = {
                     className: 'dropdown-item',
                     text: '<i class="fas fa-print me-2"></i>Print',
                     exportOptions: {
-                        columns: ':not(:last-child)'
+                        columns: ':not(:last-child)',
+                        format: {
+                            body: function (data, row, column, node) {
+                                if (node && node.querySelector('a')) {
+                                    const link = node.querySelector('a');
+                                    const text = link.textContent || link.innerText;
+                                    const href = link.href;
+                                    return `${text} (${href})`;
+                                }
+
+                                // HANDLE IMAGES
+                                if (node && node.querySelector('img')) {
+                                    const img = node.querySelector('img');
+                                    const src = img.src;
+                                    const alt = img.alt || 'image';
+                                    return `![${alt}](${src})`;
+                                }
+
+                                if (node && typeof data === 'object' && data !== null) {
+                                    return node.textContent || node.innerText || '';
+                                }
+
+
+                                if (!node && (typeof data === 'string' || typeof data === 'object')) {
+                                    const parser = new DOMParser();
+                                    const doc = typeof data === 'object' ? data : parser.parseFromString(data, 'text/html');
+                                    const link = doc.querySelector('a');
+                                    const img = doc.querySelector('img');
+                                    if (link) {
+                                        const text = link.textContent || link.innerText;
+                                        const href = link.href;
+                                        return `${text} (${href})`;
+                                    }
+                                    if (img) {
+                                        const src = img.src;
+                                        const alt = img.alt || 'image';
+                                        return `${src}`;
+                                    }
+                                    return doc.textContent || doc.innerText || '';
+                                }
+
+
+                                return data;
+                            }
+                        }
                     }
                 }
             ]
@@ -89,16 +208,17 @@ const defaultOptions = {
     }
 };
 
-const mergedOptions = computed(() => ({
-    ...defaultOptions,
-    ...props.options
-}));
+const mergedOptions = computed(() => {
+    return {
+        ...defaultOptions,
+        ...props.options,
+    };
+});
 </script>
 
 <style>
 @import 'datatables.net-bs5/css/dataTables.bootstrap5.min.css';
 @import 'datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css';
-@import 'datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css';
 @import '@fortawesome/fontawesome-free/css/all.css';
 
 .custom-datatable .card {
@@ -151,14 +271,6 @@ const mergedOptions = computed(() => ({
 
 .custom-datatable .dataTables_info {
     padding-top: 0.85rem;
-}
-
-/* Responsive table styles */
-.custom-datatable table.dataTable.dtr-inline.collapsed>tbody>tr>td.dtr-control:before,
-.custom-datatable table.dataTable.dtr-inline.collapsed>tbody>tr>th.dtr-control:before {
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: #6c757d;
 }
 
 /* Fix dropdown button appearance */

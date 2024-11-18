@@ -31,18 +31,23 @@
                     </div>
 
                     <div class="custom-table">
-                        <v-client-table :columns="columns" ref="dataTable" :data="tableData" :options="table_option">
-                            <template #actions="props">
-                                <router-link :to="{ name: 'users.edit', params: { id: props.row.id } }"
-                                    class="badge bg-info" data-bs-toggle="tooltip" data-bs-placement="top">
+                        <CustomDataTable :columns="columns" :data="users" :options="tableOptions">
+                            <template #role="{ cellData }">
+                                <span :class="['badge', cellData === 1 ? 'bg-primary' : 'bg-secondary']">
+                                    {{ cellData === 1 ? 'Admin' : 'User' }}
+                                </span>
+                            </template>
+                            <template #actions="{ rowData }">
+                                <a href="#" @click.prevent="navigateToEdit(rowData.id)" class="badge bg-info"
+                                    data-bs-toggle="tooltip" data-bs-placement="top">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                         fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
                                         stroke-linejoin="round" class="feather feather-edit-2">
                                         <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
                                     </svg>
-                                </router-link>
+                                </a>
 
-                                <a href="javascript:;" @click.prevent="deleteUser(props.row.id)"
+                                <a href="javascript:;" @click.prevent="deleteUser(rowData.id)"
                                     class="ms-2 badge bg-danger" data-bs-toggle="tooltip" data-bs-placement="top">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                         fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
@@ -54,7 +59,7 @@
                                     </svg>
                                 </a>
                             </template>
-                        </v-client-table>
+                        </CustomDataTable>
                     </div>
                 </div>
             </div>
@@ -63,18 +68,21 @@
 </template>
 
 <script setup>
-import { ref, onMounted, computed } from "vue";
-import { Modal } from "ant-design-vue";
+import { ref, onMounted } from "vue";
+import CustomDataTable from '@/Components/CustomDataTable.vue';
 import useUsers from "@/composables/users";
 import { useMeta } from "../../composables/use-meta";
+import { useRouter } from 'vue-router';
 
 useMeta({ title: "View User" });
 
-const dataTable = ref(null);
-const { users, getUsers, deleteUser } = useUsers();
+const router = useRouter();
 
-// Create a computed property if users is a ref
-const tableData = computed(() => users.value || []);
+const navigateToEdit = (id) => {
+    router.push({ name: 'users.edit', params: { id } });
+};
+
+const { users, getUsers, deleteUser } = useUsers();
 
 onMounted(() => {
     getUsers();
@@ -82,31 +90,18 @@ onMounted(() => {
 
 
 const columns = ref([
-    "id",
-    "name",
-    "email",
-    "created_at",
-    "actions",
+    { data: 'name', title: 'Name' },
+    { data: 'email', title: 'Email' },
+    { data: 'role', title: 'Role' },
+    { data: 'created_at', title: 'Created Date' },
+    { title: 'Actions' }
 ]);
 
-const table_option = ref({
-    perPage: 10,
-    perPageValues: [5, 10, 20, 50],
-    skin: "table table-hover table-striped",
-    columnsClasses: { actions: "actions text-center" },
-    pagination: { nav: "scroll", chunk: 5 },
-    texts: {
-        count: "Showing {from} to {to} of {count}",
-        filter: "",
-        filterPlaceholder: "Search...",
-        limit: "Results:",
-    },
-    sortable: ["id", "name", "is_published"],
-    sortIcon: {
-        base: "sort-icon-none",
-        up: "sort-icon-asc",
-        down: "sort-icon-desc",
-    },
-    resizableColumns: false,
+const tableOptions = ref({
+    order: [[3, 'desc']],
+    columnDefs: [
+        { data: null, targets: -1, orderable: false, searchable: false, render: '#actions' },
+        { data: 'role', targets: 2, render: '#role' }
+    ],
 });
 </script>

@@ -30,41 +30,38 @@
                         </div>
                     </div>
                     <div class="custom-table text-nowrap">
-                        <v-client-table :data="tableData" :columns="columns" :options="table_option">
-                            <template #make="props">
-                                {{ props.row.name }}
-                            </template>
 
-                            <template #image="props">
-                                <img :src="'/storage/' + props.row.main_image_path
+                        <CustomDataTable :columns="columns" :data="galleries" :options="tableOptions">
+
+                            <template #image="{ cellData }">
+                                <img :src="'/storage/' + cellData
                                     " class="rounded profile-img" alt="avatar" />
                             </template>
 
-                            <template #is_published="props">
-                                <span v-if="props.row.is_published === 1"
-                                    class="badge badge-success inv-status">Published</span>
+                            <template #is_published="{ cellData }">
+                                <span v-if="cellData === 1" class="badge badge-success inv-status">Published</span>
 
-                                <span v-if="props.row.is_published !== 1" class="badge badge-danger inv-status">Not
+                                <span v-if="cellData !== 1" class="badge badge-danger inv-status">Not
                                     Published</span>
                             </template>
 
-                            <template #actions="props">
+                            <template #actions="{ rowData }">
                                 <!-- v-if="can('category-edit')"  -->
 
-                                <router-link :to="{
+                                <a href="#" :to="{
                                     name: 'galleries.edit',
-                                    params: { id: props.row.id },
+                                    params: { id: rowData.id },
                                 }" class="badge bg-info" data-bs-toggle="tooltip" data-bs-placement="top">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                         fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
                                         stroke-linejoin="round" class="feather feather-edit-2">
                                         <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
                                     </svg>
-                                </router-link>
+                                </a>
 
                                 <!--  v-if="can('category-delete')" -->
 
-                                <a href="javascript:;" @click.prevent="deleteGallery(props.row.id)"
+                                <a href="javascript:;" @click.prevent="deleteGallery(rowData.id)"
                                     class="ms-2 badge bg-danger" data-bs-toggle="tooltip" data-bs-placement="top">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                         fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
@@ -76,7 +73,7 @@
                                     </svg>
                                 </a>
                             </template>
-                        </v-client-table>
+                        </CustomDataTable>
                     </div>
                 </div>
             </div>
@@ -87,6 +84,15 @@
 <script setup>
 import { ref, onMounted, computed } from "vue";
 
+import CustomDataTable from '@/Components/CustomDataTable.vue';
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+
+const navigateToEdit = (id) => {
+    router.push({ name: 'galleries.edit', params: { id } });
+};
+
 import { useMeta } from "../../composables/use-meta";
 useMeta({ title: "View Galleries" });
 
@@ -94,45 +100,24 @@ import useGalleries from "@/composables/galleries";
 
 const { galleries, getGalleries, deleteGallery } = useGalleries();
 
-onMounted(() => {
-    getGalleries();
+const columns = [
+    { data: 'main_image_path', title: 'Main Image' },
+    { data: 'name', title: 'Name' },
+    { data: 'is_published', title: 'Status' },
+    { data: 'created_at', title: 'Created Date' },
+    { title: 'Actions' }
+];
+
+const tableOptions = ref({
+    order: [[3, 'desc']],
+    columnDefs: [
+        { data: null, targets: -1, orderable: false, searchable: false, render: '#actions' },
+        { data: 'main_image_path', targets: 0, render: '#image' },
+        { data: 'is_published', targets: 2, render: '#is_published' }
+    ],
 });
 
-const tableData = computed(() => galleries.value || []);
-
-const columns = ref([
-    "id",
-    "image",
-    "name",
-    "is_published",
-    "created_at",
-    "actions",
-]);
-
-const table_option = ref({
-    perPage: 10,
-    perPageValues: [5, 10, 20, 50, 100, 500, 1000],
-    skin: "table table-hover table-striped",
-    columnsClasses: { actions: "actions text-center" },
-    pagination: { nav: "scroll", chunk: 5 },
-    texts: {
-        count: "Showing {from} to {to} of {count}",
-        filter: "",
-        filterPlaceholder: "Search...",
-        limit: "Results:",
-    },
-    sortable: [
-        "name",
-        "gallery_introduction",
-        "company_involvement",
-        "collaborations_and_partnership",
-        "is_published",
-    ],
-    sortIcon: {
-        base: "sort-icon-none",
-        up: "sort-icon-asc",
-        down: "sort-icon-desc",
-    },
-    resizableColumns: false,
+onMounted(() => {
+    getGalleries();
 });
 </script>

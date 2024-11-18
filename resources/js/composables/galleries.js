@@ -33,6 +33,7 @@ export default function useGallery() {
                 `/api/galleries?page=${page}&search_id=${search_id}&search_title=${search_title}&search_global=${search_global}&order_column=${order_column}&order_direction=${order_direction}`
             );
             galleries.value = response;
+            console.log(response);
         } catch (errors) {
             validationErrors.value = errors;
         }

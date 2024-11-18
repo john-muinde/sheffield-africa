@@ -46,7 +46,6 @@
 
                             <template #actions="props">
                                 <!-- v-if="can('event-edit')"  -->
-
                                 <router-link :to="{
                                     name: 'events.edit',
                                     params: { id: props.row.id },
@@ -59,7 +58,6 @@
                                 </router-link>
 
                                 <!--  v-if="can('event-delete')" -->
-
                                 <a href="javascript:;" @click.prevent="deleteEvent(props.row.id)"
                                     class="ms-2 badge bg-danger" data-bs-toggle="tooltip" data-bs-placement="top">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
