@@ -98,7 +98,7 @@ export default function useCategories() {
             cancelText: "No, cancel",
             onOk() {
                 apiRequest("delete", `/api/categories/${id}`).then(() => {
-                    // getCategories();
+                    getCategories();
                     router.push({ name: "categories.index" });
                     showToast("Category deleted successfully", "success");
                 });

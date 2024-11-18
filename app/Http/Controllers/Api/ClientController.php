@@ -39,35 +39,38 @@ class ClientController extends Controller
         return ClientResource::collection($clients);
     }
 
+
+
     public function store(StoreClientRequest $request)
     {
         $this->authorize('client-create');
 
-        // Check if the client with the same name already exists
-        $existingClient = Client::where('name', $request->name)->first();
-        if ($existingClient) {
-            return response()->json(['errors' => ['name' => ['Client with the same name already exists.']]], 409);
-        }
+        // Define validation rules
+        $validatedData = $request->validate([
+            'name' => 'required|min:3|unique:clients',
+            'phone' => 'required|min:3',
+            'email' => 'required|min:3',
+            'address' => 'required|min:3',
+            'description' => 'required|min:3',
+            'is_published' => 'required',
+            'main_image_path' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
 
-        $validatedData = $request->validated();
         $validatedData['created_by'] = auth()->user()->id;
 
-        if ($request->hasFile('main_image')) {
-
-            $file = $request->file('main_image');
-
-            $file_name = time() . '_' . '_client_' . $request->file('main_image')->getClientOriginalName();
+        if ($request->hasFile('main_image_path')) {
+            $file = $request->file('main_image_path');
+            $file_name = time() . '_client_' . $file->getClientOriginalName();
             $file_path = 'uploads/' . $file_name;
 
             // Resize and optimize the image
             $image = Image::make($file)->resize(800, null, function ($constraint) {
                 $constraint->aspectRatio();
                 $constraint->upsize();
-            })->encode('jpg', 85); // Specify the desired encoding format and quality (80% in this example)
+            })->encode('jpg', 85);
 
             // Store the optimized image
             Storage::disk('public')->put($file_path, $image);
-            //$file_path = $request->file('main_image')->storeAs('uploads', $file_name, 'public');
 
             $validatedData['main_image_path'] = $file_path;
         }
@@ -77,47 +80,46 @@ class ClientController extends Controller
         return new ClientResource($client);
     }
 
-    public function show(Client $client)
-    {
-        $this->authorize('client-edit');
-        return new ClientResource($client);
-    }
-
     public function update(Client $client, StoreClientRequest $request)
     {
         $this->authorize('client-edit');
 
-        // Check if the client with the same name already exists (excluding the current client)
-        $existingClient = Client::where('name', $request->name)
-            ->where('id', '!=', $client->id)
-            ->first();
-        if ($existingClient) {
-            return response()->json(['errors' => ['name' => ['Client with the same name already exists.']]], 409);
-        }
-        $validatedData = $request->validated();
+        // Define validation rules
+        $validatedData = $request->validate([
+            'name' => 'required|min:3|unique:clients,name,' . $client->id,
+            'phone' => 'required|min:3',
+            'email' => 'required|min:3',
+            'address' => 'required|min:3',
+            'description' => 'required|min:3',
+            'is_published' => 'required',
+            'main_image_path' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
 
-        if ($request->hasFile('main_image')) {
-
-            $file = $request->file('main_image');
-
-            $file_name = time() . '_' . '_client_' . $request->file('main_image')->getClientOriginalName();
+        if ($request->hasFile('main_image_path')) {
+            $file = $request->file('main_image_path');
+            $file_name = time() . '_client_' . $file->getClientOriginalName();
             $file_path = 'uploads/' . $file_name;
 
             // Resize and optimize the image
             $image = Image::make($file)->resize(800, null, function ($constraint) {
                 $constraint->aspectRatio();
                 $constraint->upsize();
-            })->encode('jpg', 85); // Specify the desired encoding format and quality (80% in this example)
+            })->encode('jpg', 85);
 
             // Store the optimized image
             Storage::disk('public')->put($file_path, $image);
-            //$file_path = $request->file('main_image')->storeAs('uploads', $file_name, 'public');
 
             $validatedData['main_image_path'] = $file_path;
         }
 
         $client->update($validatedData);
 
+        return new ClientResource($client);
+    }
+
+    public function show(Client $client)
+    {
+        $this->authorize('client-edit');
         return new ClientResource($client);
     }
 
@@ -135,10 +137,10 @@ class ClientController extends Controller
     }
 
 
-    public function getClients(){
+    public function getClients()
+    {
         $clients = Client::get();
 
         return $clients;
     }
-    
 }

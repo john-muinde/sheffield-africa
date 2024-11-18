@@ -28,7 +28,6 @@ class ProjectResource extends JsonResource
             'main_image_path' => $this->main_image_path,
             'project_images' => ProjectImagesResource::collection($this->projectImages),
             'client_json' => $this->projectClient ? $this->projectClient : null,
-            //'client_json_image' => $this->projectClient->main_image_path ? $this->projectClient->main_image_path : null,
             'created_at' => $this->created_at->toDateString()
         ];
     }

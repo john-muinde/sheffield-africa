@@ -1,6 +1,7 @@
-import { ref, inject } from "vue";
+import { ref } from "vue";
 import { useRouter } from "vue-router";
-import axiosInstance from "../axiosInstance";
+import { apiRequest } from "../utils/api";
+import { Modal } from "ant-design-vue";
 
 export default function useClients() {
     const clients = ref([]);
@@ -10,15 +11,14 @@ export default function useClients() {
         phone: "",
         email: "",
         address: "",
-        // main_image: "",
         is_published: "",
+        main_image_path: "",
         description: "",
     });
 
     const router = useRouter();
     const validationErrors = ref({});
     const isLoading = ref(false);
-    const swal = inject("$swal");
 
     const getClients = async (
         page = 1,
@@ -28,34 +28,27 @@ export default function useClients() {
         order_column = "created_at",
         order_direction = "desc"
     ) => {
-        axiosInstance
-            .get(
-                "/api/clients?page=" +
-                    page +
-                    "&search_id=" +
-                    search_id +
-                    "&search_title=" +
-                    search_title +
-                    "&search_global=" +
-                    search_global +
-                    "&order_column=" +
-                    order_column +
-                    "&order_direction=" +
-                    order_direction
-            )
-            .then((response) => {
-                clients.value = response.data;
-            });
+        try {
+            const response = await apiRequest(
+                "get",
+                `/api/clients?page=${page}&search_id=${search_id}&search_title=${search_title}&search_global=${search_global}&order_column=${order_column}&order_direction=${order_direction}`
+            );
+            clients.value = response;
+        } catch (errors) {
+            validationErrors.value = errors;
+        }
     };
 
     const getClient = async (id) => {
-        axiosInstance.get("/api/clients/" + id).then((response) => {
-            client.value = response.data.data;
-        });
+        try {
+            const response = await apiRequest("get", `/api/clients/${id}`);
+            client.value = response;
+        } catch (errors) {
+            validationErrors.value = errors;
+        }
     };
 
     const storeClient = async (client) => {
-        console.log(client);
         if (isLoading.value) return;
 
         isLoading.value = true;
@@ -70,38 +63,29 @@ export default function useClients() {
         }
 
         const config = {
-            headers: { "content-type": "multipart/form-data" },
+            headers: { "Content-Type": "multipart/form-data" },
         };
 
-        console.log(serializedPost);
-
-        axiosInstance
-            .post("/api/clients", serializedPost, config)
-            .then((response) => {
-                router.push({ name: "clients.create" });
-                // Reset the form values
-                client.name = null;
-                client.phone = null;
-                client.email = null;
-                client.address = null;
-                client.description = null;
-                client.main_image = null;
-                client.is_published = null;
-                swal({
-                    icon: "success",
-                    title: "Client saved successfully",
-                });
-            })
-            .catch((error) => {
-                if (error.response?.data) {
-                    validationErrors.value = error.response.data.errors;
-                }
-            })
-            .finally(() => (isLoading.value = false));
+        try {
+            await apiRequest("post", "/api/clients", serializedPost, config);
+            router.push({ name: "clients.index" });
+            client.value = {
+                name: "",
+                phone: "",
+                email: "",
+                address: "",
+                is_published: "",
+                description: "",
+            };
+            showToast("Client saved successfully", "success");
+        } catch (errors) {
+            validationErrors.value = errors;
+        } finally {
+            isLoading.value = false;
+        }
     };
 
     const updateClient = async (client) => {
-        console.log(client);
         if (isLoading.value) return;
 
         isLoading.value = true;
@@ -116,65 +100,52 @@ export default function useClients() {
         }
 
         const config = {
-            headers: { "content-type": "multipart/form-data" },
+            headers: { "Content-Type": "multipart/form-data" },
         };
 
-        console.log(serializedPost);
-
-        axiosInstance
-            .put("/api/clients/" + client.id, client)
-            .then((response) => {
-                router.push({ name: "clients.index" });
-                swal({
-                    icon: "success",
-                    title: "Client updated successfully",
-                });
-            })
-            .catch((error) => {
-                if (error.response?.data) {
-                    validationErrors.value = error.response.data.errors;
-                }
-            })
-            .finally(() => (isLoading.value = false));
+        try {
+            await apiRequest(
+                "put",
+                `/api/clients/${client.id}`,
+                serializedPost,
+                config
+            );
+            router.push({ name: "clients.index" });
+            showToast("Client updated successfully", "success");
+        } catch (errors) {
+            validationErrors.value = errors;
+        } finally {
+            isLoading.value = false;
+        }
     };
 
     const deleteClient = async (id) => {
-        swal({
+        Modal.confirm({
             title: "Are you sure?",
-            text: "You won't be able to revert this action!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonText: "Yes, delete it!",
-            confirmButtonColor: "#ef4444",
-            timer: 20000,
-            timerProgressBar: true,
-            reverseButtons: true,
-        }).then((result) => {
-            if (result.isConfirmed) {
-                axiosInstance
-                    .delete("/api/clients/" + id)
-                    .then((response) => {
-                        getClients();
-                        router.push({ name: "clients.index" });
-                        swal({
-                            icon: "success",
-                            title: "Client deleted successfully",
-                        });
-                    })
-                    .catch((error) => {
-                        swal({
-                            icon: "error",
-                            title: "Something went wrong",
-                        });
-                    });
-            }
+            content: "You won't be able to revert this action!",
+            okText: "Yes, delete it!",
+            okType: "danger",
+            cancelText: "No, cancel",
+            onOk() {
+                apiRequest("delete", `/api/clients/${id}`).then(() => {
+                    getClients();
+                    router.push({ name: "clients.index" });
+                    showToast("Client deleted successfully", "success");
+                });
+            },
+            onCancel() {
+                console.log("Cancel");
+            },
         });
     };
 
     const getClientList = async () => {
-        axiosInstance.get("/api/client-list").then((response) => {
-            clientList.value = response.data.data;
-        });
+        try {
+            const response = await apiRequest("get", "/api/client-list");
+            clientList.value = response;
+        } catch (errors) {
+            validationErrors.value = errors;
+        }
     };
 
     return {

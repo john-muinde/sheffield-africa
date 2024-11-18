@@ -206,13 +206,6 @@
                                     </router-link>
                                 </li>
 
-                                <!-- <li class="page-item" :class="{ disabled: currentPage === 1 }">
-                                    <router-link class="page-link page-link-first" :to="getCategoryLink(the_category.id, 1 )" aria-label="First" @click="goToNextPage">
-                                      First
-                                      <span aria-hidden="true"><i class="icon-long-arrow-right"></i></span>
-                                    </router-link>
-                                  </li> -->
-
                                 <li class="page-item" v-for="page in generatePageLinks" :key="page"
                                     :class="{ active: page === currentPage }">
                                     <template v-if="isInteger(page)">
@@ -225,7 +218,6 @@
                                         </router-link>
                                     </template>
                                 </li>
-                                <!--  <li class="page-item page-item-total">of {{ totalPages }}</li> -->
 
                                 <li class="page-item" :class="{
                                     disabled: currentPage === totalPages,
@@ -276,13 +268,10 @@ import { useRoute } from "vue-router";
 import { useMeta } from "../../composables/use-meta";
 useMeta({ title: "View Categories" });
 
-// import useCategories from "@/composables/categories";
-import { useAbility } from "@casl/vue";
 
-import { useForm, useField, defineRule } from "vee-validate";
+import { useField } from "vee-validate";
 
 import useCategories from "@/composables/categories";
-
 
 
 import axiosInstance from "../../../../axiosInstance";
@@ -298,7 +287,6 @@ const {
 } = useCategories();
 
 const route = useRoute();
-const currentRoute = ref(route);
 
 const currentPage = ref(route.params.page ? convertToNumberOrNull(route.params.page) : 1);
 //const perPage = ref(20);

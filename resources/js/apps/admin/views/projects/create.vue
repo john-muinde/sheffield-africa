@@ -9,10 +9,7 @@
                                 <li class="breadcrumb-item">
                                     <a href="javascript:;">Projects</a>
                                 </li>
-                                <li
-                                    class="breadcrumb-item active"
-                                    aria-current="page"
-                                >
+                                <li class="breadcrumb-item active" aria-current="page">
                                     <span>Create Project</span>
                                 </li>
                             </ol>
@@ -28,9 +25,7 @@
                     <div class="statbox panel box box-shadow">
                         <div class="panel-heading pb-0">
                             <div class="row">
-                                <div
-                                    class="col-xl-12 col-md-12 col-sm-12 col-12"
-                                >
+                                <div class="col-xl-12 col-md-12 col-sm-12 col-12">
                                     <h3><b>Create Project</b></h3>
                                 </div>
                             </div>
@@ -39,167 +34,83 @@
                             <form @submit.prevent="submitForm">
                                 <div class="row">
                                     <div class="form-group col-md-12">
-                                        <label for="post-name"
-                                            >Project Name</label
-                                        >
-                                        <input
-                                            v-model="project.name"
-                                            id="post-name"
-                                            type="text"
-                                            class="form-control"
-                                            placeholder="Enter Project Name ..."
-                                        />
-
+                                        <label for="post-name">Project Name</label>
+                                        <input v-model="project.name" id="post-name" type="text" class="form-control"
+                                            placeholder="Enter Project Name ..." />
                                         <div class="text-danger mt-1">
-                                            {{ errors.name }}
-                                        </div>
-                                        <div class="text-danger mt-1">
-                                            <div
-                                                v-for="message in validationErrors?.name"
-                                            >
+                                            <div v-for="message in validationErrors?.name">
                                                 {{ message }}
                                             </div>
                                         </div>
                                     </div>
 
                                     <div class="form-group">
-                                        <label
-                                            for="post-client"
-                                            class="form-label"
-                                            >Select Client</label
-                                        >
+                                        <label for="post-client" class="form-label">Select Client</label>
 
-                                        <multiselect
-                                            v-model="project.client"
-                                            :options="clientList"
-                                            :reduce="(client) => client.id"
-                                            :searchable="true"
-                                            :preselect-first="true"
-                                            track-by="id"
-                                            label="name"
-                                            placeholder="Choose Client ..."
-                                            selected-label=""
-                                            select-label=""
-                                            deselect-label=""
-                                        ></multiselect>
+                                        <multiselect v-model="project.client" :options="clientList"
+                                            :reduce="(client) => client.id" :searchable="true" :preselect-first="true"
+                                            track-by="id" label="name" placeholder="Choose Client ..." selected-label=""
+                                            select-label="" deselect-label=""></multiselect>
 
                                         <div class="text-danger mt-1">
-                                            {{ errors.client }}
-                                        </div>
-                                        <div class="text-danger mt-1">
-                                            <div
-                                                v-for="message in validationErrors?.client"
-                                            >
+                                            <div v-for="message in validationErrors?.client">
                                                 {{ message }}
                                             </div>
                                         </div>
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="post-content"
-                                            >Project Description</label
-                                        >
+                                        <label for="post-content">Project Description</label>
 
-                                        <quill-editor
-                                            v-model:value="project.content"
-                                            :options="options1"
-                                            placeholder="Enter Project Description ..."
-                                        ></quill-editor>
+                                        <quill-editor v-model:value="project.content"
+                                            placeholder="Enter Project Description ..."></quill-editor>
+
+                                        <div class="mt-1 text-danger">
+                                            <div v-for="message in validationErrors?.content">
+                                                {{ message }}
+                                            </div>
+                                        </div>
                                     </div>
 
-                                    <div
-                                        class="custom-file-container"
-                                        data-upload-id="myFirstImage"
-                                    >
-                                        <label
-                                            >Upload Main Project Image
-                                            <a
-                                                href="javascript:void(0)"
-                                                class="custom-file-container__image-clear"
-                                                title="Clear Image"
-                                                >x</a
-                                            ></label
-                                        >
-                                        <label
-                                            class="custom-file-container__custom-file"
-                                            for="main_image"
-                                        >
-                                            <input
-                                                type="file"
+                                    <div class="custom-file-container" data-upload-id="myFirstImage">
+                                        <label>Upload Main Project Image
+                                            <a href="javascript:void(0)" class="custom-file-container__image-clear"
+                                                title="Clear Image">x</a></label>
+                                        <label class="custom-file-container__custom-file" for="main_image_path">
+                                            <input type="file"
                                                 class="custom-file-container__custom-file__custom-file-input"
-                                                accept="image/*"
-                                                @change="
-                                                    project.main_image =
-                                                        $event.target.files[0]
-                                                "
-                                                id="main_image"
-                                            />
-                                            <input
-                                                type="hidden"
-                                                name="MAX_FILE_SIZE"
-                                                value="10485760"
-                                            />
+                                                accept="image/*" @change="
+                                                    project.main_image_path =
+                                                    $event.target.files[0]
+                                                    " id="main_image_path" />
+                                            <input type="hidden" name="MAX_FILE_SIZE" value="10485760" />
                                             <span
-                                                class="custom-file-container__custom-file__custom-file-control"
-                                            ></span>
+                                                class="custom-file-container__custom-file__custom-file-control"></span>
                                         </label>
-                                        <div
-                                            class="custom-file-container__image-preview"
-                                        ></div>
+                                        <div class="custom-file-container__image-preview"></div>
                                     </div>
 
-                                    <div
-                                        class="custom-file-container"
-                                        data-upload-id="myProjectGallery"
-                                    >
-                                        <label
-                                            >Project Gallery (multiple images
+                                    <div class="custom-file-container" data-upload-id="myProjectGallery">
+                                        <label>Project Gallery (multiple images
                                             allowed)
-                                            <a
-                                                href="javascript:void(0)"
-                                                class="custom-file-container__image-clear"
-                                                title="Clear Image"
-                                                >x</a
-                                            ></label
-                                        >
-                                        <label
-                                            class="custom-file-container__custom-file"
-                                            for="project_gallery"
-                                        >
-                                            <input
-                                                type="file"
+                                            <a href="javascript:void(0)" class="custom-file-container__image-clear"
+                                                title="Clear Image">x</a></label>
+                                        <label class="custom-file-container__custom-file" for="project_gallery">
+                                            <input type="file"
                                                 class="custom-file-container__custom-file__custom-file-input"
-                                                accept="image/*"
-                                                ref="project_gallery"
-                                                multiple
-                                                id="project_gallery"
-                                            />
-                                            <input
-                                                type="hidden"
-                                                name="MAX_FILE_SIZE"
-                                                value="10485760"
-                                            />
+                                                accept="image/*" ref="project_gallery" multiple id="project_gallery" />
+                                            <input type="hidden" name="MAX_FILE_SIZE" value="10485760" />
                                             <span
-                                                class="custom-file-container__custom-file__custom-file-control"
-                                            ></span>
+                                                class="custom-file-container__custom-file__custom-file-control"></span>
                                         </label>
-                                        <div
-                                            class="custom-file-container__image-preview"
-                                        ></div>
+                                        <div class="custom-file-container__image-preview"></div>
                                     </div>
 
                                     <div class="form-group col-md-4">
-                                        <label
-                                            for="is_published"
-                                            class="col-form-label"
-                                            >Publishing Status</label
-                                        >
+                                        <label for="is_published" class="col-form-label">Publishing Status</label>
                                         <div>
-                                            <select
-                                                v-model="project.is_published"
-                                                id="is_published"
-                                                class="form-select"
-                                            >
+                                            <select v-model="project.is_published" id="is_published"
+                                                class="form-select">
                                                 <option value="">
                                                     Select Publishing Status ...
                                                 </option>
@@ -213,22 +124,14 @@
                                         </div>
 
                                         <div class="text-danger mt-1">
-                                            {{ errors.is_published }}
-                                        </div>
-                                        <div class="text-danger mt-1">
-                                            <div
-                                                v-for="message in validationErrors?.is_published"
-                                            >
+                                            <div v-for="message in validationErrors?.is_published">
                                                 {{ message }}
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <button
-                                    :disabled="isLoading"
-                                    class="btn btn-primary mt-3"
-                                >
+                                <button :disabled="isLoading" class="btn btn-primary mt-3">
                                     <div v-show="isLoading" class=""></div>
                                     <span v-if="isLoading">Processing...</span>
                                     <span v-else>Save</span>
@@ -258,79 +161,36 @@ import { useMeta } from "../../composables/use-meta";
 useMeta({ title: "Create Project" });
 
 import "../../assets/sass/scrollspyNav.scss";
-import highlight from "../../components/plugins/highlight.vue";
 
 import "../../assets/sass/forms/file-upload-with-preview.min.css";
 import FileUploadWithPreview from "file-upload-with-preview";
 
 
-
-
 import { quillEditor } from "vue3-quill";
 import "vue3-quill/lib/vue3-quill.css";
 
-import { reactive, onMounted, ref } from "vue";
+import { onMounted } from "vue";
 import useProjects from "@/composables/projects";
 import useClients from "@/composables/clients";
-import { useForm, useField, defineRule } from "vee-validate";
-import { required, min } from "@/validation/rules";
 
-defineRule("required", required);
-defineRule("min", min);
-
-// Define a validation schema
-const schema = {
-    name: "required|min:3",
-    client: "required",
-    content: "required",
-    is_published: "required",
-};
-
-// Create a form context with the validation schema
-const { validate, errors } = useForm({ validationSchema: schema });
-// Define actual fields for validation
-const { value: name } = useField("name", null, { initialValue: "" });
-const { value: client } = useField("client", null, { initialValue: "" });
-const { value: content } = useField("content", null, {
-    initialValue: "",
-});
-const { value: is_published } = useField("is_published", null, {
-    initialValue: "",
-});
-
-const { storeProject, validationErrors, isLoading, getBlogList, blogList } =
+const { storeProject, validationErrors, isLoading, project } =
     useProjects();
 const { getClientList, clientList } = useClients();
-const project = reactive({
-    name,
-    client,
-    content,
-    is_published,
-    main_image: "",
-    project_gallery: "",
-    document: "",
-});
 
-const options1 = ref({
-    modules: {
-        //toolbar: [[{ header: [1, 2, false] }], ["bold", "italic", "underline"], ["image", "code-block"]],
-    },
-});
 
 function submitForm() {
-    validate().then((form) => {
-        if (form.valid) {
-            if (project.client && project.client.id) {
-                project.client = project.client.id;
-            } else {
-                project.client = null;
-            }
+    const projectValue = project.value;
+    const client = projectValue?.client;
 
-            const fileInput = document.getElementById("project_gallery");
-            const files = fileInput.files;
-            storeProject(project, files);
-        }
-    });
+    if (client && client.id) {
+        project.value.client = client.id;
+    } else {
+        project.value.client = null;
+    }
+
+    const fileInput = document.getElementById("project_gallery");
+    const files = fileInput.files;
+    storeProject(project.value, files);
 }
 
 onMounted(() => {
@@ -351,10 +211,4 @@ onMounted(() => {
         },
     });
 });
-
-//
-//
-
-//
-//
 </script>

@@ -26,8 +26,8 @@ class ProjectController extends Controller
             $orderDirection = 'desc';
         }
         $projects = Project::when(request('search_id'), function ($query) {
-                $query->where('id', request('search_id'));
-            })
+            $query->where('id', request('search_id'));
+        })
             ->when(request('search_title'), function ($query) {
                 $query->where('name', 'like', '%' . request('search_title') . '%');
             })
@@ -49,8 +49,6 @@ class ProjectController extends Controller
     {
         $this->authorize('project-create');
 
-        //dd($request);
-
         // Check if the project with the same name already exists
         $existingProject = Project::where('name', $request->name)->first();
         if ($existingProject) {
@@ -61,11 +59,11 @@ class ProjectController extends Controller
         $validatedData = $request->validated();
         $validatedData['created_by'] = auth()->user()->id;
 
-        if ($request->hasFile('main_image')) {
+        if ($request->hasFile('main_image_path')) {
 
-            $file = $request->file('main_image');
+            $file = $request->file('main_image_path');
 
-            $file_name = time() . '_' . $request->file('main_image')->getClientOriginalName();
+            $file_name = time() . '_' . $request->file('main_image_path')->getClientOriginalName();
             $file_path = 'uploads/' . $file_name;
 
             // Resize and optimize the image
@@ -76,7 +74,7 @@ class ProjectController extends Controller
 
             // Store the optimized image
             Storage::disk('public')->put($file_path, $image);
-            //$file_path = $request->file('main_image')->storeAs('uploads', $file_name, 'public');
+            //$file_path = $request->file('main_image_path')->storeAs('uploads', $file_name, 'public');
 
             $validatedData['main_image_path'] = $file_path;
         }
@@ -159,11 +157,11 @@ class ProjectController extends Controller
             return response()->json(['errors' => ['name' => ['Project with the same name already exists.']]], 409);
         }
 
-        if ($request->hasFile('main_image')) {
+        if ($request->hasFile('main_image_path')) {
 
-            $file = $request->file('main_image');
+            $file = $request->file('main_image_path');
 
-            $file_name = time() . '_' . $request->file('main_image')->getClientOriginalName();
+            $file_name = time() . '_' . $request->file('main_image_path')->getClientOriginalName();
             $file_path = 'uploads/' . $file_name;
 
             // Resize and optimize the image
@@ -174,7 +172,7 @@ class ProjectController extends Controller
 
             // Store the optimized image
             Storage::disk('public')->put($file_path, $image);
-            //$file_path = $request->file('main_image')->storeAs('uploads', $file_name, 'public');
+            //$file_path = $request->file('main_image_path')->storeAs('uploads', $file_name, 'public');
 
             $validatedData['main_image_path'] = $file_path;
         }
@@ -255,14 +253,14 @@ class ProjectController extends Controller
         $perPage = request('per_page', 12);
 
         $projects = Project::select('projects.*')
-    ->join(
-        \DB::raw("(SELECT MAX(id) as id FROM projects GROUP BY client) as latest_projects"),
-        function ($join) {
-            $join->on('projects.id', '=', 'latest_projects.id');
-        }
-    )
-    ->get();
-        
+            ->join(
+                \DB::raw("(SELECT MAX(id) as id FROM projects GROUP BY client) as latest_projects"),
+                function ($join) {
+                    $join->on('projects.id', '=', 'latest_projects.id');
+                }
+            )
+            ->get();
+
 
         return ProjectResource::collection($projects);
     }
