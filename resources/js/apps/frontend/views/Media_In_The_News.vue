@@ -34,7 +34,7 @@
 
                                         <a target="_blank" class="btn btn-primary ml-5 pl-4 mt-2 mb-2 float-center"
                                             style="color: white;" :href="product.url">
-                                            Read More {{ JSON.stringify(product) }}
+                                            Read More
                                             <i class="icon-long-arrow-right"></i>
                                         </a>
                                     </div>
