@@ -26,38 +26,37 @@
                         </div>
                     </div>
                     <div class="custom-table">
-                        <v-client-table :data="videos" :columns="columns" :options="table_option">
-                            <template #name="props">
-                                <span>{{ props.row.name }}</span>
+                        <CustomDataTable :columns="columns" :data="videos" :options="tableOptions">
+                            <template #name="{ cellData }">
+                                <span>{{ cellData }}</span>
                             </template>
 
-                            <template #file_path="props">
-                                <a v-if="props.row.type === 'Upload'" class="btn btn-primary"
-                                    :href="'/storage/' + props.row.file_path" target="_blank">View file</a>
-                                <a v-else-if="props.row.type === 'Youtube Url'" class="btn btn-primary"
-                                    :href="props.row.video_url" target="_blank">View link</a>
+                            <template #file_path="{ rowData }">
+                                <a v-if="rowData.type === 'Upload'" class="btn btn-primary"
+                                    :href="'/storage/' + rowData.file_path" target="_blank">View file</a>
+                                <a v-else class="btn btn-primary" :href="rowData.video_url" target="_blank">View
+                                    link</a>
                             </template>
 
-                            <template #is_published="props">
-                                <span v-if="props.row.is_published === 1"
-                                    class="badge badge-success inv-status">Published</span>
-                                <span v-if="props.row.is_published !== 1" class="badge badge-danger inv-status">Not
+                            <template #is_published="{ cellData }">
+                                <span v-if="cellData === 1" class="badge badge-success inv-status">Published</span>
+                                <span v-else class="badge badge-danger inv-status">Not
                                     Published</span>
                             </template>
-                            <template #actions="props">
+                            <template #actions="{ rowData }">
                                 <!-- v-if="can('category-edit')"  -->
-                                <router-link :to="{ name: 'videos.edit', params: { id: props.row.id } }"
-                                    class="badge bg-info" data-bs-toggle="tooltip" data-bs-placement="top">
+                                <button @click.prevent="navigateToEdit(rowData.id)" class="badge bg-info"
+                                    data-bs-toggle="tooltip" data-bs-placement="top">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                         fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
                                         stroke-linejoin="round" class="feather feather-edit-2">
                                         <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
                                     </svg>
-                                </router-link>
+                                </button>
 
                                 <!--  v-if="can('category-delete')" -->
-                                <a href="javascript:;" @click.prevent="deleteVideo(props.row.id)"
-                                    class="ms-2 badge bg-danger" data-bs-toggle="tooltip" data-bs-placement="top">
+                                <button @click.prevent="deleteVideo(rowData.id)" class="ms-2 badge bg-danger"
+                                    data-bs-toggle="tooltip" data-bs-placement="top">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                         fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
                                         stroke-linejoin="round" class="feather feather-trash">
@@ -66,9 +65,9 @@
                                             d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
                                         </path>
                                     </svg>
-                                </a>
+                                </button>
                             </template>
-                        </v-client-table>
+                        </CustomDataTable>
                     </div>
                 </div>
             </div>
@@ -83,32 +82,37 @@ useMeta({ title: "View Videos" });
 
 import useVideos from "@/composables/videos";
 
+import CustomDataTable from '@/Components/CustomDataTable.vue';
+
+import { useRouter } from "vue-router";
+
+const router = useRouter();
+
+const navigateToEdit = (id) => {
+    router.push({ name: 'videos.edit', params: { id } });
+};
+
 const { videos, getVideos, deleteVideo } = useVideos();
 
 onMounted(() => {
     getVideos();
 });
 
-const columns = ref(["name", "file_path", "type", "is_published", "created_at", "actions"]);
+const columns = [
+    { data: 'name', title: 'Title' },
+    { data: 'file_path', title: 'Media Link' },
+    { data: 'type', title: 'Media Type' },
+    { data: 'is_published', title: 'Status' },
+    { data: 'created_at', title: 'Created Date' },
+    { title: 'Actions' }
+];
 
-const table_option = ref({
-    perPage: 10,
-    perPageValues: [5, 10, 20, 50, 100, 500, 1000],
-    skin: "table table-hover table-striped",
-    columnsClasses: { actions: "actions text-center" },
-    pagination: { nav: "scroll", chunk: 5 },
-    texts: {
-        count: "Showing {from} to {to} of {count}",
-        filter: "",
-        filterPlaceholder: "Search...",
-        limit: "Results:",
-    },
-    sortable: ["name", "is_published"],
-    sortIcon: {
-        base: "sort-icon-none",
-        up: "sort-icon-asc",
-        down: "sort-icon-desc",
-    },
-    resizableColumns: false,
-});
+const tableOptions = ref({
+    order: [[4, 'desc']],
+    columnDefs: [
+        { data: null, targets: -1, orderable: false, searchable: false, render: '#actions' },
+        { data: 'file_path', targets: 1, render: '#file_path' },
+        { data: 'is_published', targets: 3, render: '#is_published' },
+    ],
+})
 </script>

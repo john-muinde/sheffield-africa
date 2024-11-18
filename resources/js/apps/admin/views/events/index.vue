@@ -31,35 +31,31 @@
                     </div>
 
                     <div class="custom-table">
-                        <v-client-table :data="tableData" :columns="columns" :options="table_option">
-                            <template #event_image="props">
-                                <img :src="'/storage/' + props.row.main_image_path
+                        <CustomDataTable :columns="columns" :data="events" :options="tableOptions">
+                            <template #event_image="{ cellData }">
+                                <img :src="'/storage/' + cellData
                                     " class="rounded profile-img" alt="avatar" />
                             </template>
-                            <template #is_published="props">
-                                <span v-if="props.row.is_published === 1"
-                                    class="badge badge-success inv-status">Published</span>
+                            <template #is_published="{ cellData }">
+                                <span v-if="cellData === 1" class="badge badge-success inv-status">Published</span>
 
-                                <span v-if="props.row.is_published !== 1" class="badge badge-danger inv-status">Not
+                                <span v-else class="badge badge-danger inv-status">Not
                                     Published</span>
                             </template>
-
-                            <template #actions="props">
+                            <template #actions="{ rowData }">
                                 <!-- v-if="can('event-edit')"  -->
-                                <router-link :to="{
-                                    name: 'events.edit',
-                                    params: { id: props.row.id },
-                                }" class="badge bg-info" data-bs-toggle="tooltip" data-bs-placement="top">
+                                <button @click.prevent="navigateToEdit(rowData.id)" class="badge bg-info"
+                                    data-bs-toggle="tooltip" data-bs-placement="top">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                         fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
                                         stroke-linejoin="round" class="feather feather-edit-2">
                                         <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
                                     </svg>
-                                </router-link>
+                                </button>
 
                                 <!--  v-if="can('event-delete')" -->
-                                <a href="javascript:;" @click.prevent="deleteEvent(props.row.id)"
-                                    class="ms-2 badge bg-danger" data-bs-toggle="tooltip" data-bs-placement="top">
+                                <button @click.prevent="deleteEvent(rowData.id)" class="ms-2 badge bg-danger"
+                                    data-bs-toggle="tooltip" data-bs-placement="top">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                         fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
                                         stroke-linejoin="round" class="feather feather-trash">
@@ -68,9 +64,9 @@
                                             d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
                                         </path>
                                     </svg>
-                                </a>
+                                </button>
                             </template>
-                        </v-client-table>
+                        </CustomDataTable>
                     </div>
                 </div>
             </div>
@@ -79,58 +75,42 @@
 </template>
 
 <script setup>
-import { ref, onMounted, watch, computed } from "vue";
+import { ref, onMounted } from "vue";
+
+import { useRouter } from "vue-router";
 
 import { useMeta } from "../../composables/use-meta";
 useMeta({ title: "View Events" });
 
 import useEvents from "@/composables/events";
-import { useAbility } from "@casl/vue";
+import CustomDataTable from '@/Components/CustomDataTable.vue';
+
+const router = useRouter();
 
 const { events, getEvents, deleteEvent } = useEvents();
-const { can } = useAbility();
+
+const columns = [
+    { data: 'name', title: 'Title' },
+    { data: 'main_image_path', title: 'Image' },
+    { data: 'is_published', title: 'Status' },
+    { data: 'created_at', title: 'Created Date' },
+    { title: 'Actions' }
+];
+
+const tableOptions = ref({
+    order: [[3, 'desc']],
+    columnDefs: [
+        { data: null, targets: -1, orderable: false, searchable: false, render: '#actions' },
+        { data: 'main_image_path', targets: 1, render: '#event_image' },
+        { data: 'is_published', targets: 2, render: '#is_published' }
+    ],
+});
+
+const navigateToEdit = (id) => {
+    router.push({ name: 'events.edit', params: { id } });
+};
 
 onMounted(() => {
     getEvents();
-
 });
-
-const tableData = computed(() => {
-    return Array.isArray(events.value) ? events.value : [];
-});
-
-const columns = ref([
-    "id",
-    "event_image",
-    "name",
-    "description",
-    "is_published",
-    "created_at",
-    "actions",
-]);
-
-const table_option = ref({
-    perPage: 10,
-    perPageValues: [5, 10, 20, 50],
-    skin: "table table-hover table-striped",
-    columnsClasses: { actions: "actions text-center" },
-    pagination: { nav: "scroll", chunk: 5 },
-    texts: {
-        count: "Showing {from} to {to} of {count}",
-        filter: "",
-        filterPlaceholder: "Search...",
-        limit: "Results:",
-    },
-    sortable: ["id", "name", "is_published"],
-    sortIcon: {
-        base: "sort-icon-none",
-        up: "sort-icon-asc",
-        down: "sort-icon-desc",
-    },
-    resizableColumns: false,
-});
-
-const view_row = (item) => {
-    alert("ID: " + item.id + ", Name: " + item.name);
-};
 </script>
