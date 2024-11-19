@@ -267,8 +267,8 @@
                             </div>
                             <div class="panel-body paragraph-advance">
                                 <div class="clipboard copy-txt">
-                                    <p class="mb-4">Link -> <span>http://www.admin-dashboard.com/code</span></p>
-                                    <button type="button" class="btn btn-primary mb-1 mx-1" @click="copy('http://www.admin-dashboard.com/code')">
+                                    <p class="mb-4">Link -> <span>https://www.admin-dashboard.com/code</span></p>
+                                    <button type="button" class="btn btn-primary mb-1 mx-1" @click="copy('https://www.admin-dashboard.com/code')">
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
                                             width="24"
@@ -314,8 +314,8 @@
                                             <pre>
 &lt;!-- Copy Hidden Text (Advanced) --&gt;
 &lt;div class=&quot;clipboard copy-txt&quot;&gt;
-    &lt;p class=&quot;mb-4&quot;&gt;Link -&gt; &lt;span&gt;http://www.admin-dashboard.com/code&lt;/span&gt;&lt;/p&gt;
-    &lt;button type=&quot;button&quot; class=&quot;btn btn-primary mb-1 mx-1&quot; @click=&quot;copy('http://www.admin-dashboard.com/code')&quot;&gt;
+    &lt;p class=&quot;mb-4&quot;&gt;Link -&gt; &lt;span&gt;https://www.admin-dashboard.com/code&lt;/span&gt;&lt;/p&gt;
+    &lt;button type=&quot;button&quot; class=&quot;btn btn-primary mb-1 mx-1&quot; @click=&quot;copy('https://www.admin-dashboard.com/code')&quot;&gt;
         &lt;svg&gt; ... &lt;/svg&gt;Copy Link
     &lt;/button&gt;
     &lt;button type=&quot;button&quot; class=&quot;btn btn-dark mb-1 mx-1&quot; @click=&quot;copy('2291')&quot;&gt;
@@ -348,7 +348,7 @@
     useMeta({ title: "Clipboard" });
 
     const code_arr = ref([]);
-    const message1 = ref("http://www.admin-dashboard.com");
+    const message1 = ref("https://www.admin-dashboard.com");
     const message2 = ref("Lorem ipsum dolor sit amet, consectetur adipiscing elit...");
 
     const { toClipboard } = useClipboard();
