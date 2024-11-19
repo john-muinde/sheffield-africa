@@ -76,23 +76,22 @@ import vue3JsonExcel from "vue3-json-excel";
 import VueFormWizard from "vue3-form-wizard";
 import "vue3-form-wizard/dist/style.css";
 
+// ant design
+import Antd from "ant-design-vue";
+import "ant-design-vue/dist/reset.css";
+app.use(Antd);
+
 // set default settings
 import appSetting from "./app-setting";
 window.$appSetting = appSetting;
 window.$appSetting.init();
 
+import showToast from "./utils/notification";
 window.showToast = showToast;
 
 //markdown editor
 import VueEasymde from "vue3-easymde";
 import "easymde/dist/easymde.min.css";
-
-// ant design
-import Antd from "ant-design-vue";
-import "ant-design-vue/dist/reset.css";
-import showToast from "./utils/notification";
-
-app.use(Antd);
 
 app.use(store)
     .use(router)

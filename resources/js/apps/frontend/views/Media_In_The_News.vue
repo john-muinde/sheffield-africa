@@ -14,7 +14,12 @@
                                 News
                             </p>
 
-                            <div class="row justify-content-left">
+                            <ContentState v-if="loading" type="loading" contentType="Articles In The News" />
+                            <ContentState v-if="!displayedProducts.length && !loading" type="empty"
+                                contentType="Our articles In The News" />
+                            <ContentState v-if="!!error" type="error" contentType="Articles In The News" />
+
+                            <div class="row justify-content-left" v-if="displayedProducts.length">
                                 <div class="col-12 col-md-6 col-lg-4 mb-2 blog-item"
                                     v-for="product in displayedProducts" :key="product.id">
                                     <div class="p-6 border rounded">
@@ -106,7 +111,7 @@
 
 <script setup>
 import { ref, computed, watch, onMounted, watchEffect } from "vue";
-// import axios from "axios";
+import ContentState from "@/Components/ContentState.vue";
 import { useRoute } from "vue-router";
 import { useMeta } from "../../admin/composables/use-meta";
 
@@ -121,8 +126,12 @@ const products = ref([]);
 const category_id = ref(route.params.id ? parseInt(route.params.id) : 1);
 const other_blogs = ref([]);
 
+const loading = ref(false);
+const error = ref(null);
+
 // Fetch products based on the current page
 const fetchProducts = async () => {
+    loading.value = true;
     try {
         const response = await axios.get("/api/get-in-the-news", {
             params: {
@@ -133,9 +142,11 @@ const fetchProducts = async () => {
         });
         products.value = response.data.data;
         totalProducts.value = response.data.total;
-
+        loading.value = false;
 
     } catch (error) {
+        loading.value = false;
+        error.value = error;
         console.error(error);
     }
 };

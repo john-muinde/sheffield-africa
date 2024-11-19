@@ -245,7 +245,7 @@
                                 <div class="col-lg-4 d-flex justify-content-end align-items-center">
                                     <div class="header-dropdown-link">
                                         <div class="dropdown compare-dropdown">
-                                            <router-link to="/myaccount" class="dropdown-toggle" role="button"
+                                            <router-link to="/my-account" class="dropdown-toggle" role="button"
                                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                                                 data-display="static" title="Compare Products"
                                                 aria-label="Compare Products">

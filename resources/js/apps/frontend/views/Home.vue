@@ -75,7 +75,7 @@
                             <i class="icon-shopping-cart"></i>
                             <span class="cart-count">{{
                                 cartItems.length
-                            }}</span>
+                                }}</span>
                             <span class="cart-txt">Cart</span>
                         </router-link>
 
@@ -346,8 +346,8 @@
     <template v-if="showPopup">
         <div class="popup-advert">
             <div class="popup-content">
-                <img src="/assets/images/events/Showroom Bonanza_Pizzeria Solutions Promotion-01.webp" alt="Rotobake Ovens Solutions" class="popup-image"
-                    style="  width: 100%; min-height: 480px;" />
+                <img src="/assets/images/events/Showroom Bonanza_Pizzeria Solutions Promotion-01.webp"
+                    alt="Rotobake Ovens Solutions" class="popup-image" style="  width: 100%; min-height: 480px;" />
                 <div class="button-group row">
                     <button @click="dismissPopup" class="btn btn-primary btn-footer col-4">
                         Cancel
@@ -370,12 +370,12 @@ import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 
-import { ref, onMounted, onBeforeUnmount, computed } from "vue";
+import { ref, onMounted, onBeforeUnmount, computed, defineAsyncComponent } from "vue";
 
 import { useMeta } from "../../admin/composables/use-meta";
-import ProductCard from '@/Components/ProductCard.vue';
+const ProductCard = defineAsyncComponent(() => import('@/Components/ProductCard.vue'));
 
-import { useRoute, useRouter } from 'vue-router';
+import { useRouter } from 'vue-router';
 
 
 useMeta({

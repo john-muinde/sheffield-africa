@@ -18,7 +18,6 @@
                             </div>
 
                             <!-- Filters Section -->
-
                             <span>
                                 Search for Videos
                             </span>
@@ -35,15 +34,11 @@
                                 </div>
                             </span>
 
-                            <!-- Category Filters -->
-                            <div class="flex-1 gap-2 overflow-x-auto pb-2">
-                                <!-- Add the filter component -->
-                                <DynamicFilters :items="videos" filter-column="type"
-                                    @update:displayedProducts="handleUpdateDisplayedProducts" :filters="filters"
-                                    :search-term="searchTerm" classes="row" />
-                            </div>
+                            <ContentState v-if="loading" type="loading" contentType="videos" />
+                            <ContentState v-if="!filteredVideos.length && !loading" type="empty" contentType="videos" />
+                            <ContentState v-if="!!error" type="error" contentType="videos" />
 
-                            <TransitionGroup tag="div"
+                            <TransitionGroup v-if="filteredVideos.length" tag="div"
                                 class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-6"
                                 :css="false" @before-enter="onBeforeEnter" @enter="onEnter" @leave="onLeave">
                                 <div v-for="video in filteredVideos" :key="video.id" :data-index="video.id"
@@ -61,6 +56,10 @@
                                                 class="w-16 h-16 rounded-full bg-white bg-opacity-90 flex items-center justify-center transform scale-0 group-hover:scale-100 transition-transform duration-300">
                                                 <div class="play-icon w-8 h-8"
                                                     :class="{ 'playing': selectedVideo?.id === video.id && !isPaused }">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                                        fill="currentColor" class="w-8 h-8">
+                                                        <path d="M8 5v14l11-7z" />
+                                                    </svg>
                                                 </div>
                                             </div>
                                         </div>
@@ -71,14 +70,6 @@
                                         <h4 class="font-semibold text-gray-900 mb-2 line-clamp-2"
                                             style="font-size: 1.6rem;">{{ video.name
                                             }}</h4>
-                                        <p class="text-gray-600 line-clamp-2" style="font-size: 1.5rem;">
-                                            {{ video.description || 'No description available'
-                                            }}
-                                        </p>
-                                        <div class="mt-3 flex items-center justify-between" style="font-size: 1.1rem;">
-                                            <span class="text-blue-600">{{ video.duration || '00:00' }}</span>
-                                            <span class="text-gray-500">{{ video.category }}</span>
-                                        </div>
                                     </div>
                                 </div>
                             </TransitionGroup>
@@ -135,40 +126,45 @@
     </div>
 </template>
 
+<style scoped>
+.play-icon {
+    transition: transform 0.3s;
+}
+
+.play-icon.playing {
+    transform: scale(1.2);
+}
+</style>
+
 <script setup>
-// import '@/styles.css'
 import { ref, computed, onMounted, onUnmounted, watch } from 'vue';
 import { TransitionRoot, TransitionChild, Dialog, DialogPanel } from '@headlessui/vue';
 import gsap from 'gsap';
-import DynamicFilters from '@/Components/DynamicFilters.vue';
 
-const filters = ref([
-    { 'Upload': 'Uploaded Videos' },
-    { 'Youtube Url': 'YouTube Videos' }
-]);
+import ContentState from '@/Components/ContentState.vue';
 
 // State
 const videos = ref([]);
 const selectedVideo = ref(null);
 const isPaused = ref(true);
-const filteredVideos = ref([]);
+const filteredVideos = ref(videos.value);
 const searchTerm = ref('');
+const loading = ref(false);
+const error = ref(null);
 const videoElement = ref(null);
 
 const isYouTubeVideo = computed(() => {
     return selectedVideo.value && selectedVideo.value.type !== 'Upload';
 });
 
-const handleUpdateDisplayedProducts = ({ filteredData, selectedFilters }) => {
-    filteredVideos.value = filteredData;
-    selectedFilters.value = selectedFilters;
-};
-
 // Methods
 const fetchVideos = async () => {
+    loading.value = true;
     try {
         const response = await axios.get('/api/get-media-center-videos');
         videos.value = response.data.videos;
+        filteredVideos.value = videos.value;
+        loading.value = false;
 
         // Get duration and thumbnail for each video
         for (const video of videos.value) {
@@ -177,31 +173,12 @@ const fetchVideos = async () => {
             }
         }
     } catch (error) {
+        error.value = error;
         console.error('Error fetching videos:', error);
+    } finally {
+        loading.value = false;
     }
 };
-
-// const fetchYouTubeVideoDetails = async (video) => {
-//     const videoId = getYoutubeId(video.video_url);
-//     const url = `'http://gdata.youtube.com/feeds/api/videos/${videoId}?v=2&alt=jsonc`;
-
-//     try {
-//         const response = await fetch(url);
-//
-//         const duration = response.data.items[0].contentDetails.duration;
-//         video.duration = formatYouTubeDuration(duration);
-//     } catch (error) {
-//         console.error('Error fetching YouTube video details:', error);
-//     }
-// };
-
-// const formatYouTubeDuration = (duration) => {
-//     const match = duration.match(/PT(\d+H)?(\d+M)?(\d+S)?/);
-//     const hours = (parseInt(match[1]) || 0);
-//     const minutes = (parseInt(match[2]) || 0);
-//     const seconds = (parseInt(match[3]) || 0);
-//     return `${hours ? hours + ':' : ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-// };
 
 const getYoutubeId = (url) => {
     if (!url) return '';
@@ -235,13 +212,9 @@ const generateThumbnail = async (video) => {
         videoElement.src = videoSrc(video);
         videoElement.crossOrigin = 'anonymous';
 
-        videoElement.addEventListener('loadedmetadata', () => {
-            video.duration = formatDuration(videoElement.duration);
-        });
-
         videoElement.addEventListener('loadeddata', () => {
             // Seek to 4.5 seconds if the video is longer than 4.5 seconds
-            const seekTime = Math.min(4.5, videoElement.duration);
+            const seekTime = Math.min(4.5, videoElement.duration || 0);
             videoElement.currentTime = seekTime;
         });
 
@@ -260,12 +233,6 @@ const generateThumbnail = async (video) => {
             reject(error);
         });
     });
-};
-
-const formatDuration = (seconds) => {
-    const minutes = Math.floor(seconds / 60);
-    const remainingSeconds = Math.floor(seconds % 60);
-    return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
 };
 
 const playVideo = (video) => {
@@ -312,6 +279,13 @@ onUnmounted(() => {
     if (videoElement.value) {
         videoElement.value.pause();
     }
+});
+
+// Watchers
+watch(searchTerm, (value) => {
+    filteredVideos.value = videos.value.filter((video) => {
+        return video.name.toLowerCase().includes(value.toLowerCase());
+    });
 });
 </script>
 

@@ -26,19 +26,18 @@ export default {
 </script>
 
 <script setup>
-import Navbar from "../components/layout/navbar.vue";
-//import NavbarHome from "../components/layout/navbarHome.vue";
-import Footer from "../components/layout/footer.vue";
-import MobileMenu from "../components/layout/mobile-menu.vue";
-import KitchenMenu from "../components/layout/KitchenMenu.vue";
-import LaundryMenu from "../components/layout/LaundryMenu.vue";
-import ColdRoomMenu from "../components/layout/ColdRoomMenu.vue";
-import PromotionalMenu from "../components/layout/PromotionalMenu.vue";
-
-import { ref, computed } from "vue";
+import { defineAsyncComponent, computed } from "vue";
 import { useRoute } from "vue-router";
 
 const route = useRoute();
+
+const Navbar = defineAsyncComponent(() => import("../components/layout/navbar.vue"));
+const Footer = defineAsyncComponent(() => import("../components/layout/footer.vue"));
+const MobileMenu = defineAsyncComponent(() => import("../components/layout/mobile-menu.vue"));
+const KitchenMenu = defineAsyncComponent(() => import("../components/layout/KitchenMenu.vue"));
+const LaundryMenu = defineAsyncComponent(() => import("../components/layout/LaundryMenu.vue"));
+const ColdRoomMenu = defineAsyncComponent(() => import("../components/layout/ColdRoomMenu.vue"));
+const PromotionalMenu = defineAsyncComponent(() => import("../components/layout/PromotionalMenu.vue"));
 
 const isHomePage = computed(() => {
     return route.path === "/";

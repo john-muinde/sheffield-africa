@@ -1,20 +1,4 @@
-import Cookies from "js-cookie";
 import store from "../store";
-
-// Frontend Page Components
-import Home from "../apps/frontend/views/Home.vue";
-import HomeHEX from "../apps/frontend/views/Home-HEX.vue";
-import About from "../apps/frontend/views/About.vue";
-import FAQ from "../apps/frontend/views/FAQ.vue";
-import DeliveryInformation from "../apps/frontend/views/DeliveryInformation.vue";
-import ContactUs from "../apps/frontend/views/ContactUs.vue";
-import Career from "../apps/frontend/views/Career.vue";
-import Wishlist from "../apps/frontend/views/Wishlist.vue";
-import Cart from "../apps/frontend/views/Cart.vue";
-import Checkout from "../apps/frontend/views/Checkout.vue";
-import MyAccount from "../apps/frontend/views/MyAccount.vue";
-import NotFound from "../apps/frontend/views/404.vue";
-import AdminNotFound from "../apps/admin/views/404.vue";
 
 function requireAdminLogin(to, from, next) {
     let isLogin = false;
@@ -51,7 +35,6 @@ function guest(to, from, next) {
 
 const routes = [
     // FRONTEND ROUTES
-
     {
         path: "/",
         //beforeEnter: guest,
@@ -98,7 +81,7 @@ const routes = [
             {
                 path: "/",
                 name: "frontend.home",
-                component: Home,
+                component: () => import("../apps/frontend/views/Home.vue"),
                 meta: {
                     layout: "frontend",
                     title: "Home",
@@ -734,7 +717,8 @@ const routes = [
             {
                 path: "/deliveryinformation",
                 name: "deliveryinformation",
-                component: DeliveryInformation,
+                component: () =>
+                    import("../apps/frontend/views/DeliveryInformation.vue"),
                 meta: {
                     layout: "frontend",
                     title: "Delivery Information",
@@ -753,7 +737,7 @@ const routes = [
             {
                 path: "/contact-us",
                 name: "contact",
-                component: ContactUs,
+                component: () => import("../apps/frontend/views/ContactUs.vue"),
                 meta: {
                     layout: "frontend",
                     title: "Contact Us",
@@ -865,28 +849,9 @@ const routes = [
                 },
             },
             {
-                path: "/wishlist",
-                name: "wishlist",
-                component: Wishlist,
-                meta: {
-                    layout: "frontend",
-                    title: "Wishlist",
-                    metaTags: [
-                        {
-                            name: "description",
-                            content: "The about page of our example app.",
-                        },
-                        {
-                            property: "og:description",
-                            content: "The about page of our example app.",
-                        },
-                    ],
-                },
-            },
-            {
                 path: "/cart",
                 name: "cart",
-                component: Cart,
+                component: () => import("../apps/frontend/views/Cart.vue"),
                 meta: {
                     layout: "frontend",
                     title: "Cart",
@@ -927,29 +892,10 @@ const routes = [
             {
                 path: "/checkout",
                 name: "checkout",
-                component: Checkout,
+                component: () => import("../apps/frontend/views/Checkout.vue"),
                 meta: {
                     layout: "frontend",
                     title: "Checkout",
-                    metaTags: [
-                        {
-                            name: "description",
-                            content: "The about page of our example app.",
-                        },
-                        {
-                            property: "og:description",
-                            content: "The about page of our example app.",
-                        },
-                    ],
-                },
-            },
-            {
-                path: "/myaccount",
-                name: "myaccount",
-                component: MyAccount,
-                meta: {
-                    layout: "frontend",
-                    title: "My Account",
                     metaTags: [
                         {
                             name: "description",
@@ -1638,7 +1584,10 @@ const routes = [
             {
                 path: "/admin/:pathMatch(.*)*",
                 name: "admin.404",
-                component: AdminNotFound,
+                component: () =>
+                    import(
+                        /* webpackChunkName: "index" */ "../apps/admin/views/404.vue"
+                    ),
                 meta: {
                     layout: "app",
                     title: "404",
@@ -1657,7 +1606,7 @@ const routes = [
             {
                 path: "/:pathMatch(.*)*",
                 name: "404",
-                component: NotFound,
+                component: () => import("../apps/frontend/views/404.vue"),
                 meta: {
                     layout: "frontend",
                     title: "404",

@@ -1,4 +1,6 @@
-import { notification } from "ant-design-vue";
+import useNotification from "ant-design-vue/es/notification/useNotification";
+
+const { notification } = useNotification();
 
 const showToast = (description, type = "success", message = "Success") => {
     if (!message || message.length == 0 || type != "success") {

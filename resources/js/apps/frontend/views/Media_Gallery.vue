@@ -14,7 +14,13 @@
                             <!-- Add the filter component -->
                             <DynamicFilters :items="products" filter-column="gallery_type"
                                 @update:displayedProducts="handleUpdateDisplayedProducts" :filters="filters" />
-                            <div class="row mt-2">
+
+                            <ContentState v-if="loading" type="loading" contentType="gallery" />
+                            <ContentState v-if="!displayedProducts.length && !loading" type="empty"
+                                contentType="gallery" />
+                            <ContentState v-if="!!error" type="error" contentType="gallery" />
+
+                            <div class="row mt-2" v-if="displayedProducts.length">
                                 <div class="entry-item col-sm-6 col-lg-4" v-for="product in displayedProducts"
                                     :key="product.id">
                                     <article class="entry entry-mask">
@@ -88,6 +94,8 @@ import { useMeta } from "../../admin/composables/use-meta";
 import DynamicFilters from '@/Components/DynamicFilters.vue';
 import axios from 'axios';
 
+import ContentState from '@/Components/ContentState.vue';
+
 useMeta({ title: "Gallery | Media Center" });
 
 const route = useRoute();
@@ -107,8 +115,12 @@ const filters = ref([
     'PROJECT'
 ]);
 
+const loading = ref(false);
+const error = ref(null);
+
 // Fetch products based on the current page
 const fetchProducts = async (url = null) => {
+    loading.value = true;
     if (typeof url == 'string' && url.includes('http')) {
         url = url.split('/api/').pop();
     }
@@ -129,9 +141,14 @@ const fetchProducts = async (url = null) => {
             prev_page_url: data.prev_page_url,
             links: data.links
         };
+        loading.value = false;
         updateDisplayedProducts(products.value);
     } catch (error) {
+        error.value = error;
         console.error(error);
+    }
+    finally {
+        loading.value = false;
     }
 };
 

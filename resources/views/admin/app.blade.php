@@ -42,7 +42,6 @@
 
 <body>
     <div id="app">
-
         <div id="breadcrumb"></div>
     </div>
 

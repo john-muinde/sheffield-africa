@@ -7,71 +7,45 @@
                         <div class="col-lg-10 offset-lg-1">
                             <h2 class="about-us-title">Blogs</h2>
                             <!-- End .title -->
-                            <router-link
-                                to="/media"
-                                class="btn btn-primary btn-round btn-shadow float-right"
-                                ><i class="icon-long-arrow-left"></i
-                                ><span>Back to Media Center</span></router-link
-                            >
+                            <router-link to="/media" class="btn btn-primary btn-round btn-shadow float-right"><i
+                                    class="icon-long-arrow-left"></i><span>Back to Media Center</span></router-link>
                             <p class="lead about-us-lead text-primary mb-3">
                                 In-Depth Insights
                             </p>
-                            <div
-                                v-if="loading"
-                                class="text-center w-100 my-4 text-green-600 font-semibold"
-                            >
-                                <i class="fas fa-spinner fa-spin"></i> Loading
-                                blog posts...
-                            </div>
-                            <div v-else class="row blogs-main-page-section">
-                                <div
-                                    class="entry-item col-sm-6 col-lg-4"
-                                    v-for="post in displayedPosts"
-                                    :key="post.id"
-                                >
+                            <ContentState v-if="loading" type="loading" contentType="Blog Posts" />
+                            <ContentState v-if="!displayedPosts.length && !loading" type="empty"
+                                contentType="Blog Posts" />
+                            <ContentState v-if="!!error" type="error" contentType="Blog Posts" />
+
+                            <div v-if="displayedPosts.length" class="row blogs-main-page-section">
+                                <div class="entry-item col-sm-6 col-lg-4" v-for="post in displayedPosts" :key="post.id">
                                     <article class="entry entry-grid">
-                                        <figure
-                                            class="entry-media entry-gallery"
-                                        >
-                                            <router-link
-                                                :to="
-                                                    getBlogLink(
-                                                        post.id,
-                                                        post.name
-                                                    )
-                                                "
-                                            >
-                                                <img
-                                                    :src="
-                                                        '/storage/' +
+                                        <figure class="entry-media entry-gallery">
+                                            <router-link :to="getBlogLink(
+                                                post.id,
+                                                post.name
+                                            )
+                                                ">
+                                                <img :src="'/storage/' +
+                                                    post.main_image_path
+                                                    " v-lazy:src="'/storage/' +
                                                         post.main_image_path
-                                                    "
-                                                    v-lazy:src="
-                                                        '/storage/' +
-                                                        post.main_image_path
-                                                    "
-                                                    alt="image desc"
-                                                />
+                                                        " alt="image desc" />
                                             </router-link>
                                         </figure>
                                         <!-- End .entry-media -->
 
                                         <div class="entry-body">
                                             <h2 class="entry-title">
-                                                <router-link
-                                                    class="text-primary"
-                                                    :to="
-                                                        getBlogLink(
-                                                            post.id,
-                                                            post.name
-                                                        )
-                                                    "
-                                                    >{{
+                                                <router-link class="text-primary" :to="getBlogLink(
+                                                    post.id,
+                                                    post.name
+                                                )
+                                                    ">{{
                                                         getBlogParagraph(
                                                             post.name
                                                         )
-                                                    }}</router-link
-                                                >
+                                                    }}</router-link>
                                             </h2>
                                             <!-- End .entry-title -->
 
@@ -83,19 +57,13 @@
                                                         )
                                                     }}
                                                 </div>
-                                                <router-link
-                                                    class="btn btn-primary"
-                                                    :to="
-                                                        getBlogLink(
-                                                            post.id,
-                                                            post.name
-                                                        )
-                                                    "
-                                                >
+                                                <router-link class="btn btn-primary" :to="getBlogLink(
+                                                    post.id,
+                                                    post.name
+                                                )
+                                                    ">
                                                     Read More
-                                                    <i
-                                                        class="icon-long-arrow-right"
-                                                    ></i>
+                                                    <i class="icon-long-arrow-right"></i>
                                                 </router-link>
                                             </div>
                                         </div>
@@ -105,61 +73,33 @@
                                 </div>
                             </div>
 
-                            <div class="row">
+                            <div v-if="displayedPosts.length" class="row">
                                 <div class="col-md-12">
                                     <nav aria-label="Page navigation">
-                                        <ul
-                                            class="pagination justify-content-center"
-                                        >
-                                            <li
-                                                class="page-item"
-                                                :class="{
-                                                    disabled: currentPage === 1,
-                                                }"
-                                            >
-                                                <router-link
-                                                    class="page-link page-link-prev"
-                                                    :to="
-                                                        getBlogPageLink(
-                                                            currentPage - 1
-                                                        )
-                                                    "
-                                                    aria-label="Previous"
-                                                    tabindex="-1"
-                                                    aria-disabled="true"
-                                                    @click="goToPreviousPage"
-                                                >
-                                                    <span aria-hidden="true"
-                                                        ><i
-                                                            class="icon-long-arrow-left"
-                                                        ></i
-                                                    ></span>
+                                        <ul class="pagination justify-content-center">
+                                            <li class="page-item" :class="{
+                                                disabled: currentPage === 1,
+                                            }">
+                                                <router-link class="page-link page-link-prev" :to="getBlogPageLink(
+                                                    currentPage - 1
+                                                )
+                                                    " aria-label="Previous" tabindex="-1" aria-disabled="true"
+                                                    @click="goToPreviousPage">
+                                                    <span aria-hidden="true"><i class="icon-long-arrow-left"></i></span>
                                                     Prev
                                                 </router-link>
                                             </li>
-                                            <li
-                                                class="page-item"
-                                                v-for="page in generatePageLinks"
-                                                :key="page"
-                                                :class="{
-                                                    active:
-                                                        page === currentPage,
-                                                }"
-                                            >
-                                                <template
-                                                    v-if="isInteger(page)"
-                                                >
-                                                    <router-link
-                                                        class="page-link"
-                                                        :to="
-                                                            getBlogPageLink(
-                                                                page
-                                                            )
-                                                        "
-                                                        @click="
+                                            <li class="page-item" v-for="page in generatePageLinks" :key="page" :class="{
+                                                active:
+                                                    page === currentPage,
+                                            }">
+                                                <template v-if="isInteger(page)">
+                                                    <router-link class="page-link" :to="getBlogPageLink(
+                                                        page
+                                                    )
+                                                        " @click="
                                                             goToThisPage(page)
-                                                        "
-                                                    >
+                                                            ">
                                                         {{ page }}
                                                     </router-link>
                                                 </template>
@@ -167,30 +107,18 @@
                                             <li class="page-item-total">
                                                 of {{ totalPages }}
                                             </li>
-                                            <li
-                                                class="page-item"
-                                                :class="{
-                                                    disabled:
-                                                        currentPage ===
-                                                        totalPages,
-                                                }"
-                                            >
-                                                <router-link
-                                                    class="page-link page-link-next"
-                                                    :to="
-                                                        getBlogPageLink(
-                                                            currentPage + 1
-                                                        )
-                                                    "
-                                                    aria-label="Next"
-                                                    @click="goToNextPage"
-                                                >
+                                            <li class="page-item" :class="{
+                                                disabled:
+                                                    currentPage ===
+                                                    totalPages,
+                                            }">
+                                                <router-link class="page-link page-link-next" :to="getBlogPageLink(
+                                                    currentPage + 1
+                                                )
+                                                    " aria-label="Next" @click="goToNextPage">
                                                     Next
-                                                    <span aria-hidden="true"
-                                                        ><i
-                                                            class="icon-long-arrow-right"
-                                                        ></i
-                                                    ></span>
+                                                    <span aria-hidden="true"><i
+                                                            class="icon-long-arrow-right"></i></span>
                                                 </router-link>
                                             </li>
                                         </ul>
@@ -213,6 +141,7 @@
 import { ref, computed, watch, onMounted, watchEffect } from "vue";
 import { useRoute } from "vue-router";
 import { useMeta } from "../../admin/composables/use-meta";
+import ContentState from "@/Components/ContentState.vue";
 
 useMeta({ title: "Blogs | Media Center" });
 
@@ -224,7 +153,10 @@ const totalPosts = ref(0);
 const posts = ref([]);
 const category_id = ref(route.params.id ? parseInt(route.params.id) : 1);
 const other_blogs = ref([]);
+
+
 const loading = ref(false);
+const error = ref(null);
 
 const fetchBlogPosts = async () => {
     loading.value = true;
@@ -239,6 +171,7 @@ const fetchBlogPosts = async () => {
         posts.value = response.data.data;
         totalPosts.value = response.data.total;
     } catch (error) {
+        error.value = error;
         console.error(error);
     } finally {
         loading.value = false;

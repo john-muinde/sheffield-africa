@@ -21,14 +21,6 @@ export default function useVideos() {
     const validationErrors = ref({});
     const isLoading = ref(false);
 
-    const sanitizeNulls = (val) => {
-        for (let key in val) {
-            if (val[key] === "null") {
-                val[key] = null;
-            }
-        }
-    };
-
     const getVideos = async (
         page = 1,
         search_id = "",
