@@ -9,7 +9,7 @@
                             <div class="flex justify-between items-center">
                                 <div>
                                     <h2 class="about-us-title">Videos</h2>
-                                    <p class="lead about-us-lead">Explore our videos</p>
+                                    <p class="lead about-us-lead text-primary mb-1">Explore our videos</p>
                                 </div>
                                 <router-link to="/media" class="btn btn-primary btn-round btn-shadow">
                                     <i class="icon-long-arrow-left"></i>
