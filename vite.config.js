@@ -21,8 +21,8 @@ export default defineConfig({
     plugins: [
         laravel({
             input: [
-                "resources/js/admin-main.js",
                 "resources/js/frontend-main.js",
+                "resources/js/admin-main.js",
                 "resources/css/app.css",
                 "resources/js/apps/frontend/assets/css/bootstrap.min.css",
                 "resources/js/apps/frontend/assets/css/plugins/owl-carousel/owl.carousel.css",

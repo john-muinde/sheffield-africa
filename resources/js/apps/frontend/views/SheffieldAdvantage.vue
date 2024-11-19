@@ -1,42 +1,28 @@
 <template>
     <main class="main">
-
-        
-        
-
         <div class="page-content pb-3 pt-1 my-header-image-section">
-
             <!-- <img class="my-header-image" src="/assets/images/sheffield_advantage.jpg"> -->
             <div class="container">
                 <!-- <div class="row justify-content-center mb-4">
-                    <div class="col-12">                   
+                    <div class="col-12">
                         <div class="headings main-header">
                             <h3 class="heading text-primary">Sheffield Advantages</h3>
                         </div>
                     </div>
-                  
+
                 </div> -->
                 <!-- End .row -->
 
-
                 <div class="row">
-
-                    <div class="col-md-12 justify-content-center">  
-
+                    <div class="col-md-12 justify-content-center">
                         <div class="row justify-content-left links-container mt-3 mb-3">
-
-
                             <div class="advantage-item start-advantage-item">
-
-                                <img src="/assets/images/sheffield_advantage_embosed.jpg">
-
+                                <img src="/assets/images/sheffield_advantage_embosed.jpg" />
                             </div>
 
-
-                            <div class="advantage-item" >
-
+                            <div class="advantage-item">
                                 <div class="advantage-image">
-                                    <img src="/assets/images/sheffield-advantages-icons/our_experience.png">
+                                    <img src="/assets/images/sheffield-advantages-icons/our_experience.png" />
                                 </div>
 
                                 <div class="advantage-description">
@@ -45,17 +31,18 @@
 
                                 <div class="advantage-text">
                                     <p>
-                                        Sheffield draws from a deep well of experience & exposure nurtured over 20+ years in the industry to deliver high-quality, efficient and sustainable solutions to our customers.
+                                        Sheffield draws from a deep well of
+                                        experience & exposure nurtured over 20+
+                                        years in the industry to deliver
+                                        high-quality, efficient and sustainable
+                                        solutions to our customers.
                                     </p>
                                 </div>
-
                             </div>
 
-
-                            <div class="advantage-item" >
-
+                            <div class="advantage-item">
                                 <div class="advantage-image">
-                                    <img src="/assets/images/sheffield-advantages-icons/our_african.png">
+                                    <img src="/assets/images/sheffield-advantages-icons/our_african.png" />
                                 </div>
 
                                 <div class="advantage-description">
@@ -64,41 +51,39 @@
 
                                 <div class="advantage-text">
                                     <p>
-                                        We are a Pan African Company offering solutions built for Africa and have installed projects in Kenya, Uganda, Tanzania, Rwanda, Ethiopia, Burundi, Nigeria, Congo & Sudan.
+                                        We are a Pan African Company offering
+                                        solutions built for Africa and have
+                                        installed projects in Kenya, Uganda,
+                                        Tanzania, Rwanda, Ethiopia, Burundi,
+                                        Nigeria, Congo & Sudan.
                                     </p>
                                 </div>
-
                             </div>
 
-
-
-                            <div class="advantage-item" >
-
+                            <div class="advantage-item">
                                 <div class="advantage-image">
-
-                                    <img src="/assets/images/sheffield-advantages-icons/our_staff.png">
-                                    
+                                    <img src="/assets/images/sheffield-advantages-icons/our_staff.png" />
                                 </div>
 
                                 <div class="advantage-description">
-                                    <span>Our Staff’s Capacity and Capability</span>
+                                    <span>Our Staff’s Capacity and
+                                        Capability</span>
                                 </div>
 
                                 <div class="advantage-text">
                                     <p>
-                                        Fully equipped with an in-house design team, service and manufacturing engineers and qualified technicians for every project. Our people are the heart of the Company.
+                                        Fully equipped with an in-house design
+                                        team, service and manufacturing
+                                        engineers and qualified technicians for
+                                        every project. Our people are the heart
+                                        of the Company.
                                     </p>
                                 </div>
-
                             </div>
 
-
-                            <div class="advantage-item" >
-
+                            <div class="advantage-item">
                                 <div class="advantage-image">
-
-                                    <img src="/assets/images/sheffield-advantages-icons/our_infrastucture.png">
-                                    
+                                    <img src="/assets/images/sheffield-advantages-icons/our_infrastucture.png" />
                                 </div>
 
                                 <div class="advantage-description">
@@ -107,21 +92,19 @@
 
                                 <div class="advantage-text">
                                     <p>
-                                        Our state-of-the-art showroom, manufacturing plant, and experience center supports our customized solutions. Our clients can visit and see the concepts and solutions we have to offer.
+                                        Our state-of-the-art showroom,
+                                        manufacturing plant, and experience
+                                        center supports our customized
+                                        solutions. Our clients can visit and see
+                                        the concepts and solutions we have to
+                                        offer.
                                     </p>
                                 </div>
-
                             </div>
 
-                            
-
-
-                            <div class="advantage-item" >
-
+                            <div class="advantage-item">
                                 <div class="advantage-image">
-
-                                    <img src="/assets/images/sheffield-advantages-icons/one_stop.png">
-                                    
+                                    <img src="/assets/images/sheffield-advantages-icons/one_stop.png" />
                                 </div>
 
                                 <div class="advantage-description">
@@ -130,18 +113,19 @@
 
                                 <div class="advantage-text">
                                     <p>
-                                        For every project, we provide drawings concept design, supply, installation, and training and after-sales support for Commercial Kitchen, Laundry, Cold Storage with a Fixed Time & Fixed Price Approach.
+                                        For every project, we provide drawings
+                                        concept design, supply, installation,
+                                        and training and after-sales support for
+                                        Commercial Kitchen, Laundry, Cold
+                                        Storage with a Fixed Time & Fixed Price
+                                        Approach.
                                     </p>
                                 </div>
-
                             </div>
 
-                            <div class="advantage-item" >
-
+                            <div class="advantage-item">
                                 <div class="advantage-image">
-
-                                    <img src="/assets/images/sheffield-advantages-icons/our_innovation.png">
-                                    
+                                    <img src="/assets/images/sheffield-advantages-icons/our_innovation.png" />
                                 </div>
 
                                 <div class="advantage-description">
@@ -150,19 +134,19 @@
 
                                 <div class="advantage-text">
                                     <p>
-                                        We are driven by innovation and re-engineering solutions to advance the operations of your facilities. With continuous Research & Development to develop the most suitable products to the local market.
+                                        We are driven by innovation and
+                                        re-engineering solutions to advance the
+                                        operations of your facilities. With
+                                        continuous Research & Development to
+                                        develop the most suitable products to
+                                        the local market.
                                     </p>
                                 </div>
-
                             </div>
 
-
-                            <div class="advantage-item" >
-
+                            <div class="advantage-item">
                                 <div class="advantage-image">
-
-                                    <img src="/assets/images/sheffield-advantages-icons/our_certifications.png">
-                                    
+                                    <img src="/assets/images/sheffield-advantages-icons/our_certifications.png" />
                                 </div>
 
                                 <div class="advantage-description">
@@ -171,20 +155,18 @@
 
                                 <div class="advantage-text">
                                     <p>
-                                        Certified in both local and international standards with notable certifications such as the ISO 9001:2015 in Quality Management Systems and NCA in Mechanical Engineering amongst others.
+                                        Certified in both local and
+                                        international standards with notable
+                                        certifications such as the ISO 9001:2015
+                                        in Quality Management Systems and NCA in
+                                        Mechanical Engineering amongst others.
                                     </p>
                                 </div>
-
                             </div>
 
-
-
-                            <div class="advantage-item" >
-
+                            <div class="advantage-item">
                                 <div class="advantage-image">
-
-                                    <img src="/assets/images/sheffield-advantages-icons/we_gurantee.png">
-                                    
+                                    <img src="/assets/images/sheffield-advantages-icons/we_gurantee.png" />
                                 </div>
 
                                 <div class="advantage-description">
@@ -193,20 +175,17 @@
 
                                 <div class="advantage-text">
                                     <p>
-                                        Exclusive distributor of several international brands hence can offer unmatched durability and reliability to ensure high-end performance.
+                                        Exclusive distributor of several
+                                        international brands hence can offer
+                                        unmatched durability and reliability to
+                                        ensure high-end performance.
                                     </p>
                                 </div>
-
                             </div>
 
-
-
-                            <div class="advantage-item" >
-
+                            <div class="advantage-item">
                                 <div class="advantage-image">
-
-                                    <img src="/assets/images/sheffield-advantages-icons/we_offer_smart.png">
-                                    
+                                    <img src="/assets/images/sheffield-advantages-icons/we_offer_smart.png" />
                                 </div>
 
                                 <div class="advantage-description">
@@ -215,20 +194,19 @@
 
                                 <div class="advantage-text">
                                     <p>
-                                        By ensuring a balance in the Ecosystem, we offer technologically smart solutions focused on Economy and Ecology. This in turn ensures the quickest Return on Investment and minimized Carbon Footprint.
+                                        By ensuring a balance in the Ecosystem,
+                                        we offer technologically smart solutions
+                                        focused on Economy and Ecology. This in
+                                        turn ensures the quickest Return on
+                                        Investment and minimized Carbon
+                                        Footprint.
                                     </p>
                                 </div>
-
                             </div>
 
-
-
-                            <div class="advantage-item" >
-
+                            <div class="advantage-item">
                                 <div class="advantage-image">
-
-                                    <img src="/assets/images/sheffield-advantages-icons/we_provide_training.png">
-                                    
+                                    <img src="/assets/images/sheffield-advantages-icons/we_provide_training.png" />
                                 </div>
 
                                 <div class="advantage-description">
@@ -237,19 +215,16 @@
 
                                 <div class="advantage-text">
                                     <p>
-                                        With an equipped Academy Center where our clients can test out concepts and products before investing on them.
+                                        With an equipped Academy Center where
+                                        our clients can test out concepts and
+                                        products before investing on them.
                                     </p>
                                 </div>
-
                             </div>
 
-
-                            <div class="advantage-item" >
-
+                            <div class="advantage-item">
                                 <div class="advantage-image">
-
-                                    <img src="/assets/images/sheffield-advantages-icons/warranty.png">
-                                    
+                                    <img src="/assets/images/sheffield-advantages-icons/warranty.png" />
                                 </div>
 
                                 <div class="advantage-description">
@@ -258,79 +233,51 @@
 
                                 <div class="advantage-text">
                                     <p>
-                                       Sheffield ensures that your unit gets full application of warranty from the manufacturer’s side.
+                                        Sheffield ensures that your unit gets
+                                        full application of warranty from the
+                                        manufacturer’s side.
                                     </p>
                                 </div>
-
                             </div>
 
-
-                            <div class="advantage-item" >
-
+                            <div class="advantage-item">
                                 <div class="advantage-image">
-
-                                    <img src="/assets/images/sheffield-advantages-icons/after_sales_service.png">
-                                    
+                                    <img src="/assets/images/sheffield-advantages-icons/after_sales_service.png" />
                                 </div>
 
                                 <div class="advantage-description">
-                                    <span>We Guarantee Availability of Spares and After Sales Service</span>
+                                    <span>We Guarantee Availability of Spares and
+                                        After Sales Service</span>
                                 </div>
 
                                 <div class="advantage-text">
                                     <p>
-                                       Our expert service staff are available all the time 24 hours to help you with after-sales support for your solutions.
+                                        Our expert service staff are available
+                                        all the time 24 hours to help you with
+                                        after-sales support for your solutions.
                                     </p>
                                 </div>
-
                             </div>
 
                             <div class="advantage-item last-advantage-item">
-
-                                <img src="/assets/images/working-happy-chef.jpg">
-
+                                <img src="/assets/images/working-happy-chef.jpg" />
                             </div>
-
-
-
-
-
                         </div>
-
                     </div>
                 </div>
-
-                
             </div>
         </div>
         <!-- End .page-content -->
     </main>
 </template>
 
-<script setup>
-    import { ref } from "vue";
-    import VideoPopup from '../components/layout/VideoPopup.vue';
-
-    const isVideoPopupVisible = ref(false);
-    const videoUrl = 'https://www.youtube.com/embed/YvhZ9lOAnSc';
-
-    const showVideoPopup = () => {
-      isVideoPopupVisible.value = true;
-    };
-
-    const hideVideoPopup = () => {
-      isVideoPopupVisible.value = false;
-    };
-</script>
 
 <style scoped>
-
-
-
 ul {
     list-style: none;
 }
-.heading{
+
+.heading {
     margin-bottom: 1.6rem;
 }
 
@@ -378,15 +325,13 @@ li::before {
     padding-left: 0;
 }
 
-.box-1 .heading{
+.box-1 .heading {
     font-size: 2.5rem;
 }
 
-.box-2 .heading{
+.box-2 .heading {
     font-size: 2.5rem;
 }
-
-
 
 .box-image {
     overflow: hidden;
@@ -395,7 +340,6 @@ li::before {
 }
 
 .box-image img {
-
     height: 100%;
     width: auto !important;
 }
@@ -404,10 +348,7 @@ li::before {
     margin-bottom: 4rem;
 }
 
-
-
 .advantage-item {
-
     width: 23.2%;
     border: 4px solid #c02434;
     margin: 0.5%;
@@ -415,7 +356,6 @@ li::before {
     border-radius: 40px;
     border-bottom: 10px solid #c02434;
     margin-bottom: 1.5rem;
-
 }
 
 .advantage-description {
@@ -451,20 +391,17 @@ li::before {
 .advantage-description {
     display: flex;
     justify-content: center;
-
 }
 
 .start-advantage-item {
     padding: 0px;
     overflow: hidden;
     border: 0px transparent !important;
-    
 }
 
 .last-advantage-item {
     padding: 0px;
     overflow: hidden;
-    
 }
 
 .start-advantage-item img {
@@ -475,17 +412,10 @@ li::before {
     height: 100% !important;
 }
 
-@media (max-width: 767px) { 
-
-    .advantage-item { 
-
+@media (max-width: 767px) {
+    .advantage-item {
         width: 100%;
         margin-bottom: 15px;
     }
-
 }
-
-
-
-
 </style>

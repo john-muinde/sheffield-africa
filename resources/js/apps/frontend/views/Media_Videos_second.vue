@@ -83,7 +83,7 @@
                                                 allowfullscreen allow="autoplay" class="w-full h-full"></iframe>
                                         </div>
                                         <video v-else ref="videoElement" :src="videoSrc(selectedVideo)"
-                                            class="w-full h-full" controls autoplay></video>
+                                            class="w-full h-full plyr-video" controls autoplay></video>
                                         <button @click="closeVideo"
                                             class="absolute top-4 right-4 p-2 rounded-full bg-black bg-opacity-50 text-white hover:bg-opacity-75 transition-colors">
                                             <span class="sr-only">Close</span>

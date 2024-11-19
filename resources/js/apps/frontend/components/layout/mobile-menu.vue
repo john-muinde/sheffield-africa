@@ -1,26 +1,13 @@
 <template>
     <!-- Mobile Menu -->
-    <div class="mobile-menu-overlay"></div>
+    <div class="mobile-menu-overlay" @click="closeMenu"></div>
     <!-- End .mobil-menu-overlay -->
 
-    <div class="mobile-menu-container">
+    <div class="mobile-menu-container" :class="{ 'active': isMenuActive }">
         <div class="mobile-menu-wrapper">
-            <span class="mobile-menu-close"><i class="icon-close"></i></span>
-
-            <!--  <form action="#" method="get" class="mobile-search">
-                <label for="mobile-search" class="sr-only">Search</label>
-                <input
-                    type="search"
-                    class="form-control"
-                    name="mobile-search"
-                    id="mobile-search"
-                    placeholder="Search in..."
-                    required
-                />
-                <button class="btn btn-primary" type="submit">
-                    <i class="icon-search"></i>
-                </button>
-            </form> -->
+            <span class="mobile-menu-close mobile-menu-toggler" @click="toggleMenu">
+                <i class="icon-close"></i>
+            </span>
 
             <ul class="nav nav-pills-mobile" role="tablist">
                 <li class="nav-item">
@@ -39,7 +26,7 @@
                     <nav class="mobile-nav">
                         <ul class="mobile-menu">
                             <li class="active">
-                                <router-link to="/">Home</router-link>
+                                <router-link to="/" @click.native="closeMenu">Home</router-link>
                             </li>
                             <li>
                                 <router-link to="/commercial-kitchen">Kitchen</router-link>
@@ -48,7 +35,7 @@
                                         <router-link :to="getKitchenCategoryLink(
                                             category.id,
                                             category.name
-                                        )">{{ category.name }}</router-link>
+                                        )" @click.native="closeMenu">{{ category.name }}</router-link>
                                     </li>
                                 </ul>
                             </li>
@@ -60,7 +47,7 @@
                                         <router-link :to="getLaundryCategoryLink(
                                             category.id,
                                             category.name
-                                        )">{{ category.name }}</router-link>
+                                        )" @click.native="closeMenu">{{ category.name }}</router-link>
                                     </li>
                                 </ul>
                             </li>
@@ -72,7 +59,7 @@
                                         <router-link :to="getColdRoomCategoryLink(
                                             category.id,
                                             category.name
-                                        )">{{ category.name }}</router-link>
+                                        )" @click.native="closeMenu">{{ category.name }}</router-link>
                                     </li>
                                 </ul>
                             </li>
@@ -84,43 +71,42 @@
                                         <router-link :to="getPromotionalCategoryLink(
                                             category.id,
                                             category.name
-                                        )">{{ category.name }}</router-link>
+                                        )" @click.native="closeMenu">{{ category.name }}</router-link>
                                     </li>
                                 </ul>
                             </li>
 
                             <li>
-                                <router-link to="/consultancy-and-design" class="sf-with-ul">
+                                <router-link to="/consultancy-and-design" class="sf-with-ul" @click.native="closeMenu">
                                     Consultancy & Design
                                 </router-link>
-
                             </li>
                             <li>
-                                <router-link to="/about-us" class="sf-with-ul">About Us</router-link>
+                                <router-link to="/about-us" class="sf-with-ul" @click.native="closeMenu">About Us</router-link>
                             </li>
 
                             <li>
-                                <router-link to="/about-us/sheffield-advantage" class="sf-with-ul">Sheffield
+                                <router-link to="/about-us/sheffield-advantage" class="sf-with-ul" @click.native="closeMenu">Sheffield
                                     Advantages</router-link>
                             </li>
                             <li>
-                                <router-link to="/projects" class="sf-with-ul">Project References</router-link>
+                                <router-link to="/projects" class="sf-with-ul" @click.native="closeMenu">Project References</router-link>
                             </li>
 
                             <li>
-                                <router-link to="/events" class="sf-with-ul">Events</router-link>
+                                <router-link to="/events" class="sf-with-ul" @click.native="closeMenu">Events</router-link>
                             </li>
                             <li>
-                                <router-link to="/careers" class="sf-with-ul">Careers</router-link>
+                                <router-link to="/careers" class="sf-with-ul" @click.native="closeMenu">Careers</router-link>
                             </li>
                             <li>
-                                <router-link to="/faq" class="sf-with-ul">FAQ</router-link>
+                                <router-link to="/faq" class="sf-with-ul" @click.native="closeMenu">FAQ</router-link>
                             </li>
                             <li>
-                                <router-link to="/media" class="sf-with-ul">Media Center</router-link>
+                                <router-link to="/media" class="sf-with-ul" @click.native="closeMenu">Media Center</router-link>
                             </li>
                             <li>
-                                <router-link to="/contact-us" class="sf-with-ul">Contact us</router-link>
+                                <router-link to="/contact-us" class="sf-with-ul" @click.native="closeMenu">Contact us</router-link>
                             </li>
                         </ul>
                     </nav>
@@ -133,16 +119,12 @@
                             <li>
                                 <router-link to="/commercial-kitchen">KITCHEN SOLUTIONS</router-link>
                                 <ul>
-
                                     <li v-for="solution in mainKitchenSolutions" :key="solution.id">
-
                                         <router-link :to="getSolutionKitchenLink(
                                             solution.id,
                                             solution.name
-                                        )">{{ solution.name }}</router-link>
-
+                                        )" @click.native="closeMenu">{{ solution.name }}</router-link>
                                     </li>
-
                                 </ul>
                             </li>
 
@@ -153,7 +135,7 @@
                                         <router-link :to="getSolutionLaundryLink(
                                             solution.id,
                                             solution.name
-                                        )">{{ solution.name }}</router-link>
+                                        )" @click.native="closeMenu">{{ solution.name }}</router-link>
                                     </li>
                                 </ul>
                             </li>
@@ -165,7 +147,7 @@
                                         <router-link :to="getSolutionColdRoomLink(
                                             solution.id,
                                             solution.name
-                                        )">{{ solution.name }}</router-link>
+                                        )" @click.native="closeMenu">{{ solution.name }}</router-link>
                                     </li>
                                 </ul>
                             </li>
@@ -177,7 +159,7 @@
                                         <router-link :to="getSolutionPromotionalLink(
                                             solution.id,
                                             solution.name
-                                        )">{{ solution.name }}</router-link>
+                                        )" @click.native="closeMenu">{{ solution.name }}</router-link>
                                     </li>
                                 </ul>
                             </li>
@@ -188,47 +170,6 @@
                 <!-- .End .tab-pane -->
             </div>
             <!-- End .tab-content -->
-
-            <!-- <div>
-
-                <h3 class="side_bar_title">Social Media</h3>
-
-            </div> -->
-
-            <!-- <div class="social-icons">
-                <div class="container">
-                    <div class="row">
-                        <a href="https://www.facebook.com/SheffieldAfricaFacilitySolutions" style="border: 0.1rem solid #c02434;" class="social-icon mt-1" target="_blank" title="Facebook">
-                        <img src="/assets/images/social-icons/facebook.png">
-                      </a>
-                      <a href="https://www.instagram.com/sheffieldafrica/" style="border: 0.1rem solid #c02434;" class="social-icon mt-1" target="_blank" title="Instagram">
-                        <img src="/assets/images/social-icons/instagram.png">
-                      </a>
-                      <a href="https://www.threads.net/@sheffieldafrica" style="border: 0.1rem solid #c02434;" class="social-icon mt-1" target="_blank" title="Threads">
-                        <img src="/assets/images/social-icons/threads.png">
-                      </a>
-                      <a href="https://wa.me/+254114838130?text=Hello%20Sheffield, I need assistance in " style="border: 0.1rem solid #c02434;" class="social-icon mt-1" target="_blank" title="WhatsApp">
-                        <img src="/assets/images/social-icons/whatsapp.png">
-                      </a>
-
-                    </div>
-                    <div class="row">
-                        <a href="https://twitter.com/sheffield_afric/" style="border: 0.1rem solid #c02434;" class="social-icon mt-1" target="_blank" title="X">
-                        <img src="/assets/images/social-icons/x.png">
-                      </a>
-                      <a href="https://www.linkedin.com/company/sheffield-steel-systems-ltd/mycompany" style="border: 0.1rem solid #c02434;" class="social-icon mt-1" target="_blank" title="Linkedin">
-                        <img src="/assets/images/social-icons/linkedin.png">
-                      </a>
-                      <a href="https://www.youtube.com/channel/UCK-oWPdQazenIHndl4zABew" style="border: 0.1rem solid #c02434;" class="social-icon mt-1" target="_blank" title="Youtube">
-                        <img src="/assets/images/social-icons/youtube.png">
-                      </a>
-                      <a href="http://tiktok.com/@sheffieldafrica" style="border: 0.1rem solid #c02434;" class="social-icon mt-1" target="_blank" title="TikTok">
-                        <img src="/assets/images/social-icons/tiktok.png">
-                      </a>
-                    </div>
-                </div>
-            </div> -->
-            <!-- End .social-icons -->
         </div>
         <!-- End .mobile-menu-wrapper -->
     </div>
@@ -350,8 +291,34 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted, reactive, nextTick, watch } from "vue";
+import { ref, onMounted, onBeforeUnmount } from "vue";
 import axios from "axios";
+
+const isMenuActive = ref(false);
+
+const toggleMenu = () => {
+    isMenuActive.value = !isMenuActive.value;
+    document.body.classList.toggle('mmenu-active', isMenuActive.value);
+};
+
+const closeMenu = () => {
+    isMenuActive.value = false;
+    document.body.classList.remove('mmenu-active');
+};
+
+onMounted(() => {
+    document.addEventListener('click', handleClickOutside);
+});
+
+onBeforeUnmount(() => {
+    document.removeEventListener('click', handleClickOutside);
+});
+
+const handleClickOutside = (event) => {
+    if (!event.target.closest('.mobile-menu') && isMenuActive.value) {
+        closeMenu();
+    }
+};
 
 const mainKitchenSolutions = ref([]);
 const mainLaundrySolutions = ref([]);
