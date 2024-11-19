@@ -154,7 +154,7 @@
                     </div>
                     <!-- End .col-lg-6 -->
 
-                   
+
                   </div>
                 </div>
               </div>
@@ -373,7 +373,7 @@ useMeta({ title: "Consultancy & Design" });
 }
 
 .who-we-are-section {
-  background-image: url("/assets/images/about-us/who-we-are/who-we-are-background.jpg");
+  /* background-image: url("/assets/images/about-us/who-we-are/who-we-are-background.jpg"); */
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
