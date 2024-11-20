@@ -9,7 +9,8 @@ use App\Http\Resources\PublicationResource;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Publication;
-use Illuminate\Http\Request;
+use Spatie\PdfToImage\Pdf;
+use Illuminate\Support\Facades\Log;
 
 class PublicationController extends Controller
 {
@@ -24,8 +25,8 @@ class PublicationController extends Controller
             $orderDirection = 'desc';
         }
         $publications = Publication::when(request('search_id'), function ($query) {
-                $query->where('id', request('search_id'));
-            })
+            $query->where('id', request('search_id'));
+        })
             ->when(request('search_title'), function ($query) {
                 $query->where('name', 'like', '%' . request('search_title') . '%');
             })
@@ -47,27 +48,47 @@ class PublicationController extends Controller
     {
         $this->authorize('blog-create');
 
-        //dd($request);
+        $validatedData = $request->validate([
+            'name' => 'required|max:255|unique:publications',
+            'content' => 'required|max:255',
+            'type' => 'required|max:255|in:Newsletter,Brochures',
+            'publication_file' => 'required|file|mimes:pdf',
+            'thumbnail_path' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'is_published' => 'required',
+        ]);
 
-        // Check if the publication with the same name already exists
-        $existingPublication = Publication::where('name', $request->name)->first();
-        if ($existingPublication) {
-            return response()->json(['errors' => ['name' => ['Publication with the same name already exists.']]], 409);
-        }
-
-
-        $validatedData = $request->validated();
         $validatedData['created_by'] = auth()->user()->id;
 
-        if ($request->hasFile('main_image')) {
+        if ($request->hasFile('publication_file')) {
+            $file = $request->file('publication_file');
+            $fileName = time() . '_' . $file->getClientOriginalName();
+            $filePath = $file->storeAs('uploads', $fileName, 'public');
+            $validatedData['publication_file'] = $filePath;
+        }
 
-            $file_name = time().'_'.$request->file('main_image')->getClientOriginalName();
-            $file_path = $request->file('main_image')->storeAs('uploads', $file_name, 'public');
-            $validatedData['publication_file'] = $file_path;
-        }       
+        if ($request->hasFile('thumbnail_path')) {
+            $request->validate([
+                'thumbnail_path' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+            ]);
+
+            // Store new files
+            $file = $request->file('thumbnail_path');
+            $fileName = time() . '_' . $file->getClientOriginalName();
+            $filePath = $file->storeAs('uploads/thumbs', $fileName, 'public');
+            $validatedData['thumbnail_path'] = $filePath;
+        }
+
+        if ($request->hasFile('main_image_path')) {
+            $request->validate([
+                'main_image_path' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
+
+            $file_name = time() . '_' . $request->file('main_image_path')->getClientOriginalName();
+            $file_path = $request->file('main_image_path')->storeAs('uploads', $file_name, 'public');
+            $validatedData['main_image_path'] = $file_path;
+        }
 
         $publication = Publication::create($validatedData);
-
 
         return new PublicationResource($publication);
     }
@@ -82,36 +103,84 @@ class PublicationController extends Controller
     {
         $this->authorize('blog-edit');
 
-        $validatedData = $request->validated();
+        $validatedData = $request->validate([
+            'name' => 'required|max:255|unique:publications,name,' . $publication->id,
+            'content' => 'required|max:255',
+            'type' => 'required|max:255|in:Newsletter,Brochures',
+            'is_published' => 'required',
+        ]);
 
+        if ($request->hasFile('publication_file')) {
+            $request->validate([
+                'publication_file' => 'required|file|mimes:pdf',
+            ]);
+            // Delete old files
+            if ($publication->publication_file) {
+                Storage::disk('public')->delete($publication->publication_file);
+            }
+            if ($publication->thumbnail_path) {
+                Storage::disk('public')->delete($publication->thumbnail_path);
+            }
 
-        // Check if the publication with the same name already exists (excluding the current publication)
-        $existingPublication = Publication::where('name', $request->name)
-            ->where('id', '!=', $publication->id)
-            ->first();
-        if ($existingPublication) {
-            return response()->json(['errors' => ['name' => ['Publication with the same name already exists.']]], 409);
+            // Store new files
+            $file = $request->file('publication_file');
+            $fileName = time() . '_' . $file->getClientOriginalName();
+            $filePath = $file->storeAs('uploads', $fileName, 'public');
+            $validatedData['publication_file'] = $filePath;
         }
 
+        if ($request->hasFile('thumbnail_path')) {
+            $request->validate([
+                'thumbnail_path' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+            ]);
 
-        if ($request->hasFile('main_image')) {
+            if ($publication->thumbnail_path) {
+                Storage::disk('public')->delete($publication->thumbnail_path);
+            }
 
-            $file_name = time().'_'.$request->file('main_image')->getClientOriginalName();
-            $file_path = $request->file('main_image')->storeAs('uploads', $file_name, 'public');
-            $validatedData['publication_file'] = $file_path;
+            // Store new files
+            $file = $request->file('thumbnail_path');
+            $fileName = time() . '_' . $file->getClientOriginalName();
+            $filePath = $file->storeAs('uploads/thumbs', $fileName, 'public');
+            $validatedData['thumbnail_path'] = $filePath;
         }
 
+        if ($request->hasFile('main_image_path')) {
+            $request->validate([
+                'main_image_path' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
+
+            // Delete old main image
+            if ($publication->main_image_path) {
+                Storage::disk('public')->delete($publication->main_image_path);
+            }
+
+            $file_name = time() . '_' . $request->file('main_image_path')->getClientOriginalName();
+            $file_path = $request->file('main_image_path')->storeAs('uploads', $file_name, 'public');
+            $validatedData['main_image_path'] = $file_path;
+        }
 
         $publication->update($validatedData);
-
-        //dd("test");
 
         return new PublicationResource($publication);
     }
 
+
     public function destroy(Publication $publication)
     {
         $this->authorize('blog-delete');
+
+        // Delete associated files
+        if ($publication->publication_file) {
+            Storage::disk('public')->delete($publication->publication_file);
+        }
+        if ($publication->thumbnail_path) {
+            Storage::disk('public')->delete($publication->thumbnail_path);
+        }
+        if ($publication->main_image_path) {
+            Storage::disk('public')->delete($publication->main_image_path);
+        }
+
         $publication->delete();
 
         return response()->noContent();

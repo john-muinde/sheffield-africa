@@ -21,9 +21,10 @@
                             </p>
 
                             <ContentState v-if="loading" type="loading" contentType="NewsLetters" />
-                            <ContentState v-if="!newsletters.length && !loading" type="empty"
+                            <ContentState v-if="!newsletters.length && !loading && error == null" type="empty"
                                 contentType="NewsLetters" />
-                            <ContentState v-if="!!error" type="error" contentType="NewsLetters" />
+                            <ContentState v-if="!!error && !loading" type="error" :errorSubMessage="error.message"
+                                contentType="NewsLetters" @retry="fetchMediaCenter" />
 
                             <div v-show="newsletters.length" class="dflip-books row media-center" id="dflip-books"
                                 ref="bookContainer">
@@ -35,7 +36,7 @@
                                     {{ newsletter.name }}
                                 </a>
                             </div>
-                            <canvas ref="thumbnailCanvas" style="display: none;"></canvas>
+                            <canvas ref="thumbnailCanvas" style="display: none"></canvas>
                         </div>
                     </div>
                 </div>
@@ -55,8 +56,8 @@ const newsletters = ref([]);
 const loading = ref(false);
 const error = ref(null);
 const bookContainer = ref(null);
-const thumbnailCanvas = ref(null);
 const dflipInitialized = ref(false);
+const thumbnailCanvas = ref(null);
 
 // Function to load PDF.js from CDN
 const loadPdfJS = async () => {
@@ -120,10 +121,10 @@ const initializeDflip = () => {
 
     newsletters.value.forEach((newsletter) => {
         window[`df_option_${newsletter.id}`] = {
-            source: '/storage/' + newsletter.publication_file,
+            source: `${window.location.origin}/storage/${newsletter.publication_file}`,
             outline: [],
             autoEnableOutline: false,
-            autoEnableThumbnail: false,
+            autoEnableThumbnail: true,
             overwritePDFOutline: false,
             pageSize: "0",
             is3D: true,
@@ -161,6 +162,11 @@ const fetchMediaCenter = async () => {
 
             // Generate thumbnail from PDF
             const pdfUrl = '/storage/' + newsletter.publication_file;
+            if (newsletter.thumbnail_path) {
+                newsletter.thumb = `${window.location.origin}/storage/${newsletter.thumbnail_path}`;
+                continue;
+            }
+
             const thumbnail = await generateThumbnail(pdfUrl);
 
             // Use generated thumbnail or fallback to placeholder
@@ -169,12 +175,15 @@ const fetchMediaCenter = async () => {
 
         newsletters.value = newslettersData;
         loading.value = false;
-    } catch (err) {
+    }
+
+    catch (err) {
         loading.value = false;
         error.value = err;
         console.error(err);
     }
-};
+}
+
 
 // Watch for changes in the newsletters array
 watch(newsletters, (newValue) => {
@@ -190,7 +199,6 @@ onMounted(async () => {
     await fetchMediaCenter();
 });
 </script>
-
 
 <style>
 /* Styles remain unchanged */

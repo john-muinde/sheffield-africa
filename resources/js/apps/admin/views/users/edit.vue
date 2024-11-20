@@ -140,8 +140,5 @@ onMounted(() => {
 
 watch(() => route.params.id, (id) => {
     getUser(route.params.id);
-
 });
-
-//
 </script>

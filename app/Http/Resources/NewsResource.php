@@ -26,6 +26,7 @@ class NewsResource extends JsonResource
             // 'parent_name_with_dashes' => $this->computeParentNameWithDashes(),
             //'children'    => BrandResource::collection($this->whenLoaded('children')),
             'file_path' => $this->file_path,
+            'thumbnail_path' => $this->thumbnail_path,
             'description' => $this->description,
             'created_at' => $this->created_at->toDateString()
         ];

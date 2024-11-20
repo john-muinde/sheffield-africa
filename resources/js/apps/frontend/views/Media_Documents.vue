@@ -5,207 +5,246 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-10 offset-lg-1">
-                            <h2 class="about-us-title">Brochures & Catalogs</h2>
-                            <!-- End .title -->
+                            <h2 class="about-us-title">Newsletters</h2>
 
-                            <router-link to="/media" class="btn btn-primary btn-round btn-shadow float-right"><i
-                                    class="icon-long-arrow-left"></i><span>Back to Media Center</span></router-link>
+                            <router-link to="/media" class="btn btn-primary btn-round btn-shadow float-right">
+                                <i class="icon-long-arrow-left"></i>
+                                <span>Back to Media Center</span>
+                            </router-link>
 
                             <p class="lead about-us-lead text-primary mb-1">
-                                Explore Our Brochures & Catalogs
+                                Explore Our Newsletters
                             </p>
 
                             <p class="about-us-text mb-2">
                                 Click on the documents to view
                             </p>
 
-
                             <ContentState v-if="loading" type="loading" contentType="Brochures & Catalogs" />
-                            <ContentState v-if="!brochures.length && !loading" type="empty"
+                            <ContentState v-if="!brochures.length && !loading && error == null" type="empty"
                                 contentType="Brochures & Catalogs" />
-                            <ContentState v-if="!!error" type="error" contentType="Brochures & Catalogs" />
+                            <ContentState v-if="!!error && !loading" type="error" :errorSubMessage="error.message"
+                                contentType="Brochures & Catalogs" @retry="fetchMediaCenter" />
 
-                            <div v-if="newsletters.length" class="row media-center">
-                                <div class="col-lg-9">
-                                    <VuePdfApp style="height: 100vh" :pdf="currentDocument"></VuePdfApp>
-                                </div>
-
-                                <aside class="col-lg-3 aside-documents">
-                                    <div class="sidebar">
-                                        <div class="widget widget-cats">
-                                            <!--  <h3 class="widget-title"><b>Brochures</b></h3> -->
-
-                                            <ul class="ul-pdf-view-documents">
-                                                <li v-for="brochure in brochures" :key="brochure.id" @click="
-                                                    loadDocument(
-                                                        '/storage/' +
-                                                        brochure.publication_file,
-                                                        brochure.id
-                                                    )
-                                                    ">
-                                                    <a :class="{
-                                                        'active-document':
-                                                            isActive(
-                                                                brochure.id
-                                                            ),
-                                                    }" href="#">
-                                                        <img src="/assets/images/pdf.png" />
-
-                                                        <span>
-                                                            {{ brochure.name }}
-                                                        </span>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <!-- End .widget -->
-                                    </div>
-                                </aside>
+                            <div v-show="brochures.length" class="dflip-books row media-center" id="dflip-books"
+                                ref="bookContainer">
+                                <a v-for="brochure in brochures" :key="brochure.id"
+                                    :href="`/media/brochures#${brochure.slug}/`" class="_df_thumb"
+                                    :data-slug="brochure.slug" :data-title="brochure.name"
+                                    :id="`df_${brochure.id}`" :data-df-option="`df_option_${brochure.id}`"
+                                    :thumb="brochure.thumb">
+                                    {{ brochure.name }}
+                                </a>
                             </div>
+                            <canvas ref="thumbnailCanvas" style="display: none"></canvas>
                         </div>
                     </div>
-                    <!-- End .row -->
                 </div>
-                <!-- End .container -->
             </div>
-            <!-- End .page-content -->
         </main>
-        <!-- End .main -->
     </div>
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
+import { onMounted, ref, nextTick, watch } from 'vue';
 import ContentState from "@/Components/ContentState.vue";
 import { useMeta } from "../../admin/composables/use-meta";
-
-import VuePdfApp from "vue3-pdf-app";
-import "vue3-pdf-app/dist/icons/main.css";
 
 useMeta({ title: "Brochures & Catalogs | Media Center" });
 
 const brochures = ref([]);
-const newsletters = ref([]);
-
 const loading = ref(false);
 const error = ref(null);
+const bookContainer = ref(null);
+const dflipInitialized = ref(false);
+const thumbnailCanvas = ref(null);
 
-// Fetch products based on the current page
+// Function to load PDF.js from CDN
+const loadPdfJS = async () => {
+    // Load PDF.js library if not already loaded
+    if (window.pdfjsLib) return window.pdfjsLib;
+
+    await Promise.all([
+        // Load main PDF.js library
+        new Promise((resolve) => {
+            const script = document.createElement('script');
+            script.src = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js';
+            script.onload = resolve;
+            document.head.appendChild(script);
+        }),
+        // Load PDF.js worker
+        new Promise((resolve) => {
+            const script = document.createElement('script');
+            script.src = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+            script.onload = resolve;
+            document.head.appendChild(script);
+        })
+    ]);
+
+    // Wait a bit to ensure everything is properly initialized
+    await new Promise(resolve => setTimeout(resolve, 100));
+
+    return window.pdfjsLib;
+};
+
+// Function to generate thumbnail from PDF
+const generateThumbnail = async (pdfUrl, scale = 0.5) => {
+    try {
+        const pdfjsLib = await loadPdfJS();
+
+        // Create a new loading task
+        const loadingTask = pdfjsLib.getDocument(pdfUrl);
+        const pdf = await loadingTask.promise;
+        const page = await pdf.getPage(1);
+
+        const viewport = page.getViewport({ scale });
+        const canvas = thumbnailCanvas.value;
+        const context = canvas.getContext('2d');
+
+        canvas.width = viewport.width;
+        canvas.height = viewport.height;
+
+        await page.render({
+            canvasContext: context,
+            viewport: viewport
+        }).promise;
+
+        return canvas.toDataURL('image/jpeg', 0.8);
+    } catch (error) {
+        console.error('Error generating thumbnail:', error);
+        return null;
+    }
+};
+
+const initializeDflip = () => {
+    if (!brochures.value.length || dflipInitialized.value) return;
+
+    brochures.value.forEach((brochure) => {
+        window[`df_option_${brochure.id}`] = {
+            source: `${window.location.origin}/storage/${brochure.publication_file}`,
+            outline: [],
+            autoEnableOutline: false,
+            autoEnableThumbnail: true,
+            overwritePDFOutline: false,
+            pageSize: "0",
+            is3D: true,
+            direction: "1",
+            slug: brochure.slug,
+            wpOptions: "true",
+            id: brochure.id,
+        };
+    });
+
+    nextTick(() => {
+        const container = bookContainer.value;
+        if (container && container.children.length === brochures.value.length) {
+            if (window.DFLIP && window.DFLIP.parseBooks) {
+                window.DFLIP.parseBooks();
+                dflipInitialized.value = true;
+                console.log('DFlip books initialized successfully');
+            } else {
+                console.warn('DFLIP library not loaded');
+            }
+        }
+    });
+};
+
+// Fetch brochures and generate thumbnails
 const fetchMediaCenter = async () => {
     loading.value = true;
     try {
         const response = await axios.get("/api/get-media-center", {});
-        newsletters.value = response.data.newsletters;
-        brochures.value = response.data.brochures;
+        const brochuresData = response.data.brochures;
+
+        // Process each brochure and generate thumbnail
+        for (const brochure of brochuresData) {
+            brochure.slug = brochure.name.toLowerCase().replace(/ /g, "-");
+
+            // Generate thumbnail from PDF
+            const pdfUrl = '/storage/' + brochure.publication_file;
+            if (brochure.thumbnail_path) {
+                brochure.thumb = `${window.location.origin}/storage/${brochure.thumbnail_path}`;
+                continue;
+            }
+
+            const thumbnail = await generateThumbnail(pdfUrl);
+
+            // Use generated thumbnail or fallback to placeholder
+            brochure.thumb = thumbnail || null;
+        }
+
+        brochures.value = brochuresData;
         loading.value = false;
-    } catch (error) {
-        loading.value = false;
-        error.value = error;
-        console.error(error);
     }
-};
 
-onMounted(() => {
-    fetchMediaCenter();
+    catch (err) {
+        loading.value = false;
+        error.value = err;
+        console.error(err);
+    }
+}
+
+
+// Watch for changes in the brochures array
+watch(brochures, (newValue) => {
+    if (newValue.length > 0) {
+        nextTick(() => {
+            initializeDflip();
+        });
+    }
+}, { deep: true });
+
+// Initial setup
+onMounted(async () => {
+    await fetchMediaCenter();
 });
-
-const currentDocument = ref(null);
-
-const selectedBrochureId = ref(null);
-
-const loadDocument = (documentPath, brochureId) => {
-    currentDocument.value = documentPath;
-    selectedBrochureId.value = brochureId;
-};
-
-const isActive = (brochureId) => {
-    return selectedBrochureId.value === brochureId;
-};
 </script>
 
-<style scoped>
-@media screen and (min-width: 768px) {
-    .blogs .entry-list .entry-media {
-        max-height: 190px;
-        overflow: hidden;
-    }
-
-    .blogs .entry-title {
-        font-size: 2.3rem;
-    }
+<style>
+/* Styles remain unchanged */
+.df-sheet .df-page:before {
+    opacity: 0.5;
 }
 
-.posts-list li {
-    margin-bottom: 2rem;
-    display: flex;
-    align-items: center;
+section.linkAnnotation a,
+a.linkAnnotation,
+.buttonWidgetAnnotation a,
+a.customLinkAnnotation,
+.customHtmlAnnotation,
+.customVideoAnnotation,
+a.df-autolink {
+    background-color: #ff0;
+    opacity: 0.2;
 }
 
-.ul-pdf-view-documents li {
-    display: flex;
-    /*background-color: #555;*/
-    /*margin-top: 1.4rem;*/
-    /*padding: 0.8rem;*/
-    /*border-radius: 10px;*/
-    /*box-shadow: -3px 4px 9px 1px #4c4c4c;*/
+section.linkAnnotation a:hover,
+a.linkAnnotation:hover,
+.buttonWidgetAnnotation a:hover,
+a.customLinkAnnotation:hover,
+.customHtmlAnnotation:hover,
+.customVideoAnnotation:hover,
+a.df-autolink:hover {
+    background-color: #2196f3;
+    opacity: 0.5;
 }
 
-.ul-pdf-view-documents li a {
-    display: flex;
-    font-size: 1.4rem;
-    padding-left: 0.9rem;
-    padding-right: 0.9rem;
-    color: #000000;
-    font-weight: 450;
-    width: 100%;
-    height: 100%;
+.df-icon-play-popup:before {
+    background-color: rgb(51, 133, 209);
 }
 
-.ul-pdf-view-documents li .active-document {
-    background-color: #000000 !important;
-    padding-top: 8px !important;
-    padding-bottom: 8px !important;
+.df-icon-play-popup:before {
+    color: #fff;
 }
 
-.ul-pdf-view-documents li .active-document span {
-    color: #ffffff !important;
+.df-lightbox-bg {
+    opacity: 0.8;
 }
 
-.ul-pdf-view-documents li span {
-    font-size: 1.4rem;
-    padding-left: 0.9rem;
-    padding-right: 0.9rem;
-    color: #000000;
-    font-weight: 450;
-    width: 100%;
-    height: 100%;
+.df-lightbox-wrapper .df-bg {
+    background-color: transparent;
 }
 
-.ul-pdf-view-documents li img {
-    width: 30px !important;
-    height: 30px !important;
-}
-
-.aside-documents {
-    max-height: 100vh;
-    overflow-y: auto;
-    background-color: #f2efef;
-    padding-top: 20px;
-    padding-bottom: 20px;
-}
-
-.aside-documents::-webkit-scrollbar {
-    width: 9px;
-    /* Adjust the width as needed */
-}
-
-.aside-documents::-webkit-scrollbar-thumb {
-    background-color: #888;
-    /* Color of the scrollbar thumb */
-}
-
-.aside-documents::-webkit-scrollbar-track {
+.df-container.df-transparent.df-fullscreen {
     background-color: #eee;
-    /* Color of the scrollbar track */
 }
 </style>

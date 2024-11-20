@@ -9,7 +9,7 @@ class Publication extends Model
 {
     use HasFactory;
 
-     protected $fillable = [
+    protected $fillable = [
 
         'name',
         'content',
@@ -17,6 +17,7 @@ class Publication extends Model
         'main_image',
         'type',
         'publication_file',
+        'thumbnail_path'
 
     ];
 }

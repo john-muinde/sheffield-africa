@@ -9,10 +9,7 @@
                                 <li class="breadcrumb-item">
                                     <a href="javascript:;">Publications</a>
                                 </li>
-                                <li
-                                    class="breadcrumb-item active"
-                                    aria-current="page"
-                                >
+                                <li class="breadcrumb-item active" aria-current="page">
                                     <span>Edit Publication</span>
                                 </li>
                             </ol>
@@ -28,9 +25,7 @@
                     <div class="statbox panel box box-shadow">
                         <div class="panel-heading pb-0">
                             <div class="row">
-                                <div
-                                    class="col-xl-12 col-md-12 col-sm-12 col-12"
-                                >
+                                <div class="col-xl-12 col-md-12 col-sm-12 col-12">
                                     <h3><b>Edit Publication</b></h3>
                                 </div>
                             </div>
@@ -40,127 +35,79 @@
                                 <div class="row">
                                     <div class="form-group col-md-12">
                                         <label for="post-name">Title</label>
-                                        <input
-                                            v-model="blog.name"
-                                            id="post-name"
-                                            type="text"
-                                            class="form-control"
-                                            placeholder="Enter Title ..."
-                                        />
+                                        <input v-model="publication.name" id="post-name" type="text"
+                                            class="form-control" placeholder="Enter Title ..." />
 
                                         <div class="text-danger mt-1">
-                                            {{ errors.name }}
-                                        </div>
-                                        <div class="text-danger mt-1">
-                                            <div
-                                                v-for="message in validationErrors?.name"
-                                            >
+                                            <div v-for="message in validationErrors?.name">
                                                 {{ message }}
                                             </div>
                                         </div>
                                     </div>
 
                                     <div class="form-group">
-                                        <label
-                                            for="post-category"
-                                            class="form-label"
-                                            >Type</label
-                                        >
+                                        <label for="post-category" class="form-label">Type</label>
 
-                                        <select class="form-select form-control" name="type" id="type" v-model="blog.type">
-                                            <option value="">Select Type</option>
-                                            <option value="Brochures">Brochures</option>
-                                            <option value="Newsletter">Newsletter</option>
+                                        <select class="form-select form-control" name="type" id="type"
+                                            v-model="publication.type">
+                                            <option>Select Type</option>
+                                            <option value="Brochures">
+                                                Brochures
+                                            </option>
+                                            <option value="Newsletter">
+                                                Newsletter
+                                            </option>
                                         </select>
 
                                         <div class="text-danger mt-1">
-                                            {{ errors.type }}
-                                        </div>
-                                        <div class="text-danger mt-1">
-                                            <div
-                                                v-for="message in validationErrors?.type"
-                                            >
+                                            <div v-for="message in validationErrors?.type">
                                                 {{ message }}
                                             </div>
                                         </div>
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="post-content"
-                                            > Description</label
-                                        >
+                                        <label for="post-content">
+                                            Description</label>
 
-                                        <quill-editor
-                                            v-model:value="blog.content"
-                                            :options="options1"
-                                            placeholder="Enter Blog Content ..."
-                                        ></quill-editor>
+                                        <quill-editor v-model:value="publication.content"
+                                            placeholder="Enter Blog Content ..."></quill-editor>
+
+                                        <div class="text-danger mt-1">
+                                            <div v-for="message in validationErrors?.content">
+                                                {{ message }}
+                                            </div>
+                                        </div>
                                     </div>
 
-                                    <div
-                                        class="custom-file-container"
-                                        data-upload-id="myFirstImage"
-                                    >
-                                        <label
-                                            >Upload File (Must be pdf)
-                                            <a
-                                                href="javascript:void(0)"
-                                                class="custom-file-container__image-clear"
-                                                title="Clear File"
-                                                >x</a
-                                            >
-
-                                            &nbsp;&nbsp;&nbsp;&nbsp;
-
-
-                                            <a class="btn btn-primary" v-if="blog.main_image" :href="'/storage/' + blog.main_image" target="_blank">View Uploaded File</a>
-
-
-
-                                            </label
-                                        >
-                                        <label
-                                            class="custom-file-container__custom-file"
-                                            for="main_image"
-                                        >
-                                            <input
-                                                type="file"
+                                    <div class="custom-file-container" data-upload-id="myFirstImage">
+                                        <label>Upload File (Must be pdf)
+                                            <a href="javascript:void(0)" class="custom-file-container__image-clear"
+                                                title="Clear File">x</a></label>
+                                        <label class="custom-file-container__custom-file" for="publication_file">
+                                            <input type="file"
                                                 class="custom-file-container__custom-file__custom-file-input"
-                                                accept="application/pdf"
-                                                @change="
-                                                    blog.main_image =
-                                                        $event.target.files[0]
-                                                "
-                                                id="main_image"
-                                            />
-                                            <input
-                                                type="hidden"
-                                                name="MAX_FILE_SIZE"
-                                                value="10485760"
-                                            />
+                                                accept="application/pdf" @change="
+                                                    publication.publication_file =
+                                                    $event.target.files[0]
+                                                    " id="publication_file" />
+                                            <input type="hidden" name="MAX_FILE_SIZE" value="10485760" />
                                             <span
-                                                class="custom-file-container__custom-file__custom-file-control"
-                                            ></span>
+                                                class="custom-file-container__custom-file__custom-file-control"></span>
                                         </label>
-                                        <div
-                                            class="custom-file-container__image-preview"
-                                        ></div>
+                                        <div class="mt-1 text-danger">
+                                            <div v-for="message in validationErrors?.publication_file">
+                                                {{ message }}
+                                            </div>
+                                        </div>
+                                        <div class="custom-file-container__image-preview"></div>
                                     </div>
-
-
 
                                     <div class="form-group col-md-4">
-                                        <label
-                                            for="is_published"
-                                            class="col-form-label"
-                                            >Publishing Status</label
-                                        >
+                                        <label for="is_published" class="col-form-label">Publishing Status</label>
                                         <div>
-                                            <select
-                                                v-model="blog.is_published"
-                                                id="is_published"
-                                                class="form-select"
-                                            >
+                                            <select v-model="publication.is_published
+                                                " id="is_published" class="form-select">
                                                 <option value="">
                                                     Select Publishing Status ...
                                                 </option>
@@ -174,22 +121,15 @@
                                         </div>
 
                                         <div class="text-danger mt-1">
-                                            {{ errors.is_published }}
-                                        </div>
-                                        <div class="text-danger mt-1">
-                                            <div
-                                                v-for="message in validationErrors?.is_published"
-                                            >
+                                            <div v-for="message in validationErrors?.is_published">
                                                 {{ message }}
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                <canvas ref="thumbnailCanvas" style="display: none"></canvas>
 
-                                <button
-                                    :disabled="isLoading"
-                                    class="btn btn-primary mt-3"
-                                >
+                                <button :disabled="isLoading" class="btn btn-primary mt-3">
                                     <div v-show="isLoading" class=""></div>
                                     <span v-if="isLoading">Processing...</span>
                                     <span v-else>Save</span>
@@ -214,138 +154,159 @@
 }
 </style>
 <script setup>
-import { onMounted, reactive, watchEffect, ref } from "vue";
+import { onMounted, watch,ref } from "vue";
 
 import { useMeta } from "../../composables/use-meta";
-useMeta({ title: "Edit Blog" });
+useMeta({ title: "Edit Publication" });
+
+import "../../assets/sass/forms/file-upload-with-preview.min.css";
 
 import { useRoute } from "vue-router";
 import usePublications from "@/composables/publications";
-import { useForm, useField, defineRule } from "vee-validate";
-import { required, min } from "@/validation/rules";
-
-import "../../assets/sass/forms/file-upload-with-preview.min.css";
-import FileUploadWithPreview from "file-upload-with-preview";
-
-
 
 
 import { quillEditor } from "vue3-quill";
 import "vue3-quill/lib/vue3-quill.css";
 
-defineRule("required", required);
-defineRule("min", min);
-
-// Define a validation schema
-const schema = {
-    name: "required|min:3",
-    type: "required",
-    is_published: "required"
-};
-
-// Create a form context with the validation schema
-const { validate, errors, resetForm } = useForm({ validationSchema: schema });
-// Define actual fields for validation
-
 const {
-    publication: postData,
+    publication,
     getPublication,
     updatePublication,
     validationErrors,
     isLoading,
-    getPublicationList,
-    blogList
 } = usePublications();
 
-
-// Define actual fields for validation
-const { value: name } = useField("name", null, { initialValue: "" });
-const { value: type } = useField("type", null, {
-    initialValue: "",
-});
-const { value: content } = useField("content", null, {
-    initialValue: "",
-});
-const { value: main_image } = useField("main_image", null, {
-    initialValue: "",
-});
-const { value: is_published } = useField("is_published", null, {
-    initialValue: "",
-});
-
-const blog = reactive({
-    name,
-    type,
-    content,
-    is_published,
-    main_image: ""
-});
-
-const options1 = ref({
-    modules: {
-        //toolbar: [[{ header: [1, 2, false] }], ["bold", "italic", "underline"], ["image", "code-block"]],
-    },
-});
-
 const route = useRoute();
-function submitForm() {
-    validate().then((form) => {
-        if (form.valid) {
 
-            updatePublication(blog, []);
+// Helper function to convert base64 to File object
+const base64ToFile = (base64String, filename) => {
+    // Extract the data part from base64 string
+    const base64WithoutPrefix = base64String.split(',')[1];
+
+    // Convert base64 to blob
+    const byteString = atob(base64WithoutPrefix);
+    const ab = new ArrayBuffer(byteString.length);
+    const ia = new Uint8Array(ab);
+
+    for (let i = 0; i < byteString.length; i++) {
+        ia[i] = byteString.charCodeAt(i);
+    }
+
+    const blob = new Blob([ab], { type: 'image/jpeg' });
+
+    // Create File object
+    return new File([blob], filename, { type: 'image/jpeg' });
+};
+
+async function submitForm() {
+    try {
+        // Check if we need to generate a thumbnail
+        if (publication.value?.publication_file || !publication.value?.thumbnail_path) {
+            let pdfData;
+            let fileName;
+
+            // Handle new PDF upload (File object)
+            if (typeof publication.value.publication_file === 'object') {
+                pdfData = await publication.value.publication_file.arrayBuffer();
+                fileName = publication.value.publication_file.name;
+            }
+            // Handle existing PDF (string path)
+            else if (typeof publication.value.publication_file === 'string') {
+                // Fetch the PDF from the existing path
+                const response = await fetch('/storage/' + publication.value.publication_file);
+                pdfData = await response.arrayBuffer();
+                // Extract filename from path
+                fileName = publication.value.publication_file.split('/').pop();
+            } else {
+                console.error('Invalid publication file');
+                return;
+            }
+
+            // Generate thumbnail
+            const thumbnailBase64 = await generateThumbnail(pdfData);
+            if (thumbnailBase64) {
+                // Generate a filename for the thumbnail
+                const thumbnailName = `thumbnail-${fileName.replace('.pdf', '.jpg')}`;
+
+                // Convert base64 to File object
+                const thumbnailFile = base64ToFile(thumbnailBase64, thumbnailName);
+
+                // Assign the File object to your publication
+                publication.value.thumbnail_path = thumbnailFile;
+            } else {
+                console.error('Failed to generate thumbnail');
+                return;
+            }
         }
-    });
+
+        updatePublication(publication.value);
+    } catch (error) {
+        console.error('Error submitting form:', error);
+        isLoading.value = false;
+    }
 }
 
-function deleteImage(imageId) {
-    deleteBlogImage(imageId);
-}
+const thumbnailCanvas = ref(null);
 
-const initializeFileUpload = async () => {};
+const loadPdfJS = async () => {
+    if (window.pdfjsLib) return window.pdfjsLib;
+
+    await Promise.all([
+        new Promise((resolve) => {
+            const script = document.createElement('script');
+            script.src = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js';
+            script.onload = resolve;
+            document.head.appendChild(script);
+        }),
+        new Promise((resolve) => {
+            const script = document.createElement('script');
+            script.src = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+            script.onload = resolve;
+            document.head.appendChild(script);
+        })
+    ]);
+
+    await new Promise(resolve => setTimeout(resolve, 100));
+    return window.pdfjsLib;
+};
+
+const generateThumbnail = async (pdfData, scale = 0.5) => {
+    try {
+        const pdfjsLib = await loadPdfJS();
+        const typedArray = new Uint8Array(pdfData);
+
+        const loadingTask = pdfjsLib.getDocument({ data: typedArray });
+        const pdf = await loadingTask.promise;
+        const page = await pdf.getPage(1);
+
+        const viewport = page.getViewport({ scale });
+        const canvas = thumbnailCanvas.value;
+        const context = canvas.getContext('2d');
+
+        canvas.width = viewport.width;
+        canvas.height = viewport.height;
+
+        await page.render({
+            canvasContext: context,
+            viewport: viewport
+        }).promise;
+
+        // Get base64 string
+        return canvas.toDataURL('image/jpeg', 0.8);
+    } catch (error) {
+        console.error('Error generating thumbnail:', error);
+        return null;
+    }
+};
 
 onMounted(() => {
-
     getPublication(route.params.id);
-
-    watchEffect(() => {
-        if (postData.value && postData.value.main_image_path) {
-            const mainImagePath = postData.value.main_image_path;
-
-            // Define the variable
-            const mainImage = "/storage/" + mainImagePath;
-
-            // Create the configuration object with the variable value
-            const fileUploadConfig = {
-                images: {
-                    baseImage: mainImage,
-                    backgroundImage: "",
-                },
-            };
-
-            // Pass the configuration object to FileUploadWithPreview
-            new FileUploadWithPreview("myFirstImage", fileUploadConfig);
-        } else {
-            new FileUploadWithPreview("myFirstImage", {
-                images: {
-                    baseImage: "/assets/images/file-preview-pdf.png",
-                    backgroundImage: "",
-                },
-            });
-        }
-    });
-
 });
-// https://vuejs.org/api/reactivity-core.html#watcheffect
 
-watchEffect(() => {
-    blog.id = postData.value.id;
-    blog.name = postData.value.name;
-    blog.content = postData.value.content;
-    blog.type = postData.value.type;
-    blog.is_published = postData.value.is_published;
-    blog.main_image = postData.value.publication_file;
-
-
-
-});
+watch(
+    () => route.params.id,
+    (id) => {
+        getPublication(route.params.id);
+    }
+);
 </script>

@@ -21,9 +21,10 @@ class PublicationResource extends JsonResource
             'name' => $this->name,
             'content' => $this->content,
             'publication_file' => $this->publication_file,
+            'thumbnail_path' => $this->thumbnail_path,
             'is_published' => $this->is_published,
             'created_at' => $this->created_at->toDateString()
-            
+
         ];
     }
 }
