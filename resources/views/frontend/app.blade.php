@@ -459,6 +459,12 @@
     @vite('resources/js/apps/frontend/assets/css/skins/skin-demo-14.css')
     @vite('resources/js/apps/frontend/assets/css/demos/demo-14.css')
     @vite('resources/js/apps/frontend/assets/css/demos/demo-4.css')
+
+    <link rel="stylesheet" id="dflip-style-css" href="/dearflip/dflip/css/dflip.min.css" media="all" />
+
+    <script src="/dearflip/dflip/js/libs/jquery.min.js" id="jquery-core-js"></script>
+    <script src="/dearflip/dflip/js/libs/jquery-migrate.min.js" id="jquery-migrate-js"></script>
+
 </head>
 
 <body>
@@ -469,10 +475,101 @@
     <script>
         window.config = @json($config);
     </script>
+
+    <script src="/dearflip/dflip/js/libs/imagesloaded.min.js" id="imagesloaded-js"></script>
+    <script src="/dearflip/dflip/js/libs/masonry.min.js" id="masonry-js"></script>
+
+    <script src="/dearflip/dflip/js/dflip.min.js" id="dflip-script-js"></script>
+    <script data-cfasync="false">
+        var dFlipLocation =
+            "https://js.dearflip.com/wp-content/plugins/dflip/assets/";
+        var dFlipWPGlobal = {
+            text: {
+                toggleSound: "Turn on\/off Sound",
+                toggleThumbnails: "Toggle Thumbnails",
+                toggleOutline: "Toggle Outline\/Bookmark",
+                previousPage: "Previous Page",
+                nextPage: "Next Page",
+                toggleFullscreen: "Toggle Fullscreen",
+                zoomIn: "Zoom In",
+                zoomOut: "Zoom Out",
+                toggleHelp: "Toggle Help",
+                singlePageMode: "Single Page Mode",
+                doublePageMode: "Double Page Mode",
+                downloadPDFFile: "Download PDF File",
+                gotoFirstPage: "Goto First Page",
+                gotoLastPage: "Goto Last Page",
+                share: "Share",
+                search: "Search",
+                print: "Print",
+                mailSubject: "I wanted you to see this FlipBook",
+                mailBody: "Check out this site {{ url()->current() }}",
+                loading: "Loading",
+            },
+            viewerType: "flipbook",
+            mobileViewerType: "auto",
+            moreControls: "download,pageMode,startPage,endPage,sound",
+            hideControls: "altPrev,altNext",
+            leftControls: "outline,thumbnail",
+            rightControls: "fullScreen,share,download,more",
+            hideShareControls: "",
+            scrollWheel: "true",
+            backgroundColor: "rgb(229,229,229)",
+            backgroundImage: "",
+            height: "auto",
+            paddingTop: "30",
+            paddingBottom: "30",
+            paddingLeft: "30",
+            paddingRight: "30",
+            controlsPosition: "bottom",
+            controlsFloating: true,
+            direction: "1",
+            duration: "800",
+            soundEnable: "true",
+            showDownloadControl: "true",
+            showSearchControl: "false",
+            showPrintControl: "false",
+            enableAnalytics: "true",
+            webgl: "true",
+            hard: "none",
+            autoEnableOutline: "false",
+            autoEnableThumbnail: "false",
+            pageScale: "fit",
+            maxTextureSize: "3200",
+            rangeChunkSize: "1048576",
+            disableRange: false,
+            zoomRatio: "1.5",
+            flexibility: "1",
+            pageMode: "0",
+            singlePageMode: "0",
+            pageSize: "0",
+            autoPlay: "false",
+            autoPlayDuration: "5000",
+            autoPlayStart: "false",
+            linkTarget: "2",
+            sharePrefix: "flipbook-",
+            pdfVersion: "default",
+            thumbLayout: "book-title-hover",
+            targetWindow: "_popup",
+            buttonClass: "",
+            hasSpiral: false,
+            spiralColor: "#eee",
+            cover3DType: "plain",
+            color3DCover: "#aaaaaa",
+            color3DSheets: "#fff",
+            flipbook3DTiltAngleUp: "0",
+            flipbook3DTiltAngleLeft: "0",
+            autoPDFLinktoViewer: false,
+            sideMenuOverlay: true,
+            displayLightboxPlayIcon: true,
+            popupBackGroundColor: "#eee",
+            shelfImage: "",
+            enableAutoLinks: false,
+        };
+    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 
     @vite('resources/js/frontend-main.js')
-
     @vite('resources/js/apps/frontend/assets/js/bootstrap.bundle.min.js?commonjs-entry')
     @vite('resources/js/apps/frontend/assets/js/jquery.hoverIntent.min.js?commonjs-entry')
     @vite('resources/js/apps/frontend/assets/js/jquery.waypoints.min.js')
@@ -483,6 +580,7 @@
     @vite('resources/js/apps/frontend/assets/js/jquery.elevateZoom.min.js')
     @vite('resources/js/apps/frontend/assets/js/main.js')
     @vite('resources/js/apps/frontend/assets/js/demos/demo-14.js')
+
     <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PDBMDPJZ" height="0" width="0"
             style="display:none;visibility:hidden"></iframe></noscript>
