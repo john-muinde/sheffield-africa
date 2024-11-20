@@ -284,7 +284,7 @@ const generateThumbnail = async (pdfData, scale = 0.5) => {
 
         const viewport = page.getViewport({ scale });
         const canvas = thumbnailCanvas.value;
-        const context = canvas.getContext('2d');
+        const context = canvas.getContext('2d', { willReadFrequently: true });
 
         canvas.width = viewport.width;
         canvas.height = viewport.height;

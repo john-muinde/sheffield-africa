@@ -222,7 +222,7 @@ const generateThumbnail = async (video) => {
             const canvas = document.createElement('canvas');
             canvas.width = videoElement.videoWidth;
             canvas.height = videoElement.videoHeight;
-            const context = canvas.getContext('2d');
+            const context = canvas.getContext('2d', { willReadFrequently: true });
             context.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
             video.thumbnail = canvas.toDataURL('image/png');
             resolve();
