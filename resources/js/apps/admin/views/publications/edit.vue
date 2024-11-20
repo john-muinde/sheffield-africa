@@ -154,7 +154,7 @@
 }
 </style>
 <script setup>
-import { onMounted, watch,ref } from "vue";
+import { onMounted, watch, ref } from "vue";
 
 import { useMeta } from "../../composables/use-meta";
 useMeta({ title: "Edit Publication" });
@@ -199,6 +199,7 @@ const base64ToFile = (base64String, filename) => {
 };
 
 async function submitForm() {
+    isLoading.value = true;
     try {
         // Check if we need to generate a thumbnail
         if (publication.value?.publication_file || !publication.value?.thumbnail_path) {
@@ -242,6 +243,8 @@ async function submitForm() {
         updatePublication(publication.value);
     } catch (error) {
         console.error('Error submitting form:', error);
+        isLoading.value = false;
+    } finally {
         isLoading.value = false;
     }
 }

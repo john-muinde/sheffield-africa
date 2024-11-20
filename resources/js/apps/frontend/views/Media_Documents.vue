@@ -30,9 +30,8 @@
                                 ref="bookContainer">
                                 <a v-for="brochure in brochures" :key="brochure.id"
                                     :href="`/media/brochures#${brochure.slug}/`" class="_df_thumb"
-                                    :data-slug="brochure.slug" :data-title="brochure.name"
-                                    :id="`df_${brochure.id}`" :data-df-option="`df_option_${brochure.id}`"
-                                    :thumb="brochure.thumb">
+                                    :data-slug="brochure.slug" :data-title="brochure.name" :id="`df_${brochure.id}`"
+                                    :data-df-option="`df_option_${brochure.id}`" :thumb="brochure.thumb">
                                     {{ brochure.name }}
                                 </a>
                             </div>

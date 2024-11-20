@@ -191,6 +191,7 @@ const base64ToFile = (base64String, filename) => {
 };
 
 async function submitForm() {
+    isLoading.value = true;
     try {
         if (publication.value?.publication_file) {
             const file = publication.value.publication_file;
@@ -215,6 +216,8 @@ async function submitForm() {
         storePublication(publication.value);
     } catch (error) {
         console.error('Error submitting form:', error);
+        isLoading.value = false;
+    }finally{
         isLoading.value = false;
     }
 }
