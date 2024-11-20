@@ -50,14 +50,12 @@
 
                                         <select class="form-select form-control" name="type" id="type"
                                             v-model="publication.type">
-                                            <option>Select Type</option>
-                                            <option value="Brochures">
-                                                Brochures
-                                            </option>
-                                            <option value="Newsletter">
-                                                Newsletter
-                                            </option>
+                                            <option selected disabled value="">Select Publication Type</option>
+                                            <option value="Brochures">Brochures</option>
+                                            <option value="Newsletter">Newsletter</option>
                                         </select>
+
+
 
                                         <div class="text-danger mt-1">
                                             <div v-for="message in validationErrors?.type">
@@ -129,10 +127,8 @@
                                 </div>
                                 <canvas ref="thumbnailCanvas" style="display: none"></canvas>
 
-                                <button :disabled="isLoading" class="btn btn-primary mt-3">
-                                    <div v-show="isLoading" class=""></div>
-                                    <span v-if="isLoading">Processing...</span>
-                                    <span v-else>Save</span>
+                                <button :disabled="isLoading || isProcessing" class="btn btn-primary mt-3">
+                                    <span>{{ isLoading || isProcessing ? 'Processing...' : 'Save' }}</span>
                                 </button>
                             </form>
                         </div>
@@ -177,6 +173,7 @@ const {
 } = usePublications();
 
 const route = useRoute();
+const isProcessing = ref(false);
 
 // Helper function to convert base64 to File object
 const base64ToFile = (base64String, filename) => {
@@ -199,10 +196,12 @@ const base64ToFile = (base64String, filename) => {
 };
 
 async function submitForm() {
-    isLoading.value = true;
+    isProcessing.value = true;
     try {
         // Check if we need to generate a thumbnail
-        if (publication.value?.publication_file || !publication.value?.thumbnail_path) {
+        console.log(typeof publication.value.publication_file === 'object')
+        console.log(publication.value?.thumbnail_path)
+        if (typeof publication.value.publication_file === 'object' || !publication.value?.thumbnail_path) {
             let pdfData;
             let fileName;
 
@@ -243,9 +242,8 @@ async function submitForm() {
         updatePublication(publication.value);
     } catch (error) {
         console.error('Error submitting form:', error);
-        isLoading.value = false;
     } finally {
-        isLoading.value = false;
+        isProcessing.value = false;
     }
 }
 
@@ -284,7 +282,7 @@ const generateThumbnail = async (pdfData, scale = 0.5) => {
 
         const viewport = page.getViewport({ scale });
         const canvas = thumbnailCanvas.value;
-        const context = canvas.getContext('2d', { willReadFrequently: true });
+        const context = canvas.getContext('2d');
 
         canvas.width = viewport.width;
         canvas.height = viewport.height;

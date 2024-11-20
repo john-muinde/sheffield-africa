@@ -37,7 +37,7 @@ export default function usePublications() {
             publications.value = response;
         } catch (errors) {
             validationErrors.value = errors;
-            console.error(error);
+            console.error(errors);
         }
     };
 
@@ -51,8 +51,8 @@ export default function usePublications() {
         }
     };
 
-    const storePublication = async (publication) => {
-        if (isLoading.value) return;
+    const storePublication = async (publication, ignoreLoading = false) => {
+        if (isLoading.value && !ignoreLoading) return;
 
         isLoading.value = true;
         validationErrors.value = {};
@@ -92,8 +92,8 @@ export default function usePublications() {
         }
     };
 
-    const updatePublication = async (publication) => {
-        if (isLoading.value) return;
+    const updatePublication = async (publication, ignoreLoading = false) => {
+        if (isLoading.value && !ignoreLoading) return;
 
         isLoading.value = true;
         validationErrors.value = {};

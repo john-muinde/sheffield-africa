@@ -50,7 +50,7 @@
 
                                         <select class="form-select form-control" name="type" id="type"
                                             v-model="publication.type">
-                                            <option>Select Type</option>
+                                            <option selected disabled value="">Select Publication Type</option>
                                             <option value="Brochures">Brochures</option>
                                             <option value="Newsletter">Newsletter</option>
                                         </select>
@@ -126,10 +126,8 @@
                                 </div>
                                 <canvas ref="thumbnailCanvas" style="display: none"></canvas>
 
-                                <button :disabled="isLoading" class="btn btn-primary mt-3">
-                                    <div v-show="isLoading" class=""></div>
-                                    <span v-if="isLoading">Processing...</span>
-                                    <span v-else>Save</span>
+                                <button :disabled="isLoading || isProcessing" class="btn btn-primary mt-3">
+                                    <span>{{ isLoading || isProcessing ? 'Processing...' : 'Save' }}</span>
                                 </button>
                             </form>
                         </div>
@@ -163,12 +161,16 @@ import "vue3-quill/lib/vue3-quill.css";
 import { reactive, onMounted, ref } from "vue";
 import usePublications from "@/composables/publications";
 
+const isProcessing = ref(false);
+
 const {
     storePublication,
     validationErrors,
     isLoading,
     publication,
 } = usePublications();
+
+
 
 // Helper function to convert base64 to File object
 const base64ToFile = (base64String, filename) => {
@@ -191,7 +193,7 @@ const base64ToFile = (base64String, filename) => {
 };
 
 async function submitForm() {
-    isLoading.value = true;
+    isProcessing.value = true;
     try {
         if (publication.value?.publication_file) {
             const file = publication.value.publication_file;
@@ -213,12 +215,11 @@ async function submitForm() {
                 return;
             }
         }
-        storePublication(publication.value);
+        storePublication(publication.value, true);
     } catch (error) {
         console.error('Error submitting form:', error);
-        isLoading.value = false;
-    }finally{
-        isLoading.value = false;
+    } finally {
+        isProcessing.value = false;
     }
 }
 
@@ -257,7 +258,7 @@ const generateThumbnail = async (pdfData, scale = 0.5) => {
 
         const viewport = page.getViewport({ scale });
         const canvas = thumbnailCanvas.value;
-        const context = canvas.getContext('2d', { willReadFrequently: true });
+        const context = canvas.getContext('2d');
 
         canvas.width = viewport.width;
         canvas.height = viewport.height;
