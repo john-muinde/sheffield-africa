@@ -124,7 +124,7 @@ const initializeDflip = () => {
             source: `${window.location.origin}/storage/${newsletter.publication_file}`,
             outline: [],
             autoEnableOutline: false,
-            autoEnableThumbnail: true,
+            autoEnableThumbnail: false,
             overwritePDFOutline: false,
             pageSize: "0",
             is3D: true,
