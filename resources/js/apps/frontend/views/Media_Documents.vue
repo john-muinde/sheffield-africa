@@ -126,7 +126,7 @@ const initializeDflip = () => {
             autoEnableThumbnail: false,
             overwritePDFOutline: false,
             pageSize: "0",
-            is3D: true,
+            is3D: false,
             direction: "1",
             slug: brochure.slug,
             wpOptions: "true",
