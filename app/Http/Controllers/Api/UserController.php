@@ -9,9 +9,11 @@ use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-use App\Mail\ContactUs;
-use App\Mail\Career;
-use App\Mail\RequestQuote;
+use App\Mail\ContactUsMail;
+use App\Mail\CareerMail;
+use App\Mail\RequestQuoteMail;
+use App\Models\ContactUs;
+use App\Models\QuoteRequest;
 
 class UserController extends Controller
 {
@@ -120,9 +122,10 @@ class UserController extends Controller
     }
 
 
+
+
     public function contactUs(Request $request)
     {
-
         $recaptchaToken = $request->input('recaptchaToken');
 
         $recaptchaSecret = '6Ldyw1wpAAAAAIvn2LJHPIGK4JsebS2FvVZkN-Pk';
@@ -135,47 +138,37 @@ class UserController extends Controller
 
         $responseData = json_decode(file_get_contents($recaptchaUrl), true);
 
-
         if (!$responseData['success']) {
             return response()->json(['message' => 'reCAPTCHA verification failed', 'status' => 'error']);
         } else {
-            $request_type = $request->input('request_type');
-            $area_of_interest = $request->input('area_of_interest');
-            $surname = $request->input('surname');
-            $email = $request->input('email');
-            $company_name = $request->input('company_name');
-            $business_type = $request->input('business_type');
-            $country = $request->input('country');
-            $message_request = $request->input('request');
-            $code = $request->input('code');
-            $firstname = $request->input('firstname');
-            $phone_number = $request->input('phone_number');
-            $accept_terms_conditions = $request->input('accept_terms_conditions');
+            $formData = $request->only([
+                'request_type',
+                'area_of_interest',
+                'surname',
+                'email',
+                'company_name',
+                'business_type',
+                'country',
+                'request',
+                'code',
+                'firstname',
+                'phone_number',
+                'accept_terms_conditions'
+            ]);
 
-            $formData = [
-                'request_type' => $request_type,
-                'area_of_interest' => $area_of_interest,
-                'surname' => $surname,
-                'email' => $email,
-                'company_name' => $company_name,
-                'business_type' => $business_type,
-                'country' => $country,
-                'message_request' => $message_request,
-                'code' => $code,
-                'firstname' => $firstname,
-                'phone_number' => $phone_number,
-                'accept_terms_conditions' => $accept_terms_conditions,
-
-            ];
-
+            $formData['message_request'] = $formData['request'];
+            unset($formData['request']);
 
             try {
+                // Save the form data to the database
+                ContactUs::create($formData);
 
-                Mail::to('sheffieldafricamarketing@gmail.com')->cc($email)->send(new ContactUs($formData));
+                // Send the email
+                Mail::to('sheffieldafricamarketing@gmail.com')->cc($formData['email'])->send(new ContactUsMail($formData));
 
                 return response()->json(['message' => 'Your message has been received', 'status' => 'success']);
             } catch (\Exception $exception) {
-                return response()->json(['message' => $exception->getMessage(), 'status' => 'success']);
+                return response()->json(['message' => $exception->getMessage(), 'status' => 'error']);
             }
         }
     }
@@ -234,7 +227,7 @@ class UserController extends Controller
 
             try {
 
-                Mail::to('sheffieldafricamarketing@gmail.com')->cc($email)->send(new Career($formData));
+                Mail::to('sheffieldafricamarketing@gmail.com')->cc($email)->send(new CareerMail($formData));
 
                 return response()->json(['message' => 'Your submission has been received', 'status' => 'success']);
             } catch (\Exception $exception) {
@@ -244,9 +237,10 @@ class UserController extends Controller
     }
 
 
+
+
     public function requestQuote(Request $request)
     {
-
         $recaptchaToken = $request->input('recaptchaToken');
 
         $recaptchaSecret = '6Ldyw1wpAAAAAIvn2LJHPIGK4JsebS2FvVZkN-Pk'; // Replace with your actual reCAPTCHA secret key
@@ -259,52 +253,36 @@ class UserController extends Controller
 
         $responseData = json_decode(file_get_contents($recaptchaUrl), true);
 
-
         if (!$responseData['success']) {
-
             return response()->json(['message' => 'reCAPTCHA verification failed', 'status' => 'error']);
         } else {
+            $formData = $request->only([
+                'surname',
+                'email',
+                'company_name',
+                'business_type',
+                'country',
+                'location',
+                'code',
+                'firstname',
+                'phone_number',
+                'shipping',
+                'installation',
+                'cartItems'
+            ]);
 
-
-            $surname = $request->input('surname');
-            $email = $request->input('email');
-            $company_name = $request->input('company_name');
-            $business_type = $request->input('business_type');
-            $country = $request->input('country');
-            $location = $request->input('location');
-            $code = $request->input('code');
-            $firstname = $request->input('firstname');
-            $phone_number = $request->input('phone_number');
-
-            $shipping = $request->input('shipping');
-            $installation = $request->input('installation');
-            $cartItems = $request->input('cartItems');
-            $cartItems = json_decode($cartItems, true);
-
-
-
-            $formData = [
-                'shipping' => $shipping,
-                'installation' => $installation,
-                'surname' => $surname,
-                'email' => $email,
-                'company_name' => $company_name,
-                'business_type' => $business_type,
-                'country' => $country,
-                'location' => $location,
-                'code' => $code,
-                'firstname' => $firstname,
-                'phone_number' => $phone_number,
-                'cartItems' => $cartItems,
-            ];
-
+            $formData['cartItems'] = json_decode($formData['cartItems'], true);
 
             try {
-                Mail::to('sheffieldafricamarketing@gmail.com')->cc($email)->send(new RequestQuote($formData));
+                // Save the form data to the database
+                QuoteRequest::create($formData);
+
+                // Send the email
+                Mail::to('sheffieldafricamarketing@gmail.com')->cc($formData['email'])->send(new RequestQuoteMail($formData));
 
                 return response()->json(['message' => 'Your Request Quote has been received', 'status' => 'success']);
             } catch (\Exception $exception) {
-                return response()->json(['message' => $exception->getMessage(), 'status' => 'success']);
+                return response()->json(['message' => $exception->getMessage(), 'status' => 'error']);
             }
         }
     }

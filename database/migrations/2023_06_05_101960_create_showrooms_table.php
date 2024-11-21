@@ -11,7 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::createIfNotExists('showrooms', function (Blueprint $table) {
+        // Drop the table if it already exists
+        if (Schema::hasTable('showrooms')) {
+            return;
+            //Schema::drop('showrooms');
+        }
+
+        // Create the table
+        Schema::create('showrooms', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable();
             $table->string('location')->nullable();

@@ -1,3 +1,4 @@
+import { onBeforeRouteLeave } from "vue-router";
 import store from "../store";
 
 function requireAdminLogin(to, from, next) {
@@ -514,6 +515,7 @@ const routes = [
                     import(
                         /* webpackChunkName: "index" */ "../apps/frontend/views/Media_Documents.vue"
                     ),
+
                 meta: {
                     layout: "frontend",
                     title: "Our Blogs",

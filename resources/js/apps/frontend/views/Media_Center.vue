@@ -24,19 +24,13 @@
 
                 <div class="container">
                     <div class="row">
-                        <div
-                            class="col-md-10 offset-lg-1 justify-content-center media-center-section"
-                        >
-                            <div
-                                class="row about-team-container about-team-container1 justify-content-center"
-                            >
+                        <div class="col-md-10 offset-lg-1 justify-content-center media-center-section">
+                            <div class="row about-team-container about-team-container1 justify-content-center">
                                 <div class="col-md-4 mt-2 mb-2">
                                     <router-link to="/media/blogs">
                                         <div class="about-team">
                                             <div class="about-team-white">
-                                                <img
-                                                    src="assets/images/media/media_blogs.jpg"
-                                                />
+                                                <img src="/assets/images/media/media_blogs.jpg" />
                                             </div>
                                             <div class="details">
                                                 <div class="name">Blogs</div>
@@ -49,9 +43,7 @@
                                     <router-link to="/media/in-the-news">
                                         <div class="about-team">
                                             <div class="about-team-white">
-                                                <img
-                                                    src="assets/images/media/media_in_the_news.jpg"
-                                                />
+                                                <img src="/assets/images/media/media_in_the_news.jpg" />
                                             </div>
                                             <div class="details">
                                                 <div class="name">
@@ -66,9 +58,7 @@
                                     <router-link to="/media/videos">
                                         <div class="about-team">
                                             <div class="about-team-white">
-                                                <img
-                                                    src="assets/images/media/media_video.jpg"
-                                                />
+                                                <img src="/assets/images/media/media_video.jpg" />
                                             </div>
                                             <div class="details">
                                                 <div class="name">Videos</div>
@@ -81,9 +71,7 @@
                                     <router-link to="/media/newsletters">
                                         <div class="about-team">
                                             <div class="about-team-white">
-                                                <img
-                                                    src="assets/images/media/media_newsletters.jpg"
-                                                />
+                                                <img src="/assets/images/media/media_newsletters.jpg" />
                                             </div>
                                             <div class="details">
                                                 <div class="name">
@@ -95,14 +83,10 @@
                                 </div>
 
                                 <div class="col-md-4 mt-2 mb-2">
-                                    <router-link
-                                        to="/media/brochures-and-catalogs"
-                                    >
+                                    <router-link to="/media/brochures-and-catalogs">
                                         <div class="about-team">
                                             <div class="about-team-white">
-                                                <img
-                                                    src="assets/images/media/media_documents.jpg"
-                                                />
+                                                <img src="/assets/images/media/media_documents.jpg" />
                                             </div>
                                             <div class="details">
                                                 <div class="name">
@@ -117,9 +101,7 @@
                                     <router-link to="/media/gallery">
                                         <div class="about-team">
                                             <div class="about-team-white">
-                                                <img
-                                                    src="assets/images/media/media_gallery.jpg"
-                                                />
+                                                <img src="/assets/images/media/media_gallery.jpg" />
                                             </div>
                                             <div class="details">
                                                 <div class="name">Gallery</div>
@@ -215,6 +197,7 @@ onMounted(() => {
     border-radius: 10px;
     box-shadow: -3px 4px 9px 1px #4c4c4c;
 }
+
 .ul-pdf-view li a {
     font-size: 1.4rem;
     padding-left: 0.9rem;
@@ -345,10 +328,12 @@ onMounted(() => {
 }
 
 .about-team:hover img {
-    filter: none; /* Remove the grayscale filter on hover */
+    filter: none;
+    /* Remove the grayscale filter on hover */
     position: relative;
     z-index: 17;
 }
+
 .about-team:hover .description {
     display: block;
     z-index: 19;

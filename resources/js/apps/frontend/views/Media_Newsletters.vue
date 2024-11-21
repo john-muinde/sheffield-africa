@@ -46,158 +46,37 @@
 </template>
 
 <script setup>
-import { onMounted, ref, nextTick, watch } from 'vue';
+import { onMounted } from 'vue';
+import { useMediaDocuments } from '@/composables/documents';
 import ContentState from "@/Components/ContentState.vue";
-import { useMeta } from "../../admin/composables/use-meta";
+import { onBeforeRouteLeave } from 'vue-router';
 
-useMeta({ title: "Newsletters | Media Center" });
-
-const newsletters = ref([]);
-const loading = ref(false);
-const error = ref(null);
-const bookContainer = ref(null);
-const dflipInitialized = ref(false);
-const thumbnailCanvas = ref(null);
-
-// Function to load PDF.js from CDN
-const loadPdfJS = async () => {
-    // Load PDF.js library if not already loaded
-    if (window.pdfjsLib) return window.pdfjsLib;
-
-    await Promise.all([
-        // Load main PDF.js library
-        new Promise((resolve) => {
-            const script = document.createElement('script');
-            script.src = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js';
-            script.onload = resolve;
-            document.head.appendChild(script);
-        }),
-        // Load PDF.js worker
-        new Promise((resolve) => {
-            const script = document.createElement('script');
-            script.src = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
-            script.onload = resolve;
-            document.head.appendChild(script);
-        })
-    ]);
-
-    // Wait a bit to ensure everything is properly initialized
-    await new Promise(resolve => setTimeout(resolve, 100));
-
-    return window.pdfjsLib;
-};
-
-// Function to generate thumbnail from PDF
-const generateThumbnail = async (pdfUrl, scale = 0.5) => {
-    try {
-        const pdfjsLib = await loadPdfJS();
-
-        // Create a new loading task
-        const loadingTask = pdfjsLib.getDocument(pdfUrl);
-        const pdf = await loadingTask.promise;
-        const page = await pdf.getPage(1);
-
-        const viewport = page.getViewport({ scale });
-        const canvas = thumbnailCanvas.value;
-        const context = canvas.getContext('2d');
-
-        canvas.width = viewport.width;
-        canvas.height = viewport.height;
-
-        await page.render({
-            canvasContext: context,
-            viewport: viewport
-        }).promise;
-
-        return canvas.toDataURL('image/jpeg', 0.8);
-    } catch (error) {
-        console.error('Error generating thumbnail:', error);
-        return null;
-    }
-};
-
-const initializeDflip = () => {
-    if (!newsletters.value.length || dflipInitialized.value) return;
-
-    newsletters.value.forEach((newsletter) => {
-        window[`df_option_${newsletter.id}`] = {
-            source: `${window.location.origin}/storage/${newsletter.publication_file}`,
-            outline: [],
-            autoEnableOutline: false,
-            autoEnableThumbnail: false,
-            overwritePDFOutline: false,
-            pageSize: "0",
-            is3D: true,
-            direction: "1",
-            slug: newsletter.slug,
-            wpOptions: "true",
-            id: newsletter.id,
-        };
-    });
-
-    nextTick(() => {
-        const container = bookContainer.value;
-        if (container && container.children.length === newsletters.value.length) {
-            if (window.DFLIP && window.DFLIP.parseBooks) {
-                window.DFLIP.parseBooks();
-                dflipInitialized.value = true;
-                console.log('DFlip books initialized successfully');
-            } else {
-                console.warn('DFLIP library not loaded');
-            }
-        }
-    });
-};
-
-// Fetch newsletters and generate thumbnails
-const fetchMediaCenter = async () => {
-    loading.value = true;
-    try {
-        const response = await axios.get("/api/get-media-center", {});
-        const newslettersData = response.data.newsletters;
-
-        // Process each newsletter and generate thumbnail
-        for (const newsletter of newslettersData) {
-            newsletter.slug = newsletter.name.toLowerCase().replace(/ /g, "-");
-
-            // Generate thumbnail from PDF
-            const pdfUrl = '/storage/' + newsletter.publication_file;
-            if (newsletter.thumbnail_path) {
-                newsletter.thumb = `${window.location.origin}/storage/${newsletter.thumbnail_path}`;
-                continue;
-            }
-
-            const thumbnail = await generateThumbnail(pdfUrl);
-
-            // Use generated thumbnail or fallback to placeholder
-            newsletter.thumb = thumbnail || null;
-        }
-
-        newsletters.value = newslettersData;
-        loading.value = false;
-    }
-
-    catch (err) {
-        loading.value = false;
-        error.value = err;
-        console.error(err);
-    }
-}
-
-
-// Watch for changes in the newsletters array
-watch(newsletters, (newValue) => {
-    if (newValue.length > 0) {
-        nextTick(() => {
-            initializeDflip();
-        });
-    }
-}, { deep: true });
-
-// Initial setup
-onMounted(async () => {
-    await fetchMediaCenter();
+// Initialize with custom options
+const {
+    processDocuments,
+    initializeDflip,
+    documents: newsletters,
+    loading,
+    error,
+    handleRouteLeave
+} = useMediaDocuments({
+    thumbnailScale: 0.4,
+    enableDflip: true
 });
+
+// Fetch function for media center
+const fetchMediaCenter = async () => {
+    const response = await axios.get("/api/get-media-center");
+    return response.data.newsletters;
+};
+
+// Fetch and process documents
+onMounted(async () => {
+    await processDocuments(fetchMediaCenter);
+    initializeDflip();
+});
+
+onBeforeRouteLeave(handleRouteLeave);
 </script>
 
 <style>
