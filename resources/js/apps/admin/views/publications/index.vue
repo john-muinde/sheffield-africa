@@ -48,8 +48,8 @@
                                     style="display: flex; flex-direction: column; justify-content: center; align-items: center;text-align: center;">
                                     <span v-if="!rowData.thumbnail_path">No Thumbnail</span>
                                     <span v-if="rowData.thumbnail_path" class="dimensions">
-                                        {{ extractDimensions(rowData.thumbnail_path || '')?.width }} x {{
-                                            extractDimensions(rowData.thumbnail_path || '')?.height }}
+                                        {{ parseInt(extractDimensions(rowData.thumbnail_path || '')?.width) }} x {{
+                                            parseInt(extractDimensions(rowData.thumbnail_path || '')?.height) }}
                                     </span>
                                     <img v-if="rowData.thumbnail_path" :src="`/storage/${rowData.thumbnail_path}`"
                                         :alt="rowData.name" class="img-fluid"

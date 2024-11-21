@@ -47,6 +47,26 @@ const props = defineProps({
     }
 });
 
+const generateBase64 = async (fileUrl, cb) => {
+    try {
+        // Fetch the file
+        const response = await fetch(window.location.origin + fileUrl);
+        const blob = await response.blob();
+
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                resolve(reader.result);
+            };
+            reader.onerror = reject;
+            reader.readAsDataURL(blob);
+        });
+    } catch (error) {
+        console.error('Error generating base64:', error);
+        throw error;
+    }
+};
+
 const defaultOptions = {
     responsive: {
         details: {
@@ -74,35 +94,48 @@ const defaultOptions = {
                                     const link = node.querySelector('a');
                                     const text = link.textContent || link.innerText;
                                     const href = link.href;
-                                    return `${text} (${href})`;
+                                    return `<a href="${href}" height="100" width="100">${text}</a>`;
                                 }
+
+                                // HANDLE IMAGES
+                                if (node && node.querySelector('img')) {
+                                    const img = node.querySelector('img');
+                                    const src = img.src;
+                                    const alt = img.alt || 'image';
+                                    return `<img src="${src}" height="100" width="100" alt="${alt}" />`;
+                                }
+
                                 if (node && typeof data === 'object' && data !== null) {
                                     return node.textContent || node.innerText || '';
                                 }
-                                if (typeof data === 'string') {
+
+
+                                if (!node && (typeof data === 'string' || typeof data === 'object')) {
                                     const parser = new DOMParser();
-                                    const doc = parser.parseFromString(data, 'text/html');
+                                    const doc = typeof data === 'object' ? data : parser.parseFromString(data, 'text/html');
                                     const link = doc.querySelector('a');
                                     const img = doc.querySelector('img');
                                     if (link) {
                                         const text = link.textContent || link.innerText;
                                         const href = link.href;
-                                        return `${text} (${href})`;
+                                        return `<a href="${href}" height="100" width="100">${text}</a>`;
                                     }
                                     if (img) {
                                         const src = img.src;
                                         const alt = img.alt || 'image';
-                                        return `![${alt}](${src})`;
+                                        return `<img src="${src}" height="100" width="100" alt="${alt}" />`;
                                     }
-                                    return doc.body.textContent || doc.body.innerText || '';
+                                    return doc.textContent || doc.innerText || '';
                                 }
+
+
                                 return data;
                             }
                         }
                     }
                 },
                 {
-                    extend: 'pdf',
+                    extend: 'pdfHtml5',
                     className: 'dropdown-item',
                     text: '<i class="fas fa-file-pdf me-2"></i>PDF',
                     exportOptions: {
@@ -113,28 +146,41 @@ const defaultOptions = {
                                     const link = node.querySelector('a');
                                     const text = link.textContent || link.innerText;
                                     const href = link.href;
-                                    return `${text} (${href})`;
+                                    return `<a href="${href}" height="100" width="100">${text}</a>`;
                                 }
+
+                                // HANDLE IMAGES
+                                if (node && node.querySelector('img')) {
+                                    const img = node.querySelector('img');
+                                    const src = img.src;
+                                    const alt = img.alt || 'image';
+                                    return `<img src="${src}" height="100" width="100" alt="${alt}" />`;
+                                }
+
                                 if (node && typeof data === 'object' && data !== null) {
                                     return node.textContent || node.innerText || '';
                                 }
-                                if (typeof data === 'string') {
+
+
+                                if (!node && (typeof data === 'string' || typeof data === 'object')) {
                                     const parser = new DOMParser();
-                                    const doc = parser.parseFromString(data, 'text/html');
+                                    const doc = typeof data === 'object' ? data : parser.parseFromString(data, 'text/html');
                                     const link = doc.querySelector('a');
                                     const img = doc.querySelector('img');
                                     if (link) {
                                         const text = link.textContent || link.innerText;
                                         const href = link.href;
-                                        return `${text} (${href})`;
+                                        return `<a href="${href}" height="100" width="100">${text}</a>`;
                                     }
                                     if (img) {
                                         const src = img.src;
                                         const alt = img.alt || 'image';
-                                        return `![${alt}](${src})`;
+                                        return `<img src="${src}" height="100" width="100" alt="${alt}" />`;
                                     }
-                                    return doc.body.textContent || doc.body.innerText || '';
+                                    return doc.textContent || doc.innerText || '';
                                 }
+
+
                                 return data;
                             }
                         }
@@ -152,7 +198,7 @@ const defaultOptions = {
                                     const link = node.querySelector('a');
                                     const text = link.textContent || link.innerText;
                                     const href = link.href;
-                                    return `${text} (${href})`;
+                                    return `<a href="${href}" height="100" width="100">${text}</a>`;
                                 }
 
                                 // HANDLE IMAGES
@@ -160,7 +206,7 @@ const defaultOptions = {
                                     const img = node.querySelector('img');
                                     const src = img.src;
                                     const alt = img.alt || 'image';
-                                    return `![${alt}](${src})`;
+                                    return `<img src="${src}" height="100" width="100" alt="${alt}" />`;
                                 }
 
                                 if (node && typeof data === 'object' && data !== null) {
@@ -176,12 +222,12 @@ const defaultOptions = {
                                     if (link) {
                                         const text = link.textContent || link.innerText;
                                         const href = link.href;
-                                        return `${text} (${href})`;
+                                        return `<a href="${href}" height="100" width="100">${text}</a>`;
                                     }
                                     if (img) {
                                         const src = img.src;
                                         const alt = img.alt || 'image';
-                                        return `${src}`;
+                                        return `<img src="${src}" height="100" width="100" alt="${alt}" />`;
                                     }
                                     return doc.textContent || doc.innerText || '';
                                 }
@@ -191,7 +237,7 @@ const defaultOptions = {
                             }
                         }
                     }
-                }
+                },
             ]
         }
     ],
@@ -221,6 +267,11 @@ const mergedOptions = computed(() => {
 @import 'datatables.net-bs5/css/dataTables.bootstrap5.min.css';
 @import 'datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css';
 @import '@fortawesome/fontawesome-free/css/all.css';
+
+table.dataTable.dtr-inline.collapsed>tbody>tr>td:first-child,
+table.dataTable.dtr-inline.collapsed>tbody>tr>th:first-child {
+    padding-left: unset;
+}
 
 .custom-datatable .card {
     border-radius: 0.5rem;
@@ -254,10 +305,6 @@ const mergedOptions = computed(() => {
 
 .custom-datatable .dt-buttons .dropdown-item:hover {
     background-color: #f8f9fa;
-}
-
-.custom-datatable .table> :not(caption)>*>* {
-    padding: 1rem 1rem;
 }
 
 .custom-datatable .dataTables_paginate {

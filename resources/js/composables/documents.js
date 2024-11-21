@@ -141,7 +141,7 @@ export function useMediaDocuments(options = {}) {
                     ...doc,
                     height,
                     width,
-                    heightWidthRatio,
+                    heightWidthRatio: parseFloat(heightWidthRatio.toFixed(2)),
                     orientation,
                 };
             });
