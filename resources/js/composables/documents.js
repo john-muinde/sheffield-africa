@@ -12,7 +12,6 @@ export function useMediaDocuments(options = {}) {
         },
     } = options;
 
-    const pdfjsLib = ref(null);
     const documents = ref([]);
     const loading = ref(false);
     const error = ref(null);
@@ -80,8 +79,8 @@ export function useMediaDocuments(options = {}) {
         try {
             const documentsData = await fetchFunction();
 
-            // Process each document
-            for (const doc of documentsData) {
+            // Pre-process thumbnails asynchronously
+            const documentPromises = documentsData.map(async (doc) => {
                 // Generate slug if not present
                 doc.slug =
                     doc.slug ||
@@ -90,29 +89,97 @@ export function useMediaDocuments(options = {}) {
                         .replace(/[^a-z0-9]+/g, "-")
                         .replace(/^-|-$/g, "");
 
-                // Handle thumbnail
-                if (
-                    !doc.thumbnail_path &&
-                    doc.publication_file.toLowerCase().endsWith(".pdf")
-                ) {
-                    const thumbnail = await generateThumbnail(
-                        doc.publication_file
-                    );
-                    doc.thumb = thumbnail || undefined;
-                } else if (doc.thumbnail_path) {
-                    doc.thumb = `${storageBaseUrl}/${doc.thumbnail_path}`;
-                }
-            }
+                // Handle thumbnail generation
+                let thumbnailHeight = 0;
+                try {
+                    if (
+                        !doc.thumbnail_path &&
+                        doc.publication_file.toLowerCase().endsWith(".pdf")
+                    ) {
+                        // Generate thumbnail for PDF
+                        const thumbnail = await generateThumbnail(
+                            doc.publication_file
+                        );
+                        doc.thumb = thumbnail || undefined;
+                    } else if (doc.thumbnail_path) {
+                        // Use existing thumbnail
+                        doc.thumb = `${storageBaseUrl}/${doc.thumbnail_path}`;
+                    }
 
-            documents.value = documentsData;
+                    // Estimate thumbnail height without fully loading the image
+                    if (doc.thumb) {
+                        thumbnailHeight = await new Promise((resolve) => {
+                            const img = new Image();
+                            img.onload = () => resolve(img.height);
+                            img.onerror = () => resolve(0);
+                            img.src = doc.thumb;
+                        });
+                    }
+                } catch (error) {
+                    console.error(
+                        `Error processing thumbnail for ${doc.name}:`,
+                        error
+                    );
+                    thumbnailHeight = 0;
+                }
+
+                return { ...doc, thumbnailHeight };
+            });
+
+            // Limit concurrent thumbnail processing to prevent performance issues
+            const processedDocuments = await Promise.all(documentPromises);
+
+            // Sort documents by thumbnail height in descending order
+            documents.value = processedDocuments.sort(
+                (a, b) => b.thumbnailHeight - a.thumbnailHeight
+            );
+
             loading.value = false;
-            return documentsData;
+            return documents.value;
         } catch (err) {
             loading.value = false;
             error.value = err instanceof Error ? err : new Error(String(err));
             console.error(err);
             return [];
         }
+    };
+
+    // Alternative method with fallback
+    const getEstimatedThumbnailHeight = (doc) => {
+        if (doc.thumbnail_path) {
+            const knownHeights = {
+                "a4-portrait": 794,
+                "a4-landscape": 560,
+                "letter-portrait": 792,
+                "letter-landscape": 612,
+            };
+
+            // Try to match known dimensions
+            const matchedHeight = Object.values(knownHeights).find((height) =>
+                doc.thumbnail_path.includes(String(height))
+            );
+
+            if (matchedHeight) return matchedHeight;
+        }
+
+        // Fallback to a default height or based on document type
+        const typeHeights = {
+            brochure: 300,
+            newsletter: 250,
+            catalog: 400,
+            default: 200,
+        };
+
+        return typeHeights[doc.type] || typeHeights["default"];
+    };
+
+    // Optimized sorting method with fallback
+    const sortDocumentsByThumbnailHeight = (documents) => {
+        return documents.sort((a, b) => {
+            const heightA = a.thumbnailHeight || getEstimatedThumbnailHeight(a);
+            const heightB = b.thumbnailHeight || getEstimatedThumbnailHeight(b);
+            return heightB - heightA;
+        });
     };
 
     // Initialize DFlip for documents
@@ -162,16 +229,17 @@ export function useMediaDocuments(options = {}) {
     };
 
     // Handle route leaving with open DFlip book
-    const handleRouteLeave = (to, from, next) => {
+    const handleRouteLeave = (to, from) => {
         const wrapper = document.querySelector(".df-lightbox-wrapper");
         const wrapperOpen = wrapper && wrapper.style.display !== "none";
 
+        console.log("Leaving route", from, to, wrapperOpen);
+
         if (window.DFLIP && wrapperOpen) {
             document.querySelector(".df-lightbox-close")?.click();
-            next(false);
             return false;
         }
-        next();
+        return true;
     };
 
     // Filter and search documents

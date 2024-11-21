@@ -185,6 +185,10 @@ export const setupRouterProgress = (router) => {
     router.afterEach(() => {
         NProgress.done();
     });
+
+    router.onError(() => {
+        NProgress.done();
+    });
 };
 
 export default axiosInstance;

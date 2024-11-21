@@ -49,7 +49,7 @@
 import { onMounted } from 'vue';
 import { useMediaDocuments } from '@/composables/documents';
 import ContentState from "@/Components/ContentState.vue";
-import { onBeforeRouteLeave } from 'vue-router';
+import { onBeforeRouteLeave, onBeforeRouteUpdate } from 'vue-router';
 
 // Initialize with custom options
 const {
@@ -77,6 +77,7 @@ onMounted(async () => {
 });
 
 onBeforeRouteLeave(handleRouteLeave);
+
 </script>
 
 <style>
