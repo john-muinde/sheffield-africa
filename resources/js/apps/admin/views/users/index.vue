@@ -98,7 +98,6 @@ const columns = ref([
 ]);
 
 const tableOptions = ref({
-    order: [[3, 'desc']],
     columnDefs: [
         { data: null, targets: -1, orderable: false, searchable: false, render: '#actions' },
         { data: 'role', targets: 2, render: '#role' }

@@ -198,6 +198,7 @@ const defaultOptions = {
     pageLength: 10,
     lengthMenu: [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
     processing: true,
+    ordering: false,
     language: {
         search: "",
         searchPlaceholder: "Search...",
@@ -291,5 +292,21 @@ const mergedOptions = computed(() => {
 .custom-datatable table.dataTable {
     margin-top: 0 !important;
     margin-bottom: 0 !important;
+}
+
+table.dataTable.nowrap th,
+table.dataTable.nowrap td {
+    white-space: unset;
+}
+
+table.dataTable.nowrap th,
+table.dataTable.nowrap td:nth-last-child(1) {
+    white-space: nowrap;
+}
+
+
+.custom-datatable .table td {
+    max-width: 200px;
+    /* Adjust this value as needed */
 }
 </style>

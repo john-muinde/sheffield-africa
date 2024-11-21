@@ -103,7 +103,6 @@ const columns = [
 ];
 
 const tableOptions = ref({
-    order: [[4, 'desc']],
     columnDefs: [
         { data: null, targets: -1, orderable: false, searchable: false, render: '#actions' },
         { data: 'main_image_path', targets: 1, render: '#brand_image' },

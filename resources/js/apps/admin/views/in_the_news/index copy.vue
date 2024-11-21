@@ -74,7 +74,6 @@ const columns = [
 ];
 
 const tableOptions = ref({
-    order: [[3, 'desc']],
     drawCallback: function (settings: any) {
         const table = settings.oInstance.api();
         table.rows().nodes().each((row: HTMLElement) => {

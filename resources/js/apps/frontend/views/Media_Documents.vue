@@ -80,6 +80,11 @@ onBeforeRouteLeave(handleRouteLeave);
 
 <style>
 /* Styles remain unchanged */
+._df_thumb {
+    width: 240px;
+    height: 360px;
+}
+
 .df-sheet .df-page:before {
     opacity: 0.5;
 }

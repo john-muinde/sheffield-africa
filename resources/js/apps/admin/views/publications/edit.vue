@@ -55,8 +55,6 @@
                                             <option value="Newsletter">Newsletter</option>
                                         </select>
 
-
-
                                         <div class="text-danger mt-1">
                                             <div v-for="message in validationErrors?.type">
                                                 {{ message }}
@@ -195,13 +193,25 @@ const base64ToFile = (base64String, filename) => {
     return new File([blob], filename, { type: 'image/jpeg' });
 };
 
+// Helper function to extract and validate dimensions
+const extractDimensions = (filename) => {
+    const parts = filename.split('-').pop().split('.jpg')[0].split('x');
+    if (parts.length === 2) {
+        const width = parseFloat(parts[0], 10);
+        const height = parseFloat(parts[1], 10);
+        if (!isNaN(width) && !isNaN(height)) {
+            return { width, height };
+        }
+    }
+    return null;
+};
+
 async function submitForm() {
     isProcessing.value = true;
     try {
         // Check if we need to generate a thumbnail
-        console.log(typeof publication.value.publication_file === 'object')
-        console.log(publication.value?.thumbnail_path)
-        if (typeof publication.value.publication_file === 'object' || !publication.value?.thumbnail_path) {
+        const dimensions = extractDimensions(publication.value?.thumbnail_path || '');
+        if (typeof publication.value.publication_file === 'object' || !publication.value?.thumbnail_path || !dimensions) {
             let pdfData;
             let fileName;
 
@@ -223,10 +233,10 @@ async function submitForm() {
             }
 
             // Generate thumbnail
-            const thumbnailBase64 = await generateThumbnail(pdfData);
+            const { thumbnailBase64, width, height } = await generateThumbnail(pdfData);
             if (thumbnailBase64) {
-                // Generate a filename for the thumbnail
-                const thumbnailName = `thumbnail-${fileName.replace('.pdf', '.jpg')}`;
+                // Generate a filename for the thumbnail with dimensions
+                const thumbnailName = `thumbnail-${fileName.replace('.pdf', '')}-${width}x${height}.jpg`;
 
                 // Convert base64 to File object
                 const thumbnailFile = base64ToFile(thumbnailBase64, thumbnailName);
@@ -293,7 +303,10 @@ const generateThumbnail = async (pdfData, scale = 0.5) => {
         }).promise;
 
         // Get base64 string
-        return canvas.toDataURL('image/jpeg', 0.8);
+        const thumbnailBase64 = canvas.toDataURL('image/jpeg', 0.8);
+
+        // Return the base64 string along with width and height
+        return { thumbnailBase64, width: viewport.width, height: viewport.height };
     } catch (error) {
         console.error('Error generating thumbnail:', error);
         return null;

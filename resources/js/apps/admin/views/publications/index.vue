@@ -43,6 +43,20 @@
                                     Published</span>
                             </template>
 
+                            <template #thumbnail="{ rowData }">
+                                <div
+                                    style="display: flex; flex-direction: column; justify-content: center; align-items: center;text-align: center;">
+                                    <span v-if="!rowData.thumbnail_path">No Thumbnail</span>
+                                    <span v-if="rowData.thumbnail_path" class="dimensions">
+                                        {{ extractDimensions(rowData.thumbnail_path || '')?.width }} x {{
+                                            extractDimensions(rowData.thumbnail_path || '')?.height }}
+                                    </span>
+                                    <img v-if="rowData.thumbnail_path" :src="`/storage/${rowData.thumbnail_path}`"
+                                        :alt="rowData.name" class="img-fluid"
+                                        style="max-width: 100px; max-height: 100px" />
+                                </div>
+                            </template>
+
                             <template #actions="{ rowData }">
                                 <!-- v-if="can('category-edit')"  -->
 
@@ -102,8 +116,24 @@ onMounted(() => {
     getPublications();
 });
 
+// Helper function to extract and validate dimensions
+const extractDimensions = (filename) => {
+    const parts = filename.split('-').pop().split('.jpg')[0].split('x');
+    if (parts.length === 2) {
+        const width = parseFloat(parts[0], 10);
+        const height = parseFloat(parts[1], 10);
+        if (!isNaN(width) && !isNaN(height)) {
+            return { width, height };
+        }
+    }
+    return null;
+};
+
+
+
 
 const columns = [
+    { data: 'thumbnail_path', title: 'Thumbnail' },
     { data: 'name', title: 'Name' },
     { data: 'publication_file', title: 'File' },
     { data: 'type', title: 'Type' },
@@ -113,11 +143,13 @@ const columns = [
 ]
 
 const tableOptions = {
-    order: [[4, "desc"]],
     columnDefs: [
         { data: null, targets: -1, orderable: false, searchable: false, render: '#actions' },
-        { data: 'is_published', targets: 3, render: '#is_published' },
-        { data: 'publication_file', targets: 1, render: '#publication_file' },
+        { data: 'is_published', targets: 4, render: '#is_published' },
+        { data: 'publication_file', targets: 2, render: '#publication_file' },
+        {
+            data: 'thumbnail_path', targets: 0, render: '#thumbnail'
+        }
     ],
 };
 </script>

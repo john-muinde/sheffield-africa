@@ -90,7 +90,9 @@ export function useMediaDocuments(options = {}) {
                         .replace(/^-|-$/g, "");
 
                 // Handle thumbnail generation
-                let thumbnailHeight = 0;
+                let height = 0,
+                    width = 0,
+                    orientation = "unknown";
                 try {
                     if (
                         !doc.thumbnail_path &&
@@ -108,30 +110,51 @@ export function useMediaDocuments(options = {}) {
 
                     // Estimate thumbnail height without fully loading the image
                     if (doc.thumb) {
-                        thumbnailHeight = await new Promise((resolve) => {
-                            const img = new Image();
-                            img.onload = () => resolve(img.height);
-                            img.onerror = () => resolve(0);
-                            img.src = doc.thumb;
-                        });
+                        const dimensions = extractDimensions(doc.thumb);
+                        if (dimensions) {
+                            width = dimensions.width;
+                            height = dimensions.height;
+
+                            // Determine orientation
+                            orientation =
+                                width > height ? "landscape" : "portrait";
+                        }
                     }
                 } catch (error) {
                     console.error(
                         `Error processing thumbnail for ${doc.name}:`,
                         error
                     );
-                    thumbnailHeight = 0;
                 }
 
-                return { ...doc, thumbnailHeight };
+                return { ...doc, height, width, orientation };
             });
 
             // Limit concurrent thumbnail processing to prevent performance issues
             const processedDocuments = await Promise.all(documentPromises);
 
-            // Sort documents by thumbnail height in descending order
-            documents.value = processedDocuments.sort(
-                (a, b) => b.thumbnailHeight - a.thumbnailHeight
+            // Separate portrait and landscape documents
+            const portraitDocs = processedDocuments
+                .filter((doc) => doc.orientation === "portrait")
+                .sort((a, b) => b.height - a.height);
+
+            const landscapeDocs = processedDocuments
+                .filter((doc) => doc.orientation === "landscape")
+                .sort((a, b) => b.height - a.height);
+
+            // Combine portrait documents first, then landscape
+            documents.value = [...portraitDocs, ...landscapeDocs];
+
+            console.log(
+                "Processed documents:",
+                documents.value.map((d) => {
+                    return {
+                        name: d.name,
+                        height: d.height,
+                        width: d.width,
+                        orientation: d.orientation,
+                    };
+                })
             );
 
             loading.value = false;
@@ -196,6 +219,7 @@ export function useMediaDocuments(options = {}) {
                     overwritePDFOutline: false,
                     pageSize: "0",
                     is3D: true,
+                    height: "100",
                     direction: "1",
                     slug: doc.slug,
                     wpOptions: "true",
@@ -233,8 +257,6 @@ export function useMediaDocuments(options = {}) {
         const wrapper = document.querySelector(".df-lightbox-wrapper");
         const wrapperOpen = wrapper && wrapper.style.display !== "none";
 
-        console.log("Leaving route", from, to, wrapperOpen);
-
         if (window.DFLIP && wrapperOpen) {
             document.querySelector(".df-lightbox-close")?.click();
             return false;
@@ -261,6 +283,18 @@ export function useMediaDocuments(options = {}) {
 
             return matchesFilters && matchesSearch;
         });
+    };
+
+    const extractDimensions = (filename) => {
+        const parts = filename.split("-").pop().split(".jpg")[0].split("x");
+        if (parts.length === 2) {
+            const width = parseFloat(parts[0], 10);
+            const height = parseFloat(parts[1], 10);
+            if (!isNaN(width) && !isNaN(height)) {
+                return { width, height };
+            }
+        }
+        return null;
     };
 
     return {

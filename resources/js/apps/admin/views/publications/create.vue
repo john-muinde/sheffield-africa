@@ -199,11 +199,11 @@ async function submitForm() {
             const file = publication.value.publication_file;
             const arrayBuffer = await file.arrayBuffer();
 
-            const thumbnailBase64 = await generateThumbnail(arrayBuffer);
+            const { thumbnailBase64, width, height } = await generateThumbnail(arrayBuffer);
             if (thumbnailBase64) {
                 // Generate a filename for the thumbnail
                 const originalName = file.name;
-                const thumbnailName = `thumbnail-${originalName.replace('.pdf', '.jpg')}`;
+                const thumbnailName = `thumbnail-${originalName.replace('.pdf', '')}-${width}x${height}.jpg`;
 
                 // Convert base64 to File object
                 const thumbnailFile = base64ToFile(thumbnailBase64, thumbnailName);
@@ -269,7 +269,10 @@ const generateThumbnail = async (pdfData, scale = 0.5) => {
         }).promise;
 
         // Get base64 string
-        return canvas.toDataURL('image/jpeg', 0.8);
+        const thumbnailBase64 = canvas.toDataURL('image/jpeg', 0.8);
+
+        // Return the base64 string along with width and height
+        return { thumbnailBase64, width: viewport.width, height: viewport.height };
     } catch (error) {
         console.error('Error generating thumbnail:', error);
         return null;
