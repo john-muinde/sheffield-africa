@@ -92,6 +92,7 @@ export function useMediaDocuments(options = {}) {
                 // Handle thumbnail generation
                 let height = 0,
                     width = 0,
+                    heightWidthRatio = 1,
                     orientation = "unknown";
                 try {
                     if (
@@ -112,12 +113,21 @@ export function useMediaDocuments(options = {}) {
                     if (doc.thumb) {
                         const dimensions = extractDimensions(doc.thumb);
                         if (dimensions) {
-                            width = dimensions.width;
-                            height = dimensions.height;
+                            width = dimensions.width || 1;
+                            height = dimensions.height || 1;
 
-                            // Determine orientation
-                            orientation =
-                                width > height ? "landscape" : "portrait";
+                            // Calculate height-width ratio, handling zero division
+                            heightWidthRatio =
+                                width === 0 ? Infinity : height / width;
+
+                            // Determine orientation based on ratio
+                            if (heightWidthRatio > 1) {
+                                orientation = "portrait";
+                            } else if (heightWidthRatio < 1) {
+                                orientation = "landscape";
+                            } else {
+                                orientation = "square";
+                            }
                         }
                     }
                 } catch (error) {
@@ -127,23 +137,23 @@ export function useMediaDocuments(options = {}) {
                     );
                 }
 
-                return { ...doc, height, width, orientation };
+                return {
+                    ...doc,
+                    height,
+                    width,
+                    heightWidthRatio,
+                    orientation,
+                };
             });
 
             // Limit concurrent thumbnail processing to prevent performance issues
             const processedDocuments = await Promise.all(documentPromises);
 
-            // Separate portrait and landscape documents
-            const portraitDocs = processedDocuments
-                .filter((doc) => doc.orientation === "portrait")
-                .sort((a, b) => b.height - a.height);
-
-            const landscapeDocs = processedDocuments
-                .filter((doc) => doc.orientation === "landscape")
-                .sort((a, b) => b.height - a.height);
-
-            // Combine portrait documents first, then landscape
-            documents.value = [...portraitDocs, ...landscapeDocs];
+            // Sort documents by height-width ratio in descending order
+            // This will prioritize portrait (taller) images, then square, then landscape
+            documents.value = processedDocuments.sort(
+                (a, b) => b.heightWidthRatio - a.heightWidthRatio
+            );
 
             console.log(
                 "Processed documents:",
@@ -152,6 +162,7 @@ export function useMediaDocuments(options = {}) {
                         name: d.name,
                         height: d.height,
                         width: d.width,
+                        heightWidthRatio: d.heightWidthRatio.toFixed(2),
                         orientation: d.orientation,
                     };
                 })
