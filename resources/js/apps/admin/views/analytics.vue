@@ -453,7 +453,9 @@
                             <div class="w-browser-details">
                                 <div class="w-browser-info">
                                     <h6>{{ platform.name }}</h6>
-                                    <p class="browser-count">{{ (platform.count / stats.visitors?.length) * 100 }}%</p>
+                                    <p class="browser-count">{{ ((platform.count / stats.visitors?.length) *
+                                        100)?.toFixed(2) }}%
+                                    </p>
                                 </div>
                                 <div class="w-browser-stats">
                                     <div class="progress">
@@ -660,9 +662,8 @@ const handleDatesAndLabels = (dates, datesStrings) => {
         end_date: datesStrings[1],
     };
 
-    console.log(obj);
-
     datePickerOnChange(obj);
+    loadData();
 }
 
 const presetRanges = [
@@ -738,6 +739,7 @@ const uniqueVisitorSeries = ref([
 
 const uniqueVisitorOptions = computed(() => {
     const isDark = store.state.is_dark_mode;
+
     return {
         chart: { toolbar: { show: false } },
         dataLabels: { enabled: false },
@@ -748,7 +750,7 @@ const uniqueVisitorOptions = computed(() => {
         legend: { position: "bottom", horizontalAlign: "center", fontSize: "14px", markers: { width: 12, height: 12 }, itemMargin: { horizontal: 0, vertical: 8 } },
         grid: { borderColor: isDark ? "#191e3a" : "#e0e6ed" },
         xaxis: {
-            categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+            categories: stats.value?.series?.labels || [],
             axisBorder: { show: true, color: isDark ? "#3b3f5c" : "#e0e6ed" },
         },
         yaxis: {
@@ -812,27 +814,13 @@ const engagementOptions = computed(() => generateChartOptions("#1abc9c", store.s
 
 const fetchStatisticsData = async () => {
     // Simulate an API call to fetch statistics data
-    return new Promise((resolve) => {
-        setTimeout(() => {
-            resolve({
-                newVistorsData: [21, 9, 36, 12, 44, 25, 59, 41, 66, 25],
-                returningVisitorsData: [22, 19, 30, 47, 32, 44, 34, 55, 41, 69],
-                uniqueVisitorData: {
-                    newVisitors: [58, 44, 55, 57, 56, 61, 58, 63, 60, 66, 56, 63],
-                    returningVisitors: [91, 76, 85, 101, 98, 87, 105, 91, 114, 94, 66, 70],
-                },
-                followersData: [38, 60, 38, 52, 36, 40, 28],
-                referralData: [60, 28, 52, 38, 40, 36, 38],
-                engagementData: [28, 50, 36, 60, 38, 52, 38],
-            });
-        }, 1000);
-    });
-};
+    const data = {
+        followersData: [38, 60, 38, 52, 36, 40, 28],
+        referralData: [60, 28, 52, 38, 40, 36, 38],
+        engagementData: [28, 50, 36, 60, 38, 52, 38],
+    }
 
-onMounted(async () => {
     const newData = await getStats();
-    console.log(newData);
-    const data = await fetchStatisticsData();
 
     newVistorsSeries.value[0].data = newData.series.datasets[0].data;
     returningVisitorsSeries.value[0].data = newData.series.datasets[1].data;
@@ -843,5 +831,9 @@ onMounted(async () => {
     followersSeries.value[0].data = data.followersData;
     referralSeries.value[0].data = data.referralData;
     engagementSeries.value[0].data = data.engagementData;
+};
+
+onMounted(async () => {
+    await fetchStatisticsData();
 });
 </script>
