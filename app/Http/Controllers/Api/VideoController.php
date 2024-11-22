@@ -6,8 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreVideoRequest;
 use App\Http\Requests\UpdateVideoRequest;
 use App\Http\Resources\VideoResource;
-use Intervention\Image\ImageManager;  // Updated import
-use Intervention\Image\Drivers\Imagick\Driver as ImagickDriver;  // Added driver import
 use Illuminate\Support\Facades\Storage;
 use App\Models\Video;
 use Illuminate\Http\Request;
@@ -15,13 +13,6 @@ use Illuminate\Support\Facades\Log;
 
 class VideoController extends Controller
 {
-    protected $imageManager;
-
-    public function __construct()
-    {
-        // Initialize the ImageManager with Imagick driver
-        $this->imageManager = new ImageManager(new ImagickDriver());
-    }
     public function index()
     {
         $orderColumn = request('order_column', 'created_at');

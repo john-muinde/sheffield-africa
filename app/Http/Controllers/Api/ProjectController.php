@@ -12,6 +12,7 @@ use App\Models\Project;
 use App\Models\ProjectImage;
 use App\Models\Client;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProjectController extends Controller
 {
@@ -66,11 +67,8 @@ class ProjectController extends Controller
             $file_name = time() . '_' . $request->file('main_image_path')->getClientOriginalName();
             $file_path = 'uploads/' . $file_name;
 
-            // Resize and optimize the image
-            $image = Image::make($file)->resize(800, null, function ($constraint) {
-                $constraint->aspectRatio();
-                $constraint->upsize();
-            })->encode('jpg', 85); // Specify the desired encoding format and quality (80% in this example)
+            // Create and process the image using the new syntax
+            $image = $this->imageManager->read($file)->coverDown(800, 800)->toJpeg(85);
 
             // Store the optimized image
             Storage::disk('public')->put($file_path, $image);
@@ -112,11 +110,8 @@ class ProjectController extends Controller
                 $file_name = time() . '_' . '_gallery_' . $file->getClientOriginalName();
                 $file_path = 'uploads/' . $file_name;
 
-                // Resize and optimize the image
-                $image = Image::make($file)->resize(800, null, function ($constraint) {
-                    $constraint->aspectRatio();
-                    $constraint->upsize();
-                })->encode('jpg', 85); // Specify the desired encoding format and quality (80% in this example)
+                // Create and process the image using the new syntax
+                $image = $this->imageManager->read($file)->coverDown(800, 800)->toJpeg(85);
 
                 // Store the optimized image
                 Storage::disk('public')->put($file_path, $image);
@@ -164,11 +159,8 @@ class ProjectController extends Controller
             $file_name = time() . '_' . $request->file('main_image_path')->getClientOriginalName();
             $file_path = 'uploads/' . $file_name;
 
-            // Resize and optimize the image
-            $image = Image::make($file)->resize(800, null, function ($constraint) {
-                $constraint->aspectRatio();
-                $constraint->upsize();
-            })->encode('jpg', 85); // Specify the desired encoding format and quality (80% in this example)
+            // Create and process the image using the new syntax
+            $image = $this->imageManager->read($file)->coverDown(800, 800)->toJpeg(85);
 
             // Store the optimized image
             Storage::disk('public')->put($file_path, $image);
@@ -208,11 +200,8 @@ class ProjectController extends Controller
                 $file_name = time() . '_' . '_gallery_' . $file->getClientOriginalName();
                 $file_path = 'uploads/' . $file_name;
 
-                // Resize and optimize the image
-                $image = Image::make($file)->resize(800, null, function ($constraint) {
-                    $constraint->aspectRatio();
-                    $constraint->upsize();
-                })->encode('jpg', 85); // Specify the desired encoding format and quality (80% in this example)
+                // Create and process the image using the new syntax
+                $image = $this->imageManager->read($file)->coverDown(800, 800)->toJpeg(85);
 
                 // Store the optimized image
                 Storage::disk('public')->put($file_path, $image);
@@ -254,7 +243,7 @@ class ProjectController extends Controller
 
         $projects = Project::select('projects.*')
             ->join(
-                \DB::raw("(SELECT MAX(id) as id FROM projects GROUP BY client) as latest_projects"),
+                DB::raw("(SELECT MAX(id) as id FROM projects GROUP BY client) as latest_projects"),
                 function ($join) {
                     $join->on('projects.id', '=', 'latest_projects.id');
                 }

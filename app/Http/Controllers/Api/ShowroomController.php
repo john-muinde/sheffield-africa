@@ -24,8 +24,8 @@ class ShowroomController extends Controller
             $orderDirection = 'desc';
         }
         $showrooms = Showroom::when(request('search_id'), function ($query) {
-                $query->where('id', request('search_id'));
-            })
+            $query->where('id', request('search_id'));
+        })
             ->when(request('search_title'), function ($query) {
                 $query->where('name', 'like', '%' . request('search_title') . '%');
             })
@@ -66,11 +66,8 @@ class ShowroomController extends Controller
             $file_name = time() . '_' . $request->file('main_image')->getClientOriginalName();
             $file_path = 'uploads/' . $file_name;
 
-            // Resize and optimize the image
-            $image = Image::make($file)->resize(800, null, function ($constraint) {
-                $constraint->aspectRatio();
-                $constraint->upsize();
-            })->encode('jpg', 85); // Specify the desired encoding format and quality (80% in this example)
+            // Create and process the image using the new syntax
+            $image = $this->imageManager->read($file)->coverDown(800, 800)->toJpeg(85);
 
             // Store the optimized image
             Storage::disk('public')->put($file_path, $image);
@@ -91,11 +88,8 @@ class ShowroomController extends Controller
                 $file_name = time() . '_' . '_gallery_' . $file->getClientOriginalName();
                 $file_path = 'uploads/' . $file_name;
 
-                // Resize and optimize the image
-                $image = Image::make($file)->resize(800, null, function ($constraint) {
-                    $constraint->aspectRatio();
-                    $constraint->upsize();
-                })->encode('jpg', 85); // Specify the desired encoding format and quality (80% in this example)
+                // Create and process the image using the new syntax
+                $image = $this->imageManager->read($file)->coverDown(800, 800)->toJpeg(85);
 
                 // Store the optimized image
                 Storage::disk('public')->put($file_path, $image);
@@ -173,10 +167,8 @@ class ShowroomController extends Controller
         $showroom = Showroom::find($showroom_id);
         $other_showrooms = Showroom::where('id', '!=', $showroom_id)->get();
 
-        return response()->json(['showroom' => new ShowroomResource($showroom), 'other_showrooms' => $other_showrooms ]);
+        return response()->json(['showroom' => new ShowroomResource($showroom), 'other_showrooms' => $other_showrooms]);
 
         //return ;
     }
-
-
 }

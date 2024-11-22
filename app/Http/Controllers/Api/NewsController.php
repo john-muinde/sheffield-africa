@@ -93,11 +93,8 @@ class NewsController extends Controller
             $file_name = time() . '_news_' . $file->getClientOriginalName();
             $file_path = 'uploads/' . $file_name;
 
-            // Resize and optimize the image
-            $image = Image::make($file)->resize(800, null, function ($constraint) {
-                $constraint->aspectRatio();
-                $constraint->upsize();
-            })->encode('jpg', 85);
+            // Create and process the image using the new syntax
+            $image = $this->imageManager->read($file)->coverDown(800, 800)->toJpeg(85);
 
             // Store the optimized image
             Storage::disk('public')->put($file_path, $image);

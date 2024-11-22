@@ -73,11 +73,8 @@ class SolutionController extends Controller
             $file_name = time() . '_' . $request->file('main_image')->getClientOriginalName();
             $file_path = 'uploads/' . $file_name;
 
-            // Resize and optimize the image
-            $image = Image::make($file)->resize(800, null, function ($constraint) {
-                $constraint->aspectRatio();
-                $constraint->upsize();
-            })->encode('jpg', 85); // Specify the desired encoding format and quality (80% in this example)
+            // Create and process the image using the new syntax
+            $image = $this->imageManager->read($file)->coverDown(800, 800)->toJpeg(85);
 
             // Store the optimized image
             Storage::disk('public')->put($file_path, $image);
@@ -135,11 +132,8 @@ class SolutionController extends Controller
             $file_name = time() . '_' . $request->file('main_image')->getClientOriginalName();
             $file_path = 'uploads/' . $file_name;
 
-            // Resize and optimize the image
-            $image = Image::make($file)->resize(800, null, function ($constraint) {
-                $constraint->aspectRatio();
-                $constraint->upsize();
-            })->encode('jpg', 85); // Specify the desired encoding format and quality (80% in this example)
+            // Create and process the image using the new syntax
+            $image = $this->imageManager->read($file)->coverDown(800, 800)->toJpeg(85);
 
             // Store the optimized image
             Storage::disk('public')->put($file_path, $image);

@@ -1712,7 +1712,7 @@ const routes = [
                 name: "admin.dashboard",
                 component: () =>
                     import(
-                        /* webpackChunkName: "analytics" */ "../apps/admin/views/index.vue"
+                        /* webpackChunkName: "analytics" */ "../apps/admin/views/analytics.vue"
                     ),
                 meta: {
                     layout: "app",
@@ -2914,7 +2914,7 @@ const routes = [
                 name: "analytics",
                 component: () =>
                     import(
-                        /* webpackChunkName: "analytics" */ "../apps/admin/views/analytics.vue"
+                        /* webpackChunkName: "analytics" */ "../apps/admin/views/index.vue"
                     ),
                 meta: {
                     layout: "app",
