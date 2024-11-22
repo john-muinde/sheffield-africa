@@ -123,7 +123,7 @@
                                     <p class="w-stats">
                                         {{
                                             stats.visitors?.filter(
-                                                (e) => e.is_new == 1
+                                                (e) => e.is_new == 0
                                             ).length
                                         }}
                                     </p>
@@ -460,7 +460,8 @@
                                         <div role="progressbar" aria-valuemin="0" aria-valuemax="100"
                                             :aria-valuenow="((platform.count / stats.visitors?.length) * 100)"
                                             class="progress-bar bg-gradient-primary"
-                                            :style="{ width: ((platform.count / stats.visitors?.length) * 100) + '%' }"></div>
+                                            :style="{ width: ((platform.count / stats.visitors?.length) * 100) + '%' }">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
