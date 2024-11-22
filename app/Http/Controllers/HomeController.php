@@ -99,9 +99,12 @@ class HomeController extends Controller
             'total_clients' => Client::count(),
             'total_admins' => User::where('role', 1)->count(),
             'visitors' => Visitors::whereBetween('created_at', [$start_date, $end_date])
-                ->distinct('tracking_id')
-                ->select('platform', 'is_new', 'browser', 'is_desktop', 'location')
-                ->get(),
+                ->select('tracking_id', 'is_new', 'platform', 'browser', 'is_desktop', 'location')
+                ->distinct()
+                ->get()
+                ->unique(function ($item) {
+                    return $item['tracking_id'] . '-' . $item['is_new'];
+                }),
             'total_posts' => Post::whereBetween('created_at', [$start_date, $end_date])->count(),
             'series' => [
                 'labels' => $labels,
