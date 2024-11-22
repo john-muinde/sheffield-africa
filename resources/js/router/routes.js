@@ -1712,7 +1712,7 @@ const routes = [
                 name: "admin.dashboard",
                 component: () =>
                     import(
-                        /* webpackChunkName: "index2" */ "../apps/admin/views/index.vue"
+                        /* webpackChunkName: "analytics" */ "../apps/admin/views/index.vue"
                     ),
                 meta: {
                     layout: "app",
@@ -2910,11 +2910,11 @@ const routes = [
             //end of the actual pages
 
             {
-                path: "/admin/index2",
-                name: "index2",
+                path: "/admin/analytics",
+                name: "analytics",
                 component: () =>
                     import(
-                        /* webpackChunkName: "index2" */ "../apps/admin/views/index2.vue"
+                        /* webpackChunkName: "analytics" */ "../apps/admin/views/analytics.vue"
                     ),
                 meta: {
                     layout: "app",

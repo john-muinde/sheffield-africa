@@ -26,6 +26,7 @@ use App\Http\Controllers\Api\VideoController;
 use App\Http\Controllers\Api\NewsController;
 use App\Http\Controllers\Api\GalleryController;
 use App\Http\Controllers\Api\GalleryImagesController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SupportEmailController;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -33,6 +34,8 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
+    Route::get('dashboard-stats', [HomeController::class, 'getStats']);
+
     Route::apiResource('users', UserController::class);
     Route::apiResource('support-email', SupportEmailController::class);
     Route::apiResource('posts', PostController::class);

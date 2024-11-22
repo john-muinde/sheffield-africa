@@ -378,7 +378,7 @@
                             <router-link to="/"> {{ $t('sales') }} </router-link>
                         </li>
                         <li>
-                            <router-link to="/index2">{{ $t('analytics') }}</router-link>
+                            <router-link to="/analytics">{{ $t('analytics') }}</router-link>
                         </li>
                     </ul>
                 </li>

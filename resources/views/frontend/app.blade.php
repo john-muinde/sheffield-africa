@@ -450,6 +450,8 @@
     <link rel="icon" type="image/png" sizes="16x16" href="{{ url('favicon.png') }}">
 
 
+
+
     @vite('resources/css/app.css')
     @vite('resources/js/apps/frontend/assets/css/bootstrap.min.css')
     @vite('resources/js/apps/frontend/assets/css/plugins/owl-carousel/owl.carousel.css')
@@ -568,6 +570,22 @@
         };
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+
+    <img id='pixel-tracker' style='display: none !important;' src="" />
+    <script>
+        //place it after jquery loaded
+        $(function() {
+            trackingId = null;
+            if (!localStorage.getItem("pixel-tracker")) {
+                trackingId = '{{ \Str::random(30) }}';
+                localStorage.setItem("pixel-tracker", trackingId);
+            } else {
+                trackingId = localStorage.getItem("pixel-tracker");
+            }
+            $('#pixel-tracker').attr("src", "{{ route('pixel-tracker') }}?event=page_visit&tracking_id=" +
+                trackingId);
+        });
+    </script>
 
     @vite('resources/js/frontend-main.js')
     @vite('resources/js/apps/frontend/assets/js/bootstrap.bundle.min.js?commonjs-entry')
