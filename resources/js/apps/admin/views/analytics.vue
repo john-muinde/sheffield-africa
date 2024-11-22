@@ -6,8 +6,12 @@
                     <div class="page-header">
                         <nav class="breadcrumb-one" aria-label="breadcrumb">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="javascript:;">Dashboard</a></li>
-                                <li class="breadcrumb-item active" aria-current="page"><span>Sales</span></li>
+                                <li class="breadcrumb-item">
+                                    <a href="javascript:;">Dashboard</a>
+                                </li>
+                                <li class="breadcrumb-item active" aria-current="page">
+                                    <span>Sales</span>
+                                </li>
                             </ol>
                         </nav>
                     </div>
@@ -26,13 +30,21 @@
                             </svg>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="ddlSettings">
-                            <li><a class="dropdown-item" data-value="Settings" href="javascript:void(0);">Settings</a>
+                            <li>
+                                <a class="dropdown-item" data-value="Settings" href="javascript:void(0);">Settings</a>
                             </li>
-                            <li><a class="dropdown-item" data-value="Mail" href="javascript:void(0);">Mail</a></li>
-                            <li><a class="dropdown-item" data-value="Print" href="javascript:void(0);">Print</a></li>
-                            <li><a class="dropdown-item" data-value="Download" href="javascript:void(0);">Download</a>
+                            <li>
+                                <a class="dropdown-item" data-value="Mail" href="javascript:void(0);">Mail</a>
                             </li>
-                            <li><a class="dropdown-item" data-value="Share" href="javascript:void(0);">Share</a></li>
+                            <li>
+                                <a class="dropdown-item" data-value="Print" href="javascript:void(0);">Print</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" data-value="Download" href="javascript:void(0);">Download</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" data-value="Share" href="javascript:void(0);">Share</a>
+                            </li>
                         </ul>
                     </div>
                 </li>
@@ -44,9 +56,10 @@
                 <div class="widget widget-unique-visitors">
                     <div class="widget-content flex justify-between p-2">
                         <div class="">
-                            <a-range-picker :bordered="false"
-                                :defaultValue="[dayjs(dates.start_date), dayjs(dates.end_date)]" :presets="presetRanges"
-                                @change="handleDatesAndLabels" />
+                            <a-range-picker :bordered="false" :defaultValue="[
+                                dayjs(dates.start_date),
+                                dayjs(dates.end_date),
+                            ]" :presets="presetRanges" @change="handleDatesAndLabels" />
                             ({{ dates.label }})
                         </div>
                         <a-space>
@@ -78,8 +91,12 @@
                                     </svg>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="ddlStatistics">
-                                    <li><a href="javascript:;" class="dropdown-item">View</a></li>
-                                    <li><a href="javascript:;" class="dropdown-item">Download</a></li>
+                                    <li>
+                                        <a href="javascript:;" class="dropdown-item">View</a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:;" class="dropdown-item">Download</a>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -89,7 +106,13 @@
                             <div class="col-6">
                                 <div class="w-detail">
                                     <p class="w-title">New Visitors</p>
-                                    <p class="w-stats">{{ stats.visitors?.filter(e => e.is_new == 1).length }}</p>
+                                    <p class="w-stats">
+                                        {{
+                                            stats.visitors?.filter(
+                                                (e) => e.is_new == 1
+                                            ).length
+                                        }}
+                                    </p>
                                 </div>
                                 <apex-chart v-if="newVistorsOptions && !loading" height="58" type="line"
                                     :options="newVistorsOptions" :series="newVistorsSeries"></apex-chart>
@@ -97,7 +120,13 @@
                             <div class="col-6">
                                 <div class="w-detail">
                                     <p class="w-title">Returning Visitors</p>
-                                    <p class="w-stats">{{ stats.visitors?.filter(e => e.is_new == 1).length }}</p>
+                                    <p class="w-stats">
+                                        {{
+                                            stats.visitors?.filter(
+                                                (e) => e.is_new == 1
+                                            ).length
+                                        }}
+                                    </p>
                                 </div>
                                 <apex-chart v-if="returningVisitorsOptions" height="58" type="line"
                                     :options="returningVisitorsOptions" :series="returningVisitorsSeries"></apex-chart>
@@ -124,9 +153,15 @@
                                     </svg>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="ddlExpenses">
-                                    <li><a href="javascript:;" class="dropdown-item">This Week</a></li>
-                                    <li><a href="javascript:;" class="dropdown-item">Last Week</a></li>
-                                    <li><a href="javascript:;" class="dropdown-item">Last Month</a></li>
+                                    <li>
+                                        <a href="javascript:;" class="dropdown-item">This Week</a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:;" class="dropdown-item">Last Week</a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:;" class="dropdown-item">Last Month</a>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -210,9 +245,15 @@
                                     </svg>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="ddlVisitors">
-                                    <li><a href="javascript:;" class="dropdown-item">View</a></li>
-                                    <li><a href="javascript:;" class="dropdown-item">Update</a></li>
-                                    <li><a href="javascript:;" class="dropdown-item">Download</a></li>
+                                    <li>
+                                        <a href="javascript:;" class="dropdown-item">View</a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:;" class="dropdown-item">Update</a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:;" class="dropdown-item">Download</a>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -242,8 +283,12 @@
                                     </svg>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="ddlActivity">
-                                    <li><a href="javascript:;" class="dropdown-item">View All</a></li>
-                                    <li><a href="javascript:;" class="dropdown-item">Mark as Read</a></li>
+                                    <li>
+                                        <a href="javascript:;" class="dropdown-item">View All</a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:;" class="dropdown-item">Mark as Read</a>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -268,7 +313,8 @@
                                     <div class="t-content">
                                         <div class="t-uppercontent">
                                             <h5>
-                                                New project created : <a href="javscript:void(0);"><span>[Cork Admin
+                                                New project created :
+                                                <a href="javscript:void(0);"><span>[Cork Admin
                                                         Template]</span></a>
                                             </h5>
                                         </div>
@@ -291,8 +337,12 @@
                                     </div>
                                     <div class="t-content">
                                         <div class="t-uppercontent">
-                                            <h5>Mail sent to <a href="javascript:void(0);">HR</a> and <a
-                                                    href="javascript:void(0);">Admin</a></h5>
+                                            <h5>
+                                                Mail sent to
+                                                <a href="javascript:void(0);">HR</a>
+                                                and
+                                                <a href="javascript:void(0);">Admin</a>
+                                            </h5>
                                         </div>
                                         <p>28 Feb, 2020</p>
                                     </div>
@@ -329,7 +379,8 @@
                                     <div class="t-content">
                                         <div class="t-uppercontent">
                                             <h5>
-                                                Task Completed : <a href="javscript:void(0);"><span>[Backup Files
+                                                Task Completed :
+                                                <a href="javscript:void(0);"><span>[Backup Files
                                                         EOD]</span></a>
                                             </h5>
                                         </div>
@@ -351,7 +402,10 @@
                                     </div>
                                     <div class="t-content">
                                         <div class="t-uppercontent">
-                                            <h5>Documents Submitted from <a href="javascript:void(0);">Sara</a></h5>
+                                            <h5>
+                                                Documents Submitted from
+                                                <a href="javascript:void(0);">Sara</a>
+                                            </h5>
                                             <span></span>
                                         </div>
                                         <p>10 Mar, 2020</p>
@@ -373,7 +427,9 @@
                                     </div>
                                     <div class="t-content">
                                         <div class="t-uppercontent">
-                                            <h5>Server rebooted successfully</h5>
+                                            <h5>
+                                                Server rebooted successfully
+                                            </h5>
                                             <span></span>
                                         </div>
                                         <p>06 Apr, 2020</p>
@@ -389,82 +445,27 @@
             <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12 layout-spacing">
                 <div class="widget widget-visitor-by-browser">
                     <div class="widget-heading">
-                        <h5>Visitors by Browser</h5>
+                        <h5>Visitors by Platform</h5>
                     </div>
                     <div class="widget-content">
-                        <div class="browser-list">
-                            <div class="w-icon icon-fill-primary">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" class="feather feather-chrome">
-                                    <circle cx="12" cy="12" r="10"></circle>
-                                    <circle cx="12" cy="12" r="4"></circle>
-                                    <line x1="21.17" y1="8" x2="12" y2="8"></line>
-                                    <line x1="3.95" y1="6.06" x2="8.54" y2="14"></line>
-                                    <line x1="10.88" y1="21.94" x2="15.46" y2="14"></line>
-                                </svg>
-                            </div>
+                        <div v-for="platform in platforms" class="browser-list">
+                            <div class="w-icon icon-fill-primary" v-html="platform.icon"></div>
                             <div class="w-browser-details">
                                 <div class="w-browser-info">
-                                    <h6>Chrome</h6>
-                                    <p class="browser-count">65%</p>
+                                    <h6>{{ platform.name }}</h6>
+                                    <p class="browser-count">{{ (platform.count / stats.visitors?.length) * 100 }}%</p>
                                 </div>
                                 <div class="w-browser-stats">
                                     <div class="progress">
-                                        <div role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="65"
-                                            class="progress-bar bg-gradient-primary" style="width: 65%"></div>
+                                        <div role="progressbar" aria-valuemin="0" aria-valuemax="100"
+                                            :aria-valuenow="((platform.count / stats.visitors?.length) * 100)"
+                                            class="progress-bar bg-gradient-primary"
+                                            :style="{ width: ((platform.count / stats.visitors?.length) * 100) + '%' }"></div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="browser-list">
-                            <div class="w-icon icon-fill-danger">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" class="feather feather-compass">
-                                    <circle cx="12" cy="12" r="10"></circle>
-                                    <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
-                                </svg>
-                            </div>
-                            <div class="w-browser-details">
-                                <div class="w-browser-info">
-                                    <h6>Safari</h6>
-                                    <p class="browser-count">25%</p>
-                                </div>
 
-                                <div class="w-browser-stats">
-                                    <div class="progress">
-                                        <div role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="35"
-                                            class="progress-bar bg-gradient-danger" style="width: 35%"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="browser-list">
-                            <div class="w-icon icon-fill-warning">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" class="feather feather-globe">
-                                    <circle cx="12" cy="12" r="10"></circle>
-                                    <line x1="2" y1="12" x2="22" y2="12"></line>
-                                    <path
-                                        d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z">
-                                    </path>
-                                </svg>
-                            </div>
-                            <div class="w-browser-details">
-                                <div class="w-browser-info">
-                                    <h6>Others</h6>
-                                    <p class="browser-count">15%</p>
-                                </div>
-                                <div class="w-browser-stats">
-                                    <div class="progress">
-                                        <div role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="15"
-                                            class="progress-bar bg-gradient-warning" style="width: 15%"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -592,6 +593,55 @@ const store = useStore();
 
 import moment from 'moment';
 
+const platformIcons = {
+    Chrome: `
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chrome">
+            <circle cx="12" cy="12" r="10"></circle>
+            <circle cx="12" cy="12" r="4"></circle>
+            <line x1="21.17" y1="8" x2="12" y2="8"></line>
+            <line x1="3.95" y1="6.06" x2="8.54" y2="14"></line>
+            <line x1="10.88" y1="21.94" x2="15.46" y2="14"></line>
+        </svg>
+    `,
+    Safari: `
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-compass">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
+        </svg>
+    `,
+    AndroidOS: `
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-smartphone">
+            <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+            <line x1="12" y1="18" x2="12" y2="18"></line>
+        </svg>
+    `,
+    Others: `
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-globe">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="2" y1="12" x2="22" y2="12"></line>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+        </svg>
+    `,
+    // Add more platform icons as needed
+};
+
+const platforms = computed(() => {
+    return stats.value.visitors?.reduce((acc, curr) => {
+        const platform = acc.find(e => e.name == curr.platform);
+        if (platform) {
+            platform.count++;
+        } else {
+            acc.push({
+                name: curr.platform,
+                count: 1,
+                desktop: curr.is_desktop == 1,
+                icon: platformIcons[curr.platform] || platformIcons.Others,
+            });
+        }
+        return acc;
+    }, []);
+});
+
 const handleDatesAndLabels = (dates, datesStrings) => {
     if (!dates || !datesStrings || !datesStrings.length) return null;
 
@@ -684,6 +734,7 @@ const uniqueVisitorSeries = ref([
     { name: "New Visitors", data: [] },
     { name: "Returning Visitors", data: [] },
 ]);
+
 const uniqueVisitorOptions = computed(() => {
     const isDark = store.state.is_dark_mode;
     return {
@@ -782,10 +833,12 @@ onMounted(async () => {
     console.log(newData);
     const data = await fetchStatisticsData();
 
-    newVistorsSeries.value[0].data = data.newVistorsData;
-    returningVisitorsSeries.value[0].data = data.returningVisitorsData;
-    uniqueVisitorSeries.value[0].data = data.uniqueVisitorData.newVisitors;
-    uniqueVisitorSeries.value[1].data = data.uniqueVisitorData.returningVisitors;
+    newVistorsSeries.value[0].data = newData.series.datasets[0].data;
+    returningVisitorsSeries.value[0].data = newData.series.datasets[1].data;
+    uniqueVisitorSeries.value[0].data = newData.series.datasets[0].data;
+    uniqueVisitorSeries.value[1].data = newData.series.datasets[1].data;
+
+
     followersSeries.value[0].data = data.followersData;
     referralSeries.value[0].data = data.referralData;
     engagementSeries.value[0].data = data.engagementData;
