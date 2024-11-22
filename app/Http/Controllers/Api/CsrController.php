@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCsrRequest;
 use App\Http\Requests\UpdateCsrRequest;
 use App\Http\Resources\CsrResource;
-use Intervention\Image\Facades\Image;
+use Intervention\Image\Laravel\Facades\Image;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Csr;
 use App\Models\CsrImage;

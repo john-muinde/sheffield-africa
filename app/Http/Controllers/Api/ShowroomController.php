@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreShowroomRequest;
 use App\Http\Resources\ShowroomResource;
-use Intervention\Image\Facades\Image;
+use Intervention\Image\Laravel\Facades\Image;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Showroom;
 use App\Models\showroomImage;
@@ -159,7 +159,7 @@ class ShowroomController extends Controller
 
     public function getShowrooms()
     {
-       
+
         $showrooms = Showroom::get();
 
         return response()->json($showrooms);
@@ -167,7 +167,7 @@ class ShowroomController extends Controller
 
     public function getShowroom()
     {
-       
+
         $showroom_id = request('showroom_id', 1);
 
         $showroom = Showroom::find($showroom_id);

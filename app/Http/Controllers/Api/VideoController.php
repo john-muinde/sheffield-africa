@@ -6,7 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreVideoRequest;
 use App\Http\Requests\UpdateVideoRequest;
 use App\Http\Resources\VideoResource;
-use Intervention\Image\Facades\Image;
+use Intervention\Image\ImageManager;  // Updated import
+use Intervention\Image\Drivers\Imagick\Driver as ImagickDriver;  // Added driver import
 use Illuminate\Support\Facades\Storage;
 use App\Models\Video;
 use Illuminate\Http\Request;
@@ -14,6 +15,13 @@ use Illuminate\Support\Facades\Log;
 
 class VideoController extends Controller
 {
+    protected $imageManager;
+
+    public function __construct()
+    {
+        // Initialize the ImageManager with Imagick driver
+        $this->imageManager = new ImageManager(new ImagickDriver());
+    }
     public function index()
     {
         $orderColumn = request('order_column', 'created_at');
@@ -82,25 +90,18 @@ class VideoController extends Controller
 
         $validatedData['created_by'] = auth()->user()->id;
 
-
         if ($request->hasFile('main_image_path')) {
-
             $file = $request->file('main_image_path');
+            $fileName = time() . '_' . $file->getClientOriginalName();
+            $filePath = 'uploads/' . $fileName;
 
-            $file_name = time() . '_' . $request->file('main_image_path')->getClientOriginalName();
-            $file_path = 'uploads/' . $file_name;
+            // Create and process the image using the new syntax
+            $image = $this->imageManager->read($file)->coverDown(800, 800)->toJpeg(85);
 
-            // Resize and optimize the image
-            $image = Image::make($file)->resize(800, null, function ($constraint) {
-                $constraint->aspectRatio();
-                $constraint->upsize();
-            })->encode('jpg', 85); // Specify the desired encoding format and quality (80% in this example)
+            // Store the processed image
+            Storage::disk('public')->put($filePath, $image);
 
-            // Store the optimized image
-            Storage::disk('public')->put($file_path, $image);
-            //$file_path = $request->file('main_image_path')->storeAs('uploads', $file_name, 'public');
-
-            $validatedData['main_image_path'] = $file_path;
+            $validatedData['main_image_path'] = $filePath;
         }
 
         if ($request->hasFile('file_path') || $request->input('type') == 'Upload') {
@@ -165,10 +166,7 @@ class VideoController extends Controller
             $file_path = 'uploads/' . $file_name;
 
             // Resize and optimize the image
-            $image = Image::make($file)->resize(800, null, function ($constraint) {
-                $constraint->aspectRatio();
-                $constraint->upsize();
-            })->encode('jpg', 85);
+            $image = $this->imageManager->read($file)->coverDown(800, 800)->toJpeg(85);
 
             // Store the optimized image
             Storage::disk('public')->put($file_path, $image);

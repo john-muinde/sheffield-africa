@@ -7,7 +7,7 @@ use App\Http\Requests\StoreSolutionRequest;
 use App\Http\Requests\UpdateSolutionRequest;
 use App\Http\Resources\SolutionResource;
 use App\Http\Resources\ProductResource;
-use Intervention\Image\Facades\Image;
+use Intervention\Image\Laravel\Facades\Image;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Solution;
 use App\Models\SolutionCategory;

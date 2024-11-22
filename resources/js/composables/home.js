@@ -25,7 +25,6 @@ export default function useStats() {
 
     const getStats = async () => {
         try {
-            console.log("Loading data with...", dates.value);
             const queryParameters = new URLSearchParams();
             queryParameters.append(
                 "period",
@@ -34,7 +33,6 @@ export default function useStats() {
             queryParameters.append("start_date", dates.value.start_date);
             queryParameters.append("end_date", dates.value.end_date);
             const url = `/api/dashboard-stats?${queryParameters.toString()}`;
-            console.log("URL", url);
             const response = await apiRequest("get", url);
             stats.value = response;
             return response;
