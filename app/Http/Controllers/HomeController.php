@@ -9,6 +9,7 @@ use App\Models\Visitors;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class HomeController extends Controller
 {
@@ -45,18 +46,35 @@ class HomeController extends Controller
                 $start_date = Carbon::now()->startOfWeek();
                 $end_date = Carbon::now()->endOfWeek();
                 break;
-            default: // day
+            case 'yesterday':
+                $start_date = Carbon::yesterday()->startOfDay();
+                $end_date = Carbon::yesterday()->endOfDay();
+                break;
+            default: // today
                 $start_date = Carbon::now()->startOfDay();
                 $end_date = Carbon::now()->endOfDay();
                 break;
         }
 
         // Override defaults if dates are provided
-        $start_date = request()->query('start_date') ? Carbon::parse(request()->query('start_date')) : $start_date;
-        $end_date = request()->query('end_date') ? Carbon::parse(request()->query('end_date')) : $end_date;
+        $start_date = request()->query('start_date')
+            ? Carbon::parse(request()->query('start_date'))->startOfDay()
+            : $start_date;
 
-        // Configure grouping based on period
+        $end_date = request()->query('end_date')
+            ? Carbon::parse(request()->query('end_date'))->endOfDay()
+            : $end_date;
+
+        // Debugging: Log the exact date range being queried
+        Log::info('Stats Query Date Range', [
+            'start_date' => $start_date->toDateTimeString(),
+            'end_date' => $end_date->toDateTimeString()
+        ]);
+
+        // Modify grouping configuration to handle daily granularity better
         $grouping = $this->getGroupingConfig($period);
+
+
 
         // Generate date periods
         $dates = [];
@@ -66,13 +84,14 @@ class HomeController extends Controller
             $current->add($grouping['interval_period'], $grouping['interval_value']);
         }
 
-        // Get visitors time series data
-        $visitors_data = Visitors::select(
-            DB::raw("DATE_FORMAT(created_at, '{$grouping['sql_format']}') as date"),
-            DB::raw('COUNT(DISTINCT CASE WHEN is_new = 1 THEN tracking_id END) as new_visitors'),
-            DB::raw('COUNT(DISTINCT CASE WHEN is_new = 0 THEN tracking_id END) as returning_visitors')
-        )
-            ->whereBetween('created_at', [$start_date, $end_date])
+        // Alternative query methods to try
+        $visitors_data = Visitors::where('created_at', '>=', $start_date)
+            ->where('created_at', '<=', $end_date)
+            ->select(
+                DB::raw("DATE_FORMAT(created_at, '{$grouping['sql_format']}') as date"),
+                DB::raw('COUNT(DISTINCT CASE WHEN is_new = 1 THEN tracking_id END) as new_visitors'),
+                DB::raw('COUNT(DISTINCT CASE WHEN is_new = 0 THEN tracking_id END) as returning_visitors')
+            )
             ->groupBy(DB::raw("DATE_FORMAT(created_at, '{$grouping['sql_format']}')"))
             ->get()
             ->keyBy('date');
@@ -159,11 +178,11 @@ class HomeController extends Controller
                 ];
             default: // day
                 return [
-                    'sql_format' => '%Y-%m-%d %H:00',
-                    'date_format' => 'Y-m-d H:00',
-                    'label_format' => 'H:i',
+                    'sql_format' => '%H', // SQL hour format
+                    'date_format' => 'H', // PHP hour format
+                    'label_format' => 'g A', // Convert to 12-hour format with AM/PM (e.g., 1 PM)
                     'interval_period' => 'hour',
-                    'interval_value' => 1
+                    'interval_value' => 2
                 ];
         }
     }
