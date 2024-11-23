@@ -1608,6 +1608,7 @@ const routes = [
             {
                 path: "/:pathMatch(.*)*",
                 name: "404",
+                
                 component: () => import("../apps/frontend/views/404.vue"),
                 meta: {
                     layout: "frontend",

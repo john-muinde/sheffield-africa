@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Client;
 use App\Models\Post;
+use App\Models\QuoteRequest;
 use App\Models\User;
 use App\Models\Visitors;
 use Illuminate\Http\Request;
@@ -28,6 +29,7 @@ class HomeController extends Controller
      *
      * @return array
      */
+
     public function getStats()
     {
         $period = request()->query('period', 'year'); // day, week, month, year
@@ -65,16 +67,9 @@ class HomeController extends Controller
             ? Carbon::parse(request()->query('end_date'))->endOfDay()
             : $end_date;
 
-        // Debugging: Log the exact date range being queried
-        Log::info('Stats Query Date Range', [
-            'start_date' => $start_date->toDateTimeString(),
-            'end_date' => $end_date->toDateTimeString()
-        ]);
 
         // Modify grouping configuration to handle daily granularity better
         $grouping = $this->getGroupingConfig($period);
-
-
 
         // Generate date periods
         $dates = [];
@@ -108,7 +103,79 @@ class HomeController extends Controller
             $returning_visitors_data[] = isset($visitors_data[$date]) ? (int)$visitors_data[$date]->returning_visitors : 0;
         }
 
-        // Get other stats with date range
+        $recentVisitors = Visitors::whereBetween('created_at', [$start_date, $end_date])
+            ->select(
+                'tracking_id',
+                DB::raw('MAX(created_at) as last_visit'),
+                DB::raw('MAX(CASE WHEN created_at = (SELECT MAX(created_at) FROM visitors v2 WHERE v2.tracking_id = visitors.tracking_id) THEN is_new END) as is_new'),
+                DB::raw('MAX(CASE WHEN created_at = (SELECT MAX(created_at) FROM visitors v2 WHERE v2.tracking_id = visitors.tracking_id) THEN platform END) as platform'),
+                DB::raw('MAX(CASE WHEN created_at = (SELECT MAX(created_at) FROM visitors v2 WHERE v2.tracking_id = visitors.tracking_id) THEN browser END) as browser'),
+                DB::raw('MAX(CASE WHEN created_at = (SELECT MAX(created_at) FROM visitors v2 WHERE v2.tracking_id = visitors.tracking_id) THEN is_desktop END) as is_desktop'),
+                DB::raw('MAX(CASE WHEN created_at = (SELECT MAX(created_at) FROM visitors v2 WHERE v2.tracking_id = visitors.tracking_id) THEN location END) as location'),
+                DB::raw('MAX(CASE WHEN created_at = (SELECT MAX(created_at) FROM visitors v2 WHERE v2.tracking_id = visitors.tracking_id) THEN url END) as url')
+            )
+            ->groupBy('tracking_id')
+            ->orderBy('last_visit', 'desc')
+            ->take(5)
+            ->get();
+
+        // Get detailed visits for each recent visitor
+        $visitorDetails = [];
+        foreach ($recentVisitors as $visitor) {
+            $visits = Visitors::where('tracking_id', $visitor->tracking_id)
+                ->whereBetween('created_at', [$start_date, $end_date])
+                ->select(
+                    'url',
+                    'created_at',
+                    'platform',
+                    'browser',
+                    'location',
+                    'is_new'
+                )
+                ->orderBy('created_at', 'desc')
+                ->take(5)
+                ->get();
+
+            $visitorDetails[] = [
+                'visitor' => [
+                    'tracking_id' => $visitor->tracking_id,
+                    'is_new' => $visitor->is_new,
+                    'platform' => $visitor->platform,
+                    'browser' => $visitor->browser,
+                    'is_desktop' => $visitor->is_desktop,
+                    'location' => $visitor->location,
+                    'last_visit' => $visitor->last_visit
+                ],
+                'visits' => $visits->map(function ($visit) {
+                    return [
+                        'url' => $visit->url,
+                        'timestamp' => $visit->created_at->format('Y-m-d H:i:s'),
+                        'platform' => $visit->platform,
+                        'browser' => $visit->browser,
+                        'location' => $visit->location,
+                        'is_new' => $visit->is_new
+                    ];
+                })
+            ];
+        }
+
+        $quotes = QuoteRequest::latest()->take(5)->get();
+
+        $activities = [];
+
+        foreach ($quotes as $quote) {
+            $activities[] = [
+                'type' => 'quote_request',
+                'timestamp' => $quote->created_at->format('Y-m-d H:i:s'),
+                'data' => [
+                    'items_count' => count($quote->cartItems),
+                    'email' => $quote->email,
+                    'message' => $quote->shipping
+                ]
+            ];
+        }
+
+        // Stats array with the modified visitor data
         $stats = [
             'period' => $period,
             'date_range' => [
@@ -117,6 +184,8 @@ class HomeController extends Controller
             ],
             'total_clients' => Client::count(),
             'total_admins' => User::where('role', 1)->count(),
+            'visitor_details' => $visitorDetails,
+            'activities' => $activities,
             'visitors' => Visitors::whereBetween('created_at', [$start_date, $end_date])
                 ->select('tracking_id', 'is_new', 'platform', 'browser', 'is_desktop', 'location')
                 ->distinct()
@@ -126,15 +195,15 @@ class HomeController extends Controller
                 }),
             'total_posts' => Post::whereBetween('created_at', [$start_date, $end_date])->count(),
             'series' => [
-                'labels' => $labels,
+                'labels' => $labels ?? [],
                 'datasets' => [
                     [
                         'name' => 'New Visitors',
-                        'data' => $new_visitors_data
+                        'data' => $new_visitors_data ?? []
                     ],
                     [
                         'name' => 'Returning Visitors',
-                        'data' => $returning_visitors_data
+                        'data' => $returning_visitors_data ?? []
                     ]
                 ]
             ]
@@ -151,39 +220,38 @@ class HomeController extends Controller
      */
     private function getGroupingConfig($period)
     {
-        switch ($period) {
-            case 'year':
-                return [
-                    'sql_format' => '%Y-%m',
-                    'date_format' => 'Y-m',
-                    'label_format' => 'M',
-                    'interval_period' => 'month',
-                    'interval_value' => 1
-                ];
-            case 'month':
-                return [
-                    'sql_format' => '%Y-%m-%d',
-                    'date_format' => 'Y-m-d',
-                    'label_format' => 'j',  // Day of the month without leading zeros
-                    'interval_period' => 'day',
-                    'interval_value' => 1
-                ];
-            case 'week':
-                return [
-                    'sql_format' => '%Y-%m-%d',
-                    'date_format' => 'Y-m-d',
-                    'label_format' => 'D',  // Mon, Tue, etc.
-                    'interval_period' => 'day',
-                    'interval_value' => 1
-                ];
-            default: // day
-                return [
-                    'sql_format' => '%H', // SQL hour format
-                    'date_format' => 'H', // PHP hour format
-                    'label_format' => 'g A', // Convert to 12-hour format with AM/PM (e.g., 1 PM)
-                    'interval_period' => 'hour',
-                    'interval_value' => 2
-                ];
-        }
+        return match ($period) {
+            'year' =>
+            [
+                'sql_format' => '%Y-%m',
+                'date_format' => 'Y-m',
+                'label_format' => 'M',
+                'interval_period' => 'month',
+                'interval_value' => 1
+            ],
+            'month' =>
+            [
+                'sql_format' => '%Y-%m-%d',
+                'date_format' => 'Y-m-d',
+                'label_format' => 'j',  // Day of the month without leading zeros
+                'interval_period' => 'day',
+                'interval_value' => 1
+            ],
+            'week' => [
+                'sql_format' => '%Y-%m-%d',
+                'date_format' => 'Y-m-d',
+                'label_format' => 'D',  // Mon, Tue, etc.
+                'interval_period' => 'day',
+                'interval_value' => 1
+            ],
+            default =>
+            [
+                'sql_format' => '%H', // SQL hour format
+                'date_format' => 'H', // PHP hour format
+                'label_format' => 'g A', // Convert to 12-hour format with AM/PM (e.g., 1 PM)
+                'interval_period' => 'hour',
+                'interval_value' => 2
+            ]
+        };
     }
 }
