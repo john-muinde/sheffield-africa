@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -28,7 +29,6 @@ class QuoteRequest extends Model
 
     protected $casts = [
         'cartItems' => 'array',
-        'shipping' => 'boolean',
         'installation' => 'boolean',
     ];
 }

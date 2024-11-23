@@ -171,7 +171,7 @@
                                                 <div class="flex items-center text-sm text-gray-600">
                                                     <span>{{ visitorData.visitor.platform }} - {{
                                                         visitorData.visitor.browser
-                                                    }}</span>
+                                                        }}</span>
                                                 </div>
                                             </div>
                                         </button>
