@@ -467,6 +467,25 @@
     <script src="/dearflip/dflip/js/libs/jquery.min.js" id="jquery-core-js"></script>
     <script src="/dearflip/dflip/js/libs/jquery-migrate.min.js" id="jquery-migrate-js"></script>
 
+    <script type='text/javascript'>
+        window.smartlook || (function(d) {
+            var o = smartlook = function() {
+                    o.api.push(arguments)
+                },
+                h = d.getElementsByTagName('head')[0];
+            var c = d.createElement('script');
+            o.api = new Array();
+            c.async = true;
+            c.type = 'text/javascript';
+            c.charset = 'utf-8';
+            c.src = 'https://web-sdk.smartlook.com/recorder.js';
+            h.appendChild(c);
+        })(document);
+        smartlook('init', '1877a41e49ec51b8bb404184dd7fa59f985f3925', {
+            region: 'eu'
+        });
+    </script>
+
 </head>
 
 <body>

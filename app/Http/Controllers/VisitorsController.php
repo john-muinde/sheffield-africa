@@ -39,7 +39,7 @@ class VisitorsController extends Controller
         $isDesktop = $agent->isDesktop();
         $browser = $agent->browser();
         $isRobot = $agent->isRobot();
-        $robotName = $isRobot ? $agent->robotName() : null;
+        $robotName = $isRobot ? $agent->robot() : null;
         $platform = $agent->platform();
         $locationJson = Location::get($ip);
 
