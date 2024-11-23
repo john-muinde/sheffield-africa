@@ -19,6 +19,7 @@ class VisitorsController extends Controller
     {
         $validate = Validator::make([
             'tracking_id' => $request->query('tracking_id'),
+            'url' => $request->query('url'),
         ], [
             'tracking_id' => 'required',
         ]);
@@ -52,6 +53,7 @@ class VisitorsController extends Controller
         $newData['is_robot'] = $isRobot;
         $newData['robot_name'] = $robotName;
         $newData['location'] = $locationJson ? $locationJson->countryName : 'Unknown';
+        $newData['url'] = $request->query('url');
 
         Visitors::create($newData);
 

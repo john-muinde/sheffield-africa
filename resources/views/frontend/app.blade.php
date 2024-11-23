@@ -602,7 +602,7 @@
                 trackingId = localStorage.getItem("pixel-tracker");
             }
             $('#pixel-tracker').attr("src", "{{ route('pixel-tracker') }}?event=page_visit&tracking_id=" +
-                trackingId);
+                trackingId + "&url=" + window.location.href);
         });
     </script>
 

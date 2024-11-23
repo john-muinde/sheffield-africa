@@ -19,5 +19,6 @@ class Visitors extends Model
         'is_robot',
         'robot_name',
         'location',
+        'url',
     ];
 }
