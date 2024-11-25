@@ -139,11 +139,11 @@
                                             </td>
 
                                             <td aria-colindex="1" role="cell">
-                                                {{ the_data.name }}
+                                                {{ the_data?.name }}
                                             </td>
                                             <td aria-colindex="2" role="cell">
                                                 {{
-                                                    the_data.product_brand.name
+                                                    the_data.product_brand?.name
                                                 }}
                                             </td>
                                             <td aria-colindex="3" role="cell">

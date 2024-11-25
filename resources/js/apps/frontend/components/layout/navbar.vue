@@ -217,7 +217,7 @@
                                                             result.model_number,
                                                             result
                                                                 .categories_json[0]
-                                                                .parent_name_with_slashes
+                                                                ?.parent_name_with_slashes
                                                         )
                                                             ">
                                                             <img style="
@@ -311,7 +311,7 @@
                                                 <i class="icon-shopping-cart"></i>
                                                 <span class="cart-count">{{
                                                     cartItems.length
-                                                    }}</span>
+                                                }}</span>
                                                 <span class="cart-txt">Cart</span>
                                             </router-link>
 
@@ -541,7 +541,7 @@ const getSubset = (items, columnIndex, totalColumns) => {
 
 const getProductLink = (id, name, model_number, main_second_parent_cat) => {
 
-    const firstPart = main_second_parent_cat.split('/')[0];
+    const firstPart = main_second_parent_cat?.split('/')[0];
     // Replace spaces with dashes
     let transformedName = name.replace(/ /g, "-").replace(/\//g, "-");
     // Remove consecutive dashes
@@ -607,7 +607,7 @@ const addClassToBody = () => {
 </script>
 
 <style scoped>
-.custom{
+.custom {
     z-index: 1035;
     top: -1px;
 }
