@@ -1,8 +1,6 @@
 <template>
     <div class="widget widget-active-log widget-visitor-by-browser">
-        <div class="widget-heading">
-            <h5>Visitors by Country</h5>
-        </div>
+        <slot></slot>
 
         <div class="widget-content">
             <div class="flex gap-4">

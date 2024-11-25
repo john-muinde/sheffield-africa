@@ -296,24 +296,34 @@
             </div>
 
             <div class="col-xl-8 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
-                <div class="dropdown btn-group">
-                    <a href="javascript:;" id="ddlRevenue" class="btn dropdown-toggle btn-icon-only"
-                        data-bs-toggle="dropdown" aria-expanded="false">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                            class="feather feather-more-horizontal">
-                            <circle cx="12" cy="12" r="1"></circle>
-                            <circle cx="19" cy="12" r="1"></circle>
-                            <circle cx="5" cy="12" r="1"></circle>
-                        </svg>
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="ddlRevenue">
-                        <li><a href="javascript:;" class="dropdown-item">Weekly</a></li>
-                        <li><a href="javascript:;" class="dropdown-item">Monthly</a></li>
-                        <li><a href="javascript:;" class="dropdown-item">Yearly</a></li>
-                    </ul>
-                </div>
-                <VisitorsMap :visitors="filters.status == 'visitors' ? uniqueVisitors : stats?.visitors" />
+
+                <VisitorsMap :visitors="filters.status == 'visitors' ? uniqueVisitors : stats?.visitors">
+                    <div class="widget-heading">
+                        <h5>Visitors by Country</h5>
+                        <div class="dropdown btn-group">
+                            <a href="javascript:;" id="ddlRevenue" class="btn dropdown-toggle btn-icon-only"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                {{ filters.status == 'visitors' ? 'Visitors' : 'Activity' }}
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="ml-1 feather feather-more-horizontal">
+                                    <circle cx="12" cy="12" r="1"></circle>
+                                    <circle cx="19" cy="12" r="1"></circle>
+                                    <circle cx="5" cy="12" r="1"></circle>
+                                </svg>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="ddlRevenue">
+                                <li><a href="javascript:;" @click="changeFilters('visitors')"
+                                        class="dropdown-item">Visitors</a>
+                                </li>
+                                <li><a href="javascript:;" @click="changeFilters('activity')"
+                                        class="dropdown-item">Activity</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </VisitorsMap>
             </div>
         </div>
     </div>
@@ -334,6 +344,10 @@ const { getStats, dates, stats, loading, datePickerOnChange, presetRanges, showR
 const store = useStore();
 const activities = computed(() => stats.value?.activities || []);
 const filters = ref({ status: "visitors" });
+
+const changeFilters = (status) => {
+    filters.value.status = status;
+}
 
 const uniqueVisitors = computed(() => {
     return stats.value.visitors?.reduce((acc, curr) => {
