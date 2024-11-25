@@ -58,6 +58,7 @@ class HomeController extends Controller
                 break;
         }
 
+
         // Override defaults if dates are provided
         $start_date = request()->query('start_date')
             ? Carbon::parse(request()->query('start_date'))->startOfDay()
@@ -188,11 +189,8 @@ class HomeController extends Controller
             'activities' => $activities,
             'visitors' => Visitors::whereBetween('created_at', [$start_date, $end_date])
                 ->select('tracking_id', 'is_new', 'platform', 'browser', 'is_desktop', 'location')
-                ->distinct()
-                ->get()
-                ->unique(function ($item) {
-                    return $item['tracking_id'] . '-' . $item['is_new'];
-                }),
+                ->orderBy('created_at', 'desc')
+                ->get(),
             'total_posts' => Post::whereBetween('created_at', [$start_date, $end_date])->count(),
             'series' => [
                 'labels' => $labels ?? [],

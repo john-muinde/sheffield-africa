@@ -59,14 +59,14 @@
                             <a-range-picker :bordered="false" :defaultValue="[
                                 dayjs(dates.start_date),
                                 dayjs(dates.end_date),
-                            ]" :presets="presetRanges" @change="handleDatesAndLabels" />
+                            ]" :presets="presetRanges" @change="datePickerOnChange" />
                             ({{ dates.label }})
                         </div>
                         <a-space>
                             <a-button type="primary" danger :disabled="loading" @click="showResetConfirm">
                                 Reset All Stats
                             </a-button>
-                            <a-button type="primary" :disabled="loading" @click="loadData">
+                            <a-button type="primary" :disabled="loading" @click="getStats">
                                 Refresh
                             </a-button>
                         </a-space>
@@ -86,7 +86,7 @@
                                     <p class="w-title">New Visitors</p>
                                     <p class="w-stats">
                                         {{
-                                            stats.visitors?.filter(
+                                            uniqueVisitors?.filter(
                                                 (e) => e.is_new == 1
                                             ).length
                                         }}
@@ -100,7 +100,7 @@
                                     <p class="w-title">Returning Visitors</p>
                                     <p class="w-stats">
                                         {{
-                                            stats.visitors?.filter(
+                                            uniqueVisitors?.filter(
                                                 (e) => e.is_new == 0
                                             ).length
                                         }}
@@ -123,7 +123,7 @@
 
                     <div class="widget-content">
                         <p class="value">
-                            {{ stats.visitors?.length }}
+                            {{ uniqueVisitors?.length }}
                             <span>({{ dates.label }})</span>
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -276,28 +276,143 @@
                             <div class="w-browser-details">
                                 <div class="w-browser-info">
                                     <h6>{{ platform.name }}</h6>
-                                    <p class="browser-count">{{ ((platform.count / stats.visitors?.length) *
+                                    <p class="browser-count">{{ ((platform.count / uniqueVisitors?.length) *
                                         100)?.toFixed(2) }}%
                                     </p>
                                 </div>
                                 <div class="w-browser-stats">
                                     <div class="progress">
                                         <div role="progressbar" aria-valuemin="0" aria-valuemax="100"
-                                            :aria-valuenow="((platform.count / stats.visitors?.length) * 100)"
+                                            :aria-valuenow="((platform.count / uniqueVisitors?.length) * 100)"
                                             class="progress-bar bg-gradient-primary"
-                                            :style="{ width: ((platform.count / stats.visitors?.length) * 100) + '%' }">
+                                            :style="{ width: ((platform.count / uniqueVisitors?.length) * 100) + '%' }">
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
+            </div>
+
+            <div class="col-xl-8 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
+                <div class="dropdown btn-group">
+                    <a href="javascript:;" id="ddlRevenue" class="btn dropdown-toggle btn-icon-only"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="feather feather-more-horizontal">
+                            <circle cx="12" cy="12" r="1"></circle>
+                            <circle cx="19" cy="12" r="1"></circle>
+                            <circle cx="5" cy="12" r="1"></circle>
+                        </svg>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="ddlRevenue">
+                        <li><a href="javascript:;" class="dropdown-item">Weekly</a></li>
+                        <li><a href="javascript:;" class="dropdown-item">Monthly</a></li>
+                        <li><a href="javascript:;" class="dropdown-item">Yearly</a></li>
+                    </ul>
+                </div>
+                <VisitorsMap :visitors="filters.status == 'visitors' ? uniqueVisitors : stats?.visitors" />
             </div>
         </div>
     </div>
 </template>
+
+<script setup>
+import "../assets/sass/widgets/widgets.scss";
+import { ref, computed, onMounted } from 'vue';
+import { useStore } from "vuex";
+import ApexChart from "vue3-apexcharts";
+import useStats from "@/composables/home";
+import dayjs from "dayjs";
+
+import VisitorsMap from "@/Components/VisitorsMap.vue";
+import { formatDate, getActivityIcon, getActivityColor, getActivityTitle, generateChartOptions, platformIcons } from '@/utils';
+
+const { getStats, dates, stats, loading, datePickerOnChange, presetRanges, showResetConfirm } = useStats();
+const store = useStore();
+const activities = computed(() => stats.value?.activities || []);
+const filters = ref({ status: "visitors" });
+
+const uniqueVisitors = computed(() => {
+    return stats.value.visitors?.reduce((acc, curr) => {
+        const visitor = acc.find(e => e.tracking_id == curr.tracking_id);
+        if (!visitor) {
+            acc.push(curr);
+        }
+        return acc;
+    }, []);
+});
+
+const platforms = computed(() => {
+    return uniqueVisitors.value?.reduce((acc, curr) => {
+        const platform = acc.find(e => e.name == curr.platform);
+        if (platform) {
+            platform.count++;
+        } else {
+            acc.push({
+                name: curr.platform,
+                count: 1,
+                desktop: curr.is_desktop == 1,
+                icon: platformIcons[curr.platform] || platformIcons.Others,
+            });
+        }
+        return acc;
+    }, []);
+});
+
+const newVistorsSeries = computed(() => {
+    return [{ data: stats.value?.series?.datasets[0].data || [] }];
+})
+const newVistorsOptions = computed(() => generateChartOptions("#009688", store.state.is_dark_mode));
+
+const returningVisitorsSeries = computed(() => {
+    return [{ data: stats.value?.series?.datasets[1].data || [] }];
+})
+const returningVisitorsOptions = computed(() => generateChartOptions("#e2a03f", store.state.is_dark_mode, {
+    dropShadow: { enabled: true, top: 1, left: 1, blur: 2, color: "#e2a03f", opacity: 0.7 },
+}));
+
+const uniqueVisitorSeries = computed(() => {
+    return [
+        { name: "New Visitors", data: stats.value?.series?.datasets[0].data || [] },
+        { name: "Returning Visitors", data: stats.value?.series?.datasets[1].data || [] },
+    ];
+});
+
+const uniqueVisitorOptions = computed(() => {
+    const isDark = store.state.is_dark_mode;
+    return {
+        chart: { toolbar: { show: false } },
+        dataLabels: { enabled: false },
+        stroke: { show: true, width: 2, colors: ["transparent"] },
+        colors: ["#5c1ac3", "#ffbb44"],
+        dropShadow: { enabled: true, opacity: 0.3, blur: 1, left: 1, top: 1, color: "#515365" },
+        plotOptions: { bar: { horizontal: false, columnWidth: "55%", borderRadius: 10 } },
+        legend: { position: "bottom", horizontalAlign: "center", fontSize: "14px", markers: { width: 12, height: 12 }, itemMargin: { horizontal: 0, vertical: 8 } },
+        grid: { borderColor: isDark ? "#191e3a" : "#e0e6ed" },
+        xaxis: {
+            categories: stats.value?.series?.labels || [],
+            axisBorder: { show: true, color: isDark ? "#3b3f5c" : "#e0e6ed" },
+        },
+        yaxis: { tickAmount: 6 },
+        fill: {
+            type: "gradient",
+            gradient: { shade: isDark ? "dark" : "light", type: "vertical", shadeIntensity: 0.3, inverseColors: false, opacityFrom: 1, opacityTo: 0.8, stops: [0, 100] },
+        },
+        tooltip: {
+            theme: isDark ? "dark" : "light",
+            y: { formatter: (val) => val },
+        },
+    };
+});
+
+onMounted(async () => {
+    await getStats();
+});
+</script>
+
 <style>
 .timeline-line {
     position: relative;
@@ -469,313 +584,3 @@ textarea[readonly] {
     color: inherit;
 }
 </style>
-
-<script setup>
-import "../assets/sass/widgets/widgets.scss";
-import { ref, computed, onMounted, nextTick } from 'vue';
-import { useStore } from "vuex";
-import { Modal } from "ant-design-vue";
-import ApexChart from "vue3-apexcharts";
-
-import useStats from "@/composables/home";
-import dayjs from "dayjs";
-
-const { getStats, dates, stats, loading, datePickerOnChange } = useStats();
-
-import {
-    Mail,
-    Plus,
-    Check,
-    File,
-    Server,
-    MessageSquare,
-    Phone,
-    ShoppingCart
-} from 'lucide-vue-next';
-
-import { useMeta } from "../composables/use-meta";
-useMeta({ title: "Widgets" });
-
-const store = useStore();
-
-import moment from 'moment';
-
-
-const activities = computed(() => stats.value?.activities || [])
-
-// Icon mapping based on activity type
-const activityIcons = {
-    quote_request: ShoppingCart,
-    contact_us: MessageSquare,
-    phone_call: Phone,
-    email_sent: Mail,
-    default: Plus
-}
-
-// Color mapping based on activity type
-const activityColors = {
-    quote_request: 't-primary',
-    contact_us: 't-success',
-    phone_call: 't-warning',
-    email_sent: 't-secondary',
-    default: 't-dark'
-}
-
-// Title mapping based on activity type
-const activityTitles = {
-    quote_request: 'New Quote Request',
-    contact_us: 'Contact Form Submission',
-    phone_call: 'Phone Call Received',
-    email_sent: 'Email Communication',
-    default: 'Activity Recorded'
-}
-
-const getActivityIcon = (type) => {
-    return activityIcons[type] || activityIcons.default
-}
-
-const getActivityColor = (type) => {
-    return activityColors[type] || activityColors.default
-}
-
-const getActivityTitle = (activity) => {
-    const title = activityTitles[activity.type] || activityTitles.default
-    if (activity.data.items_count) {
-        return `${title} (${activity.data.items_count} items)`
-    }
-    return title
-}
-
-const formatDate = (timestamp) => {
-    return new Date(timestamp).toLocaleString('en-US', {
-        year: 'numeric',
-        month: 'short',
-        day: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit'
-    })
-}
-
-
-const platformIcons = {
-    Windows: `
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chrome">
-            <circle cx="12" cy="12" r="10"></circle>
-            <circle cx="12" cy="12" r="4"></circle>
-            <line x1="21.17" y1="8" x2="12" y2="8"></line>
-            <line x1="3.95" y1="6.06" x2="8.54" y2="14"></line>
-            <line x1="10.88" y1="21.94" x2="15.46" y2="14"></line>
-        </svg>
-    `,
-    Safari: `
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-compass">
-            <circle cx="12" cy="12" r="10"></circle>
-            <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
-        </svg>
-    `,
-    AndroidOS: `
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-smartphone">
-            <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
-            <line x1="12" y1="18" x2="12" y2="18"></line>
-        </svg>
-    `,
-    Others: `
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-globe">
-            <circle cx="12" cy="12" r="10"></circle>
-            <line x1="2" y1="12" x2="22" y2="12"></line>
-            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
-        </svg>
-    `,
-};
-
-const platforms = computed(() => {
-    return stats.value.visitors?.reduce((acc, curr) => {
-        const platform = acc.find(e => e.name == curr.platform);
-        if (platform) {
-            platform.count++;
-        } else {
-            acc.push({
-                name: curr.platform,
-                count: 1,
-                desktop: curr.is_desktop == 1,
-                icon: platformIcons[curr.platform] || platformIcons.Others,
-            });
-        }
-        return acc;
-    }, []);
-});
-
-const handleDatesAndLabels = (dates, datesStrings) => {
-    if (!dates || !datesStrings || !datesStrings.length) return null;
-
-    let label = presetRanges.find((range) => range.value[0] == dates[0] && range.value[1] == dates[1]);
-
-    if (!label) {
-        label = {
-            label: `${moment(dates[0]).format("MMM D, YYYY")} - ${moment(dates[1]).format("MMM D, YYYY")}`,
-        };
-    }
-
-    const obj = {
-        label: label.label,
-        start_date: datesStrings[0],
-        end_date: datesStrings[1],
-    };
-
-    datePickerOnChange(obj);
-    loadData();
-}
-
-const presetRanges = [
-    {
-        label: 'Today',
-        value: [moment(), moment()]
-    },
-    {
-        label: 'Yesterday',
-        value: [moment().subtract(1, 'day'), moment().subtract(1, 'day')]
-    },
-    {
-        label: 'This Week',
-        value: [moment().startOf('week'), moment().endOf('week')]
-    },
-    {
-        label: 'Last 7 Days',
-        value: [moment().subtract(7, 'day'), moment()]
-    },
-    {
-        label: 'This Month',
-        value: [moment().startOf('month'), moment().endOf('month')]
-    },
-    {
-        label: 'Last Month',
-        value: [
-            moment().subtract(1, 'months').startOf('month'),
-            moment().subtract(1, 'months').endOf('month')
-        ]
-    },
-    {
-        label: 'This Year',
-        value: [moment().startOf('year'), moment().endOf('year')]
-    },
-    {
-        label: 'Last Year',
-        value: [
-            moment().subtract(1, 'year').startOf('year'),
-            moment().subtract(1, 'year').endOf('year')
-        ]
-    }
-];
-
-const showResetConfirm = () => {
-    Modal.confirm({
-        title: 'Do you want to reset the date filters?',
-        content: `This will reset the date range to ${dates.value.label}`,
-        onOk() {
-            handleDatesAndLabels([moment().startOf('week'), moment().endOf('week')], [moment().startOf('week').format('YYYY-MM-DD'), moment().endOf('week').format('YYYY-MM-DD')]);
-        },
-        onCancel() {
-            console.log('Cancel');
-        },
-    });
-};
-
-const loadData = async () => {
-    await fetchStatisticsData();
-};
-
-const newVistorsSeries = ref([{ data: [] }]);
-const newVistorsOptions = computed(() => generateChartOptions("#009688", store.state.is_dark_mode));
-
-const returningVisitorsSeries = ref([{ data: [] }]);
-const returningVisitorsOptions = computed(() => generateChartOptions("#e2a03f", store.state.is_dark_mode, {
-    dropShadow: { enabled: true, top: 1, left: 1, blur: 2, color: "#e2a03f", opacity: 0.7 },
-}));
-
-const uniqueVisitorSeries = ref([
-    { name: "New Visitors", data: [] },
-    { name: "Returning Visitors", data: [] },
-]);
-
-const uniqueVisitorOptions = computed(() => {
-    const isDark = store.state.is_dark_mode;
-
-    return {
-        chart: { toolbar: { show: false } },
-        dataLabels: { enabled: false },
-        stroke: { show: true, width: 2, colors: ["transparent"] },
-        colors: ["#5c1ac3", "#ffbb44"],
-        dropShadow: { enabled: true, opacity: 0.3, blur: 1, left: 1, top: 1, color: "#515365" },
-        plotOptions: { bar: { horizontal: false, columnWidth: "55%", borderRadius: 10 } },
-        legend: { position: "bottom", horizontalAlign: "center", fontSize: "14px", markers: { width: 12, height: 12 }, itemMargin: { horizontal: 0, vertical: 8 } },
-        grid: { borderColor: isDark ? "#191e3a" : "#e0e6ed" },
-        xaxis: {
-            categories: stats.value?.series?.labels || [],
-            axisBorder: { show: true, color: isDark ? "#3b3f5c" : "#e0e6ed" },
-        },
-        yaxis: {
-            tickAmount: 6,
-        },
-        fill: {
-            type: "gradient",
-            gradient: { shade: isDark ? "dark" : "light", type: "vertical", shadeIntensity: 0.3, inverseColors: false, opacityFrom: 1, opacityTo: 0.8, stops: [0, 100] },
-        },
-        tooltip: {
-            theme: isDark ? "dark" : "light",
-            y: {
-                formatter: function (val) {
-                    return val;
-                },
-            },
-        },
-    };
-});
-
-const generateChartOptions = (color, isDark, additionalOptions = {}) => {
-    return {
-        chart: { sparkline: { enabled: true }, dropShadow: { enabled: true, top: 3, left: 1, blur: 3, color, opacity: 0.7 } },
-        stroke: { curve: "smooth", width: 2 },
-        markers: { size: 0 },
-        colors: [color],
-        grid: { padding: { top: 0, bottom: 0, left: 0 } },
-        tooltip: {
-            theme: isDark ? "dark" : "light",
-            x: { show: false },
-            y: {
-                title: {
-                    formatter: function () {
-                        return "";
-                    },
-                },
-            },
-        },
-        responsive: [{ breakPoint: 576, options: { chart: { height: 95 }, grid: { padding: { top: 45, bottom: 0, left: 0 } } } }],
-        ...additionalOptions,
-    };
-};
-
-const fetchStatisticsData = async () => {
-
-    const newData = await getStats();
-    console.log(newData);
-
-    newVistorsSeries.value[0].data = newData.series.datasets[0].data;
-    returningVisitorsSeries.value[0].data = newData.series.datasets[1].data;
-    uniqueVisitorSeries.value[0].data = newData.series.datasets[0].data;
-    uniqueVisitorSeries.value[1].data = newData.series.datasets[1].data;
-};
-
-onMounted(async () => {
-    await fetchStatisticsData();
-    if (typeof bootstrap !== 'undefined') {
-        nextTick(() => {
-            const accordionElements = document.querySelectorAll('.accordion-collapse');
-            accordionElements.forEach(element => {
-                new bootstrap.Collapse(element, {
-                    toggle: false
-                });
-            });
-        });
-    }
-});
-</script>

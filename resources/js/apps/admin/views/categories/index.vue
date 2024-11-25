@@ -261,7 +261,7 @@ import "../../assets/sass/drag-drop/drag-drop.css";
 import "../../assets/sass/font-icons/fontawesome/css/regular.css";
 import "../../assets/sass/font-icons/fontawesome/css/fontawesome.css";
 import { VueDraggableNext as draggable } from "vue-draggable-next";
-import formatDate from "@/utils/date";
+import { formatDate } from "@/utils";
 import { useRoute } from "vue-router";
 
 

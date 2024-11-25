@@ -44,6 +44,8 @@ class VisitorsController extends Controller
         $platform = $agent->platform();
         $locationJson = Location::get($ip);
 
+        $countryCode = $locationJson ? $locationJson->countryCode : 'XX';
+
         $newData['tracking_id'] = $trackingId;
         $newData['is_new'] = $isNew;
         $newData['ip'] = $ip;
@@ -52,7 +54,7 @@ class VisitorsController extends Controller
         $newData['platform'] = $platform;
         $newData['is_robot'] = $isRobot;
         $newData['robot_name'] = $robotName;
-        $newData['location'] = $locationJson ? $locationJson->countryName : 'Unknown';
+        $newData['location'] = $locationJson ? "{$locationJson->countryName} - {$locationJson->countryCode}" : 'Unknown - XX';
         $newData['url'] = $request->query('url');
 
         Visitors::create($newData);
