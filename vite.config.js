@@ -4,6 +4,8 @@ import path from "path";
 import vueI18n from "@intlify/vite-plugin-vue-i18n";
 import laravel from "laravel-vite-plugin";
 
+import commonjs from "@rollup/plugin-commonjs";
+
 export default defineConfig({
     css: {
         preprocessorOptions: {
@@ -19,7 +21,9 @@ export default defineConfig({
             write: "assets/manifest.json",
         },
         rollupOptions: {
-            plugins: [],
+            plugins: [
+                commonjs(),
+            ],
         },
     },
     plugins: [
