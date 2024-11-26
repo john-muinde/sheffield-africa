@@ -1,67 +1,65 @@
 <template>
-    <div>
-        <main class="main">
-            <div class="page-content">
-                <div class="container">
-                    <div class="row">
+  <div>
+    <main class="main">
+      <div class="page-content">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-10 offset-lg-1">
+              <h2 class="about-us-title">
+                Gallery
+              </h2><!-- End .title -->
+              <router-link to="/media/gallery" class="btn btn-primary btn-round btn-shadow float-right">
+                <i class="icon-long-arrow-left"></i><span>Back to Gallery</span>
+              </router-link>
+              <p class="lead about-us-lead text-primary mb-1">
+                Journey Through the Lens: Our Story in Pictures
+              </p>
 
-                        <div class="col-lg-10 offset-lg-1">
+              <h2 class="text-primary text-2">
+                {{ showroom.name }}
+              </h2>
 
-                            <h2 class="about-us-title">Gallery</h2><!-- End .title -->
-                            <router-link to="/media/gallery" class="btn btn-primary btn-round btn-shadow float-right"><i class="icon-long-arrow-left"></i><span>Back to Gallery</span></router-link>
-                            <p class="lead about-us-lead text-primary mb-1">Journey Through the Lens: Our Story in Pictures</p>
+              <p class="about-us-lead"></p>
 
-                            <h2 class="text-primary text-2">{{ showroom.name }}</h2>
+              <div class="row">
+                <div class="col-lg-12 gallery_items">
+                  <div class="entry-container max-col-3">
+                    <div v-for="(image, index) in showroom.gallery_images" :key="index" class="entry-item lifestyle shopping col-sm-4">
+                      <article class="entry entry-grid text-center">
+                        <figure class="entry-media">
+                          <a href="#" @click="showMultiple(index)">
+                            <img :src="'/storage/' + image.name" :alt="showroom.name" />
+                          </a>
+                        </figure><!-- End .entry-media -->
+                      </article><!-- End .entry -->
+                    </div><!-- End .entry-item -->
 
-                            <p class="about-us-lead" ></p>
-
-                            <div class="row">
-
-                                <div class="col-lg-12 gallery_items">
-
-                                	<div  class="entry-container max-col-3">
-    					                      <div class="entry-item lifestyle shopping col-sm-4" v-for="(image, index) in showroom.gallery_images" :key="index">
-    					                          <article class="entry entry-grid text-center">
-    					                              <figure class="entry-media">
-    					                                  <a href="#" @click="showMultiple(index)">
-    					                                      <img :src="'/storage/' + image.name" :alt="showroom.name">
-    					                                  </a>
-    					                              </figure><!-- End .entry-media -->
-
-
-    					                          </article><!-- End .entry -->
-    					                      </div><!-- End .entry-item -->
-
-        					                      <!-- show images -->
-        					                      <vue-easy-lightbox
-        					                        escDisabled
-        					                        :visible="visible"
-        					                        :imgs="imgs"
-        					                        :index="indexRef"
-        					                        @hide="handleHide"
-        					                      ></vue-easy-lightbox>
-
-        					                </div>
-
-
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <!-- show images -->
+                    <vue-easy-lightbox
+                      esc-disabled
+                      :visible="visible"
+                      :imgs="imgs"
+                      :index="indexRef"
+                      @hide="handleHide"
+                    />
+                  </div>
                 </div>
+              </div>
             </div>
-        </main>
-    </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
 </template>
 
 <script setup>
 
 import { ref, computed, watch, onMounted, onUnmounted, watchEffect } from 'vue';
 
-  import { useRoute } from "vue-router";
+  import { useRoute } from 'vue-router';
 
-  import { useMeta } from "../../admin/composables/use-meta";
+  import { useMeta } from '../../admin/composables/use-meta';
   //useMeta({ title: "Showroom Details" });
 
 
@@ -75,7 +73,7 @@ import { ref, computed, watch, onMounted, onUnmounted, watchEffect } from 'vue';
 
 
 
-   import VueEasyLightbox from 'vue-easy-lightbox'
+   import VueEasyLightbox from 'vue-easy-lightbox';
 
 
 
@@ -102,7 +100,7 @@ import { ref, computed, watch, onMounted, onUnmounted, watchEffect } from 'vue';
 
 
   const showMultiple = async (index) => {
-    imgs.value = showroom.value.gallery_images.map(item => rootUrl + "/storage/" +item.name);
+    imgs.value = showroom.value.gallery_images.map(item => rootUrl + '/storage/' +item.name);
     show(index);
   };
 
@@ -177,13 +175,13 @@ import { ref, computed, watch, onMounted, onUnmounted, watchEffect } from 'vue';
   const adjustTheClass1Height = () => {
     const carouselHeight = this.$refs.carousel.$el.offsetHeight;
     this.$refs.carousel.$el.closest('.theClass1-wrapper').style.height = carouselHeight + 'px';
-  }
+  };
 
   watchEffect(() => {
     const params = route.params; // Access the route parameters
     const query = route.query; // Access the query parameters
 
-    if( params.id !== "" && showroom_id.value !== params.id ){
+    if( params.id !== '' && showroom_id.value !== params.id ){
 
         showroom_id.value = params.id ? parseInt(params.id) : 1;
 

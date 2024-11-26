@@ -1,11 +1,11 @@
-import { createRouter, createWebHistory } from "vue-router";
-import routes from "./routes.js";
-import store from "../store";
+import { createRouter, createWebHistory } from 'vue-router';
+import routes from './routes.js';
+import store from '../store';
 
 const router = createRouter({
     mode: 'history',
     history: createWebHistory(),
-    linkExactActiveClass: "active",
+    linkExactActiveClass: 'active',
     routes,
     scrollBehavior(to, from, savedPosition) {
         if (savedPosition) {
@@ -17,12 +17,12 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-    if (to.meta && to.meta.layout && to.meta.layout === "auth") {
-        store.commit("setLayout", "auth");
-    } else if (to.meta && to.meta.layout && to.meta.layout === "frontend") {
-        store.commit("setLayout", "frontend");
+    if (to.meta && to.meta.layout && to.meta.layout === 'auth') {
+        store.commit('setLayout', 'auth');
+    } else if (to.meta && to.meta.layout && to.meta.layout === 'frontend') {
+        store.commit('setLayout', 'frontend');
     } else {
-        store.commit("setLayout", "app");
+        store.commit('setLayout', 'app');
     }
     next(true);
 });

@@ -5,7 +5,9 @@
       style="background-image: url('assets/images/page-header-bg.jpg')"
     >
       <div class="container">
-        <h1 class="page-title">About us<span>Pages</span></h1>
+        <h1 class="page-title">
+          About us<span>Pages</span>
+        </h1>
       </div>
       <!-- End .container -->
     </div>
@@ -13,9 +15,15 @@
     <nav aria-label="breadcrumb" class="breadcrumb-nav">
       <div class="container">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="/">Home</a></li>
-          <li class="breadcrumb-item"><a href="#">Pages</a></li>
-          <li class="breadcrumb-item active" aria-current="page">About us</li>
+          <li class="breadcrumb-item">
+            <a href="/">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="#">Pages</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            About us
+          </li>
         </ol>
       </div>
       <!-- End .container -->
@@ -31,8 +39,12 @@
           <div class="col-lg-10 offset-lg-1">
             <div class="about-text mt-3">
               <div class="headings">
-                <h4 class="sub-heading">Welcome to Sheffield showrooms</h4>
-                <h3 class="heading text-primary">Our Showrooms</h3>
+                <h4 class="sub-heading">
+                  Welcome to Sheffield showrooms
+                </h4>
+                <h3 class="heading text-primary">
+                  Our Showrooms
+                </h3>
               </div>
               <!-- End .title text-center mb-2 -->
               <p>
@@ -74,7 +86,9 @@
                     <i class="icon-rocket"></i>
                   </span>
                   <div class="icon-box-content">
-                    <h3 class="icon-box-title">Shipping</h3>
+                    <h3 class="icon-box-title">
+                      Shipping
+                    </h3>
                     <!-- End .icon-box-title -->
                     <p>Choose your prefferd shipping method</p>
                   </div>
@@ -91,7 +105,9 @@
                   </span>
 
                   <div class="icon-box-content">
-                    <h3 class="icon-box-title">30 Days Return</h3>
+                    <h3 class="icon-box-title">
+                      30 Days Return
+                    </h3>
                     <!-- End .icon-box-title -->
                     <p>Simply return it within 30 days for an exchange</p>
                   </div>
@@ -108,7 +124,9 @@
                   </span>
 
                   <div class="icon-box-content">
-                    <h3 class="icon-box-title">Payment Secure</h3>
+                    <h3 class="icon-box-title">
+                      Payment Secure
+                    </h3>
                     <!-- End .icon-box-title -->
                     <p>Contact us 24 hours a day, 7 days a week</p>
                   </div>
@@ -125,7 +143,9 @@
                   </span>
 
                   <div class="icon-box-content">
-                    <h3 class="icon-box-title">24X7 Support</h3>
+                    <h3 class="icon-box-title">
+                      24X7 Support
+                    </h3>
                     <!-- End .icon-box-title -->
                     <p>Contact us 24 hours a day, 7 days a week</p>
                   </div>
@@ -161,11 +181,12 @@
                     data-to="40"
                     data-speed="3000"
                     data-refresh-interval="50"
-                    >0</span
-                  >k+
+                  >0</span>k+
                 </div>
                 <!-- End .count-wrapper -->
-                <h3 class="count-title text-white">Happy Customer</h3>
+                <h3 class="count-title text-white">
+                  Happy Customer
+                </h3>
                 <!-- End .count-title -->
               </div>
               <!-- End .count-container -->
@@ -181,11 +202,12 @@
                     data-to="20"
                     data-speed="3000"
                     data-refresh-interval="50"
-                    >0</span
-                  >+
+                  >0</span>+
                 </div>
                 <!-- End .count-wrapper -->
-                <h3 class="count-title text-white">Years in Business</h3>
+                <h3 class="count-title text-white">
+                  Years in Business
+                </h3>
                 <!-- End .count-title -->
               </div>
               <!-- End .count-container -->
@@ -201,11 +223,12 @@
                     data-to="95"
                     data-speed="3000"
                     data-refresh-interval="50"
-                    >0</span
-                  >%
+                  >0</span>%
                 </div>
                 <!-- End .count-wrapper -->
-                <h3 class="count-title text-white">Return Clients</h3>
+                <h3 class="count-title text-white">
+                  Return Clients
+                </h3>
                 <!-- End .count-title -->
               </div>
               <!-- End .count-container -->
@@ -221,11 +244,12 @@
                     data-to="15"
                     data-speed="3000"
                     data-refresh-interval="50"
-                    >0</span
-                  >
+                  >0</span>
                 </div>
                 <!-- End .count-wrapper -->
-                <h3 class="count-title text-white">Awards Won</h3>
+                <h3 class="count-title text-white">
+                  Awards Won
+                </h3>
                 <!-- End .count-title -->
               </div>
               <!-- End .count-container -->
@@ -240,7 +264,9 @@
 
       <div class="bg-light-2 pt-6 pb-7 mb-6">
         <div class="container">
-          <h2 class="title text-center mb-4">Meet Our Team</h2>
+          <h2 class="title text-center mb-4">
+            Meet Our Team
+          </h2>
           <!-- End .title text-center mb-2 -->
 
           <div class="row">
@@ -259,22 +285,19 @@
                         class="social-icon"
                         title="Facebook"
                         target="_blank"
-                        ><i class="icon-facebook-f"></i
-                      ></a>
+                      ><i class="icon-facebook-f"></i></a>
                       <a
                         href="#"
                         class="social-icon"
                         title="Twitter"
                         target="_blank"
-                        ><i class="icon-twitter"></i
-                      ></a>
+                      ><i class="icon-twitter"></i></a>
                       <a
                         href="#"
                         class="social-icon"
                         title="Instagram"
                         target="_blank"
-                        ><i class="icon-instagram"></i
-                      ></a>
+                      ><i class="icon-instagram"></i></a>
                     </div>
                     <!-- End .soial-icons -->
                   </figcaption>
@@ -308,22 +331,19 @@
                         class="social-icon"
                         title="Facebook"
                         target="_blank"
-                        ><i class="icon-facebook-f"></i
-                      ></a>
+                      ><i class="icon-facebook-f"></i></a>
                       <a
                         href="#"
                         class="social-icon"
                         title="Twitter"
                         target="_blank"
-                        ><i class="icon-twitter"></i
-                      ></a>
+                      ><i class="icon-twitter"></i></a>
                       <a
                         href="#"
                         class="social-icon"
                         title="Instagram"
                         target="_blank"
-                        ><i class="icon-instagram"></i
-                      ></a>
+                      ><i class="icon-instagram"></i></a>
                     </div>
                     <!-- End .soial-icons -->
                   </figcaption>
@@ -357,22 +377,19 @@
                         class="social-icon"
                         title="Facebook"
                         target="_blank"
-                        ><i class="icon-facebook-f"></i
-                      ></a>
+                      ><i class="icon-facebook-f"></i></a>
                       <a
                         href="#"
                         class="social-icon"
                         title="Twitter"
                         target="_blank"
-                        ><i class="icon-twitter"></i
-                      ></a>
+                      ><i class="icon-twitter"></i></a>
                       <a
                         href="#"
                         class="social-icon"
                         title="Instagram"
                         target="_blank"
-                        ><i class="icon-instagram"></i
-                      ></a>
+                      ><i class="icon-instagram"></i></a>
                     </div>
                     <!-- End .soial-icons -->
                   </figcaption>
@@ -406,22 +423,19 @@
                         class="social-icon"
                         title="Facebook"
                         target="_blank"
-                        ><i class="icon-facebook-f"></i
-                      ></a>
+                      ><i class="icon-facebook-f"></i></a>
                       <a
                         href="#"
                         class="social-icon"
                         title="Twitter"
                         target="_blank"
-                        ><i class="icon-twitter"></i
-                      ></a>
+                      ><i class="icon-twitter"></i></a>
                       <a
                         href="#"
                         class="social-icon"
                         title="Instagram"
                         target="_blank"
-                        ><i class="icon-instagram"></i
-                      ></a>
+                      ><i class="icon-instagram"></i></a>
                     </div>
                     <!-- End .soial-icons -->
                   </figcaption>
@@ -455,22 +469,19 @@
                         class="social-icon"
                         title="Facebook"
                         target="_blank"
-                        ><i class="icon-facebook-f"></i
-                      ></a>
+                      ><i class="icon-facebook-f"></i></a>
                       <a
                         href="#"
                         class="social-icon"
                         title="Twitter"
                         target="_blank"
-                        ><i class="icon-twitter"></i
-                      ></a>
+                      ><i class="icon-twitter"></i></a>
                       <a
                         href="#"
                         class="social-icon"
                         title="Instagram"
                         target="_blank"
-                        ><i class="icon-instagram"></i
-                      ></a>
+                      ><i class="icon-instagram"></i></a>
                     </div>
                     <!-- End .soial-icons -->
                   </figcaption>
@@ -504,22 +515,19 @@
                         class="social-icon"
                         title="Facebook"
                         target="_blank"
-                        ><i class="icon-facebook-f"></i
-                      ></a>
+                      ><i class="icon-facebook-f"></i></a>
                       <a
                         href="#"
                         class="social-icon"
                         title="Twitter"
                         target="_blank"
-                        ><i class="icon-twitter"></i
-                      ></a>
+                      ><i class="icon-twitter"></i></a>
                       <a
                         href="#"
                         class="social-icon"
                         title="Instagram"
                         target="_blank"
-                        ><i class="icon-instagram"></i
-                      ></a>
+                      ><i class="icon-instagram"></i></a>
                     </div>
                     <!-- End .soial-icons -->
                   </figcaption>
@@ -553,22 +561,19 @@
                         class="social-icon"
                         title="Facebook"
                         target="_blank"
-                        ><i class="icon-facebook-f"></i
-                      ></a>
+                      ><i class="icon-facebook-f"></i></a>
                       <a
                         href="#"
                         class="social-icon"
                         title="Twitter"
                         target="_blank"
-                        ><i class="icon-twitter"></i
-                      ></a>
+                      ><i class="icon-twitter"></i></a>
                       <a
                         href="#"
                         class="social-icon"
                         title="Instagram"
                         target="_blank"
-                        ><i class="icon-instagram"></i
-                      ></a>
+                      ><i class="icon-instagram"></i></a>
                     </div>
                     <!-- End .soial-icons -->
                   </figcaption>
@@ -602,22 +607,19 @@
                         class="social-icon"
                         title="Facebook"
                         target="_blank"
-                        ><i class="icon-facebook-f"></i
-                      ></a>
+                      ><i class="icon-facebook-f"></i></a>
                       <a
                         href="#"
                         class="social-icon"
                         title="Twitter"
                         target="_blank"
-                        ><i class="icon-twitter"></i
-                      ></a>
+                      ><i class="icon-twitter"></i></a>
                       <a
                         href="#"
                         class="social-icon"
                         title="Instagram"
                         target="_blank"
-                        ><i class="icon-instagram"></i
-                      ></a>
+                      ><i class="icon-instagram"></i></a>
                     </div>
                     <!-- End .soial-icons -->
                   </figcaption>

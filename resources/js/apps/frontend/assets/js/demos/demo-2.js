@@ -14,7 +14,7 @@ $(document).ready(function () {
 			    format: 'HMS',
 			    padZeroes: true,
 			    labels: ['years', 'months', 'weeks', 'days', 'hrs', 'mins', 'secs'],
-			    labels1: ['year', 'month', 'week', 'day', 'hr', 'min', 'sec']
+			    labels1: ['year', 'month', 'week', 'day', 'hr', 'min', 'sec'],
 			});
 		});
 

@@ -1,13 +1,13 @@
-import { notification } from "ant-design-vue";
+import { notification } from 'ant-design-vue';
 
-const showToast = (description, type = "success", message = "Success") => {
-    if (!message || message.length == 0 || type != "success") {
+const showToast = (description, type = 'success', message = 'Success') => {
+    if (!message || message.length == 0 || type != 'success') {
         message = type.substring(0, 1).toUpperCase() + type.substring(1);
     }
     notification[type]({
         message,
         description,
-        placement: "topRight",
+        placement: 'topRight',
         duration: 3, // Duration in seconds
     });
 };

@@ -1,21 +1,21 @@
-import { ref, inject } from "vue";
-import { useRouter } from "vue-router";
-import store from "../store";
-import axiosInstance from "../axiosInstance";
+import { ref, inject } from 'vue';
+import { useRouter } from 'vue-router';
+import store from '../store';
+import axiosInstance from '../axiosInstance';
 
 export default function useProfile() {
     const profile = ref({
-        name: "",
-        email: "",
+        name: '',
+        email: '',
     });
 
     const router = useRouter();
     const validationErrors = ref({});
     const isLoading = ref(false);
-    const swal = inject("$swal");
+    const swal = inject('$swal');
 
     const getProfile = async () => {
-        profile.value = store.getters["auth/user"];
+        profile.value = store.getters['auth/user'];
     };
 
     const updateProfile = async (profile) => {
@@ -25,14 +25,14 @@ export default function useProfile() {
         validationErrors.value = {};
 
         axiosInstance
-            .put("/api/user", profile)
+            .put('/api/user', profile)
             .then(({ data }) => {
                 if (data.success) {
-                    store.commit("auth/SET_USER", data.data);
+                    store.commit('auth/SET_USER', data.data);
                     // router.push({name: 'profile.index'})
                     swal({
-                        icon: "success",
-                        title: "Profile updated successfully",
+                        icon: 'success',
+                        title: 'Profile updated successfully',
                     });
                 }
             })

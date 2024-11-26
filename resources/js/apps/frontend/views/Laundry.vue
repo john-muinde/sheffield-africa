@@ -1,77 +1,82 @@
 <script></script>
 
-<style></style>
-
 <template>
-    <div class="page-wrapper">
-        <main class="main">
-            <div class="container" style="margin-top: 1px">
-                <div class="row cat-banner-row">
-                    <div class="col-xl-2 col-xxl-2 slide-from-right">
-                        <div class="cat-banner row no-gutters">
-                            <div class="col-sm-12 col-xl-12 col-xxl-12">
-                                <div class="banner banner-overlay solution-image">
-                                    <a href="#">
-                                        <img src="../assets/images/homepage/laundry_page.jpg" alt="Banner img desc" />
-                                    </a>
+  <div class="page-wrapper">
+    <main class="main">
+      <div class="container" style="margin-top: 1px">
+        <div class="row cat-banner-row">
+          <div class="col-xl-2 col-xxl-2 slide-from-right">
+            <div class="cat-banner row no-gutters">
+              <div class="col-sm-12 col-xl-12 col-xxl-12">
+                <div class="banner banner-overlay solution-image">
+                  <a href="#">
+                    <img src="../assets/images/homepage/laundry_page.jpg" alt="Banner img desc" />
+                  </a>
 
-                                    <!-- <div class="banner-content">
+                  <!-- <div class="banner-content">
                                 <h4 class="banner-subtitle text-white"><a href="#">Best Deals</a></h4>
                                 <h4 class="banner-title text-white"><a href="#">Commercial <br>Laundry
                                 </a></h4>
                                 <a href="#" class="banner-link">Shop Now <i class="icon-long-arrow-right"></i></a>
                             </div> -->
-                                </div>
-                                <!-- End .banner -->
-                            </div>
-                            <!-- End .col-sm-6 -->
-                        </div>
-                        <!-- End .cat-banner -->
-                    </div>
-                    <!-- End .col-xl-3 -->
-
-                    <div class="col-xl-10 col-xxl-10 mt-1 slide-from-left">
-                        <div class="row">
-                            <div class="col-md-2 col-sm-4 slide-solutions" v-for="solution in mainSolutions"
-                                :key="solution.id">
-                                <router-link class="cat-block" :to="getSolutionLink(
-                                    solution.id,
-                                    solution.name
-                                )
-                                    ">
-                                    <figure>
-                                        <span>
-                                            <img :src="'/storage/' +
-                                                solution.main_image_path
-                                                " alt="Category image" />
-                                        </span>
-                                    </figure>
-
-                                    <h3 class="cat-block-title">
-                                        {{ solution.name }}
-                                    </h3>
-                                    <!-- End .cat-block-title -->
-                                </router-link>
-                            </div>
-
-                            <!-- End .col-sm-4 col-lg-2 -->
-                        </div>
-                    </div>
-                    <!-- End .col-xl-9 -->
                 </div>
-                <!-- End .row cat-banner-row -->
+                <!-- End .banner -->
+              </div>
+              <!-- End .col-sm-6 -->
             </div>
-            <!-- End .container -->
+            <!-- End .cat-banner -->
+          </div>
+          <!-- End .col-xl-3 -->
 
+          <div class="col-xl-10 col-xxl-10 mt-1 slide-from-left">
+            <div class="row">
+              <div
+                v-for="solution in mainSolutions"
+                :key="solution.id"
+                class="col-md-2 col-sm-4 slide-solutions"
+              >
+                <router-link
+                  class="cat-block"
+                  :to="getSolutionLink(
+                    solution.id,
+                    solution.name
+                  )
+                  "
+                >
+                  <figure>
+                    <span>
+                      <img
+                        :src="'/storage/' +
+                          solution.main_image_path
+                        "
+                        alt="Category image"
+                      />
+                    </span>
+                  </figure>
 
-        </main>
-        <!-- End .main -->
-    </div>
-    <!-- End .page-wrapper -->
-    <button id="scroll-top" title="Back to Top">
-        <i class="icon-arrow-up"></i>
-    </button>
-    <!-- <div
+                  <h3 class="cat-block-title">
+                    {{ solution.name }}
+                  </h3>
+                  <!-- End .cat-block-title -->
+                </router-link>
+              </div>
+
+              <!-- End .col-sm-4 col-lg-2 -->
+            </div>
+          </div>
+          <!-- End .col-xl-9 -->
+        </div>
+        <!-- End .row cat-banner-row -->
+      </div>
+      <!-- End .container -->
+    </main>
+    <!-- End .main -->
+  </div>
+  <!-- End .page-wrapper -->
+  <button id="scroll-top" title="Back to Top">
+    <i class="icon-arrow-up"></i>
+  </button>
+  <!-- <div
     class="container newsletter-popup-container mfp-hide"
     id="newsletter-popup-form"
   >
@@ -138,27 +143,27 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted, reactive, nextTick, watch } from "vue";
-import { Carousel, Navigation, Slide, Pagination } from "vue3-carousel";
-import { useMeta } from "../../admin/composables/use-meta";
+import { ref, onMounted, onUnmounted, reactive, nextTick, watch } from 'vue';
+import { Carousel, Navigation, Slide, Pagination } from 'vue3-carousel';
+import { useMeta } from '../../admin/composables/use-meta';
 
 useMeta({
-    title: "Laundry and floor cleaning equipment",
-    description: "We offer state of the art commercial laundry equipment for laundromats at Sheffield africa Ltd",
-    keywords: "Laundry washer, commercial laundry equipment, commercial laundry machines in kenya, commercial laundry machines for sale in kenya, laundromats in nairobi"
+    title: 'Laundry and floor cleaning equipment',
+    description: 'We offer state of the art commercial laundry equipment for laundromats at Sheffield africa Ltd',
+    keywords: 'Laundry washer, commercial laundry equipment, commercial laundry machines in kenya, commercial laundry machines for sale in kenya, laundromats in nairobi',
 });
 
-const name = "ExamplePagination";
+const name = 'ExamplePagination';
 
 const scriptUrl = import.meta.url;
-const basePathVite = scriptUrl.substring(0, scriptUrl.lastIndexOf("/") + 1); //vite base path
+const basePathVite = scriptUrl.substring(0, scriptUrl.lastIndexOf('/') + 1); //vite base path
 const basePath = window.location.origin + window.location.pathname; //laravel base path
 
 const categories = reactive([]);
 
 const fetchCategories = () => {
     axios
-        .get("/api/get-sidebar-categories")
+        .get('/api/get-sidebar-categories')
         .then((response) => {
             categories.splice(
                 0,
@@ -168,7 +173,7 @@ const fetchCategories = () => {
                         id: category.id,
                         name: `${category.name}`,
                         columns: 3,
-                        slug: category.name.toLowerCase().replace(/\s+/g, "-"),
+                        slug: category.name.toLowerCase().replace(/\s+/g, '-'),
                         subcategories: [
                             {
                                 id: 1, // You can assign any unique ID for the subcategory
@@ -179,17 +184,17 @@ const fetchCategories = () => {
                                         name: child.name,
                                         slug: child.name
                                             .toLowerCase()
-                                            .replace(/\s+/g, "-"),
+                                            .replace(/\s+/g, '-'),
                                     };
                                 }),
                             },
                         ],
                     };
-                })
+                }),
             );
         })
         .catch((error) => {
-            console.error("Failed to fetch categories:", error);
+            console.error('Failed to fetch categories:', error);
         });
 };
 
@@ -202,7 +207,7 @@ const showrooms = ref([]);
 // Fetch products based on the current page
 const fetchShowrooms = async () => {
     try {
-        const response = await axios.get("/api/get-showrooms", {});
+        const response = await axios.get('/api/get-showrooms', {});
         showrooms.value = response.data;
     } catch (error) {
         console.error(error);
@@ -214,7 +219,7 @@ const mainSolutions = ref([]);
 
 const fetchMainSolutions = async () => {
     try {
-        const response = await axios.get("/api/get-solutions/247", {});
+        const response = await axios.get('/api/get-solutions/247', {});
         mainSolutions.value = response.data.data;
     } catch (error) {
         console.error(error);
@@ -222,9 +227,9 @@ const fetchMainSolutions = async () => {
 };
 
 const getShowroomLink = (id, name) => {
-    let transformedName = name.replace(/ /g, "-");
-    transformedName = transformedName.replace(/-+/g, "-");
-    transformedName = transformedName.replace(/^-+|-+$/g, "");
+    let transformedName = name.replace(/ /g, '-');
+    transformedName = transformedName.replace(/-+/g, '-');
+    transformedName = transformedName.replace(/^-+|-+$/g, '');
     transformedName = transformedName.toLowerCase();
 
     return `/showroom/${id}/${transformedName}`;
@@ -236,7 +241,7 @@ const productsLaundry = ref([]);
 
 const fetchFeaturedProducts = async () => {
     try {
-        const response = await axios.get("/api/get-featured-products", {});
+        const response = await axios.get('/api/get-featured-products', {});
 
         productsColdroom.value = response.data.products_coldroom;
         productsKitchen.value = response.data.products_kitchen;
@@ -248,30 +253,30 @@ const fetchFeaturedProducts = async () => {
 
 const getProductLink = (id, name, model_number) => {
     // Replace spaces with dashes
-    let transformedName = name.replace(/ /g, "-").replace(/\//g, "-");
+    let transformedName = name.replace(/ /g, '-').replace(/\//g, '-');
     // Remove consecutive dashes
-    transformedName = transformedName.replace(/-+/g, "-");
+    transformedName = transformedName.replace(/-+/g, '-');
     // Remove leading and trailing dashes
-    transformedName = transformedName.replace(/^-+|-+$/g, "");
+    transformedName = transformedName.replace(/^-+|-+$/g, '');
     // Convert to lowercase
     transformedName = transformedName.toLowerCase();
 
     let transformedModelNumber = model_number
         .toLowerCase()
-        .replace(/ /g, "-")
-        .replace(/\//g, "-");
+        .replace(/ /g, '-')
+        .replace(/\//g, '-');
     // Remove consecutive dashes
-    transformedModelNumber = transformedModelNumber.replace(/-+/g, "-");
+    transformedModelNumber = transformedModelNumber.replace(/-+/g, '-');
     // Remove leading and trailing dashes
-    transformedModelNumber = transformedModelNumber.replace(/^-+|-+$/g, "");
+    transformedModelNumber = transformedModelNumber.replace(/^-+|-+$/g, '');
 
     return `/product/${id}/${transformedName}-${transformedModelNumber}`;
 };
 
 const getSolutionLink = (id, name) => {
-    let transformedName = name.replace(/ /g, "-").replace(/\//g, "-");
-    transformedName = transformedName.replace(/-+/g, "-");
-    transformedName = transformedName.replace(/^-+|-+$/g, "");
+    let transformedName = name.replace(/ /g, '-').replace(/\//g, '-');
+    transformedName = transformedName.replace(/-+/g, '-');
+    transformedName = transformedName.replace(/^-+|-+$/g, '');
     transformedName = transformedName.toLowerCase();
 
     return `/laundry/solutions/${id}/${transformedName}`;
@@ -284,6 +289,8 @@ onMounted(async () => {
     await nextTick();
 });
 </script>
+
+<style></style>
 
 <style>
 .cat-banner-row .carousel__prev {

@@ -1,44 +1,44 @@
-import { ref, inject } from "vue";
-import { useRouter } from "vue-router";
-import axiosInstance from "../axiosInstance";
+import { ref, inject } from 'vue';
+import { useRouter } from 'vue-router';
+import axiosInstance from '../axiosInstance';
 
 export default function useTestimonials() {
     const testimonials = ref([]);
     const testimonialList = ref([]);
     const testimonial = ref({
-        name: "",
+        name: '',
         // main_image: "",
-        is_published: "",
-        description: "",
+        is_published: '',
+        description: '',
     });
 
     const router = useRouter();
     const validationErrors = ref({});
     const isLoading = ref(false);
-    const swal = inject("$swal");
+    const swal = inject('$swal');
 
     const getTestimonials = async (
         page = 1,
-        search_id = "",
-        search_title = "",
-        search_global = "",
-        order_column = "created_at",
-        order_direction = "desc"
+        search_id = '',
+        search_title = '',
+        search_global = '',
+        order_column = 'created_at',
+        order_direction = 'desc',
     ) => {
         axiosInstance
             .get(
-                "/api/testimonials?page=" +
+                '/api/testimonials?page=' +
                     page +
-                    "&search_id=" +
+                    '&search_id=' +
                     search_id +
-                    "&search_title=" +
+                    '&search_title=' +
                     search_title +
-                    "&search_global=" +
+                    '&search_global=' +
                     search_global +
-                    "&order_column=" +
+                    '&order_column=' +
                     order_column +
-                    "&order_direction=" +
-                    order_direction
+                    '&order_direction=' +
+                    order_direction,
             )
             .then((response) => {
                 testimonials.value = response.data;
@@ -46,7 +46,7 @@ export default function useTestimonials() {
     };
 
     const getTestimonial = async (id) => {
-        axiosInstance.get("/api/testimonials/" + id).then((response) => {
+        axiosInstance.get('/api/testimonials/' + id).then((response) => {
             testimonial.value = response.data.data;
         });
     };
@@ -67,15 +67,15 @@ export default function useTestimonials() {
         }
 
         const config = {
-            headers: { "content-type": "multipart/form-data" },
+            headers: { 'content-type': 'multipart/form-data' },
         };
 
         console.log(serializedPost);
 
         axiosInstance
-            .post("/api/testimonials", serializedPost, config)
+            .post('/api/testimonials', serializedPost, config)
             .then((response) => {
-                router.push({ name: "testimonials.create" });
+                router.push({ name: 'testimonials.create' });
                 // Reset the form values
                 testimonial.name = null;
                 testimonial.website = null;
@@ -85,8 +85,8 @@ export default function useTestimonials() {
                 testimonial.main_image = null;
                 testimonial.is_published = null;
                 swal({
-                    icon: "success",
-                    title: "Testimonial saved successfully",
+                    icon: 'success',
+                    title: 'Testimonial saved successfully',
                 });
             })
             .catch((error) => {
@@ -113,18 +113,18 @@ export default function useTestimonials() {
         }
 
         const config = {
-            headers: { "content-type": "multipart/form-data" },
+            headers: { 'content-type': 'multipart/form-data' },
         };
 
         console.log(serializedPost);
 
         axiosInstance
-            .put("/api/testimonials/" + testimonial.id, testimonial)
+            .put('/api/testimonials/' + testimonial.id, testimonial)
             .then((response) => {
-                router.push({ name: "testimonials.index" });
+                router.push({ name: 'testimonials.index' });
                 swal({
-                    icon: "success",
-                    title: "Testimonial updated successfully",
+                    icon: 'success',
+                    title: 'Testimonial updated successfully',
                 });
             })
             .catch((error) => {
@@ -137,31 +137,31 @@ export default function useTestimonials() {
 
     const deleteTestimonial = async (id) => {
         swal({
-            title: "Are you sure?",
-            text: "You won't be able to revert this action!",
-            icon: "warning",
+            title: 'Are you sure?',
+            text: 'You won\'t be able to revert this action!',
+            icon: 'warning',
             showCancelButton: true,
-            confirmButtonText: "Yes, delete it!",
-            confirmButtonColor: "#ef4444",
+            confirmButtonText: 'Yes, delete it!',
+            confirmButtonColor: '#ef4444',
             timer: 20000,
             timerProgressBar: true,
             reverseButtons: true,
         }).then((result) => {
             if (result.isConfirmed) {
                 axiosInstance
-                    .delete("/api/testimonials/" + id)
+                    .delete('/api/testimonials/' + id)
                     .then((response) => {
                         getTestimonials();
-                        router.push({ name: "testimonials.index" });
+                        router.push({ name: 'testimonials.index' });
                         swal({
-                            icon: "success",
-                            title: "Testimonial deleted successfully",
+                            icon: 'success',
+                            title: 'Testimonial deleted successfully',
                         });
                     })
                     .catch((error) => {
                         swal({
-                            icon: "error",
-                            title: "Something went wrong",
+                            icon: 'error',
+                            title: 'Something went wrong',
                         });
                     });
             }
@@ -169,7 +169,7 @@ export default function useTestimonials() {
     };
 
     const getTestimonialList = async () => {
-        axiosInstance.get("/api/testimonial-list").then((response) => {
+        axiosInstance.get('/api/testimonial-list').then((response) => {
             testimonialList.value = response.data.data;
         });
     };

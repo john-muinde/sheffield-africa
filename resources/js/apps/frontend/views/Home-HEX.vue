@@ -1,13 +1,8 @@
 <script></script>
 
-<style></style>
-
 <template>
-
-
-
   <header class="header header-6 header-transparent">
-            <!-- <div class="header-top">
+    <!-- <div class="header-top">
                 <div class="container">
                     <div class="header-left">
                         <ul class="top-menu top-link-menu d-none d-md-block">
@@ -50,51 +45,70 @@
                     </div>
                 </div>
             </div> -->
-            <div class="header-middle mt-2">
-                <div class="container">
-                    <div class="header-left">
-                        <div class="header-search header-search-extended header-search-visible d-none d-lg-block">
-                            <a href="#" class="search-toggle" role="button"><i class="icon-search"></i></a>
-                            <form action="#" method="get">
-                                <div class="header-search-wrapper search-wrapper-wide searchListMainDiv">
-                                    <label for="q" class="sr-only">Search</label>
-                                    <button class="btn btn-primary" type="submit"><i class="icon-search"></i></button>
-                                    <input type="search" v-model="query" @input="search" class="form-control" name="q" id="q" autocomplete="off" placeholder="Search product ..." required="">
-                                    <ul v-if="showResults" class="">
-                                      <li v-for="result in results" :key="result.id">
-                                        <router-link :to="getProductLink(result.id, result.name, result.model_number, result.categories_json[0].parent_name_with_slashes)" >
-                                          <img style="display:inline;" width="28" :src="'/storage/' + result.main_image_path" class="rounded profile-img" alt="" />
-                                          {{ result.name }}
-                                        </router-link>
-                                      </li>
-                                    </ul>
-                                </div><!-- End .header-search-wrapper -->
-                            </form>
-                        </div><!-- End .header-search -->
-                    </div>
-                    <div class="header-center">
-                        <router-link to="/" class="logo"
-                      >
-                        <img
-                          src="../assets/images/logo.png"
-                          alt="Sheffield Logo"
-                          width="285"
-                          height="auto"
-                        />
-                      </router-link>
-                    </div><!-- End .header-left -->
+    <div class="header-middle mt-2">
+      <div class="container">
+        <div class="header-left">
+          <div class="header-search header-search-extended header-search-visible d-none d-lg-block">
+            <a href="#" class="search-toggle" role="button"><i class="icon-search"></i></a>
+            <form action="#" method="get">
+              <div class="header-search-wrapper search-wrapper-wide searchListMainDiv">
+                <label for="q" class="sr-only">Search</label>
+                <button class="btn btn-primary" type="submit">
+                  <i class="icon-search"></i>
+                </button>
+                <input
+                  id="q"
+                  v-model="query"
+                  type="search"
+                  class="form-control"
+                  name="q"
+                  autocomplete="off"
+                  placeholder="Search product ..."
+                  required=""
+                  @input="search"
+                />
+                <ul v-if="showResults" class="">
+                  <li v-for="result in results" :key="result.id">
+                    <router-link :to="getProductLink(result.id, result.name, result.model_number, result.categories_json[0].parent_name_with_slashes)">
+                      <img
+                        style="display:inline;"
+                        width="28"
+                        :src="'/storage/' + result.main_image_path"
+                        class="rounded profile-img"
+                        alt=""
+                      />
+                      {{ result.name }}
+                    </router-link>
+                  </li>
+                </ul>
+              </div><!-- End .header-search-wrapper -->
+            </form>
+          </div><!-- End .header-search -->
+        </div>
+        <div class="header-center">
+          <router-link
+            to="/"
+            class="logo"
+          >
+            <img
+              src="../assets/images/logo.png"
+              alt="Sheffield Logo"
+              width="285"
+              height="auto"
+            />
+          </router-link>
+        </div><!-- End .header-left -->
 
-                    <div class="header-right">
-                        <!-- <a class="header_phone" href="tel:+254713777111">+254 713 777 111</a> -->
-                        <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="icon-telegram-plane" style="font-size: 40px;"></i> Contact Us</a>
-                    </div>
-                </div><!-- End .container -->
-            </div><!-- End .header-middle -->
+        <div class="header-right">
+          <!-- <a class="header_phone" href="tel:+254713777111">+254 713 777 111</a> -->
+          <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="icon-telegram-plane" style="font-size: 40px;"></i> Contact Us</a>
+        </div>
+      </div><!-- End .container -->
+    </div><!-- End .header-middle -->
+  </header>
 
-        </header>
 
-
-<!-- <div class="video-container">
+  <!-- <div class="video-container">
   <video autoplay="" muted="" loop="" id="myVideo">
       <source src="/assets/videos/sheffield_website_video.mp4" type="video/mp4">
     </video>
@@ -103,76 +117,95 @@
 
   <div class="page-wrapper">
     <main class="main">
-
       <div class="container">
         <div class="row justify-content-center mt-2">
+          <div class="hex-container">
+            <!-- Small hexagons -->
+            <div class="small-hex">
+              <img
+                v-if="showOverlay"
+                class=""
+                src="assets/images/tree.jpg"
+                alt="Clean Energy"
+              />
+              <video
+                id="myVideo"
+                autoplay
+                muted
+                loop
+                class="my-video"
+                @play="hideOverlay"
+              >
+                <source src="/assets/videos/tree.mp4" type="video/mp4" />
+              </video>
+            </div>
+            <div class="small-hex">
+              <img class="" src="assets/images/welding.jpg" alt="Sheffield Workshop" />
+            </div>
+            <div class="small-hex">
+              <img class="" src="assets/images/workshop_sheffield.jpg" alt="Sheffield Workshop" />
+            </div>
+            <div class="small-hex">
+              <img
+                v-if="showOverlay"
+                class=""
+                src="assets/images/oceans.jpg"
+                alt="Clean Energy"
+              />
+              <video
+                id="myVideo"
+                autoplay
+                muted
+                loop
+                class="my-video"
+                @play="hideOverlay"
+              >
+                <source src="/assets/videos/oceans.mp4" type="video/mp4" />
+              </video>
+            </div>
+            <div class="small-hex">
+              <img class="" src="assets/images/chef.jpg" alt="Commercial Kitchen" />
+            </div>
+            <div class="small-hex hex-3">
+              <img
+                v-if="showOverlay"
+                class=""
+                src="assets/images/wind_energy.jpg"
+                alt="Clean Energy"
+              />
+              <video
+                id="myVideo"
+                autoplay
+                muted
+                loop
+                class="my-video"
+                @play="hideOverlay"
+              >
+                <source src="/assets/videos/wind_energy.mp4" type="video/mp4" />
+              </video>
 
-
-
-            <div class="hex-container">
-
-              <!-- Small hexagons -->
-              <div class="small-hex">
-                <img v-if="showOverlay" class="" src="assets/images/tree.jpg" alt="Clean Energy">
-                 <video autoplay muted loop class="my-video" id="myVideo" @play="hideOverlay">
-                    <source src="/assets/videos/tree.mp4" type="video/mp4">
-                  </video>
-
-              </div>
-              <div class="small-hex">
-
-                <img class="" src="assets/images/welding.jpg" alt="Sheffield Workshop">
-
-              </div>
-              <div class="small-hex">
-
-                <img class="" src="assets/images/workshop_sheffield.jpg" alt="Sheffield Workshop">
-
-              </div>
-              <div class="small-hex">
-                 <img v-if="showOverlay" class="" src="assets/images/oceans.jpg" alt="Clean Energy">
-                 <video autoplay muted loop class="my-video" id="myVideo" @play="hideOverlay">
-                    <source src="/assets/videos/oceans.mp4" type="video/mp4">
-                  </video>
-              </div>
-              <div class="small-hex">
-
-                <img class="" src="assets/images/chef.jpg" alt="Commercial Kitchen">
-
-              </div>
-              <div class="small-hex hex-3">
-                <img v-if="showOverlay" class="" src="assets/images/wind_energy.jpg" alt="Clean Energy">
-                <video autoplay muted loop class="my-video" id="myVideo" @play="hideOverlay">
-                  <source src="/assets/videos/wind_energy.mp4" type="video/mp4">
-                </video>
-
-                <!-- <video autoplay="" muted="" loop="" id="myVideo">
+              <!-- <video autoplay="" muted="" loop="" id="myVideo">
                     <source src="/assets/videos/wind_energy.mp4" type="video/mp4">
                   </video> -->
-              </div>
-
-              <div class="hexagon hex-kitchen">
-                 <router-link to="/commercial-kitchen">
-                    <img class="" src="assets/images/homepage/commercial_kitchen.jpg" alt="Commercial Kitchen">
-                  </router-link>
-              </div>
-              <div class="hexagon hex-laundry">
-                <router-link to="/laundry">
-                  <img class="" src="assets/images/homepage/laundry.jpg" alt="Commercial Laundry">
-                </router-link>
-              </div>
-              <div class="hexagon hex-cold-storage">
-                <router-link to="/cold-storage">
-                  <img class="" src="assets/images/homepage/cold_storage.jpg" alt="Commercial Cold Room">
-                </router-link>
-              </div>
-
             </div>
 
-
-
+            <div class="hexagon hex-kitchen">
+              <router-link to="/commercial-kitchen">
+                <img class="" src="assets/images/homepage/commercial_kitchen.jpg" alt="Commercial Kitchen" />
+              </router-link>
+            </div>
+            <div class="hexagon hex-laundry">
+              <router-link to="/laundry">
+                <img class="" src="assets/images/homepage/laundry.jpg" alt="Commercial Laundry" />
+              </router-link>
+            </div>
+            <div class="hexagon hex-cold-storage">
+              <router-link to="/cold-storage">
+                <img class="" src="assets/images/homepage/cold_storage.jpg" alt="Commercial Cold Room" />
+              </router-link>
+            </div>
+          </div>
         </div>
-
       </div>
 
 
@@ -210,11 +243,6 @@
 
 
       <!-- End .container-fluid -->
-
-
-
-
-
     </main>
     <!-- End .main -->
   </div>
@@ -225,139 +253,163 @@
 
 
   <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div
+    id="exampleModal"
+    class="modal fade"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel"></h5>
+          <h5 id="exampleModalLabel" class="modal-title"></h5>
           <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
-          <button class="btn btn-primary" data-bs-dismiss="modal"><i style="font-size:20px;" class="icon-close"></i></button>
+          <button class="btn btn-primary" data-bs-dismiss="modal">
+            <i style="font-size:20px;" class="icon-close"></i>
+          </button>
         </div>
         <div class="modal-body">
           <div class="row vertical-divider align-left ml-4 mr-4" style="margin-top: 10px;margin-bottom: 10px">
             <div class="col-md-6">
+              <h3 class="text-dark">
+                Need assistance? talk to us
+              </h3>
 
-              <h3 class="text-dark">Need assistance? talk to us</h3>
-
-              <form class="mr-5 popup-form" id="contact-form" name="contact-form" action="mail.php" method="POST">
-
+              <form
+                id="contact-form"
+                class="mr-5 popup-form"
+                name="contact-form"
+                action="mail.php"
+                method="POST"
+              >
                 <!--Grid row-->
-                <div class="row" >
-
-                    <!--Grid column-->
-                    <div class="col-md-6">
-                        <div class="md-form mb-0">
-                          <label for="name" class="">Your name</label>
-                            <input type="text" id="name" name="name" class="form-control" placeholder="Enter your name here ...">
-
-                        </div>
+                <div class="row">
+                  <!--Grid column-->
+                  <div class="col-md-6">
+                    <div class="md-form mb-0">
+                      <label for="name" class="">Your name</label>
+                      <input
+                        id="name"
+                        type="text"
+                        name="name"
+                        class="form-control"
+                        placeholder="Enter your name here ..."
+                      />
                     </div>
-                    <!--Grid column-->
+                  </div>
+                  <!--Grid column-->
 
-                    <!--Grid column-->
-                    <div class="col-md-6">
-                        <div class="md-form mb-0">
-                            <label for="email" class="">Your email</label>
-                            <input type="text" id="email" name="email" class="form-control" placeholder="Enter your email here ...">
-
-                        </div>
+                  <!--Grid column-->
+                  <div class="col-md-6">
+                    <div class="md-form mb-0">
+                      <label for="email" class="">Your email</label>
+                      <input
+                        id="email"
+                        type="text"
+                        name="email"
+                        class="form-control"
+                        placeholder="Enter your email here ..."
+                      />
                     </div>
-                    <!--Grid column-->
-
+                  </div>
+                  <!--Grid column-->
                 </div>
                 <!--Grid row-->
 
                 <!--Grid row-->
                 <div class="row">
-                    <div class="col-md-12">
-                        <div class="md-form mb-0">
-                            <label for="subject" class="">Subject</label>
-                            <input type="text" id="subject" name="subject" class="form-control" placeholder="Enter your subject here ...">
-
-                        </div>
+                  <div class="col-md-12">
+                    <div class="md-form mb-0">
+                      <label for="subject" class="">Subject</label>
+                      <input
+                        id="subject"
+                        type="text"
+                        name="subject"
+                        class="form-control"
+                        placeholder="Enter your subject here ..."
+                      />
                     </div>
+                  </div>
                 </div>
                 <!--Grid row-->
 
                 <!--Grid row-->
                 <div class="row">
-
-                    <!--Grid column-->
-                    <div class="col-md-12">
-
-                        <div class="md-form">
-                            <label for="message">Your message</label>
-                            <textarea type="text" id="message" name="message" rows="2" class="form-control md-textarea" placeholder="Enter your message here ..."></textarea>
-
-                        </div>
-
+                  <!--Grid column-->
+                  <div class="col-md-12">
+                    <div class="md-form">
+                      <label for="message">Your message</label>
+                      <textarea
+                        id="message"
+                        type="text"
+                        name="message"
+                        rows="2"
+                        class="form-control md-textarea"
+                        placeholder="Enter your message here ..."
+                      ></textarea>
                     </div>
+                  </div>
                 </div>
                 <!--Grid row-->
 
 
                 <!--Grid row-->
                 <div class="row">
-
-                    <!--Grid column-->
-                    <div class="col-md-12">
-
-                        <div class="md-form">
-                            <button class="btn btn-primary">Send</button>
-
-                        </div>
-
+                  <!--Grid column-->
+                  <div class="col-md-12">
+                    <div class="md-form">
+                      <button class="btn btn-primary">
+                        Send
+                      </button>
                     </div>
+                  </div>
                 </div>
                 <!--Grid row-->
-
-            </form>
-
+              </form>
             </div>
             <div class="col-md-6">
-
               <div class="canvas-contact ml-5">
-                  <div class="canvas-map mb-30">
-                      <iframe
-                        width="90%"
-                        height="200"
-                        src="https://maps.google.com/maps?q=sheffield-steel-limited-mombasa-rd&amp;t=&amp;z=13&amp;ie=UTF8&amp;iwloc=&amp;output=embed"
-                        frameborder="0"
-                        allowfullscreen
-                      ></iframe>
-                  </div>
-                 <ul class="contact-section mt-2">
-                    <li style="font-size:20px; font-weight:500;" class="mb-3 text-dark"><i class="flaticon-pin"></i><span>
-                      Off Mombasa Road before Standard gauge railway<br>
+                <div class="canvas-map mb-30">
+                  <iframe
+                    width="90%"
+                    height="200"
+                    src="https://maps.google.com/maps?q=sheffield-steel-limited-mombasa-rd&amp;t=&amp;z=13&amp;ie=UTF8&amp;iwloc=&amp;output=embed"
+                    frameborder="0"
+                    allowfullscreen
+                  ></iframe>
+                </div>
+                <ul class="contact-section mt-2">
+                  <li style="font-size:20px; font-weight:500;" class="mb-3 text-dark">
+                    <i class="flaticon-pin"></i><span>
+                      Off Mombasa Road before Standard gauge railway<br />
                       P. O. Box 29 – 00606, Nairobi Kenya
-                    </span></li>
-                    <li class=""><i class="icon-phone" style="font-size: 35px; padding-right:15px; color: #000;"></i>
-                     <a class="text-dark" style="font-size:25px; font-weight:550;" href="tel:+254713777111">+254 713 777 111</a>
-                    </li>
-                    <li class="mb-3" ><i class="icon-envelope" style="font-size: 35px; padding-right:15px; color: #000;"></i>
-                      <a class="text-dark" style="font-size:25px; font-weight:550; color:#000;" href="mailto:info@sheffieldafrica.com">info@sheffieldafrica.com</a>
-                    </li>
-                 </ul>
-                 <ul class="social-icon">
-                     <li><a href="index.html#"><i class="fa fa-facebook"></i></a></li>
-                     <li><a href="index.html#"><i class="fa fa-twitter"></i></a></li>
-                     <li><a href="index.html#"><i class="fa fa-pinterest-p"></i></a></li>
-                     <li><a href="index.html#"><i class="fa fa-linkedin"></i></a></li>
-                 </ul>
-             </div>
-
+                    </span>
+                  </li>
+                  <li class="">
+                    <i class="icon-phone" style="font-size: 35px; padding-right:15px; color: #000;"></i>
+                    <a class="text-dark" style="font-size:25px; font-weight:550;" href="tel:+254713777111">+254 713 777 111</a>
+                  </li>
+                  <li class="mb-3">
+                    <i class="icon-envelope" style="font-size: 35px; padding-right:15px; color: #000;"></i>
+                    <a class="text-dark" style="font-size:25px; font-weight:550; color:#000;" href="mailto:info@sheffieldafrica.com">info@sheffieldafrica.com</a>
+                  </li>
+                </ul>
+                <ul class="social-icon">
+                  <li><a href="index.html#"><i class="fa fa-facebook"></i></a></li>
+                  <li><a href="index.html#"><i class="fa fa-twitter"></i></a></li>
+                  <li><a href="index.html#"><i class="fa fa-pinterest-p"></i></a></li>
+                  <li><a href="index.html#"><i class="fa fa-linkedin"></i></a></li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
-
       </div>
     </div>
   </div>
 
   <!-- Modal -->
-
-
-
 </template>
 
 <script setup>
@@ -394,11 +446,11 @@
                     return {
                       id: child.id,
                       name: child.name,
-                      slug: child.name.toLowerCase().replace(/\s+/g, '-')
+                      slug: child.name.toLowerCase().replace(/\s+/g, '-'),
                     };
-                  })
-                }
-              ]
+                  }),
+                },
+              ],
             };
 
           }));
@@ -421,40 +473,40 @@
       mobileImage: basePath + 'frontend/images/slider/slider1-mobile.jpg',
       alt: 'Commercial Kitchen Solutions',
       intro : {
-        title : "Commercial <span>Kitchen</span> <br />Solutions",
-        subtitle : "We offer the best kitchen solutions",
-        url : "#",
-      }
+        title : 'Commercial <span>Kitchen</span> <br />Solutions',
+        subtitle : 'We offer the best kitchen solutions',
+        url : '#',
+      },
     },
     {
       image: basePath + 'frontend/images/slider/slider2.webp',
       mobileImage: basePath + 'frontend/images/slider/slider2-mobile.jpg',
       alt: 'Commercial Cold Room Solutions',
       intro : {
-        title : " Commercial <span>Cold  <br />Room</span> Solutions",
-        subtitle : "We offer the best cold room solutions",
-        url : "#",
-      }
+        title : ' Commercial <span>Cold  <br />Room</span> Solutions',
+        subtitle : 'We offer the best cold room solutions',
+        url : '#',
+      },
     },
     {
       image: basePath + 'frontend/images/slider/slider1.webp',
       mobileImage: basePath + 'frontend/images/slider/slider3-mobile.jpg',
       alt: 'Commercial Laundry Solutions',
       intro : {
-        title : "Commercial <span>Laundry</span> <br /> Solutions",
-        subtitle : "We offer the best laundry solutions",
-        url : "#",
-      }
+        title : 'Commercial <span>Laundry</span> <br /> Solutions',
+        subtitle : 'We offer the best laundry solutions',
+        url : '#',
+      },
     },
     {
       image: basePath + 'frontend/images/slider/slider2.webp',
       mobileImage: basePath + 'frontend/images/slider/slider4-mobile.jpg',
       alt: 'Commercial Health Care Solutions',
       intro : {
-        title : "Commercial <span>Health <br /> Care</span> Solutions",
-        subtitle : "We offer the best health care solutions",
-        url : "#",
-      }
+        title : 'Commercial <span>Health <br /> Care</span> Solutions',
+        subtitle : 'We offer the best health care solutions',
+        url : '#',
+      },
     },
 ];
 
@@ -465,7 +517,7 @@ const testimonials = [
 
      {
       image: basePath + 'frontend/images/testimonials/user-2.jpg',
-      message: "As a professional chef, I understand the importance of having a reliable commercial kitchen. Sheffield's commercial kitchen solutions have exceeded my expectations. The equipment is durable and has improved the efficiency of my kitchen. I highly recommend Sheffield to anyone in need of commercial kitchen solutions.",
+      message: 'As a professional chef, I understand the importance of having a reliable commercial kitchen. Sheffield\'s commercial kitchen solutions have exceeded my expectations. The equipment is durable and has improved the efficiency of my kitchen. I highly recommend Sheffield to anyone in need of commercial kitchen solutions.',
       name: 'Dan Njoroge',
       company: 'Company X',
       job_title: 'Customer',
@@ -473,7 +525,7 @@ const testimonials = [
 
     {
       image: basePath + 'frontend/images/testimonials/user-1.jpg',
-      message: "I was extremely impressed with Sheffield's commercial cold room solutions. As a restaurant owner, having reliable refrigeration is crucial to the success of my business. Sheffield's team delivered and installed the cold room in a timely manner and it has been working perfectly ever since.",
+      message: 'I was extremely impressed with Sheffield\'s commercial cold room solutions. As a restaurant owner, having reliable refrigeration is crucial to the success of my business. Sheffield\'s team delivered and installed the cold room in a timely manner and it has been working perfectly ever since.',
       name: 'Dan Njoroge',
       company: 'Company X',
       job_title: 'Customer',
@@ -481,7 +533,7 @@ const testimonials = [
 
     {
       image: basePath + 'frontend/images/testimonials/user-2.jpg',
-      message: "Sheffield's commercial healthcare solutions have been a game changer for our facility. Their team helped us design and install the perfect healthcare solution that is both efficient and reliable. We can now focus on providing quality care to our patients without worrying about equipment malfunctions.",
+      message: 'Sheffield\'s commercial healthcare solutions have been a game changer for our facility. Their team helped us design and install the perfect healthcare solution that is both efficient and reliable. We can now focus on providing quality care to our patients without worrying about equipment malfunctions.',
       name: 'Dan Njoroge',
       company: 'Company X',
       job_title: 'Customer',
@@ -489,7 +541,7 @@ const testimonials = [
 
     {
       image: basePath + 'frontend/images/testimonials/user-1.jpg',
-      message: "I recently purchased a commercial laundry solution from Sheffield and I couldn't be happier with the results. The laundry solution is energy-efficient and has dramatically reduced our utility bills. The team at Sheffield were knowledgeable and professional throughout the entire process.",
+      message: 'I recently purchased a commercial laundry solution from Sheffield and I couldn\'t be happier with the results. The laundry solution is energy-efficient and has dramatically reduced our utility bills. The team at Sheffield were knowledgeable and professional throughout the entire process.',
       name: 'Dan Njoroge',
       company: 'Company X',
       job_title: 'Customer',
@@ -499,8 +551,8 @@ const testimonials = [
 const data = () => {
   return {
     //isDesktop: window.innerWidth >= 768
-  }
-}
+  };
+};
 
 const isDesktop = ref(window.innerWidth >= 768);
 
@@ -564,13 +616,13 @@ const getSubset = (items, columnIndex, totalColumns) => {
   const startIndex = (columnIndex - 1) * subsetSize;
   const endIndex = startIndex + subsetSize;
   return items.slice(startIndex, endIndex);
-}
+};
 
 
 const adjustTheClass1Height = () => {
   const carouselHeight = this.$refs.carousel.$el.offsetHeight;
   this.$refs.carousel.$el.closest('.theClass1-wrapper').style.height = carouselHeight + 'px';
-}
+};
 
 /////////////
 
@@ -641,14 +693,14 @@ const animateCounters = () => {
   });
 };
 
-const query = ref("");
+const query = ref('');
 const results = ref([]);
 const showResults = ref(false);
 
 const search = async () => {
   if (query.value.length >= 3) {
     try {
-      const response = await axios.get(`/api/product_search`+`/${query.value}`);
+      const response = await axios.get('/api/product_search'+`/${query.value}`);
       results.value = response.data.data;
 
       showResults.value = true;
@@ -674,6 +726,8 @@ const hideOverlay = () => {
 
 
 </script>
+
+<style></style>
 
 <style>
 

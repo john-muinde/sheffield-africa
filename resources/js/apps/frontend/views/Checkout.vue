@@ -6,7 +6,9 @@
         style="background-image: url('assets/images/page-header-bg.jpg')"
       >
         <div class="container">
-          <h1 class="page-title">Checkout<span>Shop</span></h1>
+          <h1 class="page-title">
+            Checkout<span>Shop</span>
+          </h1>
         </div>
         <!-- End .container -->
       </div>
@@ -14,9 +16,15 @@
       <nav aria-label="breadcrumb" class="breadcrumb-nav">
         <div class="container">
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-            <li class="breadcrumb-item"><a href="#">Shop</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Checkout</li>
+            <li class="breadcrumb-item">
+              <a href="index.html">Home</a>
+            </li>
+            <li class="breadcrumb-item">
+              <a href="#">Shop</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">
+              Checkout
+            </li>
           </ol>
         </div>
         <!-- End .container -->
@@ -29,22 +37,25 @@
             <div class="checkout-discount">
               <form action="#">
                 <input
+                  id="checkout-discount-input"
                   type="text"
                   class="form-control"
                   required
-                  id="checkout-discount-input"
                 />
-                <label for="checkout-discount-input" class="text-truncate"
-                  >Have a coupon?
-                  <span>Click here to enter your code</span></label
-                >
+                <label
+                  for="checkout-discount-input"
+                  class="text-truncate"
+                >Have a coupon?
+                  <span>Click here to enter your code</span></label>
               </form>
             </div>
             <!-- End .checkout-discount -->
             <form action="#">
               <div class="row">
                 <div class="col-lg-9">
-                  <h2 class="checkout-title">Billing Details</h2>
+                  <h2 class="checkout-title">
+                    Billing Details
+                  </h2>
                   <!-- End .checkout-title -->
                   <div class="row">
                     <div class="col-sm-6">
@@ -116,29 +127,27 @@
 
                   <div class="custom-control custom-checkbox">
                     <input
+                      id="checkout-create-acc"
                       type="checkbox"
                       class="custom-control-input"
-                      id="checkout-create-acc"
                     />
                     <label
                       class="custom-control-label"
                       for="checkout-create-acc"
-                      >Create an account?</label
-                    >
+                    >Create an account?</label>
                   </div>
                   <!-- End .custom-checkbox -->
 
                   <div class="custom-control custom-checkbox">
                     <input
+                      id="checkout-diff-address"
                       type="checkbox"
                       class="custom-control-input"
-                      id="checkout-diff-address"
                     />
                     <label
                       class="custom-control-label"
                       for="checkout-diff-address"
-                      >Ship to a different address?</label
-                    >
+                    >Ship to a different address?</label>
                   </div>
                   <!-- End .custom-checkbox -->
 
@@ -153,7 +162,9 @@
                 <!-- End .col-lg-9 -->
                 <aside class="col-lg-3">
                   <div class="summary">
-                    <h3 class="summary-title">Your Order</h3>
+                    <h3 class="summary-title">
+                      Your Order
+                    </h3>
                     <!-- End .summary-title -->
 
                     <table class="table table-summary">
@@ -196,9 +207,9 @@
                     </table>
                     <!-- End .table table-summary -->
 
-                    <div class="accordion-summary" id="accordion-payment">
+                    <div id="accordion-payment" class="accordion-summary">
                       <div class="card">
-                        <div class="card-header" id="heading-1">
+                        <div id="heading-1" class="card-header">
                           <h2 class="card-title">
                             <a
                               role="button"
@@ -231,7 +242,7 @@
                       <!-- End .card -->
 
                       <div class="card">
-                        <div class="card-header" id="heading-2">
+                        <div id="heading-2" class="card-header">
                           <h2 class="card-title">
                             <a
                               class="collapsed"
@@ -264,7 +275,7 @@
                       <!-- End .card -->
 
                       <div class="card">
-                        <div class="card-header" id="heading-3">
+                        <div id="heading-3" class="card-header">
                           <h2 class="card-title">
                             <a
                               class="collapsed"
@@ -297,7 +308,7 @@
                       <!-- End .card -->
 
                       <div class="card">
-                        <div class="card-header" id="heading-4">
+                        <div id="heading-4" class="card-header">
                           <h2 class="card-title">
                             <a
                               class="collapsed"
@@ -308,9 +319,7 @@
                               aria-controls="collapse-4"
                             >
                               PayPal
-                              <small class="float-right paypal-link"
-                                >What is PayPal?</small
-                              >
+                              <small class="float-right paypal-link">What is PayPal?</small>
                             </a>
                           </h2>
                         </div>
@@ -333,7 +342,7 @@
                       <!-- End .card -->
 
                       <div class="card">
-                        <div class="card-header" id="heading-5">
+                        <div id="heading-5" class="card-header">
                           <h2 class="card-title">
                             <a
                               class="collapsed"

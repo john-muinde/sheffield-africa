@@ -5,7 +5,6 @@ const state = {
 
 const mutations = {
   addToCart(state, product) {
-    console.log("rec");
     const existingProduct = state.cartItems.find((item) => item.id === product.id);
 
     if (existingProduct) {

@@ -1,130 +1,138 @@
 <template>
-    <div>
-        <main class="main">
-            <div class="page-content">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-10 offset-lg-1 mb-3">
-                            <h2 class="about-us-title">Media Center</h2>
-                            <!-- End .title -->
-                            <p class="lead about-us-lead text-primary mb-1">
-                                Immerse Yourself in our Media Showcase
-                            </p>
+  <div>
+    <main class="main">
+      <div class="page-content">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-10 offset-lg-1 mb-3">
+              <h2 class="about-us-title">
+                Media Center
+              </h2>
+              <!-- End .title -->
+              <p class="lead about-us-lead text-primary mb-1">
+                Immerse Yourself in our Media Showcase
+              </p>
 
-                            <p>
-                                Welcome to Our Media Center, a hub of
-                                captivating multimedia content regularly updated
-                                with new and exciting news so there's always
-                                something to discover About Sheffield. Check
-                                back often to stay updated.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-10 offset-lg-1 justify-content-center media-center-section">
-                            <div class="row about-team-container about-team-container1 justify-content-center">
-                                <div class="col-md-4 mt-2 mb-2">
-                                    <router-link to="/media/blogs">
-                                        <div class="about-team">
-                                            <div class="about-team-white">
-                                                <img src="/assets/images/media/media_blogs.jpg" />
-                                            </div>
-                                            <div class="details">
-                                                <div class="name">Blogs</div>
-                                            </div>
-                                        </div>
-                                    </router-link>
-                                </div>
-
-                                <div class="col-md-4 mt-2 mb-2">
-                                    <router-link to="/media/in-the-news">
-                                        <div class="about-team">
-                                            <div class="about-team-white">
-                                                <img src="/assets/images/media/media_in_the_news.jpg" />
-                                            </div>
-                                            <div class="details">
-                                                <div class="name">
-                                                    In The News
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </router-link>
-                                </div>
-
-                                <div class="col-md-4 mt-2 mb-2">
-                                    <router-link to="/media/videos">
-                                        <div class="about-team">
-                                            <div class="about-team-white">
-                                                <img src="/assets/images/media/media_video.jpg" />
-                                            </div>
-                                            <div class="details">
-                                                <div class="name">Videos</div>
-                                            </div>
-                                        </div>
-                                    </router-link>
-                                </div>
-
-                                <div class="col-md-4 mt-2 mb-2">
-                                    <router-link to="/media/newsletters">
-                                        <div class="about-team">
-                                            <div class="about-team-white">
-                                                <img src="/assets/images/media/media_newsletters.jpg" />
-                                            </div>
-                                            <div class="details">
-                                                <div class="name">
-                                                    Newsletters
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </router-link>
-                                </div>
-
-                                <div class="col-md-4 mt-2 mb-2">
-                                    <router-link to="/media/brochures-and-catalogs">
-                                        <div class="about-team">
-                                            <div class="about-team-white">
-                                                <img src="/assets/images/media/media_documents.jpg" />
-                                            </div>
-                                            <div class="details">
-                                                <div class="name">
-                                                    Brochures & Catalogs
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </router-link>
-                                </div>
-
-                                <div class="col-md-4 mt-2 mb-2">
-                                    <router-link to="/media/gallery">
-                                        <div class="about-team">
-                                            <div class="about-team-white">
-                                                <img src="/assets/images/media/media_gallery.jpg" />
-                                            </div>
-                                            <div class="details">
-                                                <div class="name">Gallery</div>
-                                            </div>
-                                        </div>
-                                    </router-link>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+              <p>
+                Welcome to Our Media Center, a hub of
+                captivating multimedia content regularly updated
+                with new and exciting news so there's always
+                something to discover About Sheffield. Check
+                back often to stay updated.
+              </p>
             </div>
-        </main>
-    </div>
+          </div>
+        </div>
+
+        <div class="container">
+          <div class="row">
+            <div class="col-md-10 offset-lg-1 justify-content-center media-center-section">
+              <div class="row about-team-container about-team-container1 justify-content-center">
+                <div class="col-md-4 mt-2 mb-2">
+                  <router-link to="/media/blogs">
+                    <div class="about-team">
+                      <div class="about-team-white">
+                        <img src="/assets/images/media/media_blogs.jpg" />
+                      </div>
+                      <div class="details">
+                        <div class="name">
+                          Blogs
+                        </div>
+                      </div>
+                    </div>
+                  </router-link>
+                </div>
+
+                <div class="col-md-4 mt-2 mb-2">
+                  <router-link to="/media/in-the-news">
+                    <div class="about-team">
+                      <div class="about-team-white">
+                        <img src="/assets/images/media/media_in_the_news.jpg" />
+                      </div>
+                      <div class="details">
+                        <div class="name">
+                          In The News
+                        </div>
+                      </div>
+                    </div>
+                  </router-link>
+                </div>
+
+                <div class="col-md-4 mt-2 mb-2">
+                  <router-link to="/media/videos">
+                    <div class="about-team">
+                      <div class="about-team-white">
+                        <img src="/assets/images/media/media_video.jpg" />
+                      </div>
+                      <div class="details">
+                        <div class="name">
+                          Videos
+                        </div>
+                      </div>
+                    </div>
+                  </router-link>
+                </div>
+
+                <div class="col-md-4 mt-2 mb-2">
+                  <router-link to="/media/newsletters">
+                    <div class="about-team">
+                      <div class="about-team-white">
+                        <img src="/assets/images/media/media_newsletters.jpg" />
+                      </div>
+                      <div class="details">
+                        <div class="name">
+                          Newsletters
+                        </div>
+                      </div>
+                    </div>
+                  </router-link>
+                </div>
+
+                <div class="col-md-4 mt-2 mb-2">
+                  <router-link to="/media/brochures-and-catalogs">
+                    <div class="about-team">
+                      <div class="about-team-white">
+                        <img src="/assets/images/media/media_documents.jpg" />
+                      </div>
+                      <div class="details">
+                        <div class="name">
+                          Brochures & Catalogs
+                        </div>
+                      </div>
+                    </div>
+                  </router-link>
+                </div>
+
+                <div class="col-md-4 mt-2 mb-2">
+                  <router-link to="/media/gallery">
+                    <div class="about-team">
+                      <div class="about-team-white">
+                        <img src="/assets/images/media/media_gallery.jpg" />
+                      </div>
+                      <div class="details">
+                        <div class="name">
+                          Gallery
+                        </div>
+                      </div>
+                    </div>
+                  </router-link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
 </template>
 
 <script setup>
-import { ref, computed, watch, onMounted, watchEffect } from "vue";
+import { ref, computed, watch, onMounted, watchEffect } from 'vue';
 // import axios from "axios";
-import { useRoute } from "vue-router";
-import { useMeta } from "../../admin/composables/use-meta";
+import { useRoute } from 'vue-router';
+import { useMeta } from '../../admin/composables/use-meta';
 
-useMeta({ title: "Media Center" });
+useMeta({ title: 'Media Center' });
 
 const blogs = ref([]);
 const brochures = ref([]);
@@ -133,7 +141,7 @@ const videos = ref([]);
 
 const fetchMediaCenter = async () => {
     try {
-        const response = await axios.get("/api/get-media-center", {});
+        const response = await axios.get('/api/get-media-center', {});
 
         blogs.value = response.data.blogs;
         videos.value = response.data.videos;
@@ -145,32 +153,32 @@ const fetchMediaCenter = async () => {
 };
 
 const getBlogLink = (id, name) => {
-    let transformedName = name.replace(/ /g, "-").replace(/\//g, "-");
-    transformedName = transformedName.replace(/-+/g, "-");
-    transformedName = transformedName.replace(/^-+|-+$/g, "");
+    let transformedName = name.replace(/ /g, '-').replace(/\//g, '-');
+    transformedName = transformedName.replace(/-+/g, '-');
+    transformedName = transformedName.replace(/^-+|-+$/g, '');
     transformedName = transformedName.toLowerCase();
 
     return `/media/blogs/${id}/${transformedName}`;
 };
 
 const getFirstParagraph = (content) => {
-    const tempElement = document.createElement("div");
+    const tempElement = document.createElement('div');
     tempElement.innerHTML = content;
 
-    const paragraphs = tempElement.querySelectorAll("p");
+    const paragraphs = tempElement.querySelectorAll('p');
 
     for (const paragraph of paragraphs) {
         const textContent = paragraph.textContent.trim();
         if (textContent.length > 50) {
             if (textContent.length > 150) {
-                return textContent.slice(0, 150) + "...";
+                return textContent.slice(0, 150) + '...';
             } else {
                 return textContent;
             }
         }
     }
 
-    return "";
+    return '';
 };
 
 onMounted(() => {

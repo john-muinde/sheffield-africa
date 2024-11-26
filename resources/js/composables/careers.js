@@ -1,50 +1,50 @@
-import { ref, inject } from "vue";
-import { useRouter } from "vue-router";
-import axiosInstance from "../axiosInstance";
+import { ref, inject } from 'vue';
+import { useRouter } from 'vue-router';
+import axiosInstance from '../axiosInstance';
 export default function useCareers() {
     const careers = ref([]);
     const careerList = ref([]);
     const career = ref({
-        title: "",
-        department: "",
-        location: "",
-        education: "",
-        education: "",
-        experience: "",
-        deadline: "",
-        description: "",
-        responsibilities: "",
-        requirements: "",
-        is_published: "",
+        title: '',
+        department: '',
+        location: '',
+        education: '',
+        education: '',
+        experience: '',
+        deadline: '',
+        description: '',
+        responsibilities: '',
+        requirements: '',
+        is_published: '',
     });
 
     const router = useRouter();
     const validationErrors = ref({});
     const isLoading = ref(false);
-    const swal = inject("$swal");
+    const swal = inject('$swal');
 
     const getCareers = async (
         page = 1,
-        search_id = "",
-        search_title = "",
-        search_global = "",
-        order_column = "created_at",
-        order_direction = "desc"
+        search_id = '',
+        search_title = '',
+        search_global = '',
+        order_column = 'created_at',
+        order_direction = 'desc',
     ) => {
         axiosInstance
             .get(
-                "/api/careers?page=" +
+                '/api/careers?page=' +
                     page +
-                    "&search_id=" +
+                    '&search_id=' +
                     search_id +
-                    "&search_title=" +
+                    '&search_title=' +
                     search_title +
-                    "&search_global=" +
+                    '&search_global=' +
                     search_global +
-                    "&order_column=" +
+                    '&order_column=' +
                     order_column +
-                    "&order_direction=" +
-                    order_direction
+                    '&order_direction=' +
+                    order_direction,
             )
             .then((response) => {
                 careers.value = response.data;
@@ -52,7 +52,7 @@ export default function useCareers() {
     };
 
     const getCareer = async (id) => {
-        axiosInstance.get("/api/careers/" + id).then((response) => {
+        axiosInstance.get('/api/careers/' + id).then((response) => {
             career.value = response.data.data;
         });
     };
@@ -73,15 +73,15 @@ export default function useCareers() {
         }
 
         const config = {
-            headers: { "content-type": "multipart/form-data" },
+            headers: { 'content-type': 'multipart/form-data' },
         };
 
         console.log(serializedPost);
 
         axiosInstance
-            .post("/api/careers", serializedPost, config)
+            .post('/api/careers', serializedPost, config)
             .then((response) => {
-                router.push({ name: "careers.create" });
+                router.push({ name: 'careers.create' });
                 // Reset the form values
                 career.title = null;
                 career.department = null;
@@ -94,8 +94,8 @@ export default function useCareers() {
                 career.requirements = null;
                 career.is_published = null;
                 swal({
-                    icon: "success",
-                    title: "Career saved successfully",
+                    icon: 'success',
+                    title: 'Career saved successfully',
                 });
             })
             .catch((error) => {
@@ -122,18 +122,18 @@ export default function useCareers() {
         }
 
         const config = {
-            headers: { "content-type": "multipart/form-data" },
+            headers: { 'content-type': 'multipart/form-data' },
         };
 
         console.log(serializedPost);
 
         axiosInstance
-            .put("/api/careers/" + career.id, career)
+            .put('/api/careers/' + career.id, career)
             .then((response) => {
-                router.push({ name: "careers.index" });
+                router.push({ name: 'careers.index' });
                 swal({
-                    icon: "success",
-                    title: "Career updated successfully",
+                    icon: 'success',
+                    title: 'Career updated successfully',
                 });
             })
             .catch((error) => {
@@ -146,31 +146,31 @@ export default function useCareers() {
 
     const deleteCareer = async (id) => {
         swal({
-            title: "Are you sure?",
-            text: "You won't be able to revert this action!",
-            icon: "warning",
+            title: 'Are you sure?',
+            text: 'You won\'t be able to revert this action!',
+            icon: 'warning',
             showCancelButton: true,
-            confirmButtonText: "Yes, delete it!",
-            confirmButtonColor: "#ef4444",
+            confirmButtonText: 'Yes, delete it!',
+            confirmButtonColor: '#ef4444',
             timer: 20000,
             timerProgressBar: true,
             reverseButtons: true,
         }).then((result) => {
             if (result.isConfirmed) {
                 axiosInstance
-                    .delete("/api/careers/" + id)
+                    .delete('/api/careers/' + id)
                     .then((response) => {
                         getCareers();
-                        router.push({ name: "careers.index" });
+                        router.push({ name: 'careers.index' });
                         swal({
-                            icon: "success",
-                            title: "Career deleted successfully",
+                            icon: 'success',
+                            title: 'Career deleted successfully',
                         });
                     })
                     .catch((error) => {
                         swal({
-                            icon: "error",
-                            title: "Something went wrong",
+                            icon: 'error',
+                            title: 'Something went wrong',
                         });
                     });
             }
@@ -178,7 +178,7 @@ export default function useCareers() {
     };
 
     const getCareerList = async () => {
-        axiosInstance.get("/api/career-list").then((response) => {
+        axiosInstance.get('/api/career-list').then((response) => {
             careerList.value = response.data.data;
         });
     };

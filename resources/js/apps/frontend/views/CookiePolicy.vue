@@ -15,7 +15,11 @@
       <nav aria-label="breadcrumb" class="breadcrumb-nav border-0 mb-0">
         <div class="container">
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><router-link to="/">HOME</router-link></li>
+            <li class="breadcrumb-item">
+              <router-link to="/">
+                HOME
+              </router-link>
+            </li>
             <li class="breadcrumb-item active" aria-current="page">
               COOKIE POLICY
             </li>
@@ -31,8 +35,9 @@
           <div class="row">
             <div class="col-lg-12">
               <div class="headings">
-               
-                <h3 class="heading text-primary">Our Cookie Policy</h3>
+                <h3 class="heading text-primary">
+                  Our Cookie Policy
+                </h3>
               </div>
 
 
@@ -44,7 +49,9 @@
 
               <p>Cookies are small text files that are placed on your device (computer, smartphone, tablet, etc.) when you visit a website. They are widely used to make websites work more efficiently and provide essential functionality, as well as to gather information about user interactions and preferences.</p>
 
-              <h4 class="mt-2">How We Use Cookies</h4>
+              <h4 class="mt-2">
+                How We Use Cookies
+              </h4>
 
               <p>We use cookies for the following purposes:</p>
 
@@ -56,13 +63,17 @@
 
               <p><b>Third-Party Cookies:</b> We may also allow third-party cookies to be set by third-party services that appear on our website. These cookies are controlled by the third parties and are used for various purposes, including tracking and analytics.</p>
 
-              <h4 class="mt-2">Types of Cookies We Use</h4>
+              <h4 class="mt-2">
+                Types of Cookies We Use
+              </h4>
 
               <p>Session Cookies: These are temporary cookies that are stored on your device only while you are visiting our website. They are deleted when you close your browser.</p>
 
               <p>Persistent Cookies: Persistent cookies are stored on your device for a specified period, even after you close your browser. They are used to remember your preferences and settings.</p>
 
-              <h4 class="mt-2">Your Choices</h4>
+              <h4 class="mt-2">
+                Your Choices
+              </h4>
 
               <p>You have the option to manage and control cookies in different ways:</p>
 
@@ -70,11 +81,11 @@
 
               <p><b>Cookie Consent Tool:</b> When you first visit our website, you may be presented with a cookie consent banner that allows you to accept or reject specific types of cookies. You can revisit this banner to change your preferences at any time.</p>
 
-              <h4 class="mt-2">Updates to this Policy</h4>
+              <h4 class="mt-2">
+                Updates to this Policy
+              </h4>
 
               <p>We may update this Cookie Policy from time to time to reflect changes in our practices or for other operational, legal, or regulatory reasons. Please revisit this page periodically to stay informed about our use of cookies.</p>
-
-
             </div>
           </div>
         </div>

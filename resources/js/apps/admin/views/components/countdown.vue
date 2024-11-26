@@ -1,74 +1,96 @@
 <template>
-    <div class="container">
-        <teleport to="#breadcrumb">
-            <ul class="navbar-nav flex-row">
-                <li>
-                    <div class="page-header">
-                        <nav class="breadcrumb-one" aria-label="breadcrumb">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="javascript:;">Components</a></li>
-                                <li class="breadcrumb-item active" aria-current="page"><span>Countdown</span></li>
-                            </ol>
-                        </nav>
-                    </div>
+  <div class="container">
+    <teleport to="#breadcrumb">
+      <ul class="navbar-nav flex-row">
+        <li>
+          <div class="page-header">
+            <nav class="breadcrumb-one" aria-label="breadcrumb">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                  <a href="javascript:;">Components</a>
                 </li>
-            </ul>
-        </teleport>
+                <li class="breadcrumb-item active" aria-current="page">
+                  <span>Countdown</span>
+                </li>
+              </ol>
+            </nav>
+          </div>
+        </li>
+      </ul>
+    </teleport>
 
-        <div class="container">
-            <div id="navSection" class="nav sidenav">
-                <div class="sidenav-content" v-scroll-spy-active v-scroll-spy-link>
-                    <a href="#countdownseperator" class="nav-link">Seperator</a>
-                    <a href="#countdowncircle" class="nav-link">Circle</a>
+    <div class="container">
+      <div id="navSection" class="nav sidenav">
+        <div v-scroll-spy-active v-scroll-spy-link class="sidenav-content">
+          <a href="#countdownseperator" class="nav-link">Seperator</a>
+          <a href="#countdowncircle" class="nav-link">Circle</a>
+        </div>
+      </div>
+
+      <div v-scroll-spy class="row layout-top-spacing">
+        <div id="countdownseperator" class="col-lg-12 col-12 layout-spacing">
+          <div class="statbox panel box box-shadow">
+            <div class="panel-heading">
+              <div class="row">
+                <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                  <h4>Simple Countdown</h4>
                 </div>
+              </div>
             </div>
+            <div class="panel-body text-center">
+              <div class="container">
+                <div id="cd-simple">
+                  <div class="countdown">
+                    <div class="clock-count-container">
+                      <h1 class="clock-val">
+                        {{ demo1.days }}
+                      </h1>
+                    </div>
+                    <h4 class="clock-text">
+                      Days
+                    </h4>
+                  </div>
+                  <div class="countdown">
+                    <div class="clock-count-container">
+                      <h1 class="clock-val">
+                        {{ demo1.hours }}
+                      </h1>
+                    </div>
+                    <h4 class="clock-text">
+                      Hours
+                    </h4>
+                  </div>
+                  <div class="countdown">
+                    <div class="clock-count-container">
+                      <h1 class="clock-val">
+                        {{ demo1.minutes }}
+                      </h1>
+                    </div>
+                    <h4 class="clock-text">
+                      Mins
+                    </h4>
+                  </div>
+                  <div class="countdown">
+                    <div class="clock-count-container">
+                      <h1 class="clock-val">
+                        {{ demo1.seconds }}
+                      </h1>
+                    </div>
+                    <h4 class="clock-text">
+                      Sec
+                    </h4>
+                  </div>
+                </div>
+              </div>
+              <div class="code-section-container show-code">
+                <button type="button" class="btn btn-default toggle-code-snippet" @click="toggleCode('code1')">
+                  <span>Code</span>
+                </button>
 
-            <div v-scroll-spy class="row layout-top-spacing">
-                <div id="countdownseperator" class="col-lg-12 col-12 layout-spacing">
-                    <div class="statbox panel box box-shadow">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                    <h4>Simple Countdown</h4>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="panel-body text-center">
-                            <div class="container">
-                                <div id="cd-simple">
-                                    <div class="countdown">
-                                        <div class="clock-count-container">
-                                            <h1 class="clock-val">{{ demo1.days }}</h1>
-                                        </div>
-                                        <h4 class="clock-text">Days</h4>
-                                    </div>
-                                    <div class="countdown">
-                                        <div class="clock-count-container">
-                                            <h1 class="clock-val">{{ demo1.hours }}</h1>
-                                        </div>
-                                        <h4 class="clock-text">Hours</h4>
-                                    </div>
-                                    <div class="countdown">
-                                        <div class="clock-count-container">
-                                            <h1 class="clock-val">{{ demo1.minutes }}</h1>
-                                        </div>
-                                        <h4 class="clock-text">Mins</h4>
-                                    </div>
-                                    <div class="countdown">
-                                        <div class="clock-count-container">
-                                            <h1 class="clock-val">{{ demo1.seconds }}</h1>
-                                        </div>
-                                        <h4 class="clock-text">Sec</h4>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="code-section-container show-code">
-                                <button type="button" class="btn btn-default toggle-code-snippet" @click="toggleCode('code1')"><span>Code</span></button>
-
-                                <div v-if="code_arr.includes('code1')" class="code-section text-start">
-                                    <highlight>
-                                        <div v-pre>
-                                            <pre>
+                <div v-if="code_arr.includes('code1')" class="code-section text-start">
+                  <highlight>
+                    <div v-pre>
+                      <pre>
 &lt;div id=&quot;cd-simple&quot;&gt;
     &lt;div class=&quot;countdown&quot;&gt;
         &lt;div class=&quot;clock-count-container&quot;&gt;
@@ -96,58 +118,76 @@
     &lt;/div&gt;
 &lt;/div&gt;
                                             </pre>
-                                        </div>
-                                    </highlight>
-                                </div>
-                            </div>
-                        </div>
                     </div>
+                  </highlight>
                 </div>
-                <div id="countdowncircle" class="col-lg-12 col-12 layout-spacing">
-                    <div class="statbox panel box box-shadow">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                    <h4>Circle Countdown</h4>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="panel-body text-center">
-                            <div class="container">
-                                <div id="cd-circle">
-                                    <div class="countdown">
-                                        <div class="clock-count-container">
-                                            <h1 class="clock-val">{{ demo2.days }}</h1>
-                                        </div>
-                                        <h4 class="clock-text">Days</h4>
-                                    </div>
-                                    <div class="countdown">
-                                        <div class="clock-count-container">
-                                            <h1 class="clock-val">{{ demo2.hours }}</h1>
-                                        </div>
-                                        <h4 class="clock-text">Hours</h4>
-                                    </div>
-                                    <div class="countdown">
-                                        <div class="clock-count-container">
-                                            <h1 class="clock-val">{{ demo2.minutes }}</h1>
-                                        </div>
-                                        <h4 class="clock-text">Mins</h4>
-                                    </div>
-                                    <div class="countdown">
-                                        <div class="clock-count-container">
-                                            <h1 class="clock-val">{{ demo2.seconds }}</h1>
-                                        </div>
-                                        <h4 class="clock-text">Sec</h4>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="code-section-container show-code">
-                                <button type="button" class="btn btn-default toggle-code-snippet" @click="toggleCode('code2')"><span>Code</span></button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="countdowncircle" class="col-lg-12 col-12 layout-spacing">
+          <div class="statbox panel box box-shadow">
+            <div class="panel-heading">
+              <div class="row">
+                <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                  <h4>Circle Countdown</h4>
+                </div>
+              </div>
+            </div>
+            <div class="panel-body text-center">
+              <div class="container">
+                <div id="cd-circle">
+                  <div class="countdown">
+                    <div class="clock-count-container">
+                      <h1 class="clock-val">
+                        {{ demo2.days }}
+                      </h1>
+                    </div>
+                    <h4 class="clock-text">
+                      Days
+                    </h4>
+                  </div>
+                  <div class="countdown">
+                    <div class="clock-count-container">
+                      <h1 class="clock-val">
+                        {{ demo2.hours }}
+                      </h1>
+                    </div>
+                    <h4 class="clock-text">
+                      Hours
+                    </h4>
+                  </div>
+                  <div class="countdown">
+                    <div class="clock-count-container">
+                      <h1 class="clock-val">
+                        {{ demo2.minutes }}
+                      </h1>
+                    </div>
+                    <h4 class="clock-text">
+                      Mins
+                    </h4>
+                  </div>
+                  <div class="countdown">
+                    <div class="clock-count-container">
+                      <h1 class="clock-val">
+                        {{ demo2.seconds }}
+                      </h1>
+                    </div>
+                    <h4 class="clock-text">
+                      Sec
+                    </h4>
+                  </div>
+                </div>
+              </div>
+              <div class="code-section-container show-code">
+                <button type="button" class="btn btn-default toggle-code-snippet" @click="toggleCode('code2')">
+                  <span>Code</span>
+                </button>
 
-                                <div v-if="code_arr.includes('code2')" class="code-section text-start">
-                                    <highlight>
-                                        <div v-pre>
-                                            <pre>
+                <div v-if="code_arr.includes('code2')" class="code-section text-start">
+                  <highlight>
+                    <div v-pre>
+                      <pre>
 &lt;div id=&quot;cd-circle&quot;&gt;
     &lt;div class=&quot;countdown&quot;&gt;
         &lt;div class=&quot;clock-count-container&quot;&gt;
@@ -175,26 +215,26 @@
     &lt;/div&gt;
 &lt;/div&gt;
                                             </pre>
-                                        </div>
-                                    </highlight>
-                                </div>
-                            </div>
-                        </div>
                     </div>
+                  </highlight>
                 </div>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </template>
 
 <script setup>
-    import { onMounted, onUnmounted, ref } from "vue";
-    import "../../assets/sass/scrollspyNav.scss";
-    import "../../assets/sass/components/custom-countdown.scss";
-    import highlight from "../../components/plugins/highlight.vue";
+    import { onMounted, onUnmounted, ref } from 'vue';
+    import '../../assets/sass/scrollspyNav.scss';
+    import '../../assets/sass/components/custom-countdown.scss';
+    import highlight from '../../components/plugins/highlight.vue';
 
-    import { useMeta } from "../../composables/use-meta";
-    useMeta({ title: "Countdown" });
+    import { useMeta } from '../../composables/use-meta';
+    useMeta({ title: 'Countdown' });
 
     const code_arr = ref([]);
     const timer1 = ref(null);

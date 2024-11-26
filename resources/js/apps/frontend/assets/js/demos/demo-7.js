@@ -14,7 +14,7 @@ $(document).ready(function () {
 			    format: 'HMS',
 			    padZeroes: true,
 			    labels: ['years', 'months', 'weeks', 'days', 'hours', 'minutes', 'seconds'],
-			    labels1: ['year', 'month', 'week', 'day', 'hour', 'minutes', 'second']
+			    labels1: ['year', 'month', 'week', 'day', 'hour', 'minutes', 'second'],
 			});
 		});
 
@@ -33,7 +33,7 @@ $(document).ready(function () {
 			    format: 'DHMS',
 			    padZeroes: true,
 			    labels: ['years', 'months', 'weeks', 'days', 'hours', 'minutes', 'seconds'],
-			    labels1: ['year', 'month', 'week', 'day', 'hour', 'minutes', 'second']
+			    labels1: ['year', 'month', 'week', 'day', 'hour', 'minutes', 'second'],
 			});
 		});
 

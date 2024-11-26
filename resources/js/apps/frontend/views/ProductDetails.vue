@@ -4,16 +4,18 @@
       <div class="container d-flex align-items-center">
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
-            <router-link to="/">HOME</router-link>
+            <router-link to="/">
+              HOME
+            </router-link>
           </li>
 
           <li
-            class="breadcrumb-item"
             v-if="
               product.categories_json &&
-              product.categories_json.length > 0 &&
-              product.categories_json[0].parent_name_with_slashes
+                product.categories_json.length > 0 &&
+                product.categories_json[0].parent_name_with_slashes
             "
+            class="breadcrumb-item"
           >
             <router-link
               :to="
@@ -21,12 +23,13 @@
                   product.categories_json[0].parent_name_with_slashes
                 )
               "
-              >{{
+            >
+              {{
                 getCategoryMainLinkTopName(
                   product.categories_json[0].parent_name_with_slashes
                 )
-              }}</router-link
-            >
+              }}
+            </router-link>
           </li>
 
           <li class="breadcrumb-item">
@@ -41,8 +44,9 @@
                   product.categories_json[0].parent_name_with_slashes
                 )
               "
-              >{{ category.name }}</router-link
             >
+              {{ category.name }}
+            </router-link>
           </li>
 
           <li class="breadcrumb-item active" aria-current="page">
@@ -63,7 +67,6 @@
                     :src="'/storage/' + mainImage"
                     :data-zoom-image="'/storage/' + mainImage"
                     :alt="product.name"
-                    @click="showMultiple"
                     style="
                       display: grid;
                       max-width: 100%;
@@ -74,13 +77,14 @@
                       margin-right: auto;
                       width: auto;
                     "
+                    @click="showMultiple"
                   />
 
                   <a
-                    href="#"
-                    @click="showMultiple"
                     id="btn-product-gallery"
+                    href="#"
                     class="btn-product-gallery"
+                    @click="showMultiple"
                   >
                     <i class="icon-arrows"></i>
                   </a>
@@ -93,12 +97,12 @@
 
                   <!-- all props & events -->
                   <vue-easy-lightbox
-                    escDisabled
+                    esc-disabled
                     :visible="visible"
                     :imgs="imgs"
                     :index="indexRef"
                     @hide="handleHide"
-                  ></vue-easy-lightbox>
+                  />
                 </div>
 
                 <div id="product-zoom-gallery" class="product-image-gallery max-col-6">
@@ -106,9 +110,9 @@
                     v-for="(image, index) in product.product_images"
                     :key="image.id"
                     :class="['product-gallery-item', { active: index === activeIndex }]"
-                    @mouseover="changeMainImage(image.name, index)"
                     :data-image="'/storage/' + image.name"
                     :data-zoom-image="'/storage/' + image.name"
+                    @mouseover="changeMainImage(image.name, index)"
                   >
                     <img :src="'/storage/' + image.name" :alt="product.name" />
                   </a>
@@ -150,9 +154,9 @@
                 <span>Category : </span>
 
                 <router-link
-                  style="font-weight: 500"
                   v-for="category in product.categories_json"
                   :key="category.id"
+                  style="font-weight: 500"
                   :to="
                     getCategoryLink(
                       category.id,
@@ -161,10 +165,11 @@
                       product.categories_json[0].parent_name_with_slashes
                     )
                   "
-                  >{{ category.name }}</router-link
                 >
+                  {{ category.name }}
+                </router-link>
 
-                <div class="qr_section" v-if="qrCodeDataUrl">
+                <div v-if="qrCodeDataUrl" class="qr_section">
                   <small class="mb-1">Product QR</small>
                   <img style="width: 120px" :src="qrCodeDataUrl" alt="QR Code" />
                 </div>
@@ -173,8 +178,8 @@
                 <div class="product-details-action product-details-sheffield mt-2">
                   <button
                     type="button"
-                    @click="addToCart(product)"
                     class="btn-product btn-cart"
+                    @click="addToCart(product)"
                   >
                     <span>Add to Cart</span>
                   </button>
@@ -194,27 +199,25 @@
                   >
                     <li class="nav-item">
                       <a
-                        class="nav-link active"
                         id="product-desc-link"
+                        class="nav-link active"
                         data-toggle="tab"
                         href="#product-desc-tab"
                         role="tab"
                         aria-controls="product-desc-tab"
                         aria-selected="false"
-                        >Description</a
-                      >
+                      >Description</a>
                     </li>
                     <li class="nav-item">
                       <a
-                        class="nav-link"
                         id="product-info-link"
+                        class="nav-link"
                         data-toggle="tab"
                         href="#product-info-tab"
                         role="tab"
                         aria-controls="product-info-tab"
                         aria-selected="false"
-                        >Technical Specifications</a
-                      >
+                      >Technical Specifications</a>
                     </li>
                     <!-- <li class="nav-item">
                                             <a
@@ -231,8 +234,8 @@
                   </ul>
                   <div class="tab-content">
                     <div
-                      class="tab-pane fade active show"
                       id="product-desc-tab"
+                      class="tab-pane fade active show"
                       role="tabpanel"
                       aria-labelledby="product-desc-link"
                     >
@@ -243,8 +246,8 @@
                     </div>
                     <!-- .End .tab-pane -->
                     <div
-                      class="tab-pane fade"
                       id="product-info-tab"
+                      class="tab-pane fade"
                       role="tabpanel"
                       aria-labelledby="product-info-link"
                     >
@@ -376,33 +379,33 @@
 </template>
 
 <script setup>
-import { ref, computed, watch, onMounted, watchEffect } from "vue";
-import { useRoute } from "vue-router";
-import VueEasyLightbox from "vue-easy-lightbox";
-import QRCode from "qrcode-generator";
-import { useStore } from "vuex"; // Import the store
+import { ref, computed, watch, onMounted, watchEffect } from 'vue';
+import { useRoute } from 'vue-router';
+import VueEasyLightbox from 'vue-easy-lightbox';
+import QRCode from 'qrcode-generator';
+import { useStore } from 'vuex'; // Import the store
 
 const store = useStore();
 
-import { useMeta } from "../../admin/composables/use-meta";
+import { useMeta } from '../../admin/composables/use-meta';
 
 const addToCart = (product) => {
   const toast = window.Swal.mixin({
     toast: true,
-    position: "bottom-end",
+    position: 'bottom-end',
     showConfirmButton: false,
     timer: 4000,
-    padding: "2em",
+    padding: '2em',
   });
   toast.fire({
-    icon: "success",
-    title: "Item added to cart",
-    padding: "2em",
+    icon: 'success',
+    title: 'Item added to cart',
+    padding: '2em',
     customClass: {
-      title: "swal-title-class",
+      title: 'swal-title-class',
     },
   });
-  store.dispatch("cart/addToCart", product);
+  store.dispatch('cart/addToCart', product);
 };
 
 const route = useRoute();
@@ -418,32 +421,32 @@ const formatTextHeader = (text) => {
 // Fetch products based on the current page
 const fetchProduct = async () => {
   try {
-    const response = await axios.get("/api/get-product", {
+    const response = await axios.get('/api/get-product', {
       params: {
         product_id: product_id.value,
       },
     });
     product.value = response.data.data;
 
-    useMeta({ title: formatTextHeader(product.value.name) + " | Product" });
+    useMeta({ title: formatTextHeader(product.value.name) + ' | Product' });
   } catch (error) {
     console.error(error);
   }
 };
 
 const imgs = ref([]);
-const rootUrl = window.location.protocol + "//" + window.location.host;
+const rootUrl = window.location.protocol + '//' + window.location.host;
 
 const showSingle = () => {
   imgs.value =
-    "https://media.istockphoto.com/id/1189903200/photo/red-generic-sedan-car-isolated-on-white-background-3d-illustration.jpg?s=612x612&w=0&k=20&c=uRu3o_h5FVljLQHS9z0oyz-XjXzzXN_YkyGXwhdMrjs=";
+    'https://media.istockphoto.com/id/1189903200/photo/red-generic-sedan-car-isolated-on-white-background-3d-illustration.jpg?s=612x612&w=0&k=20&c=uRu3o_h5FVljLQHS9z0oyz-XjXzzXN_YkyGXwhdMrjs=';
   show();
 };
 
 const showMultiple = async () => {
 
   imgs.value = product.value.product_images.map(
-    (item) => rootUrl + "/storage/" + item.name
+    (item) => rootUrl + '/storage/' + item.name,
   );
   show();
 };
@@ -461,11 +464,11 @@ const handleHide = () => {
 
 const getProductLink = (id, name, model_number) => {
   // Replace spaces with dashes
-  let transformedName = name.replace(/ /g, "-");
+  let transformedName = name.replace(/ /g, '-');
   // Remove consecutive dashes
-  transformedName = transformedName.replace(/-+/g, "-");
+  transformedName = transformedName.replace(/-+/g, '-');
   // Remove leading and trailing dashes
-  transformedName = transformedName.replace(/^-+|-+$/g, "");
+  transformedName = transformedName.replace(/^-+|-+$/g, '');
   // Convert to lowercase
   transformedName = transformedName.toLowerCase();
 
@@ -476,35 +479,35 @@ const getProductLink = (id, name, model_number) => {
 
 const getCategoryLink = (id, name, page, main_cat_parent) => {
   //Replace spaces with dashes
-  let transformedName = name.replace(/ /g, "-");
+  let transformedName = name.replace(/ /g, '-');
   // Remove consecutive dashes
-  transformedName = transformedName.replace(/-+/g, "-");
+  transformedName = transformedName.replace(/-+/g, '-');
   // Remove leading and trailing dashes
-  transformedName = transformedName.replace(/^-+|-+$/g, "");
+  transformedName = transformedName.replace(/^-+|-+$/g, '');
   // Convert to lowercase
   transformedName = transformedName.toLowerCase();
 
-  let parts = main_cat_parent.split("/");
+  let parts = main_cat_parent.split('/');
   parts = parts[0];
 
   return `/${parts}/${id}/${transformedName}/page/${page}`;
 };
 
 const getCategoryMainLinkTop = (name) => {
-  let parts = name.split("/");
+  let parts = name.split('/');
   parts = parts[0];
-  return "/" + parts;
+  return '/' + parts;
 };
 
 const getCategoryMainLinkTopName = (name) => {
-  let parts = name.split("/");
+  let parts = name.split('/');
   parts = parts[0];
   parts = parts.toUpperCase();
   return parts;
 };
 
 const qrCodeDataUrl = ref(null);
-const currentUrl = ref("");
+const currentUrl = ref('');
 
 const generateQRCode = (currentUrl) => {
   // Clear previous QR code
@@ -512,7 +515,7 @@ const generateQRCode = (currentUrl) => {
 
   // Generate new QR code
   const typeNumber = 0;
-  const errorCorrectionLevel = "L";
+  const errorCorrectionLevel = 'L';
   const qr = QRCode(typeNumber, errorCorrectionLevel);
   qr.addData(currentUrl.value);
   qr.make();
@@ -532,7 +535,7 @@ onMounted(() => {
   generateQRCode(currentUrl);
 });
 
-const mainImage = ref("");
+const mainImage = ref('');
 const activeIndex = ref(0);
 
 const changeMainImage = (imageName, index) => {
@@ -550,7 +553,7 @@ watchEffect(() => {
   const params = route.params; // Access the route parameters
   const query = route.query; // Access the query parameters
 
-  if (params.id !== "" && product_id.value !== params.id) {
+  if (params.id !== '' && product_id.value !== params.id) {
     product_id.value = params.id ? parseInt(params.id) : 1;
 
     fetchProduct();

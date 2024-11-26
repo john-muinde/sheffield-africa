@@ -7,7 +7,9 @@
             <div class="container">
               <div class="row no-margin">
                 <div class="col-lg-12 justify-content-center mt-1">
-                  <h2 class="about-us-title">Careers at Sheffield</h2>
+                  <h2 class="about-us-title">
+                    Careers at Sheffield
+                  </h2>
                   <!-- End .title -->
                   <!-- <p class="lead about-us-lead text-primary mb-1">We are searching for talents in the following fields</p> -->
 
@@ -122,7 +124,9 @@
                                         </div> -->
 
                     <div class="col-lg-8 offset-lg-1 who-we-are">
-                      <h5 class="mt-2">Benefits</h5>
+                      <h5 class="mt-2">
+                        Benefits
+                      </h5>
 
                       <ul class="graduate-trainee-program">
                         <li>
@@ -164,12 +168,12 @@
 
       <!-- all props & events -->
       <vue-easy-lightbox
-        escDisabled
+        esc-disabled
         :visible="visible"
         :imgs="imgs"
         :index="indexRef"
         @hide="handleHide"
-      ></vue-easy-lightbox>
+      />
     </div>
 
     <!--<div class="page-content pg-white graduate-trainee-program-section">
@@ -203,8 +207,10 @@
           <div class="row">
             <div class="col-md-12">
               <div class="row">
-                <div class="col-lg-10 offset-lg-1 who-we-are" id="fill_fomr">
-                  <h2 class="about-us-title mb-4">Interested in joining us</h2>
+                <div id="fill_fomr" class="col-lg-10 offset-lg-1 who-we-are">
+                  <h2 class="about-us-title mb-4">
+                    Interested in joining us
+                  </h2>
 
                   <p class="about-us-text">
                     Fill the form below with your details and click submit.
@@ -212,10 +218,10 @@
 
                   <div class="row">
                     <div class="offset-lg-1 col-md-10 register-right mt-2">
-                      <div class="" id="myTabContent">
+                      <div id="myTabContent" class="">
                         <div
-                          class=""
                           id="home"
+                          class=""
                           role="tabpanel"
                           aria-labelledby="home-tab"
                         >
@@ -252,9 +258,10 @@
                                 />
                               </div>
                               <div class="form-group col-md-6">
-                                <label for="" class="label"
-                                  ><b>Job Title/Position</b></label
-                                >
+                                <label
+                                  for=""
+                                  class="label"
+                                ><b>Job Title/Position</b></label>
                                 <input
                                   v-model="career.job_title"
                                   required
@@ -277,26 +284,27 @@
                               <div class="form-group col-md-6">
                                 <label for="" class="label"><b>Attach CV</b></label>
                                 <input
-                                  @change="career.cv = $event.target.files[0]"
                                   required
                                   type="file"
                                   class="form-control"
                                   placeholder="Attach CV *"
+                                  @change="career.cv = $event.target.files[0]"
                                 />
                               </div>
 
                               <div class="form-group col-md-6">
-                                <label for="" class="label"
-                                  ><b>Supporting Document</b></label
-                                >
+                                <label
+                                  for=""
+                                  class="label"
+                                ><b>Supporting Document</b></label>
                                 <input
-                                  @change="
-                                    career.supporting_document = $event.target.files[0]
-                                  "
                                   required
                                   type="file"
                                   class="form-control"
                                   placeholder="Supporting Document *"
+                                  @change="
+                                    career.supporting_document = $event.target.files[0]
+                                  "
                                 />
                               </div>
 
@@ -304,8 +312,8 @@
                                 <vue-recaptcha
                                   ref="recaptcha"
                                   :sitekey="'6Ldyw1wpAAAAAGx6vRq1hhnnfKaKHPmcuJ0imPkT'"
-                                  @verify="onRecaptchaVerify"
                                   size="normal"
+                                  @verify="onRecaptchaVerify"
                                 />
                               </div>
 
@@ -348,44 +356,44 @@ import {
   reactive,
   nextTick,
   watch,
-} from "vue";
+} from 'vue';
 
-import { useMeta } from "../../admin/composables/use-meta";
-useMeta({ title: "Career" });
+import { useMeta } from '../../admin/composables/use-meta';
+useMeta({ title: 'Career' });
 
-import VueEasyLightbox from "vue-easy-lightbox";
+import VueEasyLightbox from 'vue-easy-lightbox';
 
-import useCareers from "@/composables/career";
-import { useForm, useField, defineRule } from "vee-validate";
-import { required, min } from "@/validation/rules";
+import useCareers from '@/composables/career';
+import { useForm, useField, defineRule } from 'vee-validate';
+import { required, min } from '@/validation/rules';
 
-import { VueReCaptcha, useReCaptcha } from "vue-recaptcha-v3";
+import { VueReCaptcha, useReCaptcha } from 'vue-recaptcha-v3';
 
 const { executeRecaptcha, recaptchaLoaded } = useReCaptcha();
 
-defineRule("required", required);
-defineRule("min", min);
+defineRule('required', required);
+defineRule('min', min);
 
 // Define a validation schema
 const schema = {
-  name: "required|min:3",
-  phone_number: "required",
-  email: "required|min:3",
-  message: "required",
-  job_title: "required",
+  name: 'required|min:3',
+  phone_number: 'required',
+  email: 'required|min:3',
+  message: 'required',
+  job_title: 'required',
 };
 
 // Create a form context with the validation schema
 const { validate, errors } = useForm({ validationSchema: schema });
 
-const { value: name } = useField("name", null, { initialValue: "" });
-const { value: phone_number } = useField("phone_number", null, { initialValue: "" });
-const { value: email } = useField("email", null, { initialValue: "" });
-const { value: message } = useField("message", null, { initialValue: "" });
-const { value: job_title } = useField("job_title", null, { initialValue: "" });
-const { value: cv } = useField("cv", null, { initialValue: "" });
-const { value: supporting_document } = useField("supporting_document", null, {
-  initialValue: "",
+const { value: name } = useField('name', null, { initialValue: '' });
+const { value: phone_number } = useField('phone_number', null, { initialValue: '' });
+const { value: email } = useField('email', null, { initialValue: '' });
+const { value: message } = useField('message', null, { initialValue: '' });
+const { value: job_title } = useField('job_title', null, { initialValue: '' });
+const { value: cv } = useField('cv', null, { initialValue: '' });
+const { value: supporting_document } = useField('supporting_document', null, {
+  initialValue: '',
 });
 
 const { storeCareer, validationErrors, isLoading } = useCareers();
@@ -396,8 +404,8 @@ const career = reactive({
   email,
   message,
   job_title,
-  cv: "",
-  supporting_document: "",
+  cv: '',
+  supporting_document: '',
 });
 
 const { execute, loaded } = useReCaptcha();
@@ -412,16 +420,16 @@ const submitForm = async () => {
     const form = await validate();
 
     if (form.valid) {
-      const recaptchaToken = await executeRecaptcha("career_form");
+      const recaptchaToken = await executeRecaptcha('career_form');
       career.recaptchaToken = recaptchaToken;
       storeCareer(career);
     }
   } catch (error) {
-    console.error("Validation error:", error);
+    console.error('Validation error:', error);
   }
 };
 
-const rootUrl = window.location.protocol + "//" + window.location.host;
+const rootUrl = window.location.protocol + '//' + window.location.host;
 const imgs = ref([]);
 
 const showSingle = (image) => {

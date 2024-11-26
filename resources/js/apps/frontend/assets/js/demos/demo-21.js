@@ -6,5 +6,5 @@ $(document).ready(function () {
 
     $('.notify-action a').on('click', function() {
     	$('.notification').css('display', 'none');
-    })
+    });
 });

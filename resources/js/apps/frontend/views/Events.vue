@@ -1,118 +1,127 @@
 <template>
-    <main class="main">
-        <div class="page-content pg-white who-we-are-section pb-1">
-            <div class="overlay"></div>
+  <main class="main">
+    <div class="page-content pg-white who-we-are-section pb-1">
+      <div class="overlay"></div>
 
-            <div class="pt-1 mb-lg-8">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-10 offset-lg-1">
-                            <h2 class="about-us-title">Events</h2>
-                            <!-- End .title -->
-                            <p class="lead about-us-lead text-primary mb-1">
-                                Elevate Skills, Amplify Visibility
-                            </p>
-                        </div>
-                        <div class="col-lg-10 offset-lg-1">
-                            <p style="about-us-p" class="text-5 about-us-p">
-                                Sheffield hosts events at the Sheffield Academy and Our Facility based on
-                                the theme of experiential sessions so that you can interact with our
-                                solutions and network with like-minded industry players.<br />
-                                Some of the events include:
-                            </p>
-                        </div>
-
-                        <div class="col-lg-10 offset-lg-1">
-                            <div class="row justify-content-left links-container mt-3">
-                                <div class="event-item">
-                                    <div class="event-image">
-                                        <img src="/assets/images/events/training.png" />
-                                    </div>
-
-                                    <div class="event-text mt-2">
-                                        <p>Product and Solutions Focus Business Training</p>
-                                    </div>
-                                </div>
-
-                                <div class="event-item">
-                                    <div class="event-image">
-                                        <img src="/assets/images/events/client_demos.png" />
-                                    </div>
-
-                                    <div class="event-text mt-2">
-                                        <p>Client Dedicated Demos</p>
-                                    </div>
-                                </div>
-
-                                <div class="event-item">
-                                    <div class="event-image">
-                                        <img src="/assets/images/events/product_launch.png" />
-                                    </div>
-
-                                    <div class="event-text mt-2">
-                                        <p>New Product Launches</p>
-                                    </div>
-                                </div>
-
-                                <div class="event-item">
-                                    <div class="event-image">
-                                        <img src="/assets/images/events/live_cooking.png" />
-                                    </div>
-
-                                    <div class="event-text mt-2">
-                                        <p>
-                                            The Rational Live Cooking sessions that take place twice a month
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div class="event-item">
-                                    <div class="event-image">
-                                        <img src="/assets/images/events/chef_competitions.png" />
-                                    </div>
-
-                                    <div class="event-text mt-2">
-                                        <p>Chefs Competitions</p>
-                                    </div>
-                                </div>
-
-                                <div class="event-item">
-                                    <div class="event-image">
-                                        <img src="/assets/images/events/partner_training.png" />
-                                    </div>
-
-                                    <div class="event-text mt-2">
-                                        <p>Partner training and Demos</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+      <div class="pt-1 mb-lg-8">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-10 offset-lg-1">
+              <h2 class="about-us-title">
+                Events
+              </h2>
+              <!-- End .title -->
+              <p class="lead about-us-lead text-primary mb-1">
+                Elevate Skills, Amplify Visibility
+              </p>
             </div>
+            <div class="col-lg-10 offset-lg-1">
+              <p style="about-us-p" class="text-5 about-us-p">
+                Sheffield hosts events at the Sheffield Academy and Our Facility based on
+                the theme of experiential sessions so that you can interact with our
+                solutions and network with like-minded industry players.<br />
+                Some of the events include:
+              </p>
+            </div>
+
+            <div class="col-lg-10 offset-lg-1">
+              <div class="row justify-content-left links-container mt-3">
+                <div class="event-item">
+                  <div class="event-image">
+                    <img src="/assets/images/events/training.png" />
+                  </div>
+
+                  <div class="event-text mt-2">
+                    <p>Product and Solutions Focus Business Training</p>
+                  </div>
+                </div>
+
+                <div class="event-item">
+                  <div class="event-image">
+                    <img src="/assets/images/events/client_demos.png" />
+                  </div>
+
+                  <div class="event-text mt-2">
+                    <p>Client Dedicated Demos</p>
+                  </div>
+                </div>
+
+                <div class="event-item">
+                  <div class="event-image">
+                    <img src="/assets/images/events/product_launch.png" />
+                  </div>
+
+                  <div class="event-text mt-2">
+                    <p>New Product Launches</p>
+                  </div>
+                </div>
+
+                <div class="event-item">
+                  <div class="event-image">
+                    <img src="/assets/images/events/live_cooking.png" />
+                  </div>
+
+                  <div class="event-text mt-2">
+                    <p>
+                      The Rational Live Cooking sessions that take place twice a month
+                    </p>
+                  </div>
+                </div>
+
+                <div class="event-item">
+                  <div class="event-image">
+                    <img src="/assets/images/events/chef_competitions.png" />
+                  </div>
+
+                  <div class="event-text mt-2">
+                    <p>Chefs Competitions</p>
+                  </div>
+                </div>
+
+                <div class="event-item">
+                  <div class="event-image">
+                    <img src="/assets/images/events/partner_training.png" />
+                  </div>
+
+                  <div class="event-text mt-2">
+                    <p>Partner training and Demos</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
+    </div>
 
-        <div class="page-content pg-white">
-            <div class="mb-lg-8 pb-4">
-                <div class="container-fluid pb-4 pt-4 mb-5">
-                    <div class="row">
-                        <div class="col-md-10 offset-lg-1">
-                            <h2 class="about-us-title mb-5">Upcoming Events</h2>
+    <div class="page-content pg-white">
+      <div class="mb-lg-8 pb-4">
+        <div class="container-fluid pb-4 pt-4 mb-5">
+          <div class="row">
+            <div class="col-md-10 offset-lg-1">
+              <h2 class="about-us-title mb-5">
+                Upcoming Events
+              </h2>
 
-                            <div class="row justify-content-left">
-                                <div>
-                                    <!--  <button @click="showSingle">Show single picture.</button> -->
-                                    <!--  <button @click="showMultiple">Show a group of pictures.</button> -->
+              <div class="row justify-content-left">
+                <div>
+                  <!--  <button @click="showSingle">Show single picture.</button> -->
+                  <!--  <button @click="showMultiple">Show a group of pictures.</button> -->
 
-                                    <!-- all props & events -->
-                                    <vue-easy-lightbox escDisabled :visible="visible" :imgs="imgs" :index="indexRef"
-                                        @hide="handleHide"></vue-easy-lightbox>
-                                </div>
+                  <!-- all props & events -->
+                  <vue-easy-lightbox
+                    esc-disabled
+                    :visible="visible"
+                    :imgs="imgs"
+                    :index="indexRef"
+                    @hide="handleHide"
+                  />
+                </div>
 
-                                <div class="col-sm-6 col-lg-4" v-for="event in events" :key="event.id">
-                                    <article class="entry entry-grid">
-                                        <figure class="entry-media">
-                                            <!-- <router-link
+                <div v-for="event in events" :key="event.id" class="col-sm-6 col-lg-4">
+                  <article class="entry entry-grid">
+                    <figure class="entry-media">
+                      <!-- <router-link
                                             :to="
                                                 getEventLink(
                                                     event.id,
@@ -120,15 +129,19 @@
                                                 )
                                             "
                                         > -->
-                                            <img @click="showSingle(event.main_image_path)" style=""
-                                                :src="'/storage/' + event.main_image_path" alt="image desc" />
-                                            <!--  </router-link> -->
-                                        </figure>
-                                        <!-- End .entry-media -->
+                      <img
+                        style=""
+                        :src="'/storage/' + event.main_image_path"
+                        alt="image desc"
+                        @click="showSingle(event.main_image_path)"
+                      />
+                      <!--  </router-link> -->
+                    </figure>
+                    <!-- End .entry-media -->
 
-                                        <div class="entry-body pt-1">
-                                            <h2 class="entry-title">
-                                                <!-- <router-link
+                    <div class="entry-body pt-1">
+                      <h2 class="entry-title">
+                        <!-- <router-link
                                                 :to="
                                                     getEventLink(
                                                         event.id,
@@ -136,29 +149,33 @@
                                                     )
                                                 "
                                                 > -->
-                                                {{ event.name }}
-                                                <!-- </router-link
+                        {{ event.name }}
+                        <!-- </router-link
                                             > -->
-                                            </h2>
-                                            <!-- End .entry-title -->
+                      </h2>
+                      <!-- End .entry-title -->
 
-                                            <div class="entry-content text-left">
-                                                <p>
-                                                    <i class="icon-map-marker"></i>
+                      <div class="entry-content text-left">
+                        <p>
+                          <i class="icon-map-marker"></i>
 
-                                                    <span class="ml-3"> {{ event.location }}</span>
-                                                    <br />
-                                                    <i class="icon-calendar"></i>
+                          <span class="ml-3"> {{ event.location }}</span>
+                          <br />
+                          <i class="icon-calendar"></i>
 
-                                                    <span class="ml-3"> {{ event.start_date }}</span>
-                                                </p>
+                          <span class="ml-3"> {{ event.start_date }}</span>
+                        </p>
 
-                                                <a class="btn btn-primary btn-round mt-2" :href="event.url"
-                                                    target="_blank" style="bottom: 0px;">
-                                                    Register
-                                                </a>
+                        <a
+                          class="btn btn-primary btn-round mt-2"
+                          :href="event.url"
+                          target="_blank"
+                          style="bottom: 0px;"
+                        >
+                          Register
+                        </a>
 
-                                                <!-- <router-link
+                        <!-- <router-link
                                                 :to="
                                                     getEventLink(
                                                         event.id,
@@ -169,35 +186,35 @@
                                                 ><span>View More</span
                                                 ><i class="icon-long-arrow-right"></i
                                             ></router-link> -->
-                                            </div>
-                                            <!-- End .entry-content -->
-                                        </div>
-                                        <!-- End .entry-body -->
-                                    </article>
-                                    <!-- End .entry -->
-                                </div>
-                                <!-- End .col-lg-3 -->
-                            </div>
-                            <!-- End .row -->
-                        </div>
+                      </div>
+                      <!-- End .entry-content -->
                     </div>
+                    <!-- End .entry-body -->
+                  </article>
+                  <!-- End .entry -->
                 </div>
+                <!-- End .col-lg-3 -->
+              </div>
+              <!-- End .row -->
             </div>
+          </div>
         </div>
-    </main>
+      </div>
+    </div>
+  </main>
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted, reactive, nextTick, watch } from "vue";
-import VueEasyLightbox from "vue-easy-lightbox";
-import { useMeta } from "../../admin/composables/use-meta";
-useMeta({ title: "Events" });
+import { ref, onMounted, onUnmounted, reactive, nextTick, watch } from 'vue';
+import VueEasyLightbox from 'vue-easy-lightbox';
+import { useMeta } from '../../admin/composables/use-meta';
+useMeta({ title: 'Events' });
 
-const rootUrl = window.location.protocol + "//" + window.location.host;
+const rootUrl = window.location.protocol + '//' + window.location.host;
 const imgs = ref([]);
 
 const showSingle = (image) => {
-    imgs.value = rootUrl + "/storage/" + image;
+    imgs.value = rootUrl + '/storage/' + image;
     show();
 };
 
@@ -213,9 +230,9 @@ const handleHide = () => {
 };
 
 const getEventLink = (id, name) => {
-    let transformedName = name.replace(/ /g, "-");
-    transformedName = transformedName.replace(/-+/g, "-");
-    transformedName = transformedName.replace(/^-+|-+$/g, "");
+    let transformedName = name.replace(/ /g, '-');
+    transformedName = transformedName.replace(/-+/g, '-');
+    transformedName = transformedName.replace(/^-+|-+$/g, '');
     transformedName = transformedName.toLowerCase();
 
     return `/events/${id}/${transformedName}`;
@@ -228,7 +245,7 @@ const events = ref([]);
 // Fetch products based on the current page
 const fetchEvents = async () => {
     try {
-        const response = await axios.get("/api/get-events", {});
+        const response = await axios.get('/api/get-events', {});
         events.value = response.data;
     } catch (error) {
         console.error(error);

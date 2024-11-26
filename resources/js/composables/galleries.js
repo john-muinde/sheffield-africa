@@ -1,18 +1,18 @@
-import { ref } from "vue";
-import { useRouter } from "vue-router";
-import { apiRequest } from "../utils/api";
-import { Modal } from "ant-design-vue";
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+import { apiRequest } from '../utils/api';
+import { Modal } from 'ant-design-vue';
 
 export default function useGallery() {
     const galleries = ref([]);
     const galleryList = ref([]);
 
     const gallery = ref({
-        name: "",
-        gallery_introduction: "",
-        gallery_type: "",
-        main_image_path: "",
-        is_published: "",
+        name: '',
+        gallery_introduction: '',
+        gallery_type: '',
+        main_image_path: '',
+        is_published: '',
     });
 
     const router = useRouter();
@@ -21,16 +21,16 @@ export default function useGallery() {
 
     const getGalleries = async (
         page = 1,
-        search_id = "",
-        search_title = "",
-        search_global = "",
-        order_column = "created_at",
-        order_direction = "desc"
+        search_id = '',
+        search_title = '',
+        search_global = '',
+        order_column = 'created_at',
+        order_direction = 'desc',
     ) => {
         try {
             const response = await apiRequest(
-                "get",
-                `/api/galleries?page=${page}&search_id=${search_id}&search_title=${search_title}&search_global=${search_global}&order_column=${order_column}&order_direction=${order_direction}`
+                'get',
+                `/api/galleries?page=${page}&search_id=${search_id}&search_title=${search_title}&search_global=${search_global}&order_column=${order_column}&order_direction=${order_direction}`,
             );
             galleries.value = response;
             console.log(response);
@@ -41,7 +41,7 @@ export default function useGallery() {
 
     const getGallery = async (id) => {
         try {
-            const response = await apiRequest("get", `/api/galleries/${id}`);
+            const response = await apiRequest('get', `/api/galleries/${id}`);
             gallery.value = response;
         } catch (errors) {
             validationErrors.value = errors;
@@ -58,7 +58,7 @@ export default function useGallery() {
 
         for (var i = 0; i < files.length; i++) {
             let file = files[i];
-            serializedPost.append("gallery_gallery[" + i + "]", file);
+            serializedPost.append('gallery_gallery[' + i + ']', file);
         }
 
         for (let item in gallery) {
@@ -68,12 +68,12 @@ export default function useGallery() {
         }
 
         const config = {
-            headers: { "Content-Type": "multipart/form-data" },
+            headers: { 'Content-Type': 'multipart/form-data' },
         };
 
         try {
-            await apiRequest("post", "/api/galleries", serializedPost, config);
-            router.push({ name: "gallery.index" });
+            await apiRequest('post', '/api/galleries', serializedPost, config);
+            router.push({ name: 'gallery.index' });
             // Reset the form values
             gallery.name = null;
             gallery.gallery_introduction = null;
@@ -82,7 +82,7 @@ export default function useGallery() {
             gallery.main_image_path = null;
             gallery.gallery_gallery = null;
 
-            showToast("Gallery saved successfully", "success");
+            showToast('Gallery saved successfully', 'success');
         } catch (errors) {
             validationErrors.value = errors;
         } finally {
@@ -101,22 +101,22 @@ export default function useGallery() {
         if (files.length > 0) {
             for (var i = 0; i < files.length; i++) {
                 let file = files[i];
-                serializedPost.append("gallery_gallery[" + i + "]", file);
+                serializedPost.append('gallery_gallery[' + i + ']', file);
             }
         }
 
         for (let item in gallery) {
-            if (gallery.hasOwnProperty(item) && item !== "categories") {
+            if (gallery.hasOwnProperty(item) && item !== 'categories') {
                 let value = gallery[item];
                 if (
                     value === null &&
-                    (item === "weight" ||
-                        item === "length" ||
-                        item === "height" ||
-                        item === "width" ||
-                        item === "quantity" ||
-                        item === "cost_price" ||
-                        item === "retail_price")
+                    (item === 'weight' ||
+                        item === 'length' ||
+                        item === 'height' ||
+                        item === 'width' ||
+                        item === 'quantity' ||
+                        item === 'cost_price' ||
+                        item === 'retail_price')
                 ) {
                     value = 0;
                 }
@@ -125,18 +125,18 @@ export default function useGallery() {
         }
 
         const config = {
-            headers: { "Content-Type": "multipart/form-data" },
+            headers: { 'Content-Type': 'multipart/form-data' },
         };
 
         try {
             await apiRequest(
-                "put",
+                'put',
                 `/api/galleries/${gallery.id}`,
                 serializedPost,
-                config
+                config,
             );
-            router.push({ name: "gallery.index" });
-            showToast("Gallery updated successfully", "success");
+            router.push({ name: 'gallery.index' });
+            showToast('Gallery updated successfully', 'success');
         } catch (errors) {
             validationErrors.value = errors;
         } finally {
@@ -146,51 +146,51 @@ export default function useGallery() {
 
     const deleteGallery = async (id) => {
         Modal.confirm({
-            title: "Are you sure?",
-            content: "You won't be able to revert this action!",
-            okText: "Yes, delete it!",
-            okType: "danger",
-            cancelText: "No, cancel",
+            title: 'Are you sure?',
+            content: 'You won\'t be able to revert this action!',
+            okText: 'Yes, delete it!',
+            okType: 'danger',
+            cancelText: 'No, cancel',
             onOk() {
-                apiRequest("delete", `/api/galleries/${id}`).then(() => {
+                apiRequest('delete', `/api/galleries/${id}`).then(() => {
                     getGalleries();
-                    router.push({ name: "gallery.index" });
-                    showToast("Gallery deleted successfully", "success");
+                    router.push({ name: 'gallery.index' });
+                    showToast('Gallery deleted successfully', 'success');
                 });
             },
             onCancel() {
-                console.log("Cancel");
+                console.log('Cancel');
             },
         });
     };
 
     const deleteGalleryImage = async (id) => {
         Modal.confirm({
-            title: "Are you sure?",
-            content: "You won't be able to revert this action!",
-            okText: "Yes, delete it!",
-            okType: "danger",
-            cancelText: "No, cancel",
+            title: 'Are you sure?',
+            content: 'You won\'t be able to revert this action!',
+            okText: 'Yes, delete it!',
+            okType: 'danger',
+            cancelText: 'No, cancel',
             onOk() {
-                apiRequest("delete", `/api/gallery-images/${id}`)
+                apiRequest('delete', `/api/gallery-images/${id}`)
                     .then(() => {
                         getGalleries();
                         router.go(0);
-                        showToast("Image deleted successfully", "success");
+                        showToast('Image deleted successfully', 'success');
                     })
                     .catch(() => {
-                        showToast("Something went wrong", "error");
+                        showToast('Something went wrong', 'error');
                     });
             },
             onCancel() {
-                console.log("Cancel");
+                console.log('Cancel');
             },
         });
     };
 
     const getGalleryList = async () => {
         try {
-            const response = await apiRequest("get", "/api/gallery-list");
+            const response = await apiRequest('get', '/api/gallery-list');
             galleryList.value = response;
         } catch (errors) {
             validationErrors.value = errors;

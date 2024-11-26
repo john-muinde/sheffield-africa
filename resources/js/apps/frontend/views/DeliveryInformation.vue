@@ -1,13 +1,13 @@
 <template>
-    <div>
-        <p>Delivery Information</p>
-    </div>
+  <div>
+    <p>Delivery Information</p>
+  </div>
 </template>
 
 <script>
 
 </script>
 
-<style >
+<style>
 
 </style>

@@ -24,7 +24,7 @@
     decimals: 0,           // the number of decimal places to show
     formatter: formatter,  // handler for formatting the value before rendering
     onUpdate: null,        // callback method for every time the element is updated
-    onComplete: null       // callback method for when the element finishes updating
+    onComplete: null,       // callback method for when the element finishes updating
   };
 
   CountTo.prototype.init = function () {
@@ -40,7 +40,7 @@
       to:              this.$element.data('to'),
       speed:           this.$element.data('speed'),
       refreshInterval: this.$element.data('refresh-interval'),
-      decimals:        this.$element.data('decimals')
+      decimals:        this.$element.data('decimals'),
     };
 
     var keys = Object.keys(options);

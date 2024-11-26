@@ -1,88 +1,99 @@
 <template>
-    <div class="own-product position-relative px-2 product-card">
-        <!-- Savings Badge -->
-        <span class="savings-badge">
-            Save {{ calculateDiscount(product.cost_price, product.retail_price) }}%
-        </span>
-        <!-- Product Image with loading skeleton -->
-        <div class="product-image-container">
-            <router-link :to="getProductLink(product.id, product.name, product.model_number)"
-                class="d-flex justify-content-center align-items-center mt-2">
-                <div class="image-skeleton" v-if="!imageLoaded"></div>
-                <img v-lazy="'/storage/' + product.main_image_path" :alt="product.name"
-                    class="img img-fluid product-image" @load="imageLoaded = true" />
-            </router-link>
-        </div>
-
-        <!-- Product Details with improved spacing -->
-        <div class="product-details">
-            <!-- Product Name with ellipsis -->
-            <span class="text-start product-name">{{ product.name }}</span>
-            <!-- Description with ellipsis -->
-            <span class="text-start text-muted product-description">
-                {{ product.model_number }}
-            </span>
-        </div>
-
-        <!-- Pricing Section -->
-        <div class="pricing-section">
-            <!-- Original Price -->
-            <span class="fw-bold text-center text-muted original-price">
-                KES {{ formatPrice(product.cost_price) }}
-            </span>
-
-            <!-- Discounted Price with animation -->
-            <div class="price-tag bg-danger fw-bold text-uppercase">
-                KES {{ formatPrice(product.retail_price) }}
-            </div>
-
-            <!-- Enhanced Add to Cart Button -->
-            <div class="product-action-image">
-                <button @click="addToCart(product)" class="btn-product btn-cart" :class="{ adding: isAdding }"
-                    @mouseenter="showTooltip = true" @mouseleave="showTooltip = false">
-                    <span class="btn-text">{{ addToCartText }}</span>
-                    <div class="btn-loading-icon" v-if="isAdding">
-                        <span class="spinner"></span>
-                    </div>
-                </button>
-            </div>
-        </div>
-
-        <button id="scroll-top" title="Back to Top">
-            <i class="icon-arrow-up"></i>
-        </button>
+  <div class="own-product position-relative px-2 product-card">
+    <!-- Savings Badge -->
+    <span class="savings-badge">
+      Save {{ calculateDiscount(product.cost_price, product.retail_price) }}%
+    </span>
+    <!-- Product Image with loading skeleton -->
+    <div class="product-image-container">
+      <router-link
+        :to="getProductLink(product.id, product.name, product.model_number)"
+        class="d-flex justify-content-center align-items-center mt-2"
+      >
+        <div v-if="!imageLoaded" class="image-skeleton"></div>
+        <img
+          v-lazy="'/storage/' + product.main_image_path"
+          :alt="product.name"
+          class="img img-fluid product-image"
+          @load="imageLoaded = true"
+        />
+      </router-link>
     </div>
+
+    <!-- Product Details with improved spacing -->
+    <div class="product-details">
+      <!-- Product Name with ellipsis -->
+      <span class="text-start product-name">{{ product.name }}</span>
+      <!-- Description with ellipsis -->
+      <span class="text-start text-muted product-description">
+        {{ product.model_number }}
+      </span>
+    </div>
+
+    <!-- Pricing Section -->
+    <div class="pricing-section">
+      <!-- Original Price -->
+      <span class="fw-bold text-center text-muted original-price">
+        KES {{ formatPrice(product.cost_price) }}
+      </span>
+
+      <!-- Discounted Price with animation -->
+      <div class="price-tag bg-danger fw-bold text-uppercase">
+        KES {{ formatPrice(product.retail_price) }}
+      </div>
+
+      <!-- Enhanced Add to Cart Button -->
+      <div class="product-action-image">
+        <button
+          class="btn-product btn-cart"
+          :class="{ adding: isAdding }"
+          @click="addToCart(product)"
+          @mouseenter="showTooltip = true"
+          @mouseleave="showTooltip = false"
+        >
+          <span class="btn-text">{{ addToCartText }}</span>
+          <div v-if="isAdding" class="btn-loading-icon">
+            <span class="spinner"></span>
+          </div>
+        </button>
+      </div>
+    </div>
+
+    <button id="scroll-top" title="Back to Top">
+      <i class="icon-arrow-up"></i>
+    </button>
+  </div>
 </template>
 
 <script setup>
-import { ref, computed } from "vue";
+import { ref, computed } from 'vue';
 
 const props = defineProps({
     product: {
         type: Object,
-        required: true
-    }
+        required: true,
+    },
 });
 
 const product = props.product;
 
-import { useStore } from "vuex"; // Import the store
+import { useStore } from 'vuex'; // Import the store
 
 const store = useStore();
 
 
-const isAdding = ref(false)
-const showTooltip = ref(false)
-const imageLoaded = ref(false)
+const isAdding = ref(false);
+const showTooltip = ref(false);
+const imageLoaded = ref(false);
 
 
 const addToCartText = computed(() => {
-    return isAdding.value ? 'Adding...' : 'Add to Cart'
-})
+    return isAdding.value ? 'Adding...' : 'Add to Cart';
+});
 
 const formatPrice = (price) => {
-    return new Intl.NumberFormat('en-KE').format(price)
-}
+    return new Intl.NumberFormat('en-KE').format(price);
+};
 
 const calculateDiscount = (original, discounted) => {
     return Math.round(((original - discounted) / original) * 100);
@@ -101,59 +112,59 @@ const calculateDiscount = (original, discounted) => {
 
 const addToCart = (product) => {
     if (isAdding.value) return;
-    isAdding.value = true
+    isAdding.value = true;
     try {
         const toast = window.Swal.mixin({
             toast: true,
-            position: "bottom-end",
+            position: 'bottom-end',
             showConfirmButton: false,
             timer: 4000,
-            padding: "2em",
+            padding: '2em',
         });
-        store.dispatch("cart/addToCart", product);
+        store.dispatch('cart/addToCart', product);
         toast.fire({
-            icon: "success",
-            title: "Item added to cart",
-            padding: "2em",
+            icon: 'success',
+            title: 'Item added to cart',
+            padding: '2em',
             customClass: {
-                title: "swal-title-class",
+                title: 'swal-title-class',
             },
         });
     } catch (error) {
-        console.error(error)
+        console.error(error);
         toast.fire({
-            icon: "error",
-            title: "Failed to add item to cart",
-            padding: "2em",
+            icon: 'error',
+            title: 'Failed to add item to cart',
+            padding: '2em',
             customClass: {
-                title: "swal-title-class",
+                title: 'swal-title-class',
             },
         });
     } finally {
-        isAdding.value = false
+        isAdding.value = false;
     }
-}
+};
 
 
 
 const getProductLink = (id, name, model_number, main_second_parent_cat) => {
     // Replace spaces with dashes
-    let transformedName = name.replace(/ /g, "-").replace(/\//g, "-");
+    let transformedName = name.replace(/ /g, '-').replace(/\//g, '-');
     // Remove consecutive dashes
-    transformedName = transformedName.replace(/-+/g, "-");
+    transformedName = transformedName.replace(/-+/g, '-');
     // Remove leading and trailing dashes
-    transformedName = transformedName.replace(/^-+|-+$/g, "");
+    transformedName = transformedName.replace(/^-+|-+$/g, '');
     // Convert to lowercase
     transformedName = transformedName.toLowerCase();
 
     let transformedModelNumber = model_number
         .toLowerCase()
-        .replace(/ /g, "-")
-        .replace(/\//g, "-");
+        .replace(/ /g, '-')
+        .replace(/\//g, '-');
     // Remove consecutive dashes
-    transformedModelNumber = transformedModelNumber.replace(/-+/g, "-");
+    transformedModelNumber = transformedModelNumber.replace(/-+/g, '-');
     // Remove leading and trailing dashes
-    transformedModelNumber = transformedModelNumber.replace(/^-+|-+$/g, "");
+    transformedModelNumber = transformedModelNumber.replace(/^-+|-+$/g, '');
 
     return `/kitchen/product/${id}/${transformedName}-${transformedModelNumber}`;
 };

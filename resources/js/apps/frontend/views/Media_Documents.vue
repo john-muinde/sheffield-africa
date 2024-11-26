@@ -1,53 +1,74 @@
 <template>
-    <div>
-        <main class="main">
-            <div class="page-content">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-10 offset-lg-1">
-                            <h2 class="about-us-title">Brochures & Catalogs</h2>
+  <div>
+    <main class="main">
+      <div class="page-content">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-10 offset-lg-1">
+              <h2 class="about-us-title">
+                Brochures & Catalogs
+              </h2>
 
-                            <router-link to="/media" class="btn btn-primary btn-round btn-shadow float-right">
-                                <i class="icon-long-arrow-left"></i>
-                                <span>Back to Media Center</span>
-                            </router-link>
+              <router-link to="/media" class="btn btn-primary btn-round btn-shadow float-right">
+                <i class="icon-long-arrow-left"></i>
+                <span>Back to Media Center</span>
+              </router-link>
 
-                            <p class="lead about-us-lead text-primary mb-1">
-                                Explore Our Brochures & Catalogs
-                            </p>
+              <p class="lead about-us-lead text-primary mb-1">
+                Explore Our Brochures & Catalogs
+              </p>
 
-                            <p class="about-us-text mb-2">
-                                Click on the documents to view
-                            </p>
+              <p class="about-us-text mb-2">
+                Click on the documents to view
+              </p>
 
-                            <ContentState v-if="loading" type="loading" contentType="Brochures & Catalogs" />
-                            <ContentState v-if="!brochures.length && !loading && error == null" type="empty"
-                                contentType="Brochures & Catalogs" />
-                            <ContentState v-if="!!error && !loading" type="error" :errorSubMessage="error.message"
-                                contentType="Brochures & Catalogs" @retry="fetchMediaCenter" />
+              <ContentState v-if="loading" type="loading" content-type="Brochures & Catalogs" />
+              <ContentState
+                v-if="!brochures.length && !loading && error == null"
+                type="empty"
+                content-type="Brochures & Catalogs"
+              />
+              <ContentState
+                v-if="!!error && !loading"
+                type="error"
+                :error-sub-message="error.message"
+                content-type="Brochures & Catalogs"
+                @retry="fetchMediaCenter"
+              />
 
-                            <div v-show="brochures.length" class="dflip-books row media-center" id="dflip-books"
-                                ref="bookContainer">
-                                <a v-for="brochure in brochures" :key="brochure.id"
-                                    :href="`/media/brochures#${brochure.slug}/`" class="_df_thumb"
-                                    :data-slug="brochure.slug" :data-title="brochure.name" :id="`df_${brochure.id}`"
-                                    :data-df-option="`df_option_${brochure.id}`" :thumb="brochure.thumb">
-                                    {{ brochure.name }}
-                                </a>
-                            </div>
-                            <canvas ref="thumbnailCanvas" style="display: none"></canvas>
-                        </div>
-                    </div>
-                </div>
+              <div
+                v-show="brochures.length"
+                id="dflip-books"
+                ref="bookContainer"
+                class="dflip-books row media-center"
+              >
+                <a
+                  v-for="brochure in brochures"
+                  :id="`df_${brochure.id}`"
+                  :key="brochure.id"
+                  :href="`/media/brochures#${brochure.slug}/`"
+                  class="_df_thumb"
+                  :data-slug="brochure.slug"
+                  :data-title="brochure.name"
+                  :data-df-option="`df_option_${brochure.id}`"
+                  :thumb="brochure.thumb"
+                >
+                  {{ brochure.name }}
+                </a>
+              </div>
+              <canvas ref="thumbnailCanvas" style="display: none"></canvas>
             </div>
-        </main>
-    </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
 </template>
 
 <script setup>
 import { onMounted } from 'vue';
 import { useMediaDocuments } from '@/composables/documents';
-import ContentState from "@/Components/ContentState.vue";
+import ContentState from '@/Components/ContentState.vue';
 import { onBeforeRouteLeave } from 'vue-router';
 
 // Initialize with custom options
@@ -57,7 +78,7 @@ const {
     documents: brochures,
     loading,
     error,
-    handleRouteLeave
+    handleRouteLeave,
 } = useMediaDocuments({
     thumbnailScale: 0.4,
     enableDflip: true,
@@ -65,7 +86,7 @@ const {
 
 // Fetch function for media center
 const fetchMediaCenter = async () => {
-    const response = await axios.get("/api/get-media-center");
+    const response = await axios.get('/api/get-media-center');
     return response.data.brochures;
 };
 

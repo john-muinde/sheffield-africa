@@ -1,91 +1,114 @@
 <template>
-    <div class="layout-px-spacing">
-        <teleport to="#breadcrumb">
-            <ul class="navbar-nav flex-row">
-                <li>
-                    <div class="page-header">
-                        <nav class="breadcrumb-one" aria-label="breadcrumb">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item">
-                                    <a href="javascript:;">DataTables</a>
-                                </li>
-                                <li class="breadcrumb-item active" aria-current="page">
-                                    <span>Sticky Header</span>
-                                </li>
-                            </ol>
-                        </nav>
-                    </div>
+  <div class="layout-px-spacing">
+    <teleport to="#breadcrumb">
+      <ul class="navbar-nav flex-row">
+        <li>
+          <div class="page-header">
+            <nav class="breadcrumb-one" aria-label="breadcrumb">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                  <a href="javascript:;">DataTables</a>
                 </li>
-            </ul>
-        </teleport>
+                <li class="breadcrumb-item active" aria-current="page">
+                  <span>Sticky Header</span>
+                </li>
+              </ol>
+            </nav>
+          </div>
+        </li>
+      </ul>
+    </teleport>
 
-        <div class="seperator-header layout-top-spacing mb-4">
-            <h4 class="">Sticky Header</h4>
-        </div>
-        <div class="row layout-top-spacing">
-            <div class="col-xl-12 col-lg-12 col-sm-12 layout-spacing">
-                <div class="panel br-6 p-0">
-                    <div class="vue3-datatable sticky-table">
-                        <vue3-datatable :rows="rows" :columns="cols" :totalRows="rows?.length" :sortable="true" :pageSize="20" :hasCheckbox="true" :stickyHeader="true" class="text-nowrap">
-                            <template #id="data">
-                                <strong>#{{ data.value.id }}</strong>
-                            </template>
-                        </vue3-datatable>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="seperator-header layout-top-spacing mb-4">
-            <h4 class="">Sticky First Column</h4>
-        </div>
-        <div class="row layout-top-spacing">
-            <div class="col-xl-12 col-lg-12 col-sm-12 layout-spacing">
-                <div class="panel br-6 p-0">
-                    <div class="vue3-datatable sticky-table">
-                        <vue3-datatable :rows="rows" :columns="cols" :totalRows="rows?.length" :sortable="true" :hasCheckbox="true" :stickyFirstColumn="true" class="text-nowrap">
-                            <template #id="data">
-                                <strong>#{{ data.value.id }}</strong>
-                            </template>
-                            <template #email="data">
-                                <a :href="`mailto:${data.value.email}`" class="text-primary hover:underline">{{ data.value.email }}</a>
-                            </template>
-                        </vue3-datatable>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="seperator-header layout-top-spacing mb-4">
-            <h4 class="">Sticky Header & First Column</h4>
-        </div>
-        <div class="row layout-top-spacing">
-            <div class="col-xl-12 col-lg-12 col-sm-12 layout-spacing">
-                <div class="panel br-6 p-0">
-                    <div class="vue3-datatable sticky-table">
-                        <vue3-datatable
-                            :rows="rows"
-                            :columns="cols"
-                            :totalRows="rows?.length"
-                            :sortable="true"
-                            :pageSize="20"
-                            :hasCheckbox="true"
-                            :stickyFirstColumn="true"
-                            :stickyHeader="true"
-                            class="text-nowrap"
-                        >
-                            <template #id="data">
-                                <strong>#{{ data.value.id }}</strong>
-                            </template>
-                            <template #email="data">
-                                <a :href="`mailto:${data.value.email}`" class="text-primary hover:underline">{{ data.value.email }}</a>
-                            </template>
-                        </vue3-datatable>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div class="seperator-header layout-top-spacing mb-4">
+      <h4 class="">
+        Sticky Header
+      </h4>
     </div>
+    <div class="row layout-top-spacing">
+      <div class="col-xl-12 col-lg-12 col-sm-12 layout-spacing">
+        <div class="panel br-6 p-0">
+          <div class="vue3-datatable sticky-table">
+            <vue3-datatable
+              :rows="rows"
+              :columns="cols"
+              :total-rows="rows?.length"
+              :sortable="true"
+              :page-size="20"
+              :has-checkbox="true"
+              :sticky-header="true"
+              class="text-nowrap"
+            >
+              <template #id="data">
+                <strong>#{{ data.value.id }}</strong>
+              </template>
+            </vue3-datatable>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="seperator-header layout-top-spacing mb-4">
+      <h4 class="">
+        Sticky First Column
+      </h4>
+    </div>
+    <div class="row layout-top-spacing">
+      <div class="col-xl-12 col-lg-12 col-sm-12 layout-spacing">
+        <div class="panel br-6 p-0">
+          <div class="vue3-datatable sticky-table">
+            <vue3-datatable
+              :rows="rows"
+              :columns="cols"
+              :total-rows="rows?.length"
+              :sortable="true"
+              :has-checkbox="true"
+              :sticky-first-column="true"
+              class="text-nowrap"
+            >
+              <template #id="data">
+                <strong>#{{ data.value.id }}</strong>
+              </template>
+              <template #email="data">
+                <a :href="`mailto:${data.value.email}`" class="text-primary hover:underline">{{ data.value.email }}</a>
+              </template>
+            </vue3-datatable>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="seperator-header layout-top-spacing mb-4">
+      <h4 class="">
+        Sticky Header & First Column
+      </h4>
+    </div>
+    <div class="row layout-top-spacing">
+      <div class="col-xl-12 col-lg-12 col-sm-12 layout-spacing">
+        <div class="panel br-6 p-0">
+          <div class="vue3-datatable sticky-table">
+            <vue3-datatable
+              :rows="rows"
+              :columns="cols"
+              :total-rows="rows?.length"
+              :sortable="true"
+              :page-size="20"
+              :has-checkbox="true"
+              :sticky-first-column="true"
+              :sticky-header="true"
+              class="text-nowrap"
+            >
+              <template #id="data">
+                <strong>#{{ data.value.id }}</strong>
+              </template>
+              <template #email="data">
+                <a :href="`mailto:${data.value.email}`" class="text-primary hover:underline">{{ data.value.email }}</a>
+              </template>
+            </vue3-datatable>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script setup>

@@ -14,8 +14,14 @@
       <nav aria-label="breadcrumb" class="breadcrumb-nav">
         <div class="container">
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><router-link to="/">HOME</router-link></li>
-            <li class="breadcrumb-item active" aria-current="page">WARRANTY TERMS</li>
+            <li class="breadcrumb-item">
+              <router-link to="/">
+                HOME
+              </router-link>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">
+              WARRANTY TERMS
+            </li>
           </ol>
         </div>
         <!-- End .container -->
@@ -27,25 +33,24 @@
           <div class="row">
             <div class="col-lg-12">
               <div class="headings">
-               
-                <h3 class="heading text-primary">Warranty Terms</h3>
+                <h3 class="heading text-primary">
+                  Warranty Terms
+                </h3>
               </div>
 
               <ol style="list-style-type:decimal;">
-
-              <li>
+                <li>
                   For optimum working of machines it is essential that the supply of other services are of the required specifications:
               
-                <ul style="list-style-type: lower-alpha;">
+                  <ul style="list-style-type: lower-alpha;">
                     <li>Water should be soft and clear.</li>
                     <li>Drain should be the right size and right position.</li>
                     <li>Gas should be of the right size and right pressure.</li>
                     <li>Electrical supply should have stabilized and safety from phase failure, single phasing, and short circuit.</li>
                     <li>Trained qualified persons to authorize, clean, and maintain equipment.</li>
-
-                </ul>
-            </li>
-               <li>Equipment supplied will be of the right specification as per the quotation and warranty terms are only applicable if Sheffield technicians have done the installation.</li>
+                  </ul>
+                </li>
+                <li>Equipment supplied will be of the right specification as per the quotation and warranty terms are only applicable if Sheffield technicians have done the installation.</li>
                 <li>Warranty is NOT applicable if the client selects different equipment of make, model, or capacity than what is recommended that may strain the efficiency & effectiveness of the equipment.</li>
                 <li>Warranty is only valid if our technicians execute the installation. Installation done independently by the client will render the warranty null and void.</li>
                 <li>Warranty is only valid if our technicians execute the service/ repair works. Any service, repair work, and replacement of parts done by the client will render the warranty null and void.</li>
@@ -67,32 +72,24 @@
                 <li>All costs of re-installation & relocation, cartage, freight, and insurance associated with this warranty will be paid by the claimant.</li>
                 <li>Sheffield provides professional training and advice regarding the usage of goods supplied, this should be respected to validate the warranty.</li>
                 <li>Warranty does not cover glass breakage and other physical elements of the equipment. The warranty only covers spares.</li>
-
- 
-
-
-            </ol>
+              </ol>
               <p>
-                  <strong>LEGAL GOVERNANCE</strong><br>
-                  These terms and conditions are governed under the jurisdiction of the Republic of Kenya.
+                <strong>LEGAL GOVERNANCE</strong><br />
+                These terms and conditions are governed under the jurisdiction of the Republic of Kenya.
               </p>
-              
             </div>
-            
           </div>
         </div>
         <!-- End .container -->
       </div>
       <!-- End .page-content -->
-
-      
     </main>
   </div>
 </template>
 
 <script setup>
-  import { useMeta } from "../../admin/composables/use-meta";
-useMeta({ title: "Warranty Terms" });
+  import { useMeta } from '../../admin/composables/use-meta';
+useMeta({ title: 'Warranty Terms' });
 </script>
 
 

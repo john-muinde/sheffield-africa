@@ -1,12 +1,12 @@
-import axios from "axios";
-import NProgress from "nprogress";
-import "nprogress/nprogress.css";
+import axios from 'axios';
+import NProgress from 'nprogress';
+import 'nprogress/nprogress.css';
 
 // Configure NProgress
 NProgress.configure({
     showSpinner: false,
     minimum: 0.1,
-    easing: "ease",
+    easing: 'ease',
     speed: 500,
     trickleSpeed: 200,
 });
@@ -95,16 +95,16 @@ const styles = `
 `;
 
 // Add styles to head
-const styleSheet = document.createElement("style");
+const styleSheet = document.createElement('style');
 styleSheet.textContent = styles;
 document.head.appendChild(styleSheet);
 
 // Create loading overlay element
 const createLoadingOverlay = () => {
-    const overlay = document.createElement("div");
-    overlay.className = "request-loading-overlay";
-    const pulse = document.createElement("div");
-    pulse.className = "loading-pulse";
+    const overlay = document.createElement('div');
+    overlay.className = 'request-loading-overlay';
+    const pulse = document.createElement('div');
+    pulse.className = 'loading-pulse';
     overlay.appendChild(pulse);
     document.body.appendChild(overlay);
     return overlay;
@@ -117,37 +117,37 @@ let activeRequests = 0;
 
 const showLoading = () => {
     activeRequests++;
-    loadingOverlay.classList.add("active");
+    loadingOverlay.classList.add('active');
 };
 
 const hideLoading = () => {
     activeRequests--;
     if (activeRequests <= 0) {
         activeRequests = 0;
-        loadingOverlay.classList.remove("active");
+        loadingOverlay.classList.remove('active');
     }
 };
 
 // Create axios instance
 const axiosInstance = axios.create({
-    baseURL: "/",
+    baseURL: '/',
 });
 
 // Request interceptor
 axiosInstance.interceptors.request.use(
     (config) => {
-        if (!config.headers?.["x-no-loader"]) {
+        if (!config.headers?.['x-no-loader']) {
             NProgress.start();
             // showLoading();
         }
 
-        const token = localStorage.getItem("token");
+        const token = localStorage.getItem('token');
         if (token) {
             config.headers.Authorization = `Bearer ${token}`;
         }
 
-        if (!config.headers["Content-Type"]) {
-            config.headers["Content-Type"] = "application/json";
+        if (!config.headers['Content-Type']) {
+            config.headers['Content-Type'] = 'application/json';
         }
 
         return config;
@@ -156,13 +156,13 @@ axiosInstance.interceptors.request.use(
         // hideLoading();
         NProgress.done();
         return Promise.reject(error);
-    }
+    },
 );
 
 // Response interceptor
 axiosInstance.interceptors.response.use(
     (response) => {
-        if (!response.config.headers?.["x-no-loader"]) {
+        if (!response.config.headers?.['x-no-loader']) {
             hideLoading();
             NProgress.done();
         }
@@ -172,7 +172,7 @@ axiosInstance.interceptors.response.use(
         hideLoading();
         NProgress.done();
         return Promise.reject(error);
-    }
+    },
 );
 
 // Router navigation guard for page transitions

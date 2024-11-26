@@ -14,7 +14,11 @@
       <nav aria-label="breadcrumb" class="breadcrumb-nav">
         <div class="container">
           <ol class="breadcrumb">
-             <li class="breadcrumb-item"><router-link to="/">HOME</router-link></li>
+            <li class="breadcrumb-item">
+              <router-link to="/">
+                HOME
+              </router-link>
+            </li>
             <li class="breadcrumb-item active" aria-current="page">
               CART
             </li>
@@ -40,10 +44,6 @@
                   </thead>
 
                   <tbody>
-
-
-
-
                     <tr v-for="(item, index) in cartItems" :key="index">
                       <td class="product-col">
                         <div class="product">
@@ -65,11 +65,11 @@
                       </td>
                       <td class="price-col">
                         <img
-                         v-if="item.product_brand && item.product_brand.main_image_path"
-                            :src="'/storage/' + item.product_brand.main_image_path"
-                            alt="product"
-                            style="max-width: 50%;"
-                          />
+                          v-if="item.product_brand && item.product_brand.main_image_path"
+                          :src="'/storage/' + item.product_brand.main_image_path"
+                          alt="product"
+                          style="max-width: 50%;"
+                        />
                       </td>
                       <td class="quantity-col">
                         <div class="cart-product-quantity">
@@ -93,9 +93,6 @@
                         </button>
                       </td>
                     </tr>
-
-
-                
                   </tbody>
                 </table>
                 <!-- End .table table-wishlist -->
@@ -106,7 +103,9 @@
               <!-- End .col-lg-9 -->
               <aside class="col-lg-3">
                 <div class="summary summary-cart">
-                  <h3 class="summary-title">Cart Total</h3>
+                  <h3 class="summary-title">
+                    Cart Total
+                  </h3>
                   <!-- End .summary-title -->
 
                   <table class="table table-summary">
@@ -125,16 +124,15 @@
                         <td>
                           <div class="custom-control custom-radio">
                             <input
-                              type="radio"
                               id="free-shipping"
+                              type="radio"
                               name="shipping"
                               class="custom-control-input"
                             />
                             <label
                               class="custom-control-label"
                               for="free-shipping"
-                              >Free Shipping</label
-                            >
+                            >Free Shipping</label>
                           </div>
                           <!-- End .custom-control -->
                         </td>
@@ -146,16 +144,15 @@
                         <td>
                           <div class="custom-control custom-radio">
                             <input
-                              type="radio"
                               id="standart-shipping"
+                              type="radio"
                               name="shipping"
                               class="custom-control-input"
                             />
                             <label
                               class="custom-control-label"
                               for="standart-shipping"
-                              >Standart:</label
-                            >
+                            >Standart:</label>
                           </div>
                           <!-- End .custom-control -->
                         </td>
@@ -167,16 +164,15 @@
                         <td>
                           <div class="custom-control custom-radio">
                             <input
-                              type="radio"
                               id="express-shipping"
+                              type="radio"
                               name="shipping"
                               class="custom-control-input"
                             />
                             <label
                               class="custom-control-label"
                               for="express-shipping"
-                              >Express:</label
-                            >
+                            >Express:</label>
                           </div>
                           <!-- End .custom-control -->
                         </td>
@@ -205,12 +201,11 @@
                   <router-link
                     to="/checkout"
                     class="btn btn-outline-primary-2 btn-order btn-block"
-                    >PROCEED TO RFQ</router-link
                   >
+                    PROCEED TO RFQ
+                  </router-link>
                 </div>
                 <!-- End .summary -->
-
-               
               </aside>
               <!-- End .col-lg-3 -->
             </div>
@@ -226,7 +221,7 @@
 </template>
 
 <script setup>
-  import { useStore } from "vuex";
+  import { useStore } from 'vuex';
   const store = useStore();
 
   const cartItems = store.state.cart.cartItems;

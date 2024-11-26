@@ -1,14 +1,14 @@
-import { ref } from "vue";
-import { useRouter } from "vue-router";
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 
 export function useMediaDocuments(options = {}) {
     const {
         thumbnailScale = 0.5,
         enableDflip = true,
-        cdnBaseUrl = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174",
-        storageBaseUrl = window.location.origin + "/storage",
+        cdnBaseUrl = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174',
+        storageBaseUrl = window.location.origin + '/storage',
         filters = {
-            type: "document",
+            type: 'document',
         },
     } = options;
 
@@ -24,13 +24,13 @@ export function useMediaDocuments(options = {}) {
         try {
             await Promise.all([
                 new Promise((resolve) => {
-                    const script = document.createElement("script");
+                    const script = document.createElement('script');
                     script.src = `${cdnBaseUrl}/pdf.min.js`;
                     script.onload = resolve;
                     document.head.appendChild(script);
                 }),
                 new Promise((resolve) => {
-                    const script = document.createElement("script");
+                    const script = document.createElement('script');
                     script.src = `${cdnBaseUrl}/pdf.worker.min.js`;
                     script.onload = resolve;
                     document.head.appendChild(script);
@@ -40,7 +40,7 @@ export function useMediaDocuments(options = {}) {
             await new Promise((resolve) => setTimeout(resolve, 100));
             return window.pdfjsLib;
         } catch (err) {
-            console.error("Failed to load PDF.js", err);
+            console.error('Failed to load PDF.js', err);
             throw err;
         }
     };
@@ -54,9 +54,9 @@ export function useMediaDocuments(options = {}) {
             const pdf = await loadingTask.promise;
             const page = await pdf.getPage(1);
 
-            const canvas = document.createElement("canvas");
+            const canvas = document.createElement('canvas');
             const viewport = page.getViewport({ scale });
-            const context = canvas.getContext("2d");
+            const context = canvas.getContext('2d');
 
             canvas.width = viewport.width;
             canvas.height = viewport.height;
@@ -66,9 +66,9 @@ export function useMediaDocuments(options = {}) {
                 viewport: viewport,
             }).promise;
 
-            return canvas.toDataURL("image/jpeg", 0.8);
+            return canvas.toDataURL('image/jpeg', 0.8);
         } catch (error) {
-            console.error("Error generating thumbnail:", error);
+            console.error('Error generating thumbnail:', error);
             return null;
         }
     };
@@ -86,22 +86,22 @@ export function useMediaDocuments(options = {}) {
                     doc.slug ||
                     doc.name
                         .toLowerCase()
-                        .replace(/[^a-z0-9]+/g, "-")
-                        .replace(/^-|-$/g, "");
+                        .replace(/[^a-z0-9]+/g, '-')
+                        .replace(/^-|-$/g, '');
 
                 // Handle thumbnail generation
                 let height = 0,
                     width = 0,
                     heightWidthRatio = 1,
-                    orientation = "unknown";
+                    orientation = 'unknown';
                 try {
                     if (
                         !doc.thumbnail_path &&
-                        doc.publication_file.toLowerCase().endsWith(".pdf")
+                        doc.publication_file.toLowerCase().endsWith('.pdf')
                     ) {
                         // Generate thumbnail for PDF
                         const thumbnail = await generateThumbnail(
-                            doc.publication_file
+                            doc.publication_file,
                         );
                         doc.thumb = thumbnail || undefined;
                     } else if (doc.thumbnail_path) {
@@ -122,18 +122,18 @@ export function useMediaDocuments(options = {}) {
 
                             // Determine orientation based on ratio
                             if (heightWidthRatio > 1) {
-                                orientation = "portrait";
+                                orientation = 'portrait';
                             } else if (heightWidthRatio < 1) {
-                                orientation = "landscape";
+                                orientation = 'landscape';
                             } else {
-                                orientation = "square";
+                                orientation = 'square';
                             }
                         }
                     }
                 } catch (error) {
                     console.error(
                         `Error processing thumbnail for ${doc.name}:`,
-                        error
+                        error,
                     );
                 }
 
@@ -152,11 +152,11 @@ export function useMediaDocuments(options = {}) {
             // Sort documents by height-width ratio in descending order
             // This will prioritize portrait (taller) images, then square, then landscape
             documents.value = processedDocuments.sort(
-                (a, b) => b.heightWidthRatio - a.heightWidthRatio
+                (a, b) => b.heightWidthRatio - a.heightWidthRatio,
             );
 
             console.log(
-                "Processed documents:",
+                'Processed documents:',
                 documents.value.map((d) => {
                     return {
                         name: d.name,
@@ -165,7 +165,7 @@ export function useMediaDocuments(options = {}) {
                         heightWidthRatio: d.heightWidthRatio.toFixed(2),
                         orientation: d.orientation,
                     };
-                })
+                }),
             );
 
             loading.value = false;
@@ -182,15 +182,15 @@ export function useMediaDocuments(options = {}) {
     const getEstimatedThumbnailHeight = (doc) => {
         if (doc.thumbnail_path) {
             const knownHeights = {
-                "a4-portrait": 794,
-                "a4-landscape": 560,
-                "letter-portrait": 792,
-                "letter-landscape": 612,
+                'a4-portrait': 794,
+                'a4-landscape': 560,
+                'letter-portrait': 792,
+                'letter-landscape': 612,
             };
 
             // Try to match known dimensions
             const matchedHeight = Object.values(knownHeights).find((height) =>
-                doc.thumbnail_path.includes(String(height))
+                doc.thumbnail_path.includes(String(height)),
             );
 
             if (matchedHeight) return matchedHeight;
@@ -204,7 +204,7 @@ export function useMediaDocuments(options = {}) {
             default: 200,
         };
 
-        return typeHeights[doc.type] || typeHeights["default"];
+        return typeHeights[doc.type] || typeHeights['default'];
     };
 
     // Optimized sorting method with fallback
@@ -221,19 +221,19 @@ export function useMediaDocuments(options = {}) {
         if (!enableDflip || !docs.length) return false;
 
         docs.forEach((doc) => {
-            if (doc.publication_file.toLowerCase().endsWith(".pdf")) {
+            if (doc.publication_file.toLowerCase().endsWith('.pdf')) {
                 window[`df_option_${doc.id}`] = {
                     source: `${storageBaseUrl}/${doc.publication_file}`,
                     outline: [],
                     autoEnableOutline: false,
                     autoEnableThumbnail: false,
                     overwritePDFOutline: false,
-                    pageSize: "0",
+                    pageSize: '0',
                     is3D: true,
-                    height: "100",
-                    direction: "1",
+                    height: '100',
+                    direction: '1',
                     slug: doc.slug,
-                    wpOptions: "true",
+                    wpOptions: 'true',
                     id: doc.id,
                 };
             }
@@ -243,14 +243,14 @@ export function useMediaDocuments(options = {}) {
             window.DFLIP.parseBooks();
             if (router.currentRoute.value.hash) {
                 // if has is only #_ then remove the hash
-                if (router.currentRoute.value.hash === "#_") {
+                if (router.currentRoute.value.hash === '#_') {
                     router.replace({
-                        hash: "",
+                        hash: '',
                     });
                     return;
                 }
                 const brochure = docs.find((b) =>
-                    router.currentRoute.value.hash.includes(b.slug)
+                    router.currentRoute.value.hash.includes(b.slug),
                 );
                 if (brochure) {
                     document.getElementById(`df_${brochure.id}`).click();
@@ -259,28 +259,28 @@ export function useMediaDocuments(options = {}) {
             return true;
         }
 
-        console.warn("DFLIP library not loaded");
+        console.warn('DFLIP library not loaded');
         return false;
     };
 
     // Handle route leaving with open DFlip book
     const handleRouteLeave = (to, from) => {
-        const wrapper = document.querySelector(".df-lightbox-wrapper");
-        const wrapperOpen = wrapper && wrapper.style.display !== "none";
+        const wrapper = document.querySelector('.df-lightbox-wrapper');
+        const wrapperOpen = wrapper && wrapper.style.display !== 'none';
 
         if (window.DFLIP && wrapperOpen) {
-            document.querySelector(".df-lightbox-close")?.click();
+            document.querySelector('.df-lightbox-close')?.click();
             return false;
         }
         return true;
     };
 
     // Filter and search documents
-    const filterDocuments = (searchTerm = "") => {
+    const filterDocuments = (searchTerm = '') => {
         return documents.value.filter((doc) => {
             // Check filters
             const matchesFilters = Object.entries(filters).every(
-                ([key, value]) => doc[key] === value
+                ([key, value]) => doc[key] === value,
             );
 
             // Check search term
@@ -289,7 +289,7 @@ export function useMediaDocuments(options = {}) {
                 Object.values(doc).some((field) =>
                     String(field)
                         .toLowerCase()
-                        .includes(searchTerm.toLowerCase())
+                        .includes(searchTerm.toLowerCase()),
                 );
 
             return matchesFilters && matchesSearch;
@@ -297,7 +297,7 @@ export function useMediaDocuments(options = {}) {
     };
 
     const extractDimensions = (filename) => {
-        const parts = filename.split("-").pop().split(".jpg")[0].split("x");
+        const parts = filename.split('-').pop().split('.jpg')[0].split('x');
         if (parts.length === 2) {
             const width = parseFloat(parts[0], 10);
             const height = parseFloat(parts[1], 10);

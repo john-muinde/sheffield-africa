@@ -1,14 +1,14 @@
 <!-- CustomDataTable.vue -->
 <template>
-    <div class="custom-datatable">
-        <div class="card">
-            <div class="card-body">
-                <table ref="tableRef" class="table table-striped nowrap w-100">
-                    <slot name="thead"></slot>
-                </table>
-            </div>
-        </div>
+  <div class="custom-datatable">
+    <div class="card">
+      <div class="card-body">
+        <table ref="tableRef" class="table table-striped nowrap w-100">
+          <slot name="thead"></slot>
+        </table>
+      </div>
     </div>
+  </div>
 </template>
 
 <script>
@@ -20,7 +20,7 @@ import DataTablesLib from 'datatables.net';
 import 'datatables.net-buttons/js/buttons.html5.mjs';
 import 'datatables.net-buttons/js/buttons.print.mjs';
 import 'datatables.net-responsive-bs5';
-import router from "@/router/index";
+import router from '@/router/index';
 
 import jszip from 'jszip';
 import pdfmake from 'pdfmake';
@@ -34,16 +34,16 @@ export default defineComponent({
     props: {
         columns: {
             type: Array,
-            required: true
+            required: true,
         },
         data: {
             type: Array,
-            required: true
+            required: true,
         },
         options: {
             type: Object,
-            default: () => ({})
-        }
+            default: () => ({}),
+        },
     },
 
     emits: ['row-clicked'],
@@ -68,59 +68,59 @@ export default defineComponent({
                             className: 'dropdown-item',
                             text: '<i class="fas fa-copy me-2"></i>Copy',
                             exportOptions: {
-                                columns: ':not(:last-child)'
-                            }
+                                columns: ':not(:last-child)',
+                            },
                         },
                         {
                             extend: 'csv',
                             className: 'dropdown-item',
                             text: '<i class="fas fa-file-csv me-2"></i>CSV',
                             exportOptions: {
-                                columns: ':not(:last-child)'
-                            }
+                                columns: ':not(:last-child)',
+                            },
                         },
                         {
                             extend: 'excel',
                             className: 'dropdown-item',
                             text: '<i class="fas fa-file-excel me-2"></i>Excel',
                             exportOptions: {
-                                columns: ':not(:last-child)'
-                            }
+                                columns: ':not(:last-child)',
+                            },
                         },
                         {
                             extend: 'pdf',
                             className: 'dropdown-item',
                             text: '<i class="fas fa-file-pdf me-2"></i>PDF',
                             exportOptions: {
-                                columns: ':not(:last-child)'
-                            }
+                                columns: ':not(:last-child)',
+                            },
                         },
                         {
                             extend: 'print',
                             className: 'dropdown-item',
                             text: '<i class="fas fa-print me-2"></i>Print',
                             exportOptions: {
-                                columns: ':not(:last-child)'
-                            }
-                        }
-                    ]
-                }
+                                columns: ':not(:last-child)',
+                            },
+                        },
+                    ],
+                },
             ],
             pageLength: 10,
-            lengthMenu: [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+            lengthMenu: [[5, 10, 25, 50, -1], [5, 10, 25, 50, 'All']],
             processing: true,
             language: {
-                search: "",
-                searchPlaceholder: "Search...",
-                zeroRecords: "No matching records found",
-                emptyTable: "No data available in table",
-                info: "Showing _START_ to _END_ of _TOTAL_ entries",
-                infoEmpty: "Showing 0 to 0 of 0 entries",
+                search: '',
+                searchPlaceholder: 'Search...',
+                zeroRecords: 'No matching records found',
+                emptyTable: 'No data available in table',
+                info: 'Showing _START_ to _END_ of _TOTAL_ entries',
+                infoEmpty: 'Showing 0 to 0 of 0 entries',
                 paginate: {
-                    previous: "&lt;",
-                    next: "&gt;"
-                }
-            }
+                    previous: '&lt;',
+                    next: '&gt;',
+                },
+            },
         };
 
         const renderSlotContent = (slotName, data, columnData) => {
@@ -131,7 +131,7 @@ export default defineComponent({
             createApp({
                 render() {
                     return slot({ rowData: data, cellData: columnData });
-                }
+                },
             }).use(router)
                 .mount(container);
 
@@ -151,7 +151,7 @@ export default defineComponent({
                         }
                     }
                     return data;
-                }
+                },
             }));
 
             const mergedOptions = {
@@ -189,9 +189,9 @@ export default defineComponent({
         });
 
         return {
-            tableRef
+            tableRef,
         };
-    }
+    },
 });
 </script>
 

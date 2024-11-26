@@ -11,7 +11,7 @@ export const usePageTitle = (pageTitle) =>
   useHead(
     computed(() => ({
       title: `${unref(pageTitle)} ${separator} ${defaultPageTitle.value}`,
-    }))
+    })),
   );
 
 export const useMeta = (data) => {

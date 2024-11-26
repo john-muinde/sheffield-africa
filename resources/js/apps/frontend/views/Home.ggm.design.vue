@@ -1,7 +1,5 @@
 <script></script>
 
-<style></style>
-
 <template>
   <div class="page-wrapper">
     <main class="main">
@@ -9,19 +7,24 @@
       <!-- End .mb-lg-2 -->
       <div class="container-fluid">
         <div class="row home-row">
-
           <div class="col-lg-12">
+            <!-- start -->
 
-             <!-- start -->
 
+            <carousel
+              ref="scrollableContainerCarosel"
+              class="carousel-wrapper"
+              :per-page="1"
+              :autoplay="5000"
+              :wrap-around="true"
+              :pause-autoplay-on-hover="true"
+              @load="adjustTheClass1Height"
+            >
+              <slide v-for="(item, index) in items" :key="index">
+                <img :src="getImage(item)" :alt="item.alt" />
+                <!-- <div>{{ item.text }}</div> -->
 
-              <carousel ref="scrollableContainerCarosel" @load="adjustTheClass1Height" class="carousel-wrapper" :perPage="1" :autoplay="5000" :wrap-around="true" :pauseAutoplayOnHover ="true">
-                  <slide v-for="(item, index) in items" :key="index">
-
-                    <img :src="getImage(item)" :alt="item.alt">
-                    <!-- <div>{{ item.text }}</div> -->
-
-                   <!--  <div class="intro-content">
+                <!--  <div class="intro-content">
                       <h1 class="intro-title" v-html="item.intro.title">
 
                       </h1>
@@ -35,23 +38,17 @@
                         <i class="icon-long-arrow-right"></i>
                       </a>
                     </div> -->
-
-                  </slide>
-                  <template #addons>
-                    <Navigation />
-                    <Pagination />
-                  </template>
-              </carousel>
+              </slide>
+              <template #addons>
+                <Navigation />
+                <Pagination />
+              </template>
+            </carousel>
 
 
             <!-- end -->
-
-
           </div>
           <!-- End .col-xl-9 col-xxl-10 -->
-
-
-
         </div>
         <!-- End .row -->
       </div>
@@ -95,554 +92,606 @@
 
       <div class="container-fluid pb-4 pt-5">
         <div class="headings">
-
-          <h3 class="heading text-primary">DISCOVER SOLUTIONS</h3>
-          <h4 class="sub-heading">Find Your Perfect Fit </h4>
+          <h3 class="heading text-primary">
+            DISCOVER SOLUTIONS
+          </h3>
+          <h4 class="sub-heading">
+            Find Your Perfect Fit
+          </h4>
         </div>
 
         <div class="row">
-            <div class="col">
-                <a href="category.html" class="cat-block">
-                    <figure>
-                        <span>
-                            <img src="../assets/images/solutions/backery-solution.jpg" alt="Category image">
-                        </span>
-                    </figure>
+          <div class="col">
+            <a href="category.html" class="cat-block">
+              <figure>
+                <span>
+                  <img src="../assets/images/solutions/backery-solution.jpg" alt="Category image" />
+                </span>
+              </figure>
 
-                    <h3 class="cat-block-title">Bakery</h3><!-- End .cat-block-title -->
-                </a>
-            </div><!-- End .col-sm-4 col-lg-2 -->
-
-            <div class="col">
-                <a href="category.html" class="cat-block">
-                    <figure>
-                        <span>
-                            <img src="../assets/images/solutions/beer-trailer.jpg" alt="Category image">
-                        </span>
-                    </figure>
-
-                    <h3 class="cat-block-title">Beer Trailer</h3><!-- End .cat-block-title -->
-                </a>
-            </div><!-- End .col-sm-4 col-lg-2 -->
-
-            <div class="col">
-                <a href="category.html" class="cat-block">
-                    <figure>
-                        <span>
-                            <img src="../assets/images/solutions/butchery-solution.jpg" alt="Category image">
-                        </span>
-                    </figure>
-
-                    <h3 class="cat-block-title">Butchery</h3><!-- End .cat-block-title -->
-                </a>
-            </div><!-- End .col-sm-4 col-lg-2 -->
-
-            <div class="col">
-                <a href="category.html" class="cat-block">
-                    <figure>
-                        <span>
-                            <img src="../assets/images/solutions/coffee-solution.jpg" alt="Category image">
-                        </span>
-                    </figure>
-
-                    <h3 class="cat-block-title">Coffee</h3><!-- End .cat-block-title -->
-                </a>
-            </div><!-- End .col-sm-4 col-lg-2 -->
-
-            <div class="col">
-                <a href="category.html" class="cat-block">
-                    <figure>
-                        <span>
-                            <img src="../assets/images/solutions/coffee-tuktuk-solution.jpg" alt="Category image">
-                        </span>
-                    </figure>
-
-                    <h3 class="cat-block-title">Coffee Tuktuk</h3><!-- End .cat-block-title -->
-                </a>
-            </div><!-- End .col-sm-4 col-lg-2 -->
-
-            <div class="col">
-                <a href="category.html" class="cat-block">
-                    <figure>
-                        <span>
-                            <img src="../assets/images/solutions/commercial-laundry-solution.jpg" alt="Category image">
-                        </span>
-                    </figure>
-
-                    <h3 class="cat-block-title">Commercial Laundry</h3><!-- End .cat-block-title -->
-                </a>
-            </div><!-- End .col-sm-4 col-lg-2 -->
-            <div class="col">
-                <a href="category.html" class="cat-block">
-                    <figure>
-                        <span>
-                            <img src="../assets/images/solutions/hospital-solution.jpg" alt="Category image">
-                        </span>
-                    </figure>
-
-                    <h3 class="cat-block-title">Hospital</h3><!-- End .cat-block-title -->
-                </a>
-            </div><!-- End .col-sm-4 col-lg-2 -->
-
-            <div class="col">
-                <a href="category.html" class="cat-block">
-                    <figure>
-                        <span>
-                            <img src="../assets/images/solutions/ice-cream-solution.jpg" alt="Category image">
-                        </span>
-                    </figure>
-
-                    <h3 class="cat-block-title">Ice Scream</h3><!-- End .cat-block-title -->
-                </a>
-            </div><!-- End .col-sm-4 col-lg-2 -->
-
-        </div>
-
-         <div class="row">
+              <h3 class="cat-block-title">Bakery</h3><!-- End .cat-block-title -->
+            </a>
+          </div><!-- End .col-sm-4 col-lg-2 -->
 
           <div class="col">
-                <a href="category.html" class="cat-block">
-                    <figure>
-                        <span>
-                            <img src="../assets/images/solutions/juice-solution.jpg" alt="Category image">
-                        </span>
-                    </figure>
+            <a href="category.html" class="cat-block">
+              <figure>
+                <span>
+                  <img src="../assets/images/solutions/beer-trailer.jpg" alt="Category image" />
+                </span>
+              </figure>
 
-                    <h3 class="cat-block-title">Juice Solution</h3><!-- End .cat-block-title -->
-                </a>
-            </div><!-- End .col-sm-4 col-lg-2 -->
+              <h3 class="cat-block-title">Beer Trailer</h3><!-- End .cat-block-title -->
+            </a>
+          </div><!-- End .col-sm-4 col-lg-2 -->
 
-             <div class="col">
-                <a href="category.html" class="cat-block">
-                    <figure>
-                        <span>
-                            <img src="../assets/images/solutions/nyama-grill.jpg" alt="Category image">
-                        </span>
-                    </figure>
+          <div class="col">
+            <a href="category.html" class="cat-block">
+              <figure>
+                <span>
+                  <img src="../assets/images/solutions/butchery-solution.jpg" alt="Category image" />
+                </span>
+              </figure>
 
-                    <h3 class="cat-block-title">Nyama Grill</h3><!-- End .cat-block-title -->
-                </a>
-            </div><!-- End .col-sm-4 col-lg-2 -->
+              <h3 class="cat-block-title">Butchery</h3><!-- End .cat-block-title -->
+            </a>
+          </div><!-- End .col-sm-4 col-lg-2 -->
 
-             <div class="col">
-                <a href="category.html" class="cat-block">
-                    <figure>
-                        <span>
-                            <img src="../assets/images/solutions/pharmacy-solution.jpg" alt="Category image">
-                        </span>
-                    </figure>
+          <div class="col">
+            <a href="category.html" class="cat-block">
+              <figure>
+                <span>
+                  <img src="../assets/images/solutions/coffee-solution.jpg" alt="Category image" />
+                </span>
+              </figure>
 
-                    <h3 class="cat-block-title">Phamacy</h3><!-- End .cat-block-title -->
-                </a>
-            </div><!-- End .col-sm-4 col-lg-2 -->
+              <h3 class="cat-block-title">Coffee</h3><!-- End .cat-block-title -->
+            </a>
+          </div><!-- End .col-sm-4 col-lg-2 -->
 
-           <div class="col">
-                <a href="category.html" class="cat-block">
-                    <figure>
-                        <span>
-                            <img src="../assets/images/solutions/pizza-solution.jpg" alt="Category image">
-                        </span>
-                    </figure>
+          <div class="col">
+            <a href="category.html" class="cat-block">
+              <figure>
+                <span>
+                  <img src="../assets/images/solutions/coffee-tuktuk-solution.jpg" alt="Category image" />
+                </span>
+              </figure>
 
-                    <h3 class="cat-block-title">Pizza</h3><!-- End .cat-block-title -->
-                </a>
-            </div><!-- End .col-sm-4 col-lg-2 -->
+              <h3 class="cat-block-title">Coffee Tuktuk</h3><!-- End .cat-block-title -->
+            </a>
+          </div><!-- End .col-sm-4 col-lg-2 -->
 
-             <div class="col">
-                <a href="category.html" class="cat-block">
-                    <figure>
-                        <span>
-                            <img src="../assets/images/solutions/restaurant-solution.jpg" alt="Category image">
-                        </span>
-                    </figure>
+          <div class="col">
+            <a href="category.html" class="cat-block">
+              <figure>
+                <span>
+                  <img src="../assets/images/solutions/commercial-laundry-solution.jpg" alt="Category image" />
+                </span>
+              </figure>
 
-                    <h3 class="cat-block-title">Restaurant</h3><!-- End .cat-block-title -->
-                </a>
-            </div><!-- End .col-sm-4 col-lg-2 -->
+              <h3 class="cat-block-title">Commercial Laundry</h3><!-- End .cat-block-title -->
+            </a>
+          </div><!-- End .col-sm-4 col-lg-2 -->
+          <div class="col">
+            <a href="category.html" class="cat-block">
+              <figure>
+                <span>
+                  <img src="../assets/images/solutions/hospital-solution.jpg" alt="Category image" />
+                </span>
+              </figure>
 
-             <div class="col">
-                <a href="category.html" class="cat-block">
-                    <figure>
-                        <span>
-                            <img src="../assets/images/solutions/backery-solution.jpg" alt="Category image">
-                        </span>
-                    </figure>
+              <h3 class="cat-block-title">Hospital</h3><!-- End .cat-block-title -->
+            </a>
+          </div><!-- End .col-sm-4 col-lg-2 -->
 
-                    <h3 class="cat-block-title">Bakery</h3><!-- End .cat-block-title -->
-                </a>
-            </div><!-- End .col-sm-4 col-lg-2 -->
-            <div class="col">
-                <a href="category.html" class="cat-block">
-                    <figure>
-                        <span>
-                            <img src="../assets/images/solutions/backery-solution.jpg" alt="Category image">
-                        </span>
-                    </figure>
+          <div class="col">
+            <a href="category.html" class="cat-block">
+              <figure>
+                <span>
+                  <img src="../assets/images/solutions/ice-cream-solution.jpg" alt="Category image" />
+                </span>
+              </figure>
 
-                    <h3 class="cat-block-title">Bakery</h3><!-- End .cat-block-title -->
-                </a>
-            </div><!-- End .col-sm-4 col-lg-2 -->
-
-            <div class="col">
-                <a href="category.html" class="cat-block">
-                    <figure>
-                        <span>
-                            <img src="../assets/images/solutions/backery-solution.jpg" alt="Category image">
-                        </span>
-                    </figure>
-
-                    <h3 class="cat-block-title">Bakery</h3><!-- End .cat-block-title -->
-                </a>
-            </div><!-- End .col-sm-4 col-lg-2 -->
-
-
+              <h3 class="cat-block-title">Ice Scream</h3><!-- End .cat-block-title -->
+            </a>
+          </div><!-- End .col-sm-4 col-lg-2 -->
         </div>
 
+        <div class="row">
+          <div class="col">
+            <a href="category.html" class="cat-block">
+              <figure>
+                <span>
+                  <img src="../assets/images/solutions/juice-solution.jpg" alt="Category image" />
+                </span>
+              </figure>
 
+              <h3 class="cat-block-title">Juice Solution</h3><!-- End .cat-block-title -->
+            </a>
+          </div><!-- End .col-sm-4 col-lg-2 -->
 
+          <div class="col">
+            <a href="category.html" class="cat-block">
+              <figure>
+                <span>
+                  <img src="../assets/images/solutions/nyama-grill.jpg" alt="Category image" />
+                </span>
+              </figure>
+
+              <h3 class="cat-block-title">Nyama Grill</h3><!-- End .cat-block-title -->
+            </a>
+          </div><!-- End .col-sm-4 col-lg-2 -->
+
+          <div class="col">
+            <a href="category.html" class="cat-block">
+              <figure>
+                <span>
+                  <img src="../assets/images/solutions/pharmacy-solution.jpg" alt="Category image" />
+                </span>
+              </figure>
+
+              <h3 class="cat-block-title">Phamacy</h3><!-- End .cat-block-title -->
+            </a>
+          </div><!-- End .col-sm-4 col-lg-2 -->
+
+          <div class="col">
+            <a href="category.html" class="cat-block">
+              <figure>
+                <span>
+                  <img src="../assets/images/solutions/pizza-solution.jpg" alt="Category image" />
+                </span>
+              </figure>
+
+              <h3 class="cat-block-title">Pizza</h3><!-- End .cat-block-title -->
+            </a>
+          </div><!-- End .col-sm-4 col-lg-2 -->
+
+          <div class="col">
+            <a href="category.html" class="cat-block">
+              <figure>
+                <span>
+                  <img src="../assets/images/solutions/restaurant-solution.jpg" alt="Category image" />
+                </span>
+              </figure>
+
+              <h3 class="cat-block-title">Restaurant</h3><!-- End .cat-block-title -->
+            </a>
+          </div><!-- End .col-sm-4 col-lg-2 -->
+
+          <div class="col">
+            <a href="category.html" class="cat-block">
+              <figure>
+                <span>
+                  <img src="../assets/images/solutions/backery-solution.jpg" alt="Category image" />
+                </span>
+              </figure>
+
+              <h3 class="cat-block-title">Bakery</h3><!-- End .cat-block-title -->
+            </a>
+          </div><!-- End .col-sm-4 col-lg-2 -->
+          <div class="col">
+            <a href="category.html" class="cat-block">
+              <figure>
+                <span>
+                  <img src="../assets/images/solutions/backery-solution.jpg" alt="Category image" />
+                </span>
+              </figure>
+
+              <h3 class="cat-block-title">Bakery</h3><!-- End .cat-block-title -->
+            </a>
+          </div><!-- End .col-sm-4 col-lg-2 -->
+
+          <div class="col">
+            <a href="category.html" class="cat-block">
+              <figure>
+                <span>
+                  <img src="../assets/images/solutions/backery-solution.jpg" alt="Category image" />
+                </span>
+              </figure>
+
+              <h3 class="cat-block-title">Bakery</h3><!-- End .cat-block-title -->
+            </a>
+          </div><!-- End .col-sm-4 col-lg-2 -->
+        </div>
       </div>
 
       <div class="container">
-          <div class="cta cta-border mb-5" style="background-image: url(/assets/images/sheffield_stainless_steel_background.jpg);">
-              <img style="height:200px;" src="../assets/images/homepage_banner_product.png" alt="camera" class="cta-img">
+        <div class="cta cta-border mb-5" style="background-image: url(/assets/images/sheffield_stainless_steel_background.jpg);">
+          <img
+            style="height:200px;"
+            src="../assets/images/homepage_banner_product.png"
+            alt="camera"
+            class="cta-img"
+          />
 
-              <div class="row justify-content-center">
-                  <div class="col-md-12">
-                      <div class="cta-content">
-                          <div class="cta-text text-right text-dark">
-                              <p class="text-dark">Shop Today’s Deals <br><strong>and Discover Exclusive Promotions!</strong></p>
-                          </div><!-- End .cta-text -->
-                          <a href="#" class="btn btn-primary btn-round text-dark"><span>Shop Now</span><i class="icon-long-arrow-right"></i></a>
-                      </div><!-- End .cta-content -->
-                  </div><!-- End .col-md-12 -->
-              </div><!-- End .row -->
-          </div><!-- End .cta -->
+          <div class="row justify-content-center">
+            <div class="col-md-12">
+              <div class="cta-content">
+                <div class="cta-text text-right text-dark">
+                  <p class="text-dark">
+                    Shop Today’s Deals <br /><strong>and Discover Exclusive Promotions!</strong>
+                  </p>
+                </div><!-- End .cta-text -->
+                <a href="#" class="btn btn-primary btn-round text-dark"><span>Shop Now</span><i class="icon-long-arrow-right"></i></a>
+              </div><!-- End .cta-content -->
+            </div><!-- End .col-md-12 -->
+          </div><!-- End .row -->
+        </div><!-- End .cta -->
       </div><!-- End .container -->
 
       <div class="container">
-
-
-
-
-
         <div class="row cat-banner-row ">
-            <div class="col-xl-2 col-xxl-3">
-                <div class="cat-banner row no-gutters">
-                    <div class="cat-banner-list col-sm-6 d-xl-none d-xxl-flex" style="background-image: url(../assets/images/banner-bg-4.jpg);">
-                        <div class="banner-list-content">
-                            <h2><a href="#">Cooking </a></h2>
+          <div class="col-xl-2 col-xxl-3">
+            <div class="cat-banner row no-gutters">
+              <div class="cat-banner-list col-sm-6 d-xl-none d-xxl-flex" style="background-image: url(../assets/images/banner-bg-4.jpg);">
+                <div class="banner-list-content">
+                  <h2><a href="#">Cooking </a></h2>
 
-                            <ul>
-                                <li><a href="#">Cookware</a></li>
-                                <li><a href="#">Dinnerware</a></li>
-                                <li><a href="#">Cups</a></li>
-                                <li><a href="#">Microwaves</a></li>
-                                <li><a href="#">Toasters</a></li>
-                                <li><a href="#">Coffee Makers</a></li>
-                                <li class="list-all-link"><a href="#">See All Departments</a></li>
-                            </ul>
-                        </div><!-- End .banner-list-content -->
-                    </div><!-- End .col-sm-6 -->
+                  <ul>
+                    <li><a href="#">Cookware</a></li>
+                    <li><a href="#">Dinnerware</a></li>
+                    <li><a href="#">Cups</a></li>
+                    <li><a href="#">Microwaves</a></li>
+                    <li><a href="#">Toasters</a></li>
+                    <li><a href="#">Coffee Makers</a></li>
+                    <li class="list-all-link">
+                      <a href="#">See All Departments</a>
+                    </li>
+                  </ul>
+                </div><!-- End .banner-list-content -->
+              </div><!-- End .col-sm-6 -->
 
-                    <div class="col-sm-6 col-xl-12 col-xxl-6">
-                        <div class="banner banner-overlay">
-                            <a href="#">
-                                <img src="../assets/images/demos/demo-14/banners/banner-10.jpg" alt="Banner img desc">
-                            </a>
+              <div class="col-sm-6 col-xl-12 col-xxl-6">
+                <div class="banner banner-overlay">
+                  <a href="#">
+                    <img src="../assets/images/demos/demo-14/banners/banner-10.jpg" alt="Banner img desc" />
+                  </a>
 
-                            <div class="banner-content">
-                                <h4 class="banner-subtitle text-white"><a href="#">Best Deals</a></h4><!-- End .banner-subtitle -->
-                                <h4 class="banner-title text-white"><a href="#">Commercial <br>Kitchen <!-- <br><span>Efficiency, Precision, and Flavor</span> --></a></h4><!-- End .banner-title -->
-                                <a href="#" class="banner-link">Shop Now <i class="icon-long-arrow-right"></i></a>
-                            </div><!-- End .banner-content -->
-                        </div><!-- End .banner -->
-                    </div><!-- End .col-sm-6 -->
-                </div><!-- End .cat-banner -->
-            </div><!-- End .col-xl-3 -->
+                  <div class="banner-content">
+                    <h4 class="banner-subtitle text-white">
+                      <a href="#">Best Deals</a>
+                    </h4><!-- End .banner-subtitle -->
+                    <h4 class="banner-title text-white">
+                      <a href="#">Commercial <br />Kitchen <!-- <br><span>Efficiency, Precision, and Flavor</span> --></a>
+                    </h4><!-- End .banner-title -->
+                    <a href="#" class="banner-link">Shop Now <i class="icon-long-arrow-right"></i></a>
+                  </div><!-- End .banner-content -->
+                </div><!-- End .banner -->
+              </div><!-- End .col-sm-6 -->
+            </div><!-- End .cat-banner -->
+          </div><!-- End .col-xl-3 -->
 
-            <div class="col-xl-10 col-xxl-9">
+          <div class="col-xl-10 col-xxl-9">
+            <carousel
+              ref="scrollableContainerCarosel"
+              :breakpoints="breakpoints"
+              class="carousel-wrapper owl-full carousel-equal-height carousel-with-shadow"
+              :autoplay="5000"
+              :wrap-around="true"
+              :pause-autoplay-on-hover="true"
+              @load="adjustTheClass1Height"
+            >
+              <slide v-for="(item, index) in productsKitchen" :key="index">
+                <div class="product text-center">
+                  <figure class="product-media">
+                    <!-- <span class="product-label label-sale">Sale</span> -->
+                    <router-link :to="getProductLink(item.id, item.name, item.model_number)">
+                      <img
+                        v-lazy:src="'/storage/' + item.main_image_path"
+                        :src="'/storage/' + item.main_image_path"
+                        alt="Product image"
+                        class="product-image"
+                      />
+                    </router-link>
 
-              <carousel ref="scrollableContainerCarosel" @load="adjustTheClass1Height" :breakpoints="breakpoints" class="carousel-wrapper owl-full carousel-equal-height carousel-with-shadow"  :autoplay="5000" :wrap-around="true" :pauseAutoplayOnHover ="true">
-                  <slide v-for="(item, index) in productsKitchen" :key="index">
+                    <div class="product-action-vertical">
+                      <a href="#" class="btn-product-icon btn-wishlist" title="Add to wishlist"><span>add to wishlist</span></a>
+                      <a href="popup/quickView.html" class="btn-product-icon btn-quickview" title="Quick view"><span>Quick view</span></a>
+                    </div><!-- End .product-action-vertical -->
 
-                      <div class="product text-center">
-                        <figure class="product-media">
-                            <!-- <span class="product-label label-sale">Sale</span> -->
-                             <router-link :to="getProductLink(item.id, item.name, item.model_number)">
+                    <div class="product-action">
+                      <a href="#" class="btn-product btn-cart" title="Add to cart"><span>add to cart</span></a>
+                    </div><!-- End .product-action -->
+                  </figure><!-- End .product-media -->
 
-                                <img :src="'/storage/' + item.main_image_path" v-lazy:src="'/storage/' + item.main_image_path" alt="Product image" class="product-image"
-                                       />
-                            </router-link>
+                  <div class="product-body">
+                    <div class="product-cat">
+                      <a href="#">Cooking Appliances - </a>
+                    </div><!-- End .product-cat -->
+                    <h3 class="product-title">
+                      <router-link :to="getProductLink(item.id, item.name, item.model_number)">
+                        {{ item.name }}
+                      </router-link>
+                    </h3><!-- End .product-title -->
+                    <div class="product-price">
+                      <span class="new-price">$249.99</span>
+                    </div><!-- End .product-price -->
 
-                            <div class="product-action-vertical">
-                                <a href="#" class="btn-product-icon btn-wishlist" title="Add to wishlist"><span>add to wishlist</span></a>
-                                <a href="popup/quickView.html" class="btn-product-icon btn-quickview" title="Quick view"><span>Quick view</span></a>
+                    <br />
+                  </div><!-- End .product-body -->
+                </div><!-- End .product -->
+              </slide>
 
-                            </div><!-- End .product-action-vertical -->
-
-                            <div class="product-action">
-                                <a href="#" class="btn-product btn-cart" title="Add to cart"><span>add to cart</span></a>
-                            </div><!-- End .product-action -->
-                        </figure><!-- End .product-media -->
-
-                        <div class="product-body">
-                            <div class="product-cat">
-                                <a href="#">Cooking Appliances - </a>
-                            </div><!-- End .product-cat -->
-                            <h3 class="product-title"><router-link :to="getProductLink(item.id, item.name, item.model_number)">{{ item.name }}</router-link></h3><!-- End .product-title -->
-                            <div class="product-price">
-                                <span class="new-price">$249.99</span>
-                            </div><!-- End .product-price -->
-
-                            <br>
-
-                        </div><!-- End .product-body -->
-                    </div><!-- End .product -->
-
-                  </slide>
-
-                  <template #addons>
-                    <Navigation />
-                  </template>
-
-                </carousel><!-- End .owl-carousel -->
-
-            </div><!-- End .col-xl-9 -->
+              <template #addons>
+                <Navigation />
+              </template>
+            </carousel><!-- End .owl-carousel -->
+          </div><!-- End .col-xl-9 -->
         </div><!-- End .row cat-banner-row -->
 
         <div class="row cat-banner-row ">
-            <div class="col-xl-2 col-xxl-3">
-                <div class="cat-banner row no-gutters">
-                    <div class="cat-banner-list col-sm-6 d-xl-none d-xxl-flex" style="background-image: url(../assets/images/banner-bg-4.jpg);">
-                        <div class="banner-list-content">
-                            <h2><a href="#">Cooking </a></h2>
+          <div class="col-xl-2 col-xxl-3">
+            <div class="cat-banner row no-gutters">
+              <div class="cat-banner-list col-sm-6 d-xl-none d-xxl-flex" style="background-image: url(../assets/images/banner-bg-4.jpg);">
+                <div class="banner-list-content">
+                  <h2><a href="#">Cooking </a></h2>
 
-                            <ul>
-                                <li><a href="#">Cookware</a></li>
-                                <li><a href="#">Dinnerware</a></li>
-                                <li><a href="#">Cups</a></li>
-                                <li><a href="#">Microwaves</a></li>
-                                <li><a href="#">Toasters</a></li>
-                                <li><a href="#">Coffee Makers</a></li>
-                                <li class="list-all-link"><a href="#">See All Departments</a></li>
-                            </ul>
-                        </div><!-- End .banner-list-content -->
-                    </div><!-- End .col-sm-6 -->
+                  <ul>
+                    <li><a href="#">Cookware</a></li>
+                    <li><a href="#">Dinnerware</a></li>
+                    <li><a href="#">Cups</a></li>
+                    <li><a href="#">Microwaves</a></li>
+                    <li><a href="#">Toasters</a></li>
+                    <li><a href="#">Coffee Makers</a></li>
+                    <li class="list-all-link">
+                      <a href="#">See All Departments</a>
+                    </li>
+                  </ul>
+                </div><!-- End .banner-list-content -->
+              </div><!-- End .col-sm-6 -->
 
-                    <div class="col-sm-6 col-xl-12 col-xxl-6">
-                        <div class="banner banner-overlay">
-                            <a href="#">
-                                <img src="../assets/images/demos/demo-14/banners/banner-10.jpg" alt="Banner img desc">
-                            </a>
+              <div class="col-sm-6 col-xl-12 col-xxl-6">
+                <div class="banner banner-overlay">
+                  <a href="#">
+                    <img src="../assets/images/demos/demo-14/banners/banner-10.jpg" alt="Banner img desc" />
+                  </a>
 
-                            <div class="banner-content">
-                                <h4 class="banner-subtitle text-white"><a href="#">Best Deals</a></h4><!-- End .banner-subtitle -->
-                                <h4 class="banner-title text-white"><a href="#">Commercial <br>Kitchen <!-- <br><span>Efficiency, Precision, and Flavor</span> --></a></h4><!-- End .banner-title -->
-                                <a href="#" class="banner-link">Shop Now <i class="icon-long-arrow-right"></i></a>
-                            </div><!-- End .banner-content -->
-                        </div><!-- End .banner -->
-                    </div><!-- End .col-sm-6 -->
-                </div><!-- End .cat-banner -->
-            </div><!-- End .col-xl-3 -->
+                  <div class="banner-content">
+                    <h4 class="banner-subtitle text-white">
+                      <a href="#">Best Deals</a>
+                    </h4><!-- End .banner-subtitle -->
+                    <h4 class="banner-title text-white">
+                      <a href="#">Commercial <br />Kitchen <!-- <br><span>Efficiency, Precision, and Flavor</span> --></a>
+                    </h4><!-- End .banner-title -->
+                    <a href="#" class="banner-link">Shop Now <i class="icon-long-arrow-right"></i></a>
+                  </div><!-- End .banner-content -->
+                </div><!-- End .banner -->
+              </div><!-- End .col-sm-6 -->
+            </div><!-- End .cat-banner -->
+          </div><!-- End .col-xl-3 -->
 
-            <div class="col-xl-10 col-xxl-9">
+          <div class="col-xl-10 col-xxl-9">
+            <carousel
+              ref="scrollableContainerCarosel"
+              :breakpoints="breakpoints"
+              class="carousel-wrapper owl-full carousel-equal-height carousel-with-shadow"
+              :autoplay="5000"
+              :wrap-around="true"
+              :pause-autoplay-on-hover="true"
+              @load="adjustTheClass1Height"
+            >
+              <slide v-for="(item, index) in productsColdroom" :key="index">
+                <div class="product text-center">
+                  <figure class="product-media">
+                    <!-- <span class="product-label label-sale">Sale</span> -->
+                    <router-link :to="getProductLink(item.id, item.name, item.model_number)">
+                      <img
+                        v-lazy:src="'/storage/' + item.main_image_path"
+                        :src="'/storage/' + item.main_image_path"
+                        alt="Product image"
+                        class="product-image"
+                      />
+                    </router-link>
 
-              <carousel ref="scrollableContainerCarosel" @load="adjustTheClass1Height" :breakpoints="breakpoints" class="carousel-wrapper owl-full carousel-equal-height carousel-with-shadow"  :autoplay="5000" :wrap-around="true" :pauseAutoplayOnHover ="true">
-                  <slide v-for="(item, index) in productsColdroom" :key="index">
+                    <div class="product-action-vertical">
+                      <a href="#" class="btn-product-icon btn-wishlist" title="Add to wishlist"><span>add to wishlist</span></a>
+                      <a href="popup/quickView.html" class="btn-product-icon btn-quickview" title="Quick view"><span>Quick view</span></a>
+                    </div><!-- End .product-action-vertical -->
 
-                   <div class="product text-center">
-                        <figure class="product-media">
-                            <!-- <span class="product-label label-sale">Sale</span> -->
-                             <router-link :to="getProductLink(item.id, item.name, item.model_number)">
+                    <div class="product-action">
+                      <a href="#" class="btn-product btn-cart" title="Add to cart"><span>add to cart</span></a>
+                    </div><!-- End .product-action -->
+                  </figure><!-- End .product-media -->
 
-                                <img :src="'/storage/' + item.main_image_path" v-lazy:src="'/storage/' + item.main_image_path" alt="Product image" class="product-image"
-                                       />
-                            </router-link>
+                  <div class="product-body">
+                    <div class="product-cat">
+                      <a href="#">Cooking Appliances - </a>
+                    </div><!-- End .product-cat -->
+                    <h3 class="product-title">
+                      <router-link :to="getProductLink(item.id, item.name, item.model_number)">
+                        {{ item.name }}
+                      </router-link>
+                    </h3><!-- End .product-title -->
+                    <div class="product-price">
+                      <span class="new-price">$249.99</span>
+                    </div><!-- End .product-price -->
 
-                            <div class="product-action-vertical">
-                                <a href="#" class="btn-product-icon btn-wishlist" title="Add to wishlist"><span>add to wishlist</span></a>
-                                <a href="popup/quickView.html" class="btn-product-icon btn-quickview" title="Quick view"><span>Quick view</span></a>
+                    <br />
+                  </div><!-- End .product-body -->
+                </div><!-- End .product -->
+              </slide>
 
-                            </div><!-- End .product-action-vertical -->
-
-                            <div class="product-action">
-                                <a href="#" class="btn-product btn-cart" title="Add to cart"><span>add to cart</span></a>
-                            </div><!-- End .product-action -->
-                        </figure><!-- End .product-media -->
-
-                        <div class="product-body">
-                            <div class="product-cat">
-                                <a href="#">Cooking Appliances - </a>
-                            </div><!-- End .product-cat -->
-                            <h3 class="product-title"><router-link :to="getProductLink(item.id, item.name, item.model_number)">{{ item.name }}</router-link></h3><!-- End .product-title -->
-                            <div class="product-price">
-                                <span class="new-price">$249.99</span>
-                            </div><!-- End .product-price -->
-
-                            <br>
-
-                        </div><!-- End .product-body -->
-                    </div><!-- End .product -->
-
-
-                  </slide>
-
-                  <template #addons>
-                    <Navigation />
-                  </template>
-
-                </carousel><!-- End .owl-carousel -->
-
-            </div><!-- End .col-xl-9 -->
+              <template #addons>
+                <Navigation />
+              </template>
+            </carousel><!-- End .owl-carousel -->
+          </div><!-- End .col-xl-9 -->
         </div><!-- End .row cat-banner-row -->
 
 
         <div class="row cat-banner-row">
-            <div class="col-xl-2 col-xxl-3">
-                <div class="cat-banner row no-gutters">
-                    <div class="cat-banner-list col-sm-6 d-xl-none d-xxl-flex" style="background-image: url(../assets/images/banner-bg-4.jpg);">
-                        <div class="banner-list-content">
-                            <h2><a href="#">Cooking </a></h2>
+          <div class="col-xl-2 col-xxl-3">
+            <div class="cat-banner row no-gutters">
+              <div class="cat-banner-list col-sm-6 d-xl-none d-xxl-flex" style="background-image: url(../assets/images/banner-bg-4.jpg);">
+                <div class="banner-list-content">
+                  <h2><a href="#">Cooking </a></h2>
 
-                            <ul>
-                                <li><a href="#">Cookware</a></li>
-                                <li><a href="#">Dinnerware</a></li>
-                                <li><a href="#">Cups</a></li>
-                                <li><a href="#">Microwaves</a></li>
-                                <li><a href="#">Toasters</a></li>
-                                <li><a href="#">Coffee Makers</a></li>
-                                <li class="list-all-link"><a href="#">See All Departments</a></li>
-                            </ul>
-                        </div><!-- End .banner-list-content -->
-                    </div><!-- End .col-sm-6 -->
+                  <ul>
+                    <li><a href="#">Cookware</a></li>
+                    <li><a href="#">Dinnerware</a></li>
+                    <li><a href="#">Cups</a></li>
+                    <li><a href="#">Microwaves</a></li>
+                    <li><a href="#">Toasters</a></li>
+                    <li><a href="#">Coffee Makers</a></li>
+                    <li class="list-all-link">
+                      <a href="#">See All Departments</a>
+                    </li>
+                  </ul>
+                </div><!-- End .banner-list-content -->
+              </div><!-- End .col-sm-6 -->
 
-                    <div class="col-sm-6 col-xl-12 col-xxl-6">
-                        <div class="banner banner-overlay">
-                            <a href="#">
-                                <img src="../assets/images/demos/demo-14/banners/banner-10.jpg" alt="Banner img desc">
-                            </a>
+              <div class="col-sm-6 col-xl-12 col-xxl-6">
+                <div class="banner banner-overlay">
+                  <a href="#">
+                    <img src="../assets/images/demos/demo-14/banners/banner-10.jpg" alt="Banner img desc" />
+                  </a>
 
-                            <div class="banner-content">
-                                <h4 class="banner-subtitle text-white"><a href="#">Best Deals</a></h4><!-- End .banner-subtitle -->
-                                <h4 class="banner-title text-white"><a href="#">Commercial <br>Kitchen <!-- <br><span>Efficiency, Precision, and Flavor</span> --></a></h4><!-- End .banner-title -->
-                                <a href="#" class="banner-link">Shop Now <i class="icon-long-arrow-right"></i></a>
-                            </div><!-- End .banner-content -->
-                        </div><!-- End .banner -->
-                    </div><!-- End .col-sm-6 -->
-                </div><!-- End .cat-banner -->
-            </div><!-- End .col-xl-3 -->
+                  <div class="banner-content">
+                    <h4 class="banner-subtitle text-white">
+                      <a href="#">Best Deals</a>
+                    </h4><!-- End .banner-subtitle -->
+                    <h4 class="banner-title text-white">
+                      <a href="#">Commercial <br />Kitchen <!-- <br><span>Efficiency, Precision, and Flavor</span> --></a>
+                    </h4><!-- End .banner-title -->
+                    <a href="#" class="banner-link">Shop Now <i class="icon-long-arrow-right"></i></a>
+                  </div><!-- End .banner-content -->
+                </div><!-- End .banner -->
+              </div><!-- End .col-sm-6 -->
+            </div><!-- End .cat-banner -->
+          </div><!-- End .col-xl-3 -->
 
-            <div class="col-xl-10 col-xxl-9">
+          <div class="col-xl-10 col-xxl-9">
+            <carousel
+              ref="scrollableContainerCarosel"
+              :breakpoints="breakpoints"
+              class="carousel-wrapper owl-full carousel-equal-height carousel-with-shadow"
+              :autoplay="5000"
+              :wrap-around="true"
+              :pause-autoplay-on-hover="true"
+              @load="adjustTheClass1Height"
+            >
+              <slide v-for="(item, index) in productsLaundry" :key="index">
+                <div class="product text-center">
+                  <figure class="product-media">
+                    <!-- <span class="product-label label-sale">Sale</span> -->
+                    <router-link :to="getProductLink(item.id, item.name, item.model_number)">
+                      <img
+                        v-lazy:src="'/storage/' + item.main_image_path"
+                        :src="'/storage/' + item.main_image_path"
+                        alt="Product image"
+                        class="product-image"
+                      />
+                    </router-link>
 
-              <carousel ref="scrollableContainerCarosel" @load="adjustTheClass1Height" :breakpoints="breakpoints" class="carousel-wrapper owl-full carousel-equal-height carousel-with-shadow"  :autoplay="5000" :wrap-around="true" :pauseAutoplayOnHover ="true">
-                  <slide v-for="(item, index) in productsLaundry" :key="index">
+                    <div class="product-action-vertical">
+                      <a href="#" class="btn-product-icon btn-wishlist" title="Add to wishlist"><span>add to wishlist</span></a>
+                      <a href="popup/quickView.html" class="btn-product-icon btn-quickview" title="Quick view"><span>Quick view</span></a>
+                    </div><!-- End .product-action-vertical -->
 
-                    <div class="product text-center">
-                        <figure class="product-media">
-                            <!-- <span class="product-label label-sale">Sale</span> -->
-                             <router-link :to="getProductLink(item.id, item.name, item.model_number)">
+                    <div class="product-action">
+                      <a href="#" class="btn-product btn-cart" title="Add to cart"><span>add to cart</span></a>
+                    </div><!-- End .product-action -->
+                  </figure><!-- End .product-media -->
 
-                                <img :src="'/storage/' + item.main_image_path" v-lazy:src="'/storage/' + item.main_image_path" alt="Product image" class="product-image"
-                                       />
-                            </router-link>
+                  <div class="product-body">
+                    <div class="product-cat">
+                      <a href="#">Cooking Appliances - </a>
+                    </div><!-- End .product-cat -->
+                    <h3 class="product-title">
+                      <router-link :to="getProductLink(item.id, item.name, item.model_number)">
+                        {{ item.name }}
+                      </router-link>
+                    </h3><!-- End .product-title -->
+                    <div class="product-price">
+                      <span class="new-price">$249.99</span>
+                    </div><!-- End .product-price -->
 
-                            <div class="product-action-vertical">
-                                <a href="#" class="btn-product-icon btn-wishlist" title="Add to wishlist"><span>add to wishlist</span></a>
-                                <a href="popup/quickView.html" class="btn-product-icon btn-quickview" title="Quick view"><span>Quick view</span></a>
+                    <br />
+                  </div><!-- End .product-body -->
+                </div><!-- End .product -->
+              </slide>
 
-                            </div><!-- End .product-action-vertical -->
-
-                            <div class="product-action">
-                                <a href="#" class="btn-product btn-cart" title="Add to cart"><span>add to cart</span></a>
-                            </div><!-- End .product-action -->
-                        </figure><!-- End .product-media -->
-
-                        <div class="product-body">
-                            <div class="product-cat">
-                                <a href="#">Cooking Appliances - </a>
-                            </div><!-- End .product-cat -->
-                            <h3 class="product-title"><router-link :to="getProductLink(item.id, item.name, item.model_number)">{{ item.name }}</router-link></h3><!-- End .product-title -->
-                            <div class="product-price">
-                                <span class="new-price">$249.99</span>
-                            </div><!-- End .product-price -->
-
-                            <br>
-
-                        </div><!-- End .product-body -->
-                    </div><!-- End .product -->
-
-
-                  </slide>
-
-                  <template #addons>
-                    <Navigation />
-                  </template>
-
-                </carousel><!-- End .owl-carousel -->
-
-            </div><!-- End .col-xl-9 -->
+              <template #addons>
+                <Navigation />
+              </template>
+            </carousel><!-- End .owl-carousel -->
+          </div><!-- End .col-xl-9 -->
         </div><!-- End .row cat-banner-row -->
       </div><!-- End .container -->
 
       <div class="container-fluid pb-4 pt-5">
         <div class="headings">
-
-          <h3 class="heading text-primary">Our Showrooms</h3>
-          <h4 class="sub-heading">Welcome to Sheffield showrooms</h4>
+          <h3 class="heading text-primary">
+            Our Showrooms
+          </h3>
+          <h4 class="sub-heading">
+            Welcome to Sheffield showrooms
+          </h4>
         </div>
 
         <div class="row justify-content-left">
-
-
-          <div class="col-sm-6 col-lg-3" v-for="showroom in showrooms" :key="showroom.id">
+          <div v-for="showroom in showrooms" :key="showroom.id" class="col-sm-6 col-lg-3">
             <article class="entry entry-grid">
               <figure class="entry-media">
                 <router-link :to="getShowroomLink(showroom.id, showroom.name)">
-                  <img style="aspect-ratio: 3 / 2;" :src="'/storage/'+ showroom.main_image_path" alt="image desc">
+                  <img style="aspect-ratio: 3 / 2;" :src="'/storage/'+ showroom.main_image_path" alt="image desc" />
                 </router-link>
               </figure><!-- End .entry-media -->
 
               <div class="entry-body text-center pt-1">
-
                 <h2 class="entry-title">
-                   <router-link :to="getShowroomLink(showroom.id, showroom.name)">{{ showroom.name }}</router-link>
+                  <router-link :to="getShowroomLink(showroom.id, showroom.name)">
+                    {{ showroom.name }}
+                  </router-link>
                 </h2><!-- End .entry-title -->
 
                 <div class="entry-content">
                   <p>
-                    <span >
+                    <span>
                       <i style="color:rgb(223, 31, 49);" class="icon-phone "></i>
                       <b>
 
-                        <a style="color: #777; text-decoration: none;"
-                           onmouseover="this.style.color='#c02434'"
-                           onmouseout="this.style.color='#777'" class="text-grey pl-3" :href="'tel:' + showroom.phone_number1">{{ showroom.phone_number1 }}</a>,
+                        <a
+                          style="color: #777; text-decoration: none;"
+                          onmouseover="this.style.color='#c02434'"
+                          onmouseout="this.style.color='#777'"
+                          class="text-grey pl-3"
+                          :href="'tel:' + showroom.phone_number1"
+                        >{{ showroom.phone_number1 }}</a>,
 
-                        <a style="color: #777; text-decoration: none;"
-                           onmouseover="this.style.color='#c02434'"
-                           onmouseout="this.style.color='#777'" class="text-grey" :href="'tel:' + showroom.phone_number2">{{ showroom.phone_number2 }}</a>
+                        <a
+                          style="color: #777; text-decoration: none;"
+                          onmouseover="this.style.color='#c02434'"
+                          onmouseout="this.style.color='#777'"
+                          class="text-grey"
+                          :href="'tel:' + showroom.phone_number2"
+                        >{{ showroom.phone_number2 }}</a>
 
                       </b>
-                    </span><br>
+                    </span><br />
                     <span>
                       <i style="color:rgb(223, 31, 49);" class="icon-envelope "></i>
                       <b>
-                        <a style="color: #777; text-decoration: none;"
-                           onmouseover="this.style.color='#c02434'"
-                           onmouseout="this.style.color='#777'" class="text-grey pl-3" :href="'mailto:'+showroom.email">{{ showroom.email }} </a>
+                        <a
+                          style="color: #777; text-decoration: none;"
+                          onmouseover="this.style.color='#c02434'"
+                          onmouseout="this.style.color='#777'"
+                          class="text-grey pl-3"
+                          :href="'mailto:'+showroom.email"
+                        >{{ showroom.email }} </a>
                       </b>
-                    </span><br>
-                     {{ showroom.location }}</p>
+                    </span><br />
+                    {{ showroom.location }}
+                  </p>
 
-                  <router-link :to="getShowroomLink(showroom.id, showroom.name)" class="btn btn-outline-primary"><span>View More</span><i class="icon-long-arrow-right"></i></router-link>
+                  <router-link :to="getShowroomLink(showroom.id, showroom.name)" class="btn btn-outline-primary">
+                    <span>View More</span><i class="icon-long-arrow-right"></i>
+                  </router-link>
                 </div><!-- End .entry-content -->
               </div><!-- End .entry-body -->
             </article><!-- End .entry -->
           </div><!-- End .col-lg-3 -->
-
-
         </div><!-- End .row -->
-
       </div>
       <!-- End .container-fluid -->
 
@@ -670,9 +719,10 @@
                           <a href="#">We are Innovative </a>
                         </h2>
                         <!-- End .banner-title -->
-                        <a href="#" class="banner-link"
-                          >View More <i class="icon-long-arrow-right"></i
-                        ></a>
+                        <a
+                          href="#"
+                          class="banner-link"
+                        >View More <i class="icon-long-arrow-right"></i></a>
                       </div>
                       <!-- End .banner-content -->
                     </div>
@@ -698,9 +748,10 @@
                           <a href="#">Sheffield's CSR</a>
                         </h2>
                         <!-- End .banner-title -->
-                        <a href="#" class="banner-link"
-                          >View More<i class="icon-long-arrow-right"></i
-                        ></a>
+                        <a
+                          href="#"
+                          class="banner-link"
+                        >View More<i class="icon-long-arrow-right"></i></a>
                       </div>
                       <!-- End .banner-content -->
                     </div>
@@ -720,7 +771,8 @@
 
             <div
               class="icon-boxes-container"
-              :style="{ backgroundImage: 'url(/assets/images/sheffield_stainless_steel_background.jpg)' }">
+              :style="{ backgroundImage: 'url(/assets/images/sheffield_stainless_steel_background.jpg)' }"
+            >
               <div class="container-fluid">
                 <div class="row">
                   <div class="col-sm-6 col-lg-3">
@@ -729,7 +781,9 @@
                         <i class="icon-rocket"></i>
                       </span>
                       <div class="icon-box-content">
-                        <h3 class="icon-box-title">Shipping</h3>
+                        <h3 class="icon-box-title">
+                          Shipping
+                        </h3>
                         <!-- End .icon-box-title -->
                         <p>Choose your prefferd shipping method</p>
                       </div>
@@ -746,7 +800,9 @@
                       </span>
 
                       <div class="icon-box-content">
-                        <h3 class="icon-box-title">30 Days Return</h3>
+                        <h3 class="icon-box-title">
+                          30 Days Return
+                        </h3>
                         <!-- End .icon-box-title -->
                         <p>Simply return it within 30 days for an exchange</p>
                       </div>
@@ -763,7 +819,9 @@
                       </span>
 
                       <div class="icon-box-content">
-                        <h3 class="icon-box-title">Payment Secure</h3>
+                        <h3 class="icon-box-title">
+                          Payment Secure
+                        </h3>
                         <!-- End .icon-box-title -->
                         <p>Contact us 24 hours a day, 7 days a week</p>
                       </div>
@@ -780,7 +838,9 @@
                       </span>
 
                       <div class="icon-box-content">
-                        <h3 class="icon-box-title">24X7 Support</h3>
+                        <h3 class="icon-box-title">
+                          24X7 Support
+                        </h3>
                         <!-- End .icon-box-title -->
                         <p>Contact us 24 hours a day, 7 days a week</p>
                       </div>
@@ -801,37 +861,43 @@
 
             <div class="container pb-4">
               <div class="headings">
-                <h3 class="heading text-primary">Testimonials</h3>
-                <h4 class="sub-heading">What clients say about us</h4>
+                <h3 class="heading text-primary">
+                  Testimonials
+                </h3>
+                <h4 class="sub-heading">
+                  What clients say about us
+                </h4>
               </div>
 
-               <carousel :perPage="1" :autoplay="10000" :wrap-around="true" :pauseAutoplayOnHover ="true" >
-                  <slide v-for="(item, index) in testimonials" :key="index">
+              <carousel
+                :per-page="1"
+                :autoplay="10000"
+                :wrap-around="true"
+                :pause-autoplay-on-hover="true"
+              >
+                <slide v-for="(item, index) in testimonials" :key="index">
+                  <!-- <img :src="getImage(item)" :alt="item.alt"> -->
+                  <!-- <div>{{ item.text }}</div> -->
 
-                    <!-- <img :src="getImage(item)" :alt="item.alt"> -->
-                    <!-- <div>{{ item.text }}</div> -->
+                  <blockquote class="testimonial text-center">
+                    <img
+                      :src="item.image"
+                      :alt="item.alt"
+                    />
+                    <p>
+                      “ {{ item.message }} ”
+                    </p>
 
-                    <blockquote class="testimonial text-center">
-                      <img
-                        :src="item.image" :alt="item.alt"
-                      />
-                      <p>
-                        “ {{ item.message }} ”
-                      </p>
-
-                      <cite>
-                        {{ item.name }}
-                        <span>{{ item.job_title }}</span>
-                      </cite>
-                    </blockquote>
-
-                  </slide>
-                  <template #addons>
-                    <Navigation />
-
-                  </template>
+                    <cite>
+                      {{ item.name }}
+                      <span>{{ item.job_title }}</span>
+                    </cite>
+                  </blockquote>
+                </slide>
+                <template #addons>
+                  <Navigation />
+                </template>
               </carousel>
-
             </div>
           </div>
           <!-- End .col-lg-9 col-xxl-10 -->
@@ -847,8 +913,8 @@
     <i class="icon-arrow-up"></i>
   </button>
   <div
-    class="container newsletter-popup-container mfp-hide"
     id="newsletter-popup-form"
+    class="container newsletter-popup-container mfp-hide"
   >
     <div class="row justify-content-center">
       <div class="col-10">
@@ -863,7 +929,7 @@
                 height="auto"
               />
               <h2 class="banner-title">
-                get <span>Best<light> </light></span> Deals
+                get <span>Best<light /></span> Deals
               </h2>
               <p>
                 Subscribe to the Sheffield newsletter to receive timely updates
@@ -879,7 +945,9 @@
                     required
                   />
                   <div class="input-group-append">
-                    <button class="btn" type="submit"><span>go</span></button>
+                    <button class="btn" type="submit">
+                      <span>go</span>
+                    </button>
                   </div>
                   <!-- .End .input-group-append -->
                 </div>
@@ -887,14 +955,15 @@
               </form>
               <div class="custom-control custom-checkbox">
                 <input
+                  id="register-policy-2"
                   type="checkbox"
                   class="custom-control-input"
-                  id="register-policy-2"
                   required
                 />
-                <label class="custom-control-label" for="register-policy-2"
-                  >Do not show this popup again</label
-                >
+                <label
+                  class="custom-control-label"
+                  for="register-policy-2"
+                >Do not show this popup again</label>
               </div>
               <!-- End .custom-checkbox -->
             </div>
@@ -946,11 +1015,11 @@
                     return {
                       id: child.id,
                       name: child.name,
-                      slug: child.name.toLowerCase().replace(/\s+/g, '-')
+                      slug: child.name.toLowerCase().replace(/\s+/g, '-'),
                     };
-                  })
-                }
-              ]
+                  }),
+                },
+              ],
             };
 
           }));
@@ -973,40 +1042,40 @@
       mobileImage: basePath + 'frontend/images/slider/slider1-mobile.jpg',
       alt: 'Commercial Kitchen Solutions',
       intro : {
-        title : "Commercial <span>Kitchen</span> <br />Solutions",
-        subtitle : "We offer the best kitchen solutions",
-        url : "#",
-      }
+        title : 'Commercial <span>Kitchen</span> <br />Solutions',
+        subtitle : 'We offer the best kitchen solutions',
+        url : '#',
+      },
     },
     {
       image: basePath + 'frontend/images/slider/slider2.webp',
       mobileImage: basePath + 'frontend/images/slider/slider2-mobile.jpg',
       alt: 'Commercial Cold Room Solutions',
       intro : {
-        title : " Commercial <span>Cold  <br />Room</span> Solutions",
-        subtitle : "We offer the best cold room solutions",
-        url : "#",
-      }
+        title : ' Commercial <span>Cold  <br />Room</span> Solutions',
+        subtitle : 'We offer the best cold room solutions',
+        url : '#',
+      },
     },
     {
       image: basePath + 'frontend/images/slider/slider1.webp',
       mobileImage: basePath + 'frontend/images/slider/slider3-mobile.jpg',
       alt: 'Commercial Laundry Solutions',
       intro : {
-        title : "Commercial <span>Laundry</span> <br /> Solutions",
-        subtitle : "We offer the best laundry solutions",
-        url : "#",
-      }
+        title : 'Commercial <span>Laundry</span> <br /> Solutions',
+        subtitle : 'We offer the best laundry solutions',
+        url : '#',
+      },
     },
     {
       image: basePath + 'frontend/images/slider/slider2.webp',
       mobileImage: basePath + 'frontend/images/slider/slider4-mobile.jpg',
       alt: 'Commercial Health Care Solutions',
       intro : {
-        title : "Commercial <span>Health <br /> Care</span> Solutions",
-        subtitle : "We offer the best health care solutions",
-        url : "#",
-      }
+        title : 'Commercial <span>Health <br /> Care</span> Solutions',
+        subtitle : 'We offer the best health care solutions',
+        url : '#',
+      },
     },
 ];
 
@@ -1039,7 +1108,7 @@
       1600: {
           itemsToShow:5,
           snapAlign: 'start',
-      }
+      },
   };
 
 
@@ -1048,7 +1117,7 @@ const testimonials = [
 
      {
       image: basePath + 'frontend/images/testimonials/user-2.jpg',
-      message: "As a professional chef, I understand the importance of having a reliable commercial kitchen. Sheffield's commercial kitchen solutions have exceeded my expectations. The equipment is durable and has improved the efficiency of my kitchen. I highly recommend Sheffield to anyone in need of commercial kitchen solutions.",
+      message: 'As a professional chef, I understand the importance of having a reliable commercial kitchen. Sheffield\'s commercial kitchen solutions have exceeded my expectations. The equipment is durable and has improved the efficiency of my kitchen. I highly recommend Sheffield to anyone in need of commercial kitchen solutions.',
       name: 'Dan Njoroge',
       company: 'Company X',
       job_title: 'Customer',
@@ -1056,7 +1125,7 @@ const testimonials = [
 
     {
       image: basePath + 'frontend/images/testimonials/user-1.jpg',
-      message: "I was extremely impressed with Sheffield's commercial cold room solutions. As a restaurant owner, having reliable refrigeration is crucial to the success of my business. Sheffield's team delivered and installed the cold room in a timely manner and it has been working perfectly ever since.",
+      message: 'I was extremely impressed with Sheffield\'s commercial cold room solutions. As a restaurant owner, having reliable refrigeration is crucial to the success of my business. Sheffield\'s team delivered and installed the cold room in a timely manner and it has been working perfectly ever since.',
       name: 'Dan Njoroge',
       company: 'Company X',
       job_title: 'Customer',
@@ -1064,7 +1133,7 @@ const testimonials = [
 
     {
       image: basePath + 'frontend/images/testimonials/user-2.jpg',
-      message: "Sheffield's commercial healthcare solutions have been a game changer for our facility. Their team helped us design and install the perfect healthcare solution that is both efficient and reliable. We can now focus on providing quality care to our patients without worrying about equipment malfunctions.",
+      message: 'Sheffield\'s commercial healthcare solutions have been a game changer for our facility. Their team helped us design and install the perfect healthcare solution that is both efficient and reliable. We can now focus on providing quality care to our patients without worrying about equipment malfunctions.',
       name: 'Dan Njoroge',
       company: 'Company X',
       job_title: 'Customer',
@@ -1072,7 +1141,7 @@ const testimonials = [
 
     {
       image: basePath + 'frontend/images/testimonials/user-1.jpg',
-      message: "I recently purchased a commercial laundry solution from Sheffield and I couldn't be happier with the results. The laundry solution is energy-efficient and has dramatically reduced our utility bills. The team at Sheffield were knowledgeable and professional throughout the entire process.",
+      message: 'I recently purchased a commercial laundry solution from Sheffield and I couldn\'t be happier with the results. The laundry solution is energy-efficient and has dramatically reduced our utility bills. The team at Sheffield were knowledgeable and professional throughout the entire process.',
       name: 'Dan Njoroge',
       company: 'Company X',
       job_title: 'Customer',
@@ -1084,8 +1153,8 @@ const data = () => {
     items,
     testimonials,
     //isDesktop: window.innerWidth >= 768
-  }
-}
+  };
+};
 
 const isDesktop = ref(window.innerWidth >= 768);
 
@@ -1163,13 +1232,13 @@ const getSubset = (items, columnIndex, totalColumns) => {
   const startIndex = (columnIndex - 1) * subsetSize;
   const endIndex = startIndex + subsetSize;
   return items.slice(startIndex, endIndex);
-}
+};
 
 
 const adjustTheClass1Height = () => {
   const carouselHeight = this.$refs.carousel.$el.offsetHeight;
   this.$refs.carousel.$el.closest('.theClass1-wrapper').style.height = carouselHeight + 'px';
-}
+};
 
 /////////////
 
@@ -1258,6 +1327,8 @@ onMounted(async () => {
 
 
 </script>
+
+<style></style>
 
 <style>
 

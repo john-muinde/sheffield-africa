@@ -15,7 +15,11 @@
       <nav aria-label="breadcrumb" class="breadcrumb-nav border-0 mb-0">
         <div class="container">
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><router-link to="/">HOME</router-link></li>
+            <li class="breadcrumb-item">
+              <router-link to="/">
+                HOME
+              </router-link>
+            </li>
             <li class="breadcrumb-item active" aria-current="page">
               TERMS OF OPERATIONS
             </li>
@@ -31,21 +35,19 @@
           <div class="row">
             <div class="col-lg-12">
               <div class="headings">
-               
-                <h3 class="heading text-primary">TERMS OF OPERATIONS</h3>
+                <h3 class="heading text-primary">
+                  TERMS OF OPERATIONS
+                </h3>
               </div>
 
               <p>All transactions are strictly governed by the below-outlined terms of operations unless offered specific terms against a special contract/agreement.</p>
 
-              <ul style="margin-left: 20px;" class="mt-2" >
-
+              <ul style="margin-left: 20px;" class="mt-2">
                 <li>
-
                   <h4>PAYMENT</h4>
                  
 
                   <ol style="list-style-type: lower-alpha; margin-left: 30px;">
-
                     <li>100% Advance Payment is required together with purchase order and/or signed and stamped quotation on all pages for approval, for us to start the job.</li>
                     <li>Goods will be delivered only after full payment is received by us.</li>
                     <li>We shall not hold goods in our stores for more than 2 weeks awaiting the site to get ready or otherwise. Even if payment is made in full, we can store goods only for 2 weeks. Storage charges will be surcharged to the client at a per cubic meter rate if the items are not collected after 2 weeks of them being ready.</li>
@@ -56,13 +58,10 @@
                     <li>VAT is charged 16% extra above the prices quoted in the quotation as applicable.</li>
                     <li>If the customer is exempt from VAT, the customer has to arrange a VAT exemption letter before the delivery of goods. The exemption letter should mention the invoice number on which the exemption is certified. Goods cannot be delivered before the exemption letter is given to us.</li>
                     <li>All taxes both foreign and local are borne by the customer.</li>
-
-                  </ol>  
-
+                  </ol>
                 </li>
 
                 <li>
-
                   <h4>COMPLETION OF WORK</h4>
 
                   <ol style="list-style-type: lower-alpha; margin-left: 30px;">
@@ -72,16 +71,14 @@
                     <li>Documentation and transport (subject to site getting ready) will require one (1) to seven (7) business days within Nairobi and for export respectively.</li>
                     <li>All efforts will be made to ensure goods are ready for inspection on time. Sometimes delay may occur because of reasons beyond control or force majeure.</li>
                   </ol>
-
                 </li>
 
                 <li>
-
                   <h4>WARRANTY</h4>
 
                   <ol style="list-style-type: lower-alpha; margin-left: 30px;">
-
-                    <li>For optimum working of machines it is essential that the supply of other services are of the required specifications:
+                    <li>
+                      For optimum working of machines it is essential that the supply of other services are of the required specifications:
 
                       <ol style="list-style-type: lower-roman; margin-left: 30px;">
                         <li>Water should be soft and clear.</li>
@@ -115,19 +112,15 @@
                     <li>Sheffield provides professional training and advice regarding the usage of goods supplied, this should be respected to validate the warranty.</li>
                     <li>Warranty does not cover glass breakage and other physical elements of the equipment. The warranty only covers spares.</li>
                   </ol>
-
                 </li>
 
                 <li>
-
                   <h4>TRAVEL</h4>
 
                   <p>The client is responsible for the facilitation of the travel expenses for site visits, service, and installation scope of works outside Nairobi including tickets, food, conveyance, and movement & accommodation.</p>
-
                 </li>
 
                 <li>
-
                   <h4>INSTALLATION</h4>
 
                   <ol style="list-style-type: lower-alpha; margin-left: 30px;">
@@ -145,27 +138,21 @@
                     <li>Client will provide permits, necessary permission, licenses, designated area passes, and necessary approvals from authorities.</li>
                     <li>Installations may require several technicians, supervisors, and managers on-site to be indicated in the work plan.</li>
                   </ol>
-
                 </li>
 
                 <li>
-
                   <h4>TRANSPORT OF GOODS</h4>
 
                   <p>We outsource transport of goods. We charge as actual cost. We will be happy if the customer can arrange their transport otherwise there will be an extra cost as shown in the quotation.</p>
-
                 </li>
 
                 <li>
-
                   <h4>INSURANCE</h4>
 
                   <p>The goods are made of stainless steel, its finishes are important. We strongly recommend that insurance be arranged by the client to avoid damages and loss due to theft or accidents during transport. We charge an extra 1% of the quoted sum if insurance is to be arranged by us.</p>
-
                 </li>
 
                 <li>
-
                   <h4>AFTER SALE SERVICES</h4>
 
                   <ol style="list-style-type: lower-alpha; margin-left: 30px;">
@@ -176,23 +163,18 @@
                     <li>We suggest that the client invest 5% of the value of the contract in purchasing the required spare parts so that we can service and fit them when required.</li>
                     <li>We can train your technicians to carry out minor repairs for maintenance. This requires two weeks of training at our work in Nairobi.</li>  
                   </ol>
-
                 </li>
 
                 <li>
-
                   <h4>GOODS OWNERSHIP</h4>
 
                   <p>Goods remain the property of Sheffield Steel Systems Limited until full and final payment is made. We have the full right to remove goods if payment is not made in full.</p>
-
                 </li>
 
                 <li>
-
                   <h4>GOODS RETURN</h4>
 
                   <ol style="list-style-type: lower-alpha; margin-left: 30px;">
-
                     <li>Sheffield may take up to two business days from the time the items/goods returned are received, to determine the condition of the item(s) returned for replacement, exchange, or refund before communicating the findings to the client.</li>
                     <li>Clients are expected to notify Sheffield if an item is to be returned within 2 days of delivery/receipt. Otherwise, the item(s) will be assumed to be in good working condition considering that they are tested for the client during inspection before delivery;</li>
                     <li>A Return Goods Authorization (RGA) number will be assigned to an authorized return. The RGA form will be emailed to the customer within 72 hours/3 business days.</li>
@@ -200,57 +182,42 @@
                     <li>Items must be returned to Sheffield premises within 15 days from the date of delivery.</li>
                     <li>If a refund is issued, 5% will be deducted from the total price of the item returned to cater for administrative and other related costs incurred in the process; If a Credit Note is granted, 5% will be deducted from the total price of the item returned if the Item’s seal has been broken, and a further charge on depreciation will be levied depending on the usage. This is necessitated by the fact that such items are treated strictly as second-hand items and would not be easily disposed of by Sheffield.</li>
                     <li>Transport cost for returning, replacing, or exchanging any item shall be borne by the client.</li>
-                 </ol>
-
+                  </ol>
                 </li>
 
                 <li>
                   <h4>VALIDITY OF THE QUOTATION</h4>
 
                   <ol style="list-style-type: lower-alpha; margin-left: 30px;">
-
                     <li>Validity of the quotation is 14 days from the date of quotation.</li>
                     <li>Offer valid while stocks last.</li>
                   </ol>
-
                 </li>
                 <li>
+                  <h4>DATA SHARING & PROTECTION</h4>
 
-                <h4>DATA SHARING & PROTECTION</h4>
-
-                <ol style="list-style-type: lower-alpha; margin-left: 30px;">
-
-                  <li>Sheffield is governed by the Data Protection Act of The Republic of Kenya and is a Certified Data Controller. The Personal Data shared with us i.e your name, location and contact details will only be used for sales and marketing purposes by Sheffield Africa and will not be shared with any third party.  </li>
-                  <li>Based on our scope of works, we capture project and event pictures that will be used for sales & marketing purposes and this will serve as consent to utilize the same in our communication.  </li>
-
-                </ol>
-
+                  <ol style="list-style-type: lower-alpha; margin-left: 30px;">
+                    <li>Sheffield is governed by the Data Protection Act of The Republic of Kenya and is a Certified Data Controller. The Personal Data shared with us i.e your name, location and contact details will only be used for sales and marketing purposes by Sheffield Africa and will not be shared with any third party.  </li>
+                    <li>Based on our scope of works, we capture project and event pictures that will be used for sales & marketing purposes and this will serve as consent to utilize the same in our communication.  </li>
+                  </ol>
                 </li>
                 <li>
-
                   <h4>LEGAL GOVERNANCE</h4>
 
                   <p>These terms and conditions are governed under the jurisdiction of the Republic of Kenya.</p>
-
                 </li>
               </ul>
-
-
             </div>
-
           </div>
         </div>
       </div>
-
-
     </main>
-
   </div>
 </template>
 
 <script setup>
-  import { useMeta } from "../../admin/composables/use-meta";
-useMeta({ title: "Terms & Conditions" });
+  import { useMeta } from '../../admin/composables/use-meta';
+useMeta({ title: 'Terms & Conditions' });
 </script>
 
 <style>

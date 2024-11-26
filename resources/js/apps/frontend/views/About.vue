@@ -1,820 +1,927 @@
 <template>
-    <main class="main">
-        <div class="page-content pg-white">
-            <div class="container">
-                <div class="page-content pg-white who-we-are-section">
-                    <div class="overlay"></div>
+  <main class="main">
+    <div class="page-content pg-white">
+      <div class="container">
+        <div class="page-content pg-white who-we-are-section">
+          <div class="overlay"></div>
 
-                    <div class="pt-5 pb-2">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="row">
-                                        <div class="col-lg-6 who-we-are" style="
+          <div class="pt-5 pb-2">
+            <div class="container">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="row">
+                    <div
+                      class="col-lg-6 who-we-are"
+                      style="
                                                 background-color: #ffffff73;
                                                 padding: 20px;
-                                            ">
-                                            <h2 class="our-history-title">
-                                                Who We Are
-                                            </h2>
-                                            <p class="lead about-us-lead text-primary mb-1">
-                                                Transforming Ideas into
-                                                Sustainable Realities
-                                            </p>
-                                            <p class="who-we-are-p">
-                                                Sheffield Steel Systems Limited
-                                                was founded in 2003 and has
-                                                since expanded to become East
-                                                Africa’s leading solution and
-                                                service provider for Commercial
-                                                Kitchen, Laundry, and Cold
-                                                Storage Solutions, with a
-                                                distinct specialization in
-                                                Stainless Steel Fabrication and
-                                                Customization. We are a Kenyan
-                                                company headquartered in
-                                                Nairobi, with additional offices
-                                                in Uganda and Rwanda. Our
-                                                project executions span the
-                                                continent, reaching from
-                                                Ethiopia, Burundi, South Sudan,
-                                                and Nigeria to Congo, as we
-                                                explore new territories and
-                                                business lines. We are a
-                                                Pan-African company dedicated to
-                                                providing solutions built to
-                                                last in Africa.
-                                            </p>
-                                        </div>
-                                        <!-- End .col-lg-5 -->
-
-                                        <div class="col-lg-6">
-                                            <div class="banner video-banner-about"
-                                                style="background-color: unset !important;">
-                                                <div class="video-banner video-banner-bg bg-image text-center" style="">
-                                                    <div class="container container-video-button"
-                                                        style="cursor: pointer;">
-                                                        <a @click="showVideoPopup
-                                                            " class="btn-video btn-iframe"><i
-                                                                class="icon-play"></i></a>
-
-                                                        <VideoPopup :show-popup="isVideoPopupVisible
-                                                            " :video-url="videoUrl
-                                                                " @close="hideVideoPopup
-                                                                    " />
-                                                    </div>
-
-                                                    <span class="view-sheffield" style="cursor: pointer;"><a @click="showVideoPopup
-                                                        " class="">View Sheffield</a></span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- End .row -->
-                        </div>
-                        <!-- End .container -->
+                                            "
+                    >
+                      <h2 class="our-history-title">
+                        Who We Are
+                      </h2>
+                      <p class="lead about-us-lead text-primary mb-1">
+                        Transforming Ideas into
+                        Sustainable Realities
+                      </p>
+                      <p class="who-we-are-p">
+                        Sheffield Steel Systems Limited
+                        was founded in 2003 and has
+                        since expanded to become East
+                        Africa’s leading solution and
+                        service provider for Commercial
+                        Kitchen, Laundry, and Cold
+                        Storage Solutions, with a
+                        distinct specialization in
+                        Stainless Steel Fabrication and
+                        Customization. We are a Kenyan
+                        company headquartered in
+                        Nairobi, with additional offices
+                        in Uganda and Rwanda. Our
+                        project executions span the
+                        continent, reaching from
+                        Ethiopia, Burundi, South Sudan,
+                        and Nigeria to Congo, as we
+                        explore new territories and
+                        business lines. We are a
+                        Pan-African company dedicated to
+                        providing solutions built to
+                        last in Africa.
+                      </p>
                     </div>
+                    <!-- End .col-lg-5 -->
+
+                    <div class="col-lg-6">
+                      <div
+                        class="banner video-banner-about"
+                        style="background-color: unset !important;"
+                      >
+                        <div class="video-banner video-banner-bg bg-image text-center" style="">
+                          <div
+                            class="container container-video-button"
+                            style="cursor: pointer;"
+                          >
+                            <a
+                              class="btn-video btn-iframe"
+                              @click="showVideoPopup
+                              "
+                            ><i
+                              class="icon-play"
+                            ></i></a>
+
+                            <VideoPopup
+                              :show-popup="isVideoPopupVisible
+                              "
+                              :video-url="videoUrl
+                              "
+                              @close="hideVideoPopup
+                              "
+                            />
+                          </div>
+
+                          <span class="view-sheffield" style="cursor: pointer;"><a
+                            class=""
+                            @click="showVideoPopup
+                            "
+                          >View Sheffield</a></span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-            </div>
-        </div>
-
-        <div class="page-content pg-white">
-            <div class="container pt-3">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h2 class="our-history-title">Our History</h2>
-                            <!--                             <p class="lead about-us-lead text-primary mb-1">Transforming Ideas into Sustainable Realities</p> -->
-                            <carousel ref="scrollableContainerCarosel" @load="adjustTheClass1Height"
-                                class="carousel-wrapper" :perPage="1" :autoplay="5000" :wrap-around="true"
-                                :pauseAutoplayOnHover="true">
-                                <slide v-for="(item, index) in items" :key="index">
-                                    <img :src="getImage(item)" :alt="item.alt" />
-                                </slide>
-                                <template #addons>
-                                    <Navigation />
-                                    <Pagination />
-                                </template>
-                            </carousel>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="page-content bg-image-breaker bg-image-breaker2"></div>
-
-        <div class="page-content pt-5 our-methodology-section" id="our-methodology-section" :style="{
-            backgroundImage: 'url(/assets/images/methodology-gray.jpg)',
-        }">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="container">
-                            <h2 class="our-history-title mt-3">
-                                Sheffield Methodology
-                            </h2>
-                            <p class="lead about-us-lead text-primary mb-1">
-                                At Sheffield, our differentiating factor is you-
-                                Our Customer
-                            </p>
-                            <p class="about-us-p">
-                                We are 100% focused & committed to creating and
-                                implementing solutions for you and your
-                                business. Sheffield is flexible to your evolving
-                                needs and we will work hard to ensure they are
-                                continuously met. <br />Our main service touch
-                                points and processes for Customer Satisfaction
-                                include:
-                            </p>
-                            <div class="row">
-                                <div class="col-md-12 justify-content-center">
-                                    <div class="row justify-content-left links-container mt-3 mb-3">
-                                        <div v-for="(
-                                                item, index
-                                            ) in MethodologyResults" :key="index" class="methodology-item" :class="{
-                                                'left-class':
-                                                    item.direction === 'left',
-                                                'right-class':
-                                                    item.direction === 'right',
-                                                'down-class':
-                                                    item.direction === 'down',
-                                            }">
-                                            <div class="methodology-item-internal">
-                                                <div class="met-image">
-                                                    <img :src="item.image" />
-                                                </div>
-
-                                                <div class="met-description">
-                                                    <span>{{
-                                                        item.title
-                                                        }}</span>
-                                                </div>
-
-                                                <div class="met-text">
-                                                    <span>{{ item.text }}</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="page-content pb-0 page-content-counter" :style="{
-            backgroundImage:
-                'url(/assets/images/sheffield_stainless_steel_background.jpg)',
-        }">
-            <div class="container mt-0 counter-section" ref="counterSection"
-                :class="{ visible: state.isSectionInView }">
-                <div class="row text-center icon-boxes-container">
-                    <div class="col counter_col">
-                        <i class="fa fa-user text-primary" style="font-size: 3.5rem"></i>
-                        <h3 class="count-to text-primary mb-0">
-                            {{ projectsCount }}+
-                        </h3>
-                        <p>Projects</p>
-                    </div>
-                    <div class="col counter_col">
-                        <i class="fa fa-star text-primary" style="font-size: 3.5rem"></i>
-                        <h3 class="count-to text-primary mb-0">
-                            {{ conceptsCount }}+
-                        </h3>
-                        <p>Innovative Concepts</p>
-                    </div>
-                    <div class="col counter_col">
-                        <i class="fa fa-coffee text-primary" style="font-size: 3.5rem"></i>
-                        <h3 class="count-to text-primary mb-0">
-                            {{ trainingdemosCount }}+
-                        </h3>
-                        <p>Training Demos</p>
-                    </div>
-                    <div class="col counter_col">
-                        <i class="far fa-chart-bar text-primary" style="font-size: 3.5rem"></i>
-                        <h3 class="count-to text-primary mb-0">
-                            {{ yearsCount }}+
-                        </h3>
-                        <p>Years’ Experience</p>
-                    </div>
-
-                    <div class="col counter_col">
-                        <i class="far fa-chart-bar text-primary" style="font-size: 3.5rem"></i>
-                        <h3 class="count-to text-primary mb-0">
-                            {{ stopCount }}
-                        </h3>
-                        <p>Stop Shop Solution</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- End .page-content -->
-
-        <div class="page-content pg-white our-people-section">
-            <div class="pt-6">
-                <div class="container">
-                    <div class="container">
-                        <div class="row pt-5 pb-5">
-                            <div class="col-md-6 people-text">
-                                <h2 class="about-us-title">Our People</h2>
-                                <!-- End .title -->
-                                <p class="lead about-us-lead text-primary mb-1">
-                                    Meet Our Exceptional Team
-                                </p>
-
-                                <p class="about-us-p">
-                                    Sheffield proudly introduces our team of
-                                    highly qualified professionals, each
-                                    possessing expertise in engineering, project
-                                    management, and technical skills. They are
-                                    integral to the process of innovation and
-                                    the implementation of
-                                    <a href="#our-methodology-section">The Sheffield Methodology</a>.
-                                </p>
-                            </div>
-
-                            <div class="col-md-6" ref="counterSection_people"
-                                :class="{ visible: state.isSectionInView }">
-                                <img src="/assets/images/about-us/sheffield_in_numbers.png" />
-
-                                <div class="people-numbers staff">
-                                    <span class="number">{{ staffCount }}+</span>
-                                    <span class="number-title">Staff</span>
-                                </div>
-
-                                <div class="people-numbers engineering-crew">
-                                    <span class="number">{{ engineersCount }}+</span>
-                                    <span class="number-title">Engineering & Technical Skilled
-                                        Crew</span>
-                                </div>
-
-                                <div class="people-numbers leaders">
-                                    <span class="number">{{ executiveCount }}+</span>
-                                    <span class="number-title">Executive Leaders</span>
-                                </div>
-
-                                <div class="people-numbers design">
-                                    <span class="number">{{ designCount }}+</span>
-                                    <span class="number-title">Design Engineers</span>
-                                </div>
-
-                                <div class="people-numbers in-house">
-                                    <span class="number">{{ inhouseCount }}+</span>
-                                    <span class="number-title">In-house Chefs & Baristas</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="page-content bg-image-breaker bg-image-breaker3"></div>
-
-        <div class="page-content pg-my-grey pt-5 leadership-section">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-10 offset-lg-1">
-                        <div class="row">
-                            <div class="col-md-12 pt-5">
-                                <h2 class="about-us-title">Leadership</h2>
-                                <!-- End .title -->
-                                <p class="lead about-us-lead text-primary mb-1">
-                                    Meet the Minds Behind Our Success
-                                </p>
-
-                                <p class="about-us-p">
-                                    Our leadership team is made up of dedicated,
-                                    focused, and experienced executives working
-                                    with each other and their teams to implement
-                                    Sheffield’s strategy and vision, their
-                                    knowledge and experience come together to
-                                    make a difference for all our stakeholders.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-10 offset-lg-1 justify-content-center">
-                        <div class="row about-team-container about-team-container1 justify-content-center">
-                            <div class="col-md-3 mt-4">
-                                <div class="about-team">
-                                    <div class="about-team-white">
-                                        <img src="assets/images/team/MD - Suresh Kanotra website.jpg" />
-                                    </div>
-                                    <div class="details">
-                                        <div class="name">
-                                            Dr. Suresh Kanotra
-                                        </div>
-                                        <div class="job-title">
-                                            Managing Director
-                                        </div>
-                                    </div>
-                                    <div class="description description-text-right">
-                                        Dr. Suresh Kanotra, the founder of
-                                        Sheffield Africa, envisioned the need in
-                                        the African market for solutions &
-                                        services in the food and beverage
-                                        industry. With an engineering
-                                        background, he started Sheffield Steel
-                                        Systems Limited and continuously seeks
-                                        to innovate & tailor-make durable,
-                                        efficient, and smart solutions.
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-3 mt-4">
-                                <div class="about-team">
-                                    <div class="about-team-white">
-                                        <img src="assets/images/team/Saveer-Singh-Vohra.jpg" />
-                                    </div>
-                                    <div class="details">
-                                        <div class="name">Saveer Vohra</div>
-                                        <div class="job-title">
-                                            Financial Director
-                                        </div>
-                                    </div>
-                                    <div class="description description-text-right">
-                                        Mr. Saveer Vohra has a Bachelor’s degree
-                                        in Civil Engineering and a Master’s in
-                                        Finance from the University of Warwick
-                                        in the UK. As the Financial Director, he
-                                        ensures the Company is aligned with
-                                        financial growth, strategy, and a
-                                        profitable vision.
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-3 mt-4">
-                                <div class="about-team">
-                                    <div class="about-team-white">
-                                        <img src="assets/images/team/samman.jpg" />
-                                    </div>
-                                    <div class="details">
-                                        <div class="name">Samman Vohra</div>
-                                        <div class="job-title">
-                                            Business Development & Strategy
-                                            Director
-                                        </div>
-                                    </div>
-                                    <div class="description description-text-left">
-                                        Samman is a distinguished graduate from
-                                        the CASS Business School, City
-                                        University of London, with a strong
-                                        background in business, economics,
-                                        finance, and marketing. Leveraging
-                                        international exposure and academic
-                                        expertise, Samman works on special
-                                        projects, drives revenue growth,
-                                        identifies new opportunities, and
-                                        strengthens the Sheffield brand whilst
-                                        managing partnerships, aligning business
-                                        goals, and providing cross-functional
-                                        leadership, contributing significantly
-                                        to our company's success and vision for
-                                        the future.
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row about-team-container about-team-container2 mb-3">
-                            <div class="col mt-4">
-                                <div class="about-team">
-                                    <div class="about-team-white">
-                                        <img src="assets/images/team/Vikas-removebg-preview.jpg" />
-                                    </div>
-                                    <div class="details">
-                                        <div class="name">Vikas Sharma</div>
-                                        <div class="job-title">
-                                            Business Development Head
-                                        </div>
-                                    </div>
-                                    <div class="description description-text-right">
-                                        As the Business Development Head, Vikas
-                                        drives the organization's business
-                                        growth strategies and enhances the
-                                        current portfolio to explore new
-                                        business opportunities. With a rich
-                                        experience ranging from Strategic
-                                        Management, Marketing, and Brand
-                                        Management that has had a positive
-                                        impact on Sheffield’s operations, he
-                                        efficiently executes business strategies
-                                        that are in line with the organizational
-                                        objectives.
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col mt-4">
-                                <div class="about-team">
-                                    <div class="about-team-white">
-                                        <img src="assets/images/team/Simon.jpg" />
-                                    </div>
-                                    <div class="details">
-                                        <div class="name">Simon Mbugua</div>
-                                        <div class="job-title">
-                                            Head of Design & Development
-                                        </div>
-                                    </div>
-                                    <div class="description description-text-right">
-                                        A Mechanical Engineer by profession,
-                                        Simon specializes in product design 3D &
-                                        2D, plant maintenance, lean Six Sigma
-                                        manufacturing, workshop practices, and
-                                        structural design and integrity. He
-                                        leads the team of 2D & 3D design
-                                        engineers, research & development, and
-                                        project planning.
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col mt-4">
-                                <div class="about-team">
-                                    <div class="about-team-white">
-                                        <img src="assets/images/team/Ann Ajode Pic.jpg" />
-                                    </div>
-                                    <div class="details">
-                                        <div class="name">Ann Ajode</div>
-                                        <div class="job-title">
-                                            Customer Relations Manager
-                                        </div>
-                                    </div>
-                                    <div class="description description-text-right">
-                                        Ann is a proactive & efficient and
-                                        customer relations professional with
-                                        over 12 years of experience in business
-                                        development, sales, marketing, and
-                                        operations coordination with a
-                                        background in International Relations.
-                                        She facilitates smooth workflow
-                                        processes, communication, and
-                                        integration to enhance customer
-                                        satisfaction through quality management
-                                        systems. The customer is the top most
-                                        priority for her and her team who ensure
-                                        communication and support through the
-                                        contact points from enquiries, job
-                                        processing, execution and after sales
-                                        support.
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col mt-4">
-                                <div class="about-team">
-                                    <div class="about-team-white">
-                                        <img src="assets/images/team/Mwangi_2.jpg" />
-                                    </div>
-                                    <div class="details">
-                                        <div class="name">Joseph Mwangi</div>
-                                        <div class="job-title">
-                                            Service & Installations Manager
-                                        </div>
-                                    </div>
-                                    <div class="description description-text-left">
-                                        Mwangi supervises all the installation
-                                        and service technicians to ensure the
-                                        successful execution of all Sheffield
-                                        projects by managing all the resources
-                                        at the site and on the ground including
-                                        project managers, the technical team,
-                                        equipment, machinery, materials, and
-                                        time. With a technical and engineering
-                                        background, he ensures accurate and
-                                        effective operations of all projects.
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col mt-4">
-                                <div class="about-team">
-                                    <div class="about-team-white">
-                                        <img src="assets/images/team/Hari G.JPG" />
-                                    </div>
-                                    <div class="details">
-                                        <div class="name">Hari Singh</div>
-                                        <div class="job-title">Sales Head</div>
-                                    </div>
-                                    <div class="description description-text-left">
-                                        Hari has over 20 Years of experience in
-                                        Business Development, Distribution,
-                                        Market Expansion, Penetration and
-                                        Product Development. He drives the
-                                        Sheffield sales team to realize the
-                                        organization's sales goals by leading
-                                        from the front as the Sales Head to a
-                                        team that covers the East African Region
-                                        and Segments. He is responsible for the
-                                        successful prospecting, planning,
-                                        execution, monitoring, and closure of
-                                        sales projects.
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="page-content our-culture" :style="{
-            backgroundImage: 'url(/assets/images/about-us/our-culture.jpg)',
-        }">
-            <div class="row no-margin">
-                <div class="col-md-12">
-                    <div class="cuture-image">
-                        <img class="" src="/assets/images/about-us/our-culture.jpg" />
-
-                        <div class="culture-text-box">
-                            <h2 class="about-us-title">Culture</h2>
-                            <!-- End .title -->
-                            <p class="lead about-us-lead text-primary mb-1">
-                                Fostering Innovation
-                            </p>
-
-                            <p class="our-culture-p">
-                                At Sheffield, we cultivate a collaborative work
-                                culture with an open-door policy that fosters
-                                interaction and underscores our commitment to
-                                collective teamwork dynamics. This cultural
-                                synergy is nurtured by inspirational leaders who
-                                are unafraid to take calculated risks for the
-                                betterment of the organization. As a company
-                                that thrives on fresh ideas in both product and
-                                concept design, Sheffield's environment promotes
-                                open-mindedness, innovation, and a sense of
-                                purpose among our dedicated and driven
-                                employees.
-                            </p>
-
-                            <router-link class="btn btn-primary btn-round mt-4" to="/careers"><b>View Sheffield
-                                    Careers</b></router-link>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="page-content pg-white csr-section">
-            <div class="pt-6">
-                <div class="container">
-                    <div class="row pt-5 pb-5">
-                        <div class="col-lg-10 offset-lg-1">
-                            <div class="row">
-                                <div class="col-md-6 csr-image">
-                                    <img src="/assets/images/about-us/csr.png" />
-                                </div>
-
-                                <div class="col-md-6 csr-text">
-                                    <h2 class="about-us-title">CSR</h2>
-                                    <!-- End .title -->
-                                    <p class="lead about-us-lead text-primary mb-1">
-                                        Making a Difference Through Commitment
-                                    </p>
-
-                                    <p class="about-us-p">
-                                        Sheffield Africa has been dedicated to
-                                        corporate social responsibility from its
-                                        inception. Our commitment to making a
-                                        positive impact is driven by a policy
-                                        that guides initiatives in Environment &
-                                        Social Impact.
-                                    </p>
-                                </div>
-
-                                <div class="col-md-6 csr_image_impact">
-                                    <img src="/assets/images/about-us/csr/csr_2.jpg" />
-                                    <div class="text-block">
-                                        <div class="csr-icon-text">
-                                            <span>ENVIRONMENT</span>
-                                        </div>
-
-                                        <div class="csr-icon-image">
-                                            <img src="/assets/images/about-us/csr/environment.png" />
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6 csr_image_impact">
-                                    <img src="/assets/images/about-us/csr/csr_1.jpg" />
-
-                                    <div class="text-block">
-                                        <div class="csr-icon-text">
-                                            <span>SOCIAL IMPACT</span>
-                                        </div>
-
-                                        <div class="csr-icon-image">
-                                            <img src="/assets/images/about-us/csr/social-impact.png" />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="page-content bg-image-breaker bg-image-breaker4"></div>
-
-        <div class="page-content bg-about-white div-after-bg-image-breaker">
-            <div class="pt-6 mb-lg-8">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-10 offset-lg-1">
-                            <div class="row">
-                                <div class="col-lg-12 mb-lg-0 pt-4">
-                                    <h2 class="about-us-title">Partners</h2>
-                                    <!-- End .title -->
-                                    <p class="lead about-us-lead text-primary mb-1">
-                                        Nurturing Innovation, Embracing Unity
-                                    </p>
-                                </div>
-                            </div>
-
-                            <div class="row partners-logos">
-                                <div class="col-lg-2 col-sm-6 col-xs-6">
-                                    <img width="100%" src="/assets/images/partners/partners1.jpg" />
-                                </div>
-                                <!-- End .col-lg-6 -->
-
-                                <div class="col-lg-2 col-sm-6 col-xs-6">
-                                    <img width="100%" src="/assets/images/partners/partners2.jpg" />
-                                </div>
-                                <!-- End .col-lg-6 -->
-
-                                <div class="col-lg-2 col-sm-6 col-xs-6">
-                                    <img width="100%" src="/assets/images/partners/partners3.jpg" />
-                                </div>
-                                <!-- End .col-lg-6 -->
-
-                                <div class="col-lg-2 col-sm-6 col-xs-6">
-                                    <img width="100%" src="/assets/images/partners/partners4.jpg" />
-                                </div>
-                                <!-- End .col-lg-6 -->
-
-                                <div class="col-lg-2 col-sm-6 col-xs-6">
-                                    <img width="100%" src="/assets/images/partners/partners5.jpg" />
-                                </div>
-                                <!-- End .col-lg-6 -->
-
-                                <div class="col-lg-2 col-sm-6 col-xs-6">
-                                    <img width="100%" src="/assets/images/partners/partners6.jpg" />
-                                </div>
-                                <!-- End .col-lg-6 -->
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End .row -->
-                </div>
-                <!-- End .container -->
-            </div>
-        </div>
-
-        <div class="page-content pg-my-grey">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-10 offset-lg-1 mb-5 mt-5">
-                        <div class="row">
-                            <div class="col-md-12 mb-3 mb-lg-0 pt-4">
-                                <h2 class="about-us-title">Clients</h2>
-                                <!-- End .title -->
-                                <p class="lead about-us-lead text-primary mb-1">
-                                    Partnering with Industry Leaders
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="row main-clients">
-                            <div class="clients-container mt-3 mb-5">
-                                <div class="" v-for="client in clientList" :key="client.id">
-                                    <article class="">
-                                        <figure class="">
-                                            <!-- <a href=""> -->
-                                            <img :src="'/storage/' +
-                                                client.main_image_path
-                                                " alt="image desc" />
-                                            <!--  </a> -->
-                                        </figure>
-                                        <!-- End .entry-media -->
-                                    </article>
-                                    <!-- End .entry -->
-                                </div>
-                                <!-- End .entry-item -->
-                            </div>
-                            <!-- End .entry-container -->
-                        </div>
-                    </div>
-                </div>
+              </div>
+              <!-- End .row -->
             </div>
             <!-- End .container -->
+          </div>
         </div>
-        <!-- End .page-content -->
+      </div>
+    </div>
 
-        <div class="page-content bg-about-white div-after-bg-image-breaker">
-            <div class="pt-6 mb-lg-8">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-10 offset-lg-1">
-                            <div class="row">
-                                <div class="col-lg-12 mb-3 mb-lg-0 pt-4 mobile-header">
-                                    <h2 class="about-us-title">Partners</h2>
-                                    <!-- End .title -->
-                                    <p class="lead about-us-lead text-primary mb-1">
-                                        Nurturing Innovation, Embracing Unity
-                                    </p>
-                                </div>
-                            </div>
-
-                            <div class="row mt-3">
-                                <div class="col-md-5 video-section">
-                                    <div class="video-player">
-                                        <video controls src="/assets/images/about-us/video/iCombi.mp4" ref="videoPlayer"
-                                            loop></video>
-                                        <!-- i removed controls attribute in the above to remove the play pause buttons -->
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6 offset-md-1">
-                                    <div class="desktop-header-partners">
-                                        <h2 class="about-us-title">
-                                            <router-link to="/media">Media</router-link>
-                                        </h2>
-                                        <!-- End .title -->
-                                        <p class="lead about-us-lead text-primary mb-1">
-                                            Explore Insights from the Media
-                                            gallery of Sheffield
-                                        </p>
-                                    </div>
-
-                                    <p class="about-us-p mb-4 ml-2 mr-2">
-                                        Embark on a dynamic exploration through
-                                        our MEDIA section, revealing a curated
-                                        collection of blogs, partner videos,
-                                        company insights, and essential
-                                        technical resources. Uncover a world of
-                                        knowledge that empowers and inspires,
-                                        seamlessly tailored to fuel your
-                                        curiosity and drive innovation.
-                                    </p>
-
-                                    <div class="my-carosel-section">
-                                        <carousel :items-to-show="4" ref="scrollableContainerCarosel"
-                                            @load="adjustTheClass1Height" class="carousel-wrapper" :perPage="1"
-                                            :wrap-around="true" :pauseAutoplayOnHover="true">
-                                            <slide v-for="(
-                                                    item, index
-                                                ) in partnersSlider" :key="index">
-                                                <div class="carousel-div-image">
-                                                    <img :src="getImage(item)" :alt="item.alt" />
-
-                                                    <div class="play-button">
-                                                        <label :for="'checkbox' +
-                                                            index
-                                                            " class="label-play" @click="
-                                                                playVideo(
-                                                                    item.url,
-                                                                    'checkbox' +
-                                                                    index
-                                                                )
-                                                                ">
-                                                            <div class="play_pause_icon play"></div>
-                                                        </label>
-                                                        <input class="checkbox-play" type="checkbox" :id="'checkbox' +
-                                                            index
-                                                            " />
-                                                    </div>
-                                                </div>
-                                            </slide>
-                                            <template #addons>
-                                                <Navigation />
-                                                <Pagination />
-                                            </template>
-                                        </carousel>
-                                    </div>
-
-                                    <router-link to="/media" class="btn btn-primary mt-5">GO TO MEDIA
-                                        <i class="icon-long-arrow-right"></i></router-link>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <div class="page-content pg-white">
+      <div class="container pt-3">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <h2 class="our-history-title">
+                Our History
+              </h2>
+              <!--                             <p class="lead about-us-lead text-primary mb-1">Transforming Ideas into Sustainable Realities</p> -->
+              <carousel
+                ref="scrollableContainerCarosel"
+                class="carousel-wrapper"
+                :per-page="1"
+                :autoplay="5000"
+                :wrap-around="true"
+                :pause-autoplay-on-hover="true"
+                @load="adjustTheClass1Height"
+              >
+                <slide v-for="(item, index) in items" :key="index">
+                  <img :src="getImage(item)" :alt="item.alt" />
+                </slide>
+                <template #addons>
+                  <Navigation />
+                  <Pagination />
+                </template>
+              </carousel>
             </div>
+          </div>
         </div>
-    </main>
+      </div>
+    </div>
+
+    <div class="page-content bg-image-breaker bg-image-breaker2"></div>
+
+    <div
+      id="our-methodology-section"
+      class="page-content pt-5 our-methodology-section"
+      :style="{
+        backgroundImage: 'url(/assets/images/methodology-gray.jpg)',
+      }"
+    >
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="container">
+              <h2 class="our-history-title mt-3">
+                Sheffield Methodology
+              </h2>
+              <p class="lead about-us-lead text-primary mb-1">
+                At Sheffield, our differentiating factor is you-
+                Our Customer
+              </p>
+              <p class="about-us-p">
+                We are 100% focused & committed to creating and
+                implementing solutions for you and your
+                business. Sheffield is flexible to your evolving
+                needs and we will work hard to ensure they are
+                continuously met. <br />Our main service touch
+                points and processes for Customer Satisfaction
+                include:
+              </p>
+              <div class="row">
+                <div class="col-md-12 justify-content-center">
+                  <div class="row justify-content-left links-container mt-3 mb-3">
+                    <div
+                      v-for="(
+                        item, index
+                      ) in MethodologyResults"
+                      :key="index"
+                      class="methodology-item"
+                      :class="{
+                        'left-class':
+                          item.direction === 'left',
+                        'right-class':
+                          item.direction === 'right',
+                        'down-class':
+                          item.direction === 'down',
+                      }"
+                    >
+                      <div class="methodology-item-internal">
+                        <div class="met-image">
+                          <img :src="item.image" />
+                        </div>
+
+                        <div class="met-description">
+                          <span>{{
+                            item.title
+                          }}</span>
+                        </div>
+
+                        <div class="met-text">
+                          <span>{{ item.text }}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="page-content pb-0 page-content-counter"
+      :style="{
+        backgroundImage:
+          'url(/assets/images/sheffield_stainless_steel_background.jpg)',
+      }"
+    >
+      <div
+        ref="counterSection"
+        class="container mt-0 counter-section"
+        :class="{ visible: state.isSectionInView }"
+      >
+        <div class="row text-center icon-boxes-container">
+          <div class="col counter_col">
+            <i class="fa fa-user text-primary" style="font-size: 3.5rem"></i>
+            <h3 class="count-to text-primary mb-0">
+              {{ projectsCount }}+
+            </h3>
+            <p>Projects</p>
+          </div>
+          <div class="col counter_col">
+            <i class="fa fa-star text-primary" style="font-size: 3.5rem"></i>
+            <h3 class="count-to text-primary mb-0">
+              {{ conceptsCount }}+
+            </h3>
+            <p>Innovative Concepts</p>
+          </div>
+          <div class="col counter_col">
+            <i class="fa fa-coffee text-primary" style="font-size: 3.5rem"></i>
+            <h3 class="count-to text-primary mb-0">
+              {{ trainingdemosCount }}+
+            </h3>
+            <p>Training Demos</p>
+          </div>
+          <div class="col counter_col">
+            <i class="far fa-chart-bar text-primary" style="font-size: 3.5rem"></i>
+            <h3 class="count-to text-primary mb-0">
+              {{ yearsCount }}+
+            </h3>
+            <p>Years’ Experience</p>
+          </div>
+
+          <div class="col counter_col">
+            <i class="far fa-chart-bar text-primary" style="font-size: 3.5rem"></i>
+            <h3 class="count-to text-primary mb-0">
+              {{ stopCount }}
+            </h3>
+            <p>Stop Shop Solution</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End .page-content -->
+
+    <div class="page-content pg-white our-people-section">
+      <div class="pt-6">
+        <div class="container">
+          <div class="container">
+            <div class="row pt-5 pb-5">
+              <div class="col-md-6 people-text">
+                <h2 class="about-us-title">
+                  Our People
+                </h2>
+                <!-- End .title -->
+                <p class="lead about-us-lead text-primary mb-1">
+                  Meet Our Exceptional Team
+                </p>
+
+                <p class="about-us-p">
+                  Sheffield proudly introduces our team of
+                  highly qualified professionals, each
+                  possessing expertise in engineering, project
+                  management, and technical skills. They are
+                  integral to the process of innovation and
+                  the implementation of
+                  <a href="#our-methodology-section">The Sheffield Methodology</a>.
+                </p>
+              </div>
+
+              <div
+                ref="counterSection_people"
+                class="col-md-6"
+                :class="{ visible: state.isSectionInView }"
+              >
+                <img src="/assets/images/about-us/sheffield_in_numbers.png" />
+
+                <div class="people-numbers staff">
+                  <span class="number">{{ staffCount }}+</span>
+                  <span class="number-title">Staff</span>
+                </div>
+
+                <div class="people-numbers engineering-crew">
+                  <span class="number">{{ engineersCount }}+</span>
+                  <span class="number-title">Engineering & Technical Skilled
+                    Crew</span>
+                </div>
+
+                <div class="people-numbers leaders">
+                  <span class="number">{{ executiveCount }}+</span>
+                  <span class="number-title">Executive Leaders</span>
+                </div>
+
+                <div class="people-numbers design">
+                  <span class="number">{{ designCount }}+</span>
+                  <span class="number-title">Design Engineers</span>
+                </div>
+
+                <div class="people-numbers in-house">
+                  <span class="number">{{ inhouseCount }}+</span>
+                  <span class="number-title">In-house Chefs & Baristas</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-content bg-image-breaker bg-image-breaker3"></div>
+
+    <div class="page-content pg-my-grey pt-5 leadership-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-10 offset-lg-1">
+            <div class="row">
+              <div class="col-md-12 pt-5">
+                <h2 class="about-us-title">
+                  Leadership
+                </h2>
+                <!-- End .title -->
+                <p class="lead about-us-lead text-primary mb-1">
+                  Meet the Minds Behind Our Success
+                </p>
+
+                <p class="about-us-p">
+                  Our leadership team is made up of dedicated,
+                  focused, and experienced executives working
+                  with each other and their teams to implement
+                  Sheffield’s strategy and vision, their
+                  knowledge and experience come together to
+                  make a difference for all our stakeholders.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-10 offset-lg-1 justify-content-center">
+            <div class="row about-team-container about-team-container1 justify-content-center">
+              <div class="col-md-3 mt-4">
+                <div class="about-team">
+                  <div class="about-team-white">
+                    <img src="assets/images/team/MD - Suresh Kanotra website.jpg" />
+                  </div>
+                  <div class="details">
+                    <div class="name">
+                      Dr. Suresh Kanotra
+                    </div>
+                    <div class="job-title">
+                      Managing Director
+                    </div>
+                  </div>
+                  <div class="description description-text-right">
+                    Dr. Suresh Kanotra, the founder of
+                    Sheffield Africa, envisioned the need in
+                    the African market for solutions &
+                    services in the food and beverage
+                    industry. With an engineering
+                    background, he started Sheffield Steel
+                    Systems Limited and continuously seeks
+                    to innovate & tailor-make durable,
+                    efficient, and smart solutions.
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-3 mt-4">
+                <div class="about-team">
+                  <div class="about-team-white">
+                    <img src="assets/images/team/Saveer-Singh-Vohra.jpg" />
+                  </div>
+                  <div class="details">
+                    <div class="name">
+                      Saveer Vohra
+                    </div>
+                    <div class="job-title">
+                      Financial Director
+                    </div>
+                  </div>
+                  <div class="description description-text-right">
+                    Mr. Saveer Vohra has a Bachelor’s degree
+                    in Civil Engineering and a Master’s in
+                    Finance from the University of Warwick
+                    in the UK. As the Financial Director, he
+                    ensures the Company is aligned with
+                    financial growth, strategy, and a
+                    profitable vision.
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-3 mt-4">
+                <div class="about-team">
+                  <div class="about-team-white">
+                    <img src="assets/images/team/samman.jpg" />
+                  </div>
+                  <div class="details">
+                    <div class="name">
+                      Samman Vohra
+                    </div>
+                    <div class="job-title">
+                      Business Development & Strategy
+                      Director
+                    </div>
+                  </div>
+                  <div class="description description-text-left">
+                    Samman is a distinguished graduate from
+                    the CASS Business School, City
+                    University of London, with a strong
+                    background in business, economics,
+                    finance, and marketing. Leveraging
+                    international exposure and academic
+                    expertise, Samman works on special
+                    projects, drives revenue growth,
+                    identifies new opportunities, and
+                    strengthens the Sheffield brand whilst
+                    managing partnerships, aligning business
+                    goals, and providing cross-functional
+                    leadership, contributing significantly
+                    to our company's success and vision for
+                    the future.
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row about-team-container about-team-container2 mb-3">
+              <div class="col mt-4">
+                <div class="about-team">
+                  <div class="about-team-white">
+                    <img src="assets/images/team/Vikas-removebg-preview.jpg" />
+                  </div>
+                  <div class="details">
+                    <div class="name">
+                      Vikas Sharma
+                    </div>
+                    <div class="job-title">
+                      Business Development Head
+                    </div>
+                  </div>
+                  <div class="description description-text-right">
+                    As the Business Development Head, Vikas
+                    drives the organization's business
+                    growth strategies and enhances the
+                    current portfolio to explore new
+                    business opportunities. With a rich
+                    experience ranging from Strategic
+                    Management, Marketing, and Brand
+                    Management that has had a positive
+                    impact on Sheffield’s operations, he
+                    efficiently executes business strategies
+                    that are in line with the organizational
+                    objectives.
+                  </div>
+                </div>
+              </div>
+
+              <div class="col mt-4">
+                <div class="about-team">
+                  <div class="about-team-white">
+                    <img src="assets/images/team/Simon.jpg" />
+                  </div>
+                  <div class="details">
+                    <div class="name">
+                      Simon Mbugua
+                    </div>
+                    <div class="job-title">
+                      Head of Design & Development
+                    </div>
+                  </div>
+                  <div class="description description-text-right">
+                    A Mechanical Engineer by profession,
+                    Simon specializes in product design 3D &
+                    2D, plant maintenance, lean Six Sigma
+                    manufacturing, workshop practices, and
+                    structural design and integrity. He
+                    leads the team of 2D & 3D design
+                    engineers, research & development, and
+                    project planning.
+                  </div>
+                </div>
+              </div>
+
+              <div class="col mt-4">
+                <div class="about-team">
+                  <div class="about-team-white">
+                    <img src="assets/images/team/Ann Ajode Pic.jpg" />
+                  </div>
+                  <div class="details">
+                    <div class="name">
+                      Ann Ajode
+                    </div>
+                    <div class="job-title">
+                      Customer Relations Manager
+                    </div>
+                  </div>
+                  <div class="description description-text-right">
+                    Ann is a proactive & efficient and
+                    customer relations professional with
+                    over 12 years of experience in business
+                    development, sales, marketing, and
+                    operations coordination with a
+                    background in International Relations.
+                    She facilitates smooth workflow
+                    processes, communication, and
+                    integration to enhance customer
+                    satisfaction through quality management
+                    systems. The customer is the top most
+                    priority for her and her team who ensure
+                    communication and support through the
+                    contact points from enquiries, job
+                    processing, execution and after sales
+                    support.
+                  </div>
+                </div>
+              </div>
+
+              <div class="col mt-4">
+                <div class="about-team">
+                  <div class="about-team-white">
+                    <img src="assets/images/team/Mwangi_2.jpg" />
+                  </div>
+                  <div class="details">
+                    <div class="name">
+                      Joseph Mwangi
+                    </div>
+                    <div class="job-title">
+                      Service & Installations Manager
+                    </div>
+                  </div>
+                  <div class="description description-text-left">
+                    Mwangi supervises all the installation
+                    and service technicians to ensure the
+                    successful execution of all Sheffield
+                    projects by managing all the resources
+                    at the site and on the ground including
+                    project managers, the technical team,
+                    equipment, machinery, materials, and
+                    time. With a technical and engineering
+                    background, he ensures accurate and
+                    effective operations of all projects.
+                  </div>
+                </div>
+              </div>
+
+              <div class="col mt-4">
+                <div class="about-team">
+                  <div class="about-team-white">
+                    <img src="assets/images/team/Hari G.JPG" />
+                  </div>
+                  <div class="details">
+                    <div class="name">
+                      Hari Singh
+                    </div>
+                    <div class="job-title">
+                      Sales Head
+                    </div>
+                  </div>
+                  <div class="description description-text-left">
+                    Hari has over 20 Years of experience in
+                    Business Development, Distribution,
+                    Market Expansion, Penetration and
+                    Product Development. He drives the
+                    Sheffield sales team to realize the
+                    organization's sales goals by leading
+                    from the front as the Sales Head to a
+                    team that covers the East African Region
+                    and Segments. He is responsible for the
+                    successful prospecting, planning,
+                    execution, monitoring, and closure of
+                    sales projects.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="page-content our-culture"
+      :style="{
+        backgroundImage: 'url(/assets/images/about-us/our-culture.jpg)',
+      }"
+    >
+      <div class="row no-margin">
+        <div class="col-md-12">
+          <div class="cuture-image">
+            <img class="" src="/assets/images/about-us/our-culture.jpg" />
+
+            <div class="culture-text-box">
+              <h2 class="about-us-title">
+                Culture
+              </h2>
+              <!-- End .title -->
+              <p class="lead about-us-lead text-primary mb-1">
+                Fostering Innovation
+              </p>
+
+              <p class="our-culture-p">
+                At Sheffield, we cultivate a collaborative work
+                culture with an open-door policy that fosters
+                interaction and underscores our commitment to
+                collective teamwork dynamics. This cultural
+                synergy is nurtured by inspirational leaders who
+                are unafraid to take calculated risks for the
+                betterment of the organization. As a company
+                that thrives on fresh ideas in both product and
+                concept design, Sheffield's environment promotes
+                open-mindedness, innovation, and a sense of
+                purpose among our dedicated and driven
+                employees.
+              </p>
+
+              <router-link class="btn btn-primary btn-round mt-4" to="/careers">
+                <b>View Sheffield
+                  Careers</b>
+              </router-link>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-content pg-white csr-section">
+      <div class="pt-6">
+        <div class="container">
+          <div class="row pt-5 pb-5">
+            <div class="col-lg-10 offset-lg-1">
+              <div class="row">
+                <div class="col-md-6 csr-image">
+                  <img src="/assets/images/about-us/csr.png" />
+                </div>
+
+                <div class="col-md-6 csr-text">
+                  <h2 class="about-us-title">
+                    CSR
+                  </h2>
+                  <!-- End .title -->
+                  <p class="lead about-us-lead text-primary mb-1">
+                    Making a Difference Through Commitment
+                  </p>
+
+                  <p class="about-us-p">
+                    Sheffield Africa has been dedicated to
+                    corporate social responsibility from its
+                    inception. Our commitment to making a
+                    positive impact is driven by a policy
+                    that guides initiatives in Environment &
+                    Social Impact.
+                  </p>
+                </div>
+
+                <div class="col-md-6 csr_image_impact">
+                  <img src="/assets/images/about-us/csr/csr_2.jpg" />
+                  <div class="text-block">
+                    <div class="csr-icon-text">
+                      <span>ENVIRONMENT</span>
+                    </div>
+
+                    <div class="csr-icon-image">
+                      <img src="/assets/images/about-us/csr/environment.png" />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-6 csr_image_impact">
+                  <img src="/assets/images/about-us/csr/csr_1.jpg" />
+
+                  <div class="text-block">
+                    <div class="csr-icon-text">
+                      <span>SOCIAL IMPACT</span>
+                    </div>
+
+                    <div class="csr-icon-image">
+                      <img src="/assets/images/about-us/csr/social-impact.png" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-content bg-image-breaker bg-image-breaker4"></div>
+
+    <div class="page-content bg-about-white div-after-bg-image-breaker">
+      <div class="pt-6 mb-lg-8">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-10 offset-lg-1">
+              <div class="row">
+                <div class="col-lg-12 mb-lg-0 pt-4">
+                  <h2 class="about-us-title">
+                    Partners
+                  </h2>
+                  <!-- End .title -->
+                  <p class="lead about-us-lead text-primary mb-1">
+                    Nurturing Innovation, Embracing Unity
+                  </p>
+                </div>
+              </div>
+
+              <div class="row partners-logos">
+                <div class="col-lg-2 col-sm-6 col-xs-6">
+                  <img width="100%" src="/assets/images/partners/partners1.jpg" />
+                </div>
+                <!-- End .col-lg-6 -->
+
+                <div class="col-lg-2 col-sm-6 col-xs-6">
+                  <img width="100%" src="/assets/images/partners/partners2.jpg" />
+                </div>
+                <!-- End .col-lg-6 -->
+
+                <div class="col-lg-2 col-sm-6 col-xs-6">
+                  <img width="100%" src="/assets/images/partners/partners3.jpg" />
+                </div>
+                <!-- End .col-lg-6 -->
+
+                <div class="col-lg-2 col-sm-6 col-xs-6">
+                  <img width="100%" src="/assets/images/partners/partners4.jpg" />
+                </div>
+                <!-- End .col-lg-6 -->
+
+                <div class="col-lg-2 col-sm-6 col-xs-6">
+                  <img width="100%" src="/assets/images/partners/partners5.jpg" />
+                </div>
+                <!-- End .col-lg-6 -->
+
+                <div class="col-lg-2 col-sm-6 col-xs-6">
+                  <img width="100%" src="/assets/images/partners/partners6.jpg" />
+                </div>
+                <!-- End .col-lg-6 -->
+              </div>
+            </div>
+          </div>
+          <!-- End .row -->
+        </div>
+        <!-- End .container -->
+      </div>
+    </div>
+
+    <div class="page-content pg-my-grey">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-10 offset-lg-1 mb-5 mt-5">
+            <div class="row">
+              <div class="col-md-12 mb-3 mb-lg-0 pt-4">
+                <h2 class="about-us-title">
+                  Clients
+                </h2>
+                <!-- End .title -->
+                <p class="lead about-us-lead text-primary mb-1">
+                  Partnering with Industry Leaders
+                </p>
+              </div>
+            </div>
+
+            <div class="row main-clients">
+              <div class="clients-container mt-3 mb-5">
+                <div v-for="client in clientList" :key="client.id" class="">
+                  <article class="">
+                    <figure class="">
+                      <!-- <a href=""> -->
+                      <img
+                        :src="'/storage/' +
+                          client.main_image_path
+                        "
+                        alt="image desc"
+                      />
+                      <!--  </a> -->
+                    </figure>
+                    <!-- End .entry-media -->
+                  </article>
+                  <!-- End .entry -->
+                </div>
+                <!-- End .entry-item -->
+              </div>
+              <!-- End .entry-container -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End .container -->
+    </div>
+    <!-- End .page-content -->
+
+    <div class="page-content bg-about-white div-after-bg-image-breaker">
+      <div class="pt-6 mb-lg-8">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-10 offset-lg-1">
+              <div class="row">
+                <div class="col-lg-12 mb-3 mb-lg-0 pt-4 mobile-header">
+                  <h2 class="about-us-title">
+                    Partners
+                  </h2>
+                  <!-- End .title -->
+                  <p class="lead about-us-lead text-primary mb-1">
+                    Nurturing Innovation, Embracing Unity
+                  </p>
+                </div>
+              </div>
+
+              <div class="row mt-3">
+                <div class="col-md-5 video-section">
+                  <div class="video-player">
+                    <video
+                      ref="videoPlayer"
+                      controls
+                      src="/assets/images/about-us/video/iCombi.mp4"
+                      loop
+                    ></video>
+                    <!-- i removed controls attribute in the above to remove the play pause buttons -->
+                  </div>
+                </div>
+
+                <div class="col-md-6 offset-md-1">
+                  <div class="desktop-header-partners">
+                    <h2 class="about-us-title">
+                      <router-link to="/media">
+                        Media
+                      </router-link>
+                    </h2>
+                    <!-- End .title -->
+                    <p class="lead about-us-lead text-primary mb-1">
+                      Explore Insights from the Media
+                      gallery of Sheffield
+                    </p>
+                  </div>
+
+                  <p class="about-us-p mb-4 ml-2 mr-2">
+                    Embark on a dynamic exploration through
+                    our MEDIA section, revealing a curated
+                    collection of blogs, partner videos,
+                    company insights, and essential
+                    technical resources. Uncover a world of
+                    knowledge that empowers and inspires,
+                    seamlessly tailored to fuel your
+                    curiosity and drive innovation.
+                  </p>
+
+                  <div class="my-carosel-section">
+                    <carousel
+                      ref="scrollableContainerCarosel"
+                      :items-to-show="4"
+                      class="carousel-wrapper"
+                      :per-page="1"
+                      :wrap-around="true"
+                      :pause-autoplay-on-hover="true"
+                      @load="adjustTheClass1Height"
+                    >
+                      <slide
+                        v-for="(
+                          item, index
+                        ) in partnersSlider"
+                        :key="index"
+                      >
+                        <div class="carousel-div-image">
+                          <img :src="getImage(item)" :alt="item.alt" />
+
+                          <div class="play-button">
+                            <label
+                              :for="'checkbox' +
+                                index
+                              "
+                              class="label-play"
+                              @click="
+                                playVideo(
+                                  item.url,
+                                  'checkbox' +
+                                    index
+                                )
+                              "
+                            >
+                              <div class="play_pause_icon play"></div>
+                            </label>
+                            <input
+                              :id="'checkbox' +
+                                index
+                              "
+                              class="checkbox-play"
+                              type="checkbox"
+                            />
+                          </div>
+                        </div>
+                      </slide>
+                      <template #addons>
+                        <Navigation />
+                        <Pagination />
+                      </template>
+                    </carousel>
+                  </div>
+
+                  <router-link to="/media" class="btn btn-primary mt-5">
+                    GO TO MEDIA
+                    <i class="icon-long-arrow-right"></i>
+                  </router-link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
 </template>
 
 <script setup>
@@ -826,16 +933,16 @@ import {
     reactive,
     nextTick,
     watch,
-} from "vue";
-import { Carousel, Navigation, Slide, Pagination } from "vue3-carousel";
+} from 'vue';
+import { Carousel, Navigation, Slide, Pagination } from 'vue3-carousel';
 
-import { useMeta } from "../../admin/composables/use-meta";
-useMeta({ title: "About Us" });
+import { useMeta } from '../../admin/composables/use-meta';
+useMeta({ title: 'About Us' });
 
-import VideoPopup from "@/Components/VideoPopup.vue";
+import VideoPopup from '@/Components/VideoPopup.vue';
 
 const isVideoPopupVisible = ref(false);
-const videoUrl = "/assets/images/about-us/sheffiled_tour.mov";
+const videoUrl = '/assets/images/about-us/sheffiled_tour.mov';
 
 const showVideoPopup = () => {
     isVideoPopupVisible.value = true;
@@ -906,7 +1013,7 @@ const startIntersectionObserver = () => {
                 animateCounters();
             }
         },
-        { threshold: 0.5 } // Adjust the threshold based on your needs
+        { threshold: 0.5 }, // Adjust the threshold based on your needs
     );
     state.observer.observe(counterSectionRef.value);
 };
@@ -927,15 +1034,15 @@ const checkIfElementInViewport = () => {
 };
 
 onMounted(() => {
-    counterSectionRef.value = document.querySelector(".counter-section");
+    counterSectionRef.value = document.querySelector('.counter-section');
     startIntersectionObserver();
     checkIfElementInViewport();
-    window.addEventListener("scroll", checkIfElementInViewport);
+    window.addEventListener('scroll', checkIfElementInViewport);
 });
 
 onUnmounted(() => {
     stopIntersectionObserver();
-    window.removeEventListener("scroll", checkIfElementInViewport);
+    window.removeEventListener('scroll', checkIfElementInViewport);
 });
 
 watch(
@@ -944,7 +1051,7 @@ watch(
         if (newValue) {
             animateCounters();
         }
-    }
+    },
 );
 
 // const isSectionInView = ref(false);
@@ -993,38 +1100,38 @@ watch(
 const breakpoints = {
     0: {
         itemsToShow: 1,
-        snapAlign: "start",
+        snapAlign: 'start',
     },
     480: {
         itemsToShow: 1,
-        snapAlign: "start",
+        snapAlign: 'start',
     },
     768: {
         itemsToShow: 3,
-        snapAlign: "start",
+        snapAlign: 'start',
     },
     992: {
         itemsToShow: 6,
-        snapAlign: "start",
+        snapAlign: 'start',
     },
     1200: {
         itemsToShow: 6,
-        snapAlign: "start",
+        snapAlign: 'start',
     },
     1360: {
         itemsToShow: 8,
-        snapAlign: "start",
+        snapAlign: 'start',
     },
     1600: {
         itemsToShow: 8,
-        snapAlign: "start",
+        snapAlign: 'start',
     },
 };
 
 const clientList = ref([]);
 const fetchClientList = async () => {
     try {
-        const response = await axios.get("/api/get-clients-home", {});
+        const response = await axios.get('/api/get-clients-home', {});
 
         clientList.value = response.data.data;
     } catch (error) {
@@ -1033,9 +1140,9 @@ const fetchClientList = async () => {
 };
 
 const getShowroomLink = (id, name) => {
-    let transformedName = name.replace(/ /g, "-");
-    transformedName = transformedName.replace(/-+/g, "-");
-    transformedName = transformedName.replace(/^-+|-+$/g, "");
+    let transformedName = name.replace(/ /g, '-');
+    transformedName = transformedName.replace(/-+/g, '-');
+    transformedName = transformedName.replace(/^-+|-+$/g, '');
     transformedName = transformedName.toLowerCase();
 
     return `/showroom/${id}/${transformedName}`;
@@ -1048,7 +1155,7 @@ const showrooms = ref([]);
 // Fetch products based on the current page
 const fetchShowrooms = async () => {
     try {
-        const response = await axios.get("/api/get-showrooms", {});
+        const response = await axios.get('/api/get-showrooms', {});
         showrooms.value = response.data;
     } catch (error) {
         console.error(error);
@@ -1064,54 +1171,54 @@ onMounted(async () => {
 
 const methodology = [
     {
-        image: "/assets/images/methodology/methodology01.png",
-        title: "CUSTOMER BRIEF",
-        text: "Sheffield Staff conducts a site visit for a scope of work brief to understand the client's requirements, space, and concept.",
+        image: '/assets/images/methodology/methodology01.png',
+        title: 'CUSTOMER BRIEF',
+        text: 'Sheffield Staff conducts a site visit for a scope of work brief to understand the client\'s requirements, space, and concept.',
     },
     {
-        image: "/assets/images/methodology/methodology02.png",
-        title: "DESIGN & DEVELOPMENT",
-        text: "A site survey is conducted by a technical sales engineer and our design team develops an equipment layout.",
+        image: '/assets/images/methodology/methodology02.png',
+        title: 'DESIGN & DEVELOPMENT',
+        text: 'A site survey is conducted by a technical sales engineer and our design team develops an equipment layout.',
     },
     {
-        image: "/assets/images/methodology/methodology03.png",
-        title: "PLANNING",
-        text: "Our planning team ensures efficient and effective execution through project management.",
+        image: '/assets/images/methodology/methodology03.png',
+        title: 'PLANNING',
+        text: 'Our planning team ensures efficient and effective execution through project management.',
     },
     {
-        image: "/assets/images/methodology/methodology05.png",
-        title: "MANUFACTURING & IMPORTS",
-        text: "We have partnerships with international suppliers. Sheffield has an in-house stainless steel and cold room manufacturing plant for custom solutions.",
+        image: '/assets/images/methodology/methodology05.png',
+        title: 'MANUFACTURING & IMPORTS',
+        text: 'We have partnerships with international suppliers. Sheffield has an in-house stainless steel and cold room manufacturing plant for custom solutions.',
     },
     {
-        image: "/assets/images/methodology/methodology06.png",
-        title: "TESTING",
-        text: "Each step of manufacturing is checked by our Quality Control Team and upon completion, testing is done.",
+        image: '/assets/images/methodology/methodology06.png',
+        title: 'TESTING',
+        text: 'Each step of manufacturing is checked by our Quality Control Team and upon completion, testing is done.',
     },
     {
-        image: "/assets/images/methodology/methodology07.png",
-        title: "DELIVERY",
-        text: "Delivery is scheduled after testing and inspection by the Sheffield logistics team in liaison with the client based on the terms agreed upon.",
+        image: '/assets/images/methodology/methodology07.png',
+        title: 'DELIVERY',
+        text: 'Delivery is scheduled after testing and inspection by the Sheffield logistics team in liaison with the client based on the terms agreed upon.',
     },
     {
-        image: "/assets/images/methodology/methodology08.png",
-        title: "INSTALLATION",
-        text: "The installation process is done against the layout drawings and the project manager’s supervision with his installation technical team.",
+        image: '/assets/images/methodology/methodology08.png',
+        title: 'INSTALLATION',
+        text: 'The installation process is done against the layout drawings and the project manager’s supervision with his installation technical team.',
     },
     {
-        image: "/assets/images/methodology/methodology09.png",
-        title: "TRAINING",
-        text: "Sheffield ensures that users at the client’s site are properly trained to operate the installed equipment.",
+        image: '/assets/images/methodology/methodology09.png',
+        title: 'TRAINING',
+        text: 'Sheffield ensures that users at the client’s site are properly trained to operate the installed equipment.',
     },
     {
-        image: "/assets/images/methodology/methodology10.png",
-        title: "COMMISSIONING",
-        text: "Commissioning and handover is conducted to ascertain the completion of works and operations of the equipment.",
+        image: '/assets/images/methodology/methodology10.png',
+        title: 'COMMISSIONING',
+        text: 'Commissioning and handover is conducted to ascertain the completion of works and operations of the equipment.',
     },
     {
-        image: "/assets/images/methodology/methodology11.png",
-        title: "AFTER-SALES SERVICES",
-        text: "A Service Contract is extended to the client to support the maintenance and warranty terms. Sheffield stocks original spares for the equipment supplied.",
+        image: '/assets/images/methodology/methodology11.png',
+        title: 'AFTER-SALES SERVICES',
+        text: 'A Service Contract is extended to the client to support the maintenance and warranty terms. Sheffield stocks original spares for the equipment supplied.',
     },
 ];
 
@@ -1145,16 +1252,16 @@ function chunkAndReorderWithDirection(originalArray, chunkSize) {
         if ((i / chunkSize) % 2 === 1) {
             chunk.reverse();
             // For reversed sets, set direction 'down' for the first item and 'left' for the rest
-            chunk[0].direction = "down";
+            chunk[0].direction = 'down';
             for (let j = 1; j < chunk.length; j++) {
-                chunk[j].direction = "left";
+                chunk[j].direction = 'left';
             }
         } else {
             // For non-reversed sets, set direction 'right' for all items except the last one which is 'down'
             for (let j = 0; j < chunk.length - 1; j++) {
-                chunk[j].direction = "right";
+                chunk[j].direction = 'right';
             }
-            chunk[chunk.length - 1].direction = "down";
+            chunk[chunk.length - 1].direction = 'down';
         }
 
         // Add the chunk to the result array
@@ -1177,7 +1284,7 @@ const updateMethodologyResults = () => {
     // Run the function with the updated chunk size
     MethodologyResults.value = chunkAndReorderWithDirection(
         methodology,
-        chunkSize
+        chunkSize,
     );
 };
 
@@ -1187,13 +1294,13 @@ onMounted(() => {
     updateMethodologyResults();
 
     // Add a listener for window resize events
-    window.addEventListener("resize", updateMethodologyResults);
+    window.addEventListener('resize', updateMethodologyResults);
 });
 
 // Lifecycle hook equivalent to beforeUnmount
 onBeforeUnmount(() => {
     // Remove the window resize event listener when the component is about to be destroyed
-    window.removeEventListener("resize", updateMethodologyResults);
+    window.removeEventListener('resize', updateMethodologyResults);
 });
 
 //// end methodology
@@ -1202,34 +1309,34 @@ const basePath = window.location.origin + window.location.pathname; //laravel ba
 
 const partnersSlider = [
     {
-        image: "/assets/images/about-us/video/logos/rational.png",
-        mobileImage: "/assets/images/about-us/video/logos/rational.png",
-        url: "/assets/images/about-us/video/iCombi.mp4",
+        image: '/assets/images/about-us/video/logos/rational.png',
+        mobileImage: '/assets/images/about-us/video/logos/rational.png',
+        url: '/assets/images/about-us/video/iCombi.mp4',
     },
     {
-        image: "/assets/images/about-us/video/logos/Prisma Food.jpg",
-        mobileImage: "/assets/images/about-us/video/logos/Prisma Food.jpg",
-        url: "/assets/images/about-us/video/Prismafood.mp4",
+        image: '/assets/images/about-us/video/logos/Prisma Food.jpg',
+        mobileImage: '/assets/images/about-us/video/logos/Prisma Food.jpg',
+        url: '/assets/images/about-us/video/Prismafood.mp4',
     },
     {
-        image: "/assets/images/about-us/video/logos/broaster.jpg",
-        mobileImage: "/assets/images/about-us/video/logos/broaster.jpg",
-        url: "/assets/images/about-us/video/PressureFryers.mp4",
+        image: '/assets/images/about-us/video/logos/broaster.jpg',
+        mobileImage: '/assets/images/about-us/video/logos/broaster.jpg',
+        url: '/assets/images/about-us/video/PressureFryers.mp4',
     },
     {
-        image: "/assets/images/about-us/video/logos/f4e.jpg",
-        mobileImage: "/assets/images/about-us/video/logos/f4e.jpg",
-        url: "/assets/images/about-us/video/FOOD_FOR_EDUCATION_GIGA_KITCHEN.mp4",
+        image: '/assets/images/about-us/video/logos/f4e.jpg',
+        mobileImage: '/assets/images/about-us/video/logos/f4e.jpg',
+        url: '/assets/images/about-us/video/FOOD_FOR_EDUCATION_GIGA_KITCHEN.mp4',
     },
     {
-        image: "/assets/images/about-us/video/logos/mambo_safi_.jpg",
-        mobileImage: "/assets/images/about-us/video/logos/mambo_safi_.jpg",
-        url: "/assets/images/about-us/video/Mambo_Safi_Laundromat.mp4",
+        image: '/assets/images/about-us/video/logos/mambo_safi_.jpg',
+        mobileImage: '/assets/images/about-us/video/logos/mambo_safi_.jpg',
+        url: '/assets/images/about-us/video/Mambo_Safi_Laundromat.mp4',
     },
     {
-        image: "/assets/images/about-us/video/logos/sheffield.jpg",
-        mobileImage: "/assets/images/about-us/video/logos/sheffield.jpg",
-        url: "/assets/images/about-us/video/Sheffield_Africa_Suresh_Kanotra.mp4",
+        image: '/assets/images/about-us/video/logos/sheffield.jpg',
+        mobileImage: '/assets/images/about-us/video/logos/sheffield.jpg',
+        url: '/assets/images/about-us/video/Sheffield_Africa_Suresh_Kanotra.mp4',
     },
     // {
     //   image: '/assets/images/about-us/video/logos/TASKI.jpg',
@@ -1273,102 +1380,102 @@ const handleResize = () => {
 
 const items1 = [
     {
-        image: "/assets/images/about-us/slider/history1.jpg",
-        mobileImage: "/assets/images/about-us/slider/history1.jpg",
-        alt: "Our History at Sheffield first slide",
+        image: '/assets/images/about-us/slider/history1.jpg',
+        mobileImage: '/assets/images/about-us/slider/history1.jpg',
+        alt: 'Our History at Sheffield first slide',
         intro: {
-            title: "Our History at Sheffield first slide",
+            title: 'Our History at Sheffield first slide',
         },
     },
     {
-        image: "/assets/images/about-us/slider/history2.jpg",
-        mobileImage: "/assets/images/about-us/slider/history3.jpg",
-        alt: "Our History at Sheffield first slide",
+        image: '/assets/images/about-us/slider/history2.jpg',
+        mobileImage: '/assets/images/about-us/slider/history3.jpg',
+        alt: 'Our History at Sheffield first slide',
         intro: {
-            title: "Our History at Sheffield first slide",
+            title: 'Our History at Sheffield first slide',
         },
     },
     {
-        image: "/assets/images/about-us/slider/history3.jpg",
-        mobileImage: "/assets/images/about-us/slider/history3.jpg",
-        alt: "Our History at Sheffield first slide",
+        image: '/assets/images/about-us/slider/history3.jpg',
+        mobileImage: '/assets/images/about-us/slider/history3.jpg',
+        alt: 'Our History at Sheffield first slide',
         intro: {
-            title: "Our History at Sheffield first slide",
+            title: 'Our History at Sheffield first slide',
         },
     },
 ];
 
 const items2 = [
     {
-        image: "/assets/images/about-us/slider/mob-slider1.jpg",
-        mobileImage: "/assets/images/about-us/slider/mob-slider1.jpg",
-        alt: "Our History at Sheffield first slide",
+        image: '/assets/images/about-us/slider/mob-slider1.jpg',
+        mobileImage: '/assets/images/about-us/slider/mob-slider1.jpg',
+        alt: 'Our History at Sheffield first slide',
         intro: {
-            title: "Our History at Sheffield first slide",
+            title: 'Our History at Sheffield first slide',
         },
     },
     {
-        image: "/assets/images/about-us/slider/mob-slider2.jpg",
-        mobileImage: "/assets/images/about-us/slider/mob-slider2.jpg",
-        alt: "Our History at Sheffield first slide",
+        image: '/assets/images/about-us/slider/mob-slider2.jpg',
+        mobileImage: '/assets/images/about-us/slider/mob-slider2.jpg',
+        alt: 'Our History at Sheffield first slide',
         intro: {
-            title: "Our History at Sheffield first slide",
+            title: 'Our History at Sheffield first slide',
         },
     },
     {
-        image: "/assets/images/about-us/slider/mob-slider3.jpg",
-        mobileImage: "/assets/images/about-us/slider/mob-slider3.jpg",
-        alt: "Our History at Sheffield first slide",
+        image: '/assets/images/about-us/slider/mob-slider3.jpg',
+        mobileImage: '/assets/images/about-us/slider/mob-slider3.jpg',
+        alt: 'Our History at Sheffield first slide',
         intro: {
-            title: "Our History at Sheffield first slide",
+            title: 'Our History at Sheffield first slide',
         },
     },
     {
-        image: "/assets/images/about-us/slider/mob-slider4.jpg",
-        mobileImage: "/assets/images/about-us/slider/mob-slider4.jpg",
-        alt: "Our History at Sheffield first slide",
+        image: '/assets/images/about-us/slider/mob-slider4.jpg',
+        mobileImage: '/assets/images/about-us/slider/mob-slider4.jpg',
+        alt: 'Our History at Sheffield first slide',
         intro: {
-            title: "Our History at Sheffield first slide",
+            title: 'Our History at Sheffield first slide',
         },
     },
     {
-        image: "/assets/images/about-us/slider/mob-slider5.jpg",
-        mobileImage: "/assets/images/about-us/slider/mob-slider5.jpg",
-        alt: "Our History at Sheffield first slide",
+        image: '/assets/images/about-us/slider/mob-slider5.jpg',
+        mobileImage: '/assets/images/about-us/slider/mob-slider5.jpg',
+        alt: 'Our History at Sheffield first slide',
         intro: {
-            title: "Our History at Sheffield first slide",
+            title: 'Our History at Sheffield first slide',
         },
     },
     {
-        image: "/assets/images/about-us/slider/mob-slider6.jpg",
-        mobileImage: "/assets/images/about-us/slider/mob-slider6.jpg",
-        alt: "Our History at Sheffield first slide",
+        image: '/assets/images/about-us/slider/mob-slider6.jpg',
+        mobileImage: '/assets/images/about-us/slider/mob-slider6.jpg',
+        alt: 'Our History at Sheffield first slide',
         intro: {
-            title: "Our History at Sheffield first slide",
+            title: 'Our History at Sheffield first slide',
         },
     },
     {
-        image: "/assets/images/about-us/slider/mob-slider7.jpg",
-        mobileImage: "/assets/images/about-us/slider/mob-slider7.jpg",
-        alt: "Our History at Sheffield first slide",
+        image: '/assets/images/about-us/slider/mob-slider7.jpg',
+        mobileImage: '/assets/images/about-us/slider/mob-slider7.jpg',
+        alt: 'Our History at Sheffield first slide',
         intro: {
-            title: "Our History at Sheffield first slide",
+            title: 'Our History at Sheffield first slide',
         },
     },
     {
-        image: "/assets/images/about-us/slider/mob-slider8.jpg",
-        mobileImage: "/assets/images/about-us/slider/mob-slider8.jpg",
-        alt: "Our History at Sheffield first slide",
+        image: '/assets/images/about-us/slider/mob-slider8.jpg',
+        mobileImage: '/assets/images/about-us/slider/mob-slider8.jpg',
+        alt: 'Our History at Sheffield first slide',
         intro: {
-            title: "Our History at Sheffield first slide",
+            title: 'Our History at Sheffield first slide',
         },
     },
     {
-        image: "/assets/images/about-us/slider/mob-slider9.jpg",
-        mobileImage: "/assets/images/about-us/slider/mob-slider9.jpg",
-        alt: "Our History at Sheffield first slide",
+        image: '/assets/images/about-us/slider/mob-slider9.jpg',
+        mobileImage: '/assets/images/about-us/slider/mob-slider9.jpg',
+        alt: 'Our History at Sheffield first slide',
         intro: {
-            title: "Our History at Sheffield first slide",
+            title: 'Our History at Sheffield first slide',
         },
     },
 ];
@@ -1376,7 +1483,7 @@ const items2 = [
 const items = isDesktop.value ? items1 : items2;
 
 const scrollableContainer = ref(null);
-const ulHeight = ref("");
+const ulHeight = ref('');
 
 // Function to update the ul height
 const updateUlHeight = () => {
@@ -1384,7 +1491,7 @@ const updateUlHeight = () => {
         const containerHeight = scrollableContainer.value.clientHeight;
 
         if (containerHeight == 0) {
-            ulHeight.value = "417px";
+            ulHeight.value = '417px';
         } else {
             ulHeight.value = `${containerHeight}px`;
         }
@@ -1404,14 +1511,14 @@ const handleCarouselLoad = () => {
 };
 
 onMounted(() => {
-    carouselRef.value = document.querySelector(".carousel-wrapper");
+    carouselRef.value = document.querySelector('.carousel-wrapper');
 
-    carouselRef.value.addEventListener("load", handleCarouselLoad);
+    carouselRef.value.addEventListener('load', handleCarouselLoad);
 });
 
 onUnmounted(() => {
     if (carouselRef.value) {
-        carouselRef.value.removeEventListener("load", handleCarouselLoad);
+        carouselRef.value.removeEventListener('load', handleCarouselLoad);
     }
 });
 
@@ -1421,7 +1528,7 @@ window.onload = () => {
 
 onMounted(async () => {
     await nextTick();
-    window.addEventListener("resize", handleResize);
+    window.addEventListener('resize', handleResize);
 });
 
 const getImage = (item) => {
@@ -1441,13 +1548,13 @@ const getSubset = (items, columnIndex, totalColumns) => {
 
 const adjustTheClass1Height = () => {
     const carouselHeight = this.$refs.carousel.$el.offsetHeight;
-    this.$refs.carousel.$el.closest(".theClass1-wrapper").style.height =
-        carouselHeight + "px";
+    this.$refs.carousel.$el.closest('.theClass1-wrapper').style.height =
+        carouselHeight + 'px';
 };
 
 ////////////////
 
-const selectedVideoUrl = ref("");
+const selectedVideoUrl = ref('');
 const videoPlayer = ref(null);
 
 const videoBasePath = window.location.origin; //laravel base path
@@ -1459,12 +1566,12 @@ const isVideoPaused = (videoUrl) => {
 const playVideo = (videoUrl, checkboxId) => {
     //
 
-    const videoButtons = document.querySelectorAll(".play-button");
+    const videoButtons = document.querySelectorAll('.play-button');
 
     // Loop through each 'video-button' element
     videoButtons.forEach((videoButton) => {
         // Find the checkbox within each 'video-button' element
-        const checkbox = videoButton.querySelector(".checkbox-play");
+        const checkbox = videoButton.querySelector('.checkbox-play');
 
         // Disable the checkbox
         if (checkbox) {

@@ -1,56 +1,71 @@
 <script></script>
 
-<style></style>
-
 <template>
+  <header class="header header-6 header-transparent">
+    <div class="header-middle mt-2">
+      <div class="container">
+        <div class="header-left">
+          <div class="header-search header-search-extended header-search-visible d-none d-lg-block">
+            <a href="#" class="search-toggle" role="button"><i class="icon-search"></i></a>
+            <form action="#" method="get">
+              <div class="header-search-wrapper search-wrapper-wide searchListMainDiv">
+                <label for="q" class="sr-only">Search</label>
+                <button class="btn btn-primary" type="submit">
+                  <i class="icon-search"></i>
+                </button>
+                <input
+                  id="q"
+                  v-model="query"
+                  type="search"
+                  class="form-control"
+                  name="q"
+                  autocomplete="off"
+                  placeholder="Search product ..."
+                  required=""
+                  @input="search"
+                />
+                <ul v-if="showResults" class="">
+                  <li v-for="result in results" :key="result.id">
+                    <router-link :to="getProductLink(result.id, result.name, result.model_number, result.categories_json[0].parent_name_with_slashes)">
+                      <img
+                        style="display:inline;"
+                        width="28"
+                        :src="'/storage/' + result.main_image_path"
+                        class="rounded profile-img"
+                        alt=""
+                      />
+                      {{ result.name }}
+                    </router-link>
+                  </li>
+                </ul>
+              </div><!-- End .header-search-wrapper -->
+            </form>
+          </div><!-- End .header-search -->
+        </div>
+        <div class="header-center">
+          <router-link
+            to="/"
+            class="logo"
+          >
+            <img
+              src="../assets/images/logo.png"
+              alt="Sheffield Logo"
+              width="285"
+              height="auto"
+            />
+          </router-link>
+        </div><!-- End .header-left -->
 
-        <header class="header header-6 header-transparent">
-
-            <div class="header-middle mt-2">
-                <div class="container">
-                    <div class="header-left">
-                        <div class="header-search header-search-extended header-search-visible d-none d-lg-block">
-                            <a href="#" class="search-toggle" role="button"><i class="icon-search"></i></a>
-                            <form action="#" method="get">
-                                <div class="header-search-wrapper search-wrapper-wide searchListMainDiv">
-                                    <label for="q" class="sr-only">Search</label>
-                                    <button class="btn btn-primary" type="submit"><i class="icon-search"></i></button>
-                                    <input type="search" v-model="query" @input="search" class="form-control" name="q" id="q" autocomplete="off" placeholder="Search product ..." required="">
-                                    <ul v-if="showResults" class="">
-                                      <li v-for="result in results" :key="result.id">
-                                        <router-link :to="getProductLink(result.id, result.name, result.model_number, result.categories_json[0].parent_name_with_slashes)" >
-                                          <img style="display:inline;" width="28" :src="'/storage/' + result.main_image_path" class="rounded profile-img" alt="" />
-                                          {{ result.name }}
-                                        </router-link>
-                                      </li>
-                                    </ul>
-                                </div><!-- End .header-search-wrapper -->
-                            </form>
-                        </div><!-- End .header-search -->
-                    </div>
-                    <div class="header-center">
-                        <router-link to="/" class="logo"
-                      >
-                        <img
-                          src="../assets/images/logo.png"
-                          alt="Sheffield Logo"
-                          width="285"
-                          height="auto"
-                        />
-                      </router-link>
-                    </div><!-- End .header-left -->
-
-                    <div class="header-right">
-                        <!-- <a class="header_phone" href="tel:+254713777111">+254 713 777 111</a> -->
-                        <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="icon-telegram-plane" style="font-size: 40px;"></i> Contact Us</a>
-                    </div>
-                </div><!-- End .container -->
-            </div><!-- End .header-middle -->
-
-        </header>
+        <div class="header-right">
+          <!-- <a class="header_phone" href="tel:+254713777111">+254 713 777 111</a> -->
+          <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="icon-telegram-plane" style="font-size: 40px;"></i> Contact Us</a>
+        </div>
+      </div><!-- End .container -->
+    </div><!-- End .header-middle -->
+  </header>
 
 
-<!-- <div class="video-container">
+  <!-- <div class="video-container">
   <video autoplay="" muted="" loop="" id="myVideo">
       <source src="/assets/videos/sheffield_website_video.mp4" type="video/mp4">
     </video>
@@ -59,23 +74,20 @@
 
   <div class="page-wrapper">
     <main class="main">
-
       <div class="container">
         <div class="row justify-content-center mt-2 home_page_category">
-
           <div class="col-md-6 col-lg-4 home-round-category home_kitchen">
             <div class="banner">
               <router-link to="/commercial-kitchen" title="Click to open Food Service Equipment">
-                <img class="home-rounded-circle" src="assets/gif/food_service.gif" alt="Banner">
+                <img class="home-rounded-circle" src="assets/gif/food_service.gif" alt="Banner" />
               </router-link>
-
             </div><!-- End .banner -->
           </div><!-- End .col-md-6 -->
 
           <div class="col-md-6 col-lg-4 home-round-category home_laundry">
             <div class="banner">
               <router-link to="/laundry" title="Click to open Laundry & Floor Cleaning">
-                <img class="home-rounded-circle" src="assets/gif/laundry.gif" alt="Banner">
+                <img class="home-rounded-circle" src="assets/gif/laundry.gif" alt="Banner" />
               </router-link>
             </div><!-- End .banner -->
           </div><!-- End .col-md-6 -->
@@ -83,20 +95,15 @@
           <div class="col-md-6 col-lg-4 home-round-category home_cold_room">
             <div class="banner">
               <router-link to="cold-storage" title="Click to open Cold Storage">
-                <img class="home-rounded-circle" src="assets/gif/cold_storage.gif" alt="Laundry">
+                <img class="home-rounded-circle" src="assets/gif/cold_storage.gif" alt="Laundry" />
               </router-link>
             </div><!-- End .banner -->
           </div><!-- End .col-md-6 -->
-
         </div>
       </div><!-- End .container -->
 
 
       <!-- End .container-fluid -->
-
-
-
-
     </main>
     <!-- End .main -->
   </div>
@@ -107,139 +114,163 @@
 
 
   <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div
+    id="exampleModal"
+    class="modal fade"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel"></h5>
+          <h5 id="exampleModalLabel" class="modal-title"></h5>
           <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
-          <button class="btn btn-primary" data-bs-dismiss="modal"><i style="font-size:20px;" class="icon-close"></i></button>
+          <button class="btn btn-primary" data-bs-dismiss="modal">
+            <i style="font-size:20px;" class="icon-close"></i>
+          </button>
         </div>
         <div class="modal-body">
           <div class="row vertical-divider align-left ml-4 mr-4" style="margin-top: 10px;margin-bottom: 10px">
             <div class="col-md-6">
+              <h3 class="text-dark">
+                Need assistance? talk to us
+              </h3>
 
-              <h3 class="text-dark">Need assistance? talk to us</h3>
-
-              <form class="mr-5 popup-form" id="contact-form" name="contact-form" action="mail.php" method="POST">
-
+              <form
+                id="contact-form"
+                class="mr-5 popup-form"
+                name="contact-form"
+                action="mail.php"
+                method="POST"
+              >
                 <!--Grid row-->
-                <div class="row" >
-
-                    <!--Grid column-->
-                    <div class="col-md-6">
-                        <div class="md-form mb-0">
-                          <label for="name" class="">Your name</label>
-                            <input type="text" id="name" name="name" class="form-control" placeholder="Enter your name here ...">
-
-                        </div>
+                <div class="row">
+                  <!--Grid column-->
+                  <div class="col-md-6">
+                    <div class="md-form mb-0">
+                      <label for="name" class="">Your name</label>
+                      <input
+                        id="name"
+                        type="text"
+                        name="name"
+                        class="form-control"
+                        placeholder="Enter your name here ..."
+                      />
                     </div>
-                    <!--Grid column-->
+                  </div>
+                  <!--Grid column-->
 
-                    <!--Grid column-->
-                    <div class="col-md-6">
-                        <div class="md-form mb-0">
-                            <label for="email" class="">Your email</label>
-                            <input type="text" id="email" name="email" class="form-control" placeholder="Enter your email here ...">
-
-                        </div>
+                  <!--Grid column-->
+                  <div class="col-md-6">
+                    <div class="md-form mb-0">
+                      <label for="email" class="">Your email</label>
+                      <input
+                        id="email"
+                        type="text"
+                        name="email"
+                        class="form-control"
+                        placeholder="Enter your email here ..."
+                      />
                     </div>
-                    <!--Grid column-->
-
+                  </div>
+                  <!--Grid column-->
                 </div>
                 <!--Grid row-->
 
                 <!--Grid row-->
                 <div class="row">
-                    <div class="col-md-12">
-                        <div class="md-form mb-0">
-                            <label for="subject" class="">Subject</label>
-                            <input type="text" id="subject" name="subject" class="form-control" placeholder="Enter your subject here ...">
-
-                        </div>
+                  <div class="col-md-12">
+                    <div class="md-form mb-0">
+                      <label for="subject" class="">Subject</label>
+                      <input
+                        id="subject"
+                        type="text"
+                        name="subject"
+                        class="form-control"
+                        placeholder="Enter your subject here ..."
+                      />
                     </div>
+                  </div>
                 </div>
                 <!--Grid row-->
 
                 <!--Grid row-->
                 <div class="row">
-
-                    <!--Grid column-->
-                    <div class="col-md-12">
-
-                        <div class="md-form">
-                            <label for="message">Your message</label>
-                            <textarea type="text" id="message" name="message" rows="2" class="form-control md-textarea" placeholder="Enter your message here ..."></textarea>
-
-                        </div>
-
+                  <!--Grid column-->
+                  <div class="col-md-12">
+                    <div class="md-form">
+                      <label for="message">Your message</label>
+                      <textarea
+                        id="message"
+                        type="text"
+                        name="message"
+                        rows="2"
+                        class="form-control md-textarea"
+                        placeholder="Enter your message here ..."
+                      ></textarea>
                     </div>
+                  </div>
                 </div>
                 <!--Grid row-->
 
 
                 <!--Grid row-->
                 <div class="row">
-
-                    <!--Grid column-->
-                    <div class="col-md-12">
-
-                        <div class="md-form">
-                            <button class="btn btn-primary">Send</button>
-
-                        </div>
-
+                  <!--Grid column-->
+                  <div class="col-md-12">
+                    <div class="md-form">
+                      <button class="btn btn-primary">
+                        Send
+                      </button>
                     </div>
+                  </div>
                 </div>
                 <!--Grid row-->
-
-            </form>
-
+              </form>
             </div>
             <div class="col-md-6">
-
               <div class="canvas-contact ml-5">
-                  <div class="canvas-map mb-30">
-                      <iframe
-                        width="90%"
-                        height="200"
-                        src="https://maps.google.com/maps?q=sheffield-steel-limited-mombasa-rd&amp;t=&amp;z=13&amp;ie=UTF8&amp;iwloc=&amp;output=embed"
-                        frameborder="0"
-                        allowfullscreen
-                      ></iframe>
-                  </div>
-                 <ul class="contact-section mt-2">
-                    <li style="font-size:20px; font-weight:500;" class="mb-3 text-dark"><i class="flaticon-pin"></i><span>
-                      Off Mombasa Road before Standard gauge railway<br>
+                <div class="canvas-map mb-30">
+                  <iframe
+                    width="90%"
+                    height="200"
+                    src="https://maps.google.com/maps?q=sheffield-steel-limited-mombasa-rd&amp;t=&amp;z=13&amp;ie=UTF8&amp;iwloc=&amp;output=embed"
+                    frameborder="0"
+                    allowfullscreen
+                  ></iframe>
+                </div>
+                <ul class="contact-section mt-2">
+                  <li style="font-size:20px; font-weight:500;" class="mb-3 text-dark">
+                    <i class="flaticon-pin"></i><span>
+                      Off Mombasa Road before Standard gauge railway<br />
                       P. O. Box 29 – 00606, Nairobi Kenya
-                    </span></li>
-                    <li class=""><i class="icon-phone" style="font-size: 35px; padding-right:15px; color: #000;"></i>
-                     <a class="text-dark" style="font-size:25px; font-weight:550;" href="tel:+254713777111">+254 713 777 111</a>
-                    </li>
-                    <li class="mb-3" ><i class="icon-envelope" style="font-size: 35px; padding-right:15px; color: #000;"></i>
-                      <a class="text-dark" style="font-size:25px; font-weight:550; color:#000;" href="mailto:info@sheffieldafrica.com">info@sheffieldafrica.com</a>
-                    </li>
-                 </ul>
-                 <ul class="social-icon">
-                     <li><a href="index.html#"><i class="fa fa-facebook"></i></a></li>
-                     <li><a href="index.html#"><i class="fa fa-twitter"></i></a></li>
-                     <li><a href="index.html#"><i class="fa fa-pinterest-p"></i></a></li>
-                     <li><a href="index.html#"><i class="fa fa-linkedin"></i></a></li>
-                 </ul>
-             </div>
-
+                    </span>
+                  </li>
+                  <li class="">
+                    <i class="icon-phone" style="font-size: 35px; padding-right:15px; color: #000;"></i>
+                    <a class="text-dark" style="font-size:25px; font-weight:550;" href="tel:+254713777111">+254 713 777 111</a>
+                  </li>
+                  <li class="mb-3">
+                    <i class="icon-envelope" style="font-size: 35px; padding-right:15px; color: #000;"></i>
+                    <a class="text-dark" style="font-size:25px; font-weight:550; color:#000;" href="mailto:info@sheffieldafrica.com">info@sheffieldafrica.com</a>
+                  </li>
+                </ul>
+                <ul class="social-icon">
+                  <li><a href="index.html#"><i class="fa fa-facebook"></i></a></li>
+                  <li><a href="index.html#"><i class="fa fa-twitter"></i></a></li>
+                  <li><a href="index.html#"><i class="fa fa-pinterest-p"></i></a></li>
+                  <li><a href="index.html#"><i class="fa fa-linkedin"></i></a></li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
-
       </div>
     </div>
   </div>
 
   <!-- Modal -->
-
-
-
 </template>
 
 <script setup>
@@ -276,14 +307,14 @@
 
 
 
-    const query = ref("");
+    const query = ref('');
     const results = ref([]);
     const showResults = ref(false);
 
     const search = async () => {
       if (query.value.length >= 3) {
         try {
-          const response = await axios.get(`/api/product_search`+`/${query.value}`);
+          const response = await axios.get('/api/product_search'+`/${query.value}`);
           results.value = response.data.data;
           //
           showResults.value = true;
@@ -300,6 +331,8 @@
 
 
 </script>
+
+<style></style>
 
 <style>
 

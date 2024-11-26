@@ -1,124 +1,155 @@
 <template>
-    <main class="main">
-        <nav aria-label="breadcrumb" class="breadcrumb-nav border-0 mb-0">
-            <div class="container d-flex align-items-center">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item">
-                        <router-link to="/">HOME</router-link>
-                    </li>
+  <main class="main">
+    <nav aria-label="breadcrumb" class="breadcrumb-nav border-0 mb-0">
+      <div class="container d-flex align-items-center">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <router-link to="/">
+              HOME
+            </router-link>
+          </li>
 
-                    <li class="breadcrumb-item">
-                        <router-link to="/promotional-solutions">PROMOTIONS</router-link>
-                    </li>
+          <li class="breadcrumb-item">
+            <router-link to="/promotional-solutions">
+              PROMOTIONS
+            </router-link>
+          </li>
 
-                    <li class="breadcrumb-item active" aria-current="page">
-                        {{ solutionCategories.name }}
-                    </li>
-                </ol>
-            </div>
-        </nav>
-        <!-- End .page-header -->
+          <li class="breadcrumb-item active" aria-current="page">
+            {{ solutionCategories.name }}
+          </li>
+        </ol>
+      </div>
+    </nav>
+    <!-- End .page-header -->
 
-        <div class="page-content">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-9">
-                        <!-- End .toolbox -->
-                        <div class="products mb-3">
-                            <div class="row">
-                                <div class="col-lg-12 col-md-12 mt-1">
-                                    <div class="accordion" id="accordion-1" style="width: 100%">
-                                        <div class="card">
-                                            <div class="card-header" id="heading-2">
-                                                <h2 class="card-title">
-                                                    <a class="collapsed" role="button" data-toggle="collapse"
-                                                        href="#collapse-2" aria-expanded="false"
-                                                        aria-controls="collapse-2">
-                                                        {{
-                                                            solutionCategories.name
-                                                        }}
-                                                        - SOLUTION
-                                                    </a>
-                                                </h2>
-                                            </div>
-                                            <!-- End .card-header -->
-                                            <div id="collapse-2" class="collapse" aria-labelledby="heading-2"
-                                                data-parent="#accordion-1" style=""></div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-12 col-md-6 col-lg-6 col-xl-6 image-container">
-                                    <div class="card-body middle-section">
-                                        <span v-html="solutionCategories.description
-                                            "></span>
-                                    </div>
-                                </div>
-
-                                <div class="col-12 col-md-6 col-lg-4 col-xl-4 image-container laundry-image">
-                                    <img :src="'/storage/' +
-                                        solutionCategories.main_image_path
-                                        " v-lazy:src="'/storage/' +
-                                            solutionCategories.main_image_path
-                                            " alt="Product image" />
-                                </div>
-
-                                <!-- End .col-sm-6 col-lg-4 col-xl-3 -->
-                            </div>
-                            <!-- End .row -->
-                        </div>
-                        <!-- End .products -->
+    <div class="page-content">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-9">
+            <!-- End .toolbox -->
+            <div class="products mb-3">
+              <div class="row">
+                <div class="col-lg-12 col-md-12 mt-1">
+                  <div id="accordion-1" class="accordion" style="width: 100%">
+                    <div class="card">
+                      <div id="heading-2" class="card-header">
+                        <h2 class="card-title">
+                          <a
+                            class="collapsed"
+                            role="button"
+                            data-toggle="collapse"
+                            href="#collapse-2"
+                            aria-expanded="false"
+                            aria-controls="collapse-2"
+                          >
+                            {{
+                              solutionCategories.name
+                            }}
+                            - SOLUTION
+                          </a>
+                        </h2>
+                      </div>
+                      <!-- End .card-header -->
+                      <div
+                        id="collapse-2"
+                        class="collapse"
+                        aria-labelledby="heading-2"
+                        data-parent="#accordion-1"
+                        style=""
+                      ></div>
                     </div>
-                    <!-- End .col-lg-9 -->
+                  </div>
+                </div>
 
-                    <aside class="col-lg-3 order-lg-first mt-2">
-                        <div class="sidebar sidebar-shop sidebar-shop-solution">
-                            <!-- End .widget widget-clean -->
+                <div class="col-12 col-md-6 col-lg-6 col-xl-6 image-container">
+                  <div class="card-body middle-section">
+                    <span
+                      v-html="solutionCategories.description
+                      "
+                    ></span>
+                  </div>
+                </div>
 
-                            <div class="widget widget-cats widget-categories">
-                                <h3 class="widget-title">Relevant Products</h3>
-                                <!-- End .widget-title -->
+                <div class="col-12 col-md-6 col-lg-4 col-xl-4 image-container laundry-image">
+                  <img
+                    v-lazy:src="'/storage/' +
+                      solutionCategories.main_image_path
+                    "
+                    :src="'/storage/' +
+                      solutionCategories.main_image_path
+                    "
+                    alt="Product image"
+                  />
+                </div>
 
-                                <hr />
+                <!-- End .col-sm-6 col-lg-4 col-xl-3 -->
+              </div>
+              <!-- End .row -->
+            </div>
+            <!-- End .products -->
+          </div>
+          <!-- End .col-lg-9 -->
 
-                                <ul v-for="category in solutionCategoriesList" :key="category.id">
-                                    <li class="" style="
+          <aside class="col-lg-3 order-lg-first mt-2">
+            <div class="sidebar sidebar-shop sidebar-shop-solution">
+              <!-- End .widget widget-clean -->
+
+              <div class="widget widget-cats widget-categories">
+                <h3 class="widget-title">
+                  Relevant Products
+                </h3>
+                <!-- End .widget-title -->
+
+                <hr />
+
+                <ul v-for="category in solutionCategoriesList" :key="category.id">
+                  <li
+                    class=""
+                    style="
                                             border-bottom: 1px solid #ccc;
                                             padding: 10px;
-                                        ">
-                                        <router-link :to="getCategoryLink(
-                                            category.id,
-                                            category.name,
-                                            currentPage - 1
-                                        )
-                                            ">{{ category.name
-                                            }}<span>>></span></router-link>
-                                    </li>
-                                </ul>
+                                        "
+                  >
+                    <router-link
+                      :to="getCategoryLink(
+                        category.id,
+                        category.name,
+                        currentPage - 1
+                      )
+                      "
+                    >
+                      {{ category.name
+                      }}<span>>></span>
+                    </router-link>
+                  </li>
+                </ul>
 
-                                <div class="widget-body mt-5">
-                                    <router-link to="/contact-us" class="btn btn-secondary btn-block">Need
-                                        Advise?</router-link>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- End .sidebar sidebar-shop -->
-                    </aside>
-                    <!-- End .col-lg-3 -->
+                <div class="widget-body mt-5">
+                  <router-link to="/contact-us" class="btn btn-secondary btn-block">
+                    Need
+                    Advise?
+                  </router-link>
                 </div>
-                <!-- End .row -->
+              </div>
             </div>
-            <!-- End .container -->
+            <!-- End .sidebar sidebar-shop -->
+          </aside>
+          <!-- End .col-lg-3 -->
         </div>
-        <!-- End .page-content -->
-    </main>
+        <!-- End .row -->
+      </div>
+      <!-- End .container -->
+    </div>
+    <!-- End .page-content -->
+  </main>
 </template>
 
 <script setup>
-import { ref, watch, onMounted } from "vue";
-import { useRoute } from "vue-router";
+import { ref, watch, onMounted } from 'vue';
+import { useRoute } from 'vue-router';
 
-import { useMeta } from "../../admin/composables/use-meta";
+import { useMeta } from '../../admin/composables/use-meta';
 
 const route = useRoute();
 
@@ -132,7 +163,7 @@ const solutionCategoriesList = ref([]);
 
 const fetchSolutionCategories = async () => {
     try {
-        const response = await axios.get("/api/get-solution-categories", {
+        const response = await axios.get('/api/get-solution-categories', {
             params: {
                 solution_id: solution_id.value,
             },
@@ -144,7 +175,7 @@ const fetchSolutionCategories = async () => {
         //
 
         useMeta({
-            title: solutionCategories.value.name + " | Promotions",
+            title: solutionCategories.value.name + ' | Promotions',
         });
     } catch (error) {
         console.error(error);
@@ -156,14 +187,14 @@ const solutionCategoryProducts = ref([]);
 const fetchSolutionCategoryProducts = async () => {
     try {
         const response = await axios.get(
-            "/api/get-solution-category-products",
+            '/api/get-solution-category-products',
             {
                 params: {
                     solution_id: solution_id.value,
                     checkedCategoriesSolutions:
                         checkedCategoriesSolutions.value,
                 },
-            }
+            },
         );
         solutionCategoryProducts.value = response.data.products.data;
 
@@ -178,11 +209,11 @@ const fetchSolutionCategoryProducts = async () => {
 const displayedProducts = ref([]);
 
 const getCategoryLink = (id, name) => {
-    let transformedName = name.replace(/ /g, "-").replace(/\//g, "-");
+    let transformedName = name.replace(/ /g, '-').replace(/\//g, '-');
     // Remove consecutive dashes
-    transformedName = transformedName.replace(/-+/g, "-");
+    transformedName = transformedName.replace(/-+/g, '-');
     // Remove leading and trailing dashes
-    transformedName = transformedName.replace(/^-+|-+$/g, "");
+    transformedName = transformedName.replace(/^-+|-+$/g, '');
     // Convert to lowercase
     transformedName = transformedName.toLowerCase();
 
@@ -194,7 +225,7 @@ const updateDisplayedProducts = () => {
     const startIndex = 0;
     displayedProducts.value = products.value.slice(
         startIndex,
-        startIndex + perPage.value
+        startIndex + perPage.value,
     );
 };
 

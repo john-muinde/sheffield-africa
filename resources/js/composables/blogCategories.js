@@ -1,15 +1,15 @@
-import { ref, getCurrentInstance } from "vue";
-import { useRouter } from "vue-router";
-import { apiRequest } from "../utils/api";
-import { Modal } from "ant-design-vue";
+import { ref, getCurrentInstance } from 'vue';
+import { useRouter } from 'vue-router';
+import { apiRequest } from '../utils/api';
+import { Modal } from 'ant-design-vue';
 
 export default function useBlogCategories() {
     const blogCategories = ref([]);
     const blogCategoryList = ref([]);
     const blogCategory = ref({
-        name: "",
-        is_published: "",
-        description: "",
+        name: '',
+        is_published: '',
+        description: '',
     });
 
     const router = useRouter();
@@ -18,16 +18,16 @@ export default function useBlogCategories() {
 
     const getBlogCategories = async (
         page = 1,
-        search_id = "",
-        search_title = "",
-        search_global = "",
-        order_column = "created_at",
-        order_direction = "desc"
+        search_id = '',
+        search_title = '',
+        search_global = '',
+        order_column = 'created_at',
+        order_direction = 'desc',
     ) => {
         try {
             const response = await apiRequest(
-                "get",
-                `/api/blogCategories?page=${page}&search_id=${search_id}&search_title=${search_title}&search_global=${search_global}&order_column=${order_column}&order_direction=${order_direction}`
+                'get',
+                `/api/blogCategories?page=${page}&search_id=${search_id}&search_title=${search_title}&search_global=${search_global}&order_column=${order_column}&order_direction=${order_direction}`,
             );
             blogCategories.value = response;
         } catch (errors) {
@@ -38,8 +38,8 @@ export default function useBlogCategories() {
     const getBlogCategory = async (id) => {
         try {
             const response = await apiRequest(
-                "get",
-                `/api/blogCategories/${id}`
+                'get',
+                `/api/blogCategories/${id}`,
             );
             blogCategory.value = response;
         } catch (errors) {
@@ -61,23 +61,23 @@ export default function useBlogCategories() {
         }
 
         const config = {
-            headers: { "content-type": "multipart/form-data" },
+            headers: { 'content-type': 'multipart/form-data' },
         };
 
         try {
             await apiRequest(
-                "post",
-                "/api/blogCategories",
+                'post',
+                '/api/blogCategories',
                 serializedPost,
-                config
+                config,
             );
-            router.push({ name: "blogCategories.create" });
+            router.push({ name: 'blogCategories.create' });
             // Reset the form values
             blogCategory.name = null;
             blogCategory.description = null;
             blogCategory.main_image = null;
             blogCategory.is_published = null;
-            showToast("Blog Category saved successfully", "success");
+            showToast('Blog Category saved successfully', 'success');
         } catch (errors) {
             validationErrors.value = errors;
         } finally {
@@ -99,18 +99,18 @@ export default function useBlogCategories() {
         }
 
         const config = {
-            headers: { "content-type": "multipart/form-data" },
+            headers: { 'content-type': 'multipart/form-data' },
         };
 
         try {
             await apiRequest(
-                "put",
+                'put',
                 `/api/blogCategories/${blogCategory.id}`,
                 serializedPost,
-                config
+                config,
             );
-            router.push({ name: "blogCategories.index" });
-            showToast("Blog Category updated successfully", "success");
+            router.push({ name: 'blogCategories.index' });
+            showToast('Blog Category updated successfully', 'success');
         } catch (errors) {
             validationErrors.value = errors;
         } finally {
@@ -120,27 +120,27 @@ export default function useBlogCategories() {
 
     const deleteBlogCategory = async (id) => {
         Modal.confirm({
-            title: "Are you sure?",
-            content: "You won't be able to revert this action!",
-            okText: "Yes, delete it!",
-            okType: "danger",
-            cancelText: "No, cancel",
+            title: 'Are you sure?',
+            content: 'You won\'t be able to revert this action!',
+            okText: 'Yes, delete it!',
+            okType: 'danger',
+            cancelText: 'No, cancel',
             onOk() {
-                apiRequest("delete", `/api/blogCategories/${id}`).then(() => {
+                apiRequest('delete', `/api/blogCategories/${id}`).then(() => {
                     getBlogCategories();
-                    router.push({ name: "blogCategories.index" });
-                    showToast("Blog Category deleted successfully", "success");
+                    router.push({ name: 'blogCategories.index' });
+                    showToast('Blog Category deleted successfully', 'success');
                 });
             },
             onCancel() {
-                console.log("Cancel");
+                console.log('Cancel');
             },
         });
     };
 
     const getBlogCategoryList = async () => {
         try {
-            const response = await apiRequest("get", "/api/blogCategory-list");
+            const response = await apiRequest('get', '/api/blogCategory-list');
             blogCategoryList.value = response;
         } catch (errors) {
             validationErrors.value = errors;

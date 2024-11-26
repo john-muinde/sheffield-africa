@@ -1,47 +1,47 @@
-import { ref, inject } from "vue";
-import { useRouter } from "vue-router";
-import axiosInstance from "../axiosInstance";
+import { ref, inject } from 'vue';
+import { useRouter } from 'vue-router';
+import axiosInstance from '../axiosInstance';
 
 export default function useRequestQuotes() {
     const contacts = ref([]);
     const contactList = ref([]);
     const contact = ref({
-        name: "",
-        parent_id: "",
-        description: "",
-        is_published: "",
+        name: '',
+        parent_id: '',
+        description: '',
+        is_published: '',
     });
 
     const router = useRouter();
     const validationErrors = ref({});
     const isLoading = ref(false);
-    const swal = inject("$swal");
+    const swal = inject('$swal');
 
     const getContacts = async (
         page = 1,
-        search_id = "",
-        search_title = "",
-        search_parent_id = "",
-        search_global = "",
-        order_column = "created_at",
-        order_direction = "desc"
+        search_id = '',
+        search_title = '',
+        search_parent_id = '',
+        search_global = '',
+        order_column = 'created_at',
+        order_direction = 'desc',
     ) => {
         axiosInstance
             .get(
-                "/api/contacts?page=" +
+                '/api/contacts?page=' +
                     page +
-                    "&search_id=" +
+                    '&search_id=' +
                     search_id +
-                    "&search_title=" +
+                    '&search_title=' +
                     search_title +
-                    "&search_parent_id=" +
+                    '&search_parent_id=' +
                     search_parent_id +
-                    "&search_global=" +
+                    '&search_global=' +
                     search_global +
-                    "&order_column=" +
+                    '&order_column=' +
                     order_column +
-                    "&order_direction=" +
-                    order_direction
+                    '&order_direction=' +
+                    order_direction,
             )
             .then((response) => {
                 contacts.value = response.data;
@@ -49,7 +49,7 @@ export default function useRequestQuotes() {
     };
 
     const getContact = async (id) => {
-        axiosInstance.get("/api/contacts/" + id).then((response) => {
+        axiosInstance.get('/api/contacts/' + id).then((response) => {
             contact.value = response.data.data;
         });
     };
@@ -71,16 +71,16 @@ export default function useRequestQuotes() {
         }
 
         const config = {
-            headers: { "content-type": "multipart/form-data" },
+            headers: { 'content-type': 'multipart/form-data' },
         };
 
         axiosInstance
-            .post("/api/request-quote", serializedPost, config)
+            .post('/api/request-quote', serializedPost, config)
             .then((response) => {
                 //router.push({name: 'contact'}) //disabled due to top gap
                 // Reset the form values
 
-                if (response.data.status == "success") {
+                if (response.data.status == 'success') {
                     contact.request_type = null;
                     contact.area_of_interest = null;
                     contact.surname = null;
@@ -95,15 +95,15 @@ export default function useRequestQuotes() {
                 swal({
                     icon: response.data.status,
                     title: response.data.message,
-                    confirmButtonColor: "#363636",
+                    confirmButtonColor: '#363636',
                 });
             })
             .catch((error) => {
                 if (error.response?.data) {
                     swal({
-                        icon: "error",
-                        title: "Error occurred when trying to submit your request please try again",
-                        confirmButtonColor: "#363636",
+                        icon: 'error',
+                        title: 'Error occurred when trying to submit your request please try again',
+                        confirmButtonColor: '#363636',
                     });
                     validationErrors.value = error.response.data.errors;
                 }
@@ -113,31 +113,31 @@ export default function useRequestQuotes() {
 
     const deleteContact = async (id) => {
         swal({
-            title: "Are you sure?",
-            text: "You won't be able to revert this action!",
-            icon: "warning",
+            title: 'Are you sure?',
+            text: 'You won\'t be able to revert this action!',
+            icon: 'warning',
             showCancelButton: true,
-            confirmButtonText: "Yes, delete it!",
-            confirmButtonColor: "#ef4444",
+            confirmButtonText: 'Yes, delete it!',
+            confirmButtonColor: '#ef4444',
             timer: 20000,
             timerProgressBar: true,
             reverseButtons: true,
         }).then((result) => {
             if (result.isConfirmed) {
                 axiosInstance
-                    .delete("/api/contacts/" + id)
+                    .delete('/api/contacts/' + id)
                     .then((response) => {
                         getContacts();
-                        router.push({ name: "contacts.index" });
+                        router.push({ name: 'contacts.index' });
                         swal({
-                            icon: "success",
-                            title: "Contact deleted successfully",
+                            icon: 'success',
+                            title: 'Contact deleted successfully',
                         });
                     })
                     .catch((error) => {
                         swal({
-                            icon: "error",
-                            title: "Something went wrong",
+                            icon: 'error',
+                            title: 'Something went wrong',
                         });
                     });
             }
@@ -145,7 +145,7 @@ export default function useRequestQuotes() {
     };
 
     const getContactList = async () => {
-        axiosInstance.get("/api/contact-list").then((response) => {
+        axiosInstance.get('/api/contact-list').then((response) => {
             contactList.value = response.data.data;
         });
     };

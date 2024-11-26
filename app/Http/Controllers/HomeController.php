@@ -68,6 +68,10 @@ class HomeController extends Controller
             ? Carbon::parse(request()->query('end_date'))->endOfDay()
             : $end_date;
 
+        // convert start time and end time to utc
+        $start_date = Carbon::parse($start_date)->setTimezone('UTC');
+        $end_date = Carbon::parse($end_date)->setTimezone('UTC');
+
 
         // Modify grouping configuration to handle daily granularity better
         $grouping = $this->getGroupingConfig($period);

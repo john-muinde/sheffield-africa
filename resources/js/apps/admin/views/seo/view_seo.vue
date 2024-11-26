@@ -36,9 +36,6 @@
               :columns="columns"
               :options="table_option"
             >
-             
-            
-
               <template #actions="props">
                 <!-- v-if="can('user-edit')"  -->
 
@@ -62,7 +59,7 @@
                   >
                     <path
                       d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"
-                    ></path>
+                    />
                   </svg>
                 </router-link>
 
@@ -70,10 +67,10 @@
 
                 <a
                   href="javascript:;"
-                  @click.prevent="deleteSeo(props.row.id)"
                   class="ms-2 badge bg-danger"
                   data-bs-toggle="tooltip"
                   data-bs-placement="top"
+                  @click.prevent="deleteSeo(props.row.id)"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -87,10 +84,10 @@
                     stroke-linejoin="round"
                     class="feather feather-trash"
                   >
-                    <polyline points="3 6 5 6 21 6"></polyline>
+                    <polyline points="3 6 5 6 21 6" />
                     <path
                       d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"
-                    ></path>
+                    />
                   </svg>
                 </a>
               </template>
@@ -103,13 +100,11 @@
 </template>
 
 <script setup>
-import { ref, onMounted, watch } from "vue";
+import { ref, onMounted } from 'vue';
 
-import useSeo from "@/composables/seo";
-import { useAbility } from "@casl/vue";
+import useSeo from '@/composables/seo';
 
 const { seo, getSeos, deleteSeo } = useSeo();
-const { can } = useAbility();
 
 onMounted(() => {
   getSeos();
@@ -120,37 +115,33 @@ const getTableData = () => {
 };
 
 const columns = ref([
-  "id",
-  "page",
-  "title",
-  "keywords",
-  "description",
-  "type",
-  "actions",
+  'id',
+  'page',
+  'title',
+  'keywords',
+  'description',
+  'type',
+  'actions',
 ]);
 
 const table_option = ref({
   perPage: 10,
   perPageValues: [5, 10, 20, 50],
-  skin: "table table-hover table-striped",
-  columnsClasses: { actions: "actions text-center" },
-  pagination: { nav: "scroll", chunk: 5 },
+  skin: 'table table-hover table-striped',
+  columnsClasses: { actions: 'actions text-center' },
+  pagination: { nav: 'scroll', chunk: 5 },
   texts: {
-    count: "Showing {from} to {to} of {count}",
-    filter: "",
-    filterPlaceholder: "Search...",
-    limit: "Results:",
+    count: 'Showing {from} to {to} of {count}',
+    filter: '',
+    filterPlaceholder: 'Search...',
+    limit: 'Results:',
   },
-  sortable: ["id", "page", "title"],
+  sortable: ['id', 'page', 'title'],
   sortIcon: {
-    base: "sort-icon-none",
-    up: "sort-icon-asc",
-    down: "sort-icon-desc",
+    base: 'sort-icon-none',
+    up: 'sort-icon-asc',
+    down: 'sort-icon-desc',
   },
   resizableColumns: false,
 });
-
-const view_row = (item) => {
-  alert("ID: " + item.id + ", Name: " + item.page);
-};
 </script>

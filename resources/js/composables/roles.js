@@ -1,40 +1,40 @@
-import { ref, inject } from "vue";
-import { useRouter } from "vue-router";
-import axiosInstance from "../axiosInstance";
+import { ref, inject } from 'vue';
+import { useRouter } from 'vue-router';
+import axiosInstance from '../axiosInstance';
 
 export default function useRoles() {
     const roles = ref([]);
     const role = ref({
-        name: "",
+        name: '',
     });
 
     const router = useRouter();
     const validationErrors = ref({});
     const isLoading = ref(false);
-    const swal = inject("$swal");
+    const swal = inject('$swal');
 
     const getRoles = async (
         page = 1,
-        search_id = "",
-        search_title = "",
-        search_global = "",
-        order_column = "created_at",
-        order_direction = "desc"
+        search_id = '',
+        search_title = '',
+        search_global = '',
+        order_column = 'created_at',
+        order_direction = 'desc',
     ) => {
         axiosInstance
             .get(
-                "/api/roles?page=" +
+                '/api/roles?page=' +
                     page +
-                    "&search_id=" +
+                    '&search_id=' +
                     search_id +
-                    "&search_title=" +
+                    '&search_title=' +
                     search_title +
-                    "&search_global=" +
+                    '&search_global=' +
                     search_global +
-                    "&order_column=" +
+                    '&order_column=' +
                     order_column +
-                    "&order_direction=" +
-                    order_direction
+                    '&order_direction=' +
+                    order_direction,
             )
             .then((response) => {
                 roles.value = response.data;
@@ -42,7 +42,7 @@ export default function useRoles() {
     };
 
     const getRole = async (id) => {
-        axiosInstance.get("/api/roles/" + id).then((response) => {
+        axiosInstance.get('/api/roles/' + id).then((response) => {
             role.value = response.data.data;
         });
     };
@@ -54,12 +54,12 @@ export default function useRoles() {
         validationErrors.value = {};
 
         axiosInstance
-            .post("/api/roles", role)
+            .post('/api/roles', role)
             .then((response) => {
-                router.push({ name: "roles.index" });
+                router.push({ name: 'roles.index' });
                 swal({
-                    icon: "success",
-                    title: "Role saved successfully",
+                    icon: 'success',
+                    title: 'Role saved successfully',
                 });
             })
             .catch((error) => {
@@ -77,12 +77,12 @@ export default function useRoles() {
         validationErrors.value = {};
 
         axiosInstance
-            .put("/api/roles/" + role.id, role)
+            .put('/api/roles/' + role.id, role)
             .then((response) => {
-                router.push({ name: "roles.index" });
+                router.push({ name: 'roles.index' });
                 swal({
-                    icon: "success",
-                    title: "Role updated successfully",
+                    icon: 'success',
+                    title: 'Role updated successfully',
                 });
             })
             .catch((error) => {
@@ -95,31 +95,31 @@ export default function useRoles() {
 
     const deleteRole = async (id) => {
         swal({
-            title: "Are you sure?",
-            text: "You won't be able to revert this action!",
-            icon: "warning",
+            title: 'Are you sure?',
+            text: 'You won\'t be able to revert this action!',
+            icon: 'warning',
             showCancelButton: true,
-            confirmButtonText: "Yes, delete it!",
-            confirmButtonColor: "#ef4444",
+            confirmButtonText: 'Yes, delete it!',
+            confirmButtonColor: '#ef4444',
             timer: 20000,
             timerProgressBar: true,
             reverseButtons: true,
         }).then((result) => {
             if (result.isConfirmed) {
                 axiosInstance
-                    .delete("/api/roles/" + id)
+                    .delete('/api/roles/' + id)
                     .then((response) => {
                         getRoles();
-                        router.push({ name: "roles.index" });
+                        router.push({ name: 'roles.index' });
                         swal({
-                            icon: "success",
-                            title: "Role deleted successfully",
+                            icon: 'success',
+                            title: 'Role deleted successfully',
                         });
                     })
                     .catch((error) => {
                         swal({
-                            icon: "error",
-                            title: "Something went wrong",
+                            icon: 'error',
+                            title: 'Something went wrong',
                         });
                     });
             }

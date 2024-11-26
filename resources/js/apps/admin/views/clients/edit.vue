@@ -33,94 +33,94 @@
             <div class="panel-body">
               <form @submit.prevent="submitForm">
                 <div class="row">
-                    <div class="form-group col-md-6">
-                  <label for="post-name">Client Name</label>
-                  <input
-                    v-model="client.name"
-                    id="post-name"
-                    type="text"
-                    class="form-control"
-                    placeholder="Enter Client Name ..."
-                  />
+                  <div class="form-group col-md-6">
+                    <label for="post-name">Client Name</label>
+                    <input
+                      id="post-name"
+                      v-model="client.name"
+                      type="text"
+                      class="form-control"
+                      placeholder="Enter Client Name ..."
+                    />
 
-                  <div class="text-danger mt-1">
-                    {{ errors.name }}
-                  </div>
-                  <div class="text-danger mt-1">
-                    <div v-for="message in validationErrors?.name">
-                      {{ message }}
+                    <div class="text-danger mt-1">
+                      {{ errors.name }}
+                    </div>
+                    <div class="text-danger mt-1">
+                      <div v-for="message in validationErrors?.name">
+                        {{ message }}
+                      </div>
                     </div>
                   </div>
-                </div>
 
-                <div class="form-group col-md-6">
-                  <label for="post-phone">Client Phone</label>
-                  <input
-                    v-model="client.phone"
-                    id="post-phone"
-                    type="text"
-                    class="form-control"
-                    placeholder="Enter Client Phone ..."
-                  />
+                  <div class="form-group col-md-6">
+                    <label for="post-phone">Client Phone</label>
+                    <input
+                      id="post-phone"
+                      v-model="client.phone"
+                      type="text"
+                      class="form-control"
+                      placeholder="Enter Client Phone ..."
+                    />
 
-                  <div class="text-danger mt-1">
-                    {{ errors.phone }}
-                  </div>
-                  <div class="text-danger mt-1">
-                    <div v-for="message in validationErrors?.phone">
-                      {{ message }}
+                    <div class="text-danger mt-1">
+                      {{ errors.phone }}
+                    </div>
+                    <div class="text-danger mt-1">
+                      <div v-for="message in validationErrors?.phone">
+                        {{ message }}
+                      </div>
                     </div>
                   </div>
-                </div>
                 </div>
 
                 <div class="row">
-                    <div class="form-group col-md-6">
-                  <label for="post-email">Client Email</label>
-                  <input
-                    v-model="client.email"
-                    id="post-email"
-                    type="email"
-                    class="form-control"
-                    placeholder="Enter Client Email ..."
-                  />
+                  <div class="form-group col-md-6">
+                    <label for="post-email">Client Email</label>
+                    <input
+                      id="post-email"
+                      v-model="client.email"
+                      type="email"
+                      class="form-control"
+                      placeholder="Enter Client Email ..."
+                    />
 
-                  <div class="text-danger mt-1">
-                    {{ errors.email }}
-                  </div>
-                  <div class="text-danger mt-1">
-                    <div v-for="message in validationErrors?.email">
-                      {{ message }}
+                    <div class="text-danger mt-1">
+                      {{ errors.email }}
+                    </div>
+                    <div class="text-danger mt-1">
+                      <div v-for="message in validationErrors?.email">
+                        {{ message }}
+                      </div>
                     </div>
                   </div>
-                </div>
 
-                <div class="form-group col-md-6">
-                  <label for="post-address">Client Address</label>
-                  <input
-                    v-model="client.address"
-                    id="post-address"
-                    type="text"
-                    class="form-control"
-                    placeholder="Enter Client address ..."
-                  />
+                  <div class="form-group col-md-6">
+                    <label for="post-address">Client Address</label>
+                    <input
+                      id="post-address"
+                      v-model="client.address"
+                      type="text"
+                      class="form-control"
+                      placeholder="Enter Client address ..."
+                    />
 
-                  <div class="text-danger mt-1">
-                    {{ errors.address }}
-                  </div>
-                  <div class="text-danger mt-1">
-                    <div v-for="message in validationErrors?.address">
-                      {{ message }}
+                    <div class="text-danger mt-1">
+                      {{ errors.address }}
+                    </div>
+                    <div class="text-danger mt-1">
+                      <div v-for="message in validationErrors?.address">
+                        {{ message }}
+                      </div>
                     </div>
                   </div>
-                </div>
                 </div>
 
                 <div class="form-group">
                   <label for="post_description">Description</label>
                   <textarea
-                    v-model="client.description"
                     id="post_description"
+                    v-model="client.description"
                     class="form-control"
                     placeholder="Enter Description ..."
                   ></textarea>
@@ -140,16 +140,13 @@
                     class="custom-file-container"
                     data-upload-id="myFirstImage"
                   >
-                    <label
-                      >Upload Client Logo
+                    <label>Upload Client Logo
                       <a
                         id="brand_image"
                         href="javascript:void(0)"
                         class="custom-file-container__image-clear"
                         title="Clear Image"
-                        >x</a
-                      ></label
-                    >
+                      >x</a></label>
                     <label class="custom-file-container__custom-file">
                       <input
                         type="file"
@@ -171,17 +168,22 @@
                 </div>
 
                 <div class="form-group">
-                  <label for="is_published" class="col-form-label"
-                    >Publishing Status</label
-                  >
+                  <label
+                    for="is_published"
+                    class="col-form-label"
+                  >Publishing Status</label>
                   <div>
                     <select
-                      v-model="client.is_published"
                       id="is_published"
+                      v-model="client.is_published"
                       class="form-select"
                     >
-                      <option selected value="1">Published</option>
-                      <option value="0">Not Published</option>
+                      <option selected value="1">
+                        Published
+                      </option>
+                      <option value="0">
+                        Not Published
+                      </option>
                     </select>
                   </div>
 
@@ -209,31 +211,31 @@
   </div>
 </template>
 <script setup>
-import { onMounted, reactive, watchEffect } from "vue";
+import { onMounted, reactive, watchEffect } from 'vue';
 
-import { useRoute } from "vue-router";
-import useClients from "@/composables/clients";
-import { useForm, useField, defineRule } from "vee-validate";
-import { required, min } from "@/validation/rules";
-import FileUploadWithPreview from "file-upload-with-preview";
-import "../../assets/sass/forms/file-upload-with-preview.min.css";
+import { useRoute } from 'vue-router';
+import useClients from '@/composables/clients';
+import { useForm, useField, defineRule } from 'vee-validate';
+import { required, min } from '@/validation/rules';
+import FileUploadWithPreview from 'file-upload-with-preview';
+import '../../assets/sass/forms/file-upload-with-preview.min.css';
 
 
 
-import { useMeta } from "../../composables/use-meta";
-useMeta({ title: "Edit Client Category" });
+import { useMeta } from '../../composables/use-meta';
+useMeta({ title: 'Edit Client Category' });
 
-defineRule("required", required);
-defineRule("min", min);
+defineRule('required', required);
+defineRule('min', min);
 
 // Define a validation schema
 const schema = {
-  name: "required|min:3",
-  phone: "required|min:3",
-  email: "required|min:3",
-  address: "required|min:3",
-  description: "required|min:3",
-  is_published: "required",
+  name: 'required|min:3',
+  phone: 'required|min:3',
+  email: 'required|min:3',
+  address: 'required|min:3',
+  description: 'required|min:3',
+  is_published: 'required',
 };
 
 // Create a form context with the validation schema
@@ -249,15 +251,15 @@ const {
   getClientList,
 } = useClients();
 
-const { value: name } = useField("name", null, { initialValue: "" });
-const { value: phone } = useField("phone", null, { initialValue: "" });
-const { value: email } = useField("email", null, { initialValue: "" });
-const { value: address } = useField("address", null, { initialValue: "" });
-const { value: description } = useField("description", null, {
-  initialValue: "",
+const { value: name } = useField('name', null, { initialValue: '' });
+const { value: phone } = useField('phone', null, { initialValue: '' });
+const { value: email } = useField('email', null, { initialValue: '' });
+const { value: address } = useField('address', null, { initialValue: '' });
+const { value: description } = useField('description', null, {
+  initialValue: '',
 });
-const { value: is_published } = useField("is_published", null, {
-  initialValue: "",
+const { value: is_published } = useField('is_published', null, {
+  initialValue: '',
 });
 
 const client = reactive({
@@ -286,18 +288,18 @@ onMounted(() => {
       const mainImagePath = postData.value.main_image_path;
 
       // Define the variable
-      const mainImage = "/storage/" + mainImagePath;
+      const mainImage = '/storage/' + mainImagePath;
 
       // Create the configuration object with the variable value
       const fileUploadConfig = {
         images: {
           baseImage: mainImage,
-          backgroundImage: "",
+          backgroundImage: '',
         },
       };
 
       // Pass the configuration object to FileUploadWithPreview
-      new FileUploadWithPreview("myFirstImage", fileUploadConfig);
+      new FileUploadWithPreview('myFirstImage', fileUploadConfig);
     }
   });
 });

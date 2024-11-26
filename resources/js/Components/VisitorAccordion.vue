@@ -1,10 +1,5 @@
 <template>
-
 </template>
-
-<style scoped>
-
-</style>
 
 <script>
 export default {
@@ -12,12 +7,16 @@ export default {
     props: {
         stats: {
             type: Object,
-            required: true
+            required: true,
         },
         dates: {
             type: Object,
-            required: true
-        }
-    }
-}
+            required: true,
+        },
+    },
+};
 </script>
+
+<style scoped>
+
+</style>

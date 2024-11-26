@@ -1,9 +1,9 @@
 <template>
-    <div :class="[$store.state.layout_style, $store.state.menu_style]">
-        <!-- <component v-bind:is="layout"></component> -->
-        <!-- :is="$route.meta.layout || 'div'" -->
-        <component v-bind:is="layout"></component>
-    </div>
+  <div :class="[$store.state.layout_style, $store.state.menu_style]">
+    <!-- <component v-bind:is="layout"></component> -->
+    <!-- :is="$route.meta.layout || 'div'" -->
+    <component :is="layout" />
+  </div>
 </template>
 <script setup>
 import { computed } from 'vue';
@@ -25,7 +25,7 @@ export default {
     components: {
         app: appLayout,
         auth: authLayout,
-        frontend: publicLayout
+        frontend: publicLayout,
     },
 };
 </script>

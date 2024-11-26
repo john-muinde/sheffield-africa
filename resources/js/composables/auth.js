@@ -1,31 +1,31 @@
-import { useRouter } from "vue-router";
-import { AbilityBuilder, Ability } from "@casl/ability";
-import { ref, reactive, getCurrentInstance } from "vue";
-import store from "../store";
-import { apiRequest } from "../utils/api";
+import { useRouter } from 'vue-router';
+import { AbilityBuilder, Ability } from '@casl/ability';
+import { ref, reactive, getCurrentInstance } from 'vue';
+import store from '../store';
+import { apiRequest } from '../utils/api';
 
 // import router
-import router from "../router";
+import router from '../router';
 
 export default function useAuth() {
     let user = ref({
-        name: "",
-        email: "",
+        name: '',
+        email: '',
     });
     const processing = ref(false);
     const validationErrors = ref({});
 
     const loginForm = reactive({
-        email: "",
-        password: "",
+        email: '',
+        password: '',
         remember: false,
     });
 
     const registerForm = reactive({
-        name: "",
-        email: "",
-        password: "",
-        password_confirmation: "",
+        name: '',
+        email: '',
+        password: '',
+        password_confirmation: '',
     });
 
     const submitLogin = async () => {
@@ -35,10 +35,10 @@ export default function useAuth() {
         validationErrors.value = {};
 
         try {
-            await apiRequest("post", `/login`, loginForm);
-            await store.dispatch("auth/getUser");
-            showToast("success", "Login successfully");
-            await router.push({ name: "frontend.myaccount" });
+            await apiRequest('post', '/login', loginForm);
+            await store.dispatch('auth/getUser');
+            showToast('success', 'Login successfully');
+            await router.push({ name: 'frontend.myaccount' });
         } catch (errors) {
             validationErrors.value = errors;
         } finally {
@@ -53,9 +53,9 @@ export default function useAuth() {
         validationErrors.value = {};
 
         try {
-            await apiRequest("post", "/register", registerForm);
-            showToast("success", "Registration successfully");
-            await router.push({ name: "auth.login" });
+            await apiRequest('post', '/register', registerForm);
+            showToast('success', 'Registration successfully');
+            await router.push({ name: 'auth.login' });
         } catch (errors) {
             validationErrors.value = errors;
         } finally {
@@ -65,7 +65,7 @@ export default function useAuth() {
 
     const submitLoginAdmin = async () => {
         if (processing.value) {
-            showToast("Processing", "error");
+            showToast('Processing', 'error');
             return;
         }
 
@@ -73,12 +73,12 @@ export default function useAuth() {
         validationErrors.value = {};
 
         try {
-            const response = await apiRequest("post", "/login", loginForm);
-            localStorage.setItem("token", response.token);
-            localStorage.setItem("user", JSON.stringify(response.user));
-            await store.dispatch("auth/getUser");
-            showToast("Login successfully", "success");
-            await router.push({ name: "admin.dashboard" });
+            const response = await apiRequest('post', '/login', loginForm);
+            localStorage.setItem('token', response.token);
+            localStorage.setItem('user', JSON.stringify(response.user));
+            await store.dispatch('auth/getUser');
+            showToast('Login successfully', 'success');
+            await router.push({ name: 'admin.dashboard' });
         } catch (errors) {
             validationErrors.value = errors;
         } finally {
@@ -93,9 +93,9 @@ export default function useAuth() {
         validationErrors.value = {};
 
         try {
-            await apiRequest("post", "/register", registerForm);
-            showToast("Registration successfully", "success");
-            await router.push({ name: "admin.dashboard" });
+            await apiRequest('post', '/register', registerForm);
+            showToast('Registration successfully', 'success');
+            await router.push({ name: 'admin.dashboard' });
         } catch (errors) {
             validationErrors.value = errors;
         } finally {
@@ -109,8 +109,8 @@ export default function useAuth() {
     };
 
     const getUser = async () => {
-        if (store.getters["auth/authenticated"]) {
-            await store.dispatch("auth/getUser");
+        if (store.getters['auth/authenticated']) {
+            await store.dispatch('auth/getUser');
             await loginUser();
         }
     };
@@ -121,11 +121,11 @@ export default function useAuth() {
         processing.value = true;
 
         try {
-            await apiRequest("post", "/logout");
-            user.value.name = "";
-            user.value.email = "";
-            store.dispatch("auth/logout");
-            router.push({ name: "frontend.login" });
+            await apiRequest('post', '/logout');
+            user.value.name = '';
+            user.value.email = '';
+            store.dispatch('auth/logout');
+            router.push({ name: 'frontend.login' });
         } catch (errors) {
             validationErrors.value = errors;
         } finally {
@@ -139,14 +139,14 @@ export default function useAuth() {
         processing.value = true;
 
         try {
-            await apiRequest("post", "/logout");
-            user.name = "";
-            user.email = "";
-            store.dispatch("auth/logout");
-            showToast("Logout successfully", "success");
+            await apiRequest('post', '/logout');
+            user.value.name = '';
+            user.value.email = '';
+            store.dispatch('auth/logout');
+            showToast('Logout successfully', 'success');
             router.replace({
-                name: "admin.login",
-                meta: { layout: "auth" },
+                name: 'admin.login',
+                meta: { layout: 'auth' },
                 replace: true,
             });
         } catch (errors) {
@@ -158,7 +158,7 @@ export default function useAuth() {
 
     const getAbilities = async () => {
         try {
-            const response = await apiRequest("get", "/api/abilities");
+            const response = await apiRequest('get', '/api/abilities');
             const permissions = response;
             const { can, rules } = new AbilityBuilder(Ability);
 

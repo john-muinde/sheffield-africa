@@ -1,11 +1,8 @@
 <script></script>
 
-<style></style>
-
 <template>
-
-      <header class="header header-6">
-            <!-- <div class="header-top">
+  <header class="header header-6">
+    <!-- <div class="header-top">
                 <div class="container">
                     <div class="header-left">
                         <ul class="top-menu top-link-menu d-none d-md-block">
@@ -48,125 +45,132 @@
                     </div>
                 </div>
             </div> -->
-            <div class="header-middle mt-2">
-                <div class="container">
-                    <div class="header-left">
-                        <div class="header-search header-search-extended header-search-visible d-none d-lg-block">
-                            <a href="#" class="search-toggle" role="button"><i class="icon-search"></i></a>
-                            <form action="#" method="get">
-                                <div class="header-search-wrapper search-wrapper-wide">
-                                    <label for="q" class="sr-only">Search</label>
-                                    <button class="btn btn-primary" type="submit"><i class="icon-search"></i></button>
-                                    <input type="search" class="form-control" name="q" id="q" placeholder="Search product ..." required="">
-                                </div><!-- End .header-search-wrapper -->
-                            </form>
-                        </div><!-- End .header-search -->
-                    </div>
-                    <div class="header-center">
-                        <router-link to="/" class="logo"
-                      >
-                        <img
-                          src="../assets/images/logo.png"
-                          alt="Molla Logo"
-                          width="285"
-                          height="auto"
-                        />
-                      </router-link>
-                    </div><!-- End .header-left -->
+    <div class="header-middle mt-2">
+      <div class="container">
+        <div class="header-left">
+          <div class="header-search header-search-extended header-search-visible d-none d-lg-block">
+            <a href="#" class="search-toggle" role="button"><i class="icon-search"></i></a>
+            <form action="#" method="get">
+              <div class="header-search-wrapper search-wrapper-wide">
+                <label for="q" class="sr-only">Search</label>
+                <button class="btn btn-primary" type="submit">
+                  <i class="icon-search"></i>
+                </button>
+                <input
+                  id="q"
+                  type="search"
+                  class="form-control"
+                  name="q"
+                  placeholder="Search product ..."
+                  required=""
+                />
+              </div><!-- End .header-search-wrapper -->
+            </form>
+          </div><!-- End .header-search -->
+        </div>
+        <div class="header-center">
+          <router-link
+            to="/"
+            class="logo"
+          >
+            <img
+              src="../assets/images/logo.png"
+              alt="Molla Logo"
+              width="285"
+              height="auto"
+            />
+          </router-link>
+        </div><!-- End .header-left -->
 
-                    <div class="header-right">
-                        <a href="wishlist.html" class="wishlist-link">
-                            <i class="icon-heart-o"></i>
-                            <span class="wishlist-count">3</span>
-                            <span class="wishlist-txt">My Wishlist</span>
-                        </a>
+        <div class="header-right">
+          <a href="wishlist.html" class="wishlist-link">
+            <i class="icon-heart-o"></i>
+            <span class="wishlist-count">3</span>
+            <span class="wishlist-txt">My Wishlist</span>
+          </a>
 
-                        <div class="dropdown cart-dropdown">
-                            <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
-                                <i class="icon-shopping-cart"></i>
-                                <span class="cart-count">2</span>
-                                <span class="cart-txt">$ 164,00</span>
-                            </a>
+          <div class="dropdown cart-dropdown">
+            <a
+              href="#"
+              class="dropdown-toggle"
+              role="button"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+              data-display="static"
+            >
+              <i class="icon-shopping-cart"></i>
+              <span class="cart-count">2</span>
+              <span class="cart-txt">$ 164,00</span>
+            </a>
 
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <div class="dropdown-cart-products">
+            <div class="dropdown-menu dropdown-menu-right">
+              <div class="dropdown-cart-products">
+              </div><!-- End .cart-product -->
 
+              <div class="dropdown-cart-total">
+                <span>Total</span>
 
+                <span class="cart-total-price">2 Items</span>
+              </div><!-- End .dropdown-cart-total -->
 
-                                </div><!-- End .cart-product -->
-
-                                <div class="dropdown-cart-total">
-                                    <span>Total</span>
-
-                                    <span class="cart-total-price">2 Items</span>
-                                </div><!-- End .dropdown-cart-total -->
-
-                                <div class="dropdown-cart-action">
-                                    <a href="cart.html" class="btn btn-primary">View Cart</a>
-                                    <a href="checkout.html" class="btn btn-outline-primary-2"><span>Checkout</span><i class="icon-long-arrow-right"></i></a>
-                                </div><!-- End .dropdown-cart-total -->
-                            </div><!-- End .dropdown-menu -->
-                        </div><!-- End .cart-dropdown -->
-                    </div>
-                </div><!-- End .container -->
-            </div><!-- End .header-middle -->
-
-
-        </header>
+              <div class="dropdown-cart-action">
+                <a href="cart.html" class="btn btn-primary">View Cart</a>
+                <a href="checkout.html" class="btn btn-outline-primary-2"><span>Checkout</span><i class="icon-long-arrow-right"></i></a>
+              </div><!-- End .dropdown-cart-total -->
+            </div><!-- End .dropdown-menu -->
+          </div><!-- End .cart-dropdown -->
+        </div>
+      </div><!-- End .container -->
+    </div><!-- End .header-middle -->
+  </header>
 
   <div class="page-wrapper">
     <main class="main">
-
       <div class="container">
-
         <div class="row justify-content-center mt-1">
-                    <div class="col-md-6 col-lg-4">
-                      <div class="banner">
-                        <a href="/commercial-kitchen">
-                          <img class="home_image" src="assets/images/homepage/commercial_kitchen.jpg" alt="Banner">
-                        </a>
+          <div class="col-md-6 col-lg-4">
+            <div class="banner">
+              <a href="/commercial-kitchen">
+                <img class="home_image" src="assets/images/homepage/commercial_kitchen.jpg" alt="Banner" />
+              </a>
 
-                        <!-- <div class="banner-content">
+              <!-- <div class="banner-content">
                           <h4 class="banner-subtitle">Quisque a lectus</h4>
                           <h3 class="banner-title">Praesent elementum <br>hendrerit tortor.</h3>
                           <a href="#" class="banner-link">Click here</a>
                         </div> -->
-                      </div><!-- End .banner -->
-                    </div><!-- End .col-md-6 -->
+            </div><!-- End .banner -->
+          </div><!-- End .col-md-6 -->
 
-                    <div class="col-md-6 col-lg-4">
-                      <div class="banner">
-                        <a href="/laundry">
-                          <img class="home_image" src="assets/images/homepage/laundry.jpg" alt="Banner">
-                        </a>
+          <div class="col-md-6 col-lg-4">
+            <div class="banner">
+              <a href="/laundry">
+                <img class="home_image" src="assets/images/homepage/laundry.jpg" alt="Banner" />
+              </a>
 
-                       <!-- <div class="banner-content">
+              <!-- <div class="banner-content">
                           <h4 class="banner-subtitle">Quisque a lectus</h4>
                           <h3 class="banner-title">Praesent elementum <br>hendrerit tortor.</h3>
                           <a href="#" class="banner-link">Click here</a>
                         </div> -->
-                      </div><!-- End .banner -->
-                    </div><!-- End .col-md-6 -->
+            </div><!-- End .banner -->
+          </div><!-- End .col-md-6 -->
 
-                    <div class="col-md-6 col-lg-4">
-                      <div class="banner">
-                        <a href="cold-room">
-                          <img class="home_image" src="assets/images/homepage/cold_storage.jpg" alt="Laundry">
-                        </a>
+          <div class="col-md-6 col-lg-4">
+            <div class="banner">
+              <a href="cold-room">
+                <img class="home_image" src="assets/images/homepage/cold_storage.jpg" alt="Laundry" />
+              </a>
 
-                        <!-- <div class="banner-content">
+              <!-- <div class="banner-content">
                           <h4 class="banner-subtitle">Quisque a lectus</h4>
                           <h3 class="banner-title">Praesent elementum <br>hendrerit tortor.</h3>
                           <a href="#" class="banner-link">Click here</a>
                         </div> -->
-                      </div><!-- End .banner -->
-                    </div><!-- End .col-md-6 -->
-                  </div>
-
-
-
-
-
+            </div><!-- End .banner -->
+          </div><!-- End .col-md-6 -->
+        </div>
       </div><!-- End .container -->
 
 
@@ -175,14 +179,14 @@
       <div class="container-fluid banner-blogs">
         <div class="row">
           <div class="col-xl-12">
-
             <!-- End .row -->
 
             <!-- End .mb-5 -->
 
             <div
               class="icon-boxes-container"
-              :style="{ backgroundImage: 'url(/assets/images/sheffield_stainless_steel_background.jpg)' }">
+              :style="{ backgroundImage: 'url(/assets/images/sheffield_stainless_steel_background.jpg)' }"
+            >
               <div class="container-fluid">
                 <div class="row">
                   <div class="col-sm-6 col-lg-3">
@@ -191,7 +195,9 @@
                         <i class="icon-rocket"></i>
                       </span>
                       <div class="icon-box-content">
-                        <h3 class="icon-box-title">Shipping</h3>
+                        <h3 class="icon-box-title">
+                          Shipping
+                        </h3>
                         <!-- End .icon-box-title -->
                         <p>Choose your prefferd shipping method</p>
                       </div>
@@ -208,7 +214,9 @@
                       </span>
 
                       <div class="icon-box-content">
-                        <h3 class="icon-box-title">30 Days Return</h3>
+                        <h3 class="icon-box-title">
+                          30 Days Return
+                        </h3>
                         <!-- End .icon-box-title -->
                         <p>Simply return it within 30 days for an exchange</p>
                       </div>
@@ -225,7 +233,9 @@
                       </span>
 
                       <div class="icon-box-content">
-                        <h3 class="icon-box-title">Payment Secure</h3>
+                        <h3 class="icon-box-title">
+                          Payment Secure
+                        </h3>
                         <!-- End .icon-box-title -->
                         <p>Contact us 24 hours a day, 7 days a week</p>
                       </div>
@@ -242,7 +252,9 @@
                       </span>
 
                       <div class="icon-box-content">
-                        <h3 class="icon-box-title">24X7 Support</h3>
+                        <h3 class="icon-box-title">
+                          24X7 Support
+                        </h3>
                         <!-- End .icon-box-title -->
                         <p>Contact us 24 hours a day, 7 days a week</p>
                       </div>
@@ -281,9 +293,10 @@
                           <a href="#">We are Innovative </a>
                         </h2>
                         <!-- End .banner-title -->
-                        <a href="#" class="banner-link"
-                          >View More <i class="icon-long-arrow-right"></i
-                        ></a>
+                        <a
+                          href="#"
+                          class="banner-link"
+                        >View More <i class="icon-long-arrow-right"></i></a>
                       </div>
                       <!-- End .banner-content -->
                     </div>
@@ -309,9 +322,10 @@
                           <a href="#">We are Innovative </a>
                         </h2>
                         <!-- End .banner-title -->
-                        <a href="#" class="banner-link"
-                          >View More <i class="icon-long-arrow-right"></i
-                        ></a>
+                        <a
+                          href="#"
+                          class="banner-link"
+                        >View More <i class="icon-long-arrow-right"></i></a>
                       </div>
                       <!-- End .banner-content -->
                     </div>
@@ -337,9 +351,10 @@
                           <a href="#">Sheffield's CSR</a>
                         </h2>
                         <!-- End .banner-title -->
-                        <a href="#" class="banner-link"
-                          >View More<i class="icon-long-arrow-right"></i
-                        ></a>
+                        <a
+                          href="#"
+                          class="banner-link"
+                        >View More<i class="icon-long-arrow-right"></i></a>
                       </div>
                       <!-- End .banner-content -->
                     </div>
@@ -364,9 +379,10 @@
                           <a href="#">Sheffield's CSR</a>
                         </h2>
                         <!-- End .banner-title -->
-                        <a href="#" class="banner-link"
-                          >View More<i class="icon-long-arrow-right"></i
-                        ></a>
+                        <a
+                          href="#"
+                          class="banner-link"
+                        >View More<i class="icon-long-arrow-right"></i></a>
                       </div>
                       <!-- End .banner-content -->
                     </div>
@@ -381,8 +397,6 @@
               <!-- End .col-lg-3 col-xxl-2 -->
             </div>
             <!-- End .mb-5 -->
-
-
           </div>
           <!-- End .col-lg-9 col-xxl-10 -->
         </div>
@@ -496,11 +510,11 @@
                     return {
                       id: child.id,
                       name: child.name,
-                      slug: child.name.toLowerCase().replace(/\s+/g, '-')
+                      slug: child.name.toLowerCase().replace(/\s+/g, '-'),
                     };
-                  })
-                }
-              ]
+                  }),
+                },
+              ],
             };
 
           }));
@@ -523,40 +537,40 @@
       mobileImage: basePath + 'frontend/images/slider/slider1-mobile.jpg',
       alt: 'Commercial Kitchen Solutions',
       intro : {
-        title : "Commercial <span>Kitchen</span> <br />Solutions",
-        subtitle : "We offer the best kitchen solutions",
-        url : "#",
-      }
+        title : 'Commercial <span>Kitchen</span> <br />Solutions',
+        subtitle : 'We offer the best kitchen solutions',
+        url : '#',
+      },
     },
     {
       image: basePath + 'frontend/images/slider/slider2.webp',
       mobileImage: basePath + 'frontend/images/slider/slider2-mobile.jpg',
       alt: 'Commercial Cold Room Solutions',
       intro : {
-        title : " Commercial <span>Cold  <br />Room</span> Solutions",
-        subtitle : "We offer the best cold room solutions",
-        url : "#",
-      }
+        title : ' Commercial <span>Cold  <br />Room</span> Solutions',
+        subtitle : 'We offer the best cold room solutions',
+        url : '#',
+      },
     },
     {
       image: basePath + 'frontend/images/slider/slider1.webp',
       mobileImage: basePath + 'frontend/images/slider/slider3-mobile.jpg',
       alt: 'Commercial Laundry Solutions',
       intro : {
-        title : "Commercial <span>Laundry</span> <br /> Solutions",
-        subtitle : "We offer the best laundry solutions",
-        url : "#",
-      }
+        title : 'Commercial <span>Laundry</span> <br /> Solutions',
+        subtitle : 'We offer the best laundry solutions',
+        url : '#',
+      },
     },
     {
       image: basePath + 'frontend/images/slider/slider2.webp',
       mobileImage: basePath + 'frontend/images/slider/slider4-mobile.jpg',
       alt: 'Commercial Health Care Solutions',
       intro : {
-        title : "Commercial <span>Health <br /> Care</span> Solutions",
-        subtitle : "We offer the best health care solutions",
-        url : "#",
-      }
+        title : 'Commercial <span>Health <br /> Care</span> Solutions',
+        subtitle : 'We offer the best health care solutions',
+        url : '#',
+      },
     },
 ];
 
@@ -589,7 +603,7 @@
       1600: {
           itemsToShow:5,
           snapAlign: 'start',
-      }
+      },
   };
 
 
@@ -598,7 +612,7 @@ const testimonials = [
 
      {
       image: basePath + 'frontend/images/testimonials/user-2.jpg',
-      message: "As a professional chef, I understand the importance of having a reliable commercial kitchen. Sheffield's commercial kitchen solutions have exceeded my expectations. The equipment is durable and has improved the efficiency of my kitchen. I highly recommend Sheffield to anyone in need of commercial kitchen solutions.",
+      message: 'As a professional chef, I understand the importance of having a reliable commercial kitchen. Sheffield\'s commercial kitchen solutions have exceeded my expectations. The equipment is durable and has improved the efficiency of my kitchen. I highly recommend Sheffield to anyone in need of commercial kitchen solutions.',
       name: 'Dan Njoroge',
       company: 'Company X',
       job_title: 'Customer',
@@ -606,7 +620,7 @@ const testimonials = [
 
     {
       image: basePath + 'frontend/images/testimonials/user-1.jpg',
-      message: "I was extremely impressed with Sheffield's commercial cold room solutions. As a restaurant owner, having reliable refrigeration is crucial to the success of my business. Sheffield's team delivered and installed the cold room in a timely manner and it has been working perfectly ever since.",
+      message: 'I was extremely impressed with Sheffield\'s commercial cold room solutions. As a restaurant owner, having reliable refrigeration is crucial to the success of my business. Sheffield\'s team delivered and installed the cold room in a timely manner and it has been working perfectly ever since.',
       name: 'Dan Njoroge',
       company: 'Company X',
       job_title: 'Customer',
@@ -614,7 +628,7 @@ const testimonials = [
 
     {
       image: basePath + 'frontend/images/testimonials/user-2.jpg',
-      message: "Sheffield's commercial healthcare solutions have been a game changer for our facility. Their team helped us design and install the perfect healthcare solution that is both efficient and reliable. We can now focus on providing quality care to our patients without worrying about equipment malfunctions.",
+      message: 'Sheffield\'s commercial healthcare solutions have been a game changer for our facility. Their team helped us design and install the perfect healthcare solution that is both efficient and reliable. We can now focus on providing quality care to our patients without worrying about equipment malfunctions.',
       name: 'Dan Njoroge',
       company: 'Company X',
       job_title: 'Customer',
@@ -622,7 +636,7 @@ const testimonials = [
 
     {
       image: basePath + 'frontend/images/testimonials/user-1.jpg',
-      message: "I recently purchased a commercial laundry solution from Sheffield and I couldn't be happier with the results. The laundry solution is energy-efficient and has dramatically reduced our utility bills. The team at Sheffield were knowledgeable and professional throughout the entire process.",
+      message: 'I recently purchased a commercial laundry solution from Sheffield and I couldn\'t be happier with the results. The laundry solution is energy-efficient and has dramatically reduced our utility bills. The team at Sheffield were knowledgeable and professional throughout the entire process.',
       name: 'Dan Njoroge',
       company: 'Company X',
       job_title: 'Customer',
@@ -634,8 +648,8 @@ const data = () => {
     items,
     testimonials,
     //isDesktop: window.innerWidth >= 768
-  }
-}
+  };
+};
 
 const isDesktop = ref(window.innerWidth >= 768);
 
@@ -713,13 +727,13 @@ const getSubset = (items, columnIndex, totalColumns) => {
   const startIndex = (columnIndex - 1) * subsetSize;
   const endIndex = startIndex + subsetSize;
   return items.slice(startIndex, endIndex);
-}
+};
 
 
 const adjustTheClass1Height = () => {
   const carouselHeight = this.$refs.carousel.$el.offsetHeight;
   this.$refs.carousel.$el.closest('.theClass1-wrapper').style.height = carouselHeight + 'px';
-}
+};
 
 /////////////
 
@@ -808,6 +822,8 @@ onMounted(async () => {
 
 
 </script>
+
+<style></style>
 
 <style>
 

@@ -1,206 +1,302 @@
 <template>
-    <div class="layout-px-spacing apps-calendar">
-        <teleport to="#breadcrumb">
-            <ul class="navbar-nav flex-row">
-                <li>
-                    <div class="page-header">
-                        <nav class="breadcrumb-one" aria-label="breadcrumb">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="javascript:;">Apps</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">
-                                    <span>Calendar</span>
-                                </li>
-                            </ol>
-                        </nav>
-                    </div>
+  <div class="layout-px-spacing apps-calendar">
+    <teleport to="#breadcrumb">
+      <ul class="navbar-nav flex-row">
+        <li>
+          <div class="page-header">
+            <nav class="breadcrumb-one" aria-label="breadcrumb">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                  <a href="javascript:;">Apps</a>
                 </li>
-            </ul>
-        </teleport>
+                <li class="breadcrumb-item active" aria-current="page">
+                  <span>Calendar</span>
+                </li>
+              </ol>
+            </nav>
+          </div>
+        </li>
+      </ul>
+    </teleport>
 
-        <div class="row layout-top-spacing" id="cancel-row">
-            <div class="col-xl-12 col-lg-12 col-md-12">
-                <div class="statbox panel box box-shadow">
-                    <div class="panel-body">
-                        <div class="calendar-upper-section">
-                            <div class="row">
-                                <div class="col-md-8 col-12">
-                                    <div class="labels text-md-start text-center">
-                                        <p class="label label-primary">Work</p>
-                                        <p class="label label-warning">Travel</p>
-                                        <p class="label label-success">Personal</p>
-                                        <p class="label label-danger">Important</p>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 col-12">
-                                    <form class="form-horizontal mt-md-0 mt-3 text-md-end text-center">
-                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addEventsModal" @click="edit_event()">
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                width="24"
-                                                height="24"
-                                                viewBox="0 0 24 24"
-                                                fill="none"
-                                                stroke="currentColor"
-                                                stroke-width="2"
-                                                stroke-linecap="round"
-                                                stroke-linejoin="round"
-                                                class="feather feather-calendar me-2"
-                                            >
-                                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-                                                <line x1="16" y1="2" x2="16" y2="6"></line>
-                                                <line x1="8" y1="2" x2="8" y2="6"></line>
-                                                <line x1="3" y1="10" x2="21" y2="10"></line>
-                                            </svg>
-                                            Add Event
-                                        </button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-
-                        <FullCalendar ref="calendar" :key="randomKey" :options="options">
-                            <template v-slot:eventContent="arg">
-                                <div class="fc-event-main-frame">
-                                    <div class="fc-event-time">{{ arg.timeText }}</div>
-                                    <div class="fc-event-title-container">
-                                        <div class="fc-event-title fc-sticky">
-                                            {{ arg.event.title }}
-                                        </div>
-                                    </div>
-
-                                    <div class="calendar-tlp">
-                                        <div class="p-2 bg-dark text-white text-start text-wrap">
-                                            {{ arg.timeText + ' : ' + arg.event.title }}
-                                        </div>
-                                        <div class="p-2 text-start text-wrap">
-                                            {{ arg.event.extendedProps ? arg.event.extendedProps.description : '' }}
-                                        </div>
-                                    </div>
-                                </div>
-                            </template>
-                        </FullCalendar>
-                    </div>
+    <div id="cancel-row" class="row layout-top-spacing">
+      <div class="col-xl-12 col-lg-12 col-md-12">
+        <div class="statbox panel box box-shadow">
+          <div class="panel-body">
+            <div class="calendar-upper-section">
+              <div class="row">
+                <div class="col-md-8 col-12">
+                  <div class="labels text-md-start text-center">
+                    <p class="label label-primary">
+                      Work
+                    </p>
+                    <p class="label label-warning">
+                      Travel
+                    </p>
+                    <p class="label label-success">
+                      Personal
+                    </p>
+                    <p class="label label-danger">
+                      Important
+                    </p>
+                  </div>
                 </div>
+                <div class="col-md-4 col-12">
+                  <form class="form-horizontal mt-md-0 mt-3 text-md-end text-center">
+                    <button
+                      type="button"
+                      class="btn btn-primary"
+                      data-bs-toggle="modal"
+                      data-bs-target="#addEventsModal"
+                      @click="edit_event()"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class="feather feather-calendar me-2"
+                      >
+                        <rect
+                          x="3"
+                          y="4"
+                          width="18"
+                          height="18"
+                          rx="2"
+                          ry="2"
+                        />
+                        <line
+                          x1="16"
+                          y1="2"
+                          x2="16"
+                          y2="6"
+                        />
+                        <line
+                          x1="8"
+                          y1="2"
+                          x2="8"
+                          y2="6"
+                        />
+                        <line
+                          x1="3"
+                          y1="10"
+                          x2="21"
+                          y2="10"
+                        />
+                      </svg>
+                      Add Event
+                    </button>
+                  </form>
+                </div>
+              </div>
             </div>
 
-            <!-- The Modal -->
-            <div id="addEventsModal" class="modal fade" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-md modal-dialog-centered">
-                    <div class="modal-content mailbox-popup">
-                        <div class="modal-header">
-                            <h5 class="modal-title">
-                                {{ params.id ? 'Edit Event' : 'Add Event' }}
-                            </h5>
-                            <button type="button" data-dismiss="modal" data-bs-dismiss="modal" aria-label="Close" class="btn-close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group mb-4">
-                                        <label for="start-date" class="">Event Title:</label>
-                                        <input type="text" v-model="params.title" class="form-control" placeholder="Enter Title" />
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6 col-sm-6 col-12">
-                                    <div class="form-group start-date mb-4">
-                                        <label>From:</label>
-                                        <flat-pickr
-                                            v-model="params.start"
-                                            :config="{
-                                                enableTime: true,
-                                                dateFormat: 'Y-m-d H:i:S',
-                                                minDate: min_date_start,
-                                            }"
-                                            @on-change="start_date_change"
-                                            class="form-control flatpickr active"
-                                            placeholder="Start Date"
-                                        ></flat-pickr>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-sm-6 col-12">
-                                    <div class="form-group end-date mb-4">
-                                        <label for="end-date" class="">To:</label>
-                                        <flat-pickr
-                                            v-model="params.end"
-                                            :config="{
-                                                enableTime: true,
-                                                dateFormat: 'Y-m-d H:i:S',
-                                                minDate: min_date_end,
-                                            }"
-                                            @on-change="end_date_change"
-                                            class="form-control flatpickr active"
-                                            placeholder="End Date"
-                                        ></flat-pickr>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group mb-4">
-                                        <label class="">Event Description:</label>
-                                        <textarea v-model="params.description" class="form-control" placeholder="Enter Description" rows="3"></textarea>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="event-badge">
-                                        <label>Badge:</label>
-                                        <div class="d-sm-flex d-block">
-                                            <div class="radio-classic radio-primary me-2 custom-control custom-radio">
-                                                <input v-model="params.className" type="radio" value="bg-primary" name="marker" class="custom-control-input" id="rdoWork" /><label
-                                                    class="custom-control-label"
-                                                    for="rdoWork"
-                                                >
-                                                    Work
-                                                </label>
-                                            </div>
-
-                                            <div class="radio-classic radio-warning me-2 custom-control custom-radio">
-                                                <input v-model="params.className" type="radio" value="bg-warning" name="marker" class="custom-control-input" id="rdoTravel" /><label
-                                                    class="custom-control-label"
-                                                    for="rdoTravel"
-                                                >
-                                                    Travel
-                                                </label>
-                                            </div>
-
-                                            <div class="radio-classic radio-success me-2 custom-control custom-radio">
-                                                <input v-model="params.className" type="radio" value="bg-success" name="marker" class="custom-control-input" id="rdoPersonal" /><label
-                                                    class="custom-control-label"
-                                                    for="rdoPersonal"
-                                                >
-                                                    Personal
-                                                </label>
-                                            </div>
-
-                                            <div class="radio-classic radio-danger me-2 custom-control custom-radio">
-                                                <input v-model="params.className" type="radio" value="bg-danger" name="marker" class="custom-control-input" id="rdoImportant" /><label
-                                                    class="custom-control-label"
-                                                    for="rdoImportant"
-                                                >
-                                                    Important
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal" data-bs-dismiss="modal">Discard</button>
-                            <button type="button" class="btn btn-primary" @click="save_event()">
-                                {{ params.id ? 'Update Event' : 'Add Event' }}
-                            </button>
-                        </div>
+            <FullCalendar ref="calendar" :key="randomKey" :options="options">
+              <template #eventContent="arg">
+                <div class="fc-event-main-frame">
+                  <div class="fc-event-time">
+                    {{ arg.timeText }}
+                  </div>
+                  <div class="fc-event-title-container">
+                    <div class="fc-event-title fc-sticky">
+                      {{ arg.event.title }}
                     </div>
+                  </div>
+
+                  <div class="calendar-tlp">
+                    <div class="p-2 bg-dark text-white text-start text-wrap">
+                      {{ arg.timeText + ' : ' + arg.event.title }}
+                    </div>
+                    <div class="p-2 text-start text-wrap">
+                      {{ arg.event.extendedProps ? arg.event.extendedProps.description : '' }}
+                    </div>
+                  </div>
                 </div>
-            </div>
+              </template>
+            </FullCalendar>
+          </div>
         </div>
+      </div>
+
+      <!-- The Modal -->
+      <div
+        id="addEventsModal"
+        class="modal fade"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-md modal-dialog-centered">
+          <div class="modal-content mailbox-popup">
+            <div class="modal-header">
+              <h5 class="modal-title">
+                {{ params.id ? 'Edit Event' : 'Add Event' }}
+              </h5>
+              <button
+                type="button"
+                data-dismiss="modal"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+                class="btn-close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group mb-4">
+                    <label for="start-date" class="">Event Title:</label>
+                    <input
+                      v-model="params.title"
+                      type="text"
+                      class="form-control"
+                      placeholder="Enter Title"
+                    />
+                  </div>
+                </div>
+
+                <div class="col-md-6 col-sm-6 col-12">
+                  <div class="form-group start-date mb-4">
+                    <label>From:</label>
+                    <flat-pickr
+                      v-model="params.start"
+                      :config="{
+                        enableTime: true,
+                        dateFormat: 'Y-m-d H:i:S',
+                        minDate: min_date_start,
+                      }"
+                      class="form-control flatpickr active"
+                      placeholder="Start Date"
+                      @on-change="start_date_change"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-6 col-sm-6 col-12">
+                  <div class="form-group end-date mb-4">
+                    <label for="end-date" class="">To:</label>
+                    <flat-pickr
+                      v-model="params.end"
+                      :config="{
+                        enableTime: true,
+                        dateFormat: 'Y-m-d H:i:S',
+                        minDate: min_date_end,
+                      }"
+                      class="form-control flatpickr active"
+                      placeholder="End Date"
+                      @on-change="end_date_change"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group mb-4">
+                    <label class="">Event Description:</label>
+                    <textarea
+                      v-model="params.description"
+                      class="form-control"
+                      placeholder="Enter Description"
+                      rows="3"
+                    ></textarea>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="event-badge">
+                    <label>Badge:</label>
+                    <div class="d-sm-flex d-block">
+                      <div class="radio-classic radio-primary me-2 custom-control custom-radio">
+                        <input
+                          id="rdoWork"
+                          v-model="params.className"
+                          type="radio"
+                          value="bg-primary"
+                          name="marker"
+                          class="custom-control-input"
+                        /><label
+                          class="custom-control-label"
+                          for="rdoWork"
+                        >
+                          Work
+                        </label>
+                      </div>
+
+                      <div class="radio-classic radio-warning me-2 custom-control custom-radio">
+                        <input
+                          id="rdoTravel"
+                          v-model="params.className"
+                          type="radio"
+                          value="bg-warning"
+                          name="marker"
+                          class="custom-control-input"
+                        /><label
+                          class="custom-control-label"
+                          for="rdoTravel"
+                        >
+                          Travel
+                        </label>
+                      </div>
+
+                      <div class="radio-classic radio-success me-2 custom-control custom-radio">
+                        <input
+                          id="rdoPersonal"
+                          v-model="params.className"
+                          type="radio"
+                          value="bg-success"
+                          name="marker"
+                          class="custom-control-input"
+                        /><label
+                          class="custom-control-label"
+                          for="rdoPersonal"
+                        >
+                          Personal
+                        </label>
+                      </div>
+
+                      <div class="radio-classic radio-danger me-2 custom-control custom-radio">
+                        <input
+                          id="rdoImportant"
+                          v-model="params.className"
+                          type="radio"
+                          value="bg-danger"
+                          name="marker"
+                          class="custom-control-input"
+                        /><label
+                          class="custom-control-label"
+                          for="rdoImportant"
+                        >
+                          Important
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-default"
+                data-dismiss="modal"
+                data-bs-dismiss="modal"
+              >
+                Discard
+              </button>
+              <button type="button" class="btn btn-primary" @click="save_event()">
+                {{ params.id ? 'Update Event' : 'Add Event' }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 </template>
 
 <script setup>
@@ -271,7 +367,7 @@
     };
 
     const initPopup = () => {
-        addEventsModal = new window.bootstrap.Modal(document.getElementById('addEventsModal'));
+        addEventsModal.value = new window.bootstrap.Modal(document.getElementById('addEventsModal'));
     };
 
     const bind_events = () => {
@@ -431,7 +527,7 @@
             min_date_end.value = new Date();
         }
 
-        addEventsModal.show();
+        addEventsModal.value.show();
     };
 
     const save_event = () => {
@@ -477,7 +573,7 @@
         setRandomKey();
         calendar.value.getApi(); //refresh calendar
         showMessage('Event saved successfully.');
-        addEventsModal.hide();
+        addEventsModal.value.hide();
     };
 
     const setup_draggable = () => {

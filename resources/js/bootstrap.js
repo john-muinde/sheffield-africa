@@ -1,7 +1,7 @@
-import _ from "lodash";
+import _ from 'lodash';
 window._ = _;
 
-import "bootstrap";
+import 'bootstrap';
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
@@ -9,10 +9,10 @@ import "bootstrap";
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 
-import axios from "axios";
+import axios from 'axios';
 window.axios = axios;
 
-window.axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
+window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 window.axios.defaults.withCredentials = true;
 window.axios.defaults.withXSRFToken = true;
@@ -26,15 +26,15 @@ window.axios.interceptors.response.use(
             error.response?.status === 419
         ) {
             if (
-                location.pathname !== "/admin/login" ||
-                location.pathname !== "/login"
+                location.pathname !== '/admin/login' ||
+                location.pathname !== '/login'
             ) {
                 // location.assign('/login')
             }
         }
 
         return Promise.reject(error);
-    }
+    },
 );
 
 /**

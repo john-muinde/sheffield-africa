@@ -1,121 +1,168 @@
 <template>
-    <div>
-        <main class="main">
-            <div class="page-content">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-10 offset-lg-1 in-the-news-section">
-                            <h2 class="about-us-title">In the News</h2>
-                            <!-- End .title -->
-                            <router-link to="/media" class="btn btn-primary btn-round btn-shadow float-right"><i
-                                    class="icon-long-arrow-left"></i><span>Back to Media Center</span></router-link>
-                            <p class="lead about-us-lead text-primary mb-3">
-                                Media Spotlight: Sheffield Making Waves in the
-                                News
-                            </p>
+  <div>
+    <main class="main">
+      <div class="page-content">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-10 offset-lg-1 in-the-news-section">
+              <h2 class="about-us-title">
+                In the News
+              </h2>
+              <!-- End .title -->
+              <router-link to="/media" class="btn btn-primary btn-round btn-shadow float-right">
+                <i
+                  class="icon-long-arrow-left"
+                ></i><span>Back to Media Center</span>
+              </router-link>
+              <p class="lead about-us-lead text-primary mb-3">
+                Media Spotlight: Sheffield Making Waves in the
+                News
+              </p>
 
-                            <ContentState v-if="loading" type="loading" contentType="Articles In The News" />
-                            <ContentState v-if="!displayedProducts.length && !loading" type="empty"
-                                contentType="Our articles In The News" />
-                            <ContentState v-if="!!error" type="error" contentType="Articles In The News" />
+              <ContentState v-if="loading" type="loading" content-type="Articles In The News" />
+              <ContentState
+                v-if="!displayedProducts.length && !loading"
+                type="empty"
+                content-type="Our articles In The News"
+              />
+              <ContentState v-if="!!error" type="error" content-type="Articles In The News" />
 
-                            <div class="row justify-content-left" v-if="displayedProducts.length">
-                                <div class="col-12 col-md-6 col-lg-4 mb-2 blog-item"
-                                    v-for="product in displayedProducts" :key="product.id">
-                                    <div class="p-6 border rounded">
-                                        <div class="position-relative mb-2" style="height: 216px">
-                                            <a target="_blank" class="float-center" :href="product.url">
-                                                <img class="w-100 h-100 rounded" style="object-fit: cover" :src="'/storage/' +
-                                                    product.main_image_path
-                                                    " :alt="product.name" />
-                                            </a>
-                                        </div>
+              <div v-if="displayedProducts.length" class="row justify-content-left">
+                <div
+                  v-for="product in displayedProducts"
+                  :key="product.id"
+                  class="col-12 col-md-6 col-lg-4 mb-2 blog-item"
+                >
+                  <div class="p-6 border rounded">
+                    <div class="position-relative mb-2" style="height: 216px">
+                      <a target="_blank" class="float-center" :href="product.url">
+                        <img
+                          class="w-100 h-100 rounded"
+                          style="object-fit: cover"
+                          :src="'/storage/' +
+                            product.main_image_path
+                          "
+                          :alt="product.name"
+                        />
+                      </a>
+                    </div>
 
-                                        <!-- <h2 class="mb-1 h5 px-4 entry-title">
+                    <!-- <h2 class="mb-1 h5 px-4 entry-title">
                                         <a target="_blank" class="" :href="product.url">
                                             {{ product.name }}
                                         </a>
                                       </h2> -->
 
-                                        <a target="_blank" class="btn btn-primary ml-5 pl-4 mt-2 mb-2 float-center"
-                                            style="color: white;" :href="product.url">
-                                            Read More
-                                            <i class="icon-long-arrow-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-12 blogs mt-3">
-                                    <nav aria-label="Page navigation">
-                                        <ul class="pagination justify-content-center">
-                                            <li class="page-item" :class="{
-                                                disabled: currentPage === 1,
-                                            }">
-                                                <router-link class="page-link page-link-prev" :to="getBlogPageLink(
-                                                    currentPage - 1
-                                                )
-                                                    " aria-label="Previous" tabindex="-1" aria-disabled="true"
-                                                    @click="goToPreviousPage">
-                                                    <span aria-hidden="true"><i class="icon-long-arrow-left"></i></span>
-                                                    Prev
-                                                </router-link>
-                                            </li>
-                                            <li class="page-item" v-for="page in generatePageLinks" :key="page" :class="{
-                                                active:
-                                                    page === currentPage,
-                                            }">
-                                                <template v-if="isInteger(page)">
-                                                    <router-link class="page-link" :to="getBlogPageLink(
-                                                        page
-                                                    )
-                                                        " @click="
-                                                            goToThisPage(page)
-                                                            ">
-                                                        {{ page }}
-                                                    </router-link>
-                                                </template>
-                                            </li>
-                                            <li class="page-item-total">
-                                                of {{ totalPages }}
-                                            </li>
-                                            <li class="page-item" :class="{
-                                                disabled:
-                                                    currentPage ===
-                                                    totalPages,
-                                            }">
-                                                <router-link class="page-link page-link-next" :to="getBlogPageLink(
-                                                    currentPage + 1
-                                                )
-                                                    " aria-label="Next" @click="goToNextPage">
-                                                    Next
-                                                    <span aria-hidden="true"><i
-                                                            class="icon-long-arrow-right"></i></span>
-                                                </router-link>
-                                            </li>
-                                        </ul>
-                                    </nav>
-                                </div>
-                                <!-- End .col-lg-9 -->
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End .row -->
+                    <a
+                      target="_blank"
+                      class="btn btn-primary ml-5 pl-4 mt-2 mb-2 float-center"
+                      style="color: white;"
+                      :href="product.url"
+                    >
+                      Read More
+                      <i class="icon-long-arrow-right"></i>
+                    </a>
+                  </div>
                 </div>
-                <!-- End .container -->
+
+                <div class="col-lg-12 blogs mt-3">
+                  <nav aria-label="Page navigation">
+                    <ul class="pagination justify-content-center">
+                      <li
+                        class="page-item"
+                        :class="{
+                          disabled: currentPage === 1,
+                        }"
+                      >
+                        <router-link
+                          class="page-link page-link-prev"
+                          :to="getBlogPageLink(
+                            currentPage - 1
+                          )
+                          "
+                          aria-label="Previous"
+                          tabindex="-1"
+                          aria-disabled="true"
+                          @click="goToPreviousPage"
+                        >
+                          <span aria-hidden="true"><i class="icon-long-arrow-left"></i></span>
+                          Prev
+                        </router-link>
+                      </li>
+                      <li
+                        v-for="page in generatePageLinks"
+                        :key="page"
+                        class="page-item"
+                        :class="{
+                          active:
+                            page === currentPage,
+                        }"
+                      >
+                        <template v-if="isInteger(page)">
+                          <router-link
+                            class="page-link"
+                            :to="getBlogPageLink(
+                              page
+                            )
+                            "
+                            @click="
+                              goToThisPage(page)
+                            "
+                          >
+                            {{ page }}
+                          </router-link>
+                        </template>
+                      </li>
+                      <li class="page-item-total">
+                        of {{ totalPages }}
+                      </li>
+                      <li
+                        class="page-item"
+                        :class="{
+                          disabled:
+                            currentPage ===
+                            totalPages,
+                        }"
+                      >
+                        <router-link
+                          class="page-link page-link-next"
+                          :to="getBlogPageLink(
+                            currentPage + 1
+                          )
+                          "
+                          aria-label="Next"
+                          @click="goToNextPage"
+                        >
+                          Next
+                          <span aria-hidden="true"><i
+                            class="icon-long-arrow-right"
+                          ></i></span>
+                        </router-link>
+                      </li>
+                    </ul>
+                  </nav>
+                </div>
+                <!-- End .col-lg-9 -->
+              </div>
             </div>
-            <!-- End .page-content -->
-        </main>
-        <!-- End .main -->
-    </div>
+          </div>
+          <!-- End .row -->
+        </div>
+        <!-- End .container -->
+      </div>
+      <!-- End .page-content -->
+    </main>
+    <!-- End .main -->
+  </div>
 </template>
 
 <script setup>
-import { ref, computed, watch, onMounted, watchEffect } from "vue";
-import ContentState from "@/Components/ContentState.vue";
-import { useRoute } from "vue-router";
-import { useMeta } from "../../admin/composables/use-meta";
+import { ref, computed, watch, onMounted, watchEffect } from 'vue';
+import ContentState from '@/Components/ContentState.vue';
+import { useRoute } from 'vue-router';
+import { useMeta } from '../../admin/composables/use-meta';
 
-useMeta({ title: "In the News | Media Center" });
+useMeta({ title: 'In the News | Media Center' });
 
 const route = useRoute();
 
@@ -133,7 +180,7 @@ const error = ref(null);
 const fetchProducts = async () => {
     loading.value = true;
     try {
-        const response = await axios.get("/api/get-in-the-news", {
+        const response = await axios.get('/api/get-in-the-news', {
             params: {
                 page: currentPage.value,
                 per_page: perPage.value,
@@ -153,7 +200,7 @@ const fetchProducts = async () => {
 
 const fetchBlogSidebar = async () => {
     try {
-        const response = await axios.get("/api/get-blog-sidebar", {});
+        const response = await axios.get('/api/get-blog-sidebar', {});
         //blog.value = response.data.blog;
         other_blogs.value = response.data.other_blogs;
     } catch (error) {
@@ -207,13 +254,13 @@ const generatePageLinks = computed(() => {
 
     // Add previous link
     if (currentPage.value > 1) {
-        pageLinks.push("Prev");
+        pageLinks.push('Prev');
     }
 
     // Add current page and surrounding pages
     let startPage = Math.max(
         1,
-        currentPage.value - Math.floor(maxVisiblePages / 2)
+        currentPage.value - Math.floor(maxVisiblePages / 2),
     );
     let endPage = Math.min(startPage + maxVisiblePages - 1, totalPages.value);
 
@@ -227,7 +274,7 @@ const generatePageLinks = computed(() => {
 
     // Add next link
     if (currentPage.value < totalPages.value) {
-        pageLinks.push("Next");
+        pageLinks.push('Next');
     }
 
     return pageLinks;
@@ -249,12 +296,12 @@ watchEffect(() => {
     const params = route.params; // Access the route parameters
     const query = route.query; // Access the query parameters
 
-    if (params.id !== "" && category_id !== params.id) {
+    if (params.id !== '' && category_id.value !== params.id) {
         currentPage.value = 1;
 
         category_id.value = params.id ? parseInt(params.id) : 1;
 
-        if (params.page !== "" && currentPage !== params.page) {
+        if (params.page !== '' && currentPage.value !== params.page) {
             currentPage.value = params.page ? parseInt(params.page) : 1;
         }
         fetchProducts();

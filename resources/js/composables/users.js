@@ -1,17 +1,17 @@
-import { ref } from "vue";
-import { useRouter } from "vue-router";
-import { apiRequest } from "../utils/api";
-import { Modal } from "ant-design-vue";
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+import { apiRequest } from '../utils/api';
+import { Modal } from 'ant-design-vue';
 
 export default function useUsers() {
     const users = ref([]);
     const user = ref({
-        id: "",
-        name: "",
-        email: "",
-        role: "",
-        password: "",
-        confirm_password: "",
+        id: '',
+        name: '',
+        email: '',
+        role: '',
+        password: '',
+        confirm_password: '',
     });
 
     const router = useRouter();
@@ -20,16 +20,16 @@ export default function useUsers() {
 
     const getUsers = async ({
         page = 1,
-        search_id = "",
-        search_title = "",
-        search_global = "",
-        order_column = "created_at",
-        order_direction = "desc",
+        search_id = '',
+        search_title = '',
+        search_global = '',
+        order_column = 'created_at',
+        order_direction = 'desc',
     } = {}) => {
         try {
             const response = await apiRequest(
-                "get",
-                `/api/users?page=${page}&search_id=${search_id}&search_title=${search_title}&search_global=${search_global}&order_column=${order_column}&order_direction=${order_direction}`
+                'get',
+                `/api/users?page=${page}&search_id=${search_id}&search_title=${search_title}&search_global=${search_global}&order_column=${order_column}&order_direction=${order_direction}`,
             );
             users.value = response;
         } catch (errors) {
@@ -39,7 +39,7 @@ export default function useUsers() {
 
     const getUser = async (id) => {
         try {
-            const response = await apiRequest("get", `/api/users/${id}`);
+            const response = await apiRequest('get', `/api/users/${id}`);
             user.value = response;
         } catch (errors) {
             validationErrors.value = errors;
@@ -60,13 +60,13 @@ export default function useUsers() {
         }
 
         const config = {
-            headers: { "content-type": "multipart/form-data" },
+            headers: { 'content-type': 'multipart/form-data' },
         };
 
         try {
-            await apiRequest("post", "/api/users", serializedPost, config);
-            router.push({ name: "users.index" });
-            showToast("User saved successfully", "success");
+            await apiRequest('post', '/api/users', serializedPost, config);
+            router.push({ name: 'users.index' });
+            showToast('User saved successfully', 'success');
         } catch (errors) {
             validationErrors.value = errors;
         } finally {
@@ -81,9 +81,9 @@ export default function useUsers() {
         validationErrors.value = {};
 
         try {
-            await apiRequest("put", `/api/users/${user.id}`, user);
-            router.push({ name: "users.index" });
-            showToast("User updated successfully", "success");
+            await apiRequest('put', `/api/users/${user.id}`, user);
+            router.push({ name: 'users.index' });
+            showToast('User updated successfully', 'success');
         } catch (errors) {
             validationErrors.value = errors;
         } finally {
@@ -93,20 +93,20 @@ export default function useUsers() {
 
     const deleteUser = async (id) => {
         Modal.confirm({
-            title: "Are you sure?",
-            content: "You won't be able to revert this action!",
-            okText: "Yes, delete it!",
-            okType: "danger",
-            cancelText: "No, cancel",
+            title: 'Are you sure?',
+            content: 'You won\'t be able to revert this action!',
+            okText: 'Yes, delete it!',
+            okType: 'danger',
+            cancelText: 'No, cancel',
             onOk() {
-                apiRequest("delete", `/api/users/${id}`).then(() => {
+                apiRequest('delete', `/api/users/${id}`).then(() => {
                     getUsers();
-                    router.push({ name: "users.index" });
-                    showToast("User deleted successfully", "success");
+                    router.push({ name: 'users.index' });
+                    showToast('User deleted successfully', 'success');
                 });
             },
             onCancel() {
-                console.log("Cancel");
+                console.log('Cancel');
             },
         });
     };

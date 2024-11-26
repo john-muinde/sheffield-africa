@@ -1,41 +1,41 @@
 <template>
-    <div class="layout-px-spacing">
-        <teleport to="#breadcrumb">
-            <ul class="navbar-nav flex-row">
-                <li>
-                    <div class="page-header">
-                        <nav class="breadcrumb-one" aria-label="breadcrumb">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item">
-                                    <a href="javascript:;">DataTables</a>
-                                </li>
-                                <li class="breadcrumb-item active" aria-current="page">
-                                    <span>Slot</span>
-                                </li>
-                            </ol>
-                        </nav>
-                    </div>
+  <div class="layout-px-spacing">
+    <teleport to="#breadcrumb">
+      <ul class="navbar-nav flex-row">
+        <li>
+          <div class="page-header">
+            <nav class="breadcrumb-one" aria-label="breadcrumb">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                  <a href="javascript:;">DataTables</a>
                 </li>
-            </ul>
-        </teleport>
+                <li class="breadcrumb-item active" aria-current="page">
+                  <span>Slot</span>
+                </li>
+              </ol>
+            </nav>
+          </div>
+        </li>
+      </ul>
+    </teleport>
 
-        <div class="row layout-top-spacing">
-            <div class="col-xl-12 col-lg-12 col-sm-12 layout-spacing">
-                <div class="panel br-6 p-0">
-                    <div class="vue3-datatable">
-                        <vue3-datatable :rows="rows" :columns="cols" :totalRows="rows?.length">
-                            <template #id="data">
-                                <strong>#{{ data.value.id }}</strong>
-                            </template>
-                            <template #email="data">
-                                <a :href="`mailto:${data.value.email}`" class="text-primary hover:underline">{{ data.value.email }}</a>
-                            </template>
-                        </vue3-datatable>
-                    </div>
-                </div>
-            </div>
+    <div class="row layout-top-spacing">
+      <div class="col-xl-12 col-lg-12 col-sm-12 layout-spacing">
+        <div class="panel br-6 p-0">
+          <div class="vue3-datatable">
+            <vue3-datatable :rows="rows" :columns="cols" :total-rows="rows?.length">
+              <template #id="data">
+                <strong>#{{ data.value.id }}</strong>
+              </template>
+              <template #email="data">
+                <a :href="`mailto:${data.value.email}`" class="text-primary hover:underline">{{ data.value.email }}</a>
+              </template>
+            </vue3-datatable>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </template>
 
 <script setup>

@@ -1,54 +1,74 @@
 <template>
-    <div>
-        <main class="main">
-            <div class="page-content">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-10 offset-lg-1">
-                            <h2 class="about-us-title">Newsletters</h2>
+  <div>
+    <main class="main">
+      <div class="page-content">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-10 offset-lg-1">
+              <h2 class="about-us-title">
+                Newsletters
+              </h2>
 
-                            <router-link to="/media" class="btn btn-primary btn-round btn-shadow float-right">
-                                <i class="icon-long-arrow-left"></i>
-                                <span>Back to Media Center</span>
-                            </router-link>
+              <router-link to="/media" class="btn btn-primary btn-round btn-shadow float-right">
+                <i class="icon-long-arrow-left"></i>
+                <span>Back to Media Center</span>
+              </router-link>
 
-                            <p class="lead about-us-lead text-primary mb-1">
-                                Explore Our Newsletters
-                            </p>
+              <p class="lead about-us-lead text-primary mb-1">
+                Explore Our Newsletters
+              </p>
 
-                            <p class="about-us-text mb-2">
-                                Click on the documents to view
-                            </p>
+              <p class="about-us-text mb-2">
+                Click on the documents to view
+              </p>
 
-                            <ContentState v-if="loading" type="loading" contentType="NewsLetters" />
-                            <ContentState v-if="!newsletters.length && !loading && error == null" type="empty"
-                                contentType="NewsLetters" />
-                            <ContentState v-if="!!error && !loading" type="error" :errorSubMessage="error.message"
-                                contentType="NewsLetters" @retry="fetchMediaCenter" />
+              <ContentState v-if="loading" type="loading" content-type="NewsLetters" />
+              <ContentState
+                v-if="!newsletters.length && !loading && error == null"
+                type="empty"
+                content-type="NewsLetters"
+              />
+              <ContentState
+                v-if="!!error && !loading"
+                type="error"
+                :error-sub-message="error.message"
+                content-type="NewsLetters"
+                @retry="fetchMediaCenter"
+              />
 
-                            <div v-show="newsletters.length" class="dflip-books row media-center" id="dflip-books"
-                                ref="bookContainer">
-                                <a v-for="newsletter in newsletters" :key="newsletter.id"
-                                    :href="`/media/newsletters#${newsletter.slug}/`" class="_df_thumb"
-                                    :data-slug="newsletter.slug" :data-title="newsletter.name"
-                                    :id="`df_${newsletter.id}`" :data-df-option="`df_option_${newsletter.id}`"
-                                    :thumb="newsletter.thumb">
-                                    {{ newsletter.name }}
-                                </a>
-                            </div>
-                            <canvas ref="thumbnailCanvas" style="display: none"></canvas>
-                        </div>
-                    </div>
-                </div>
+              <div
+                v-show="newsletters.length"
+                id="dflip-books"
+                ref="bookContainer"
+                class="dflip-books row media-center"
+              >
+                <a
+                  v-for="newsletter in newsletters"
+                  :id="`df_${newsletter.id}`"
+                  :key="newsletter.id"
+                  :href="`/media/newsletters#${newsletter.slug}/`"
+                  class="_df_thumb"
+                  :data-slug="newsletter.slug"
+                  :data-title="newsletter.name"
+                  :data-df-option="`df_option_${newsletter.id}`"
+                  :thumb="newsletter.thumb"
+                >
+                  {{ newsletter.name }}
+                </a>
+              </div>
+              <canvas ref="thumbnailCanvas" style="display: none"></canvas>
             </div>
-        </main>
-    </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
 </template>
 
 <script setup>
 import { onMounted } from 'vue';
 import { useMediaDocuments } from '@/composables/documents';
-import ContentState from "@/Components/ContentState.vue";
+import ContentState from '@/Components/ContentState.vue';
 import { onBeforeRouteLeave } from 'vue-router';
 
 // Initialize with custom options
@@ -58,15 +78,15 @@ const {
     documents: newsletters,
     loading,
     error,
-    handleRouteLeave
+    handleRouteLeave,
 } = useMediaDocuments({
     thumbnailScale: 0.4,
-    enableDflip: true
+    enableDflip: true,
 });
 
 // Fetch function for media center
 const fetchMediaCenter = async () => {
-    const response = await axios.get("/api/get-media-center");
+    const response = await axios.get('/api/get-media-center');
     return response.data.newsletters;
 };
 

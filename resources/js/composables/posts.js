@@ -1,48 +1,48 @@
-import { ref, inject } from "vue";
-import { useRouter } from "vue-router";
-import axiosInstance from "../axiosInstance";
+import { ref, inject } from 'vue';
+import { useRouter } from 'vue-router';
+import axiosInstance from '../axiosInstance';
 
 export default function usePosts() {
     const posts = ref({});
     const post = ref({
-        title: "",
-        content: "",
-        category_id: "",
-        thumbnail: "",
+        title: '',
+        content: '',
+        category_id: '',
+        thumbnail: '',
     });
     const router = useRouter();
     const validationErrors = ref({});
     const isLoading = ref(false);
-    const swal = inject("$swal");
+    const swal = inject('$swal');
 
     const getPosts = async (
         page = 1,
-        search_category = "",
-        search_id = "",
-        search_title = "",
-        search_content = "",
-        search_global = "",
-        order_column = "created_at",
-        order_direction = "desc"
+        search_category = '',
+        search_id = '',
+        search_title = '',
+        search_content = '',
+        search_global = '',
+        order_column = 'created_at',
+        order_direction = 'desc',
     ) => {
         axiosInstance
             .get(
-                "/api/posts?page=" +
+                '/api/posts?page=' +
                     page +
-                    "&search_category=" +
+                    '&search_category=' +
                     search_category +
-                    "&search_id=" +
+                    '&search_id=' +
                     search_id +
-                    "&search_title=" +
+                    '&search_title=' +
                     search_title +
-                    "&search_content=" +
+                    '&search_content=' +
                     search_content +
-                    "&search_global=" +
+                    '&search_global=' +
                     search_global +
-                    "&order_column=" +
+                    '&order_column=' +
                     order_column +
-                    "&order_direction=" +
-                    order_direction
+                    '&order_direction=' +
+                    order_direction,
             )
             .then((response) => {
                 posts.value = response.data;
@@ -50,7 +50,7 @@ export default function usePosts() {
     };
 
     const getPost = async (id) => {
-        axiosInstance.get("/api/posts/" + id).then((response) => {
+        axiosInstance.get('/api/posts/' + id).then((response) => {
             post.value = response.data.data;
         });
     };
@@ -69,12 +69,12 @@ export default function usePosts() {
         }
 
         axiosInstance
-            .post("/api/posts", serializedPost)
+            .post('/api/posts', serializedPost)
             .then((response) => {
-                router.push({ name: "posts.index" });
+                router.push({ name: 'posts.index' });
                 swal({
-                    icon: "success",
-                    title: "Post saved successfully",
+                    icon: 'success',
+                    title: 'Post saved successfully',
                 });
             })
             .catch((error) => {
@@ -92,12 +92,12 @@ export default function usePosts() {
         validationErrors.value = {};
 
         axiosInstance
-            .put("/api/posts/" + post.id, post)
+            .put('/api/posts/' + post.id, post)
             .then((response) => {
-                router.push({ name: "posts.index" });
+                router.push({ name: 'posts.index' });
                 swal({
-                    icon: "success",
-                    title: "Post updated successfully",
+                    icon: 'success',
+                    title: 'Post updated successfully',
                 });
             })
             .catch((error) => {
@@ -110,31 +110,31 @@ export default function usePosts() {
 
     const deletePost = async (id) => {
         swal({
-            title: "Are you sure?",
-            text: "You won't be able to revert this action!",
-            icon: "warning",
+            title: 'Are you sure?',
+            text: 'You won\'t be able to revert this action!',
+            icon: 'warning',
             showCancelButton: true,
-            confirmButtonText: "Yes, delete it!",
-            confirmButtonColor: "#ef4444",
+            confirmButtonText: 'Yes, delete it!',
+            confirmButtonColor: '#ef4444',
             timer: 20000,
             timerProgressBar: true,
             reverseButtons: true,
         }).then((result) => {
             if (result.isConfirmed) {
                 axiosInstance
-                    .delete("/api/posts/" + id)
+                    .delete('/api/posts/' + id)
                     .then((response) => {
                         getPosts();
-                        router.push({ name: "posts.index" });
+                        router.push({ name: 'posts.index' });
                         swal({
-                            icon: "success",
-                            title: "Post deleted successfully",
+                            icon: 'success',
+                            title: 'Post deleted successfully',
                         });
                     })
                     .catch((error) => {
                         swal({
-                            icon: "error",
-                            title: "Something went wrong",
+                            icon: 'error',
+                            title: 'Something went wrong',
                         });
                     });
             }

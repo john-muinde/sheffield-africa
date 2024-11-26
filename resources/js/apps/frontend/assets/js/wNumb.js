@@ -31,7 +31,7 @@ var FormatOptions = [
 	'negativeBefore',
 	'negative',
 	'edit',
-	'undo'
+	'undo',
 ];
 
 // General
@@ -335,7 +335,7 @@ var FormatOptions = [
 			return new wNumb ( options );
 		}
 
-		if ( typeof options !== "object" ) {
+		if ( typeof options !== 'object' ) {
 			return;
 		}
 

@@ -33,97 +33,95 @@
             <div class="panel-body">
               <form @submit.prevent="submitForm">
                 <div class="row">
-                    <div class="form-group col-md-6">
-                  <label for="post-page"> Page</label>
-                  <input
-                    v-model="seo.page"
-                    id="post-page"
-                    type="text"
-                    class="form-control"
-                    placeholder="Enter Page ..."
-                  />
+                  <div class="form-group col-md-6">
+                    <label for="post-page"> Page</label>
+                    <input
+                      id="post-page"
+                      v-model="seo.page"
+                      type="text"
+                      class="form-control"
+                      placeholder="Enter Page ..."
+                    />
 
-                  <div class="text-danger mt-1">
-                    {{ errors.page }}
-                  </div>
-                  <div class="text-danger mt-1">
-                    <div v-for="message in validationErrors?.page">
-                      {{ message }}
+                    <div class="text-danger mt-1">
+                      {{ errors.page }}
+                    </div>
+                    <div class="text-danger mt-1">
+                      <div v-for="message in validationErrors?.page">
+                        {{ message }}
+                      </div>
                     </div>
                   </div>
-                </div>
 
-                 <div class="form-group col-md-6">
-                  <label for="post-title">Page Title</label>
-                  <input
-                    v-model="seo.title"
-                    id="post-title"
-                    type="text"
-                    class="form-control"
-                    placeholder="Enter Page Title ..."
-                  />
+                  <div class="form-group col-md-6">
+                    <label for="post-title">Page Title</label>
+                    <input
+                      id="post-title"
+                      v-model="seo.title"
+                      type="text"
+                      class="form-control"
+                      placeholder="Enter Page Title ..."
+                    />
 
-                  <div class="text-danger mt-1">
-                    {{ errors.title }}
-                  </div>
-                  <div class="text-danger mt-1">
-                    <div v-for="message in validationErrors?.title">
-                      {{ message }}
+                    <div class="text-danger mt-1">
+                      {{ errors.title }}
+                    </div>
+                    <div class="text-danger mt-1">
+                      <div v-for="message in validationErrors?.title">
+                        {{ message }}
+                      </div>
                     </div>
                   </div>
-                </div>
-
-             
                 </div>
 
                 <div class="row">
-                    <div class="form-group col-md-6">
-                  <label for="post-description">Page Description</label>
-                  <input
-                    v-model="seo.description"
-                    id="post-description"
-                    type="text"
-                    class="form-control"
-                    placeholder="Enter Page Description ..."
-                  />
+                  <div class="form-group col-md-6">
+                    <label for="post-description">Page Description</label>
+                    <input
+                      id="post-description"
+                      v-model="seo.description"
+                      type="text"
+                      class="form-control"
+                      placeholder="Enter Page Description ..."
+                    />
 
-                  <div class="text-danger mt-1">
-                    {{ errors.description }}
-                  </div>
-                  <div class="text-danger mt-1">
-                    <div v-for="message in validationErrors?.description">
-                      {{ message }}
+                    <div class="text-danger mt-1">
+                      {{ errors.description }}
+                    </div>
+                    <div class="text-danger mt-1">
+                      <div v-for="message in validationErrors?.description">
+                        {{ message }}
+                      </div>
                     </div>
                   </div>
-                </div>
 
-                <div class="form-group col-md-6">
-                  <label for="post-keywords">Page Keywords</label>
-                  <input
-                    v-model="seo.keywords"
-                    id="post-keywords"
-                    type="text"
-                    class="form-control"
-                    placeholder="Enter comma separated Keywords ..."
-                  />
+                  <div class="form-group col-md-6">
+                    <label for="post-keywords">Page Keywords</label>
+                    <input
+                      id="post-keywords"
+                      v-model="seo.keywords"
+                      type="text"
+                      class="form-control"
+                      placeholder="Enter comma separated Keywords ..."
+                    />
 
-                  <div class="text-danger mt-1">
-                    {{ errors.keywords }}
-                  </div>
-                  <div class="text-danger mt-1">
-                    <div v-for="message in validationErrors?.keywords">
-                      {{ message }}
+                    <div class="text-danger mt-1">
+                      {{ errors.keywords }}
+                    </div>
+                    <div class="text-danger mt-1">
+                      <div v-for="message in validationErrors?.keywords">
+                        {{ message }}
+                      </div>
                     </div>
                   </div>
-                </div>
                 </div>
 
                 <div class="row">
                   <div class="form-group col-md-6">
                     <label for="post-canonical">Canonical URL</label>
                     <input
-                      v-model="seo.canonical"
                       id="post-canonical"
+                      v-model="seo.canonical"
                       type="text"
                       class="form-control"
                       placeholder="Enter Canonical URL here or leave blank to autogenerate ..."
@@ -142,13 +140,19 @@
                     <label for="post-type">SEO Type</label>
                     <div>
                       <select
-                        v-model="seo.type"
                         id="post-type"
+                        v-model="seo.type"
                         class="form-select"
                       >
-                        <option selected value="article">Article</option>
-                        <option selected value="page">Page</option>
-                        <option selected value="product">Product</option>
+                        <option selected value="article">
+                          Article
+                        </option>
+                        <option selected value="page">
+                          Page
+                        </option>
+                        <option selected value="product">
+                          Product
+                        </option>
                       </select>
                     </div>
 
@@ -178,42 +182,42 @@
 </template>
 
 <script setup>
-import "../../assets/sass/scrollspyNav.scss";
-import "../../assets/sass/scrollspyNav.scss";
-import "../../assets/sass/forms/file-upload-with-preview.min.css";
+import '../../assets/sass/scrollspyNav.scss';
+import '../../assets/sass/scrollspyNav.scss';
+import '../../assets/sass/forms/file-upload-with-preview.min.css';
 
-import { reactive, onMounted, ref, watchEffect } from "vue";
-import useSeo from "@/composables/seo";
-import { useForm, useField, defineRule } from "vee-validate";
-import { required, min } from "@/validation/rules";
-import { useRoute } from "vue-router";
+import { reactive, onMounted, ref, watchEffect } from 'vue';
+import useSeo from '@/composables/seo';
+import { useForm, useField, defineRule } from 'vee-validate';
+import { required, min } from '@/validation/rules';
+import { useRoute } from 'vue-router';
 
-defineRule("required", required);
-defineRule("min", min);
+defineRule('required', required);
+defineRule('min', min);
 
 // Define a validation schema
 const schema = {
-  page: "required|min:1",
-  title: "required|min:3",
-  description: "required",
-  keywords: "required|min:3",
-  canonical: "",
-  type:"required"
+  page: 'required|min:1',
+  title: 'required|min:3',
+  description: 'required',
+  keywords: 'required|min:3',
+  canonical: '',
+  type:'required',
 };
 // Create a form context with the validation schema
 const { validate, errors } = useForm({ validationSchema: schema });
 // Define actual fields for validation
-const { value: page } = useField("page", null, { initialValue: "" });
-const { value: title } = useField("title", null, { initialValue: "" });
-const { value: description } = useField("description", null, { initialValue: "" });
-const { value: keywords } = useField("keywords", null, {
-  initialValue: "",
+const { value: page } = useField('page', null, { initialValue: '' });
+const { value: title } = useField('title', null, { initialValue: '' });
+const { value: description } = useField('description', null, { initialValue: '' });
+const { value: keywords } = useField('keywords', null, {
+  initialValue: '',
 });
-const { value: canonical } = useField("canonical", null, {
-  initialValue: "",
+const { value: canonical } = useField('canonical', null, {
+  initialValue: '',
 });
-const { value: type } = useField("type", null, {
-  initialValue: "",
+const { value: type } = useField('type', null, {
+  initialValue: '',
 });
 
 const route = useRoute();
@@ -229,7 +233,7 @@ const seo = reactive({
   description,
   keywords,
   canonical,
-  type
+  type,
 });
 
 function submitForm() {

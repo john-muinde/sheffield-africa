@@ -63,7 +63,7 @@
     originX: 0.5,
     originY: 0.5,
     pointerEvents: true,
-    precision: 1
+    precision: 1,
   };
 
   function Plugin(element, options) {
@@ -90,7 +90,7 @@
       originX: parseFloat(this.$context.data('origin-x')) || null,
       originY: parseFloat(this.$context.data('origin-y')) || null,
       pointerEvents: this.$context.data('pointer-events') || true,
-      precision: parseFloat(this.$context.data('precision')) || 1
+      precision: parseFloat(this.$context.data('precision')) || 1,
     };
 
     // Delete Null Data Values
@@ -192,7 +192,7 @@
           body.appendChild(element);
           element.style[jsProperty] = 'translate3d(1px,1px,1px)';
           propertyValue = window.getComputedStyle(element).getPropertyValue(cssProperty);
-          featureSupport = propertyValue !== undefined && propertyValue.length > 0 && propertyValue !== "none";
+          featureSupport = propertyValue !== undefined && propertyValue.length > 0 && propertyValue !== 'none';
           documentElement.style.overflow = documentOverflow;
           body.removeChild(element);
           if ( isCreatedBody ) {
@@ -226,14 +226,14 @@
     // Configure Styles
     if (this.$context.css('position') === 'static') {
       this.$context.css({
-        position:'relative'
+        position:'relative',
       });
     }
 
     // Pointer events
     if(!this.pointerEvents){
       this.$context.css({
-        pointerEvents: 'none'
+        pointerEvents: 'none',
       });
     }
 
@@ -259,10 +259,10 @@
       position:'absolute',
       display:'block',
       left: 0,
-      top: 0
+      top: 0,
     });
     this.$layers.first().css({
-      position:'relative'
+      position:'relative',
     });
 
     // Hardware Accelerate Layers
@@ -531,7 +531,7 @@
     invert: Plugin.prototype.invert,
     scalar: Plugin.prototype.scalar,
     limit: Plugin.prototype.limit,
-    origin: Plugin.prototype.origin
+    origin: Plugin.prototype.origin,
   };
 
   $.fn[NAME] = function (value) {

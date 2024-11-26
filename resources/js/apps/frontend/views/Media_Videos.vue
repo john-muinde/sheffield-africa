@@ -1,140 +1,201 @@
 <template>
-    <div>
-        <main class="main">
-            <div class="page-content bg-gray-50">
-                <div class="container mx-auto px-4">
-                    <div class="row">
-                        <div class="col-lg-10 offset-lg-1 media-video">
-                            <!-- Header Section -->
-                            <div class="flex justify-between items-center">
-                                <div>
-                                    <h2 class="about-us-title">Videos</h2>
-                                    <p class="lead about-us-lead text-primary mb-1">Explore our videos</p>
-                                </div>
-                                <router-link to="/media" class="btn btn-primary btn-round btn-shadow">
-                                    <i class="icon-long-arrow-left"></i>
-                                    <span>Back to Media Center</span>
-                                </router-link>
-                            </div>
-
-                            <!-- Filters Section -->
-                            <span>
-                                Search for Videos
-                            </span>
-                            <span class="relative">
-                                <input type="text" v-model="searchTerm" placeholder="Search videos..."
-                                    class="w-full pl-10 pr-4 py-2 rounded-3xl border border-gray-200 focus:ring-2 focus:ring-blue-500 focus:border-red-600 shadow-sm  mb-2" />
-                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                    <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 20 20" fill="currentColor">
-                                        <path fill-rule="evenodd"
-                                            d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                                            clip-rule="evenodd" />
-                                    </svg>
-                                </div>
-                            </span>
-
-                            <ContentState v-if="loading" type="loading" contentType="videos" />
-                            <ContentState v-if="!filteredVideos.length && !loading" type="empty" contentType="videos" />
-                            <ContentState v-if="!!error" type="error" contentType="videos" />
-
-                            <TransitionGroup v-if="filteredVideos.length" tag="div"
-                                class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-6"
-                                :css="false" @before-enter="onBeforeEnter" @enter="onEnter" @leave="onLeave">
-                                <div v-for="video in filteredVideos" :key="video.id" :data-index="video.id"
-                                    class="group relative rounded-xl overflow-hidden shadow-lg bg-white hover:shadow-xl transition-all duration-300">
-                                    <!-- Thumbnail Container -->
-                                    <div class="aspect-video relative overflow-hidden cursor-pointer"
-                                        @click="playVideo(video)">
-                                        <img :src="getVideoPoster(video)" :alt="video.name"
-                                            class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                                            @error="handleImageError" />
-                                        <!-- Overlay -->
-                                        <div
-                                            class="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                                            <div
-                                                class="w-16 h-16 rounded-full bg-white bg-opacity-90 flex items-center justify-center transform scale-0 group-hover:scale-100 transition-transform duration-300">
-                                                <div class="play-icon w-8 h-8"
-                                                    :class="{ 'playing': selectedVideo?.id === video.id && !isPaused }">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                                        fill="currentColor" class="w-8 h-8">
-                                                        <path d="M8 5v14l11-7z" />
-                                                    </svg>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Video Info -->
-                                    <div class="p-4">
-                                        <h4 class="font-semibold text-gray-900 mb-2 line-clamp-2"
-                                            style="font-size: 1.6rem;">{{ video.name
-                                            }}</h4>
-                                    </div>
-                                </div>
-                            </TransitionGroup>
-
-                            <!-- Video Player Modal -->
-                            <TransitionRoot appear :show="!!selectedVideo" as="template">
-                                <Dialog as="div" @close="closeVideo" class="relative z-50 w-full">
-                                    <TransitionChild enter="duration-300 ease-out" enter-from="opacity-0"
-                                        enter-to="opacity-100" leave="duration-200 ease-in" leave-from="opacity-100"
-                                        leave-to="opacity-0">
-                                        <div class="fixed inset-0 bg-black bg-opacity-75" />
-                                    </TransitionChild>
-
-                                    <div class="fixed inset-0 overflow-y-auto">
-                                        <div class="flex min-h-full items-center justify-center p-4">
-                                            <TransitionChild enter="duration-300 ease-out"
-                                                enter-from="opacity-0 scale-95" enter-to="opacity-100 scale-100"
-                                                leave="duration-200 ease-in" leave-from="opacity-100 scale-100"
-                                                leave-to="opacity-0 scale-95">
-                                                <DialogPanel class="rounded-2xl bg-white" :style="{
-                                                    width: 'calc(100vw - 40px)',
-                                                    maxWidth: '1200px'
-                                                }">
-                                                    <div class="relative aspect-video">
-                                                        <div v-if="isYouTubeVideo" class="plyr__video-embed h-full">
-                                                            <iframe
-                                                                :src="`https://www.youtube.com/embed/${getYoutubeId(selectedVideo?.video_url)}?autoplay=1`"
-                                                                allowfullscreen allow="autoplay"
-                                                                class="w-full h-full rounded-2xl"></iframe>
-                                                        </div>
-                                                        <video v-else ref="videoElement" :src="videoSrc(selectedVideo)"
-                                                            class="w-full h-full rounded-2xl" controls autoplay></video>
-                                                        <button @click="closeVideo"
-                                                            class="absolute top-4 right-4 p-2 rounded-full bg-black bg-opacity-50 text-white hover:bg-opacity-75 transition-colors">
-                                                            <span class="sr-only">Close</span>
-                                                            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24"
-                                                                stroke="currentColor">
-                                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                                    stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                                                            </svg>
-                                                        </button>
-                                                    </div>
-                                                </DialogPanel>
-                                            </TransitionChild>
-                                        </div>
-                                    </div>
-                                </Dialog>
-                            </TransitionRoot>
-                        </div>
-                    </div>
+  <div>
+    <main class="main">
+      <div class="page-content bg-gray-50">
+        <div class="container mx-auto px-4">
+          <div class="row">
+            <div class="col-lg-10 offset-lg-1 media-video">
+              <!-- Header Section -->
+              <div class="flex justify-between items-center">
+                <div>
+                  <h2 class="about-us-title">
+                    Videos
+                  </h2>
+                  <p class="lead about-us-lead text-primary mb-1">
+                    Explore our videos
+                  </p>
                 </div>
+                <router-link to="/media" class="btn btn-primary btn-round btn-shadow">
+                  <i class="icon-long-arrow-left"></i>
+                  <span>Back to Media Center</span>
+                </router-link>
+              </div>
+
+              <!-- Filters Section -->
+              <span>
+                Search for Videos
+              </span>
+              <span class="relative">
+                <input
+                  v-model="searchTerm"
+                  type="text"
+                  placeholder="Search videos..."
+                  class="w-full pl-10 pr-4 py-2 rounded-3xl border border-gray-200 focus:ring-2 focus:ring-blue-500 focus:border-red-600 shadow-sm  mb-2"
+                />
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <svg
+                    class="h-5 w-5 text-gray-400"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                </div>
+              </span>
+
+              <ContentState v-if="loading" type="loading" content-type="videos" />
+              <ContentState v-if="!filteredVideos.length && !loading" type="empty" content-type="videos" />
+              <ContentState v-if="!!error" type="error" content-type="videos" />
+
+              <TransitionGroup
+                v-if="filteredVideos.length"
+                tag="div"
+                class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+                :css="false"
+                @before-enter="onBeforeEnter"
+                @enter="onEnter"
+                @leave="onLeave"
+              >
+                <div
+                  v-for="video in filteredVideos"
+                  :key="video.id"
+                  :data-index="video.id"
+                  class="group relative rounded-xl overflow-hidden shadow-lg bg-white hover:shadow-xl transition-all duration-300"
+                >
+                  <!-- Thumbnail Container -->
+                  <div
+                    class="aspect-video relative overflow-hidden cursor-pointer"
+                    @click="playVideo(video)"
+                  >
+                    <img
+                      :src="getVideoPoster(video)"
+                      :alt="video.name"
+                      class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                      @error="handleImageError"
+                    />
+                    <!-- Overlay -->
+                    <div
+                      class="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center"
+                    >
+                      <div
+                        class="w-16 h-16 rounded-full bg-white bg-opacity-90 flex items-center justify-center transform scale-0 group-hover:scale-100 transition-transform duration-300"
+                      >
+                        <div
+                          class="play-icon w-8 h-8"
+                          :class="{ 'playing': selectedVideo?.id === video.id && !isPaused }"
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            fill="currentColor"
+                            class="w-8 h-8"
+                          >
+                            <path d="M8 5v14l11-7z" />
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Video Info -->
+                  <div class="p-4">
+                    <h4
+                      class="font-semibold text-gray-900 mb-2 line-clamp-2"
+                      style="font-size: 1.6rem;"
+                    >
+                      {{ video.name
+                      }}
+                    </h4>
+                  </div>
+                </div>
+              </TransitionGroup>
+
+              <!-- Video Player Modal -->
+              <TransitionRoot appear :show="!!selectedVideo" as="template">
+                <Dialog as="div" class="relative z-50 w-full" @close="closeVideo">
+                  <TransitionChild
+                    enter="duration-300 ease-out"
+                    enter-from="opacity-0"
+                    enter-to="opacity-100"
+                    leave="duration-200 ease-in"
+                    leave-from="opacity-100"
+                    leave-to="opacity-0"
+                  >
+                    <div class="fixed inset-0 bg-black bg-opacity-75"></div>
+                  </TransitionChild>
+
+                  <div class="fixed inset-0 overflow-y-auto">
+                    <div class="flex min-h-full items-center justify-center p-4">
+                      <TransitionChild
+                        enter="duration-300 ease-out"
+                        enter-from="opacity-0 scale-95"
+                        enter-to="opacity-100 scale-100"
+                        leave="duration-200 ease-in"
+                        leave-from="opacity-100 scale-100"
+                        leave-to="opacity-0 scale-95"
+                      >
+                        <DialogPanel
+                          class="rounded-2xl bg-white"
+                          :style="{
+                            width: 'calc(100vw - 40px)',
+                            maxWidth: '1200px'
+                          }"
+                        >
+                          <div class="relative aspect-video">
+                            <div v-if="isYouTubeVideo" class="plyr__video-embed h-full">
+                              <iframe
+                                :src="`https://www.youtube.com/embed/${getYoutubeId(selectedVideo?.video_url)}?autoplay=1`"
+                                allowfullscreen
+                                allow="autoplay"
+                                class="w-full h-full rounded-2xl"
+                              ></iframe>
+                            </div>
+                            <video
+                              v-else
+                              ref="videoElement"
+                              :src="videoSrc(selectedVideo)"
+                              class="w-full h-full rounded-2xl"
+                              controls
+                              autoplay
+                            ></video>
+                            <button
+                              class="absolute top-4 right-4 p-2 rounded-full bg-black bg-opacity-50 text-white hover:bg-opacity-75 transition-colors"
+                              @click="closeVideo"
+                            >
+                              <span class="sr-only">Close</span>
+                              <svg
+                                class="w-6 h-6"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                              >
+                                <path
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  stroke-width="2"
+                                  d="M6 18L18 6M6 6l12 12"
+                                />
+                              </svg>
+                            </button>
+                          </div>
+                        </DialogPanel>
+                      </TransitionChild>
+                    </div>
+                  </div>
+                </Dialog>
+              </TransitionRoot>
             </div>
-        </main>
-    </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
 </template>
-
-<style scoped>
-.play-icon {
-    transition: transform 0.3s;
-}
-
-.play-icon.playing {
-    transform: scale(1.2);
-}
-</style>
 
 <script setup>
 import { ref, computed, onMounted, onUnmounted, watch } from 'vue';
@@ -257,7 +318,7 @@ const onEnter = (el, done) => {
         scale: 1,
         duration: 0.3,
         delay: el.dataset.index * 0.1,
-        onComplete: done
+        onComplete: done,
     });
 };
 
@@ -266,7 +327,7 @@ const onLeave = (el, done) => {
         opacity: 0,
         scale: 0.8,
         duration: 0.3,
-        onComplete: done
+        onComplete: done,
     });
 };
 
@@ -288,3 +349,13 @@ watch(searchTerm, (value) => {
     });
 });
 </script>
+
+<style scoped>
+.play-icon {
+    transition: transform 0.3s;
+}
+
+.play-icon.playing {
+    transform: scale(1.2);
+}
+</style>

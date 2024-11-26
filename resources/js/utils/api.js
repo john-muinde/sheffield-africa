@@ -1,15 +1,15 @@
 // src/utils/api.js
-import axiosInstance from "../axiosInstance";
-import showToast from "./notification";
+import axiosInstance from '../axiosInstance';
+import showToast from './notification';
 
-import useAuth from "../composables/auth";
+import useAuth from '../composables/auth';
 const { logoutAdmin } = useAuth();
 
 export const apiRequest = async (method, url, data = null, config = {}) => {
     try {
-        if (method === "put") {
-            method = "post";
-            url += "?_method=PUT";
+        if (method === 'put') {
+            method = 'post';
+            url += '?_method=PUT';
         }
         const response = await axiosInstance({
             method,
@@ -24,13 +24,13 @@ export const apiRequest = async (method, url, data = null, config = {}) => {
         const message =
             error.response?.data?.message ||
             error.message ||
-            "Something went wrong";
+            'Something went wrong';
         validationErrors.message = message;
-        showToast(message, "error");
+        showToast(message, 'error');
 
         // if 401 and admin use logoutadmin othwerwise logout
         if (error.response.status === 401) {
-            if (window.location.pathname.includes("admin")) {
+            if (window.location.pathname.includes('admin')) {
                 logoutAdmin();
             }
         }

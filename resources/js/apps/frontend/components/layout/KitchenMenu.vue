@@ -1,114 +1,114 @@
 <template>
-    <div class="container">
-        <div class="row elements top-menu categories">
-            <div
-                class="col-xs-3 col-sm-4 col-md-2 white-bg"
-                v-for="(category, index) in mainCategories"
-                :key="index.id"
-            >
-                <router-link
-                    class="element-type"
-                    :to="getCategoryLink(category.id, category.name, 1)"
-                >
-                    <div class="element box">
-                        <p>
-                            <img
-                                class="menu-icon"
-                                :src="`/assets/images/menu-icons/${formattedName(
-                                    category.name
-                                )}.png`"
-                            />{{ category.name }}
-                        </p>
-                    </div>
-                </router-link>
-            </div>
-
-            <div class="col-xs-3 col-sm-4 col-md-2 white-bg">
-                <router-link
-                    class="element-type router-link-active active"
-                    to="/consultancy-and-design"
-                >
-                    <div class="element box box2 box3">
-                        <p>
-                            <img
-                                class="menu-icon"
-                                src="/assets/images/menu-icons/consultancy-design.png"
-                            />Consultancy & Design
-                        </p>
-                    </div>
-                </router-link>
-            </div>
-        </div>
-    </div>
-    <div class="mobile-categories">
-        <button
-            class="btn btn-default dropdown-toggle button"
-            type="button"
-            id="menu1"
-            data-toggle="dropdown"
+  <div class="container">
+    <div class="row elements top-menu categories">
+      <div
+        v-for="(category, index) in mainCategories"
+        :key="index.id"
+        class="col-xs-3 col-sm-4 col-md-2 white-bg"
+      >
+        <router-link
+          class="element-type"
+          :to="getCategoryLink(category.id, category.name, 1)"
         >
-            BROWSE CATEGORIES <span class="caret"></span>
-        </button>
-        <ul
-            class="dropdown-menu browse-categories mobile-menu"
-            role="menu"
-            aria-labelledby="menu1"
-        >
-            <li
-                role="presentation"
-                v-for="category in mainCategories"
-                :key="category.id"
-            >
-                <router-link
-                    class="element-type"
-                    :to="getCategoryLink(category.id, category.name, 1)"
-                >
-                    <div class="sf-with-ul">
-                        <p class="category">
-                            <img
-                                class="mobile-menu-icon"
-                                :src="`/assets/images/menu-icons/${formattedName(
-                                    category.name
-                                )}.png`"
-                            />
-                            {{ category.name }}
-                        </p>
-                    </div>
-                </router-link>
-            </li>
+          <div class="element box">
+            <p>
+              <img
+                class="menu-icon"
+                :src="`/assets/images/menu-icons/${formattedName(
+                  category.name
+                )}.png`"
+              />{{ category.name }}
+            </p>
+          </div>
+        </router-link>
+      </div>
 
-            <li role="presentation">
-                <router-link class="element-type" to="/consultancy-and-design">
-                    <div class="sf-with-ul">
-                        <p class="category">
-                            <img
-                                class="mobile-menu-icon"
-                                src="/assets/images/menu-icons/consultancy-design.png"
-                            />
-                            Consultancy & Design
-                        </p>
-                    </div>
-                </router-link>
-            </li>
-        </ul>
+      <div class="col-xs-3 col-sm-4 col-md-2 white-bg">
+        <router-link
+          class="element-type router-link-active active"
+          to="/consultancy-and-design"
+        >
+          <div class="element box box2 box3">
+            <p>
+              <img
+                class="menu-icon"
+                src="/assets/images/menu-icons/consultancy-design.png"
+              />Consultancy & Design
+            </p>
+          </div>
+        </router-link>
+      </div>
     </div>
+  </div>
+  <div class="mobile-categories">
+    <button
+      id="menu1"
+      class="btn btn-default dropdown-toggle button"
+      type="button"
+      data-toggle="dropdown"
+    >
+      BROWSE CATEGORIES <span class="caret"></span>
+    </button>
+    <ul
+      class="dropdown-menu browse-categories mobile-menu"
+      role="menu"
+      aria-labelledby="menu1"
+    >
+      <li
+        v-for="category in mainCategories"
+        :key="category.id"
+        role="presentation"
+      >
+        <router-link
+          class="element-type"
+          :to="getCategoryLink(category.id, category.name, 1)"
+        >
+          <div class="sf-with-ul">
+            <p class="category">
+              <img
+                class="mobile-menu-icon"
+                :src="`/assets/images/menu-icons/${formattedName(
+                  category.name
+                )}.png`"
+              />
+              {{ category.name }}
+            </p>
+          </div>
+        </router-link>
+      </li>
+
+      <li role="presentation">
+        <router-link class="element-type" to="/consultancy-and-design">
+          <div class="sf-with-ul">
+            <p class="category">
+              <img
+                class="mobile-menu-icon"
+                src="/assets/images/menu-icons/consultancy-design.png"
+              />
+              Consultancy & Design
+            </p>
+          </div>
+        </router-link>
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script setup>
-import { ref, onMounted, reactive, watch, computed } from "vue";
-import { useRoute } from "vue-router";
+import { ref, onMounted, reactive, watch, computed } from 'vue';
+import { useRoute } from 'vue-router';
 
 const mainCategories = ref([]);
 const mainSolutions = ref([]);
 
 const itemClass = (index) => {
-    return index % 2 === 0 ? "box" : "box2";
+    return index % 2 === 0 ? 'box' : 'box2';
 };
 
 // Fetch products based on the current page
 const fetchMainCategories = async () => {
     try {
-        const response = await axios.get("/api/get-main-categories/21", {});
+        const response = await axios.get('/api/get-main-categories/21', {});
         mainCategories.value = response.data.data;
     } catch (error) {
         console.error(error);
@@ -116,11 +116,11 @@ const fetchMainCategories = async () => {
 };
 
 const getCategoryLink = (id, name, page) => {
-    let transformedName = name.replace(/ /g, "-").replace(/\//g, "-");
+    let transformedName = name.replace(/ /g, '-').replace(/\//g, '-');
     // Remove consecutive dashes
-    transformedName = transformedName.replace(/-+/g, "-");
+    transformedName = transformedName.replace(/-+/g, '-');
     // Remove leading and trailing dashes
-    transformedName = transformedName.replace(/^-+|-+$/g, "");
+    transformedName = transformedName.replace(/^-+|-+$/g, '');
     // Convert to lowercase
     transformedName = transformedName.toLowerCase();
 
@@ -132,7 +132,7 @@ onMounted(async () => {
 });
 
 const formattedName = (category_name) => {
-    return category_name.toLowerCase().replace(/\s/g, "-");
+    return category_name.toLowerCase().replace(/\s/g, '-');
 };
 
 const route = useRoute();
@@ -140,12 +140,12 @@ const linkClass = computed(() => {
     const generatedLink = getCategoryLink(
         props.category.id,
         props.category.name,
-        1
+        1,
     );
     const currentPath = route.path;
     return currentPath.includes(generatedLink)
-        ? "element-type-active"
-        : "element-type";
+        ? 'element-type-active'
+        : 'element-type';
 });
 </script>
 

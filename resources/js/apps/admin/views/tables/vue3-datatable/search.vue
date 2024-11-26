@@ -1,37 +1,47 @@
 <template>
-    <div class="layout-px-spacing">
-        <teleport to="#breadcrumb">
-            <ul class="navbar-nav flex-row">
-                <li>
-                    <div class="page-header">
-                        <nav class="breadcrumb-one" aria-label="breadcrumb">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item">
-                                    <a href="javascript:;">DataTables</a>
-                                </li>
-                                <li class="breadcrumb-item active" aria-current="page">
-                                    <span>Search</span>
-                                </li>
-                            </ol>
-                        </nav>
-                    </div>
+  <div class="layout-px-spacing">
+    <teleport to="#breadcrumb">
+      <ul class="navbar-nav flex-row">
+        <li>
+          <div class="page-header">
+            <nav class="breadcrumb-one" aria-label="breadcrumb">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                  <a href="javascript:;">DataTables</a>
                 </li>
-            </ul>
-        </teleport>
+                <li class="breadcrumb-item active" aria-current="page">
+                  <span>Search</span>
+                </li>
+              </ol>
+            </nav>
+          </div>
+        </li>
+      </ul>
+    </teleport>
 
-        <div class="row layout-top-spacing">
-            <div class="col-xl-12 col-lg-12 col-sm-12 layout-spacing">
-                <div class="panel br-6 p-0">
-                    <div class="vue3-datatable">
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Search..." v-model="search" />
-                        </div>
-                        <vue3-datatable :rows="rows" :columns="cols" :totalRows="rows?.length" :search="search"> </vue3-datatable>
-                    </div>
-                </div>
+    <div class="row layout-top-spacing">
+      <div class="col-xl-12 col-lg-12 col-sm-12 layout-spacing">
+        <div class="panel br-6 p-0">
+          <div class="vue3-datatable">
+            <div class="form-group">
+              <input
+                v-model="search"
+                type="text"
+                class="form-control"
+                placeholder="Search..."
+              />
             </div>
+            <vue3-datatable
+              :rows="rows"
+              :columns="cols"
+              :total-rows="rows?.length"
+              :search="search"
+            />
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </template>
 
 <script setup>

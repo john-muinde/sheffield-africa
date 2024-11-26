@@ -11,7 +11,9 @@
                 <div class="col-md-12">
                   <div class="row">
                     <div class="col-lg-7 who-we-are">
-                      <h2 class="our-history-title">Consultancy & Design</h2>
+                      <h2 class="our-history-title">
+                        Consultancy & Design
+                      </h2>
                       <p class="lead about-us-lead text-primary mb-1">
                         Crafting Vision into Reality
                       </p>
@@ -87,10 +89,8 @@
                         <li>
                           <span class="badge badge-secondary">6</span>
                           <span class="li-text">
-                            <strong
-                              >Implementation of Hygiene and Safety Standards
-                              (HACCP):</strong
-                            >
+                            <strong>Implementation of Hygiene and Safety Standards
+                              (HACCP):</strong>
                             Incorporating and implementing stringent hygiene and safety
                             standards, particularly adhering to Hazard Analysis and
                             Critical Control Points (HACCP) guidelines.
@@ -134,8 +134,6 @@
                           </span>
                         </li>
                       </ul>
-
-
                     </div>
                     <!-- End .col-lg-5 -->
 
@@ -148,13 +146,11 @@
                           class=""
                         />
 
-                        <img src="/assets/images/design/image3_design_c.jpg">
+                        <img src="/assets/images/design/image3_design_c.jpg" />
                       </div>
                       <!-- End .about-images -->
                     </div>
                     <!-- End .col-lg-6 -->
-
-
                   </div>
                 </div>
               </div>
@@ -167,124 +163,118 @@
         <div class="page-content mt-4 pt-2">
           <div class="container">
             <div class="row">
-               <div class="row">
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="row">
+                    <div class="col-lg-4 offset-lg-1">
+                      <img src="/assets/images/design/image1_design_c.jpg" class="img" />
+                    </div>
 
-                        <div class="col-lg-12">
+                    <div class="col-lg-6 offset-lg-1">
+                      <h5 class="mt-2 sub-title-cd">
+                        Pre Design & Consultancy
+                      </h5>
 
-                            <div class="row">
+                      <ul class="graduate-trainee-program mb-3">
+                        <li>
+                          <span class="badge badge-secondary">1</span>
+                          <span class="li-text">
+                            <strong> Equipment Layout, Design, and Schedule:</strong> We
+                            will provide a detailed plan specifying equipment placement
+                            and schedule.
+                          </span>
+                        </li>
+                        <li>
+                          <span class="badge badge-secondary">2</span>
+                          <span class="li-text">
+                            <strong>Service Drawings:</strong> Comprehensive 2D and
+                            elevation drawings will be supplied, covering Gas, Plumbing,
+                            and Electrical requirements.
+                          </span>
+                        </li>
+                        <li>
+                          <span class="badge badge-secondary">3</span>
+                          <span class="li-text">
+                            <strong>Power Load Requirement:</strong> We will outline the
+                            power load necessary for the kitchen equipment.
+                          </span>
+                        </li>
+                        <li>
+                          <span class="badge badge-secondary">4</span>
+                          <span class="li-text">
+                            <strong>Bill of Quantity:</strong> A complete inventory of all
+                            equipment will be included.
+                          </span>
+                        </li>
+                      </ul>
+                    </div>
 
-                                <div class="col-lg-4 offset-lg-1">
-                                  <img src="/assets/images/design/image1_design_c.jpg" class="img">
-                                </div>
+                    <div class="col-lg-6 mt-2">
+                      <h5 class="mt-2 sub-title-cd">
+                        Project Implementation
+                      </h5>
 
-                                <div class="col-lg-6 offset-lg-1">
+                      <ul class="graduate-trainee-program">
+                        <li>
+                          <span class="badge badge-secondary">5</span>
+                          <span class="li-text">
+                            <strong>Program of Works:</strong> We will provide a timeline
+                            and plan of action and monitor the project timeline and budget
+                            to ensure successful completion.
+                          </span>
+                        </li>
 
-                                  <h5 class="mt-2 sub-title-cd">Pre Design & Consultancy</h5>
+                        <li>
+                          <span class="badge badge-secondary">6</span>
+                          <span class="li-text">
+                            <strong>Project Management:</strong> Overseeing the
+                            implementation of the design, working with contractors and
+                            subcontractors.
+                          </span>
+                        </li>
 
-                                  <ul class="graduate-trainee-program mb-3">
-                                    <li>
-                                      <span class="badge badge-secondary">1</span>
-                                      <span class="li-text">
-                                        <strong> Equipment Layout, Design, and Schedule:</strong> We
-                                        will provide a detailed plan specifying equipment placement
-                                        and schedule.
-                                      </span>
-                                    </li>
-                                    <li>
-                                      <span class="badge badge-secondary">2</span>
-                                      <span class="li-text">
-                                        <strong>Service Drawings:</strong> Comprehensive 2D and
-                                        elevation drawings will be supplied, covering Gas, Plumbing,
-                                        and Electrical requirements.
-                                      </span>
-                                    </li>
-                                    <li>
-                                      <span class="badge badge-secondary">3</span>
-                                      <span class="li-text">
-                                        <strong>Power Load Requirement:</strong> We will outline the
-                                        power load necessary for the kitchen equipment.
-                                      </span>
-                                    </li>
-                                    <li>
-                                      <span class="badge badge-secondary">4</span>
-                                      <span class="li-text">
-                                        <strong>Bill of Quantity:</strong> A complete inventory of all
-                                        equipment will be included.
-                                      </span>
-                                    </li>
-                                  </ul>
+                        <li>
+                          <span class="badge badge-secondary">7</span>
+                          <span class="li-text">
+                            <strong>On-Site Technician:</strong> An on-site technician
+                            will be available to mark service points as needed.
+                          </span>
+                        </li>
 
-                                </div>
+                        <li>
+                          <span class="badge badge-secondary">8</span>
+                          <span class="li-text">
+                            <strong>Supply and Installation:</strong> We will take care of
+                            equipment supply and professional installation.
+                          </span>
+                        </li>
 
-                                <div class="col-lg-6 mt-2">
+                        <li>
+                          <span class="badge badge-secondary">9</span>
+                          <span class="li-text">
+                            <strong>User Training:</strong> During handover and
+                            commissioning, we will provide training to ensure your team is
+                            proficient in equipment usage.
+                          </span>
+                        </li>
 
-                                  <h5 class="mt-2 sub-title-cd">Project Implementation</h5>
+                        <li>
+                          <span class="badge badge-secondary">10</span>
+                          <span class="li-text">
+                            <strong>After-Sales Support:</strong> We are committed to
+                            providing ongoing support, including preventive maintenance,
+                            to ensure the kitchen's continued efficiency.
+                          </span>
+                        </li>
+                      </ul>
+                    </div>
 
-                                  <ul class="graduate-trainee-program">
-                                    <li>
-                                      <span class="badge badge-secondary">5</span>
-                                      <span class="li-text">
-                                        <strong>Program of Works:</strong> We will provide a timeline
-                                        and plan of action and monitor the project timeline and budget
-                                        to ensure successful completion.
-                                      </span>
-                                    </li>
-
-                                    <li>
-                                      <span class="badge badge-secondary">6</span>
-                                      <span class="li-text">
-                                        <strong>Project Management:</strong> Overseeing the
-                                        implementation of the design, working with contractors and
-                                        subcontractors.
-                                      </span>
-                                    </li>
-
-                                    <li>
-                                      <span class="badge badge-secondary">7</span>
-                                      <span class="li-text">
-                                        <strong>On-Site Technician:</strong> An on-site technician
-                                        will be available to mark service points as needed.
-                                      </span>
-                                    </li>
-
-                                    <li>
-                                      <span class="badge badge-secondary">8</span>
-                                      <span class="li-text">
-                                        <strong>Supply and Installation:</strong> We will take care of
-                                        equipment supply and professional installation.
-                                      </span>
-                                    </li>
-
-                                    <li>
-                                      <span class="badge badge-secondary">9</span>
-                                      <span class="li-text">
-                                        <strong>User Training:</strong> During handover and
-                                        commissioning, we will provide training to ensure your team is
-                                        proficient in equipment usage.
-                                      </span>
-                                    </li>
-
-                                    <li>
-                                      <span class="badge badge-secondary">10</span>
-                                      <span class="li-text">
-                                        <strong>After-Sales Support:</strong> We are committed to
-                                        providing ongoing support, including preventive maintenance,
-                                        to ensure the kitchen's continued efficiency.
-                                      </span>
-                                    </li>
-                                  </ul>
-
-                                </div>
-
-                                <div class="col-lg-6">
-                                    <img src="/assets/images/design/image2_design_c.jpg">
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                      </div>
+                    <div class="col-lg-6">
+                      <img src="/assets/images/design/image2_design_c.jpg" />
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -302,10 +292,10 @@ import {
   reactive,
   nextTick,
   watch,
-} from "vue";
+} from 'vue';
 
-import { useMeta } from "../../admin/composables/use-meta";
-useMeta({ title: "Consultancy & Design" });
+import { useMeta } from '../../admin/composables/use-meta';
+useMeta({ title: 'Consultancy & Design' });
 </script>
 
 <style>

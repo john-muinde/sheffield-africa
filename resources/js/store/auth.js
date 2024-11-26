@@ -1,5 +1,5 @@
-import axios from "axios";
-import axiosInstance from "../axiosInstance";
+import axios from 'axios';
+import axiosInstance from '../axiosInstance';
 
 export default {
     namespaced: true,
@@ -26,23 +26,23 @@ export default {
     actions: {
         login({ commit }) {
             return axios
-                .get("/api/user")
+                .get('/api/user')
                 .then(({ data }) => {
-                    commit("SET_USER", data);
-                    commit("SET_AUTHENTICATED", true);
+                    commit('SET_USER', data);
+                    commit('SET_AUTHENTICATED', true);
                 })
                 .catch(({ res }) => {
-                    commit("SET_USER", {});
-                    commit("SET_AUTHENTICATED", false);
+                    commit('SET_USER', {});
+                    commit('SET_AUTHENTICATED', false);
                 });
         },
         getUser({ commit }) {
             return axiosInstance
-                .get("/api/user")
+                .get('/api/user')
                 .then(({ data }) => {
                     if (data.success) {
-                        commit("SET_USER", data.data);
-                        commit("SET_AUTHENTICATED", true);
+                        commit('SET_USER', data.data);
+                        commit('SET_AUTHENTICATED', true);
                         // router.push({name: 'dashboard'})
                     }
                     // else {
@@ -50,14 +50,14 @@ export default {
                     //     commit('SET_AUTHENTICATED', false)
                     // }
                 })
-                .catch(({ res }) => {
-                    commit("SET_USER", {});
-                    commit("SET_AUTHENTICATED", false);
+                .catch(() => {
+                    commit('SET_USER', {});
+                    commit('SET_AUTHENTICATED', false);
                 });
         },
         logout({ commit }) {
-            commit("SET_USER", {});
-            commit("SET_AUTHENTICATED", false);
+            commit('SET_USER', {});
+            commit('SET_AUTHENTICATED', false);
         },
     },
 };

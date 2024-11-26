@@ -1,19 +1,19 @@
-import { ref } from "vue";
-import { useRouter } from "vue-router";
-import { apiRequest } from "../utils/api";
-import { Modal } from "ant-design-vue";
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+import { apiRequest } from '../utils/api';
+import { Modal } from 'ant-design-vue';
 
 export default function useClients() {
     const clients = ref([]);
     const clientList = ref([]);
     const client = ref({
-        name: "",
-        phone: "",
-        email: "",
-        address: "",
-        is_published: "",
-        main_image_path: "",
-        description: "",
+        name: '',
+        phone: '',
+        email: '',
+        address: '',
+        is_published: '',
+        main_image_path: '',
+        description: '',
     });
 
     const router = useRouter();
@@ -22,16 +22,16 @@ export default function useClients() {
 
     const getClients = async (
         page = 1,
-        search_id = "",
-        search_title = "",
-        search_global = "",
-        order_column = "created_at",
-        order_direction = "desc"
+        search_id = '',
+        search_title = '',
+        search_global = '',
+        order_column = 'created_at',
+        order_direction = 'desc',
     ) => {
         try {
             const response = await apiRequest(
-                "get",
-                `/api/clients?page=${page}&search_id=${search_id}&search_title=${search_title}&search_global=${search_global}&order_column=${order_column}&order_direction=${order_direction}`
+                'get',
+                `/api/clients?page=${page}&search_id=${search_id}&search_title=${search_title}&search_global=${search_global}&order_column=${order_column}&order_direction=${order_direction}`,
             );
             clients.value = response;
         } catch (errors) {
@@ -41,7 +41,7 @@ export default function useClients() {
 
     const getClient = async (id) => {
         try {
-            const response = await apiRequest("get", `/api/clients/${id}`);
+            const response = await apiRequest('get', `/api/clients/${id}`);
             client.value = response;
         } catch (errors) {
             validationErrors.value = errors;
@@ -63,21 +63,21 @@ export default function useClients() {
         }
 
         const config = {
-            headers: { "Content-Type": "multipart/form-data" },
+            headers: { 'Content-Type': 'multipart/form-data' },
         };
 
         try {
-            await apiRequest("post", "/api/clients", serializedPost, config);
-            router.push({ name: "clients.index" });
+            await apiRequest('post', '/api/clients', serializedPost, config);
+            router.push({ name: 'clients.index' });
             client.value = {
-                name: "",
-                phone: "",
-                email: "",
-                address: "",
-                is_published: "",
-                description: "",
+                name: '',
+                phone: '',
+                email: '',
+                address: '',
+                is_published: '',
+                description: '',
             };
-            showToast("Client saved successfully", "success");
+            showToast('Client saved successfully', 'success');
         } catch (errors) {
             validationErrors.value = errors;
         } finally {
@@ -100,18 +100,18 @@ export default function useClients() {
         }
 
         const config = {
-            headers: { "Content-Type": "multipart/form-data" },
+            headers: { 'Content-Type': 'multipart/form-data' },
         };
 
         try {
             await apiRequest(
-                "put",
+                'put',
                 `/api/clients/${client.id}`,
                 serializedPost,
-                config
+                config,
             );
-            router.push({ name: "clients.index" });
-            showToast("Client updated successfully", "success");
+            router.push({ name: 'clients.index' });
+            showToast('Client updated successfully', 'success');
         } catch (errors) {
             validationErrors.value = errors;
         } finally {
@@ -121,27 +121,27 @@ export default function useClients() {
 
     const deleteClient = async (id) => {
         Modal.confirm({
-            title: "Are you sure?",
-            content: "You won't be able to revert this action!",
-            okText: "Yes, delete it!",
-            okType: "danger",
-            cancelText: "No, cancel",
+            title: 'Are you sure?',
+            content: 'You won\'t be able to revert this action!',
+            okText: 'Yes, delete it!',
+            okType: 'danger',
+            cancelText: 'No, cancel',
             onOk() {
-                apiRequest("delete", `/api/clients/${id}`).then(() => {
+                apiRequest('delete', `/api/clients/${id}`).then(() => {
                     getClients();
-                    router.push({ name: "clients.index" });
-                    showToast("Client deleted successfully", "success");
+                    router.push({ name: 'clients.index' });
+                    showToast('Client deleted successfully', 'success');
                 });
             },
             onCancel() {
-                console.log("Cancel");
+                console.log('Cancel');
             },
         });
     };
 
     const getClientList = async () => {
         try {
-            const response = await apiRequest("get", "/api/client-list");
+            const response = await apiRequest('get', '/api/client-list');
             clientList.value = response;
         } catch (errors) {
             validationErrors.value = errors;

@@ -1,5 +1,5 @@
-import { onBeforeRouteLeave } from "vue-router";
-import store from "../store";
+
+import store from '../store';
 
 function requireAdminLogin(to, from, next) {
     let isLogin = false;
@@ -8,7 +8,7 @@ function requireAdminLogin(to, from, next) {
     if (isLogin) {
         next();
     } else {
-        next("/admin/login");
+        next('/admin/login');
     }
 }
 
@@ -19,1113 +19,1073 @@ function requireLogin(to, from, next) {
     if (isLogin) {
         next();
     } else {
-        next("/login");
+        next('/login');
     }
 }
 
-function guest(to, from, next) {
-    let isLogin;
-    isLogin = !!store.state.auth.authenticated;
-
-    if (isLogin) {
-        next("/");
-    } else {
-        next();
-    }
-}
 
 const routes = [
     // FRONTEND ROUTES
     {
-        path: "/",
+        path: '/',
         //beforeEnter: guest,
 
         children: [
             {
-                path: "/login",
-                name: "frontend.login",
-                component: () => import("../apps/frontend/views/Login.vue"),
+                path: '/login',
+                name: 'frontend.login',
+                component: () => import('../apps/frontend/views/Login.vue'),
                 meta: {
-                    layout: "frontend",
-                    title: "Login to Sheffield",
+                    layout: 'frontend',
+                    title: 'Login to Sheffield',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
             },
             {
-                path: "/register",
-                name: "frontend.register",
-                component: () => import("../apps/frontend/views/Register.vue"),
+                path: '/register',
+                name: 'frontend.register',
+                component: () => import('../apps/frontend/views/Register.vue'),
                 meta: {
-                    layout: "frontend",
-                    title: "Register to Sheffield Africa Website",
+                    layout: 'frontend',
+                    title: 'Register to Sheffield Africa Website',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
             },
             {
-                path: "/",
-                name: "frontend.home",
-                component: () => import("../apps/frontend/views/Home.vue"),
+                path: '/',
+                name: 'frontend.home',
+                component: () => import('../apps/frontend/views/Home.vue'),
                 meta: {
-                    layout: "frontend",
-                    title: "Home",
+                    layout: 'frontend',
+                    title: 'Home',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
             },
             {
-                path: "/offers",
-                name: "frontend.offers",
+                path: '/offers',
+                name: 'frontend.offers',
                 component: () =>
                     import(
-                        /* webpackChunkName: "offers" */ "../apps/frontend/views/Landing.vue"
+                        /* webpackChunkName: "offers" */ '../apps/frontend/views/Landing.vue'
                     ),
                 meta: {
-                    layout: "frontend",
-                    title: "Offers",
+                    layout: 'frontend',
+                    title: 'Offers',
                     metaTags: [
                         {
-                            name: "description",
+                            name: 'description',
                             content:
-                                "Here are our top offers offered at Sheffield Africa.",
+                                'Here are our top offers offered at Sheffield Africa.',
                         },
                         {
-                            property: "og:description",
+                            property: 'og:description',
                             content:
-                                "Here are our top offers at Sheffield Africa",
+                                'Here are our top offers at Sheffield Africa',
                         },
                     ],
                 },
             },
 
             {
-                path: "/about-us",
-                name: "about",
+                path: '/about-us',
+                name: 'about',
                 component: () =>
                     import(
-                        /* webpackChunkName: "about" */ "../apps/frontend/views/About.vue"
+                        /* webpackChunkName: "about" */ '../apps/frontend/views/About.vue'
                     ),
                 meta: {
-                    layout: "frontend",
-                    title: "About Us",
+                    layout: 'frontend',
+                    title: 'About Us',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
             },
             {
-                path: "/about-us/who-we-are",
-                name: "who-we-are",
+                path: '/about-us/who-we-are',
+                name: 'who-we-are',
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/WhoWeAre.vue"
+                        /* webpackChunkName: "index" */ '../apps/frontend/views/WhoWeAre.vue'
                     ),
                 meta: {
-                    layout: "frontend",
-                    title: "Who We Are",
+                    layout: 'frontend',
+                    title: 'Who We Are',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
             },
             {
-                path: "/about-us/how-we-work",
-                name: "how-we-work",
+                path: '/about-us/how-we-work',
+                name: 'how-we-work',
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/HowWeWork.vue"
+                        /* webpackChunkName: "index" */ '../apps/frontend/views/HowWeWork.vue'
                     ),
                 meta: {
-                    layout: "frontend",
-                    title: "How We Work",
+                    layout: 'frontend',
+                    title: 'How We Work',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
             },
             {
-                path: "/about-us/company-culture",
-                name: "company-culture",
+                path: '/about-us/company-culture',
+                name: 'company-culture',
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/CompanyCulture.vue"
+                        /* webpackChunkName: "index" */ '../apps/frontend/views/CompanyCulture.vue'
                     ),
                 meta: {
-                    layout: "frontend",
-                    title: "Company Culture",
+                    layout: 'frontend',
+                    title: 'Company Culture',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
             },
             {
-                path: "/about-us/sheffield-advantage",
-                name: "sheffield-advantage",
+                path: '/about-us/sheffield-advantage',
+                name: 'sheffield-advantage',
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/SheffieldAdvantage.vue"
+                        /* webpackChunkName: "index" */ '../apps/frontend/views/SheffieldAdvantage.vue'
                     ),
                 meta: {
-                    layout: "frontend",
-                    title: "Sheffield Advantage",
+                    layout: 'frontend',
+                    title: 'Sheffield Advantage',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
             },
             {
-                path: "/about-us/our-leadership",
-                name: "our-leadership",
+                path: '/about-us/our-leadership',
+                name: 'our-leadership',
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/OurLeadership.vue"
+                        /* webpackChunkName: "index" */ '../apps/frontend/views/OurLeadership.vue'
                     ),
                 meta: {
-                    layout: "frontend",
-                    title: "Our Leadership",
+                    layout: 'frontend',
+                    title: 'Our Leadership',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
             },
             {
-                path: "/about-us/our-location-and-facilities",
-                name: "our-location-facilities",
+                path: '/about-us/our-location-and-facilities',
+                name: 'our-location-facilities',
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/OurLocationFacilities.vue"
+                        /* webpackChunkName: "index" */ '../apps/frontend/views/OurLocationFacilities.vue'
                     ),
                 meta: {
-                    layout: "frontend",
-                    title: "Our Location Facilities",
+                    layout: 'frontend',
+                    title: 'Our Location Facilities',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
             },
 
             {
-                path: "/media",
-                name: "media",
+                path: '/media',
+                name: 'media',
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/Media_Center.vue"
+                        /* webpackChunkName: "index" */ '../apps/frontend/views/Media_Center.vue'
                     ),
                 meta: {
-                    layout: "frontend",
-                    title: "Our Blogs",
+                    layout: 'frontend',
+                    title: 'Our Blogs',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
             },
 
             {
-                path: "/media/blogs",
-                name: "blogs",
+                path: '/media/blogs',
+                name: 'blogs',
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/Blogs.vue"
+                        /* webpackChunkName: "index" */ '../apps/frontend/views/Blogs.vue'
                     ),
                 meta: {
-                    layout: "frontend",
-                    title: "Our Blogs",
+                    layout: 'frontend',
+                    title: 'Our Blogs',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
             },
 
             {
-                path: "/media/blogs/page/:page",
-                name: "blogs.pagenation",
+                path: '/media/blogs/page/:page',
+                name: 'blogs.pagenation',
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/Blogs.vue"
+                        /* webpackChunkName: "index" */ '../apps/frontend/views/Blogs.vue'
                     ),
                 meta: {
-                    layout: "frontend",
-                    title: "Our Blogs",
+                    layout: 'frontend',
+                    title: 'Our Blogs',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
             },
 
             {
-                path: "/media/blogs/:id/:name",
-                name: "blogs.detail",
+                path: '/media/blogs/:id/:name',
+                name: 'blogs.detail',
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/BlogDetails.vue"
+                        /* webpackChunkName: "index" */ '../apps/frontend/views/BlogDetails.vue'
                     ),
                 meta: {
-                    layout: "frontend",
-                    title: "Our Blogs",
+                    layout: 'frontend',
+                    title: 'Our Blogs',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
             },
 
             {
-                path: "/media/videos",
-                name: "media-videos",
+                path: '/media/videos',
+                name: 'media-videos',
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/Media_Videos.vue"
+                        /* webpackChunkName: "index" */ '../apps/frontend/views/Media_Videos.vue'
                     ),
                 meta: {
-                    layout: "frontend",
-                    title: "Our Blogs",
+                    layout: 'frontend',
+                    title: 'Our Blogs',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
             },
 
             {
-                path: "/media/in-the-news",
-                name: "media-in-the-news",
+                path: '/media/in-the-news',
+                name: 'media-in-the-news',
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/Media_In_The_News.vue"
+                        /* webpackChunkName: "index" */ '../apps/frontend/views/Media_In_The_News.vue'
                     ),
                 meta: {
-                    layout: "frontend",
-                    title: "Our Blogs",
+                    layout: 'frontend',
+                    title: 'Our Blogs',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
             },
 
             {
-                path: "/media/in-the-news/page/:page",
-                name: "media-in-the-news.pages",
+                path: '/media/in-the-news/page/:page',
+                name: 'media-in-the-news.pages',
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/Media_In_The_News.vue"
+                        /* webpackChunkName: "index" */ '../apps/frontend/views/Media_In_The_News.vue'
                     ),
                 meta: {
-                    layout: "frontend",
-                    title: "Our Blogs",
+                    layout: 'frontend',
+                    title: 'Our Blogs',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
             },
 
             {
-                path: "/media/gallery",
-                name: "media-gallery",
+                path: '/media/gallery',
+                name: 'media-gallery',
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/Media_Gallery.vue"
+                        /* webpackChunkName: "index" */ '../apps/frontend/views/Media_Gallery.vue'
                     ),
                 meta: {
-                    layout: "frontend",
-                    title: "Our Blogs",
+                    layout: 'frontend',
+                    title: 'Our Blogs',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
             },
 
             {
-                path: "/media/gallery/page/:page",
-                name: "blogs.gallery",
+                path: '/media/gallery/page/:page',
+                name: 'blogs.gallery',
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/Media_Gallery.vue"
+                        /* webpackChunkName: "index" */ '../apps/frontend/views/Media_Gallery.vue'
                     ),
                 meta: {
-                    layout: "frontend",
-                    title: "Our Gallery",
+                    layout: 'frontend',
+                    title: 'Our Gallery',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
             },
 
             {
-                path: "/media/gallery/:id/:name",
-                name: "gallery.detail",
+                path: '/media/gallery/:id/:name',
+                name: 'gallery.detail',
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/Media_Gallery_Details.vue"
+                        /* webpackChunkName: "index" */ '../apps/frontend/views/Media_Gallery_Details.vue'
                     ),
                 meta: {
-                    layout: "frontend",
-                    title: "Our Gallery",
+                    layout: 'frontend',
+                    title: 'Our Gallery',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
             },
 
             {
-                path: "/media/brochures-and-catalogs",
-                name: "media-documents",
+                path: '/media/brochures-and-catalogs',
+                name: 'media-documents',
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/Media_Documents.vue"
+                        /* webpackChunkName: "index" */ '../apps/frontend/views/Media_Documents.vue'
                     ),
 
                 meta: {
-                    layout: "frontend",
-                    title: "Our Blogs",
+                    layout: 'frontend',
+                    title: 'Our Blogs',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
-                        },
-                    ],
-                },
-            },
-
-            {
-                path: "/media/newsletters",
-                name: "media-newsletters",
-                component: () =>
-                    import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/Media_Newsletters.vue"
-                    ),
-                meta: {
-                    layout: "frontend",
-                    title: "Newsletters",
-                    metaTags: [
-                        {
-                            name: "description",
-                            content: "The about page of our example app.",
-                        },
-                        {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
             },
 
             {
-                path: "/faq",
-                name: "faq",
+                path: '/media/newsletters',
+                name: 'media-newsletters',
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/FAQ.vue"
+                        /* webpackChunkName: "index" */ '../apps/frontend/views/Media_Newsletters.vue'
                     ),
                 meta: {
-                    layout: "frontend",
-                    title: "FAQ",
+                    layout: 'frontend',
+                    title: 'Newsletters',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
             },
 
             {
-                path: "/privacy-policy",
-                name: "Privacy Policy",
+                path: '/faq',
+                name: 'faq',
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/PrivacyPolicy.vue"
+                        /* webpackChunkName: "index" */ '../apps/frontend/views/FAQ.vue'
                     ),
                 meta: {
-                    layout: "frontend",
-                    title: "Privacy Policy",
+                    layout: 'frontend',
+                    title: 'FAQ',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
             },
 
             {
-                path: "/terms-and-conditions",
-                name: "Terms & Conditions",
+                path: '/privacy-policy',
+                name: 'Privacy Policy',
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/TermsAndConditions.vue"
+                        /* webpackChunkName: "index" */ '../apps/frontend/views/PrivacyPolicy.vue'
                     ),
                 meta: {
-                    layout: "frontend",
-                    title: "Terms & Conditions",
+                    layout: 'frontend',
+                    title: 'Privacy Policy',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
             },
 
             {
-                path: "/lease-and-finance",
-                name: "Lease & Finance",
+                path: '/terms-and-conditions',
+                name: 'Terms & Conditions',
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/LeaseAndFinance.vue"
+                        /* webpackChunkName: "index" */ '../apps/frontend/views/TermsAndConditions.vue'
                     ),
                 meta: {
-                    layout: "frontend",
-                    title: "Lease & Finance",
+                    layout: 'frontend',
+                    title: 'Terms & Conditions',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
             },
 
             {
-                path: "/customer-service",
-                name: "Customer Service",
+                path: '/lease-and-finance',
+                name: 'Lease & Finance',
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/CustomerService.vue"
+                        /* webpackChunkName: "index" */ '../apps/frontend/views/LeaseAndFinance.vue'
                     ),
                 meta: {
-                    layout: "frontend",
-                    title: "Customer Service",
+                    layout: 'frontend',
+                    title: 'Lease & Finance',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
             },
 
             {
-                path: "/cookie-policy",
-                name: "Cookie Policy",
+                path: '/customer-service',
+                name: 'Customer Service',
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/CookiePolicy.vue"
+                        /* webpackChunkName: "index" */ '../apps/frontend/views/CustomerService.vue'
                     ),
                 meta: {
-                    layout: "frontend",
-                    title: "Cookie Policy",
+                    layout: 'frontend',
+                    title: 'Customer Service',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
             },
 
             {
-                path: "/warranty-terms",
-                name: "warranty_terms",
+                path: '/cookie-policy',
+                name: 'Cookie Policy',
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/WarrantyTerms.vue"
+                        /* webpackChunkName: "index" */ '../apps/frontend/views/CookiePolicy.vue'
                     ),
                 meta: {
-                    layout: "frontend",
-                    title: "Warranty Terms",
+                    layout: 'frontend',
+                    title: 'Cookie Policy',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
             },
 
             {
-                path: "/deliveryinformation",
-                name: "deliveryinformation",
-                component: () =>
-                    import("../apps/frontend/views/DeliveryInformation.vue"),
-                meta: {
-                    layout: "frontend",
-                    title: "Delivery Information",
-                    metaTags: [
-                        {
-                            name: "description",
-                            content: "The about page of our example app.",
-                        },
-                        {
-                            property: "og:description",
-                            content: "The about page of our example app.",
-                        },
-                    ],
-                },
-            },
-            {
-                path: "/contact-us",
-                name: "contact",
-                component: () => import("../apps/frontend/views/ContactUs.vue"),
-                meta: {
-                    layout: "frontend",
-                    title: "Contact Us",
-                    metaTags: [
-                        {
-                            name: "description",
-                            content: "The about page of our example app.",
-                        },
-                        {
-                            property: "og:description",
-                            content: "The about page of our example app.",
-                        },
-                    ],
-                },
-            },
-            {
-                path: "/careers",
-                name: "career",
+                path: '/warranty-terms',
+                name: 'warranty_terms',
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/Career.vue"
+                        /* webpackChunkName: "index" */ '../apps/frontend/views/WarrantyTerms.vue'
                     ),
                 meta: {
-                    layout: "frontend",
-                    title: "Career",
+                    layout: 'frontend',
+                    title: 'Warranty Terms',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
+                        },
+                    ],
+                },
+            },
+
+            {
+                path: '/deliveryinformation',
+                name: 'deliveryinformation',
+                component: () =>
+                    import('../apps/frontend/views/DeliveryInformation.vue'),
+                meta: {
+                    layout: 'frontend',
+                    title: 'Delivery Information',
+                    metaTags: [
+                        {
+                            name: 'description',
+                            content: 'The about page of our example app.',
+                        },
+                        {
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
             },
             {
-                path: "/events",
-                name: "events",
-                component: () =>
-                    import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/Events.vue"
-                    ),
+                path: '/contact-us',
+                name: 'contact',
+                component: () => import('../apps/frontend/views/ContactUs.vue'),
                 meta: {
-                    layout: "frontend",
-                    title: "Events",
+                    layout: 'frontend',
+                    title: 'Contact Us',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
             },
             {
-                path: "/projects",
-                name: "projects",
+                path: '/careers',
+                name: 'career',
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/Projects.vue"
+                        /* webpackChunkName: "index" */ '../apps/frontend/views/Career.vue'
                     ),
                 meta: {
-                    layout: "frontend",
-                    title: "Projects",
+                    layout: 'frontend',
+                    title: 'Career',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
             },
             {
-                path: "/project/:id/:name",
-                name: "project.details",
+                path: '/events',
+                name: 'events',
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/ProjectDetails.vue"
+                        /* webpackChunkName: "index" */ '../apps/frontend/views/Events.vue'
                     ),
                 meta: {
-                    layout: "frontend",
-                    title: "Project Details",
+                    layout: 'frontend',
+                    title: 'Events',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
+                        },
+                    ],
+                },
+            },
+            {
+                path: '/projects',
+                name: 'projects',
+                component: () =>
+                    import(
+                        /* webpackChunkName: "index" */ '../apps/frontend/views/Projects.vue'
+                    ),
+                meta: {
+                    layout: 'frontend',
+                    title: 'Projects',
+                    metaTags: [
+                        {
+                            name: 'description',
+                            content: 'The about page of our example app.',
+                        },
+                        {
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
+                        },
+                    ],
+                },
+            },
+            {
+                path: '/project/:id/:name',
+                name: 'project.details',
+                component: () =>
+                    import(
+                        /* webpackChunkName: "index" */ '../apps/frontend/views/ProjectDetails.vue'
+                    ),
+                meta: {
+                    layout: 'frontend',
+                    title: 'Project Details',
+                    metaTags: [
+                        {
+                            name: 'description',
+                            content: 'The about page of our example app.',
+                        },
+                        {
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
                 beforeEnter: (to, from, next) => {
                     // Transform the name parameter by replacing dashes with spaces
-                    const name = to.params.name.replace(/-/g, " ");
+                    const name = to.params.name.replace(/-/g, ' ');
                     // Add the transformed name to the route's params object
                     to.params.transformedName = name;
                     next();
                 },
             },
             {
-                path: "/cart",
-                name: "cart",
-                component: () => import("../apps/frontend/views/Cart.vue"),
+                path: '/cart',
+                name: 'cart',
+                component: () => import('../apps/frontend/views/Cart.vue'),
                 meta: {
-                    layout: "frontend",
-                    title: "Cart",
+                    layout: 'frontend',
+                    title: 'Cart',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
             },
             {
-                path: "/request-for-quote",
-                name: "request_quote",
+                path: '/request-for-quote',
+                name: 'request_quote',
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/RequestQuote.vue"
+                        /* webpackChunkName: "index" */ '../apps/frontend/views/RequestQuote.vue'
                     ),
                 meta: {
-                    layout: "frontend",
-                    title: "Cart",
+                    layout: 'frontend',
+                    title: 'Cart',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
             },
             {
-                path: "/checkout",
-                name: "checkout",
-                component: () => import("../apps/frontend/views/Checkout.vue"),
+                path: '/checkout',
+                name: 'checkout',
+                component: () => import('../apps/frontend/views/Checkout.vue'),
                 meta: {
-                    layout: "frontend",
-                    title: "Checkout",
+                    layout: 'frontend',
+                    title: 'Checkout',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
             },
 
             {
-                path: "/consultancy-and-Design",
-                name: "Consultancy & Design",
+                path: '/consultancy-and-Design',
+                name: 'Consultancy & Design',
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/Consultancy_Design.vue"
+                        /* webpackChunkName: "index" */ '../apps/frontend/views/Consultancy_Design.vue'
                     ),
                 meta: {
-                    layout: "frontend",
-                    title: "Cart",
+                    layout: 'frontend',
+                    title: 'Cart',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
             },
 
             {
-                path: "/category/:id/:name",
-                name: "frontend.category",
+                path: '/category/:id/:name',
+                name: 'frontend.category',
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/ProductCategory.vue"
+                        /* webpackChunkName: "index" */ '../apps/frontend/views/ProductCategory.vue'
                     ),
                 meta: {
-                    layout: "frontend",
-                    title: "Category",
+                    layout: 'frontend',
+                    title: 'Category',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
             },
 
             {
-                path: "/category/:id/:name/page/:page",
-                name: "frontend.category.page",
+                path: '/category/:id/:name/page/:page',
+                name: 'frontend.category.page',
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/ProductCategory.vue"
+                        /* webpackChunkName: "index" */ '../apps/frontend/views/ProductCategory.vue'
                     ),
                 meta: {
-                    layout: "frontend",
-                    title: "Category",
+                    layout: 'frontend',
+                    title: 'Category',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
             },
 
             {
-                path: "/commercial-kitchen",
-                name: "frontend.kitchen.page",
+                path: '/commercial-kitchen',
+                name: 'frontend.kitchen.page',
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/Kitchen.vue"
+                        /* webpackChunkName: "index" */ '../apps/frontend/views/Kitchen.vue'
                     ),
                 meta: {
-                    layout: "frontend",
-                    title: "Kitchen",
+                    layout: 'frontend',
+                    title: 'Kitchen',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
             },
 
             {
-                path: "/kitchen/solutions/:id/:name",
-                name: "frontend.solution_kitchen.page",
+                path: '/kitchen/solutions/:id/:name',
+                name: 'frontend.solution_kitchen.page',
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/KitchenSolution.vue"
+                        /* webpackChunkName: "index" */ '../apps/frontend/views/KitchenSolution.vue'
                     ),
                 meta: {
-                    layout: "frontend",
-                    title: "Category",
+                    layout: 'frontend',
+                    title: 'Category',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
             },
 
             {
-                path: "/kitchen/:id/:name",
-                name: "frontend.category.kitchen",
+                path: '/kitchen/:id/:name',
+                name: 'frontend.category.kitchen',
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/ProductCategoryKitchen.vue"
+                        /* webpackChunkName: "index" */ '../apps/frontend/views/ProductCategoryKitchen.vue'
                     ),
                 meta: {
-                    layout: "frontend",
-                    title: "Category",
+                    layout: 'frontend',
+                    title: 'Category',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
             },
 
             {
-                path: "/kitchen/:id/:name/page/:page",
-                name: "frontend.kitchen.page.pagenation",
+                path: '/kitchen/:id/:name/page/:page',
+                name: 'frontend.kitchen.page.pagenation',
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/ProductCategoryKitchen.vue"
+                        /* webpackChunkName: "index" */ '../apps/frontend/views/ProductCategoryKitchen.vue'
                     ),
                 meta: {
-                    layout: "frontend",
-                    title: "Category",
+                    layout: 'frontend',
+                    title: 'Category',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
             },
 
             {
-                path: "/kitchen/product/:id/:name",
-                name: "product.details.kitchen",
+                path: '/kitchen/product/:id/:name',
+                name: 'product.details.kitchen',
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/ProductDetails.vue"
+                        /* webpackChunkName: "index" */ '../apps/frontend/views/ProductDetails.vue'
                     ),
                 meta: {
-                    layout: "frontend",
-                    title: "Product Details",
+                    layout: 'frontend',
+                    title: 'Product Details',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
                 beforeEnter: (to, from, next) => {
                     // Transform the name parameter by replacing dashes with spaces
-                    const name = to.params.name.replace(/-/g, " ");
-                    // Add the transformed name to the route's params object
-                    to.params.transformedName = name;
-                    next();
-                },
-            },
-
-            {
-                path: "/laundry/product/:id/:name",
-                name: "product.details.laundry",
-                component: () =>
-                    import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/ProductDetails.vue"
-                    ),
-                meta: {
-                    layout: "frontend",
-                    title: "Laundry",
-                    metaTags: [
-                        {
-                            name: "description",
-                            content: "The about page of our example app.",
-                        },
-                        {
-                            property: "og:description",
-                            content: "The about page of our example app.",
-                        },
-                    ],
-                },
-                beforeEnter: (to, from, next) => {
-                    // Transform the name parameter by replacing dashes with spaces
-                    const name = to.params.name.replace(/-/g, " ");
+                    const name = to.params.name.replace(/-/g, ' ');
                     // Add the transformed name to the route's params object
                     to.params.transformedName = name;
                     next();
@@ -1133,121 +1093,151 @@ const routes = [
             },
 
             {
-                path: "/laundry",
-                name: "frontend.laundry.page",
+                path: '/laundry/product/:id/:name',
+                name: 'product.details.laundry',
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/Laundry.vue"
+                        /* webpackChunkName: "index" */ '../apps/frontend/views/ProductDetails.vue'
                     ),
                 meta: {
-                    layout: "frontend",
-                    title: "Laundry",
+                    layout: 'frontend',
+                    title: 'Laundry',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
-                        },
-                    ],
-                },
-            },
-
-            {
-                path: "/laundry/solutions/:id/:name",
-                name: "frontend.solution_laundry.page",
-                component: () =>
-                    import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/LaundrySolution.vue"
-                    ),
-                meta: {
-                    layout: "frontend",
-                    title: "Category",
-                    metaTags: [
-                        {
-                            name: "description",
-                            content: "The about page of our example app.",
-                        },
-                        {
-                            property: "og:description",
-                            content: "The about page of our example app.",
-                        },
-                    ],
-                },
-            },
-
-            {
-                path: "/laundry/:id/:name",
-                name: "frontend.category.laundry",
-                component: () =>
-                    import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/ProductCategoryLaundry.vue"
-                    ),
-                meta: {
-                    layout: "frontend",
-                    title: "Category",
-                    metaTags: [
-                        {
-                            name: "description",
-                            content: "The about page of our example app.",
-                        },
-                        {
-                            property: "og:description",
-                            content: "The about page of our example app.",
-                        },
-                    ],
-                },
-            },
-
-            {
-                path: "/laundry/:id/:name/page/:page",
-                name: "frontend.laundry.page.pagenation",
-                component: () =>
-                    import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/ProductCategoryLaundry.vue"
-                    ),
-                meta: {
-                    layout: "frontend",
-                    title: "Category",
-                    metaTags: [
-                        {
-                            name: "description",
-                            content: "The about page of our example app.",
-                        },
-                        {
-                            property: "og:description",
-                            content: "The about page of our example app.",
-                        },
-                    ],
-                },
-            },
-
-            {
-                path: "/laundry/product/:id/:name",
-                name: "product.details.laundry",
-                component: () =>
-                    import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/ProductDetails.vue"
-                    ),
-                meta: {
-                    layout: "frontend",
-                    title: "Product Details",
-                    metaTags: [
-                        {
-                            name: "description",
-                            content: "The about page of our example app.",
-                        },
-                        {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
                 beforeEnter: (to, from, next) => {
                     // Transform the name parameter by replacing dashes with spaces
-                    const name = to.params.name.replace(/-/g, " ");
+                    const name = to.params.name.replace(/-/g, ' ');
+                    // Add the transformed name to the route's params object
+                    to.params.transformedName = name;
+                    next();
+                },
+            },
+
+            {
+                path: '/laundry',
+                name: 'frontend.laundry.page',
+                component: () =>
+                    import(
+                        /* webpackChunkName: "index" */ '../apps/frontend/views/Laundry.vue'
+                    ),
+                meta: {
+                    layout: 'frontend',
+                    title: 'Laundry',
+                    metaTags: [
+                        {
+                            name: 'description',
+                            content: 'The about page of our example app.',
+                        },
+                        {
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
+                        },
+                    ],
+                },
+            },
+
+            {
+                path: '/laundry/solutions/:id/:name',
+                name: 'frontend.solution_laundry.page',
+                component: () =>
+                    import(
+                        /* webpackChunkName: "index" */ '../apps/frontend/views/LaundrySolution.vue'
+                    ),
+                meta: {
+                    layout: 'frontend',
+                    title: 'Category',
+                    metaTags: [
+                        {
+                            name: 'description',
+                            content: 'The about page of our example app.',
+                        },
+                        {
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
+                        },
+                    ],
+                },
+            },
+
+            {
+                path: '/laundry/:id/:name',
+                name: 'frontend.category.laundry',
+                component: () =>
+                    import(
+                        /* webpackChunkName: "index" */ '../apps/frontend/views/ProductCategoryLaundry.vue'
+                    ),
+                meta: {
+                    layout: 'frontend',
+                    title: 'Category',
+                    metaTags: [
+                        {
+                            name: 'description',
+                            content: 'The about page of our example app.',
+                        },
+                        {
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
+                        },
+                    ],
+                },
+            },
+
+            {
+                path: '/laundry/:id/:name/page/:page',
+                name: 'frontend.laundry.page.pagenation',
+                component: () =>
+                    import(
+                        /* webpackChunkName: "index" */ '../apps/frontend/views/ProductCategoryLaundry.vue'
+                    ),
+                meta: {
+                    layout: 'frontend',
+                    title: 'Category',
+                    metaTags: [
+                        {
+                            name: 'description',
+                            content: 'The about page of our example app.',
+                        },
+                        {
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
+                        },
+                    ],
+                },
+            },
+
+            {
+                path: '/laundry/product/:id/:name',
+                name: 'product.details.laundry',
+                component: () =>
+                    import(
+                        /* webpackChunkName: "index" */ '../apps/frontend/views/ProductDetails.vue'
+                    ),
+                meta: {
+                    layout: 'frontend',
+                    title: 'Product Details',
+                    metaTags: [
+                        {
+                            name: 'description',
+                            content: 'The about page of our example app.',
+                        },
+                        {
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
+                        },
+                    ],
+                },
+                beforeEnter: (to, from, next) => {
+                    // Transform the name parameter by replacing dashes with spaces
+                    const name = to.params.name.replace(/-/g, ' ');
                     // Add the transformed name to the route's params object
                     to.params.transformedName = name;
                     next();
@@ -1257,121 +1247,121 @@ const routes = [
             // promotional solutions
 
             {
-                path: "/promotional-solutions",
-                name: "frontend.promotional-solutions.page",
+                path: '/promotional-solutions',
+                name: 'frontend.promotional-solutions.page',
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/Promotional.vue"
+                        /* webpackChunkName: "index" */ '../apps/frontend/views/Promotional.vue'
                     ),
                 meta: {
-                    layout: "frontend",
-                    title: "Promotional Solutions",
+                    layout: 'frontend',
+                    title: 'Promotional Solutions',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
             },
 
             {
-                path: "/promotional-solutions/solutions/:id/:name",
-                name: "frontend.solution_promotional.page",
+                path: '/promotional-solutions/solutions/:id/:name',
+                name: 'frontend.solution_promotional.page',
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/PromotionalSolutions.vue"
+                        /* webpackChunkName: "index" */ '../apps/frontend/views/PromotionalSolutions.vue'
                     ),
                 meta: {
-                    layout: "frontend",
-                    title: "Category",
+                    layout: 'frontend',
+                    title: 'Category',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
             },
 
             {
-                path: "/promotional-solutions/:id/:name",
-                name: "frontend.category.promotional",
+                path: '/promotional-solutions/:id/:name',
+                name: 'frontend.category.promotional',
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/ProductCategoryPromotional.vue"
+                        /* webpackChunkName: "index" */ '../apps/frontend/views/ProductCategoryPromotional.vue'
                     ),
                 meta: {
-                    layout: "frontend",
-                    title: "Category",
+                    layout: 'frontend',
+                    title: 'Category',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
             },
 
             {
-                path: "/promotional-solutions/:id/:name/page/:page",
-                name: "frontend.laundry.page.pagenation",
+                path: '/promotional-solutions/:id/:name/page/:page',
+                name: 'frontend.laundry.page.pagenation',
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/ProductCategoryPromotional.vue"
+                        /* webpackChunkName: "index" */ '../apps/frontend/views/ProductCategoryPromotional.vue'
                     ),
                 meta: {
-                    layout: "frontend",
-                    title: "Category",
+                    layout: 'frontend',
+                    title: 'Category',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
             },
 
             {
-                path: "/promotional-solutions/product/:id/:name",
-                name: "product.details.promotional-solutions",
+                path: '/promotional-solutions/product/:id/:name',
+                name: 'product.details.promotional-solutions',
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/ProductDetails.vue"
+                        /* webpackChunkName: "index" */ '../apps/frontend/views/ProductDetails.vue'
                     ),
                 meta: {
-                    layout: "frontend",
-                    title: "Product Details",
+                    layout: 'frontend',
+                    title: 'Product Details',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
                 beforeEnter: (to, from, next) => {
                     // Transform the name parameter by replacing dashes with spaces
-                    const name = to.params.name.replace(/-/g, " ");
+                    const name = to.params.name.replace(/-/g, ' ');
                     // Add the transformed name to the route's params object
                     to.params.transformedName = name;
                     next();
@@ -1379,121 +1369,121 @@ const routes = [
             },
 
             {
-                path: "/cold-storage",
-                name: "frontend.coldroom.page",
+                path: '/cold-storage',
+                name: 'frontend.coldroom.page',
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/Cold_Room.vue"
+                        /* webpackChunkName: "index" */ '../apps/frontend/views/Cold_Room.vue'
                     ),
                 meta: {
-                    layout: "frontend",
-                    title: "Cold Room",
+                    layout: 'frontend',
+                    title: 'Cold Room',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
             },
 
             {
-                path: "/cold-storage/solutions/:id/:name",
-                name: "frontend.solution_cold_storage.page",
+                path: '/cold-storage/solutions/:id/:name',
+                name: 'frontend.solution_cold_storage.page',
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/ColdRoomSolution.vue"
+                        /* webpackChunkName: "index" */ '../apps/frontend/views/ColdRoomSolution.vue'
                     ),
                 meta: {
-                    layout: "frontend",
-                    title: "Category",
+                    layout: 'frontend',
+                    title: 'Category',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
             },
 
             {
-                path: "/cold-storage/:id/:name",
-                name: "frontend.category.cold_storage",
+                path: '/cold-storage/:id/:name',
+                name: 'frontend.category.cold_storage',
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/ProductCategoryColdRoom.vue"
+                        /* webpackChunkName: "index" */ '../apps/frontend/views/ProductCategoryColdRoom.vue'
                     ),
                 meta: {
-                    layout: "frontend",
-                    title: "Category",
+                    layout: 'frontend',
+                    title: 'Category',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
             },
 
             {
-                path: "/cold-storage/:id/:name/page/:page",
-                name: "frontend.cold-storage.page.pagenation",
+                path: '/cold-storage/:id/:name/page/:page',
+                name: 'frontend.cold-storage.page.pagenation',
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/ProductCategoryColdRoom.vue"
+                        /* webpackChunkName: "index" */ '../apps/frontend/views/ProductCategoryColdRoom.vue'
                     ),
                 meta: {
-                    layout: "frontend",
-                    title: "Category",
+                    layout: 'frontend',
+                    title: 'Category',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
             },
 
             {
-                path: "/cold-storage/product/:id/:name",
-                name: "product.details.cold_storage",
+                path: '/cold-storage/product/:id/:name',
+                name: 'product.details.cold_storage',
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/ProductDetails.vue"
+                        /* webpackChunkName: "index" */ '../apps/frontend/views/ProductDetails.vue'
                     ),
                 meta: {
-                    layout: "frontend",
-                    title: "Product Details",
+                    layout: 'frontend',
+                    title: 'Product Details',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
                 beforeEnter: (to, from, next) => {
                     // Transform the name parameter by replacing dashes with spaces
-                    const name = to.params.name.replace(/-/g, " ");
+                    const name = to.params.name.replace(/-/g, ' ');
                     // Add the transformed name to the route's params object
                     to.params.transformedName = name;
                     next();
@@ -1501,29 +1491,29 @@ const routes = [
             },
 
             {
-                path: "/product/:id/:name",
-                name: "product.details",
+                path: '/product/:id/:name',
+                name: 'product.details',
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/ProductDetails.vue"
+                        /* webpackChunkName: "index" */ '../apps/frontend/views/ProductDetails.vue'
                     ),
                 meta: {
-                    layout: "frontend",
-                    title: "Product Details",
+                    layout: 'frontend',
+                    title: 'Product Details',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
                 beforeEnter: (to, from, next) => {
                     // Transform the name parameter by replacing dashes with spaces
-                    const name = to.params.name.replace(/-/g, " ");
+                    const name = to.params.name.replace(/-/g, ' ');
                     // Add the transformed name to the route's params object
                     to.params.transformedName = name;
                     next();
@@ -1531,29 +1521,29 @@ const routes = [
             },
 
             {
-                path: "/showroom/:id/:name",
-                name: "showroom.details",
+                path: '/showroom/:id/:name',
+                name: 'showroom.details',
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/ShowroomDetails.vue"
+                        /* webpackChunkName: "index" */ '../apps/frontend/views/ShowroomDetails.vue'
                     ),
                 meta: {
-                    layout: "frontend",
-                    title: "Showroom Details",
+                    layout: 'frontend',
+                    title: 'Showroom Details',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
                 beforeEnter: (to, from, next) => {
                     // Transform the name parameter by replacing dashes with spaces
-                    const name = to.params.name.replace(/-/g, " ");
+                    const name = to.params.name.replace(/-/g, ' ');
                     // Add the transformed name to the route's params object
                     to.params.transformedName = name;
                     next();
@@ -1561,66 +1551,66 @@ const routes = [
             },
 
             {
-                path: "/enquiry/product/:id",
-                name: "frontend.enquiry.product",
+                path: '/enquiry/product/:id',
+                name: 'frontend.enquiry.product',
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/frontend/views/EnquiryProduct.vue"
+                        /* webpackChunkName: "index" */ '../apps/frontend/views/EnquiryProduct.vue'
                     ),
                 meta: {
-                    layout: "frontend",
-                    title: "Enquiry Product",
+                    layout: 'frontend',
+                    title: 'Enquiry Product',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
             },
 
             {
-                path: "/admin/:pathMatch(.*)*",
-                name: "admin.404",
+                path: '/admin/:pathMatch(.*)*',
+                name: 'admin.404',
                 component: () =>
                     import(
-                        /* webpackChunkName: "index" */ "../apps/admin/views/404.vue"
+                        /* webpackChunkName: "index" */ '../apps/admin/views/404.vue'
                     ),
                 meta: {
-                    layout: "app",
-                    title: "404",
+                    layout: 'app',
+                    title: '404',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
             },
             {
-                path: "/:pathMatch(.*)*",
-                name: "404",
-                
-                component: () => import("../apps/frontend/views/404.vue"),
+                path: '/:pathMatch(.*)*',
+                name: '404',
+
+                component: () => import('../apps/frontend/views/404.vue'),
                 meta: {
-                    layout: "frontend",
-                    title: "404",
+                    layout: 'frontend',
+                    title: '404',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
@@ -1629,26 +1619,26 @@ const routes = [
     },
 
     {
-        path: "/my-account",
+        path: '/my-account',
         beforeEnter: requireLogin,
 
         children: [
             {
-                path: "/my-account",
-                name: "frontend.myaccount",
+                path: '/my-account',
+                name: 'frontend.myaccount',
                 component: () =>
-                    import("../apps/frontend/views/myaccount/MyAccount.vue"),
+                    import('../apps/frontend/views/myaccount/MyAccount.vue'),
                 meta: {
-                    layout: "frontend",
-                    title: "My Account",
+                    layout: 'frontend',
+                    title: 'My Account',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
@@ -1666,66 +1656,66 @@ const routes = [
 
     //auth
     {
-        path: "/admin/login",
-        name: "admin.login",
+        path: '/admin/login',
+        name: 'admin.login',
         component: () =>
             import(
-                /* webpackChunkName: "auth-login" */ "../apps/admin/views/auth/login.vue"
+                /* webpackChunkName: "auth-login" */ '../apps/admin/views/auth/login.vue'
             ),
-        meta: { layout: "app" },
+        meta: { layout: 'app' },
     },
     {
-        path: "/admin/register",
-        name: "register",
+        path: '/admin/register',
+        name: 'register',
         component: () =>
             import(
-                /* webpackChunkName: "auth-register" */ "../apps/admin/views/auth/register.vue"
+                /* webpackChunkName: "auth-register" */ '../apps/admin/views/auth/register.vue'
             ),
-        meta: { layout: "app" },
+        meta: { layout: 'app' },
     },
     {
-        path: "/admin/lockscreen",
-        name: "lockscreen",
+        path: '/admin/lockscreen',
+        name: 'lockscreen',
         component: () =>
             import(
-                /* webpackChunkName: "auth-lockscreen" */ "../apps/admin/views/auth/lockscreen.vue"
+                /* webpackChunkName: "auth-lockscreen" */ '../apps/admin/views/auth/lockscreen.vue'
             ),
-        meta: { layout: "app" },
+        meta: { layout: 'app' },
     },
     {
-        path: "/admin/pass-recovery",
-        name: "pass-recovery",
+        path: '/admin/pass-recovery',
+        name: 'pass-recovery',
         component: () =>
             import(
-                /* webpackChunkName: "auth-pass-recovery" */ "../apps/admin/views/auth/pass_recovery.vue"
+                /* webpackChunkName: "auth-pass-recovery" */ '../apps/admin/views/auth/pass_recovery.vue'
             ),
-        meta: { layout: "app" },
+        meta: { layout: 'app' },
     },
 
     {
-        path: "/admin",
+        path: '/admin',
         //redirect: { name: 'admin.login' },
         //component: ,
         beforeEnter: requireAdminLogin,
         children: [
             {
-                path: "/admin",
-                name: "admin.dashboard",
+                path: '/admin',
+                name: 'admin.dashboard',
                 component: () =>
                     import(
-                        /* webpackChunkName: "analytics" */ "../apps/admin/views/analytics.vue"
+                        /* webpackChunkName: "analytics" */ '../apps/admin/views/analytics.vue'
                     ),
                 meta: {
-                    layout: "app",
-                    title: "Dashboard",
+                    layout: 'app',
+                    title: 'Dashboard',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
@@ -1736,83 +1726,83 @@ const routes = [
             //categories
 
             {
-                path: "/admin/categories",
-                name: "categories.index",
+                path: '/admin/categories',
+                name: 'categories.index',
                 component: () =>
-                    import("../apps/admin/views/categories/index.vue"),
+                    import('../apps/admin/views/categories/index.vue'),
                 meta: {
-                    layout: "app",
-                    title: "Categories",
+                    layout: 'app',
+                    title: 'Categories',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
             },
 
             {
-                path: "/admin/categories/page/:page",
-                name: "categories.index.page.pagenation",
+                path: '/admin/categories/page/:page',
+                name: 'categories.index.page.pagenation',
                 component: () =>
-                    import("../apps/admin/views/categories/index.vue"),
+                    import('../apps/admin/views/categories/index.vue'),
                 meta: {
-                    layout: "app",
-                    title: "Categories",
+                    layout: 'app',
+                    title: 'Categories',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
             },
 
             {
-                path: "/admin/categories/create",
-                name: "categories.create",
+                path: '/admin/categories/create',
+                name: 'categories.create',
                 component: () =>
-                    import("../apps/admin/views/categories/create.vue"),
+                    import('../apps/admin/views/categories/create.vue'),
                 meta: {
-                    layout: "app",
-                    title: "Create Category",
+                    layout: 'app',
+                    title: 'Create Category',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
             },
             {
-                path: "/admin/categories/edit/:id",
-                name: "categories.edit",
+                path: '/admin/categories/edit/:id',
+                name: 'categories.edit',
                 component: () =>
-                    import("../apps/admin/views/categories/edit.vue"),
+                    import('../apps/admin/views/categories/edit.vue'),
                 meta: {
-                    layout: "app",
-                    title: "Edit Category",
+                    layout: 'app',
+                    title: 'Edit Category',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
@@ -1821,142 +1811,142 @@ const routes = [
             //products
 
             {
-                path: "/admin/products",
-                name: "products.index",
+                path: '/admin/products',
+                name: 'products.index',
                 component: () =>
-                    import("../apps/admin/views/products/index.vue"),
+                    import('../apps/admin/views/products/index.vue'),
                 meta: {
-                    layout: "app",
-                    title: "Products",
+                    layout: 'app',
+                    title: 'Products',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
             },
 
             {
-                path: "/admin/products/page/:page",
-                name: "products.index.page.pagenation",
+                path: '/admin/products/page/:page',
+                name: 'products.index.page.pagenation',
                 component: () =>
-                    import("../apps/admin/views/products/index.vue"),
+                    import('../apps/admin/views/products/index.vue'),
                 meta: {
-                    layout: "app",
-                    title: "Products",
+                    layout: 'app',
+                    title: 'Products',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
             },
 
             {
-                path: "/admin/products/create",
-                name: "products.create",
+                path: '/admin/products/create',
+                name: 'products.create',
                 component: () =>
-                    import("../apps/admin/views/products/create.vue"),
+                    import('../apps/admin/views/products/create.vue'),
                 meta: {
-                    layout: "app",
-                    title: "Create Product",
+                    layout: 'app',
+                    title: 'Create Product',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
             },
             {
-                path: "/admin/products/edit/:id",
-                name: "products.edit",
+                path: '/admin/products/edit/:id',
+                name: 'products.edit',
                 component: () =>
-                    import("../apps/admin/views/products/edit.vue"),
+                    import('../apps/admin/views/products/edit.vue'),
                 meta: {
-                    layout: "app",
-                    title: "Edit Product",
+                    layout: 'app',
+                    title: 'Edit Product',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
             },
 
             {
-                path: "/admin/brands",
-                name: "brands.index",
-                component: () => import("../apps/admin/views/brands/index.vue"),
+                path: '/admin/brands',
+                name: 'brands.index',
+                component: () => import('../apps/admin/views/brands/index.vue'),
                 meta: {
-                    layout: "app",
-                    title: "brands",
+                    layout: 'app',
+                    title: 'brands',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
             },
             {
-                path: "/admin/brands/create",
-                name: "brands.create",
+                path: '/admin/brands/create',
+                name: 'brands.create',
                 component: () =>
-                    import("../apps/admin/views/brands/create.vue"),
+                    import('../apps/admin/views/brands/create.vue'),
                 meta: {
-                    layout: "app",
-                    title: "Create Brand",
+                    layout: 'app',
+                    title: 'Create Brand',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
             },
             {
-                path: "/admin/brands/edit/:id",
-                name: "brands.edit",
-                component: () => import("../apps/admin/views/brands/edit.vue"),
+                path: '/admin/brands/edit/:id',
+                name: 'brands.edit',
+                component: () => import('../apps/admin/views/brands/edit.vue'),
                 meta: {
-                    layout: "app",
-                    title: "Edit Brand",
+                    layout: 'app',
+                    title: 'Edit Brand',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
@@ -1965,61 +1955,61 @@ const routes = [
             //showrooms
 
             {
-                path: "/admin/showrooms",
-                name: "showrooms.index",
+                path: '/admin/showrooms',
+                name: 'showrooms.index',
                 component: () =>
-                    import("../apps/admin/views/showrooms/index.vue"),
+                    import('../apps/admin/views/showrooms/index.vue'),
                 meta: {
-                    layout: "app",
-                    title: "showrooms",
+                    layout: 'app',
+                    title: 'showrooms',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
             },
             {
-                path: "/admin/showrooms/create",
-                name: "showrooms.create",
+                path: '/admin/showrooms/create',
+                name: 'showrooms.create',
                 component: () =>
-                    import("../apps/admin/views/showrooms/create.vue"),
+                    import('../apps/admin/views/showrooms/create.vue'),
                 meta: {
-                    layout: "app",
-                    title: "Create Showroom",
+                    layout: 'app',
+                    title: 'Create Showroom',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
             },
             {
-                path: "/admin/showrooms/edit/:id",
-                name: "showrooms.edit",
+                path: '/admin/showrooms/edit/:id',
+                name: 'showrooms.edit',
                 component: () =>
-                    import("../apps/admin/views/showrooms/edit.vue"),
+                    import('../apps/admin/views/showrooms/edit.vue'),
                 meta: {
-                    layout: "app",
-                    title: "Edit Showroom",
+                    layout: 'app',
+                    title: 'Edit Showroom',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
@@ -2028,58 +2018,58 @@ const routes = [
             //csr
 
             {
-                path: "/admin/csrs",
-                name: "csrs.index",
-                component: () => import("../apps/admin/views/csrs/index.vue"),
+                path: '/admin/csrs',
+                name: 'csrs.index',
+                component: () => import('../apps/admin/views/csrs/index.vue'),
                 meta: {
-                    layout: "app",
-                    title: "csrs",
+                    layout: 'app',
+                    title: 'csrs',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
             },
             {
-                path: "/admin/csrs/create",
-                name: "csrs.create",
-                component: () => import("../apps/admin/views/csrs/create.vue"),
+                path: '/admin/csrs/create',
+                name: 'csrs.create',
+                component: () => import('../apps/admin/views/csrs/create.vue'),
                 meta: {
-                    layout: "app",
-                    title: "Create CSRs",
+                    layout: 'app',
+                    title: 'Create CSRs',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
             },
             {
-                path: "/admin/csrs/edit/:id",
-                name: "csrs.edit",
-                component: () => import("../apps/admin/views/csrs/edit.vue"),
+                path: '/admin/csrs/edit/:id',
+                name: 'csrs.edit',
+                component: () => import('../apps/admin/views/csrs/edit.vue'),
                 meta: {
-                    layout: "app",
-                    title: "Edit CSRs",
+                    layout: 'app',
+                    title: 'Edit CSRs',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
@@ -2088,61 +2078,61 @@ const routes = [
             //blog categories
 
             {
-                path: "/admin/blog_categories",
-                name: "blogCategories.index",
+                path: '/admin/blog_categories',
+                name: 'blogCategories.index',
                 component: () =>
-                    import("../apps/admin/views/blog_categories/index.vue"),
+                    import('../apps/admin/views/blog_categories/index.vue'),
                 meta: {
-                    layout: "app",
-                    title: "Categories",
+                    layout: 'app',
+                    title: 'Categories',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
             },
             {
-                path: "/admin/blog_categories/create",
-                name: "blogCategories.create",
+                path: '/admin/blog_categories/create',
+                name: 'blogCategories.create',
                 component: () =>
-                    import("../apps/admin/views/blog_categories/create.vue"),
+                    import('../apps/admin/views/blog_categories/create.vue'),
                 meta: {
-                    layout: "app",
-                    title: "Create Blog Category",
+                    layout: 'app',
+                    title: 'Create Blog Category',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
             },
             {
-                path: "/admin/blog_categories/edit/:id",
-                name: "blogCategories.edit",
+                path: '/admin/blog_categories/edit/:id',
+                name: 'blogCategories.edit',
                 component: () =>
-                    import("../apps/admin/views/blog_categories/edit.vue"),
+                    import('../apps/admin/views/blog_categories/edit.vue'),
                 meta: {
-                    layout: "app",
-                    title: "Edit Blog Category",
+                    layout: 'app',
+                    title: 'Edit Blog Category',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
@@ -2151,58 +2141,58 @@ const routes = [
             //blogs
 
             {
-                path: "/admin/blogs",
-                name: "blogs.index",
-                component: () => import("../apps/admin/views/blogs/index.vue"),
+                path: '/admin/blogs',
+                name: 'blogs.index',
+                component: () => import('../apps/admin/views/blogs/index.vue'),
                 meta: {
-                    layout: "app",
-                    title: "blogs",
+                    layout: 'app',
+                    title: 'blogs',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
             },
             {
-                path: "/admin/blogs/create",
-                name: "blogs.create",
-                component: () => import("../apps/admin/views/blogs/create.vue"),
+                path: '/admin/blogs/create',
+                name: 'blogs.create',
+                component: () => import('../apps/admin/views/blogs/create.vue'),
                 meta: {
-                    layout: "app",
-                    title: "Create Blogs",
+                    layout: 'app',
+                    title: 'Create Blogs',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
             },
             {
-                path: "/admin/blogs/edit/:id",
-                name: "blogs.edit",
-                component: () => import("../apps/admin/views/blogs/edit.vue"),
+                path: '/admin/blogs/edit/:id',
+                name: 'blogs.edit',
+                component: () => import('../apps/admin/views/blogs/edit.vue'),
                 meta: {
-                    layout: "app",
-                    title: "Edit Blogs",
+                    layout: 'app',
+                    title: 'Edit Blogs',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
@@ -2211,61 +2201,61 @@ const routes = [
             //start publications
 
             {
-                path: "/admin/publications",
-                name: "publications.index",
+                path: '/admin/publications',
+                name: 'publications.index',
                 component: () =>
-                    import("../apps/admin/views/publications/index.vue"),
+                    import('../apps/admin/views/publications/index.vue'),
                 meta: {
-                    layout: "app",
-                    title: "Publications",
+                    layout: 'app',
+                    title: 'Publications',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
             },
             {
-                path: "/admin/publications/create",
-                name: "publications.create",
+                path: '/admin/publications/create',
+                name: 'publications.create',
                 component: () =>
-                    import("../apps/admin/views/publications/create.vue"),
+                    import('../apps/admin/views/publications/create.vue'),
                 meta: {
-                    layout: "app",
-                    title: "Create Publications",
+                    layout: 'app',
+                    title: 'Create Publications',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
             },
             {
-                path: "/admin/publications/edit/:id",
-                name: "publications.edit",
+                path: '/admin/publications/edit/:id',
+                name: 'publications.edit',
                 component: () =>
-                    import("../apps/admin/views/publications/edit.vue"),
+                    import('../apps/admin/views/publications/edit.vue'),
                 meta: {
-                    layout: "app",
-                    title: "Edit Publications",
+                    layout: 'app',
+                    title: 'Edit Publications',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
@@ -2276,61 +2266,61 @@ const routes = [
             //start in the news
 
             {
-                path: "/admin/in-the-news",
-                name: "news.index",
+                path: '/admin/in-the-news',
+                name: 'news.index',
                 component: () =>
-                    import("../apps/admin/views/in_the_news/index.vue"),
+                    import('../apps/admin/views/in_the_news/index.vue'),
                 meta: {
-                    layout: "app",
-                    title: "In the News",
+                    layout: 'app',
+                    title: 'In the News',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
             },
             {
-                path: "/admin/in-the-news/create",
-                name: "news.create",
+                path: '/admin/in-the-news/create',
+                name: 'news.create',
                 component: () =>
-                    import("../apps/admin/views/in_the_news/create.vue"),
+                    import('../apps/admin/views/in_the_news/create.vue'),
                 meta: {
-                    layout: "app",
-                    title: "Create In the News",
+                    layout: 'app',
+                    title: 'Create In the News',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
             },
             {
-                path: "/admin/in-the-news/edit/:id",
-                name: "news.edit",
+                path: '/admin/in-the-news/edit/:id',
+                name: 'news.edit',
                 component: () =>
-                    import("../apps/admin/views/in_the_news/edit.vue"),
+                    import('../apps/admin/views/in_the_news/edit.vue'),
                 meta: {
-                    layout: "app",
-                    title: "Edit In the News",
+                    layout: 'app',
+                    title: 'Edit In the News',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
@@ -2340,59 +2330,59 @@ const routes = [
             //start vides
 
             {
-                path: "/admin/videos",
-                name: "videos.index",
-                component: () => import("../apps/admin/views/videos/index.vue"),
+                path: '/admin/videos',
+                name: 'videos.index',
+                component: () => import('../apps/admin/views/videos/index.vue'),
                 meta: {
-                    layout: "app",
-                    title: "Videos",
+                    layout: 'app',
+                    title: 'Videos',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
             },
             {
-                path: "/admin/videos/create",
-                name: "videos.create",
+                path: '/admin/videos/create',
+                name: 'videos.create',
                 component: () =>
-                    import("../apps/admin/views/videos/create.vue"),
+                    import('../apps/admin/views/videos/create.vue'),
                 meta: {
-                    layout: "app",
-                    title: "Create Videos",
+                    layout: 'app',
+                    title: 'Create Videos',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
             },
             {
-                path: "/admin/videos/edit/:id",
-                name: "videos.edit",
-                component: () => import("../apps/admin/views/videos/edit.vue"),
+                path: '/admin/videos/edit/:id',
+                name: 'videos.edit',
+                component: () => import('../apps/admin/views/videos/edit.vue'),
                 meta: {
-                    layout: "app",
-                    title: "Edit Videos",
+                    layout: 'app',
+                    title: 'Edit Videos',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
@@ -2403,60 +2393,60 @@ const routes = [
             //start gallery
 
             {
-                path: "/admin/gallery",
-                name: "gallery.index",
+                path: '/admin/gallery',
+                name: 'gallery.index',
                 component: () =>
-                    import("../apps/admin/views/gallery/index.vue"),
+                    import('../apps/admin/views/gallery/index.vue'),
                 meta: {
-                    layout: "app",
-                    title: "Gallery",
+                    layout: 'app',
+                    title: 'Gallery',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
             },
             {
-                path: "/admin/gallery/create",
-                name: "gallery.create",
+                path: '/admin/gallery/create',
+                name: 'gallery.create',
                 component: () =>
-                    import("../apps/admin/views/gallery/create.vue"),
+                    import('../apps/admin/views/gallery/create.vue'),
                 meta: {
-                    layout: "app",
-                    title: "Create Gallery",
+                    layout: 'app',
+                    title: 'Create Gallery',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
             },
             {
-                path: "/admin/gallery/edit/:id",
-                name: "galleries.edit",
-                component: () => import("../apps/admin/views/gallery/edit.vue"),
+                path: '/admin/gallery/edit/:id',
+                name: 'galleries.edit',
+                component: () => import('../apps/admin/views/gallery/edit.vue'),
                 meta: {
-                    layout: "app",
-                    title: "Edit Gallery",
+                    layout: 'app',
+                    title: 'Edit Gallery',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
@@ -2467,129 +2457,129 @@ const routes = [
             //solutions
 
             {
-                path: "/admin/solutions",
-                name: "solutions.index",
+                path: '/admin/solutions',
+                name: 'solutions.index',
                 component: () =>
-                    import("../apps/admin/views/solutions/index.vue"),
+                    import('../apps/admin/views/solutions/index.vue'),
                 meta: {
-                    layout: "app",
-                    title: "solutions",
+                    layout: 'app',
+                    title: 'solutions',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
             },
 
             {
-                path: "/admin/solutions/page/:page",
-                name: "solutions.index.page.pagenation",
+                path: '/admin/solutions/page/:page',
+                name: 'solutions.index.page.pagenation',
                 component: () =>
-                    import("../apps/admin/views/solutions/index.vue"),
+                    import('../apps/admin/views/solutions/index.vue'),
                 meta: {
-                    layout: "app",
-                    title: "solutions",
+                    layout: 'app',
+                    title: 'solutions',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
             },
 
             {
-                path: "/admin/solutions/category-sequence/:id",
-                name: "solutions.category.sequence",
+                path: '/admin/solutions/category-sequence/:id',
+                name: 'solutions.category.sequence',
                 component: () =>
                     import(
-                        "../apps/admin/views/solutions/category-sequence.vue"
+                        '../apps/admin/views/solutions/category-sequence.vue'
                     ),
                 meta: {
-                    layout: "app",
-                    title: "solutions",
+                    layout: 'app',
+                    title: 'solutions',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
             },
 
             {
-                path: "/admin/solutions/category-sequence/:id/page/:page",
-                name: "solutions.category.sequence.page.pagenation",
+                path: '/admin/solutions/category-sequence/:id/page/:page',
+                name: 'solutions.category.sequence.page.pagenation',
                 component: () =>
                     import(
-                        "../apps/admin/views/solutions/category-sequence.vue"
+                        '../apps/admin/views/solutions/category-sequence.vue'
                     ),
                 meta: {
-                    layout: "app",
-                    title: "solutions",
+                    layout: 'app',
+                    title: 'solutions',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
             },
 
             {
-                path: "/admin/solutions/create",
-                name: "solutions.create",
+                path: '/admin/solutions/create',
+                name: 'solutions.create',
                 component: () =>
-                    import("../apps/admin/views/solutions/create.vue"),
+                    import('../apps/admin/views/solutions/create.vue'),
                 meta: {
-                    layout: "app",
-                    title: "Create Solutions",
+                    layout: 'app',
+                    title: 'Create Solutions',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
             },
             {
-                path: "/admin/solutions/edit/:id",
-                name: "solutions.edit",
+                path: '/admin/solutions/edit/:id',
+                name: 'solutions.edit',
                 component: () =>
-                    import("../apps/admin/views/solutions/edit.vue"),
+                    import('../apps/admin/views/solutions/edit.vue'),
                 meta: {
-                    layout: "app",
-                    title: "Edit Solutions",
+                    layout: 'app',
+                    title: 'Edit Solutions',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
@@ -2598,59 +2588,59 @@ const routes = [
             //events
 
             {
-                path: "/admin/events",
-                name: "events.index",
-                component: () => import("../apps/admin/views/events/index.vue"),
+                path: '/admin/events',
+                name: 'events.index',
+                component: () => import('../apps/admin/views/events/index.vue'),
                 meta: {
-                    layout: "app",
-                    title: "events",
+                    layout: 'app',
+                    title: 'events',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
             },
             {
-                path: "/admin/events/create",
-                name: "events.create",
+                path: '/admin/events/create',
+                name: 'events.create',
                 component: () =>
-                    import("../apps/admin/views/events/create.vue"),
+                    import('../apps/admin/views/events/create.vue'),
                 meta: {
-                    layout: "app",
-                    title: "Create events",
+                    layout: 'app',
+                    title: 'Create events',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
             },
             {
-                path: "/admin/events/edit/:id",
-                name: "events.edit",
-                component: () => import("../apps/admin/views/events/edit.vue"),
+                path: '/admin/events/edit/:id',
+                name: 'events.edit',
+                component: () => import('../apps/admin/views/events/edit.vue'),
                 meta: {
-                    layout: "app",
-                    title: "Edit events",
+                    layout: 'app',
+                    title: 'Edit events',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
@@ -2659,61 +2649,61 @@ const routes = [
             //testimonials
 
             {
-                path: "/admin/testimonials",
-                name: "testimonials.index",
+                path: '/admin/testimonials',
+                name: 'testimonials.index',
                 component: () =>
-                    import("../apps/admin/views/testimonials/index.vue"),
+                    import('../apps/admin/views/testimonials/index.vue'),
                 meta: {
-                    layout: "app",
-                    title: "testimonials",
+                    layout: 'app',
+                    title: 'testimonials',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
             },
             {
-                path: "/admin/testimonials/create",
-                name: "testimonials.create",
+                path: '/admin/testimonials/create',
+                name: 'testimonials.create',
                 component: () =>
-                    import("../apps/admin/views/testimonials/create.vue"),
+                    import('../apps/admin/views/testimonials/create.vue'),
                 meta: {
-                    layout: "app",
-                    title: "Create testimonials",
+                    layout: 'app',
+                    title: 'Create testimonials',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
             },
             {
-                path: "/admin/testimonials/edit/:id",
-                name: "testimonials.edit",
+                path: '/admin/testimonials/edit/:id',
+                name: 'testimonials.edit',
                 component: () =>
-                    import("../apps/admin/views/testimonials/edit.vue"),
+                    import('../apps/admin/views/testimonials/edit.vue'),
                 meta: {
-                    layout: "app",
-                    title: "Edit testimonials",
+                    layout: 'app',
+                    title: 'Edit testimonials',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
@@ -2722,60 +2712,60 @@ const routes = [
             //careers
 
             {
-                path: "/admin/careers",
-                name: "careers.index",
+                path: '/admin/careers',
+                name: 'careers.index',
                 component: () =>
-                    import("../apps/admin/views/careers/index.vue"),
+                    import('../apps/admin/views/careers/index.vue'),
                 meta: {
-                    layout: "app",
-                    title: "careers",
+                    layout: 'app',
+                    title: 'careers',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
             },
             {
-                path: "/admin/careers/create",
-                name: "careers.create",
+                path: '/admin/careers/create',
+                name: 'careers.create',
                 component: () =>
-                    import("../apps/admin/views/careers/create.vue"),
+                    import('../apps/admin/views/careers/create.vue'),
                 meta: {
-                    layout: "app",
-                    title: "Create careers",
+                    layout: 'app',
+                    title: 'Create careers',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
             },
             {
-                path: "/admin/careers/edit/:id",
-                name: "careers.edit",
-                component: () => import("../apps/admin/views/careers/edit.vue"),
+                path: '/admin/careers/edit/:id',
+                name: 'careers.edit',
+                component: () => import('../apps/admin/views/careers/edit.vue'),
                 meta: {
-                    layout: "app",
-                    title: "Edit careers",
+                    layout: 'app',
+                    title: 'Edit careers',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
@@ -2784,60 +2774,60 @@ const routes = [
             //clients
 
             {
-                path: "/admin/clients",
-                name: "clients.index",
+                path: '/admin/clients',
+                name: 'clients.index',
                 component: () =>
-                    import("../apps/admin/views/clients/index.vue"),
+                    import('../apps/admin/views/clients/index.vue'),
                 meta: {
-                    layout: "app",
-                    title: "clients",
+                    layout: 'app',
+                    title: 'clients',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
             },
             {
-                path: "/admin/clients/create",
-                name: "clients.create",
+                path: '/admin/clients/create',
+                name: 'clients.create',
                 component: () =>
-                    import("../apps/admin/views/clients/create.vue"),
+                    import('../apps/admin/views/clients/create.vue'),
                 meta: {
-                    layout: "app",
-                    title: "Create Clients",
+                    layout: 'app',
+                    title: 'Create Clients',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
             },
             {
-                path: "/admin/clients/edit/:id",
-                name: "clients.edit",
-                component: () => import("../apps/admin/views/clients/edit.vue"),
+                path: '/admin/clients/edit/:id',
+                name: 'clients.edit',
+                component: () => import('../apps/admin/views/clients/edit.vue'),
                 meta: {
-                    layout: "app",
-                    title: "Edit Clients",
+                    layout: 'app',
+                    title: 'Edit Clients',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
@@ -2848,61 +2838,61 @@ const routes = [
             //clients
 
             {
-                path: "/admin/projects",
-                name: "projects.index",
+                path: '/admin/projects',
+                name: 'projects.index',
                 component: () =>
-                    import("../apps/admin/views/projects/index.vue"),
+                    import('../apps/admin/views/projects/index.vue'),
                 meta: {
-                    layout: "app",
-                    title: "projects",
+                    layout: 'app',
+                    title: 'projects',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
             },
             {
-                path: "/admin/projects/create",
-                name: "projects.create",
+                path: '/admin/projects/create',
+                name: 'projects.create',
                 component: () =>
-                    import("../apps/admin/views/projects/create.vue"),
+                    import('../apps/admin/views/projects/create.vue'),
                 meta: {
-                    layout: "app",
-                    title: "Create Projects",
+                    layout: 'app',
+                    title: 'Create Projects',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
             },
             {
-                path: "/admin/projects/edit/:id",
-                name: "projects.edit",
+                path: '/admin/projects/edit/:id',
+                name: 'projects.edit',
                 component: () =>
-                    import("../apps/admin/views/projects/edit.vue"),
+                    import('../apps/admin/views/projects/edit.vue'),
                 meta: {
-                    layout: "app",
-                    title: "Edit Projects",
+                    layout: 'app',
+                    title: 'Edit Projects',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
@@ -2911,88 +2901,88 @@ const routes = [
             //end of the actual pages
 
             {
-                path: "/admin/analytics",
-                name: "analytics",
+                path: '/admin/analytics',
+                name: 'analytics',
                 component: () =>
                     import(
-                        /* webpackChunkName: "analytics" */ "../apps/admin/views/index.vue"
+                        /* webpackChunkName: "analytics" */ '../apps/admin/views/index.vue'
                     ),
                 meta: {
-                    layout: "app",
-                    title: "Dashboard",
+                    layout: 'app',
+                    title: 'Dashboard',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
             },
 
             {
-                path: "/admin/components/tabs",
-                name: "tabs",
+                path: '/admin/components/tabs',
+                name: 'tabs',
                 component: () =>
                     import(
-                        /* webpackChunkName: "components-tabs" */ "../apps/admin/views/components/tabs.vue"
+                        /* webpackChunkName: "components-tabs" */ '../apps/admin/views/components/tabs.vue'
                     ),
                 meta: {
-                    layout: "app",
-                    title: "Tabs",
+                    layout: 'app',
+                    title: 'Tabs',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
             },
             {
-                path: "/admin/components/accordions",
-                name: "accordions",
+                path: '/admin/components/accordions',
+                name: 'accordions',
                 component: () =>
-                    import("../apps/admin/views/components/accordions.vue"),
+                    import('../apps/admin/views/components/accordions.vue'),
                 meta: {
-                    layout: "app",
-                    title: "Accordations",
+                    layout: 'app',
+                    title: 'Accordations',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
             },
             {
-                path: "/admin/components/modals",
-                name: "modals",
+                path: '/admin/components/modals',
+                name: 'modals',
                 component: () =>
                     import(
-                        /* webpackChunkName: "components-modals" */ "../apps/admin/views/components/modals.vue"
+                        /* webpackChunkName: "components-modals" */ '../apps/admin/views/components/modals.vue'
                     ),
                 meta: {
-                    layout: "app",
-                    title: "Modals",
+                    layout: 'app',
+                    title: 'Modals',
                     metaTags: [
                         {
-                            name: "description",
-                            content: "The about page of our example app.",
+                            name: 'description',
+                            content: 'The about page of our example app.',
                         },
                         {
-                            property: "og:description",
-                            content: "The about page of our example app.",
+                            property: 'og:description',
+                            content: 'The about page of our example app.',
                         },
                     ],
                 },
@@ -3003,852 +2993,852 @@ const routes = [
     //components
 
     {
-        path: "/admin/components/cards",
-        name: "cards",
+        path: '/admin/components/cards',
+        name: 'cards',
         component: () =>
             import(
-                /* webpackChunkName: "components-cards" */ "../apps/admin/views/components/cards.vue"
+                /* webpackChunkName: "components-cards" */ '../apps/admin/views/components/cards.vue'
             ),
     },
     {
-        path: "/admin/components/carousel",
-        name: "admin.carousel",
+        path: '/admin/components/carousel',
+        name: 'admin.carousel',
         component: () =>
             import(
-                /* webpackChunkName: "components-carousel" */ "../apps/admin/views/components/carousel.vue"
-            ),
-    },
-
-    {
-        path: "/admin/components/timeline",
-        name: "timeline",
-        component: () =>
-            import(
-                /* webpackChunkName: "components-timeline" */ "../apps/admin/views/components/timeline.vue"
-            ),
-    },
-    {
-        path: "/admin/components/media-object",
-        name: "media-object",
-        component: () =>
-            import(
-                /* webpackChunkName: "components-media-object" */ "../apps/admin/views/components/media_object.vue"
-            ),
-    },
-    {
-        path: "/admin/components/list-group",
-        name: "list-group",
-        component: () =>
-            import(
-                /* webpackChunkName: "components-list-group" */ "../apps/admin/views/components/list_group.vue"
-            ),
-    },
-    {
-        path: "/admin/components/pricing-table",
-        name: "pricing-table",
-        component: () =>
-            import(
-                /* webpackChunkName: "components-pricing-table" */ "../apps/admin/views/components/pricing_table.vue"
-            ),
-    },
-    {
-        path: "/admin/components/notifications",
-        name: "notifications",
-        component: () =>
-            import(
-                /* webpackChunkName: "components-notifications" */ "../apps/admin/views/components/toast.vue"
+                /* webpackChunkName: "components-carousel" */ '../apps/admin/views/components/carousel.vue'
             ),
     },
 
     {
-        path: "/admin/components/lightbox",
-        name: "lightbox",
+        path: '/admin/components/timeline',
+        name: 'timeline',
         component: () =>
             import(
-                /* webpackChunkName: "components-lightbox" */ "../apps/admin/views/components/lightbox.vue"
+                /* webpackChunkName: "components-timeline" */ '../apps/admin/views/components/timeline.vue'
             ),
     },
     {
-        path: "/admin/components/countdown",
-        name: "countdown",
+        path: '/admin/components/media-object',
+        name: 'media-object',
         component: () =>
             import(
-                /* webpackChunkName: "components-countdown" */ "../apps/admin/views/components/countdown.vue"
+                /* webpackChunkName: "components-media-object" */ '../apps/admin/views/components/media_object.vue'
             ),
     },
     {
-        path: "/admin/components/counter",
-        name: "counter",
+        path: '/admin/components/list-group',
+        name: 'list-group',
         component: () =>
             import(
-                /* webpackChunkName: "components-counter" */ "../apps/admin/views/components/counter.vue"
+                /* webpackChunkName: "components-list-group" */ '../apps/admin/views/components/list_group.vue'
             ),
     },
     {
-        path: "/admin/components/sweetalert",
-        name: "sweetalert",
+        path: '/admin/components/pricing-table',
+        name: 'pricing-table',
         component: () =>
             import(
-                /* webpackChunkName: "components-sweetalert" */ "../apps/admin/views/components/sweetalert.vue"
+                /* webpackChunkName: "components-pricing-table" */ '../apps/admin/views/components/pricing_table.vue'
+            ),
+    },
+    {
+        path: '/admin/components/notifications',
+        name: 'notifications',
+        component: () =>
+            import(
+                /* webpackChunkName: "components-notifications" */ '../apps/admin/views/components/toast.vue'
+            ),
+    },
+
+    {
+        path: '/admin/components/lightbox',
+        name: 'lightbox',
+        component: () =>
+            import(
+                /* webpackChunkName: "components-lightbox" */ '../apps/admin/views/components/lightbox.vue'
+            ),
+    },
+    {
+        path: '/admin/components/countdown',
+        name: 'countdown',
+        component: () =>
+            import(
+                /* webpackChunkName: "components-countdown" */ '../apps/admin/views/components/countdown.vue'
+            ),
+    },
+    {
+        path: '/admin/components/counter',
+        name: 'counter',
+        component: () =>
+            import(
+                /* webpackChunkName: "components-counter" */ '../apps/admin/views/components/counter.vue'
+            ),
+    },
+    {
+        path: '/admin/components/sweetalert',
+        name: 'sweetalert',
+        component: () =>
+            import(
+                /* webpackChunkName: "components-sweetalert" */ '../apps/admin/views/components/sweetalert.vue'
             ),
     },
 
     //fonts
     {
-        path: "/admin/font-icons",
-        name: "font-icons",
+        path: '/admin/font-icons',
+        name: 'font-icons',
         component: () =>
             import(
-                /* webpackChunkName: "font-icons" */ "../apps/admin/views/font_icons.vue"
+                /* webpackChunkName: "font-icons" */ '../apps/admin/views/font_icons.vue'
             ),
     },
 
     //pages
     {
-        path: "/admin/pages/helpdesk",
-        name: "helpdesk",
+        path: '/admin/pages/helpdesk',
+        name: 'helpdesk',
         component: () =>
             import(
-                /* webpackChunkName: "pages-helpdesk" */ "../apps/admin/views/pages/helpdesk.vue"
+                /* webpackChunkName: "pages-helpdesk" */ '../apps/admin/views/pages/helpdesk.vue'
             ),
     },
     {
-        path: "/admin/pages/contact-us",
-        name: "contact-us",
+        path: '/admin/pages/contact-us',
+        name: 'contact-us',
         component: () =>
             import(
-                /* webpackChunkName: "pages-contact-us" */ "../apps/admin/views/pages/contact_us.vue"
+                /* webpackChunkName: "pages-contact-us" */ '../apps/admin/views/pages/contact_us.vue'
             ),
     },
     {
-        path: "/admin/pages/faq",
-        name: "faq1",
+        path: '/admin/pages/faq',
+        name: 'faq1',
         component: () =>
             import(
-                /* webpackChunkName: "pages-faq" */ "../apps/admin/views/pages/faq.vue"
+                /* webpackChunkName: "pages-faq" */ '../apps/admin/views/pages/faq.vue'
             ),
     },
     {
-        path: "/admin/pages/faq2",
-        name: "faq2",
+        path: '/admin/pages/faq2',
+        name: 'faq2',
         component: () =>
             import(
-                /* webpackChunkName: "pages-faq2" */ "../apps/admin/views/pages/faq2.vue"
+                /* webpackChunkName: "pages-faq2" */ '../apps/admin/views/pages/faq2.vue'
             ),
     },
     {
-        path: "/admin/pages/privacy-policy",
-        name: "admin-privacy-policy",
+        path: '/admin/pages/privacy-policy',
+        name: 'admin-privacy-policy',
         component: () =>
             import(
-                /* webpackChunkName: "pages-privacy-policy" */ "../apps/admin/views/pages/privacy_policy.vue"
+                /* webpackChunkName: "pages-privacy-policy" */ '../apps/admin/views/pages/privacy_policy.vue'
             ),
     },
     {
-        path: "/admin/pages/coming-soon",
-        name: "coming-soon",
+        path: '/admin/pages/coming-soon',
+        name: 'coming-soon',
         component: () =>
             import(
-                /* webpackChunkName: "pages-coming-soon" */ "../apps/admin/views/pages/coming_soon.vue"
+                /* webpackChunkName: "pages-coming-soon" */ '../apps/admin/views/pages/coming_soon.vue'
             ),
-        meta: { layout: "auth" },
+        meta: { layout: 'auth' },
     },
     {
-        path: "/admin/pages/error404",
-        name: "error404",
+        path: '/admin/pages/error404',
+        name: 'error404',
         component: () =>
             import(
-                /* webpackChunkName: "pages-error404" */ "../apps/admin/views/pages/error404.vue"
+                /* webpackChunkName: "pages-error404" */ '../apps/admin/views/pages/error404.vue'
             ),
-        meta: { layout: "auth" },
+        meta: { layout: 'auth' },
     },
     {
-        path: "/admin/pages/error500",
-        name: "error500",
+        path: '/admin/pages/error500',
+        name: 'error500',
         component: () =>
             import(
-                /* webpackChunkName: "pages-error500" */ "../apps/admin/views/pages/error500.vue"
+                /* webpackChunkName: "pages-error500" */ '../apps/admin/views/pages/error500.vue'
             ),
-        meta: { layout: "auth" },
+        meta: { layout: 'auth' },
     },
     {
-        path: "/admin/pages/error503",
-        name: "error503",
+        path: '/admin/pages/error503',
+        name: 'error503',
         component: () =>
             import(
-                /* webpackChunkName: "pages-error503" */ "../apps/admin/views/pages/error503.vue"
+                /* webpackChunkName: "pages-error503" */ '../apps/admin/views/pages/error503.vue'
             ),
-        meta: { layout: "auth" },
+        meta: { layout: 'auth' },
     },
     {
-        path: "/admin/pages/maintenence",
-        name: "maintenence",
+        path: '/admin/pages/maintenence',
+        name: 'maintenence',
         component: () =>
             import(
-                /* webpackChunkName: "pages-maintenence" */ "../apps/admin/views/pages/maintenence.vue"
+                /* webpackChunkName: "pages-maintenence" */ '../apps/admin/views/pages/maintenence.vue'
             ),
-        meta: { layout: "auth" },
+        meta: { layout: 'auth' },
     },
     {
-        path: "/admin/pages/blank-page",
-        name: "blank-page",
+        path: '/admin/pages/blank-page',
+        name: 'blank-page',
         component: () =>
             import(
-                /* webpackChunkName: "pages-blank-page" */ "../apps/admin/views/pages/blank_page.vue"
+                /* webpackChunkName: "pages-blank-page" */ '../apps/admin/views/pages/blank_page.vue'
             ),
     },
     {
-        path: "/admin/pages/sample",
-        name: "sample",
+        path: '/admin/pages/sample',
+        name: 'sample',
         component: () =>
             import(
-                /* webpackChunkName: "pages-sample" */ "../apps/admin/views/pages/sample.vue"
+                /* webpackChunkName: "pages-sample" */ '../apps/admin/views/pages/sample.vue'
             ),
     },
 
     //elements
     {
-        path: "/admin/elements/alerts",
-        name: "alerts",
+        path: '/admin/elements/alerts',
+        name: 'alerts',
         component: () =>
             import(
-                /* webpackChunkName: "elements-alerts" */ "../apps/admin/views/elements/alerts.vue"
+                /* webpackChunkName: "elements-alerts" */ '../apps/admin/views/elements/alerts.vue'
             ),
     },
     {
-        path: "/admin/elements/avatar",
-        name: "avatar",
+        path: '/admin/elements/avatar',
+        name: 'avatar',
         component: () =>
             import(
-                /* webpackChunkName: "elements-avatar" */ "../apps/admin/views/elements/avatar.vue"
+                /* webpackChunkName: "elements-avatar" */ '../apps/admin/views/elements/avatar.vue'
             ),
     },
     {
-        path: "/admin/elements/badges",
-        name: "badges",
+        path: '/admin/elements/badges',
+        name: 'badges',
         component: () =>
             import(
-                /* webpackChunkName: "elements-badges" */ "../apps/admin/views/elements/badges.vue"
+                /* webpackChunkName: "elements-badges" */ '../apps/admin/views/elements/badges.vue'
             ),
     },
     {
-        path: "/admin/elements/breadcrumbs",
-        name: "breadcrumbs",
+        path: '/admin/elements/breadcrumbs',
+        name: 'breadcrumbs',
         component: () =>
             import(
-                /* webpackChunkName: "elements-breadcrumbs" */ "../apps/admin/views/elements/breadcrumbs.vue"
+                /* webpackChunkName: "elements-breadcrumbs" */ '../apps/admin/views/elements/breadcrumbs.vue'
             ),
     },
     {
-        path: "/admin/elements/buttons",
-        name: "buttons",
+        path: '/admin/elements/buttons',
+        name: 'buttons',
         component: () =>
             import(
-                /* webpackChunkName: "elements-buttons" */ "../apps/admin/views/elements/buttons.vue"
+                /* webpackChunkName: "elements-buttons" */ '../apps/admin/views/elements/buttons.vue'
             ),
     },
     {
-        path: "/admin/elements/buttons-group",
-        name: "buttons-group",
+        path: '/admin/elements/buttons-group',
+        name: 'buttons-group',
         component: () =>
             import(
-                /* webpackChunkName: "elements-buttons-group" */ "../apps/admin/views/elements/buttons_group.vue"
+                /* webpackChunkName: "elements-buttons-group" */ '../apps/admin/views/elements/buttons_group.vue'
             ),
     },
     {
-        path: "/admin/elements/color-library",
-        name: "color-library",
+        path: '/admin/elements/color-library',
+        name: 'color-library',
         component: () =>
             import(
-                /* webpackChunkName: "elements-color-library" */ "../apps/admin/views/elements/color_library.vue"
+                /* webpackChunkName: "elements-color-library" */ '../apps/admin/views/elements/color_library.vue'
             ),
     },
     {
-        path: "/admin/elements/dropdown",
-        name: "dropdown",
+        path: '/admin/elements/dropdown',
+        name: 'dropdown',
         component: () =>
             import(
-                /* webpackChunkName: "elements-dropdown" */ "../apps/admin/views/elements/dropdown.vue"
+                /* webpackChunkName: "elements-dropdown" */ '../apps/admin/views/elements/dropdown.vue'
             ),
     },
     {
-        path: "/admin/elements/infobox",
-        name: "infobox",
+        path: '/admin/elements/infobox',
+        name: 'infobox',
         component: () =>
             import(
-                /* webpackChunkName: "elements-infobox" */ "../apps/admin/views/elements/infobox.vue"
+                /* webpackChunkName: "elements-infobox" */ '../apps/admin/views/elements/infobox.vue'
             ),
     },
     {
-        path: "/admin/elements/jumbotron",
-        name: "jumbotron",
+        path: '/admin/elements/jumbotron',
+        name: 'jumbotron',
         component: () =>
             import(
-                /* webpackChunkName: "elements-jumbotron" */ "../apps/admin/views/elements/jumbotron.vue"
+                /* webpackChunkName: "elements-jumbotron" */ '../apps/admin/views/elements/jumbotron.vue'
             ),
     },
     {
-        path: "/admin/elements/loader",
-        name: "loader",
+        path: '/admin/elements/loader',
+        name: 'loader',
         component: () =>
             import(
-                /* webpackChunkName: "elements-loader" */ "../apps/admin/views/elements/loader.vue"
+                /* webpackChunkName: "elements-loader" */ '../apps/admin/views/elements/loader.vue'
             ),
     },
     {
-        path: "/admin/elements/pagination",
-        name: "pagination",
+        path: '/admin/elements/pagination',
+        name: 'pagination',
         component: () =>
             import(
-                /* webpackChunkName: "elements-pagination" */ "../apps/admin/views/elements/pagination.vue"
+                /* webpackChunkName: "elements-pagination" */ '../apps/admin/views/elements/pagination.vue'
             ),
     },
     {
-        path: "/admin/elements/popovers",
-        name: "popovers",
+        path: '/admin/elements/popovers',
+        name: 'popovers',
         component: () =>
             import(
-                /* webpackChunkName: "elements-popovers" */ "../apps/admin/views/elements/popovers.vue"
+                /* webpackChunkName: "elements-popovers" */ '../apps/admin/views/elements/popovers.vue'
             ),
     },
     {
-        path: "/admin/elements/progress-bar",
-        name: "progress-bar",
+        path: '/admin/elements/progress-bar',
+        name: 'progress-bar',
         component: () =>
             import(
-                /* webpackChunkName: "elements-progress-bar" */ "../apps/admin/views/elements/progress_bar.vue"
+                /* webpackChunkName: "elements-progress-bar" */ '../apps/admin/views/elements/progress_bar.vue'
             ),
     },
     {
-        path: "/admin/elements/search",
-        name: "search",
+        path: '/admin/elements/search',
+        name: 'search',
         component: () =>
             import(
-                /* webpackChunkName: "elements-search" */ "../apps/admin/views/elements/search.vue"
+                /* webpackChunkName: "elements-search" */ '../apps/admin/views/elements/search.vue'
             ),
     },
     {
-        path: "/admin/elements/tooltips",
-        name: "tooltips",
+        path: '/admin/elements/tooltips',
+        name: 'tooltips',
         component: () =>
             import(
-                /* webpackChunkName: "elements-tooltips" */ "../apps/admin/views/elements/tooltips.vue"
+                /* webpackChunkName: "elements-tooltips" */ '../apps/admin/views/elements/tooltips.vue'
             ),
     },
     {
-        path: "/admin/elements/treeview",
-        name: "treeview",
+        path: '/admin/elements/treeview',
+        name: 'treeview',
         component: () =>
             import(
-                /* webpackChunkName: "elements-treeview" */ "../apps/admin/views/elements/treeview.vue"
+                /* webpackChunkName: "elements-treeview" */ '../apps/admin/views/elements/treeview.vue'
             ),
     },
     {
-        path: "/admin/elements/typography",
-        name: "typography",
+        path: '/admin/elements/typography',
+        name: 'typography',
         component: () =>
             import(
-                /* webpackChunkName: "elements-typography" */ "../apps/admin/views/elements/typography.vue"
+                /* webpackChunkName: "elements-typography" */ '../apps/admin/views/elements/typography.vue'
             ),
     },
 
     //tables
     {
-        path: "/admin/tables",
-        name: "tables",
+        path: '/admin/tables',
+        name: 'tables',
         component: () =>
             import(
-                /* webpackChunkName: "tables" */ "../apps/admin/views/tables.vue"
+                /* webpackChunkName: "tables" */ '../apps/admin/views/tables.vue'
             ),
     },
 
     //users
     {
-        path: "/admin/users/create_users",
-        name: "users.create",
+        path: '/admin/users/create_users',
+        name: 'users.create',
         component: () =>
             import(
-                /* webpackChunkName: "users-profile" */ "../apps/admin/views/users/create_users.vue"
+                /* webpackChunkName: "users-profile" */ '../apps/admin/views/users/create_users.vue'
             ),
     },
 
     {
-        path: "/admin/users/edit/:id",
-        name: "users.edit",
+        path: '/admin/users/edit/:id',
+        name: 'users.edit',
         component: () =>
             import(
-                /* webpackChunkName: "users-profile" */ "../apps/admin/views/users/edit.vue"
+                /* webpackChunkName: "users-profile" */ '../apps/admin/views/users/edit.vue'
             ),
     },
     {
-        path: "/admin/users/view_users",
-        name: "users.index",
+        path: '/admin/users/view_users',
+        name: 'users.index',
         component: () =>
             import(
-                /* webpackChunkName: "users-profile" */ "../apps/admin/views/users/index.vue"
+                /* webpackChunkName: "users-profile" */ '../apps/admin/views/users/index.vue'
             ),
     },
     {
-        path: "/admin/users/profile",
-        name: "profile",
+        path: '/admin/users/profile',
+        name: 'profile',
         component: () =>
             import(
-                /* webpackChunkName: "users-profile" */ "../apps/admin/views/users/profile.vue"
+                /* webpackChunkName: "users-profile" */ '../apps/admin/views/users/profile.vue'
             ),
     },
     {
-        path: "/admin/users/account-setting",
-        name: "account-setting",
+        path: '/admin/users/account-setting',
+        name: 'account-setting',
         component: () =>
             import(
-                /* webpackChunkName: "users-account-setting" */ "../apps/admin/views/users/account_setting.vue"
+                /* webpackChunkName: "users-account-setting" */ '../apps/admin/views/users/account_setting.vue'
             ),
     },
 
     //seo
     {
-        path: "/admin/seo/create_seo",
-        name: "create-seo",
+        path: '/admin/seo/create_seo',
+        name: 'create-seo',
         component: () =>
             import(
-                /* webpackChunkName: "create-seo" */ "../apps/admin/views/seo/create_seo.vue"
+                /* webpackChunkName: "create-seo" */ '../apps/admin/views/seo/create_seo.vue'
             ),
     },
     {
-        path: "/admin/seo/view_seo",
-        name: "view-seo",
+        path: '/admin/seo/view_seo',
+        name: 'view-seo',
         component: () =>
             import(
-                /* webpackChunkName: "view-seo" */ "../apps/admin/views/seo/view_seo.vue"
+                /* webpackChunkName: "view-seo" */ '../apps/admin/views/seo/view_seo.vue'
             ),
     },
     {
-        path: "/admin/seo/edit/:id",
-        name: "edit-seo",
+        path: '/admin/seo/edit/:id',
+        name: 'edit-seo',
         component: () =>
             import(
-                /* webpackChunkName: "edit-seo" */ "../apps/admin/views/seo/edit.vue"
+                /* webpackChunkName: "edit-seo" */ '../apps/admin/views/seo/edit.vue'
             ),
     },
 
     //drag&drop
     {
-        path: "/admin/dragndrop",
-        name: "dragndrop",
+        path: '/admin/dragndrop',
+        name: 'dragndrop',
         component: () =>
             import(
-                /* webpackChunkName: "dragndrop" */ "../apps/admin/views/dragndrop.vue"
+                /* webpackChunkName: "dragndrop" */ '../apps/admin/views/dragndrop.vue'
             ),
     },
 
     //charts
     {
-        path: "/admin/charts/apex-chart",
-        name: "apex-chart",
+        path: '/admin/charts/apex-chart',
+        name: 'apex-chart',
         component: () =>
             import(
-                /* webpackChunkName: "charts-apex-chart" */ "../apps/admin/views/charts/apex_chart.vue"
+                /* webpackChunkName: "charts-apex-chart" */ '../apps/admin/views/charts/apex_chart.vue'
             ),
     },
 
     //widgets
     {
-        path: "/admin/widgets",
-        name: "widgets",
+        path: '/admin/widgets',
+        name: 'widgets',
         component: () =>
             import(
-                /* webpackChunkName: "widgets" */ "../apps/admin/views/widgets.vue"
+                /* webpackChunkName: "widgets" */ '../apps/admin/views/widgets.vue'
             ),
     },
 
     //forms
     {
-        path: "/admin/forms/basic",
-        name: "basic",
+        path: '/admin/forms/basic',
+        name: 'basic',
         component: () =>
             import(
-                /* webpackChunkName: "forms-basic" */ "../apps/admin/views/forms/basic.vue"
+                /* webpackChunkName: "forms-basic" */ '../apps/admin/views/forms/basic.vue'
             ),
     },
     {
-        path: "/admin/forms/input-group",
-        name: "input-group",
+        path: '/admin/forms/input-group',
+        name: 'input-group',
         component: () =>
             import(
-                /* webpackChunkName: "forms-input-group" */ "../apps/admin/views/forms/input_group.vue"
+                /* webpackChunkName: "forms-input-group" */ '../apps/admin/views/forms/input_group.vue'
             ),
     },
     {
-        path: "/admin/forms/layouts",
-        name: "layouts",
+        path: '/admin/forms/layouts',
+        name: 'layouts',
         component: () =>
             import(
-                /* webpackChunkName: "forms-layouts" */ "../apps/admin/views/forms/layouts.vue"
+                /* webpackChunkName: "forms-layouts" */ '../apps/admin/views/forms/layouts.vue'
             ),
     },
     {
-        path: "/admin/forms/validation",
-        name: "validation",
+        path: '/admin/forms/validation',
+        name: 'validation',
         component: () =>
             import(
-                /* webpackChunkName: "forms-validation" */ "../apps/admin/views/forms/validation.vue"
+                /* webpackChunkName: "forms-validation" */ '../apps/admin/views/forms/validation.vue'
             ),
     },
     {
-        path: "/admin/forms/checkbox-radio",
-        name: "checkbox-radio",
+        path: '/admin/forms/checkbox-radio',
+        name: 'checkbox-radio',
         component: () =>
             import(
-                /* webpackChunkName: "forms-checkbox-radio" */ "../apps/admin/views/forms/checkbox_radio.vue"
+                /* webpackChunkName: "forms-checkbox-radio" */ '../apps/admin/views/forms/checkbox_radio.vue'
             ),
     },
     {
-        path: "/admin/forms/switches",
-        name: "switches",
+        path: '/admin/forms/switches',
+        name: 'switches',
         component: () =>
             import(
-                /* webpackChunkName: "forms-switches" */ "../apps/admin/views/forms/switches.vue"
+                /* webpackChunkName: "forms-switches" */ '../apps/admin/views/forms/switches.vue'
             ),
     },
     {
-        path: "/admin/forms/wizards",
-        name: "wizards",
+        path: '/admin/forms/wizards',
+        name: 'wizards',
         component: () =>
             import(
-                /* webpackChunkName: "forms-wizards" */ "../apps/admin/views/forms/wizards.vue"
+                /* webpackChunkName: "forms-wizards" */ '../apps/admin/views/forms/wizards.vue'
             ),
     },
     {
-        path: "/admin/forms/file-upload",
-        name: "file-upload",
+        path: '/admin/forms/file-upload',
+        name: 'file-upload',
         component: () =>
             import(
-                /* webpackChunkName: "forms-file-upload" */ "../apps/admin/views/forms/fileupload.vue"
+                /* webpackChunkName: "forms-file-upload" */ '../apps/admin/views/forms/fileupload.vue'
             ),
     },
     {
-        path: "/admin/forms/clipboard",
-        name: "clipboard",
+        path: '/admin/forms/clipboard',
+        name: 'clipboard',
         component: () =>
             import(
-                /* webpackChunkName: "forms-clipboard" */ "../apps/admin/views/forms/clipboard.vue"
+                /* webpackChunkName: "forms-clipboard" */ '../apps/admin/views/forms/clipboard.vue'
             ),
     },
     {
-        path: "/admin/forms/date-picker",
-        name: "date-picker",
+        path: '/admin/forms/date-picker',
+        name: 'date-picker',
         component: () =>
             import(
-                /* webpackChunkName: "forms-date-picker" */ "../apps/admin/views/forms/date_range_picker.vue"
+                /* webpackChunkName: "forms-date-picker" */ '../apps/admin/views/forms/date_range_picker.vue'
             ),
     },
     {
-        path: "/admin/forms/input-mask",
-        name: "input-mask",
+        path: '/admin/forms/input-mask',
+        name: 'input-mask',
         component: () =>
             import(
-                /* webpackChunkName: "forms-input-mask" */ "../apps/admin/views/forms/input_mask.vue"
+                /* webpackChunkName: "forms-input-mask" */ '../apps/admin/views/forms/input_mask.vue'
             ),
     },
     {
-        path: "/admin/forms/quill-editor",
-        name: "quill-editor",
+        path: '/admin/forms/quill-editor',
+        name: 'quill-editor',
         component: () =>
             import(
-                /* webpackChunkName: "forms-quill-editor" */ "../apps/admin/views/forms/quill_editor.vue"
+                /* webpackChunkName: "forms-quill-editor" */ '../apps/admin/views/forms/quill_editor.vue'
             ),
     },
     {
-        path: "/admin/forms/touchspin",
-        name: "touchspin",
+        path: '/admin/forms/touchspin',
+        name: 'touchspin',
         component: () =>
             import(
-                /* webpackChunkName: "forms-touchspin" */ "../apps/admin/views/forms/touchspin.vue"
+                /* webpackChunkName: "forms-touchspin" */ '../apps/admin/views/forms/touchspin.vue'
             ),
     },
     {
-        path: "/admin/forms/markdown-editor",
-        name: "markdown-editor",
+        path: '/admin/forms/markdown-editor',
+        name: 'markdown-editor',
         component: () =>
             import(
-                /* webpackChunkName: "forms-markdown-editor" */ "../apps/admin/views/forms/markdown_editor.vue"
+                /* webpackChunkName: "forms-markdown-editor" */ '../apps/admin/views/forms/markdown_editor.vue'
             ),
     },
     {
-        path: "/admin/forms/select2",
-        name: "select2",
+        path: '/admin/forms/select2',
+        name: 'select2',
         component: () =>
             import(
-                /* webpackChunkName: "forms-select2" */ "../apps/admin/views/forms/select2.vue"
+                /* webpackChunkName: "forms-select2" */ '../apps/admin/views/forms/select2.vue'
             ),
     },
 
     //apps
     {
-        path: "/admin/apps/chat",
-        name: "chat",
+        path: '/admin/apps/chat',
+        name: 'chat',
         component: () =>
             import(
-                /* webpackChunkName: "apps-chat" */ "../apps/admin/views/apps/chat.vue"
+                /* webpackChunkName: "apps-chat" */ '../apps/admin/views/apps/chat.vue'
             ),
     },
     {
-        path: "/admin/apps/mailbox",
-        name: "mailbox",
+        path: '/admin/apps/mailbox',
+        name: 'mailbox',
         component: () =>
             import(
-                /* webpackChunkName: "apps-mailbox" */ "../apps/admin/views/apps/mailbox.vue"
+                /* webpackChunkName: "apps-mailbox" */ '../apps/admin/views/apps/mailbox.vue'
             ),
     },
     {
-        path: "/admin/apps/todo-list",
-        name: "todo-list",
+        path: '/admin/apps/todo-list',
+        name: 'todo-list',
         component: () =>
             import(
-                /* webpackChunkName: "apps-todo-list" */ "../apps/admin/views/apps/todo_list.vue"
+                /* webpackChunkName: "apps-todo-list" */ '../apps/admin/views/apps/todo_list.vue'
             ),
     },
     {
-        path: "/admin/apps/contacts",
-        name: "contacts",
+        path: '/admin/apps/contacts',
+        name: 'contacts',
         component: () =>
             import(
-                /* webpackChunkName: "apps-contacts" */ "../apps/admin/views/apps/contacts.vue"
+                /* webpackChunkName: "apps-contacts" */ '../apps/admin/views/apps/contacts.vue'
             ),
     },
     {
-        path: "/admin/apps/notes",
-        name: "notes",
+        path: '/admin/apps/notes',
+        name: 'notes',
         component: () =>
             import(
-                /* webpackChunkName: "apps-notes" */ "../apps/admin/views/apps/notes.vue"
+                /* webpackChunkName: "apps-notes" */ '../apps/admin/views/apps/notes.vue'
             ),
     },
     {
-        path: "/admin/apps/scrumboard",
-        name: "scrumboard",
+        path: '/admin/apps/scrumboard',
+        name: 'scrumboard',
         component: () =>
             import(
-                /* webpackChunkName: "apps-scrumboard" */ "../apps/admin/views/apps/scrumboard.vue"
+                /* webpackChunkName: "apps-scrumboard" */ '../apps/admin/views/apps/scrumboard.vue'
             ),
     },
     {
-        path: "/admin/apps/calendar",
-        name: "calendar",
+        path: '/admin/apps/calendar',
+        name: 'calendar',
         component: () =>
             import(
-                /* webpackChunkName: "apps-calendar" */ "../apps/admin/views/apps/calendar.vue"
+                /* webpackChunkName: "apps-calendar" */ '../apps/admin/views/apps/calendar.vue'
             ),
     },
     {
-        path: "/admin/apps/invoice/list",
-        name: "invoice-list",
+        path: '/admin/apps/invoice/list',
+        name: 'invoice-list',
         component: () =>
             import(
-                /* webpackChunkName: "apps-invoice-list" */ "../apps/admin/views/apps/invoice/list.vue"
+                /* webpackChunkName: "apps-invoice-list" */ '../apps/admin/views/apps/invoice/list.vue'
             ),
     },
     {
-        path: "/admin/apps/invoice/preview",
-        name: "invoice-preview",
+        path: '/admin/apps/invoice/preview',
+        name: 'invoice-preview',
         component: () =>
             import(
-                /* webpackChunkName: "apps-invoice-preview" */ "../apps/admin/views/apps/invoice/preview.vue"
+                /* webpackChunkName: "apps-invoice-preview" */ '../apps/admin/views/apps/invoice/preview.vue'
             ),
     },
     {
-        path: "/admin/apps/invoice/add",
-        name: "invoice-add",
+        path: '/admin/apps/invoice/add',
+        name: 'invoice-add',
         component: () =>
             import(
-                /* webpackChunkName: "apps-invoice-add" */ "../apps/admin/views/apps/invoice/add.vue"
+                /* webpackChunkName: "apps-invoice-add" */ '../apps/admin/views/apps/invoice/add.vue'
             ),
     },
     {
-        path: "/admin/apps/invoice/edit",
-        name: "invoice-edit",
+        path: '/admin/apps/invoice/edit',
+        name: 'invoice-edit',
         component: () =>
             import(
-                /* webpackChunkName: "apps-invoice-edit" */ "../apps/admin/views/apps/invoice/edit.vue"
+                /* webpackChunkName: "apps-invoice-edit" */ '../apps/admin/views/apps/invoice/edit.vue'
             ),
     },
 
     //v3-table
     {
-        path: "/admin/tables/v3-table/basic",
-        name: "table-v3-table-basic",
+        path: '/admin/tables/v3-table/basic',
+        name: 'table-v3-table-basic',
         component: () =>
             import(
-                /* webpackChunkName: "tables-basic" */ "../apps/admin/views/tables/v3-table/basic.vue"
+                /* webpackChunkName: "tables-basic" */ '../apps/admin/views/tables/v3-table/basic.vue'
             ),
     },
     {
-        path: "/admin/tables/v3-table/striped",
-        name: "v3-table-striped",
+        path: '/admin/tables/v3-table/striped',
+        name: 'v3-table-striped',
         component: () =>
             import(
-                /* webpackChunkName: "tables-v3-table-striped" */ "../apps/admin/views/tables/v3-table/striped.vue"
+                /* webpackChunkName: "tables-v3-table-striped" */ '../apps/admin/views/tables/v3-table/striped.vue'
             ),
     },
     {
-        path: "/admin/tables/v3-table/order-sorting",
-        name: "v3-table-order-sorting",
+        path: '/admin/tables/v3-table/order-sorting',
+        name: 'v3-table-order-sorting',
         component: () =>
             import(
-                /* webpackChunkName: "tables-v3-table-order-sorting" */ "../apps/admin/views/tables/v3-table/order_sorting.vue"
+                /* webpackChunkName: "tables-v3-table-order-sorting" */ '../apps/admin/views/tables/v3-table/order_sorting.vue'
             ),
     },
     {
-        path: "/admin/tables/v3-table/multi-column",
-        name: "v3-table-multi-column",
+        path: '/admin/tables/v3-table/multi-column',
+        name: 'v3-table-multi-column',
         component: () =>
             import(
-                /* webpackChunkName: "tables-v3-table-multi-column" */ "../apps/admin/views/tables/v3-table/multi_column.vue"
+                /* webpackChunkName: "tables-v3-table-multi-column" */ '../apps/admin/views/tables/v3-table/multi_column.vue'
             ),
     },
     {
-        path: "/admin/tables/v3-table/multiple-tables",
-        name: "v3-table-multiple-tables",
+        path: '/admin/tables/v3-table/multiple-tables',
+        name: 'v3-table-multiple-tables',
         component: () =>
             import(
-                /* webpackChunkName: "tables-v3-table-multiple-tables" */ "../apps/admin/views/tables/v3-table/multiple_tables.vue"
+                /* webpackChunkName: "tables-v3-table-multiple-tables" */ '../apps/admin/views/tables/v3-table/multiple_tables.vue'
             ),
     },
     {
-        path: "/admin/tables/v3-table/alt-pagination",
-        name: "v3-table-alt-pagination",
+        path: '/admin/tables/v3-table/alt-pagination',
+        name: 'v3-table-alt-pagination',
         component: () =>
             import(
-                /* webpackChunkName: "tables-v3-table-alt-pagination" */ "../apps/admin/views/tables/v3-table/alt_pagination.vue"
+                /* webpackChunkName: "tables-v3-table-alt-pagination" */ '../apps/admin/views/tables/v3-table/alt_pagination.vue'
             ),
     },
     {
-        path: "/admin/tables/v3-table/custom",
-        name: "v3-table-custom",
+        path: '/admin/tables/v3-table/custom',
+        name: 'v3-table-custom',
         component: () =>
             import(
-                /* webpackChunkName: "tables-v3-table-custom" */ "../apps/admin/views/tables/v3-table/custom.vue"
+                /* webpackChunkName: "tables-v3-table-custom" */ '../apps/admin/views/tables/v3-table/custom.vue'
             ),
     },
     {
-        path: "/admin/tables/v3-table/range-search",
-        name: "v3-table-range-search",
+        path: '/admin/tables/v3-table/range-search',
+        name: 'v3-table-range-search',
         component: () =>
             import(
-                /* webpackChunkName: "tables-v3-table-range-search" */ "../apps/admin/views/tables/v3-table/range_search.vue"
+                /* webpackChunkName: "tables-v3-table-range-search" */ '../apps/admin/views/tables/v3-table/range_search.vue'
             ),
     },
     {
-        path: "/admin/tables/v3-table/export",
-        name: "v3-table-export",
+        path: '/admin/tables/v3-table/export',
+        name: 'v3-table-export',
         component: () =>
             import(
-                /* webpackChunkName: "tables-v3-table-export" */ "../apps/admin/views/tables/v3-table/export.vue"
+                /* webpackChunkName: "tables-v3-table-export" */ '../apps/admin/views/tables/v3-table/export.vue'
             ),
     },
     {
-        path: "/admin/tables/v3-table/live-dom-ordering",
-        name: "v3-table-live-dom-ordering",
+        path: '/admin/tables/v3-table/live-dom-ordering',
+        name: 'v3-table-live-dom-ordering',
         component: () =>
             import(
-                /* webpackChunkName: "tables-v3-table-live-dom-ordering" */ "../apps/admin/views/tables/v3-table/live_dom_ordering.vue"
+                /* webpackChunkName: "tables-v3-table-live-dom-ordering" */ '../apps/admin/views/tables/v3-table/live_dom_ordering.vue'
             ),
     },
     {
-        path: "/admin/tables/v3-table/miscellaneous",
-        name: "v3-table-miscellaneous",
+        path: '/admin/tables/v3-table/miscellaneous',
+        name: 'v3-table-miscellaneous',
         component: () =>
             import(
-                /* webpackChunkName: "tables-v3-table-miscellaneous" */ "../apps/admin/views/tables/v3-table/miscellaneous.vue"
+                /* webpackChunkName: "tables-v3-table-miscellaneous" */ '../apps/admin/views/tables/v3-table/miscellaneous.vue'
             ),
     },
     //vue3-datatable
     {
-        path: "/admin/tables/vue3-datatable/basic",
-        name: "table-vue3-datatable-basic",
+        path: '/admin/tables/vue3-datatable/basic',
+        name: 'table-vue3-datatable-basic',
         component: () =>
             import(
-                /* webpackChunkName: "tables-vue3-datatable-basic" */ "../apps/admin/views/tables/vue3-datatable/basic.vue"
+                /* webpackChunkName: "tables-vue3-datatable-basic" */ '../apps/admin/views/tables/vue3-datatable/basic.vue'
             ),
     },
     {
-        path: "/admin/tables/vue3-datatable/order-sorting",
-        name: "vue3-datatable-order-sorting",
+        path: '/admin/tables/vue3-datatable/order-sorting',
+        name: 'vue3-datatable-order-sorting',
         component: () =>
             import(
-                /* webpackChunkName: "tables-vue3-datatable-order-sorting" */ "../apps/admin/views/tables/vue3-datatable/order_sorting.vue"
+                /* webpackChunkName: "tables-vue3-datatable-order-sorting" */ '../apps/admin/views/tables/vue3-datatable/order_sorting.vue'
             ),
     },
     {
-        path: "/admin/tables/vue3-datatable/alt-pagination",
-        name: "vue3-datatable-alt-pagination",
+        path: '/admin/tables/vue3-datatable/alt-pagination',
+        name: 'vue3-datatable-alt-pagination',
         component: () =>
             import(
-                /* webpackChunkName: "tables-vue3-datatable-alt-pagination" */ "../apps/admin/views/tables/vue3-datatable/alt_pagination.vue"
+                /* webpackChunkName: "tables-vue3-datatable-alt-pagination" */ '../apps/admin/views/tables/vue3-datatable/alt_pagination.vue'
             ),
     },
     {
-        path: "/admin/tables/vue3-datatable/search",
-        name: "vue3-datatable-search",
+        path: '/admin/tables/vue3-datatable/search',
+        name: 'vue3-datatable-search',
         component: () =>
             import(
-                /* webpackChunkName: "tables-vue3-datatable-search" */ "../apps/admin/views/tables/vue3-datatable/search.vue"
+                /* webpackChunkName: "tables-vue3-datatable-search" */ '../apps/admin/views/tables/vue3-datatable/search.vue'
             ),
     },
     {
-        path: "/admin/tables/vue3-datatable/checkbox",
-        name: "vue3-datatable-checkbox",
+        path: '/admin/tables/vue3-datatable/checkbox',
+        name: 'vue3-datatable-checkbox',
         component: () =>
             import(
-                /* webpackChunkName: "tables-vue3-datatable-checkbox" */ "../apps/admin/views/tables/vue3-datatable/checkbox.vue"
+                /* webpackChunkName: "tables-vue3-datatable-checkbox" */ '../apps/admin/views/tables/vue3-datatable/checkbox.vue'
             ),
     },
     {
-        path: "/admin/tables/vue3-datatable/slot",
-        name: "vue3-datatable-slot",
+        path: '/admin/tables/vue3-datatable/slot',
+        name: 'vue3-datatable-slot',
         component: () =>
             import(
-                /* webpackChunkName: "tables-vue3-datatable-slot" */ "../apps/admin/views/tables/vue3-datatable/slot.vue"
+                /* webpackChunkName: "tables-vue3-datatable-slot" */ '../apps/admin/views/tables/vue3-datatable/slot.vue'
             ),
     },
     {
-        path: "/admin/tables/vue3-datatable/column-filter",
-        name: "vue3-datatable-column-filter",
+        path: '/admin/tables/vue3-datatable/column-filter',
+        name: 'vue3-datatable-column-filter',
         component: () =>
             import(
-                /* webpackChunkName: "tables-vue3-datatable-column-filter" */ "../apps/admin/views/tables/vue3-datatable/column-filter.vue"
+                /* webpackChunkName: "tables-vue3-datatable-column-filter" */ '../apps/admin/views/tables/vue3-datatable/column-filter.vue'
             ),
     },
     {
-        path: "/admin/tables/vue3-datatable/actions",
-        name: "vue3-datatable-actions",
+        path: '/admin/tables/vue3-datatable/actions',
+        name: 'vue3-datatable-actions',
         component: () =>
             import(
-                /* webpackChunkName: "tables-vue3-datatable-actions" */ "../apps/admin/views/tables/vue3-datatable/actions.vue"
+                /* webpackChunkName: "tables-vue3-datatable-actions" */ '../apps/admin/views/tables/vue3-datatable/actions.vue'
             ),
     },
     {
-        path: "/admin/tables/vue3-datatable/sticky-header",
-        name: "vue3-datatable-sticky-header",
+        path: '/admin/tables/vue3-datatable/sticky-header',
+        name: 'vue3-datatable-sticky-header',
         component: () =>
             import(
-                /* webpackChunkName: "tables-vue3-datatable-sticky-header" */ "../apps/admin/views/tables/vue3-datatable/sticky-header.vue"
+                /* webpackChunkName: "tables-vue3-datatable-sticky-header" */ '../apps/admin/views/tables/vue3-datatable/sticky-header.vue'
             ),
     },
     {
-        path: "/admin/tables/vue3-datatable/column-chooser",
-        name: "vue3-datatable-column-chooser",
+        path: '/admin/tables/vue3-datatable/column-chooser',
+        name: 'vue3-datatable-column-chooser',
         component: () =>
             import(
-                /* webpackChunkName: "tables-vue3-datatable-column-chooser" */ "../apps/admin/views/tables/vue3-datatable/column-chooser.vue"
+                /* webpackChunkName: "tables-vue3-datatable-column-chooser" */ '../apps/admin/views/tables/vue3-datatable/column-chooser.vue'
             ),
     },
     {
-        path: "/admin/tables/vue3-datatable/advance",
-        name: "vue3-datatable-advance",
+        path: '/admin/tables/vue3-datatable/advance',
+        name: 'vue3-datatable-advance',
         component: () =>
             import(
-                /* webpackChunkName: "tables-vue3-datatable-advance" */ "../apps/admin/views/tables/vue3-datatable/advance.vue"
+                /* webpackChunkName: "tables-vue3-datatable-advance" */ '../apps/admin/views/tables/vue3-datatable/advance.vue'
             ),
     },
 ];

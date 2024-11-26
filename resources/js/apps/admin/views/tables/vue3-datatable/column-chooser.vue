@@ -1,65 +1,82 @@
 <template>
-    <div class="layout-px-spacing">
-        <teleport to="#breadcrumb">
-            <ul class="navbar-nav flex-row">
-                <li>
-                    <div class="page-header">
-                        <nav class="breadcrumb-one" aria-label="breadcrumb">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item">
-                                    <a href="javascript:;">DataTables</a>
-                                </li>
-                                <li class="breadcrumb-item active" aria-current="page">
-                                    <span>Column Chooser</span>
-                                </li>
-                            </ol>
-                        </nav>
-                    </div>
+  <div class="layout-px-spacing">
+    <teleport to="#breadcrumb">
+      <ul class="navbar-nav flex-row">
+        <li>
+          <div class="page-header">
+            <nav class="breadcrumb-one" aria-label="breadcrumb">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                  <a href="javascript:;">DataTables</a>
                 </li>
-            </ul>
-        </teleport>
+                <li class="breadcrumb-item active" aria-current="page">
+                  <span>Column Chooser</span>
+                </li>
+              </ol>
+            </nav>
+          </div>
+        </li>
+      </ul>
+    </teleport>
 
-        <div class="d-flex align-items-end">
-            <div class="btn-group custom-dropdown layout-top-spacing me-2 ms-auto" role="group">
-                <button id="btndefault" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Column Chooser
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        class="feather feather-chevron-down"
-                    >
-                        <polyline points="6 9 12 15 18 9"></polyline>
-                    </svg>
-                </button>
-                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="btndefault">
-                    <li v-for="col in cols" :key="col.field">
-                        <label class="checkbox-primary custom-control custom-checkbox">
-                            <div class="px-3 py-1">
-                                <input type="checkbox" class="custom-control-input" :checked="!col.hide" @change="col.hide = !$event.target.checked" />
-                                <span class="custom-control-label">{{ col.title }}</span>
-                            </div>
-                        </label>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="row layout-top-spacing">
-            <div class="col-xl-12 col-lg-12 col-sm-12 layout-spacing">
-                <div class="panel br-6 p-0">
-                    <div class="vue3-datatable">
-                        <vue3-datatable :rows="rows" :columns="cols" :totalRows="rows?.length" :sortable="true"> </vue3-datatable>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div class="d-flex align-items-end">
+      <div class="btn-group custom-dropdown layout-top-spacing me-2 ms-auto" role="group">
+        <button
+          id="btndefault"
+          type="button"
+          class="btn btn-primary dropdown-toggle"
+          data-bs-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          Column Chooser
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="feather feather-chevron-down"
+          >
+            <polyline points="6 9 12 15 18 9" />
+          </svg>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="btndefault">
+          <li v-for="col in cols" :key="col.field">
+            <label class="checkbox-primary custom-control custom-checkbox">
+              <div class="px-3 py-1">
+                <input
+                  type="checkbox"
+                  class="custom-control-input"
+                  :checked="!col.hide"
+                  @change="col.hide = !$event.target.checked"
+                />
+                <span class="custom-control-label">{{ col.title }}</span>
+              </div>
+            </label>
+          </li>
+        </ul>
+      </div>
     </div>
+    <div class="row layout-top-spacing">
+      <div class="col-xl-12 col-lg-12 col-sm-12 layout-spacing">
+        <div class="panel br-6 p-0">
+          <div class="vue3-datatable">
+            <vue3-datatable
+              :rows="rows"
+              :columns="cols"
+              :total-rows="rows?.length"
+              :sortable="true"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script setup>

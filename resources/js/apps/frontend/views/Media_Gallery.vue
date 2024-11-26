@@ -1,57 +1,76 @@
 <template>
-    <div>
-        <main class="main">
-            <div class="page-content">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-10 offset-lg-1 gallery-main-page-section">
-                            <h2 class="about-us-title">Gallery</h2><!-- End .title -->
-                            <router-link to="/media" class="btn btn-primary btn-round btn-shadow float-right">
-                                <i class="icon-long-arrow-left"></i><span>Back to Media Center</span>
-                            </router-link>
-                            <p class="lead about-us-lead text-primary mb-3">Journey Through the Lens: Our Story in
-                                Pictures</p>
-                            <!-- Add the filter component -->
-                            <DynamicFilters :items="products" filter-column="gallery_type"
-                                @update:displayedProducts="handleUpdateDisplayedProducts" :filters="filters" />
+  <div>
+    <main class="main">
+      <div class="page-content">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-10 offset-lg-1 gallery-main-page-section">
+              <h2 class="about-us-title">
+                Gallery
+              </h2><!-- End .title -->
+              <router-link to="/media" class="btn btn-primary btn-round btn-shadow float-right">
+                <i class="icon-long-arrow-left"></i><span>Back to Media Center</span>
+              </router-link>
+              <p class="lead about-us-lead text-primary mb-3">
+                Journey Through the Lens: Our Story in
+                Pictures
+              </p>
+              <!-- Add the filter component -->
+              <DynamicFilters
+                :items="products"
+                filter-column="gallery_type"
+                :filters="filters"
+                @update:displayed-products="handleUpdateDisplayedProducts"
+              />
 
-                            <ContentState v-if="loading" type="loading" contentType="gallery" />
-                            <ContentState v-if="!displayedProducts.length && !loading" type="empty"
-                                contentType="gallery" />
-                            <ContentState v-if="!!error" type="error" contentType="gallery" />
+              <ContentState v-if="loading" type="loading" content-type="gallery" />
+              <ContentState
+                v-if="!displayedProducts.length && !loading"
+                type="empty"
+                content-type="gallery"
+              />
+              <ContentState v-if="!!error" type="error" content-type="gallery" />
 
-                            <div class="row mt-2" v-if="displayedProducts.length">
-                                <div class="entry-item col-sm-6 col-lg-4" v-for="product in displayedProducts"
-                                    :key="product.id">
-                                    <article class="entry entry-mask">
-                                        <figure class="entry-media entry-gallery">
-                                            <router-link :to="getBlogLink(product.id, product.name)">
-                                                <img :src="'/storage/' + product.main_image_path"
-                                                    v-lazy:src="'/storage/' + product.main_image_path" alt="image desc">
-                                            </router-link>
-                                        </figure><!-- End .entry-media -->
+              <div v-if="displayedProducts.length" class="row mt-2">
+                <div
+                  v-for="product in displayedProducts"
+                  :key="product.id"
+                  class="entry-item col-sm-6 col-lg-4"
+                >
+                  <article class="entry entry-mask">
+                    <figure class="entry-media entry-gallery">
+                      <router-link :to="getBlogLink(product.id, product.name)">
+                        <img
+                          v-lazy:src="'/storage/' + product.main_image_path"
+                          :src="'/storage/' + product.main_image_path"
+                          alt="image desc"
+                        />
+                      </router-link>
+                    </figure><!-- End .entry-media -->
 
-                                        <div class="entry-body">
-                                            <div class="entry-meta">
-                                                <!-- <a href="#">Nov 18, 2018</a> -->
-                                                <span class="meta-separator">|</span>
-                                            </div><!-- End .entry-meta -->
-                                            <h2 class="entry-title">
-                                                <router-link :to="getBlogLink(product.id, product.name)">{{ product.name
-                                                    }}</router-link>
-                                            </h2><!-- End .entry-title -->
-                                            <div class="entry-cats mt-1">
-                                                <b style="background-color:#c02434; padding: 5px;">{{
-                                                    product.gallery_type }}</b>
-                                            </div><!-- End .entry-cats -->
-                                        </div><!-- End .entry-body -->
-                                    </article><!-- End .entry -->
-                                </div>
+                    <div class="entry-body">
+                      <div class="entry-meta">
+                        <!-- <a href="#">Nov 18, 2018</a> -->
+                        <span class="meta-separator">|</span>
+                      </div><!-- End .entry-meta -->
+                      <h2 class="entry-title">
+                        <router-link :to="getBlogLink(product.id, product.name)">
+                          {{ product.name
+                          }}
+                        </router-link>
+                      </h2><!-- End .entry-title -->
+                      <div class="entry-cats mt-1">
+                        <b style="background-color:#c02434; padding: 5px;">{{
+                          product.gallery_type }}</b>
+                      </div><!-- End .entry-cats -->
+                    </div><!-- End .entry-body -->
+                  </article><!-- End .entry -->
+                </div>
 
-                                <div class="col-lg-12 mt-3">
-                                    <nav aria-label="Page navigation">
-                                        <ul class="pagination justify-content-center">
-                                            <!-- <li class="page-item" :class="{ disabled: !pagination?.prev_page_url }">
+                <div class="col-lg-12 mt-3">
+                  <nav aria-label="Page navigation">
+                    <ul class="pagination justify-content-center">
+                      <!-- <li class="page-item" :class="{ disabled: !pagination?.prev_page_url }">
                                                 <a class="page-link page-link-prev"
                                                     @click.prevent="goToPage(pagination?.prev_page_url)"
                                                     aria-label="Previous" tabindex="-1" aria-disabled="true">
@@ -59,14 +78,21 @@
                                                     Prev
                                                 </a>
                                             </li> -->
-                                            <li class="page-item" v-for="(page, index ) in pagination?.links"
-                                                :key="page.label" :class="{ active: page.active }">
-                                                <a class="page-link" @click.prevent="goToPage(page.url)"
-                                                    v-if="page.url && Number.isInteger(Number(page.label))">
-                                                    {{ page.label }}
-                                                </a>
-                                            </li>
-                                            <!-- <li class="page-item" :class="{ disabled: !pagination?.next_page_url }">
+                      <li
+                        v-for="(page, index ) in pagination?.links"
+                        :key="page.label"
+                        class="page-item"
+                        :class="{ active: page.active }"
+                      >
+                        <a
+                          v-if="page.url && Number.isInteger(Number(page.label))"
+                          class="page-link"
+                          @click.prevent="goToPage(page.url)"
+                        >
+                          {{ page.label }}
+                        </a>
+                      </li>
+                      <!-- <li class="page-item" :class="{ disabled: !pagination?.next_page_url }">
                                                 <a class="page-link page-link-next"
                                                     @click.prevent="goToPage(pagination?.next_page_url)"
                                                     aria-label="Next">
@@ -75,28 +101,28 @@
                                                             class="icon-long-arrow-right"></i></span>
                                                 </a>
                                             </li> -->
-                                        </ul>
-                                    </nav>
-                                </div>
-                            </div>
-                        </div>
-                    </div><!-- End .row -->
-                </div><!-- End .container -->
-            </div><!-- End .page-content -->
-        </main><!-- End .main -->
-    </div>
+                    </ul>
+                  </nav>
+                </div>
+              </div>
+            </div>
+          </div><!-- End .row -->
+        </div><!-- End .container -->
+      </div><!-- End .page-content -->
+    </main><!-- End .main -->
+  </div>
 </template>
 
 <script setup>
 import { ref, watch, onMounted, watchEffect } from 'vue';
-import { useRoute, useRouter } from "vue-router";
-import { useMeta } from "../../admin/composables/use-meta";
+import { useRoute, useRouter } from 'vue-router';
+import { useMeta } from '../../admin/composables/use-meta';
 import DynamicFilters from '@/Components/DynamicFilters.vue';
 import axios from 'axios';
 
 import ContentState from '@/Components/ContentState.vue';
 
-useMeta({ title: "Gallery | Media Center" });
+useMeta({ title: 'Gallery | Media Center' });
 
 const route = useRoute();
 const router = useRouter();
@@ -112,7 +138,7 @@ const pagination = ref({});
 const filters = ref([
     'CSR',
     'EVENT',
-    'PROJECT'
+    'PROJECT',
 ]);
 
 const loading = ref(false);
@@ -139,7 +165,7 @@ const fetchProducts = async (url = null) => {
         pagination.value = {
             next_page_url: data.next_page_url,
             prev_page_url: data.prev_page_url,
-            links: data.links
+            links: data.links,
         };
         loading.value = false;
         updateDisplayedProducts(products.value);

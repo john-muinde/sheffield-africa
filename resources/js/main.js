@@ -1,63 +1,63 @@
-import { createApp, markRaw } from "vue";
-import App from "./App.vue";
-import router from "./router";
-import store from "./store";
+import { createApp, markRaw } from 'vue';
+import App from './App.vue';
+import router from './router';
+import store from './store';
 const app = createApp(App);
 
 // bootstrap
-import * as bootstrap from "bootstrap";
+import * as bootstrap from 'bootstrap';
 window.bootstrap = bootstrap;
 
 // modals
-import "./apps/admin/assets/sass/components/custom-modal.scss";
+import './apps/admin/assets/sass/components/custom-modal.scss';
 
 // perfect scrollbar
-import { PerfectScrollbarPlugin } from "vue3-perfect-scrollbar";
-import "vue3-perfect-scrollbar/style.css";
+import { PerfectScrollbarPlugin } from 'vue3-perfect-scrollbar';
+import 'vue3-perfect-scrollbar/style.css';
 
 //vue-meta
-import { createHead } from "@vueuse/head";
+import { createHead } from '@vueuse/head';
 const head = createHead();
 
 //Sweetalert
-import Swal from "sweetalert2";
+import Swal from 'sweetalert2';
 window.Swal = Swal;
 
 // nouislider - later remove and add to page due to not working in page
-import VueNouislider from "vue3-nouislider";
-import "vue3-nouislider/dist/vue3-nouislider.css";
+import VueNouislider from 'vue3-nouislider';
+import 'vue3-nouislider/dist/vue3-nouislider.css';
 
 // vue input mask
-import Maska from "maska";
+import Maska from 'maska';
 
 // smooth scroll
-import { registerScrollSpy } from "vue3-scroll-spy/dist/index";
+import { registerScrollSpy } from 'vue3-scroll-spy/dist/index';
 registerScrollSpy(app, { offset: 118 });
 
 //vue-i18n
-import i18n from "./i18n";
+import i18n from './i18n';
 
 // datatables
-import { ServerTable, ClientTable, EventBus } from "v-tables-3";
-app.use(ClientTable, {}, "bootstrap4", {
+import {  ClientTable } from 'v-tables-3';
+app.use(ClientTable, {}, 'bootstrap4', {
     genericFilter: markRaw({}),
 });
 
 // json to excel
-import vue3JsonExcel from "vue3-json-excel";
+import vue3JsonExcel from 'vue3-json-excel';
 
 //vue-wizard
-import VueFormWizard from "vue3-form-wizard";
-import "vue3-form-wizard/dist/style.css";
+import VueFormWizard from 'vue3-form-wizard';
+import 'vue3-form-wizard/dist/style.css';
 
 // set default settings
-import appSetting from "./app-setting";
+import appSetting from './app-setting';
 window.$appSetting = appSetting;
 window.$appSetting.init();
 
 //markdown editor
-import VueEasymde from "vue3-easymde";
-import "easymde/dist/easymde.min.css";
+import VueEasymde from 'vue3-easymde';
+import 'easymde/dist/easymde.min.css';
 
 app.use(store)
     .use(router)
@@ -69,4 +69,4 @@ app.use(store)
     .use(VueFormWizard)
     .use(head)
     .use(VueEasymde)
-    .mount("#app");
+    .mount('#app');

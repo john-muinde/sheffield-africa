@@ -35,8 +35,8 @@
                 <div class="form-group">
                   <label for="post-name">Showroom Name</label>
                   <input
-                    v-model="showroom.name"
                     id="post-name"
+                    v-model="showroom.name"
                     type="text"
                     class="form-control"
                     placeholder="Enter Showroom Name ..."
@@ -55,8 +55,8 @@
                 <div class="form-group">
                   <label for="post_description">Description</label>
                   <textarea
-                    v-model="showroom.description"
                     id="post_description"
+                    v-model="showroom.description"
                     class="form-control"
                     placeholder="Enter Description ..."
                   ></textarea>
@@ -77,16 +77,13 @@
                     data-upload-id="myFirstImage"
                   >
                     {{ showroom.showroom_image }}
-                    <label
-                      >Upload Showroom Logo
+                    <label>Upload Showroom Logo
                       <a
                         id="showroom_image"
                         href="javascript:void(0)"
                         class="custom-file-container__image-clear"
                         title="Clear Image"
-                        >x</a
-                      ></label
-                    >
+                      >x</a></label>
                     <label class="custom-file-container__custom-file">
                       <input
                         type="file"
@@ -108,17 +105,22 @@
                 </div>
 
                 <div class="form-group">
-                  <label for="is_published" class="col-form-label"
-                    >Publishing Status</label
-                  >
+                  <label
+                    for="is_published"
+                    class="col-form-label"
+                  >Publishing Status</label>
                   <div>
                     <select
-                      v-model="showroom.is_published"
                       id="is_published"
+                      v-model="showroom.is_published"
                       class="form-select"
                     >
-                      <option selected value="1">Published</option>
-                      <option value="0">Not Published</option>
+                      <option selected value="1">
+                        Published
+                      </option>
+                      <option value="0">
+                        Not Published
+                      </option>
                     </select>
                   </div>
 
@@ -146,29 +148,29 @@
   </div>
 </template>
 <script setup>
-import { onMounted, reactive, watchEffect } from "vue";
+import { onMounted, reactive, watchEffect } from 'vue';
 
-import { useMeta } from "../../composables/use-meta";
-useMeta({ title: "Edit Showroom" });
+import { useMeta } from '../../composables/use-meta';
+useMeta({ title: 'Edit Showroom' });
 
-import { useRoute } from "vue-router";
-import useShowrooms from "@/composables/showrooms";
-import { useForm, useField, defineRule } from "vee-validate";
-import { required, min } from "@/validation/rules";
-import FileUploadWithPreview from "file-upload-with-preview";
-import "../../assets/sass/forms/file-upload-with-preview.min.css";
-
-
+import { useRoute } from 'vue-router';
+import useShowrooms from '@/composables/showrooms';
+import { useForm, useField, defineRule } from 'vee-validate';
+import { required, min } from '@/validation/rules';
+import FileUploadWithPreview from 'file-upload-with-preview';
+import '../../assets/sass/forms/file-upload-with-preview.min.css';
 
 
-defineRule("required", required);
-defineRule("min", min);
+
+
+defineRule('required', required);
+defineRule('min', min);
 
 // Define a validation schema
 const schema = {
-  name: "required|min:3",
-  description: "required|min:3",
-  is_published: "required",
+  name: 'required|min:3',
+  description: 'required|min:3',
+  is_published: 'required',
 };
 
 // Create a form context with the validation schema
@@ -185,12 +187,12 @@ const {
   showroomList,
 } = useShowrooms();
 
-const { value: name } = useField("name", null, { initialValue: "" });
-const { value: description } = useField("description", null, {
-  initialValue: "",
+const { value: name } = useField('name', null, { initialValue: '' });
+const { value: description } = useField('description', null, {
+  initialValue: '',
 });
-const { value: is_published } = useField("is_published", null, {
-  initialValue: "",
+const { value: is_published } = useField('is_published', null, {
+  initialValue: '',
 });
 
 const showroom = reactive({
@@ -215,18 +217,18 @@ onMounted(() => {
       const mainImagePath = postData.value.main_image_path;
 
       // Define the variable
-      const mainImage = "/storage/" + mainImagePath;
+      const mainImage = '/storage/' + mainImagePath;
 
       // Create the configuration object with the variable value
       const fileUploadConfig = {
         images: {
           baseImage: mainImage,
-          backgroundImage: "",
+          backgroundImage: '',
         },
       };
 
       // Pass the configuration object to FileUploadWithPreview
-      new FileUploadWithPreview("myFirstImage", fileUploadConfig);
+      new FileUploadWithPreview('myFirstImage', fileUploadConfig);
     }
   });
 });

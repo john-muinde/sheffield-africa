@@ -1,67 +1,82 @@
 <template>
-    <div class="layout-px-spacing">
-        <teleport to="#breadcrumb">
-            <ul class="navbar-nav flex-row">
-                <li>
-                    <div class="page-header">
-                        <nav class="breadcrumb-one" aria-label="breadcrumb">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item">
-                                    <a href="javascript:;">DataTables</a>
-                                </li>
-                                <li class="breadcrumb-item active" aria-current="page">
-                                    <span>Actions</span>
-                                </li>
-                            </ol>
-                        </nav>
-                    </div>
+  <div class="layout-px-spacing">
+    <teleport to="#breadcrumb">
+      <ul class="navbar-nav flex-row">
+        <li>
+          <div class="page-header">
+            <nav class="breadcrumb-one" aria-label="breadcrumb">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                  <a href="javascript:;">DataTables</a>
                 </li>
-            </ul>
-        </teleport>
+                <li class="breadcrumb-item active" aria-current="page">
+                  <span>Actions</span>
+                </li>
+              </ol>
+            </nav>
+          </div>
+        </li>
+      </ul>
+    </teleport>
 
-        <div class="seperator-header layout-top-spacing mb-4">
-            <h4>Action</h4>
-        </div>
-        <div class="row layout-top-spacing">
-            <div class="col-xl-12 col-lg-12 col-sm-12 layout-spacing">
-                <div class="panel br-6 p-0">
-                    <div class="vue3-datatable">
-                        <vue3-datatable :rows="rows" :columns="cols" :totalRows="rows?.length">
-                            <template #id="data">
-                                <strong>#{{ data.value.id }}</strong>
-                            </template>
-                            <template #actions="data">
-                                <div class="flex">
-                                    <button type="button" class="btn btn-success me-3"
-                                        @click="viewUser(data.value)">View</button>
-                                    <button type="button" class="btn btn-danger"
-                                        @click="deleteUser(data.value)">Delete</button>
-                                </div>
-                            </template>
-                        </vue3-datatable>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="seperator-header layout-top-spacing mb-4">
-            <h4>Row Click</h4>
-        </div>
-        <div class="row layout-top-spacing">
-            <div class="col-xl-12 col-lg-12 col-sm-12 layout-spacing">
-                <div class="panel br-6 p-0">
-                    <div class="vue3-datatable">
-                        <vue3-datatable :rows="rows" :columns="cols1" :totalRows="rows?.length"
-                            rowClass="cursor-pointer" @rowClick="rowClick">
-                            <template #id="data">
-                                <strong>#{{ data.value.id }}</strong>
-                            </template>
-                        </vue3-datatable>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div class="seperator-header layout-top-spacing mb-4">
+      <h4>Action</h4>
     </div>
+    <div class="row layout-top-spacing">
+      <div class="col-xl-12 col-lg-12 col-sm-12 layout-spacing">
+        <div class="panel br-6 p-0">
+          <div class="vue3-datatable">
+            <vue3-datatable :rows="rows" :columns="cols" :total-rows="rows?.length">
+              <template #id="data">
+                <strong>#{{ data.value.id }}</strong>
+              </template>
+              <template #actions="data">
+                <div class="flex">
+                  <button
+                    type="button"
+                    class="btn btn-success me-3"
+                    @click="viewUser(data.value)"
+                  >
+                    View
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-danger"
+                    @click="deleteUser(data.value)"
+                  >
+                    Delete
+                  </button>
+                </div>
+              </template>
+            </vue3-datatable>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="seperator-header layout-top-spacing mb-4">
+      <h4>Row Click</h4>
+    </div>
+    <div class="row layout-top-spacing">
+      <div class="col-xl-12 col-lg-12 col-sm-12 layout-spacing">
+        <div class="panel br-6 p-0">
+          <div class="vue3-datatable">
+            <vue3-datatable
+              :rows="rows"
+              :columns="cols1"
+              :total-rows="rows?.length"
+              row-class="cursor-pointer"
+              @row-click="rowClick"
+            >
+              <template #id="data">
+                <strong>#{{ data.value.id }}</strong>
+              </template>
+            </vue3-datatable>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script setup>

@@ -1,100 +1,117 @@
 <template>
-    <div class="layout-px-spacing">
-        <teleport to="#breadcrumb">
-            <ul class="navbar-nav flex-row">
-                <li>
-                    <div class="page-header">
-                        <nav class="breadcrumb-one" aria-label="breadcrumb">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item">
-                                    <a href="javascript:;">DataTables</a>
-                                </li>
-                                <li class="breadcrumb-item active" aria-current="page">
-                                    <span>Alt. Pagination</span>
-                                </li>
-                            </ol>
-                        </nav>
-                    </div>
+  <div class="layout-px-spacing">
+    <teleport to="#breadcrumb">
+      <ul class="navbar-nav flex-row">
+        <li>
+          <div class="page-header">
+            <nav class="breadcrumb-one" aria-label="breadcrumb">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                  <a href="javascript:;">DataTables</a>
                 </li>
-            </ul>
-        </teleport>
+                <li class="breadcrumb-item active" aria-current="page">
+                  <span>Alt. Pagination</span>
+                </li>
+              </ol>
+            </nav>
+          </div>
+        </li>
+      </ul>
+    </teleport>
 
-        <div class="seperator-header layout-top-spacing mb-4">
-            <h4 class="">Alt Pagination</h4>
-        </div>
-        <div class="row layout-top-spacing">
-            <div class="col-xl-12 col-lg-12 col-sm-12 layout-spacing">
-                <div class="panel br-6 p-0">
-                    <div class="vue3-datatable">
-                        <vue3-datatable
-                            :rows="rows"
-                            :columns="cols"
-                            :totalRows="rows?.length"
-                            firstArrow="First"
-                            lastArrow="Last"
-                            previousArrow="Prev"
-                            nextArrow="Next"
-                            :showNumbersCount="3"
-                            class="alt-pagination"
-                        >
-                        </vue3-datatable>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="seperator-header layout-top-spacing mb-4">
-            <h4 class="">Disable First Last Pagination</h4>
-        </div>
-        <div class="row layout-top-spacing">
-            <div class="col-xl-12 col-lg-12 col-sm-12 layout-spacing">
-                <div class="panel br-6 p-0">
-                    <div class="vue3-datatable">
-                        <vue3-datatable :rows="rows" :columns="cols" :totalRows="rows?.length" :showFirstPage="false" :showLastPage="false"> </vue3-datatable>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="seperator-header layout-top-spacing mb-4">
-            <h4 class="">Pagination Without Number</h4>
-        </div>
-        <div class="row layout-top-spacing">
-            <div class="col-xl-12 col-lg-12 col-sm-12 layout-spacing">
-                <div class="panel br-6 p-0">
-                    <div class="vue3-datatable">
-                        <vue3-datatable :rows="rows" :columns="cols" :totalRows="rows?.length" :showNumbers="false"> </vue3-datatable>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="seperator-header layout-top-spacing mb-4">
-            <h4 class="">Next Previous</h4>
-        </div>
-        <div class="row layout-top-spacing">
-            <div class="col-xl-12 col-lg-12 col-sm-12 layout-spacing">
-                <div class="panel br-6 p-0">
-                    <div class="vue3-datatable">
-                        <vue3-datatable
-                            :rows="rows"
-                            :columns="cols"
-                            :totalRows="rows?.length"
-                            :showNumbers="false"
-                            :showFirstPage="false"
-                            :showLastPage="false"
-                            previousArrow="Previous"
-                            nextArrow="Next"
-                            class="next-prev-pagination"
-                            paginationInfo="{0} to {1} of {2}"
-                            :showPageSize="false"
-                        >
-                        </vue3-datatable>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div class="seperator-header layout-top-spacing mb-4">
+      <h4 class="">
+        Alt Pagination
+      </h4>
     </div>
+    <div class="row layout-top-spacing">
+      <div class="col-xl-12 col-lg-12 col-sm-12 layout-spacing">
+        <div class="panel br-6 p-0">
+          <div class="vue3-datatable">
+            <vue3-datatable
+              :rows="rows"
+              :columns="cols"
+              :total-rows="rows?.length"
+              first-arrow="First"
+              last-arrow="Last"
+              previous-arrow="Prev"
+              next-arrow="Next"
+              :show-numbers-count="3"
+              class="alt-pagination"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="seperator-header layout-top-spacing mb-4">
+      <h4 class="">
+        Disable First Last Pagination
+      </h4>
+    </div>
+    <div class="row layout-top-spacing">
+      <div class="col-xl-12 col-lg-12 col-sm-12 layout-spacing">
+        <div class="panel br-6 p-0">
+          <div class="vue3-datatable">
+            <vue3-datatable
+              :rows="rows"
+              :columns="cols"
+              :total-rows="rows?.length"
+              :show-first-page="false"
+              :show-last-page="false"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="seperator-header layout-top-spacing mb-4">
+      <h4 class="">
+        Pagination Without Number
+      </h4>
+    </div>
+    <div class="row layout-top-spacing">
+      <div class="col-xl-12 col-lg-12 col-sm-12 layout-spacing">
+        <div class="panel br-6 p-0">
+          <div class="vue3-datatable">
+            <vue3-datatable
+              :rows="rows"
+              :columns="cols"
+              :total-rows="rows?.length"
+              :show-numbers="false"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="seperator-header layout-top-spacing mb-4">
+      <h4 class="">
+        Next Previous
+      </h4>
+    </div>
+    <div class="row layout-top-spacing">
+      <div class="col-xl-12 col-lg-12 col-sm-12 layout-spacing">
+        <div class="panel br-6 p-0">
+          <div class="vue3-datatable">
+            <vue3-datatable
+              :rows="rows"
+              :columns="cols"
+              :total-rows="rows?.length"
+              :show-numbers="false"
+              :show-first-page="false"
+              :show-last-page="false"
+              previous-arrow="Previous"
+              next-arrow="Next"
+              class="next-prev-pagination"
+              pagination-info="{0} to {1} of {2}"
+              :show-page-size="false"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script setup>

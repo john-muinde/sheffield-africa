@@ -1,110 +1,174 @@
 <template>
-    <div class="min-h-screen bg-gray-50 py-8">
-        <div class="container mx-auto px-4">
-            <!-- Header Section -->
-            <div class="mb-8">
-                <h1 class="text-4xl font-bold text-gray-900 mb-2">Video Gallery</h1>
-                <p class="text-gray-600">Explore our collection of videos</p>
-            </div>
+  <div class="min-h-screen bg-gray-50 py-8">
+    <div class="container mx-auto px-4">
+      <!-- Header Section -->
+      <div class="mb-8">
+        <h1 class="text-4xl font-bold text-gray-900 mb-2">
+          Video Gallery
+        </h1>
+        <p class="text-gray-600">
+          Explore our collection of videos
+        </p>
+      </div>
 
-            <!-- Filters Section -->
-            <div class="flex flex-col md:flex-row gap-4 mb-8">
-                <!-- Search Input -->
-                <div class="flex-1">
-                    <input type="text" v-model="searchTerm" placeholder="Search videos..."
-                        class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
-                </div>
-                <!-- Category Filters -->
-                <div class="flex gap-2 overflow-x-auto pb-2">
-                    <button v-for="category in categories" :key="category.id" @click="activeFilter = category.id"
-                        :class="[
-                            'px-4 py-2 rounded-lg whitespace-nowrap transition-all duration-200',
-                            activeFilter === category.id
-                                ? 'bg-blue-600 text-white'
-                                : 'bg-white text-gray-700 hover:bg-gray-100'
-                        ]">
-                        {{ category.label }}
-                    </button>
-                </div>
-            </div>
-
-            <!-- Video Grid -->
-            <TransitionGroup tag="div" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" :css="false"
-                @before-enter="onBeforeEnter" @enter="onEnter" @leave="onLeave">
-                <div v-for="video in filteredVideos" :key="video.id" :data-index="video.id"
-                    class="group relative rounded-xl overflow-hidden shadow-lg bg-white hover:shadow-xl transition-all duration-300">
-                    <!-- Thumbnail Container -->
-                    <div class="aspect-video relative overflow-hidden cursor-pointer" @click="playVideo(video)">
-                        <img :src="getVideoPoster(video)" :alt="video.name"
-                            class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                            @error="handleImageError" />
-                        <!-- Overlay -->
-                        <div
-                            class="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                            <div
-                                class="w-16 h-16 rounded-full bg-white bg-opacity-90 flex items-center justify-center transform scale-0 group-hover:scale-100 transition-transform duration-300">
-                                <div class="play-icon w-8 h-8"
-                                    :class="{ 'playing': selectedVideo?.id === video.id && !isPaused }"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Video Info -->
-                    <div class="p-4">
-                        <h3 class="text-lg font-semibold text-gray-900 mb-2 line-clamp-2">{{ video.name }}</h3>
-                        <p class="text-sm text-gray-600 line-clamp-2">{{ video.description || 'No description available'
-                            }}</p>
-                        <div class="mt-3 flex items-center justify-between">
-                            <span class="text-sm text-blue-600">{{ video.duration || '00:00' }}</span>
-                            <span class="text-sm text-gray-500">{{ video.category }}</span>
-                        </div>
-                    </div>
-                </div>
-            </TransitionGroup>
-
-            <!-- Video Player Modal -->
-            <TransitionRoot appear :show="!!selectedVideo" as="template">
-                <Dialog as="div" @close="closeVideo" class="relative z-50">
-                    <TransitionChild enter="duration-300 ease-out" enter-from="opacity-0" enter-to="opacity-100"
-                        leave="duration-200 ease-in" leave-from="opacity-100" leave-to="opacity-0">
-                        <div class="fixed inset-0 bg-black bg-opacity-75" />
-                    </TransitionChild>
-
-                    <div class="fixed inset-0 overflow-y-auto">
-                        <div class="flex min-h-full items-center justify-center p-4">
-                            <TransitionChild enter="duration-300 ease-out" enter-from="opacity-0 scale-95"
-                                enter-to="opacity-100 scale-100" leave="duration-200 ease-in"
-                                leave-from="opacity-100 scale-100" leave-to="opacity-0 scale-95">
-                                <DialogPanel class="w-full max-w-4xl rounded-2xl bg-white">
-                                    <div class="relative aspect-video">
-                                        <div v-if="isYouTubeVideo" class="plyr__video-embed h-full">
-                                            <iframe
-                                                :src="`https://www.youtube.com/embed/${getYoutubeId(selectedVideo?.video_url)}?autoplay=1`"
-                                                allowfullscreen allow="autoplay" class="w-full h-full"></iframe>
-                                        </div>
-                                        <video v-else ref="videoElement" :src="videoSrc(selectedVideo)"
-                                            class="w-full h-full plyr-video" controls autoplay></video>
-                                        <button @click="closeVideo"
-                                            class="absolute top-4 right-4 p-2 rounded-full bg-black bg-opacity-50 text-white hover:bg-opacity-75 transition-colors">
-                                            <span class="sr-only">Close</span>
-                                            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                    d="M6 18L18 6M6 6l12 12" />
-                                            </svg>
-                                        </button>
-                                    </div>
-                                </DialogPanel>
-                            </TransitionChild>
-                        </div>
-                    </div>
-                </Dialog>
-            </TransitionRoot>
+      <!-- Filters Section -->
+      <div class="flex flex-col md:flex-row gap-4 mb-8">
+        <!-- Search Input -->
+        <div class="flex-1">
+          <input
+            v-model="searchTerm"
+            type="text"
+            placeholder="Search videos..."
+            class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          />
         </div>
+        <!-- Category Filters -->
+        <div class="flex gap-2 overflow-x-auto pb-2">
+          <button
+            v-for="category in categories"
+            :key="category.id"
+            :class="[
+              'px-4 py-2 rounded-lg whitespace-nowrap transition-all duration-200',
+              activeFilter === category.id
+                ? 'bg-blue-600 text-white'
+                : 'bg-white text-gray-700 hover:bg-gray-100'
+            ]"
+            @click="activeFilter = category.id"
+          >
+            {{ category.label }}
+          </button>
+        </div>
+      </div>
+
+      <!-- Video Grid -->
+      <TransitionGroup
+        tag="div"
+        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+        :css="false"
+        @before-enter="onBeforeEnter"
+        @enter="onEnter"
+        @leave="onLeave"
+      >
+        <div
+          v-for="video in filteredVideos"
+          :key="video.id"
+          :data-index="video.id"
+          class="group relative rounded-xl overflow-hidden shadow-lg bg-white hover:shadow-xl transition-all duration-300"
+        >
+          <!-- Thumbnail Container -->
+          <div class="aspect-video relative overflow-hidden cursor-pointer" @click="playVideo(video)">
+            <img
+              :src="getVideoPoster(video)"
+              :alt="video.name"
+              class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+              @error="handleImageError"
+            />
+            <!-- Overlay -->
+            <div
+              class="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center"
+            >
+              <div
+                class="w-16 h-16 rounded-full bg-white bg-opacity-90 flex items-center justify-center transform scale-0 group-hover:scale-100 transition-transform duration-300"
+              >
+                <div
+                  class="play-icon w-8 h-8"
+                  :class="{ 'playing': selectedVideo?.id === video.id && !isPaused }"
+                ></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Video Info -->
+          <div class="p-4">
+            <h3 class="text-lg font-semibold text-gray-900 mb-2 line-clamp-2">
+              {{ video.name }}
+            </h3>
+            <p class="text-sm text-gray-600 line-clamp-2">
+              {{ video.description || 'No description available'
+              }}
+            </p>
+            <div class="mt-3 flex items-center justify-between">
+              <span class="text-sm text-blue-600">{{ video.duration || '00:00' }}</span>
+              <span class="text-sm text-gray-500">{{ video.category }}</span>
+            </div>
+          </div>
+        </div>
+      </TransitionGroup>
+
+      <!-- Video Player Modal -->
+      <TransitionRoot appear :show="!!selectedVideo" as="template">
+        <Dialog as="div" class="relative z-50" @close="closeVideo">
+          <TransitionChild
+            enter="duration-300 ease-out"
+            enter-from="opacity-0"
+            enter-to="opacity-100"
+            leave="duration-200 ease-in"
+            leave-from="opacity-100"
+            leave-to="opacity-0"
+          >
+            <div class="fixed inset-0 bg-black bg-opacity-75"></div>
+          </TransitionChild>
+
+          <div class="fixed inset-0 overflow-y-auto">
+            <div class="flex min-h-full items-center justify-center p-4">
+              <TransitionChild
+                enter="duration-300 ease-out"
+                enter-from="opacity-0 scale-95"
+                enter-to="opacity-100 scale-100"
+                leave="duration-200 ease-in"
+                leave-from="opacity-100 scale-100"
+                leave-to="opacity-0 scale-95"
+              >
+                <DialogPanel class="w-full max-w-4xl rounded-2xl bg-white">
+                  <div class="relative aspect-video">
+                    <div v-if="isYouTubeVideo" class="plyr__video-embed h-full">
+                      <iframe
+                        :src="`https://www.youtube.com/embed/${getYoutubeId(selectedVideo?.video_url)}?autoplay=1`"
+                        allowfullscreen
+                        allow="autoplay"
+                        class="w-full h-full"
+                      ></iframe>
+                    </div>
+                    <video
+                      v-else
+                      ref="videoElement"
+                      :src="videoSrc(selectedVideo)"
+                      class="w-full h-full plyr-video"
+                      controls
+                      autoplay
+                    ></video>
+                    <button
+                      class="absolute top-4 right-4 p-2 rounded-full bg-black bg-opacity-50 text-white hover:bg-opacity-75 transition-colors"
+                      @click="closeVideo"
+                    >
+                      <span class="sr-only">Close</span>
+                      <svg
+                        class="w-6 h-6"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M6 18L18 6M6 6l12 12"
+                        />
+                      </svg>
+                    </button>
+                  </div>
+                </DialogPanel>
+              </TransitionChild>
+            </div>
+          </div>
+        </Dialog>
+      </TransitionRoot>
     </div>
+  </div>
 </template>
 
 <script setup>
-import '@/styles.css'
+import '@/styles.css';
 import { ref, computed, onMounted, onUnmounted } from 'vue';
 import { TransitionRoot, TransitionChild, Dialog, DialogPanel } from '@headlessui/vue';
 import gsap from 'gsap';
@@ -122,7 +186,7 @@ const categories = [
     { id: 'all', label: 'All Videos' },
     { id: 'tutorials', label: 'Tutorials' },
     { id: 'webinars', label: 'Webinars' },
-    { id: 'events', label: 'Events' }
+    { id: 'events', label: 'Events' },
 ];
 
 // Computed properties
@@ -198,7 +262,7 @@ const onEnter = (el, done) => {
         scale: 1,
         duration: 0.3,
         delay: el.dataset.index * 0.1,
-        onComplete: done
+        onComplete: done,
     });
 };
 
@@ -207,7 +271,7 @@ const onLeave = (el, done) => {
         opacity: 0,
         scale: 0.8,
         duration: 0.3,
-        onComplete: done
+        onComplete: done,
     });
 };
 

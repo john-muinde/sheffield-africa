@@ -6,7 +6,9 @@
         style="background-image: url('assets/images/page-header-bg.jpg')"
       >
         <div class="container">
-          <h1 class="page-title">My Account<span>Shop</span></h1>
+          <h1 class="page-title">
+            My Account<span>Shop</span>
+          </h1>
         </div>
         <!-- End .container -->
       </div>
@@ -14,8 +16,12 @@
       <nav aria-label="breadcrumb" class="breadcrumb-nav mb-3">
         <div class="container">
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-            <li class="breadcrumb-item"><a href="#">Shop</a></li>
+            <li class="breadcrumb-item">
+              <a href="index.html">Home</a>
+            </li>
+            <li class="breadcrumb-item">
+              <a href="#">Shop</a>
+            </li>
             <li class="breadcrumb-item active" aria-current="page">
               My Account
             </li>
@@ -36,63 +42,58 @@
                 >
                   <li class="nav-item">
                     <a
-                      class="nav-link active"
                       id="tab-dashboard-link"
+                      class="nav-link active"
                       data-toggle="tab"
                       href="#tab-dashboard"
                       role="tab"
                       aria-controls="tab-dashboard"
                       aria-selected="true"
-                      >Dashboard</a
-                    >
+                    >Dashboard</a>
                   </li>
                   <li class="nav-item">
                     <a
-                      class="nav-link"
                       id="tab-orders-link"
+                      class="nav-link"
                       data-toggle="tab"
                       href="#tab-orders"
                       role="tab"
                       aria-controls="tab-orders"
                       aria-selected="false"
-                      >Orders</a
-                    >
+                    >Orders</a>
                   </li>
                   <li class="nav-item">
                     <a
-                      class="nav-link"
                       id="tab-downloads-link"
+                      class="nav-link"
                       data-toggle="tab"
                       href="#tab-downloads"
                       role="tab"
                       aria-controls="tab-downloads"
                       aria-selected="false"
-                      >Downloads</a
-                    >
+                    >Downloads</a>
                   </li>
                   <li class="nav-item">
                     <a
-                      class="nav-link"
                       id="tab-address-link"
+                      class="nav-link"
                       data-toggle="tab"
                       href="#tab-address"
                       role="tab"
                       aria-controls="tab-address"
                       aria-selected="false"
-                      >Adresses</a
-                    >
+                    >Adresses</a>
                   </li>
                   <li class="nav-item">
                     <a
-                      class="nav-link"
                       id="tab-account-link"
+                      class="nav-link"
                       data-toggle="tab"
                       href="#tab-account"
                       role="tab"
                       aria-controls="tab-account"
                       aria-selected="false"
-                      >Account Details</a
-                    >
+                    >Account Details</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="#">Sign Out</a>
@@ -104,8 +105,8 @@
               <div class="col-md-8 col-lg-9">
                 <div class="tab-content">
                   <div
-                    class="tab-pane fade show active"
                     id="tab-dashboard"
+                    class="tab-pane fade show active"
                     role="tabpanel"
                     aria-labelledby="tab-dashboard-link"
                   >
@@ -120,47 +121,50 @@
                       <a
                         href="#tab-orders"
                         class="tab-trigger-link link-underline"
-                        >recent orders</a
-                      >, manage your
-                      <a href="#tab-address" class="tab-trigger-link"
-                        >shipping and billing addresses</a
-                      >, and
-                      <a href="#tab-account" class="tab-trigger-link"
-                        >edit your password and account details</a
-                      >.
+                      >recent orders</a>, manage your
+                      <a
+                        href="#tab-address"
+                        class="tab-trigger-link"
+                      >shipping and billing addresses</a>, and
+                      <a
+                        href="#tab-account"
+                        class="tab-trigger-link"
+                      >edit your password and account details</a>.
                     </p>
                   </div>
                   <!-- .End .tab-pane -->
 
                   <div
-                    class="tab-pane fade"
                     id="tab-orders"
+                    class="tab-pane fade"
                     role="tabpanel"
                     aria-labelledby="tab-orders-link"
                   >
                     <p>No order has been made yet.</p>
-                    <a href="category.html" class="btn btn-outline-primary-2"
-                      ><span>GO SHOP</span><i class="icon-long-arrow-right"></i
-                    ></a>
+                    <a
+                      href="category.html"
+                      class="btn btn-outline-primary-2"
+                    ><span>GO SHOP</span><i class="icon-long-arrow-right"></i></a>
                   </div>
                   <!-- .End .tab-pane -->
 
                   <div
-                    class="tab-pane fade"
                     id="tab-downloads"
+                    class="tab-pane fade"
                     role="tabpanel"
                     aria-labelledby="tab-downloads-link"
                   >
                     <p>No downloads available yet.</p>
-                    <a href="category.html" class="btn btn-outline-primary-2"
-                      ><span>GO SHOP</span><i class="icon-long-arrow-right"></i
-                    ></a>
+                    <a
+                      href="category.html"
+                      class="btn btn-outline-primary-2"
+                    ><span>GO SHOP</span><i class="icon-long-arrow-right"></i></a>
                   </div>
                   <!-- .End .tab-pane -->
 
                   <div
-                    class="tab-pane fade"
                     id="tab-address"
+                    class="tab-pane fade"
                     role="tabpanel"
                     aria-labelledby="tab-address-link"
                   >
@@ -173,7 +177,9 @@
                       <div class="col-lg-6">
                         <div class="card card-dashboard">
                           <div class="card-body">
-                            <h3 class="card-title">Billing Address</h3>
+                            <h3 class="card-title">
+                              Billing Address
+                            </h3>
                             <!-- End .card-title -->
 
                             <p>
@@ -186,8 +192,7 @@
                                 href="/cdn-cgi/l/email-protection"
                                 class="__cf_email__"
                                 data-cfemail="c7bea8b2b5aaa6aeab87aaa6aeabe9a4a8aa"
-                                >[email&#160;protected]</a
-                              ><br />
+                              >[email&#160;protected]</a><br />
                               <a href="#">Edit <i class="icon-edit"></i></a>
                             </p>
                           </div>
@@ -200,7 +205,9 @@
                       <div class="col-lg-6">
                         <div class="card card-dashboard">
                           <div class="card-body">
-                            <h3 class="card-title">Shipping Address</h3>
+                            <h3 class="card-title">
+                              Shipping Address
+                            </h3>
                             <!-- End .card-title -->
 
                             <p>
@@ -219,8 +226,8 @@
                   <!-- .End .tab-pane -->
 
                   <div
-                    class="tab-pane fade"
                     id="tab-account"
+                    class="tab-pane fade"
                     role="tabpanel"
                     aria-labelledby="tab-account-link"
                   >
@@ -242,23 +249,17 @@
 
                       <label>Display Name *</label>
                       <input type="text" class="form-control" required />
-                      <small class="form-text"
-                        >This will be how your name will be displayed in the
-                        account section and in reviews</small
-                      >
+                      <small class="form-text">This will be how your name will be displayed in the
+                        account section and in reviews</small>
 
                       <label>Email address *</label>
                       <input type="email" class="form-control" required />
 
-                      <label
-                        >Current password (leave blank to leave
-                        unchanged)</label
-                      >
+                      <label>Current password (leave blank to leave
+                        unchanged)</label>
                       <input type="password" class="form-control" />
 
-                      <label
-                        >New password (leave blank to leave unchanged)</label
-                      >
+                      <label>New password (leave blank to leave unchanged)</label>
                       <input type="password" class="form-control" />
 
                       <label>Confirm new password</label>

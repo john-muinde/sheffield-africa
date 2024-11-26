@@ -82,7 +82,7 @@ jQuery(document).ready(function($) {
 
             //trigger animation
             setTimeout(function() {
-                hideWord(headline.find('.is-visible').eq(0))
+                hideWord(headline.find('.is-visible').eq(0));
             }, duration);
         });
     }
@@ -104,7 +104,7 @@ jQuery(document).ready(function($) {
             }, $duration);
         } else if ($bool) {
             setTimeout(function() {
-                hideWord(takeNext($word))
+                hideWord(takeNext($word));
             }, animationDelay);
         }
     }
@@ -119,12 +119,12 @@ jQuery(document).ready(function($) {
         } else {
             if (!$bool) {
                 setTimeout(function() {
-                    hideWord($word)
-                }, animationDelay)
+                    hideWord($word);
+                }, animationDelay);
             }
 
             $word.closest('.word-rotator-words').stop( true, true ).animate({
-                width: $word.outerWidth()
+                width: $word.outerWidth(),
             });
         }
     }

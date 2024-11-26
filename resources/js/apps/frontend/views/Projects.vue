@@ -1,107 +1,100 @@
 <template>
-    <main class="main">
+  <main class="main">
+    <!-- style="background-image: url(/assets/images/projects_sheffield.jpg)" -->
+    <div class="my-projects-banner bg-image text-center">
+      <div class="container justify-content-center mt-2 mb-1">
+        <div class="row">
+          <div class="col-lg-12 mb-2">
+            <div class="my-page-header">
+              <span>Project References</span>
+            </div>
+          </div>
 
-<!-- style="background-image: url(/assets/images/projects_sheffield.jpg)" -->
-        <div class="my-projects-banner bg-image text-center" >
-            <div class="container justify-content-center mt-2 mb-1">
+          <div class="col-lg-12 my-projects-section justify-content-center">
+            <div class="my-projects-carousel">
+              <carousel
+                ref="scrollableContainerCarosel"
+                v-model="currentSlide"
+                class="carousel-wrapper"
+                :per-page="1"
+                :breakpoints="breakpoints"
+                :wrap-around="true"
+                :pause-autoplay-on-hover="true"
+              >
+                <slide
+                  v-for="(item, index) in projectsMenu"
+                  :key="index"
+                  data-toggle="tab"
+                  :href="'#'+ item.title"
+                  role="tab"
+                  :aria-controls="item.title"
+                  aria-selected="false"
+                >
+                  <div class="carousel-div-image" @click="slideTo(index)">
+                    <img :src="item.image" :alt="item.alt" />
 
-                <div class="row">
-
-                    <div class="col-lg-12 mb-2">
-                        <div class="my-page-header">
-                            <span>Project References</span>
-                        </div>
+                    <div class="project-section-header">
+                      <span>{{ item.title }}</span>
                     </div>
-
-                    <div class="col-lg-12 my-projects-section justify-content-center">
-
-
-
-
-
-                        <div class="my-projects-carousel">
-
-                            <carousel ref="scrollableContainerCarosel" class="carousel-wrapper" :perPage="1" :breakpoints="breakpoints"  :wrap-around="true" :pauseAutoplayOnHover ="true" v-model="currentSlide">
-                                <slide v-for="(item, index) in projectsMenu" :key="index"  data-toggle="tab" :href="'#'+ item.title" role="tab" :aria-controls="item.title" aria-selected="false">
-
-                                    <div class="carousel-div-image" @click="slideTo(index)">
-                                        <img :src="item.image" :alt="item.alt">
-
-                                        <div class="project-section-header">
-                                            <span>{{ item.title }}</span>
-                                        </div>
-                                    </div>
-
-                                </slide>
-                                <template #addons>
-                                    <Navigation />
-                                    <Pagination />
-                                </template>
-                            </carousel>
-
-                        </div>
-
-                    </div>
+                  </div>
+                </slide>
+                <template #addons>
+                  <Navigation />
+                  <Pagination />
+                </template>
+              </carousel>
+            </div>
+          </div>
 
 
 
 
-                    <div class="col-lg-12 tab-content  mt-5 mb-5 pb-5">
-
-                        <!-- <div v-for="(item, index) in projects" :key="index" class="tab-pane p-0 fade" id="top-fur-tab" role="tabpanel" aria-labelledby="top-fur-link">
+          <div class="col-lg-12 tab-content  mt-5 mb-5 pb-5">
+            <!-- <div v-for="(item, index) in projects" :key="index" class="tab-pane p-0 fade" id="top-fur-tab" role="tabpanel" aria-labelledby="top-fur-link">
 
                         </div> -->
 
-                        <div v-for="(segment, segmentIndex) in segmentsData" :key="segmentIndex" class="tab-pane p-0 fade "  :class="{ 'show active': segment.name === 'Hotels' }" :id="segment.name" role="tabpanel" :aria-labelledby="segment.name">
+            <div
+              v-for="(segment, segmentIndex) in segmentsData"
+              :id="segment.name"
+              :key="segmentIndex"
+              class="tab-pane p-0 fade "
+              :class="{ 'show active': segment.name === 'Hotels' }"
+              role="tabpanel"
+              :aria-labelledby="segment.name"
+            >
+              <div class="main-clients">
+                <div class="clients-container mb-5 row ">
+                  <div class="col-md-10 offset-lg-1">
+                    <div class="row justify-content-center projects-row">
+                      <div v-for="(project, projectIndex) in segment.projects" :key="projectIndex" class="col-md-2 ">
+                        <article class="">
+                          <figure class="">
+                            <!-- <a href=""> -->
+                            <img :src="'/storage/' + project.main_image_path" alt="image desc" />
 
-                            <div class="main-clients">
-
-                                <div class="clients-container mb-5 row ">
-
-                                    <div class="col-md-10 offset-lg-1">
-
-                                        <div class="row justify-content-center projects-row">
-
-                                            <div class="col-md-2 " v-for="(project, projectIndex) in segment.projects" :key="projectIndex">
-
-                                                <article class="">
-                                                    <figure class="">
-                                                        <!-- <a href=""> -->
-                                                            <img :src="'/storage/' + project.main_image_path" alt="image desc">
-
-                                                       <!--  </a> -->
-                                                    </figure><!-- End .entry-media -->
-
-                                                </article><!-- End .entry -->
-
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-
-                            </div>
-
-                        </div>
-
+                            <!--  </a> -->
+                          </figure><!-- End .entry-media -->
+                        </article><!-- End .entry -->
+                      </div>
                     </div>
-
+                  </div>
                 </div>
-
+              </div>
             </div>
+          </div>
         </div>
-
-
-    </main>
-
+      </div>
+    </div>
+  </main>
 </template>
 
 <script setup>
 
-    import { ref, onMounted, onUnmounted, reactive, nextTick, watch } from "vue";
-    import { Carousel, Navigation, Slide, Pagination } from "vue3-carousel";
-    import { useMeta } from "../../admin/composables/use-meta";
-    useMeta({ title: "Projects" });
+    import { ref, onMounted, onUnmounted, reactive, nextTick, watch } from 'vue';
+    import { Carousel, Navigation, Slide, Pagination } from 'vue3-carousel';
+    import { useMeta } from '../../admin/composables/use-meta';
+    useMeta({ title: 'Projects' });
 
     const breakpoints = {
       0: {
@@ -127,9 +120,9 @@
   };
 
     const getProjectLink = (id, name) => {
-        let transformedName = name.replace(/ /g, "-");
-        transformedName = transformedName.replace(/-+/g, "-");
-        transformedName = transformedName.replace(/^-+|-+$/g, "");
+        let transformedName = name.replace(/ /g, '-');
+        transformedName = transformedName.replace(/-+/g, '-');
+        transformedName = transformedName.replace(/^-+|-+$/g, '');
         transformedName = transformedName.toLowerCase();
 
         return `/project/${id}/${transformedName}`;
@@ -145,7 +138,7 @@
     // Fetch products based on the current page
     const fetchProjects = async () => {
         try {
-            const response = await axios.get("/api/get-clients", {});
+            const response = await axios.get('/api/get-clients', {});
             projects.value = response.data;
 
             segmentsData.value = segmentedProjects();
@@ -188,40 +181,40 @@
 
         {
           image: '/assets/images/projects/hotel.png',
-          title: "Hotels",
+          title: 'Hotels',
 
         },
         {
           image: '/assets/images/projects/restaurant.png',
-          title: "Restaurants",
+          title: 'Restaurants',
 
 
         },
         {
           image: '/assets/images/projects/coffee-shop.png',
-          title: "Coffee Shops",
+          title: 'Coffee Shops',
 
         },
         {
           image: '/assets/images/projects/retail.png',
-          title: "Retail",
+          title: 'Retail',
 
         },
         {
           image: '/assets/images/projects/corporate.png',
-          title: "Corporates",
+          title: 'Corporates',
 
         },
         {
           image: '/assets/images/projects/institutions.png',
-          title: "Institutions",
+          title: 'Institutions',
 
         },
         {
           image: '/assets/images/projects/hospital.png',
-          title: "Healthcare",
+          title: 'Healthcare',
 
-        }
+        },
 
 
 
@@ -237,7 +230,7 @@
 
     const slideTo = (val) => {
 
-        currentSlide.value = val
+        currentSlide.value = val;
     };
 
 
@@ -277,7 +270,7 @@
 
 </script>
 
-<style >
+<style>
 
 
 .entry-container {

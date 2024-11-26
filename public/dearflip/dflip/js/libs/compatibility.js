@@ -13,11 +13,11 @@
  * limitations under the License.
  */
 /* eslint strict: ["error", "function"] */
-/* eslint-disable no-extend-native */
+ 
 /* globals VBArray, PDFJS */
 
 (function compatibilityWrapper() {
-  'use strict';
+  
 
 var userAgent = navigator.userAgent;
 
@@ -171,7 +171,7 @@ if (typeof PDFJS === 'undefined') {
     // IE10 might have response, but not overrideMimeType
     // Support: IE10
     Object.defineProperty(xhrPrototype, 'overrideMimeType', {
-      value: function xmlHttpRequestOverrideMimeType(mimeType) {}
+      value: function xmlHttpRequestOverrideMimeType(mimeType) {},
     });
   }
   if ('responseType' in xhr) {
@@ -193,7 +193,7 @@ if (typeof PDFJS === 'undefined') {
           this.overrideMimeType('text/plain; charset=x-user-defined');
         }
       }
-    }
+    },
   });
 
   // Support: IE9
@@ -204,7 +204,7 @@ if (typeof PDFJS === 'undefined') {
           return new Uint8Array(new VBArray(this.responseBody).toArray());
         }
         return this.responseText;
-      }
+      },
     });
     return;
   }
@@ -221,7 +221,7 @@ if (typeof PDFJS === 'undefined') {
         result[i] = text.charCodeAt(i) & 0xFF;
       }
       return result.buffer;
-    }
+    },
   });
 })();
 
@@ -333,11 +333,11 @@ if (typeof PDFJS === 'undefined') {
       Object.defineProperty(this, '_dataset', {
         value: dataset,
         writable: false,
-        enumerable: false
+        enumerable: false,
       });
       return dataset;
     },
-    enumerable: true
+    enumerable: true,
   });
 })();
 
@@ -378,7 +378,7 @@ if (typeof PDFJS === 'undefined') {
     },
     toggle: function(name) {
       changeList(this.element, name, true, true);
-    }
+    },
   };
 
   Object.defineProperty(HTMLElement.prototype, 'classList', {
@@ -391,17 +391,17 @@ if (typeof PDFJS === 'undefined') {
         element: {
           value: this,
           writable: false,
-          enumerable: true
-        }
+          enumerable: true,
+        },
       });
       Object.defineProperty(this, '_classList', {
         value: classList,
         writable: false,
-        enumerable: false
+        enumerable: false,
       });
       return classList;
     },
-    enumerable: true
+    enumerable: true,
   });
 })();
 
@@ -414,7 +414,7 @@ if (typeof PDFJS === 'undefined') {
     window.console = {
       log: function() {},
       error: function() {},
-      warn: function() {}
+      warn: function() {},
     };
   } else if (!('bind' in console.log)) {
     // native functions in IE9 might not have bind
@@ -592,7 +592,7 @@ if (typeof PDFJS === 'undefined') {
       return scripts[scripts.length - 1];
     },
     enumerable: true,
-    configurable: true
+    configurable: true,
   });
 })();
 
@@ -611,7 +611,7 @@ if (typeof PDFJS === 'undefined') {
         typeProperty.set.call(this, value === 'number' ? 'text' : value);
       },
       enumerable: true,
-      configurable: true
+      configurable: true,
     });
   }
 })();
@@ -632,7 +632,7 @@ if (typeof PDFJS === 'undefined') {
     },
     set: function (value) { readyStateProto.set.call(this, value); },
     enumerable: true,
-    configurable: true
+    configurable: true,
   });
 })();
 

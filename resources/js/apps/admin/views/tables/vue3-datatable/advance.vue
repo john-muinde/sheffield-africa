@@ -1,86 +1,112 @@
 <template>
-    <div class="layout-px-spacing">
-        <teleport to="#breadcrumb">
-            <ul class="navbar-nav flex-row">
-                <li>
-                    <div class="page-header">
-                        <nav class="breadcrumb-one" aria-label="breadcrumb">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item">
-                                    <a href="javascript:;">DataTables</a>
-                                </li>
-                                <li class="breadcrumb-item active" aria-current="page">
-                                    <span>Advance</span>
-                                </li>
-                            </ol>
-                        </nav>
-                    </div>
+  <div class="layout-px-spacing">
+    <teleport to="#breadcrumb">
+      <ul class="navbar-nav flex-row">
+        <li>
+          <div class="page-header">
+            <nav class="breadcrumb-one" aria-label="breadcrumb">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                  <a href="javascript:;">DataTables</a>
                 </li>
-            </ul>
-        </teleport>
+                <li class="breadcrumb-item active" aria-current="page">
+                  <span>Advance</span>
+                </li>
+              </ol>
+            </nav>
+          </div>
+        </li>
+      </ul>
+    </teleport>
 
-        <div class="row layout-top-spacing">
-            <div class="col-xl-12 col-lg-12 col-sm-12 layout-spacing">
-                <div class="panel br-6 p-0">
-                    <div class="vue3-datatable">
-                        <vue3-datatable :rows="rows" :columns="cols" :totalRows="rows?.length" :sortable="true" class="advanced-table text-nowrap">
-                            <template #id="data">
-                                <strong>#{{ data.value.id }}</strong>
-                            </template>
-                            <template #firstName="data">
-                                <div class="d-flex align-items-center">
-                                    <img width="40" :src="`/assets/images/profile-${data.value.id}.jpeg`" class="rounded-circle me-2" alt="user-profile" />
-                                    <div class="fw-bold">{{ data.value.firstName + ' ' + data.value.lastName }}</div>
-                                </div>
-                            </template>
-                            <template #email="data">
-                                <a :href="`mailto:${data.value.email}`" class="text-primary hover:underline">{{ data.value.email }}</a>
-                            </template>
-                            <template #age="data">
-                                <div class="progress-bar">
-                                    <div class="progress-line" :style="`width:${data.value.age}%; background-color:${randomColor()}`"></div>
-                                </div>
-                            </template>
-                            <template #rating="data">
-                                <div class="d-flex text-warning">
-                                    <div v-for="i in Math.floor(Math.random() * (5 - 1) + 1)" :key="i + data.value.id">
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            width="16"
-                                            height="16"
-                                            viewBox="0 0 24 24"
-                                            fill="#e2a03f"
-                                            stroke="currentColor"
-                                            stroke-width="2"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            class="feather feather-star f-icon-line"
-                                        >
-                                            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
-                                        </svg>
-                                    </div>
-                                </div>
-                            </template>
-                            <template #status="data">
-                                <span class="badge" :class="`badge-${data.value.status.color}`">{{ data.value.status.tooltip }}</span>
-                            </template>
-                            <template #country>
-                                <div class="d-flex align-items-center">
-                                    <img width="24" :src="`/assets/images/flags/${getCountry().code}.svg`" class="me-2" alt="user-profile" />
-                                    <div class="fw-bold">{{ getCountry().name }}</div>
-                                </div>
-                            </template>
-                            <template #series="data">
-                                <div style="width: 150px">
-                                    <apex-chart :key="data.value.id" height="30" type="line" :options="chart_options" :series="data.value.series"></apex-chart>
-                                </div>
-                            </template>
-                        </vue3-datatable>
-                    </div>
+    <div class="row layout-top-spacing">
+      <div class="col-xl-12 col-lg-12 col-sm-12 layout-spacing">
+        <div class="panel br-6 p-0">
+          <div class="vue3-datatable">
+            <vue3-datatable
+              :rows="rows"
+              :columns="cols"
+              :total-rows="rows?.length"
+              :sortable="true"
+              class="advanced-table text-nowrap"
+            >
+              <template #id="data">
+                <strong>#{{ data.value.id }}</strong>
+              </template>
+              <template #firstName="data">
+                <div class="d-flex align-items-center">
+                  <img
+                    width="40"
+                    :src="`/assets/images/profile-${data.value.id}.jpeg`"
+                    class="rounded-circle me-2"
+                    alt="user-profile"
+                  />
+                  <div class="fw-bold">
+                    {{ data.value.firstName + ' ' + data.value.lastName }}
+                  </div>
                 </div>
-            </div>
+              </template>
+              <template #email="data">
+                <a :href="`mailto:${data.value.email}`" class="text-primary hover:underline">{{ data.value.email }}</a>
+              </template>
+              <template #age="data">
+                <div class="progress-bar">
+                  <div class="progress-line" :style="`width:${data.value.age}%; background-color:${randomColor()}`"></div>
+                </div>
+              </template>
+              <template #rating="data">
+                <div class="d-flex text-warning">
+                  <div v-for="i in Math.floor(Math.random() * (5 - 1) + 1)" :key="i + data.value.id">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="#e2a03f"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="feather feather-star f-icon-line"
+                    >
+                      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                    </svg>
+                  </div>
+                </div>
+              </template>
+              <template #status="data">
+                <span class="badge" :class="`badge-${data.value.status.color}`">{{ data.value.status.tooltip }}</span>
+              </template>
+              <template #country>
+                <div class="d-flex align-items-center">
+                  <img
+                    width="24"
+                    :src="`/assets/images/flags/${getCountry().code}.svg`"
+                    class="me-2"
+                    alt="user-profile"
+                  />
+                  <div class="fw-bold">
+                    {{ getCountry().name }}
+                  </div>
+                </div>
+              </template>
+              <template #series="data">
+                <div style="width: 150px">
+                  <apex-chart
+                    :key="data.value.id"
+                    height="30"
+                    type="line"
+                    :options="chart_options"
+                    :series="data.value.series"
+                  />
+                </div>
+              </template>
+            </vue3-datatable>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </template>
 
 <script setup>

@@ -1,92 +1,111 @@
 <template>
-    <div>
-        <main class="main">
-            <div class="page-content">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-10 offset-lg-1">
-                            <h2 class="about-us-title">Newsletters</h2>
-                            <!-- End .title -->
+  <div>
+    <main class="main">
+      <div class="page-content">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-10 offset-lg-1">
+              <h2 class="about-us-title">
+                Newsletters
+              </h2>
+              <!-- End .title -->
 
-                            <router-link to="/media" class="btn btn-primary btn-round btn-shadow float-right"><i
-                                    class="icon-long-arrow-left"></i><span>Back to Media Center</span></router-link>
+              <router-link to="/media" class="btn btn-primary btn-round btn-shadow float-right">
+                <i
+                  class="icon-long-arrow-left"
+                ></i><span>Back to Media Center</span>
+              </router-link>
 
-                            <p class="lead about-us-lead text-primary mb-1">
-                                Explore Our Newsletters
-                            </p>
+              <p class="lead about-us-lead text-primary mb-1">
+                Explore Our Newsletters
+              </p>
 
-                            <p class="about-us-text mb-2">
-                                Click on the documents to view
-                            </p>
+              <p class="about-us-text mb-2">
+                Click on the documents to view
+              </p>
 
-                            <!--Button Lightbox Usage-->
-                            <div class="_df_button" source="/example.pdf"> Intro Book</div>
+              <!--Button Lightbox Usage-->
+              <div class="_df_button" source="/example.pdf">
+                Intro Book
+              </div>
 
-                            <!--Thumbnail Lightbox Usage Images-->
-                            <div class="_df_thumb" source="/example.pdf" thumb="/thumbs/intro.jpg">Intro Book</div>
+              <!--Thumbnail Lightbox Usage Images-->
+              <div class="_df_thumb" source="/example.pdf" thumb="/thumbs/intro.jpg">
+                Intro Book
+              </div>
 
-                            <ContentState v-if="loading" type="loading" contentType="NewsLetters" />
-                            <ContentState v-if="!newsletters.length && !loading" type="empty"
-                                contentType="NewsLetters" />
-                            <ContentState v-if="!!error" type="error" contentType="NewsLetters" />
+              <ContentState v-if="loading" type="loading" content-type="NewsLetters" />
+              <ContentState
+                v-if="!newsletters.length && !loading"
+                type="empty"
+                content-type="NewsLetters"
+              />
+              <ContentState v-if="!!error" type="error" content-type="NewsLetters" />
 
-                            <div v-if="newsletters.length" class="row media-center">
-                                <div class="col-lg-9">
-                                    <VuePdfApp style="height: 100vh" :pdf="currentDocument"></VuePdfApp>
-                                </div>
-
-                                <aside class="col-lg-3 aside-documents">
-                                    <div class="sidebar">
-                                        <div class="widget widget-cats">
-                                            <!--  <h3 class="widget-title"><b>Newsletters</b></h3> -->
-                                            <ul class="ul-pdf-view-documents">
-                                                <li v-for="newsletter in newsletters" :key="newsletter.id" @click="
-                                                    loadDocument(
-                                                        '/storage/' +
-                                                        newsletter.publication_file,
-                                                        newsletter.id
-                                                    )
-                                                    ">
-                                                    <a :class="{
-                                                        'active-document':
-                                                            isActive(
-                                                                newsletter.id
-                                                            ),
-                                                    }" href="#">
-                                                        <img src="/assets/images/pdf.png" />
-
-                                                        <span>
-                                                            {{ newsletter.name }}
-                                                        </span>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <!-- End .widget -->
-                                    </div>
-                                </aside>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End .row -->
+              <div v-if="newsletters.length" class="row media-center">
+                <div class="col-lg-9">
+                  <VuePdfApp style="height: 100vh" :pdf="currentDocument" />
                 </div>
-                <!-- End .container -->
+
+                <aside class="col-lg-3 aside-documents">
+                  <div class="sidebar">
+                    <div class="widget widget-cats">
+                      <!--  <h3 class="widget-title"><b>Newsletters</b></h3> -->
+                      <ul class="ul-pdf-view-documents">
+                        <li
+                          v-for="newsletter in newsletters"
+                          :key="newsletter.id"
+                          @click="
+                            loadDocument(
+                              '/storage/' +
+                                newsletter.publication_file,
+                              newsletter.id
+                            )
+                          "
+                        >
+                          <a
+                            :class="{
+                              'active-document':
+                                isActive(
+                                  newsletter.id
+                                ),
+                            }"
+                            href="#"
+                          >
+                            <img src="/assets/images/pdf.png" />
+
+                            <span>
+                              {{ newsletter.name }}
+                            </span>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                    <!-- End .widget -->
+                  </div>
+                </aside>
+              </div>
             </div>
-            <!-- End .page-content -->
-        </main>
-        <!-- End .main -->
-    </div>
+          </div>
+          <!-- End .row -->
+        </div>
+        <!-- End .container -->
+      </div>
+      <!-- End .page-content -->
+    </main>
+    <!-- End .main -->
+  </div>
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
-import ContentState from "@/Components/ContentState.vue";
-import { useMeta } from "../../admin/composables/use-meta";
+import { ref, onMounted } from 'vue';
+import ContentState from '@/Components/ContentState.vue';
+import { useMeta } from '../../admin/composables/use-meta';
 
-import VuePdfApp from "vue3-pdf-app";
-import "vue3-pdf-app/dist/icons/main.css";
+import VuePdfApp from 'vue3-pdf-app';
+import 'vue3-pdf-app/dist/icons/main.css';
 
-useMeta({ title: "Newsletters | Media Center" });
+useMeta({ title: 'Newsletters | Media Center' });
 
 const newsletters = ref([]);
 
@@ -97,7 +116,7 @@ const error = ref(null);
 const fetchMediaCenter = async () => {
     loading.value = true;
     try {
-        const response = await axios.get("/api/get-media-center", {});
+        const response = await axios.get('/api/get-media-center', {});
         newsletters.value = response.data.newsletters;
         loading.value = false;
     } catch (error) {
