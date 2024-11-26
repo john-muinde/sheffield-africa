@@ -2,7 +2,8 @@
 //      Imports
 //  =================
 
-@import '../base/base'; // Base Variables
+@use '../base/base'; // Base Variables
+@use "../base/color_variables";
 
 html {
     min-height: 100%;
@@ -25,7 +26,7 @@ h3,
 h4,
 h5,
 h6 {
-    color: $dark;
+    color: color_variables.$dark;
 }
 
 :focus {
@@ -34,12 +35,12 @@ h6 {
 
 ::-moz-selection {
     /* Code for Firefox */
-    color: $primary;
+    color: color_variables.$primary;
     background: transparent;
 }
 
 ::selection {
-    color: $primary;
+    color: color_variables.$primary;
     background: transparent;
 }
 a {
@@ -63,7 +64,7 @@ strong {
 }
 
 code {
-    color: $danger;
+    color: color_variables.$danger;
 }
 .small,
 small {
@@ -128,7 +129,7 @@ mark {
     border-radius: 0;
 
     svg {
-        color: $primary;
+        color: color_variables.$primary;
     }
 }
 
@@ -172,7 +173,7 @@ blockquote {
         border-bottom-right-radius: 8px;
         border-top-right-radius: 8px;
         border: 1px solid #e0e6ed;
-        border-left: 2px solid $primary;
+        border-left: 2px solid color_variables.$primary;
         -webkit-box-shadow: 0 0.1px 0px rgba(0, 0, 0, 0.002), 0 0.2px 0px rgba(0, 0, 0, 0.003), 0 0.4px 0px rgba(0, 0, 0, 0.004), 0 0.6px 0px rgba(0, 0, 0, 0.004), 0 0.9px 0px rgba(0, 0, 0, 0.005),
             0 1.2px 0px rgba(0, 0, 0, 0.006), 0 1.8px 0px rgba(0, 0, 0, 0.006), 0 2.6px 0px rgba(0, 0, 0, 0.007), 0 3.9px 0px rgba(0, 0, 0, 0.008), 0 7px 0px rgba(0, 0, 0, 0.01);
         -moz-box-shadow: 0 0.1px 0px rgba(0, 0, 0, 0.002), 0 0.2px 0px rgba(0, 0, 0, 0.003), 0 0.4px 0px rgba(0, 0, 0, 0.004), 0 0.6px 0px rgba(0, 0, 0, 0.004), 0 0.9px 0px rgba(0, 0, 0, 0.005),
@@ -202,7 +203,7 @@ blockquote {
 
     &.media-object {
         &.m-o-border-right {
-            border-right: 4px solid $primary;
+            border-right: 4px solid color_variables.$primary;
             border-left: none;
         }
 
@@ -227,7 +228,7 @@ blockquote {
     svg {
         width: 18px;
         height: 18px;
-        color: $primary;
+        color: color_variables.$primary;
         margin-right: 2px;
         vertical-align: sub;
     }
@@ -273,15 +274,15 @@ textarea {
 
 span {
     &.blue {
-        color: $primary;
+        color: color_variables.$primary;
     }
 
     &.green {
-        color: $success;
+        color: color_variables.$success;
     }
 
     &.red {
-        color: $danger;
+        color: color_variables.$danger;
     }
 }
 
@@ -311,7 +312,7 @@ label {
 .form-control {
     height: auto;
     border: 1px solid #bfc9d4;
-    color: $dark;
+    color: color_variables.$dark;
     font-size: 15px;
     padding: 8px 10px;
     letter-spacing: 1px;
@@ -321,8 +322,8 @@ label {
 
     &:focus {
         box-shadow: 0 0 5px 2px rgba(194, 213, 255, 0.6196078431);
-        border-color: $primary;
-        color: $dark;
+        border-color: color_variables.$primary;
+        color: color_variables.$dark;
     }
 
     &::-webkit-input-placeholder,
@@ -366,7 +367,7 @@ label {
 .form-select {
     height: auto;
     border: 1px solid #bfc9d4;
-    color: $dark;
+    color: color_variables.$dark;
     font-size: 15px;
     padding: 12px 20px;
     letter-spacing: 1px;
@@ -388,8 +389,8 @@ label {
 
     &:focus {
         box-shadow: none;
-        border-color: $primary;
-        color: $dark;
+        border-color: color_variables.$primary;
+        color: color_variables.$dark;
     }
 }
 .form-select[multiple],
@@ -401,7 +402,7 @@ label {
 
 .form-control-file {
     width: 100%;
-    color: $secondary;
+    color: color_variables.$secondary;
 
     &::-webkit-file-upload-button {
         letter-spacing: 1px;
@@ -415,7 +416,7 @@ label {
         transition: 0.2s ease-out;
         touch-action: manipulation;
         cursor: pointer;
-        background-color: $secondary;
+        background-color: color_variables.$secondary;
         box-shadow: 0px 0px 15px 1px rgba(113, 106, 202, 0.2);
         will-change: opacity, transform;
         transition: all 0.3s ease-out;
@@ -437,7 +438,7 @@ label {
         transition: 0.2s ease-out;
         touch-action: manipulation;
         cursor: pointer;
-        background-color: $secondary;
+        background-color: color_variables.$secondary;
         box-shadow: 0px 0px 15px 1px rgba(113, 106, 202, 0.2);
         will-change: opacity, transform;
         transition: all 0.3s ease-out;
@@ -490,7 +491,7 @@ select.form-control.form-custom {
         width: 100%;
         height: auto;
         border: 1px solid #f1f2f3;
-        color: $dark;
+        color: color_variables.$dark;
         font-size: 15px;
         padding: 8px 10px;
         letter-spacing: 1px;
@@ -555,12 +556,12 @@ select.form-control.form-custom {
             font-size: 13px;
 
             &:hover {
-                color: $info;
+                color: color_variables.$info;
             }
         }
 
         .dropdown-item:hover {
-            color: $info;
+            color: color_variables.$info;
         }
     }
 
@@ -581,7 +582,7 @@ select.form-control.form-custom {
     }
 
     &:hover .input-group-text svg {
-        color: $primary;
+        color: color_variables.$primary;
         fill: rgb(223 32 48 / 51%);
     }
 
@@ -595,7 +596,7 @@ select.form-control.form-custom {
     }
 
     &:hover .input-group-append .input-group-text svg {
-        color: $primary;
+        color: color_variables.$primary;
         fill: rgb(223 32 48 / 51%);
     }
 }
@@ -607,44 +608,44 @@ select.form-control.form-custom {
 /*      Validation Customization      */
 
 .invalid-feedback {
-    color: $danger;
+    color: color_variables.$danger;
     font-size: 13px;
     font-weight: 700;
     letter-spacing: 1px;
 }
 
 .valid-feedback {
-    color: $success;
+    color: color_variables.$success;
     font-size: 13px;
     font-weight: 700;
     letter-spacing: 1px;
 }
 
 .valid-tooltip {
-    background-color: $success;
+    background-color: color_variables.$success;
 }
 
 .invalid-tooltip {
-    background-color: $danger;
+    background-color: color_variables.$danger;
 }
 
 .form-select.is-valid,
 .form-control.is-valid {
-    border-color: $success;
+    border-color: color_variables.$success;
     background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%231abc9c' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-check'%3e%3cpolyline points='20 6 9 17 4 12'%3e%3c/polyline%3e%3c/svg%3e");
 }
 
 .was-validated {
     .form-select:valid,
     .form-control:valid {
-        border-color: $success;
+        border-color: color_variables.$success;
         background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%231abc9c' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-check'%3e%3cpolyline points='20 6 9 17 4 12'%3e%3c/polyline%3e%3c/svg%3e");
     }
 }
 
 .custom-control-input.is-valid ~ .custom-control-label,
 .was-validated .custom-control-input:valid ~ .custom-control-label {
-    color: $success;
+    color: color_variables.$success;
 }
 
 .custom-checkbox .custom-control-input.is-valid ~ .custom-control-label {
@@ -658,7 +659,7 @@ select.form-control.form-custom {
 
 .custom-control-input.is-invalid ~ .custom-control-label,
 .was-validated .custom-control-input:invalid ~ .custom-control-label {
-    color: $danger;
+    color: color_variables.$danger;
 }
 
 .dropdown-toggle:after,
@@ -681,7 +682,7 @@ select.form-control.form-custom {
     padding: 0.4375rem 1.25rem;
     text-shadow: none;
     font-size: 14px;
-    color: $dark;
+    color: color_variables.$dark;
     font-weight: normal;
     white-space: normal;
     word-wrap: break-word;
@@ -708,7 +709,7 @@ select.form-control.form-custom {
 
     &:hover,
     &:focus {
-        color: $dark;
+        color: color_variables.$dark;
         background-color: #f1f2f3;
         border-color: #d3d3d3;
         -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
@@ -829,7 +830,7 @@ select.form-control.form-custom {
             font-size: 13px;
 
             &:hover {
-                color: $info;
+                color: color_variables.$info;
             }
 
             svg {
@@ -843,7 +844,7 @@ select.form-control.form-custom {
             }
 
             &:hover svg {
-                color: $primary;
+                color: color_variables.$primary;
             }
         }
     }
@@ -1047,29 +1048,29 @@ select.form-control.form-custom {
 
 .btn-primary {
     color: #fff !important;
-    background-color: $primary !important;
-    border-color: $primary;
-    box-shadow: 0 10px 20px -10px $primary;
+    background-color: color_variables.$primary !important;
+    border-color: color_variables.$primary;
+    box-shadow: 0 10px 20px -10px color_variables.$primary;
 
     &:hover,
     &:focus {
         color: #fff !important;
-        background-color: $primary;
+        background-color: color_variables.$primary;
         box-shadow: none;
-        border-color: $primary;
+        border-color: color_variables.$primary;
     }
 
     &:active,
     &.active {
-        background-color: $primary;
-        border-top: 1px solid $primary;
+        background-color: color_variables.$primary;
+        border-top: 1px solid color_variables.$primary;
     }
 
     &.disabled,
     &.btn[disabled],
     &:disabled {
-        background-color: $primary;
-        border-color: $primary;
+        background-color: color_variables.$primary;
+        border-color: color_variables.$primary;
         -webkit-box-shadow: none;
         -moz-box-shadow: none;
         box-shadow: none;
@@ -1115,15 +1116,15 @@ select.form-control.form-custom {
     &.active,
     &:active {
         color: #fff !important;
-        background-color: $primary;
-        border-color: $primary;
+        background-color: color_variables.$primary;
+        border-color: color_variables.$primary;
     }
 }
 
 .show > .btn-primary.dropdown-toggle {
     color: #fff !important;
-    background-color: $primary;
-    border-color: $primary;
+    background-color: color_variables.$primary;
+    border-color: color_variables.$primary;
 }
 
 .btn-primary .caret {
@@ -1136,46 +1137,46 @@ select.form-control.form-custom {
 
 .btn-secondary {
     color: #fff !important;
-    background-color: $secondary;
-    border-color: $secondary;
-    box-shadow: 0 10px 20px -10px $secondary;
+    background-color: color_variables.$secondary;
+    border-color: color_variables.$secondary;
+    box-shadow: 0 10px 20px -10px color_variables.$secondary;
 
     &:hover,
     &:focus {
         color: #fff !important;
-        background-color: $secondary;
+        background-color: color_variables.$secondary;
         box-shadow: none;
-        border-color: $secondary;
+        border-color: color_variables.$secondary;
     }
 
     &:active,
     &.active {
-        background-color: $secondary;
-        border-top: 1px solid $secondary;
+        background-color: color_variables.$secondary;
+        border-top: 1px solid color_variables.$secondary;
     }
 
     &:not(:disabled):not(.disabled) {
         &.active,
         &:active {
             color: #fff !important;
-            background-color: $secondary;
-            border-color: $secondary;
+            background-color: color_variables.$secondary;
+            border-color: color_variables.$secondary;
         }
     }
 }
 
 .show > .btn-secondary.dropdown-toggle {
     color: #fff !important;
-    background-color: $secondary;
-    border-color: $secondary;
+    background-color: color_variables.$secondary;
+    border-color: color_variables.$secondary;
 }
 
 .btn-secondary {
     &.disabled,
     &.btn[disabled],
     &:disabled {
-        background-color: $secondary;
-        border-color: $secondary;
+        background-color: color_variables.$secondary;
+        border-color: color_variables.$secondary;
         -webkit-box-shadow: none;
         -moz-box-shadow: none;
         box-shadow: none;
@@ -1188,46 +1189,46 @@ select.form-control.form-custom {
 
 .btn-info {
     color: #fff !important;
-    background-color: $info;
-    border-color: $info;
-    box-shadow: 0 10px 20px -10px $info;
+    background-color: color_variables.$info;
+    border-color: color_variables.$info;
+    box-shadow: 0 10px 20px -10px color_variables.$info;
 
     &:hover,
     &:focus {
         color: #fff !important;
-        background-color: $info;
+        background-color: color_variables.$info;
         box-shadow: none;
-        border-color: $info;
+        border-color: color_variables.$info;
     }
 
     &:active,
     &.active {
-        background-color: $info;
-        border-top: 1px solid $info;
+        background-color: color_variables.$info;
+        border-top: 1px solid color_variables.$info;
     }
 
     &:not(:disabled):not(.disabled) {
         &.active,
         &:active {
             color: #fff !important;
-            background-color: $info;
-            border-color: $info;
+            background-color: color_variables.$info;
+            border-color: color_variables.$info;
         }
     }
 }
 
 .show > .btn-info.dropdown-toggle {
     color: #fff !important;
-    background-color: $info;
-    border-color: $info;
+    background-color: color_variables.$info;
+    border-color: color_variables.$info;
 }
 
 .btn-info {
     &.disabled,
     &.btn[disabled],
     &:disabled {
-        background-color: $info;
-        border-color: $info;
+        background-color: color_variables.$info;
+        border-color: color_variables.$info;
         -webkit-box-shadow: none;
         -moz-box-shadow: none;
         box-shadow: none;
@@ -1238,23 +1239,23 @@ select.form-control.form-custom {
         &:focus,
         &:hover {
             color: #fff !important;
-            background-color: $info;
-            border-color: $info;
+            background-color: color_variables.$info;
+            border-color: color_variables.$info;
         }
     }
 
     &.focus:active {
         color: #fff !important;
-        background-color: $info;
-        border-color: $info;
+        background-color: color_variables.$info;
+        border-color: color_variables.$info;
     }
 
     &:active {
         &:focus,
         &:hover {
             color: #fff !important;
-            background-color: $info;
-            border-color: $info;
+            background-color: color_variables.$info;
+            border-color: color_variables.$info;
         }
     }
 }
@@ -1264,8 +1265,8 @@ select.form-control.form-custom {
     &:focus,
     &:hover {
         color: #fff !important;
-        background-color: $info;
-        border-color: $info;
+        background-color: color_variables.$info;
+        border-color: color_variables.$info;
     }
 }
 
@@ -1279,46 +1280,46 @@ select.form-control.form-custom {
 
 .btn-warning {
     color: #fff !important;
-    background-color: $warning;
-    border-color: $warning;
-    box-shadow: 0 10px 20px -10px $warning;
+    background-color: color_variables.$warning;
+    border-color: color_variables.$warning;
+    box-shadow: 0 10px 20px -10px color_variables.$warning;
 
     &:hover,
     &:focus {
         color: #fff !important;
-        background-color: $warning;
+        background-color: color_variables.$warning;
         box-shadow: none;
-        border-color: $warning;
+        border-color: color_variables.$warning;
     }
 
     &:active,
     &.active {
-        background-color: $warning;
-        border-top: 1px solid $warning;
+        background-color: color_variables.$warning;
+        border-top: 1px solid color_variables.$warning;
     }
 
     &:not(:disabled):not(.disabled) {
         &.active,
         &:active {
             color: #0e1726;
-            background-color: $warning;
-            border-color: $warning;
+            background-color: color_variables.$warning;
+            border-color: color_variables.$warning;
         }
     }
 }
 
 .show > .btn-warning.dropdown-toggle {
     color: #0e1726;
-    background-color: $warning;
-    border-color: $warning;
+    background-color: color_variables.$warning;
+    border-color: color_variables.$warning;
 }
 
 .btn-warning {
     &.disabled,
     &.btn[disabled],
     &:disabled {
-        background-color: $warning;
-        border-color: $warning;
+        background-color: color_variables.$warning;
+        border-color: color_variables.$warning;
         -webkit-box-shadow: none;
         -moz-box-shadow: none;
         box-shadow: none;
@@ -1329,23 +1330,23 @@ select.form-control.form-custom {
         &:focus,
         &:hover {
             color: #fff !important;
-            background-color: $warning;
-            border-color: $warning;
+            background-color: color_variables.$warning;
+            border-color: color_variables.$warning;
         }
     }
 
     &.focus:active {
         color: #fff !important;
-        background-color: $warning;
-        border-color: $warning;
+        background-color: color_variables.$warning;
+        border-color: color_variables.$warning;
     }
 
     &:active {
         &:focus,
         &:hover {
             color: #fff !important;
-            background-color: $warning;
-            border-color: $warning;
+            background-color: color_variables.$warning;
+            border-color: color_variables.$warning;
         }
     }
 }
@@ -1355,8 +1356,8 @@ select.form-control.form-custom {
     &:focus,
     &:hover {
         color: #fff !important;
-        background-color: $warning;
-        border-color: $warning;
+        background-color: color_variables.$warning;
+        border-color: color_variables.$warning;
     }
 }
 
@@ -1370,46 +1371,46 @@ select.form-control.form-custom {
 
 .btn-danger {
     color: #fff !important;
-    background-color: $danger;
-    border-color: $danger;
-    box-shadow: 0 10px 20px -10px $danger;
+    background-color: color_variables.$danger;
+    border-color: color_variables.$danger;
+    box-shadow: 0 10px 20px -10px color_variables.$danger;
 
     &:hover,
     &:focus {
         color: #fff !important;
-        background-color: $danger;
+        background-color: color_variables.$danger;
         box-shadow: none;
-        border-color: $danger;
+        border-color: color_variables.$danger;
     }
 
     &:active,
     &.active {
-        background-color: $danger;
-        border-top: 1px solid $danger;
+        background-color: color_variables.$danger;
+        border-top: 1px solid color_variables.$danger;
     }
 
     &:not(:disabled):not(.disabled) {
         &.active,
         &:active {
             color: #fff !important;
-            background-color: $danger;
-            border-color: $danger;
+            background-color: color_variables.$danger;
+            border-color: color_variables.$danger;
         }
     }
 }
 
 .show > .btn-danger.dropdown-toggle {
     color: #fff !important;
-    background-color: $danger;
-    border-color: $danger;
+    background-color: color_variables.$danger;
+    border-color: color_variables.$danger;
 }
 
 .btn-danger {
     &.disabled,
     &.btn[disabled],
     &:disabled {
-        background-color: $danger;
-        border-color: $danger;
+        background-color: color_variables.$danger;
+        border-color: color_variables.$danger;
         -webkit-box-shadow: none;
         -moz-box-shadow: none;
         box-shadow: none;
@@ -1461,46 +1462,46 @@ select.form-control.form-custom {
 
 .btn-dark {
     color: #fff !important;
-    background-color: $dark;
-    border-color: $dark;
-    box-shadow: 0 10px 20px -10px $dark;
+    background-color: color_variables.$dark;
+    border-color: color_variables.$dark;
+    box-shadow: 0 10px 20px -10px color_variables.$dark;
 
     &:hover,
     &:focus {
         color: #fff !important;
-        background-color: $dark;
+        background-color: color_variables.$dark;
         box-shadow: none;
-        border-color: $dark;
+        border-color: color_variables.$dark;
     }
 
     &:active,
     &.active {
-        background-color: $dark;
-        border-top: 1px solid $dark;
+        background-color: color_variables.$dark;
+        border-top: 1px solid color_variables.$dark;
     }
 
     &:not(:disabled):not(.disabled) {
         &.active,
         &:active {
             color: #fff !important;
-            background-color: $dark;
-            border-color: $dark;
+            background-color: color_variables.$dark;
+            border-color: color_variables.$dark;
         }
     }
 }
 
 .show > .btn-dark.dropdown-toggle {
     color: #fff !important;
-    background-color: $dark;
-    border-color: $dark;
+    background-color: color_variables.$dark;
+    border-color: color_variables.$dark;
 }
 
 .btn-dark {
     &.disabled,
     &.btn[disabled],
     &:disabled {
-        background-color: $dark;
-        border-color: $dark;
+        background-color: color_variables.$dark;
+        border-color: color_variables.$dark;
         -webkit-box-shadow: none;
         -moz-box-shadow: none;
         box-shadow: none;
@@ -1517,46 +1518,46 @@ select.form-control.form-custom {
 
 .btn-success {
     color: #fff !important;
-    background-color: $success;
-    border-color: $success;
-    box-shadow: 0 10px 20px -10px $success;
+    background-color: color_variables.$success;
+    border-color: color_variables.$success;
+    box-shadow: 0 10px 20px -10px color_variables.$success;
 
     &:hover,
     &:focus {
         color: #fff !important;
-        background-color: $success;
+        background-color: color_variables.$success;
         box-shadow: none;
-        border-color: $success;
+        border-color: color_variables.$success;
     }
 
     &:active,
     &.active {
-        background-color: $success;
-        border-top: 1px solid $success;
+        background-color: color_variables.$success;
+        border-top: 1px solid color_variables.$success;
     }
 
     &:not(:disabled):not(.disabled) {
         &.active,
         &:active {
             color: #fff !important;
-            background-color: $success;
-            border-color: $success;
+            background-color: color_variables.$success;
+            border-color: color_variables.$success;
         }
     }
 }
 
 .show > .btn-success.dropdown-toggle {
     color: #fff !important;
-    background-color: $success;
-    border-color: $success;
+    background-color: color_variables.$success;
+    border-color: color_variables.$success;
 }
 
 .btn-success {
     &.disabled,
     &.btn[disabled],
     &:disabled {
-        background-color: $success;
-        border-color: $success;
+        background-color: color_variables.$success;
+        border-color: color_variables.$success;
         -webkit-box-shadow: none;
         -moz-box-shadow: none;
         box-shadow: none;
@@ -1767,92 +1768,92 @@ select.form-control.form-custom {
 .btn-outline-primary:not(:disabled):not(.disabled) {
     &.active,
     &:active {
-        background-color: $primary;
+        background-color: color_variables.$primary;
         color: #fff !important;
     }
 }
 
 .show.btn-outline-primary.dropdown-toggle {
-    background-color: $primary;
+    background-color: color_variables.$primary;
     color: #fff !important;
 }
 
 .btn-outline-success:not(:disabled):not(.disabled) {
     &.active,
     &:active {
-        background-color: $success;
+        background-color: color_variables.$success;
         color: #fff !important;
     }
 }
 
 .show.btn-outline-success.dropdown-toggle {
-    background-color: $success;
+    background-color: color_variables.$success;
     color: #fff !important;
 }
 
 .btn-outline-info:not(:disabled):not(.disabled) {
     &.active,
     &:active {
-        background-color: $info;
+        background-color: color_variables.$info;
         color: #fff !important;
     }
 }
 
 .show.btn-outline-info.dropdown-toggle {
-    background-color: $info;
+    background-color: color_variables.$info;
     color: #fff !important;
 }
 
 .btn-outline-danger:not(:disabled):not(.disabled) {
     &.active,
     &:active {
-        background-color: $danger;
+        background-color: color_variables.$danger;
         color: #fff !important;
     }
 }
 
 .show.btn-outline-danger.dropdown-toggle {
-    background-color: $danger;
+    background-color: color_variables.$danger;
     color: #fff !important;
 }
 
 .btn-outline-warning:not(:disabled):not(.disabled) {
     &.active,
     &:active {
-        background-color: $warning;
+        background-color: color_variables.$warning;
         color: #fff !important;
     }
 }
 
 .show.btn-outline-warning.dropdown-toggle {
-    background-color: $warning;
+    background-color: color_variables.$warning;
     color: #fff !important;
 }
 
 .btn-outline-secondary:not(:disabled):not(.disabled) {
     &.active,
     &:active {
-        background-color: $secondary;
+        background-color: color_variables.$secondary;
         color: #fff !important;
     }
 }
 
 .show.btn-outline-secondary.dropdown-toggle {
-    background-color: $secondary;
+    background-color: color_variables.$secondary;
     color: #fff !important;
 }
 
 .btn-outline-dark:not(:disabled):not(.disabled) {
     &.active,
     &:active {
-        background-color: $dark;
+        background-color: color_variables.$dark;
         color: #fff !important;
     }
 }
 
 .show > {
     .btn-outline-dark.dropdown-toggle {
-        background-color: $dark;
+        background-color: color_variables.$dark;
         color: #fff !important;
     }
 
@@ -1875,50 +1876,50 @@ select.form-control.form-custom {
 }
 
 .btn-outline-primary {
-    border: 1px solid $primary !important;
-    color: $primary !important;
+    border: 1px solid color_variables.$primary !important;
+    color: color_variables.$primary !important;
     background-color: transparent;
     box-shadow: none;
 }
 
 .btn-outline-info {
-    border: 1px solid $info !important;
-    color: $info !important;
+    border: 1px solid color_variables.$info !important;
+    color: color_variables.$info !important;
     background-color: transparent;
     box-shadow: none;
 }
 
 .btn-outline-warning {
-    border: 1px solid $warning !important;
-    color: $warning !important;
+    border: 1px solid color_variables.$warning !important;
+    color: color_variables.$warning !important;
     background-color: transparent;
     box-shadow: none;
 }
 
 .btn-outline-success {
-    border: 1px solid $success !important;
-    color: $success !important;
+    border: 1px solid color_variables.$success !important;
+    color: color_variables.$success !important;
     background-color: transparent;
     box-shadow: none;
 }
 
 .btn-outline-danger {
-    border: 1px solid $danger !important;
-    color: $danger !important;
+    border: 1px solid color_variables.$danger !important;
+    color: color_variables.$danger !important;
     background-color: transparent;
     box-shadow: none;
 }
 
 .btn-outline-secondary {
-    border: 1px solid $secondary !important;
-    color: $secondary !important;
+    border: 1px solid color_variables.$secondary !important;
+    color: color_variables.$secondary !important;
     background-color: transparent;
     box-shadow: none;
 }
 
 .btn-outline-dark {
-    border: 1px solid $dark !important;
-    color: $dark !important;
+    border: 1px solid color_variables.$dark !important;
+    color: color_variables.$dark !important;
     background-color: transparent;
     box-shadow: none;
 }
@@ -1935,44 +1936,44 @@ select.form-control.form-custom {
 
 .btn-outline-primary:hover {
     color: #fff !important;
-    background-color: $primary;
-    box-shadow: 0 10px 20px -10px $primary;
+    background-color: color_variables.$primary;
+    box-shadow: 0 10px 20px -10px color_variables.$primary;
 }
 
 .btn-outline-info:hover {
     color: #fff !important;
-    background-color: $info;
-    box-shadow: 0 10px 20px -10px $info;
+    background-color: color_variables.$info;
+    box-shadow: 0 10px 20px -10px color_variables.$info;
 }
 
 .btn-outline-warning:hover {
     color: #fff !important;
-    background-color: $warning;
-    box-shadow: 0 10px 20px -10px $warning;
+    background-color: color_variables.$warning;
+    box-shadow: 0 10px 20px -10px color_variables.$warning;
 }
 
 .btn-outline-success:hover {
     color: #fff !important;
-    background-color: $success;
-    box-shadow: 0 10px 20px -10px $success;
+    background-color: color_variables.$success;
+    box-shadow: 0 10px 20px -10px color_variables.$success;
 }
 
 .btn-outline-danger:hover {
     color: #fff !important;
-    background-color: $danger;
-    box-shadow: 0 10px 20px -10px $danger;
+    background-color: color_variables.$danger;
+    box-shadow: 0 10px 20px -10px color_variables.$danger;
 }
 
 .btn-outline-secondary:hover {
     color: #fff !important;
-    background-color: $secondary;
-    box-shadow: 0 10px 20px -10px $secondary;
+    background-color: color_variables.$secondary;
+    box-shadow: 0 10px 20px -10px color_variables.$secondary;
 }
 
 .btn-outline-dark:hover {
     color: #fff !important;
-    background-color: $dark !important;
-    box-shadow: 0 10px 20px -10px $dark;
+    background-color: color_variables.$dark !important;
+    box-shadow: 0 10px 20px -10px color_variables.$dark;
 }
 
 /*      Dropdown Toggle       */
@@ -2004,17 +2005,17 @@ select.form-control.form-custom {
 }
 
 .data-marker-success {
-    background-color: $success;
+    background-color: color_variables.$success;
 }
 
 .data-marker-warning {
-    background-color: $warning;
+    background-color: color_variables.$warning;
 }
 
 .data-marker-danger,
 .data-marker-info,
 .data-marker-dark {
-    background-color: $danger;
+    background-color: color_variables.$danger;
 }
 
 .badge {
@@ -2034,12 +2035,12 @@ select.form-control.form-custom {
     }
 
     &.badge-enabled {
-        background-color: $success;
+        background-color: color_variables.$success;
         color: #fff;
     }
 
     &.badge-disable {
-        background-color: $danger;
+        background-color: color_variables.$danger;
         color: #fff;
     }
 }
@@ -2106,36 +2107,36 @@ select.form-control.form-custom {
 
 .badge-primary {
     color: #fff;
-    background-color: $primary;
+    background-color: color_variables.$primary;
 }
 
 .badge-info {
     color: #fff;
-    background-color: $info;
+    background-color: color_variables.$info;
 }
 
 .badge-success {
     color: #fff;
-    background-color: $success;
+    background-color: color_variables.$success;
 }
 
 .badge-danger {
     color: #fff;
-    background-color: $danger;
+    background-color: color_variables.$danger;
 }
 
 .badge-warning {
     color: #fff;
-    background-color: $warning;
+    background-color: color_variables.$warning;
 }
 
 .badge-dark {
     color: #fff;
-    background-color: $dark;
+    background-color: color_variables.$dark;
 }
 
 .badge-secondary {
-    background-color: $secondary;
+    background-color: color_variables.$secondary;
 }
 
 .badge-light {
@@ -2144,59 +2145,59 @@ select.form-control.form-custom {
 }
 
 .outline-badge-primary {
-    color: $primary;
+    color: color_variables.$primary;
     background-color: transparent;
-    border: 1px solid $primary;
+    border: 1px solid color_variables.$primary;
 }
 
 .outline-badge-info {
-    color: $info;
+    color: color_variables.$info;
     background-color: transparent;
-    border: 1px solid $info;
+    border: 1px solid color_variables.$info;
 }
 
 .outline-badge-success {
-    color: $success;
+    color: color_variables.$success;
     background-color: transparent;
-    border: 1px solid $success;
+    border: 1px solid color_variables.$success;
 }
 
 .outline-badge-danger {
-    color: $danger;
+    color: color_variables.$danger;
     background-color: transparent;
-    border: 1px solid $danger;
+    border: 1px solid color_variables.$danger;
 }
 
 .outline-badge-warning {
-    color: $warning;
+    color: color_variables.$warning;
     background-color: transparent;
-    border: 1px solid $warning;
+    border: 1px solid color_variables.$warning;
 }
 
 .outline-badge-dark {
-    color: $dark;
+    color: color_variables.$dark;
     background-color: transparent;
-    border: 1px solid $dark;
+    border: 1px solid color_variables.$dark;
 }
 
 .outline-badge-secondary {
-    color: $secondary;
+    color: color_variables.$secondary;
     background-color: transparent;
-    border: 1px solid $secondary;
+    border: 1px solid color_variables.$secondary;
 }
 
 .outline-badge-primary {
     &:focus,
     &:hover {
         background-color: #eaf1ff;
-        color: $primary;
+        color: color_variables.$primary;
     }
 }
 
 .outline-badge-secondary {
     &:focus,
     &:hover {
-        color: $secondary;
+        color: color_variables.$secondary;
         background-color: #f3effc;
     }
 }
@@ -2204,7 +2205,7 @@ select.form-control.form-custom {
 .outline-badge-success {
     &:focus,
     &:hover {
-        color: $success;
+        color: color_variables.$success;
         background-color: #ddf5f0;
     }
 }
@@ -2212,7 +2213,7 @@ select.form-control.form-custom {
 .outline-badge-danger {
     &:focus,
     &:hover {
-        color: $danger;
+        color: color_variables.$danger;
         background-color: #fff5f5;
     }
 }
@@ -2220,7 +2221,7 @@ select.form-control.form-custom {
 .outline-badge-warning {
     &:focus,
     &:hover {
-        color: $warning;
+        color: color_variables.$warning;
         background-color: #fff9ed;
     }
 }
@@ -2228,7 +2229,7 @@ select.form-control.form-custom {
 .outline-badge-info {
     &:focus,
     &:hover {
-        color: $info;
+        color: color_variables.$info;
         background-color: #e7f7ff;
     }
 }
@@ -2236,7 +2237,7 @@ select.form-control.form-custom {
 .outline-badge-dark {
     &:focus,
     &:hover {
-        color: $dark;
+        color: color_variables.$dark;
         background-color: #e3e4eb;
     }
 }
@@ -2248,43 +2249,43 @@ select.form-control.form-custom {
 }
 
 .link-badge-primary {
-    color: $primary;
+    color: color_variables.$primary;
     background-color: transparent;
     border: 1px solid transparent;
 }
 
 .link-badge-info {
-    color: $info;
+    color: color_variables.$info;
     background-color: transparent;
     border: 1px solid transparent;
 }
 
 .link-badge-success {
-    color: $success;
+    color: color_variables.$success;
     background-color: transparent;
     border: 1px solid transparent;
 }
 
 .link-badge-danger {
-    color: $danger;
+    color: color_variables.$danger;
     background-color: transparent;
     border: 1px solid transparent;
 }
 
 .link-badge-warning {
-    color: $warning;
+    color: color_variables.$warning;
     background-color: transparent;
     border: 1px solid transparent;
 }
 
 .link-badge-dark {
-    color: $dark;
+    color: color_variables.$dark;
     background-color: transparent;
     border: 1px solid transparent;
 }
 
 .link-badge-secondary {
-    color: $secondary;
+    color: color_variables.$secondary;
     background-color: transparent;
     border: 1px solid transparent;
 }
@@ -2292,7 +2293,7 @@ select.form-control.form-custom {
 .link-badge-primary {
     &:focus,
     &:hover {
-        color: $primary;
+        color: color_variables.$primary;
         background-color: transparent;
     }
 }
@@ -2316,7 +2317,7 @@ select.form-control.form-custom {
 .link-badge-danger {
     &:focus,
     &:hover {
-        color: $danger;
+        color: color_variables.$danger;
         background-color: transparent;
     }
 }
@@ -2403,7 +2404,7 @@ select.form-control.form-custom {
     &.active svg,
     &:active svg,
     &:hover svg {
-        color: $primary;
+        color: color_variables.$primary;
     }
 }
 
@@ -2411,7 +2412,7 @@ select.form-control.form-custom {
     &.active svg,
     &:active svg,
     &:hover svg {
-        color: $primary;
+        color: color_variables.$primary;
     }
 }
 
@@ -2474,7 +2475,7 @@ textarea[readonly] {
     }
 
     thead > tr > th {
-        color: $primary;
+        color: color_variables.$primary;
         font-weight: 700;
         font-size: 13px;
         letter-spacing: 1px;
@@ -2526,7 +2527,7 @@ textarea[readonly] {
             cursor: pointer;
 
             &.t-hover-icon:hover {
-                background-color: $danger;
+                background-color: color_variables.$danger;
                 color: #fff;
             }
         }
@@ -2621,7 +2622,7 @@ table {
 }
 
 .table > tfoot > tr > th {
-    color: $dark;
+    color: color_variables.$dark;
 }
 
 .table-vertical-align {
@@ -2689,11 +2690,11 @@ table {
 }
 
 .toast-primary {
-    background: $primary;
+    background: color_variables.$primary;
 }
 
 .toast-header {
-    background: $primary;
+    background: color_variables.$primary;
     color: #fff;
     border-bottom: 1px solid rgba(33, 150, 243, 0.3411764706);
 
@@ -2724,44 +2725,44 @@ table {
 */
 
 .bg-primary {
-    background-color: $primary !important;
-    border-color: $primary;
+    background-color: color_variables.$primary !important;
+    border-color: color_variables.$primary;
     color: #fff;
 }
 
 .bg-success {
-    background-color: $success !important;
-    border-color: $success;
+    background-color: color_variables.$success !important;
+    border-color: color_variables.$success;
     color: #fff;
 }
 
 .bg-info {
-    background-color: $info !important;
-    border-color: $info;
+    background-color: color_variables.$info !important;
+    border-color: color_variables.$info;
     color: #fff;
 }
 
 .bg-warning {
-    background-color: $warning !important;
-    border-color: $warning;
+    background-color: color_variables.$warning !important;
+    border-color: color_variables.$warning;
     color: #fff;
 }
 
 .bg-danger {
-    background-color: $danger !important;
-    border-color: $danger;
+    background-color: color_variables.$danger !important;
+    border-color: color_variables.$danger;
     color: #fff;
 }
 
 .bg-secondary {
-    background-color: $secondary !important;
-    border-color: $secondary;
+    background-color: color_variables.$secondary !important;
+    border-color: color_variables.$secondary;
     color: #fff;
 }
 
 .bg-dark {
     background-color: #fff;
-    border-color: $dark;
+    border-color: color_variables.$dark;
     color: #fff;
 }
 
@@ -2772,37 +2773,37 @@ table {
 .bg-light-primary {
     background-color: #eaf1ff !important;
     border-color: #eaf1ff;
-    color: $info;
+    color: color_variables.$info;
 }
 
 .bg-light-success {
     background-color: #ddf5f0 !important;
     border-color: #ddf5f0;
-    color: $success;
+    color: color_variables.$success;
 }
 
 .bg-light-info {
     background-color: #e7f7ff !important;
     border-color: #e7f7ff;
-    color: $info;
+    color: color_variables.$info;
 }
 
 .bg-light-warning {
     background-color: #fff9ed !important;
     border-color: #fff9ed;
-    color: $warning;
+    color: color_variables.$warning;
 }
 
 .bg-light-danger {
     background-color: #fff5f5 !important;
     border-color: #fff5f5;
-    color: $danger;
+    color: color_variables.$danger;
 }
 
 .bg-light-secondary {
     background-color: #f3effc !important;
     border-color: #f3effc;
-    color: $secondary;
+    color: color_variables.$secondary;
 }
 
 .bg-light-dark {
@@ -2927,37 +2928,37 @@ table {
 
     .progress-bar {
         &.bg-gradient-primary {
-            background-color: $primary;
+            background-color: color_variables.$primary;
             background: linear-gradient(to right, #0081ff 0%, #0045ff 100%);
         }
 
         &.bg-gradient-info {
-            background-color: $primary;
+            background-color: color_variables.$primary;
             background-image: linear-gradient(to right, #04befe 0%, #4481eb 100%);
         }
 
         &.bg-gradient-success {
-            background-color: $primary;
+            background-color: color_variables.$primary;
             background-image: linear-gradient(to right, #3cba92 0%, #0ba360 100%);
         }
 
         &.bg-gradient-warning {
-            background-color: $primary;
+            background-color: color_variables.$primary;
             background-image: linear-gradient(to right, #f09819 0%, #ff5858 100%);
         }
 
         &.bg-gradient-secondary {
-            background-color: $primary;
+            background-color: color_variables.$primary;
             background-image: linear-gradient(to right, #7579ff 0%, #b224ef 100%);
         }
 
         &.bg-gradient-danger {
-            background-color: $primary;
+            background-color: color_variables.$primary;
             background-image: linear-gradient(to right, #d09693 0%, #c71d6f 100%);
         }
 
         &.bg-gradient-dark {
-            background-color: $primary;
+            background-color: color_variables.$primary;
             background-image: linear-gradient(to right, #2b5876 0%, #4e4376 100%);
         }
     }
@@ -3054,43 +3055,43 @@ table {
 /*-------text-colors------*/
 
 .text-primary {
-    color: $primary !important;
+    color: color_variables.$primary !important;
 }
 
 .text-success {
-    color: $success !important;
+    color: color_variables.$success !important;
 }
 
 .text-info {
-    color: $info !important;
+    color: color_variables.$info !important;
 }
 
 .text-danger {
-    color: $danger !important;
+    color: color_variables.$danger !important;
 }
 
 .text-warning {
-    color: $warning !important;
+    color: color_variables.$warning !important;
 }
 
 .text-secondary {
-    color: $secondary !important;
+    color: color_variables.$secondary !important;
 }
 
 .text-dark {
-    color: $dark !important;
+    color: color_variables.$dark !important;
 }
 
 .text-muted {
-    color: $m-color_6 !important;
+    color: color_variables.$m-color_6 !important;
 }
 
 .text-white {
-    color: $white !important;
+    color: color_variables.$white !important;
 }
 
 .text-black {
-    color: $black !important;
+    color: color_variables.$black !important;
 }
 
 /*-----border main------*/
@@ -3116,31 +3117,31 @@ table {
 }
 
 .border-primary {
-    border-color: $primary !important;
+    border-color: color_variables.$primary !important;
 }
 
 .border-info {
-    border-color: $info !important;
+    border-color: color_variables.$info !important;
 }
 
 .border-warning {
-    border-color: $warning !important;
+    border-color: color_variables.$warning !important;
 }
 
 .border-success {
-    border-color: $success !important;
+    border-color: color_variables.$success !important;
 }
 
 .border-danger {
-    border-color: $danger !important;
+    border-color: color_variables.$danger !important;
 }
 
 .border-secondary {
-    border-color: $secondary !important;
+    border-color: color_variables.$secondary !important;
 }
 
 .border-dark {
-    border-color: $dark !important;
+    border-color: color_variables.$dark !important;
 }
 
 /*-----border style------*/

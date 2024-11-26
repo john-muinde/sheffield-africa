@@ -2,7 +2,8 @@
 //      Imports
 //  =================
 
-@import '../../base/base'; // Base Variables
+@use '../../base/base'; // Base Variables
+@use "../../base/color_variables";
 
 /*      Alert       */
 
@@ -40,44 +41,44 @@
 
 .alert-primary {
     color: #fff;
-    background-color: $primary;
-    border-color: $primary;
+    background-color: color_variables.$primary;
+    border-color: color_variables.$primary;
 }
 
 .alert-warning {
     color: #fff;
-    background-color: $warning;
-    border-color: $warning;
+    background-color: color_variables.$warning;
+    border-color: color_variables.$warning;
 }
 
 .alert-success {
     color: #fff;
-    background-color: $success;
-    border-color: $success;
+    background-color: color_variables.$success;
+    border-color: color_variables.$success;
 }
 
 .alert-info {
     color: #fff;
-    background-color: $info;
-    border-color: $info;
+    background-color: color_variables.$info;
+    border-color: color_variables.$info;
 }
 
 .alert-danger {
     color: #fff;
-    background-color: $danger;
-    border-color: $danger;
+    background-color: color_variables.$danger;
+    border-color: color_variables.$danger;
 }
 
 .alert-dark {
     color: #fff;
-    background-color: $dark;
-    border-color: $dark;
+    background-color: color_variables.$dark;
+    border-color: color_variables.$dark;
 }
 
 /*Outline Alerts*/
 
 .alert-outline-primary {
-    border-color: $primary;
+    border-color: color_variables.$primary;
     border-radius: 5px;
 }
 
@@ -87,7 +88,7 @@
 }
 
 .alert-outline-success {
-    border-color: $success;
+    border-color: color_variables.$success;
     border-radius: 5px;
 }
 
@@ -97,7 +98,7 @@
 }
 
 .alert-outline-danger {
-    border-color: $danger;
+    border-color: color_variables.$danger;
     border-radius: 5px;
 }
 
@@ -108,7 +109,7 @@
 
 .alert {
     &.alert-light .close {
-        color: $m-color_10;
+        color: color_variables.$m-color_10;
     }
 
     &.solid-alert-3 .close,
@@ -124,62 +125,62 @@
 /*      Light Alert         */
 
 .alert-light-primary {
-    color: $primary;
-    background-color: $l-primary;
-    border-color: $primary;
+    color: color_variables.$primary;
+    background-color: color_variables.$l-primary;
+    border-color: color_variables.$primary;
 
     svg.close {
-        color: $primary;
+        color: color_variables.$primary;
     }
 }
 
 .alert-light-warning {
-    color: $warning;
-    background-color: $l-warning;
-    border-color: $warning;
+    color: color_variables.$warning;
+    background-color: color_variables.$l-warning;
+    border-color: color_variables.$warning;
 
     svg.close {
-        color: $warning;
+        color: color_variables.$warning;
     }
 }
 
 .alert-light-success {
-    color: $success;
-    background-color: $l-success;
-    border-color: $success;
+    color: color_variables.$success;
+    background-color: color_variables.$l-success;
+    border-color: color_variables.$success;
 
     svg.close {
-        color: $success;
+        color: color_variables.$success;
     }
 }
 
 .alert-light-info {
-    color: $info;
-    background-color: $l-info;
-    border-color: $info;
+    color: color_variables.$info;
+    background-color: color_variables.$l-info;
+    border-color: color_variables.$info;
 
     svg.close {
-        color: $info;
+        color: color_variables.$info;
     }
 }
 
 .alert-light-danger {
-    color: $danger;
-    background-color: $l-danger;
-    border-color: $danger;
+    color: color_variables.$danger;
+    background-color: color_variables.$l-danger;
+    border-color: color_variables.$danger;
 
     svg.close {
-        color: $danger;
+        color: color_variables.$danger;
     }
 }
 
 .alert-light-dark {
-    color: $dark;
-    background-color: $l-dark;
-    border-color: $dark;
+    color: color_variables.$dark;
+    background-color: color_variables.$l-dark;
+    border-color: color_variables.$dark;
 
     svg.close {
-        color: $dark;
+        color: color_variables.$dark;
     }
 }
 
@@ -209,8 +210,8 @@
 /* Default */
 
 .custom-alert-1 {
-    background-color: $m-color_25;
-    border-color: $m-color_25;
+    background-color: color_variables.$m-color_25;
+    border-color: color_variables.$m-color_25;
     border-radius: 5px;
     color: #fff;
 

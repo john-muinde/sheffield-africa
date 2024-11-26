@@ -1,3 +1,4 @@
+@use "sass:meta";
 //	=================
 //    	Imports
 //	=================
@@ -112,8 +113,8 @@
 //	     _structure Imports
 //  ===============================
 
-@import '_structure/_navbar';
-@import '_structure/_sidebar';
+@include meta.load-css('_structure/_navbar');
+@include meta.load-css('_structure/_sidebar');
 
 /*  
     ======================
@@ -180,4 +181,4 @@
     }
 }
 
-@import '_structure/_media-query';
+@include meta.load-css('_structure/_media-query');

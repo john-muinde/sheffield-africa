@@ -3,11 +3,15 @@ import vue from "@vitejs/plugin-vue";
 import path from "path";
 import vueI18n from "@intlify/vite-plugin-vue-i18n";
 import laravel from "laravel-vite-plugin";
-import sass from "sass";
-// import sass from "vite-plugin-sass";
-import commonjs from "@rollup/plugin-commonjs";
 
 export default defineConfig({
+    css: {
+        preprocessorOptions: {
+        scss: {
+            silenceDeprecations: ["legacy-js-api"],
+        },
+        },
+  },
     build: {
         sourcemap: false,
         assetsDir: "assets",
@@ -15,7 +19,7 @@ export default defineConfig({
             write: "assets/manifest.json",
         },
         rollupOptions: {
-            plugins: [commonjs()],
+            plugins: [],
         },
     },
     plugins: [
@@ -63,11 +67,6 @@ export default defineConfig({
             include: path.resolve("resources/js/src/locales/**"),
         }),
     ],
-    css: {
-        modules: {
-            scopeBehaviour: "local",
-        },
-    },
     optimizeDeps: {
         include: ["quill", "nouislider"],
     },
@@ -82,3 +81,4 @@ export default defineConfig({
     },
     type: "module",
 });
+

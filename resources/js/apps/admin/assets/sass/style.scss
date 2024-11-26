@@ -1,6 +1,7 @@
-@import '../base/color_variables'; // Color Variables
+@use "sass:string";
+@use '../base/color_variables'; // Color Variables
 @function get_color($color) {
-    @return '%23' + str-slice('#{$color}', 2, -1);
+    @return '%23' + string.slice('#{$color}', 2, -1);
 }
 .sr-only {
     display: none;
@@ -436,144 +437,144 @@
 
 .checkbox-outline-default .custom-control-input:checked ~ .custom-control-label::before {
     background-color: transparent !important;
-    border: 2px solid $m-color_6;
+    border: 2px solid color_variables.$m-color_6;
 }
 
 .checkbox-outline-default .custom-control-input:checked ~ .custom-control-label::after {
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3e%3cpath fill='#{get_color($m-color_6)}' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26l2.974 2.99L8 2.193z'/%3e%3c/svg%3e") !important;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3e%3cpath fill='#{get_color(color_variables.$m-color_6)}' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26l2.974 2.99L8 2.193z'/%3e%3c/svg%3e") !important;
 }
 
 .checkbox-primary .custom-control-input:checked ~ .custom-control-label::before {
-    background-color: $primary !important;
-    border-color: $primary;
+    background-color: color_variables.$primary !important;
+    border-color: color_variables.$primary;
 }
 
 .checkbox-outline-primary .custom-control-input:checked ~ .custom-control-label::before {
     background-color: transparent !important;
-    border: 2px solid $primary;
+    border: 2px solid color_variables.$primary;
 }
 
 .checkbox-outline-primary .custom-control-input:checked ~ .custom-control-label::after {
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3e%3cpath fill='#{get_color($primary)}' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26l2.974 2.99L8 2.193z'/%3e%3c/svg%3e") !important;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3e%3cpath fill='#{get_color(color_variables.$primary)}' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26l2.974 2.99L8 2.193z'/%3e%3c/svg%3e") !important;
 }
 
 .checkbox-primary.text-color .custom-control-input:checked ~ .custom-control-label,
 .checkbox-outline-primary.text-color .custom-control-input:checked ~ .custom-control-label {
-    color: $primary;
+    color: color_variables.$primary;
 }
 
 .checkbox-info .custom-control-input:checked ~ .custom-control-label::before {
-    background-color: $info !important;
-    border-color: $info;
+    background-color: color_variables.$info !important;
+    border-color: color_variables.$info;
 }
 
 .checkbox-outline-info .custom-control-input:checked ~ .custom-control-label::before {
     background-color: transparent !important;
-    border: 2px solid $info;
+    border: 2px solid color_variables.$info;
 }
 
 .checkbox-outline-info .custom-control-input:checked ~ .custom-control-label::after {
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3e%3cpath fill='#{get_color($info)}' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26l2.974 2.99L8 2.193z'/%3e%3c/svg%3e") !important;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3e%3cpath fill='#{get_color(color_variables.$info)}' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26l2.974 2.99L8 2.193z'/%3e%3c/svg%3e") !important;
 }
 
 .checkbox-info.text-color .custom-control-input:checked ~ .custom-control-label,
 .checkbox-outline-info.text-color .custom-control-input:checked ~ .custom-control-label {
-    color: $info;
+    color: color_variables.$info;
 }
 
 .checkbox-success .custom-control-input:checked ~ .custom-control-label::before {
-    background-color: $success !important;
-    border-color: $success;
+    background-color: color_variables.$success !important;
+    border-color: color_variables.$success;
 }
 
 .checkbox-outline-success .custom-control-input:checked ~ .custom-control-label::before {
     background-color: transparent !important;
-    border: 2px solid $success;
+    border: 2px solid color_variables.$success;
 }
 
 .checkbox-outline-success .custom-control-input:checked ~ .custom-control-label::after {
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3e%3cpath fill='#{get_color($success)}' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26l2.974 2.99L8 2.193z'/%3e%3c/svg%3e") !important;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3e%3cpath fill='#{get_color(color_variables.$success)}' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26l2.974 2.99L8 2.193z'/%3e%3c/svg%3e") !important;
 }
 
 .checkbox-success.text-color .custom-control-input:checked ~ .custom-control-label,
 .checkbox-outline-success.text-color .custom-control-input:checked ~ .custom-control-label {
-    color: $success;
+    color: color_variables.$success;
 }
 
 .checkbox-warning .custom-control-input:checked ~ .custom-control-label::before {
-    background-color: $warning !important;
-    border-color: $warning;
+    background-color: color_variables.$warning !important;
+    border-color: color_variables.$warning;
 }
 
 .checkbox-outline-warning .custom-control-input:checked ~ .custom-control-label::before {
     background-color: transparent !important;
-    border: 2px solid $warning;
+    border: 2px solid color_variables.$warning;
 }
 
 .checkbox-outline-warning .custom-control-input:checked ~ .custom-control-label::after {
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3e%3cpath fill='#{get_color($warning)}' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26l2.974 2.99L8 2.193z'/%3e%3c/svg%3e") !important;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3e%3cpath fill='#{get_color(color_variables.$warning)}' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26l2.974 2.99L8 2.193z'/%3e%3c/svg%3e") !important;
 }
 
 .checkbox-warning.text-color .custom-control-input:checked ~ .custom-control-label,
 .checkbox-outline-warning.text-color .custom-control-input:checked ~ .custom-control-label {
-    color: $warning;
+    color: color_variables.$warning;
 }
 
 .checkbox-danger .custom-control-input:checked ~ .custom-control-label::before {
-    background-color: $danger !important;
-    border-color: $danger;
+    background-color: color_variables.$danger !important;
+    border-color: color_variables.$danger;
 }
 
 .checkbox-outline-danger .custom-control-input:checked ~ .custom-control-label::before {
     background-color: transparent !important;
-    border: 2px solid $danger;
+    border: 2px solid color_variables.$danger;
 }
 
 .checkbox-outline-danger .custom-control-input:checked ~ .custom-control-label::after {
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3e%3cpath fill='#{get_color($danger)}' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26l2.974 2.99L8 2.193z'/%3e%3c/svg%3e") !important;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3e%3cpath fill='#{get_color(color_variables.$danger)}' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26l2.974 2.99L8 2.193z'/%3e%3c/svg%3e") !important;
 }
 
 .checkbox-danger.text-color .custom-control-input:checked ~ .custom-control-label,
 .checkbox-outline-danger.text-color .custom-control-input:checked ~ .custom-control-label {
-    color: $danger;
+    color: color_variables.$danger;
 }
 
 .checkbox-secondary .custom-control-input:checked ~ .custom-control-label::before {
-    background-color: $secondary !important;
-    border-color: $secondary;
+    background-color: color_variables.$secondary !important;
+    border-color: color_variables.$secondary;
 }
 
 .checkbox-outline-secondary .custom-control-input:checked ~ .custom-control-label::before {
     background-color: transparent !important;
-    border: 2px solid $secondary;
+    border: 2px solid color_variables.$secondary;
 }
 
 .checkbox-outline-secondary .custom-control-input:checked ~ .custom-control-label::after {
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3e%3cpath fill='#{get_color($secondary)}' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26l2.974 2.99L8 2.193z'/%3e%3c/svg%3e") !important;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3e%3cpath fill='#{get_color(color_variables.$secondary)}' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26l2.974 2.99L8 2.193z'/%3e%3c/svg%3e") !important;
 }
 
 .checkbox-secondary.text-color .custom-control-input:checked ~ .custom-control-label,
 .checkbox-outline-secondary.text-color .custom-control-input:checked ~ .custom-control-label {
-    color: $secondary;
+    color: color_variables.$secondary;
 }
 
 .checkbox-dark .custom-control-input:checked ~ .custom-control-label::before {
-    background-color: $dark !important;
-    border-color: $dark;
+    background-color: color_variables.$dark !important;
+    border-color: color_variables.$dark;
 }
 
 .checkbox-outline-dark .custom-control-input:checked ~ .custom-control-label::before {
     background-color: transparent !important;
-    border: 2px solid $dark;
+    border: 2px solid color_variables.$dark;
 }
 
 .checkbox-outline-dark .custom-control-input:checked ~ .custom-control-label::after {
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3e%3cpath fill='#{get_color($dark)}' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26l2.974 2.99L8 2.193z'/%3e%3c/svg%3e") !important;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3e%3cpath fill='#{get_color(color_variables.$dark)}' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26l2.974 2.99L8 2.193z'/%3e%3c/svg%3e") !important;
 }
 
 .checkbox-dark.text-color .custom-control-input:checked ~ .custom-control-label,
 .checkbox-outline-dark.text-color .custom-control-input:checked ~ .custom-control-label {
-    color: $dark;
+    color: color_variables.$dark;
 }
 
 .custom-radio .custom-control-input:checked ~ .custom-control-label:after {
@@ -598,128 +599,128 @@
 }
 
 .radio-default .custom-control-input:checked ~ .custom-control-label::before {
-    background-color: $m-color_6 !important;
+    background-color: color_variables.$m-color_6 !important;
     border: none;
 }
 
 .radio-primary .custom-control-input:checked ~ .custom-control-label::before {
-    background-color: $primary !important;
+    background-color: color_variables.$primary !important;
     border: none;
 }
 
 .radio-primary.text-color .custom-control-input:checked ~ .custom-control-label {
-    color: $primary;
+    color: color_variables.$primary;
 }
 
 .radio-info .custom-control-input:checked ~ .custom-control-label::before {
-    background-color: $info !important;
+    background-color: color_variables.$info !important;
     border: none;
 }
 
 .radio-info.text-color .custom-control-input:checked ~ .custom-control-label {
-    color: $info;
+    color: color_variables.$info;
 }
 
 .radio-success .custom-control-input:checked ~ .custom-control-label::before {
-    background-color: $success !important;
+    background-color: color_variables.$success !important;
     border: none;
 }
 
 .radio-success.text-color .custom-control-input:checked ~ .custom-control-label {
-    color: $success;
+    color: color_variables.$success;
 }
 
 .radio-warning .custom-control-input:checked ~ .custom-control-label::before {
-    background-color: $warning !important;
+    background-color: color_variables.$warning !important;
     border: none;
 }
 
 .radio-warning.text-color .custom-control-input:checked ~ .custom-control-label {
-    color: $warning;
+    color: color_variables.$warning;
 }
 
 .radio-danger .custom-control-input:checked ~ .custom-control-label::before {
-    background-color: $danger !important;
+    background-color: color_variables.$danger !important;
     border: none;
 }
 
 .radio-danger.text-color .custom-control-input:checked ~ .custom-control-label {
-    color: $danger;
+    color: color_variables.$danger;
 }
 
 .radio-secondary .custom-control-input:checked ~ .custom-control-label::before {
-    background-color: $secondary !important;
+    background-color: color_variables.$secondary !important;
     border: none;
 }
 
 .radio-secondary.text-color .custom-control-input:checked ~ .custom-control-label {
-    color: $secondary;
+    color: color_variables.$secondary;
 }
 
 .radio-dark .custom-control-input:checked ~ .custom-control-label::before {
-    background-color: $dark !important;
+    background-color: color_variables.$dark !important;
     border: none;
 }
 
 .radio-dark.text-color .custom-control-input:checked ~ .custom-control-label {
-    color: $dark;
+    color: color_variables.$dark;
 }
 
 /*switch*/
 .switch.s-primary .custom-control-label::after {
-    background-color: $primary;
+    background-color: color_variables.$primary;
 }
 
 .switch.s-primary .custom-control-input:checked ~ .custom-control-label::before {
-    background-color: $primary !important;
+    background-color: color_variables.$primary !important;
 }
 
 .switch.s-info .custom-control-label::after {
-    background-color: $info;
+    background-color: color_variables.$info;
 }
 
 .switch.s-info .custom-control-input:checked ~ .custom-control-label::before {
-    background-color: $info !important;
+    background-color: color_variables.$info !important;
 }
 
 .switch.s-success .custom-control-label::after {
-    background-color: $success;
+    background-color: color_variables.$success;
 }
 
 .switch.s-success .custom-control-input:checked ~ .custom-control-label::before {
-    background-color: $success !important;
+    background-color: color_variables.$success !important;
 }
 
 .switch.s-warning .custom-control-label::after {
-    background-color: $warning;
+    background-color: color_variables.$warning;
 }
 
 .switch.s-warning .custom-control-input:checked ~ .custom-control-label::before {
-    background-color: $warning !important;
+    background-color: color_variables.$warning !important;
 }
 
 .switch.s-danger .custom-control-label::after {
-    background-color: $danger;
+    background-color: color_variables.$danger;
 }
 
 .switch.s-danger .custom-control-input:checked ~ .custom-control-label::before {
-    background-color: $danger !important;
+    background-color: color_variables.$danger !important;
 }
 
 .switch.s-secondary .custom-control-label::after {
-    background-color: $secondary;
+    background-color: color_variables.$secondary;
 }
 
 .switch.s-secondary .custom-control-input:checked ~ .custom-control-label::before {
-    background-color: $secondary !important;
+    background-color: color_variables.$secondary !important;
 }
 
 .switch.s-dark .custom-control-label::after {
-    background-color: $dark;
+    background-color: color_variables.$dark;
 }
 
 .switch.s-dark .custom-control-input:checked ~ .custom-control-label::before {
-    background-color: $dark !important;
+    background-color: color_variables.$dark !important;
 }
 
 /*list group*/
@@ -741,35 +742,35 @@
 }
 
 .toast-default {
-    background-color: $m-color_6;
+    background-color: color_variables.$m-color_6;
 }
 
 .toast-primary {
-    background-color: $primary;
+    background-color: color_variables.$primary;
 }
 
 .toast-info {
-    background-color: $info;
+    background-color: color_variables.$info;
 }
 
 .toast-success {
-    background-color: $success;
+    background-color: color_variables.$success;
 }
 
 .toast-warning {
-    background-color: $warning;
+    background-color: color_variables.$warning;
 }
 
 .toast-danger {
-    background-color: $danger;
+    background-color: color_variables.$danger;
 }
 
 .toast-secondary {
-    background-color: $secondary;
+    background-color: color_variables.$secondary;
 }
 
 .toast-dark {
-    background-color: $dark;
+    background-color: color_variables.$dark;
 }
 
 /*alerts*/
@@ -896,12 +897,12 @@
         a {
             padding: 10px 15px;
             font-weight: 600;
-            color: $dark;
+            color: color_variables.$dark;
         }
 
         padding: 10px 0;
         font-weight: 600;
-        color: $dark;
+        color: color_variables.$dark;
         border-radius: 4px;
 
         &:not(:last-child) {
@@ -916,49 +917,49 @@
 
 .pagination-default {
     li {
-        border: 2px solid $m-color_3;
+        border: 2px solid color_variables.$m-color_3;
 
         &:hover {
-            border: 2px solid $primary !important;
+            border: 2px solid color_variables.$primary !important;
 
             a {
-                color: $primary;
+                color: color_variables.$primary;
             }
         }
 
         &.active {
-            border: 2px solid $primary !important;
-            color: $primary;
+            border: 2px solid color_variables.$primary !important;
+            color: color_variables.$primary;
         }
 
         a.active:hover,
         &.active a {
-            color: $primary;
+            color: color_variables.$primary;
         }
     }
 
     .prev {
-        border: 2px solid $m-color_3;
+        border: 2px solid color_variables.$m-color_3;
 
         &:hover {
-            border: 2px solid $primary;
+            border: 2px solid color_variables.$primary;
 
             a,
             svg {
-                color: $primary;
+                color: color_variables.$primary;
             }
         }
     }
 
     .next {
-        border: 2px solid $m-color_3;
+        border: 2px solid color_variables.$m-color_3;
 
         &:hover {
-            border: 2px solid $primary;
+            border: 2px solid color_variables.$primary;
 
             a,
             svg {
-                color: $primary;
+                color: color_variables.$primary;
             }
         }
     }
@@ -970,45 +971,45 @@
 
 .pagination-solid {
     li {
-        background-color: $m-color_3;
+        background-color: color_variables.$m-color_3;
 
         &:hover a {
-            color: $primary;
+            color: color_variables.$primary;
         }
 
         &.active {
-            background-color: $primary !important;
-            color: $white;
+            background-color: color_variables.$primary !important;
+            color: color_variables.$white;
         }
 
         a.active:hover,
         &.active a {
-            color: $white;
+            color: color_variables.$white;
         }
     }
 
     .prev {
-        background-color: $m-color_3;
+        background-color: color_variables.$m-color_3;
 
         &:hover {
-            background-color: $primary;
+            background-color: color_variables.$primary;
 
             a,
             svg {
-                color: $white;
+                color: color_variables.$white;
             }
         }
     }
 
     .next {
-        background-color: $m-color_3;
+        background-color: color_variables.$m-color_3;
 
         &:hover {
-            background-color: $primary;
+            background-color: color_variables.$primary;
 
             a,
             svg {
-                color: $white;
+                color: color_variables.$white;
             }
         }
     }
@@ -1026,31 +1027,31 @@
     margin-bottom: 0;
 
     .prev {
-        background-color: $m-color_3;
+        background-color: color_variables.$m-color_3;
         border-radius: 50%;
         padding: 10px 11px;
         margin-right: 5px;
 
         &:hover {
-            background-color: $primary;
+            background-color: color_variables.$primary;
 
             svg {
-                color: $white;
+                color: color_variables.$white;
             }
         }
     }
 
     .next {
-        background-color: $m-color_3;
+        background-color: color_variables.$m-color_3;
         border-radius: 50%;
         padding: 10px 11px;
         margin-left: 5px;
 
         &:hover {
-            background-color: $primary;
+            background-color: color_variables.$primary;
 
             svg {
-                color: $white;
+                color: color_variables.$white;
             }
         }
     }
@@ -1077,31 +1078,31 @@
             border-bottom-right-radius: 50px;
         }
 
-        background-color: $m-color_3;
+        background-color: color_variables.$m-color_3;
 
         a {
             padding: 10px 15px;
             font-weight: 600;
-            color: $dark;
+            color: color_variables.$dark;
 
             &.active {
-                background-color: $primary !important;
+                background-color: color_variables.$primary !important;
                 border-radius: 6px;
-                color: $white;
+                color: color_variables.$white;
 
                 &:hover {
-                    color: $white;
+                    color: color_variables.$white;
                 }
             }
 
             &:hover {
-                color: $primary;
+                color: color_variables.$primary;
             }
         }
 
         padding: 10px 0;
         font-weight: 600;
-        color: $dark;
+        color: color_variables.$dark;
     }
 }
 
@@ -1121,31 +1122,31 @@
     margin-bottom: 0;
 
     .prev {
-        background-color: $m-color_3;
+        background-color: color_variables.$m-color_3;
         border-radius: 50%;
         padding: 10px 11px;
         margin-right: 25px;
 
         &:hover {
-            background-color: $primary;
+            background-color: color_variables.$primary;
 
             svg {
-                color: $white;
+                color: color_variables.$white;
             }
         }
     }
 
     .next {
-        background-color: $m-color_3;
+        background-color: color_variables.$m-color_3;
         border-radius: 50%;
         padding: 10px 11px;
         margin-left: 25px;
 
         &:hover {
-            background-color: $primary;
+            background-color: color_variables.$primary;
 
             svg {
-                color: $white;
+                color: color_variables.$white;
             }
         }
     }
@@ -1172,31 +1173,31 @@
             border-bottom-right-radius: 50px;
         }
 
-        background-color: $m-color_3;
+        background-color: color_variables.$m-color_3;
 
         a {
             padding: 10px 15px;
             font-weight: 600;
-            color: $dark;
+            color: color_variables.$dark;
 
             &.active {
-                background-color: $primary !important;
+                background-color: color_variables.$primary !important;
                 border-radius: 6px;
-                color: $white;
+                color: color_variables.$white;
 
                 &:hover {
-                    color: $white;
+                    color: color_variables.$white;
                 }
             }
 
             &:hover {
-                color: $primary;
+                color: color_variables.$primary;
             }
         }
 
         padding: 10px 0;
         font-weight: 600;
-        color: $dark;
+        color: color_variables.$dark;
     }
 }
 
@@ -1210,31 +1211,31 @@
     margin-bottom: 0;
 
     .prev {
-        border: 2px solid $m-color_3;
+        border: 2px solid color_variables.$m-color_3;
         border-radius: 50%;
         padding: 8px 11px;
         margin-right: 25px;
 
         &:hover {
-            border: 2px solid $primary;
+            border: 2px solid color_variables.$primary;
 
             svg {
-                color: $primary;
+                color: color_variables.$primary;
             }
         }
     }
 
     .next {
-        border: 2px solid $m-color_3;
+        border: 2px solid color_variables.$m-color_3;
         border-radius: 50%;
         padding: 8px 11px;
         margin-left: 25px;
 
         &:hover {
-            border: 2px solid $primary;
+            border: 2px solid color_variables.$primary;
 
             svg {
-                color: $primary;
+                color: color_variables.$primary;
             }
         }
     }
@@ -1253,11 +1254,11 @@
     li {
         padding: 10px 0;
         font-weight: 600;
-        color: $dark;
-        border: 1px solid $m-color_3;
+        color: color_variables.$dark;
+        border: 1px solid color_variables.$m-color_3;
 
         &.active {
-            background-color: $m-color_3;
+            background-color: color_variables.$m-color_3;
         }
 
         &:first-child {
@@ -1273,18 +1274,18 @@
         a {
             padding: 10px 15px;
             font-weight: 600;
-            color: $dark;
+            color: color_variables.$dark;
 
             &:hover {
-                color: $primary;
+                color: color_variables.$primary;
             }
         }
 
         &.active a {
             background-color: #ffffff;
-            border: 2px solid $primary !important;
+            border: 2px solid color_variables.$primary !important;
             border-radius: 6px;
-            color: $primary;
+            color: color_variables.$primary;
         }
     }
 }

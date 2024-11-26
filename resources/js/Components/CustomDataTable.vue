@@ -23,7 +23,7 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
+import {  computed } from 'vue';
 import DataTable from 'datatables.net-vue3';
 import DataTablesLib from 'datatables.net';
 import DataTablesCore from 'datatables.net-bs5';
@@ -55,25 +55,6 @@ const props = defineProps({
   },
 });
 
-const generateBase64 = async (fileUrl, cb) => {
-  try {
-    // Fetch the file
-    const response = await fetch(window.location.origin + fileUrl);
-    const blob = await response.blob();
-
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        resolve(reader.result);
-      };
-      reader.onerror = reject;
-      reader.readAsDataURL(blob);
-    });
-  } catch (error) {
-    console.error('Error generating base64:', error);
-    throw error;
-  }
-};
 
 const defaultOptions = {
   responsive: {

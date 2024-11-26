@@ -2,22 +2,22 @@
 //      Imports
 //  =================
 
-@import '../../base/base'; // Base Variables
+@use '../../base/base' as *; // Base Variables
 
 .tooltip-inner {
-    border-radius: 6px;
+  border-radius: 6px;
 }
 
 .tooltip .tooltip-item {
-    color: #fff;
-    padding: 0 9px;
+  color: #fff;
+  padding: 0 9px;
 }
 
 .tooltip-section h6 {
-    color: $dark;
-    font-size: 0.875rem;
-    margin-top: 25px;
-    margin-bottom: 20px;
+  color: $dark;
+  font-size: 0.875rem;
+  margin-top: 25px;
+  margin-bottom: 20px;
 }
 
 /*
@@ -33,66 +33,66 @@
 /*		Tooltip Inner 	*/
 
 .tooltip-primary .tooltip-inner {
-    color: $primary;
-    background-color: $l-primary;
+  color: $primary;
+  background-color: $l-primary;
 }
 
 .tooltip-success .tooltip-inner {
-    color: $success;
-    background-color: $l-success;
+  color: $success;
+  background-color: $l-success;
 }
 
 .tooltip-info .tooltip-inner {
-    color: $info;
-    background-color: $l-info;
+  color: $info;
+  background-color: $l-info;
 }
 
 .tooltip-danger .tooltip-inner {
-    color: $danger;
-    background-color: $l-danger;
+  color: $danger;
+  background-color: $l-danger;
 }
 
 .tooltip-warning .tooltip-inner {
-    color: $warning;
-    background-color: $l-warning;
+  color: $warning;
+  background-color: $l-warning;
 }
 
 .tooltip-secondary .tooltip-inner {
-    color: $secondary;
-    background-color: $l-secondary;
+  color: $secondary;
+  background-color: $l-secondary;
 }
 
 .tooltip-dark .tooltip-inner {
-    color: $dark;
-    background-color: $l-dark;
+  color: $dark;
+  background-color: $l-dark;
 }
 
 /*		Tooltip arrow 		*/
 
 .tooltip-primary .tooltip-arrow:before {
-    border-top-color: $l-primary;
+  border-top-color: $l-primary;
 }
 
 .tooltip-success .tooltip-arrow:before {
-    border-top-color: $l-success;
+  border-top-color: $l-success;
 }
 
 .tooltip-info .tooltip-arrow:before {
-    border-top-color: $l-info;
+  border-top-color: $l-info;
 }
 
 .tooltip-danger .tooltip-arrow:before {
-    border-top-color: $l-danger;
+  border-top-color: $l-danger;
 }
 
 .tooltip-warning .tooltip-arrow:before {
-    border-top-color: $l-warning;
+  border-top-color: $l-warning;
 }
 
 .tooltip-secondary .tooltip-arrow:before {
-    border-top-color: $l-secondary;
+  border-top-color: $l-secondary;
 }
 
 .tooltip-dark .tooltip-arrow:before {
-    border-top-color: $l-dark;
+  border-top-color: $l-dark;
 }

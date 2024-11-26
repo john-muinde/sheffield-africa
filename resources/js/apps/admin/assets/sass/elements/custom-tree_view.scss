@@ -2,7 +2,7 @@
 //      Imports
 //  =================
 
-@import '../../base/base';    // Base Variables
+@use '../../base/base' as *; // Base Variables
 
 /*  Tree View   */
 
@@ -65,14 +65,14 @@
 }
 
 .file-tree {
-  * {
-    list-style-type: none;
-  }
-
   margin-bottom: 0;
   padding-left: 20px;
   list-style: none;
   overflow: hidden;
+
+  * {
+    list-style-type: none;
+  }
 
   ul {
     list-style: none;
@@ -98,10 +98,10 @@
     transition: all 0.2s;
     -webkit-transition-delay: 0s;
     -moz-transition-delay: 0s;
-    transition-delay: 0s;    
-    
+    transition-delay: 0s;
+
     &::before {
-      content: "\e9b9";
+      content: '\e9b9';
       font-size: 1.25rem;
     }
 
@@ -113,9 +113,9 @@
       -moz-transition-delay: 0s;
       transition-delay: 0s;
       position: absolute;
-      top: .4rem;
+      top: 0.4rem;
       left: -2em;
-      content: "\f182";
+      content: '\f182';
       display: block;
       text-align: center;
       font-family: 'flaticon' !important;
@@ -136,7 +136,7 @@
       display: inline-block;
       text-align: center;
       width: 30px;
-      margin-right: .25rem;
+      margin-right: 0.25rem;
       vertical-align: middle;
       font-size: 1rem;
       color: $info;

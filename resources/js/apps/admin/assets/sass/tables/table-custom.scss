@@ -1,4 +1,5 @@
-@import '../../base/base'; // Base Variables
+@use '../../base/base'; // Base Variables
+@use "../../base/color_variables";
 
 .table > :not(:first-child) {
     border-top: none;
@@ -190,32 +191,32 @@
                         .page-link {
                             border-radius: 100%;
                             padding: 8px 14px;
-                            background-color: $m-color_3;
+                            background-color: color_variables.$m-color_3;
                             font-weight: 600;
                             color: #3b3f5c;
                             outline: 0;
                             box-shadow: none;
 
                             &:hover .page-link {
-                                color: $primary;
+                                color: color_variables.$primary;
                             }
                             &.active {
-                                background-color: $primary !important;
-                                border-color: $primary;
-                                color: $white !important;
+                                background-color: color_variables.$primary !important;
+                                border-color: color_variables.$primary;
+                                color: color_variables.$white !important;
                             }
 
                             .page-link.active:hover,
                             &.active .page-link {
-                                color: $white;
+                                color: color_variables.$white;
                             }
                         }
 
                         &:not(.disabled).VuePagination__pagination-item-prev-page,
                         &:not(.disabled).VuePagination__pagination-item-next-page {
                             &:hover .page-link {
-                                background-color: $primary;
-                                color: $white;
+                                background-color: color_variables.$primary;
+                                color: color_variables.$white;
                             }
                         }
                     }

@@ -1,19 +1,20 @@
+@use "sass:meta";
 /*main pluging css*/
 @import '@bhplugin/vue3-datatable/dist/style.css';
 @import 'bootstrap/dist/css/bootstrap.min.css';
-@import 'forms/theme-checkbox-radio.scss';
+@include meta.load-css('forms/theme-checkbox-radio.scss');
 @import 'perfect-scrollbar.css';
-@import 'main.scss';
-@import 'structure.scss';
-@import 'elements/alert.scss';
-@import 'forms/switches.scss';
+@include meta.load-css('main.scss');
+@include meta.load-css('structure.scss');
+@include meta.load-css('elements/alert.scss');
+@include meta.load-css('forms/switches.scss');
 @import 'custom-loader.css';
 @import 'animate.css';
 
-@import 'tables/table-custom.scss';
+@include meta.load-css('tables/table-custom.scss');
 
 /*dark css*/
-@import 'dark.scss';
+@include meta.load-css('dark.scss');
 
 /*custom css*/
-@import 'style.scss';
+@include meta.load-css('style.scss');
