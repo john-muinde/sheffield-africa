@@ -208,7 +208,7 @@ $productsForSchema = $productsForSchema->merge($promotionalProducts)->unique('id
         "@type": "OfferShippingDetails",
         "shippingRate": {
           "@type": "MonetaryAmount",
-          "value": {!! json_encode($product->shipping_cost ?? 1) !!},
+          "value": {!! json_encode($product->shipping_cost ?? 0) !!},
           "currency": "KES"
         },
         "deliveryTime": {
