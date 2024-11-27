@@ -138,7 +138,7 @@ $productsForSchema = $productsForSchema->merge($promotionalProducts)->unique('id
               "aggregateRating": {
                 "@type": "AggregateRating",
                 "ratingValue": "{{ $product->aggregate_rating ?? 4.9 }}",
-                "reviewCount": "{{ $product->review_count ?? 500 }}",
+                "reviewCount": "{{ $product->review_count ?? 500 }}"
               },
               "offers": {
                 "@type": "Offer",
@@ -394,9 +394,12 @@ $productsForSchema = $productsForSchema->merge($promotionalProducts)->unique('id
     "@type": "VideoObject",
     "name": "Sheffield Commercial Kitchen Solutions Overview",
     "description": "Comprehensive overview of our commercial kitchen equipment and services",
-    "thumbnailUrl": "https://www.youtube.com/watch?v=YvhZ9lOAnSc&",
-    "uploadDate": "2021-07-12",
-    "contentUrl": "https://www.youtube.com/watch?v=YvhZ9lOAnSc&",
+    "thumbnailUrl": [
+        "https://img.youtube.com/vi/YvhZ9lOAnSc/maxresdefault.jpg",
+    ],
+    "embedUrl": "https://www.youtube.com/embed/YvhZ9lOAnSc?si=YtlSNqwiWkdyi7zC",
+    "uploadDate": "2021-07-12T08:00:00+03:00",
+    "contentUrl": "https://www.youtube.com/watch?v=YvhZ9lOAnSc",
     "duration": "PT2M23S"
   }
 </script>
