@@ -1,4 +1,3 @@
-<!-- eslint-disable no-console -->
 <template>
   <main class="main">
     <nav aria-label="breadcrumb" class="breadcrumb-nav border-0 mb-0">
@@ -19,9 +18,17 @@
             class="breadcrumb-item"
           >
             <router-link
-              :to="getCategoryMainLinkTop(product.categories_json[0].parent_name_with_slashes)"
+              :to="
+                getCategoryMainLinkTop(
+                  product.categories_json[0].parent_name_with_slashes
+                )
+              "
             >
-              {{ getCategoryMainLinkTopName(product.categories_json[0].parent_name_with_slashes) }}
+              {{
+                getCategoryMainLinkTopName(
+                  product.categories_json[0].parent_name_with_slashes
+                )
+              }}
             </router-link>
           </li>
 
@@ -167,8 +174,13 @@
                   <img style="width: 120px" :src="qrCodeDataUrl" alt="QR Code" />
                 </div>
 
+
                 <div class="product-details-action product-details-sheffield mt-2">
-                  <button type="button" class="btn-product btn-cart" @click="addToCart(product)">
+                  <button
+                    type="button"
+                    class="btn-product btn-cart"
+                    @click="addToCart(product)"
+                  >
                     <span>Add to Cart</span>
                   </button>
                 </div>
@@ -181,7 +193,10 @@
                 <!-- End .product-content -->
 
                 <div class="product-details-tab mt-2">
-                  <ul class="nav nav-pills justify-content-left mobile-description" role="tablist">
+                  <ul
+                    class="nav nav-pills justify-content-left mobile-description"
+                    role="tablist"
+                  >
                     <li class="nav-item">
                       <a
                         id="product-desc-link"
@@ -238,14 +253,79 @@
                     >
                       <div class="product-desc-content">
                         <div v-html="product.technical_specification"></div>
+                        <!-- <a
+                                                    v-if="product.document_path"
+                                                    :href="
+                                                        '/storage/' +
+                                                        product.document_path
+                                                    "
+                                                    target="_blank"
+                                                    class="btn btn-warning"
+                                                    >Download Technical Document
+                                                    <i
+                                                        class="icon-long-arrow-right"
+                                                    ></i
+                                                ></a> -->
                       </div>
                       <!-- End .product-desc-content -->
                     </div>
                     <!-- .End .tab-pane -->
+                    <!-- <div
+                                            class="tab-pane fade"
+                                            id="product-shipping-tab"
+                                            role="tabpanel"
+                                            aria-labelledby="product-shipping-link"
+                                        >
+                                            <div class="product-desc-content">
+                                                <div
+                                                    v-html="
+                                                        product.terms_of_operation
+                                                    "
+                                                ></div>
+                                            </div>
+
+                                        </div> -->
                     <!-- .End .tab-pane -->
                   </div>
                   <!-- End .tab-content -->
                 </div>
+
+                <!-- <div class="product-details-footer">
+                                    <div class="product-cat"></div>
+
+                                    <div class="social-icons social-icons-sm">
+                                        <span class="social-label">Share:</span>
+                                        <a
+                                            href="#"
+                                            class="social-icon"
+                                            title="Facebook"
+                                            target="_blank"
+                                            ><i class="icon-facebook-f"></i
+                                        ></a>
+                                        <a
+                                            href="#"
+                                            class="social-icon"
+                                            title="Twitter"
+                                            target="_blank"
+                                            ><i class="icon-twitter"></i
+                                        ></a>
+                                        <a
+                                            href="#"
+                                            class="social-icon"
+                                            title="Instagram"
+                                            target="_blank"
+                                            ><i class="icon-instagram"></i
+                                        ></a>
+                                        <a
+                                            href="#"
+                                            class="social-icon"
+                                            title="Pinterest"
+                                            target="_blank"
+                                            ><i class="icon-pinterest"></i
+                                        ></a>
+                                    </div>
+                                </div> -->
+
                 <!-- End .product-details-footer -->
               </div>
               <!-- End .product-details -->
@@ -260,10 +340,46 @@
     </div>
     <!-- End .page-content -->
   </main>
+
+  <!-- <div class="sticky-bar">
+    <div class="container">
+      <div class="row">
+        <div class="col-6">
+          <figure class="product-media">
+            <a href="#">
+              <img
+                style="height: 40px"
+                :src="'/storage/' + mainImage"
+                :alt="product.name"
+              />
+            </a>
+          </figure>
+
+          <h4 class="product-title">
+            <a href="product.html">{{ product.name }}</a>
+          </h4>
+
+        </div>
+        <div class="col-6 justify-content-end">
+
+
+          <div class="product-details-action">
+            <router-link :to="'/enquiry/product/' + product_id" class="btn btn-primary"
+              ><span>Enquire Product</span><i class="icon-long-arrow-right"></i
+            ></router-link>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div> -->
 </template>
 
 <script setup>
-import { ref, watch, onMounted, watchEffect } from 'vue';
+import { ref, computed, watch, onMounted, watchEffect } from 'vue';
 import { useRoute } from 'vue-router';
 import VueEasyLightbox from 'vue-easy-lightbox';
 import QRCode from 'qrcode-generator';
@@ -293,7 +409,7 @@ const addToCart = (product) => {
 };
 
 const route = useRoute();
-const axios = window.axios;
+const currentRoute = ref(route);
 
 const product = ref([]);
 const product_id = ref(route.params.id ? parseInt(route.params.id) : 1);
@@ -311,7 +427,6 @@ const fetchProduct = async () => {
       },
     });
     product.value = response.data.data;
-    console.log(product.value);
 
     useMeta({ title: formatTextHeader(product.value.name) + ' | Product' });
   } catch (error) {
@@ -322,9 +437,17 @@ const fetchProduct = async () => {
 const imgs = ref([]);
 const rootUrl = window.location.protocol + '//' + window.location.host;
 
+const showSingle = () => {
+  imgs.value =
+    'https://media.istockphoto.com/id/1189903200/photo/red-generic-sedan-car-isolated-on-white-background-3d-illustration.jpg?s=612x612&w=0&k=20&c=uRu3o_h5FVljLQHS9z0oyz-XjXzzXN_YkyGXwhdMrjs=';
+  show();
+};
+
 const showMultiple = async () => {
-  console.log(product.value);
-  imgs.value = product.value.product_images.map((item) => rootUrl + '/storage/' + item.name);
+
+  imgs.value = product.value.product_images.map(
+    (item) => rootUrl + '/storage/' + item.name,
+  );
   show();
 };
 
@@ -337,6 +460,21 @@ const show = () => {
 
 const handleHide = () => {
   visible.value = false;
+};
+
+const getProductLink = (id, name, model_number) => {
+  // Replace spaces with dashes
+  let transformedName = name.replace(/ /g, '-');
+  // Remove consecutive dashes
+  transformedName = transformedName.replace(/-+/g, '-');
+  // Remove leading and trailing dashes
+  transformedName = transformedName.replace(/^-+|-+$/g, '');
+  // Convert to lowercase
+  transformedName = transformedName.toLowerCase();
+
+  let transformedModelNumber = model_number.toLowerCase();
+
+  return `/product/${id}/${transformedName}-${transformedModelNumber}`;
 };
 
 const getCategoryLink = (id, name, page, main_cat_parent) => {
@@ -386,6 +524,10 @@ const generateQRCode = (currentUrl) => {
   qrCodeDataUrl.value = qr.createDataURL();
 };
 
+// const renderAsRawHTML = (html) => {
+//     return { __html: html };
+// };
+
 // Initial fetch of products
 onMounted(() => {
   fetchProduct();
@@ -409,6 +551,7 @@ watch(product, () => {
 
 watchEffect(() => {
   const params = route.params; // Access the route parameters
+  const query = route.query; // Access the query parameters
 
   if (params.id !== '' && product_id.value !== params.id) {
     product_id.value = params.id ? parseInt(params.id) : 1;
@@ -453,8 +596,7 @@ watchEffect(() => {
   border-color: #c02434 !important;
 }
 
-.product-details-sheffield .btn-cart:hover span,
-.product-details-sheffield .btn-cart:focus span {
+.product-details-sheffield .btn-cart:hover span, .product-details-sheffield .btn-cart:focus span {
   color: #ffffff !important;
 }
 

@@ -29,6 +29,37 @@ $productsForSchema = $productsForSchema->merge($promotionalProducts)->unique('id
     }
 @endphp
 <!-- Enhanced Organization Schema -->
+@php
+    $promotionalProducts = [];
+    $currentProduct = null;
+    // Fetch promotional products
+    $promotionalProducts = \App\Models\Product::whereHas('productCategories', function ($query) {
+        $query->where('category_id', 371);
+    })
+        ->where('is_published', true)
+        ->with('productBrand', 'productCategories')
+        ->get();
+
+    $promoProducts = \App\Http\Resources\ProductResource::collection($promotionalProducts);
+
+    // Check if there's a current product (if on a product detail page)
+$currentProductId = request()->route('id');
+$currentProduct = $currentProductId
+    ? \App\Models\Product::with('productBrand', 'productCategories')->find($currentProductId)
+    : null;
+
+// Combine current product and promotional products
+$productsForSchema = collect();
+if ($currentProduct) {
+    $currentProduct = \App\Http\Resources\ProductResource::make($currentProduct);
+    $productsForSchema->push($currentProduct);
+}
+$productsForSchema = $productsForSchema->merge($promotionalProducts)->unique('id');
+    foreach ($productsForSchema as &$product) {
+        $product->productImages;
+    }
+@endphp
+<!-- Enhanced Organization Schema -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -110,56 +141,44 @@ $productsForSchema = $productsForSchema->merge($promotionalProducts)->unique('id
             "@type": "Offer",
             "itemOffered": {
               "@type": "Product",
-              "name": "{{ $product->name }}",
-              "description": "{{ Str::limit($product->description ?? 'Product description not available', 160) }}",
+              "name": {!! json_encode($product->name) !!},
+              "description": {!! json_encode(Str::limit($product->description ?? 'Product description not available', 160)) !!},
               "image": [
-                "{{ $product->main_image_path ? url('storage/' . $product->main_image_path) : '' }}",
+                {!! json_encode($product->main_image_path ? url('storage/' . $product->main_image_path) : '') !!},
                 @foreach($product->productImages as $image)
-                "{{ $image->name ? url('storage/' . $image->name) : '' }}"{{ !$loop->last ? ',' : '' }}
+                {!! json_encode($image->image_path ? url('storage/' . $image->image_path) : '') !!}{{ !$loop->last ? ',' : '' }}
                 @endforeach
               ],
               "brand": {
                 "@type": "Brand",
-                "name": "{{ $product->productBrand->name ?? 'Sheffield Steel Systems' }}"
+                "name": {!! json_encode($product->productBrand->name ?? 'Sheffield Steel Systems') !!}
               },
-              "category": "{{ $product->productCategories->first()->name ?? 'Uncategorized' }}",
+              "category": {!! json_encode($product->productCategories->first()->name ?? 'Uncategorized') !!},
               "review": {
                 "@type": "Review",
                 "reviewRating": {
                   "@type": "Rating",
-                  "ratingValue": "{{ $product->review_rating ?? 5 }}",
+                  "ratingValue": {!! json_encode($product->review_rating ?? 4.9) !!},
                   "bestRating": "5"
                 },
                 "author": {
                   "@type": "Person",
-                  "name": "{{ $product->review_author ?? 'Anonymous' }}"
+                  "name": {!! json_encode($product->review_author ?? 'Anonymous') !!}
                 }
               },
               "aggregateRating": {
                 "@type": "AggregateRating",
-                "ratingValue": "{{ $product->aggregate_rating ?? 4.9 }}",
-                "reviewCount": "{{ $product->review_count ?? 500 }}"
+                "ratingValue": {!! json_encode($product->aggregate_rating ?? 5) !!},
+                "reviewCount": {!! json_encode($product->review_count ?? 100) !!}
               },
               "offers": {
                 "@type": "Offer",
                 "priceCurrency": "KES",
-                "price": "{{ $product->cost_price ?? 0 }}",
-                "priceValidUntil": "{{ $product->price_valid_until ?? '2024-11-20' }}",
+                "price": {!! json_encode($product->cost_price ?? 1) !!},
+                "priceValidUntil": {!! json_encode($product->price_valid_until ?? '2024-11-20') !!},
                 "availability": "https://schema.org/InStock",
-                "url": "{{
-                    request()->is('product/' . $product->id . '/*')
-                        ? request()->url()
-                        : url('/') . '/kitchen/product/' . $product->id . '/' . Str::slug($product->name)
-                }}"
-              },
-               "hasMerchantReturnPolicy": {
-                "@type": "MerchantReturnPolicy",
-                "applicableCountry": "KE",
-                "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
-                "merchantReturnDays": 60,
-                "returnMethod": "https://schema.org/ReturnByMail",
-                "returnFees": "https://schema.org/FreeReturn"
-            }
+                "url": {!! json_encode(request()->is('product/' . $product->id . '/*') ? request()->url() : url('/') . '/kitchen/product/' . $product->id . '/' . Str::slug($product->name)) !!}
+              }
             }
           }{{ !$loop->last ? ',' : '' }}
           @endforeach
@@ -171,39 +190,39 @@ $productsForSchema = $productsForSchema->merge($promotionalProducts)->unique('id
     @foreach($productsForSchema as $product)
     {
       "@type": "Offer",
-      "name": "{{ $product->name }}",
-      "description": "{{ Str::limit($product->description ?? 'Product description not available', 160) }}",
-      "itemCondition": "https://schema.org/NewCondition",
+      "name": {!! json_encode($product->name) !!},
+      "description": {!! json_encode(Str::limit($product->description ?? 'Product description not available', 160)) !!},
       "image": [
-        "{{ $product->main_image_path ? url('storage/' . $product->main_image_path) : '' }}"
+        {!! json_encode($product->main_image_path ? url('storage/' . $product->main_image_path) : '') !!}
       ],
       "priceCurrency": "KES",
-      "price": "{{ $product->price ?? 0 }}",
-      "priceValidUntil": "{{ $product->price_valid_until ?? '2024-11-20' }}",
+      "price": {!! json_encode($product->price ?? 1) !!},
+      "priceValidUntil": {!! json_encode($product->price_valid_until ?? '2024-11-20') !!},
       "availability": "https://schema.org/InStock",
-      "url": "{{
-          request()->is('product/' . $product->id . '/*')
-              ? request()->url()
-              : url('/') . '/kitchen/product/' . $product->id . '/' . Str::slug($product->name)
-      }}",
+      "url": {!! json_encode(request()->is('product/' . $product->id . '/*') ? request()->url() : url('/') . '/kitchen/product/' . $product->id . '/' . Str::slug($product->name)) !!},
       "brand": {
         "@type": "Brand",
-        "name": "{{ $product->productBrand->name ?? 'Sheffield Steel Systems' }}"
+        "name": {!! json_encode($product->productBrand->name ?? 'Sheffield Steel Systems') !!}
       },
       "shippingDetails": {
         "@type": "OfferShippingDetails",
         "shippingRate": {
-            "@type": "MonetaryAmount",
-            "value": "0",
-            "currency": "KES"
+          "@type": "MonetaryAmount",
+          "value": {!! json_encode($product->shipping_cost ?? 1) !!},
+          "currency": "KES"
         },
-        "shippingDestination": [
-            {
-            "@type": "DefinedRegion",
-            "addressCountry": "KE",
-            }
-        ]
-    }
+        "deliveryTime": {
+          "@type": "QuantitativeValue",
+          "minValue": {!! json_encode($product->min_delivery_time ?? 1) !!},
+          "maxValue": {!! json_encode($product->max_delivery_time ?? 7) !!},
+          "unitCode": "d"
+        }
+      },
+      "hasMerchantReturnPolicy": {
+        "@type": "MerchantReturnPolicy",
+        "returnPolicyCategory": "https://schema.org/RefundTypeFull",
+        "merchantReturnDays": {!! json_encode($product->return_days ?? 30) !!}
+      }
     }{{ !$loop->last ? ',' : '' }}
     @endforeach
   ],
