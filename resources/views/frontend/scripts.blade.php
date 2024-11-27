@@ -177,7 +177,36 @@ $productsForSchema = $productsForSchema->merge($promotionalProducts)->unique('id
                 "price": {!! json_encode($product->cost_price ?? 1) !!},
                 "priceValidUntil": {!! json_encode($product->price_valid_until ?? '2024-11-20') !!},
                 "availability": "https://schema.org/InStock",
-                "url": {!! json_encode(request()->is('product/' . $product->id . '/*') ? request()->url() : url('/') . '/kitchen/product/' . $product->id . '/' . Str::slug($product->name)) !!}
+                "url": {!! json_encode(request()->is('product/' . $product->id . '/*') ? request()->url() : url('/') . '/kitchen/product/' . $product->id . '/' . Str::slug($product->name)) !!},
+                "sku": {!! json_encode($product->sku ?? 'SSS' . $product->id) !!},
+                "shippingDetails": {
+                    "@type": "OfferShippingDetails",
+                    "shippingRate": {
+                        "@type": "MonetaryAmount",
+                        "value": {!! json_encode($product->shipping_cost ?? 0) !!},
+                        "currency": "KES"
+                    },
+                    "deliveryTime": {
+                        "@type": "ShippingDeliveryTime",
+                        "handlingTime": {
+                            "@type": "QuantitativeValue",
+                            "minValue": 0,
+                            "maxValue": 1,
+                            "unitCode": "DAY"
+                        },
+                        "transitTime": {
+                            "@type": "QuantitativeValue",
+                            "minValue":  {!! json_encode($product->min_delivery_time ?? 1) !!},
+                            "maxValue": {!! json_encode($product->max_delivery_time ?? 7) !!},
+                            "unitCode": "DAY"
+                        }
+                    }
+                },
+                "hasMerchantReturnPolicy": {
+                    "@type": "MerchantReturnPolicy",
+                    "returnPolicyCategory": "https://schema.org/RefundTypeFull",
+                    "merchantReturnDays": {!! json_encode($product->return_days ?? 30) !!}
+                }
               }
             }
           }{{ !$loop->last ? ',' : '' }}
@@ -203,25 +232,6 @@ $productsForSchema = $productsForSchema->merge($promotionalProducts)->unique('id
       "brand": {
         "@type": "Brand",
         "name": {!! json_encode($product->productBrand->name ?? 'Sheffield Steel Systems') !!}
-      },
-      "shippingDetails": {
-        "@type": "OfferShippingDetails",
-        "shippingRate": {
-          "@type": "MonetaryAmount",
-          "value": {!! json_encode($product->shipping_cost ?? 0) !!},
-          "currency": "KES"
-        },
-        "deliveryTime": {
-          "@type": "QuantitativeValue",
-          "minValue": {!! json_encode($product->min_delivery_time ?? 1) !!},
-          "maxValue": {!! json_encode($product->max_delivery_time ?? 7) !!},
-          "unitCode": "d"
-        }
-      },
-      "hasMerchantReturnPolicy": {
-        "@type": "MerchantReturnPolicy",
-        "returnPolicyCategory": "https://schema.org/RefundTypeFull",
-        "merchantReturnDays": {!! json_encode($product->return_days ?? 30) !!}
       }
     }{{ !$loop->last ? ',' : '' }}
     @endforeach

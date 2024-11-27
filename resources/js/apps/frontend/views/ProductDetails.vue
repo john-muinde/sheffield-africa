@@ -311,7 +311,6 @@ const fetchProduct = async () => {
       },
     });
     product.value = response.data.data;
-    console.log(product.value);
 
     useMeta({ title: formatTextHeader(product.value.name) + ' | Product' });
   } catch (error) {
