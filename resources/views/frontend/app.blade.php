@@ -14,7 +14,7 @@
     <link rel="profile" href="https://gmpg.org/xfn/11">
 
 
-    @include('frontend.meta') <!-- Include the meta tags and schema markup -->
+    @include('frontend.meta')
 
     <!-- Favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="{{ url('favicon.png') }}">

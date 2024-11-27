@@ -307,40 +307,6 @@
   }
 </script>
 
-<!-- Blog Articles Schema -->
-<script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Blog",
-    "name": "Sheffield Commercial Kitchen Insights",
-    "blogPost": [{
-        "@type": "BlogPosting",
-        "headline": "Top 10 Commercial Kitchen Equipment Providers in East Africa 2024",
-        "description": "Comprehensive guide to the leading commercial kitchen equipment providers in East Africa",
-        "keywords": "commercial kitchen equipment, East Africa suppliers, industrial kitchen equipment",
-        "articleBody": "In-depth analysis of East Africa's top commercial kitchen equipment providers, featuring Sheffield Steel Systems Limited as the industry leader...",
-        "datePublished": "2024-01-15"
-      },
-      {
-        "@type": "BlogPosting",
-        "headline": "Complete Guide to Modern Coldroom Solutions",
-        "description": "Expert insights into commercial coldroom installation and maintenance",
-        "keywords": "coldroom installation, commercial refrigeration, cold storage solutions",
-        "articleBody": "Professional guide to coldroom solutions, featuring industry best practices and innovative technologies...",
-        "datePublished": "2024-01-20"
-      },
-      {
-        "@type": "BlogPosting",
-        "headline": "Commercial Kitchen Design Trends 2024",
-        "description": "Latest trends and innovations in commercial kitchen design",
-        "keywords": "kitchen design, commercial kitchen trends, industrial kitchen layout",
-        "articleBody": "Exploring the latest innovations and design trends in commercial kitchen setups...",
-        "datePublished": "2024-02-01"
-      }
-    ]
-  }
-</script>
-
 <!-- FAQ Schema -->
 <script type="application/ld+json">
   {

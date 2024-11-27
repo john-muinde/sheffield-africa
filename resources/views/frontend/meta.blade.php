@@ -1,26 +1,197 @@
 @php
-    // Function to clean and truncate description
-    function cleanDescription($description, $maxLength = 160)
+    use Illuminate\Support\Str;
+    use Illuminate\Support\Facades\Log;
+
+    class MetaGenerator
     {
-        // Remove HTML tags
-        $cleanText = strip_tags($description);
+        protected $supportedTypes = [
+            'blogs' => \App\Models\Blog::class,
+            'product' => \App\Models\Product::class,
+            'video' => \App\Models\Video::class,
+            'media' => [\App\Models\Blog::class, \App\Models\Video::class, \App\Models\Product::class],
+        ];
 
-        // Decode HTML entities
-        $cleanText = html_entity_decode($cleanText);
+        public function extractIdFromUrl($url)
+        {
+            $segments = parse_url($url, PHP_URL_PATH);
+            $segments = explode('/', trim($segments, '/'));
 
-        // Trim to max length
-        if (strlen($cleanText) > $maxLength) {
-            $cleanText = substr($cleanText, 0, $maxLength) . '...';
+            // Handle case where ID is the second last segment
+            $lastSegment = end($segments);
+            $secondLastSegment = prev($segments);
+            $thirdLastSegment = prev($segments);
+
+            if (is_numeric($lastSegment)) {
+                return ['type' => $thirdLastSegment, 'id' => $secondLastSegment];
+            }
+
+            foreach ($segments as $index => $segment) {
+                if (isset($this->supportedTypes[$segment])) {
+                    // Check next segment for potential ID
+                    if (isset($segments[$index + 1])) {
+                        $possibleId = $segments[$index + 1];
+
+                        // Handle URLs with hyphens or underscores
+                        if (Str::contains($possibleId, ['-', '_'])) {
+                            $extractedId = Str::before($possibleId, '-');
+                            $extractedId = Str::before($extractedId, '_');
+
+                            return is_numeric($extractedId) ? ['type' => $segment, 'id' => $extractedId] : null;
+                        }
+
+                        // Handle URLs with ID followed by name
+                        if (is_numeric($possibleId)) {
+                            return ['type' => $segment, 'id' => $possibleId];
+                        }
+                    }
+                }
+            }
+
+            return null;
         }
 
-        // Ensure no special characters break the meta tag
-        $cleanText = htmlspecialchars($cleanText, ENT_QUOTES, 'UTF-8');
+        public function findContent($extractedData)
+        {
+            $content = null;
 
-        return $cleanText;
+            if ($extractedData && isset($this->supportedTypes[$extractedData['type']])) {
+                $models = $this->supportedTypes[$extractedData['type']];
+                $modelsToCheck = is_array($models) ? $models : [$models];
+
+                foreach ($modelsToCheck as $modelClass) {
+                    try {
+                        $content = $modelClass::find($extractedData['id']);
+                        if ($content) {
+                            return [
+                                'type' => $extractedData['type'],
+                                'content' => $content,
+                            ];
+                        }
+                    } catch (\Exception $e) {
+                        Log::error('Error finding content: ' . $e->getMessage());
+                    }
+                }
+            }
+
+            return null;
+        }
+
+        public function generateMetaTags($contentData)
+        {
+            if (!$contentData) {
+                return $this->getDefaultMetaTags();
+            }
+
+            $content = $contentData['content'];
+            $type = $contentData['type'];
+
+            // Clean description method
+            $cleanDescription = function ($description, $maxLength = 160) {
+                $cleanText = strip_tags($description);
+                $cleanText = html_entity_decode($cleanText);
+
+                if (strlen($cleanText) > $maxLength) {
+                    $cleanText = substr($cleanText, 0, $maxLength) . '...';
+                }
+
+                return htmlspecialchars($cleanText, ENT_QUOTES, 'UTF-8');
+            };
+
+            // Dynamic meta tag generation based on content type
+            switch ($type) {
+                case 'blogs':
+                    return [
+                        'title' => $content->name . ' | Sheffield Steel Systems Blog',
+                        'description' => $cleanDescription($content->content),
+                        'ogTitle' => $content->name,
+                        'ogDescription' => $cleanDescription($content->content),
+                        'primaryImage' => $content->blogImages->first()
+                            ? $content->blogImages->first()->url
+                            : url('assets/images/logo.png'),
+                        'jsonLdSchema' => [
+                            '@context' => 'https://schema.org',
+                            '@type' => 'BlogPosting',
+                            'headline' => $content->name,
+                            'image' => [url('/') . $content->main_image_path],
+                            'datePublished' => $content->created_at->toIso8601String(),
+                            'dateModified' => $content->updated_at->toIso8601String(),
+                            'author' => $content->author
+                                ? [
+                                    [
+                                        '@type' => 'Person',
+                                        'name' => $content->author->name,
+                                        'url' =>
+                                            $content->author->profile_url ??
+                                            url('/author') . '/' . $content->author->id,
+                                    ],
+                                ]
+                                : [
+                                    [
+                                        '@type' => 'Organization',
+                                        'name' => 'Sheffield Steel Systems Limited',
+                                        'url' => url('/'),
+                                    ],
+                                ],
+                        ],
+                    ];
+
+                case 'product':
+                    return [
+                        'title' => $content->name . ' | Sheffield Steel Systems',
+                        'description' => $cleanDescription($content->description ?? ''),
+                        'ogTitle' => $content->name . ' - Sheffield Steel Systems',
+                        'ogDescription' => $cleanDescription($content->description ?? ''),
+                        'primaryImage' => $content->main_image_path
+                            ? $content->productImages->first()->url
+                            : url('assets/images/logo.png'),
+                        'jsonLdSchema' => null,
+                    ];
+
+                case 'video':
+                    return [
+                        'title' => $content->title . ' | Sheffield Steel Systems',
+                        'description' => $cleanDescription($content->description ?? ''),
+                        'ogTitle' => $content->title . ' - Sheffield Steel Systems',
+                        'ogDescription' => $cleanDescription($content->description ?? ''),
+                        'primaryImage' => $content->thumbnail ? $content->thumbnail : url('assets/images/logo.png'),
+                        'jsonLdSchema' => [
+                            '@context' => 'https://schema.org',
+                            '@type' => 'VideoObject',
+                            'name' => $content->title,
+                            'description' => $content->description,
+                            'thumbnailUrl' => $content->thumbnail ?? url('assets/images/logo.png'),
+                            'uploadDate' => $content->created_at->toIso8601String(),
+                        ],
+                    ];
+
+                default:
+                    return $this->getDefaultMetaTags();
+            }
+        }
+
+        public function getDefaultMetaTags()
+        {
+            return [
+                'title' => 'Sheffield Steel Systems | Commercial Kitchen, Laundry & Steel Solutions',
+                'description' =>
+                    "Discover Sheffield Steel Systems, East Africa's leader in commercial kitchen equipment, laundry solutions, coldrooms, steel fabrication.",
+                'ogTitle' => 'Sheffield Steel Systems Limited - Transforming Ideas into Sustainable Realities',
+                'ogDescription' =>
+                    "East Africa's leading solution and service provider for Commercial Kitchen, commercial equipment, Laundry, and Cold Storage Solutions.",
+                'primaryImage' => url('assets/images/logo.png'),
+                'jsonLdSchema' => null,
+            ];
+        }
     }
 
+    // Initialize and use the MetaGenerator
+    $metaGenerator = new MetaGenerator();
+    $currentUrl = request()->fullUrl();
+    $extractedId = $metaGenerator->extractIdFromUrl($currentUrl);
+    $contentData = $extractedId ? $metaGenerator->findContent($extractedId) : null;
+    $metaTags = $metaGenerator->generateMetaTags($contentData);
+
     $promotionalProducts = [];
-    $currentProduct = null;
     // Fetch promotional products
     $promotionalProducts = \App\Models\Product::whereHas('productCategories', function ($query) {
         $query->where('category_id', 371);
@@ -32,10 +203,7 @@
     $promoProducts = \App\Http\Resources\ProductResource::collection($promotionalProducts);
 
     // Check if there's a current product (if on a product detail page)
-$currentProductId = request()->route('id');
-$currentProduct = $currentProductId
-    ? \App\Models\Product::with('productBrand', 'productCategories')->find($currentProductId)
-    : null;
+$currentProduct = $contentData && $contentData['type'] === 'product' ? $contentData['content'] : null;
 
 // Combine current product and promotional products
 $productsForSchema = collect();
@@ -44,42 +212,14 @@ if ($currentProduct) {
     $productsForSchema->push($currentProduct);
 }
 $productsForSchema = $productsForSchema->merge($promotionalProducts)->unique('id');
-foreach ($productsForSchema as &$product) {
-    $product->productImages;
-}
-
-// Customize meta tags based on whether a specific product is being viewed
-$metaTitle = $currentProduct
-    ? $currentProduct->name . ' | Sheffield Steel Systems'
-    : 'Sheffield Steel Systems | Commercial Kitchen, Laundry & Steel Solutions';
-
-$metaDescription = $currentProduct
-    ? 'Explore ' .
-        $currentProduct->name .
-        ' - A high-quality solution from Sheffield Steel Systems. Part of our comprehensive range of commercial kitchen, laundry, and steel equipment.'
-    : "Discover Sheffield Steel Systems, East Africa's leader in commercial kitchen equipment, laundry solutions, coldrooms, steel fabrication. Trusted by top brands.";
-
-$ogTitle = $currentProduct
-    ? $currentProduct->name . ' - Sheffield Steel Systems'
-    : 'Sheffield Steel Systems Limited - Transforming Ideas into Sustainable Realities';
-
-// Clean and truncate description
-$ogDescription = $currentProduct
-    ? ($currentProduct->description
-        ? cleanDescription($currentProduct->description)
-        : $metaDescription)
-    : "East Africa's leading solution and service provider for Commercial Kitchen, commercial equipment, Laundry, and Cold Storage Solutions, specializing in Stainless Steel Fabrication and Customization. We have served clients like Java, Big Square, Sarova, and many more.";
-
-// Prepare product images for schema and Open Graph
-$primaryImage =
-    $currentProduct && $currentProduct->productImages->first()
-        ? $currentProduct->productImages->first()->name
-        : url('assets/images/logo.png');
+    foreach ($productsForSchema as &$product) {
+        $product->productImages;
+    }
 @endphp
 
 <!-- Primary Meta Tags -->
-<title>{{ $metaTitle }}</title>
-<meta name="description" content="{{ $metaDescription }}">
+<title>{{ $metaTags['title'] }}</title>
+<meta name="description" content="{{ $metaTags['description'] }}">
 <meta name="author" content="Sheffield Steel Systems Limited">
 <meta name="designer" content="Sheffield Steel Systems Limited">
 <meta name="publisher" content="Sheffield Steel Systems Limited">
@@ -161,18 +301,18 @@ $primaryImage =
         hospital kitchen systems, school catering equipment,
         industrial facility solutions, commercial setups">
 
+
 <!-- Open Graph / Facebook -->
+<meta property="og:title" content="{{ $metaTags['ogTitle'] }}">
+<meta property="og:description" content="{{ $metaTags['ogDescription'] }}">
+<meta property="og:image" content="{{ $metaTags['primaryImage'] }}">
+<meta property="og:image:secure_url" content="{{ $metaTags['primaryImage'] }}">
 <link rel="canonical" href="{{ url()->current() }}">
 <meta property="og:locale" content="en_US">
 <meta property="og:type" content="website">
-<meta property="og:title" content="{{ $ogTitle }}">
-<meta property="og:description" content="{{ $ogDescription }}">
-
 <meta property="og:url" content="{{ url()->current() }}">
 <meta property="og:site_name" content="Sheffield Steel Systems Limited">
 <meta property="og:updated_time" content="{{ now()->toIso8601String() }}">
-<meta property="og:image" content="{{ $primaryImage }}">
-<meta property="og:image:secure_url" content="{{ $primaryImage }}">
 <meta property="og:image:width" content="1280">
 <meta property="og:image:height" content="622">
 <meta property="og:image:alt" content="Sheffield Steel Systems Limited">
@@ -180,13 +320,15 @@ $primaryImage =
 <meta property="article:published_time" content="2003-01-01T00:00:00+00:00">
 <meta property="article:modified_time" content="{{ now()->toIso8601String() }}">
 
+
+
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="{{ $ogTitle }}">
-<meta name="twitter:description" content="{{ $ogDescription }}">
+<meta name="twitter:title" content="{{ $metaTags['ogTitle'] }}">
+<meta name="twitter:description" content="{{ $metaTags['ogDescription'] }}">
+<meta name="twitter:image" content="{{ $metaTags['primaryImage'] }}">
 <meta name="twitter:site" content="@SheffieldAfrica">
 <meta name="twitter:creator" content="@SheffieldAfrica">
-<meta name="twitter:image" content="{{ $primaryImage }}">
 <meta name="twitter:label1" content="Written by">
 <meta name="twitter:data1" content="Sheffield Steel Systems Limited">
 <meta name="twitter:label2" content="Time to read">
@@ -197,5 +339,11 @@ $primaryImage =
 <meta name="geo.placename" content="Nairobi">
 <meta name="geo.position" content="-1.3553028;36.9004438">
 <meta name="ICBM" content="-1.3553028, 36.9004438">
+
+@if ($metaTags['jsonLdSchema'])
+    <script type="application/ld+json">
+{!! json_encode($metaTags['jsonLdSchema']) !!}
+</script>
+@endif
 
 @include('frontend.scripts')
