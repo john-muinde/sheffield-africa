@@ -151,7 +151,15 @@ $productsForSchema = $productsForSchema->merge($promotionalProducts)->unique('id
                         ? request()->url()
                         : url('/') . '/kitchen/product/' . $product->id . '/' . Str::slug($product->name)
                 }}"
-              }
+              },
+               "hasMerchantReturnPolicy": {
+                "@type": "MerchantReturnPolicy",
+                "applicableCountry": "KE",
+                "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+                "merchantReturnDays": 60,
+                "returnMethod": "https://schema.org/ReturnByMail",
+                "returnFees": "https://schema.org/FreeReturn"
+            }
             }
           }{{ !$loop->last ? ',' : '' }}
           @endforeach
@@ -165,6 +173,7 @@ $productsForSchema = $productsForSchema->merge($promotionalProducts)->unique('id
       "@type": "Offer",
       "name": "{{ $product->name }}",
       "description": "{{ Str::limit($product->description ?? 'Product description not available', 160) }}",
+      "itemCondition": "https://schema.org/NewCondition",
       "image": [
         "{{ $product->main_image_path ? url('storage/' . $product->main_image_path) : '' }}"
       ],
@@ -184,22 +193,17 @@ $productsForSchema = $productsForSchema->merge($promotionalProducts)->unique('id
       "shippingDetails": {
         "@type": "OfferShippingDetails",
         "shippingRate": {
-          "@type": "MonetaryAmount",
-          "value": "{{ $product->shipping_cost ?? 0 }}",
-          "currency": "KES"
+            "@type": "MonetaryAmount",
+            "value": "0",
+            "currency": "KES"
         },
-        "deliveryTime": {
-          "@type": "QuantitativeValue",
-          "minValue": "{{ $product->min_delivery_time ?? 1 }}",
-          "maxValue": "{{ $product->max_delivery_time ?? 7 }}",
-          "unitCode": "d"
-        }
-      },
-      "hasMerchantReturnPolicy": {
-        "@type": "MerchantReturnPolicy",
-        "returnPolicyCategory": "https://schema.org/RefundTypeFull",
-        "merchantReturnDays": "{{ $product->return_days ?? 30 }}"
-      }
+        "shippingDestination": [
+            {
+            "@type": "DefinedRegion",
+            "addressCountry": "KE",
+            }
+        ]
+    }
     }{{ !$loop->last ? ',' : '' }}
     @endforeach
   ],
@@ -395,7 +399,7 @@ $productsForSchema = $productsForSchema->merge($promotionalProducts)->unique('id
     "name": "Sheffield Commercial Kitchen Solutions Overview",
     "description": "Comprehensive overview of our commercial kitchen equipment and services",
     "thumbnailUrl": [
-        "https://img.youtube.com/vi/YvhZ9lOAnSc/maxresdefault.jpg",
+        "https://img.youtube.com/vi/YvhZ9lOAnSc/maxresdefault.jpg"
     ],
     "embedUrl": "https://www.youtube.com/embed/YvhZ9lOAnSc?si=YtlSNqwiWkdyi7zC",
     "uploadDate": "2021-07-12T08:00:00+03:00",
