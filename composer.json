@@ -24,6 +24,7 @@
         "wearepixel/laravel-google-shopping-feed": "^4.0"
     },
     "require-dev": {
+        "beyondcode/laravel-dump-server": "^2.0",
         "fakerphp/faker": "^1.9.1",
         "laravel/pint": "^1.0",
         "laravel/sail": "^1.18",

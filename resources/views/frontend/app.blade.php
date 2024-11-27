@@ -137,10 +137,33 @@
     <!-- Geographical Service Areas -->
     <meta name="geo.region" content="KE-30">
     <meta name="geo.placename" content="Nairobi">
-    <meta name="geo.position" content="-1.2921;36.8219">
-    <meta name="ICBM" content="-1.2921, 36.8219">
+    <meta name="geo.position" content="-1.3553028;36.9004438">
+    <meta name="ICBM" content="-1.3553028, 36.9004438">
 
+    @php
+        $promotionalProducts = [];
+        $currentProduct = null;
+        // Fetch promotional products
+        $promotionalProducts = \App\Models\Product::whereHas('productCategories', function ($query) {
+            $query->where('category_id', 371);
+        })
+            ->where('is_published', true)
+            ->with('productBrand', 'productCategories')
+            ->get();
 
+        // Check if there's a current product (if on a product detail page)
+$currentProductId = request()->route('id');
+$currentProduct = $currentProductId
+    ? \App\Models\Product::with('productBrand', 'productCategories')->find($currentProductId)
+    : null;
+
+// Combine current product and promotional products
+$productsForSchema = collect();
+if ($currentProduct) {
+    $productsForSchema->push($currentProduct);
+}
+$productsForSchema = $productsForSchema->merge($promotionalProducts)->unique('id');
+    @endphp
     <!-- Enhanced Organization Schema -->
     <script type="application/ld+json">
     {
@@ -162,8 +185,8 @@
           "@type": "GeoCircle",
           "geoMidpoint": {
             "@type": "GeoCoordinates",
-            "latitude": "-1.2921",
-            "longitude": "36.8219"
+            "latitude": "-1.3553028",
+            "longitude": "36.9004438"
           },
           "geoRadius": "3000",
           "description": "East Africa Region"
@@ -185,6 +208,13 @@
         "Industrial Refrigeration Systems",
         "Stainless Steel Fabrication",
         "Commercial Laundry Solutions",
+        "Coldroom Installation",
+        "Custom Metalwork",
+        "Kitchen Consultancy",
+        "Project Management",
+        "Maintenance Services",
+        "Commercial Kitchen",
+        "Laundry Equipment",
         "Cold Storage Systems",
         "Industrial Kitchen Design",
         "Commercial Kitchen Maintenance",
@@ -204,49 +234,64 @@
         "Project Consultancy"
       ],
       "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Commercial Solutions Catalog",
+    "itemListElement": [
+      {
         "@type": "OfferCatalog",
-        "name": "Commercial Solutions Catalog",
+        "name": "Commercial Products",
         "itemListElement": [
+          @foreach($productsForSchema as $product)
           {
-            "@type": "OfferCatalog",
-            "name": "Commercial Kitchen Equipment",
-            "itemListElement": [
-              {
-                "@type": "Offer",
-                "itemOffered": {
-                  "@type": "Product",
-                  "name": "Commercial Kitchen Design and Installation",
-                  "description": "Complete kitchen solutions from design to installation"
-                }
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Product",
+              "name": "{{ $product->name }}",
+              "description": "{{ Str::limit($product->description ?? 'Product description not available', 160) }}",
+              "brand": {
+                "@type": "Brand",
+                "name": "{{ $product->productBrand->name ?? 'Sheffield Steel Systems' }}"
               },
-              {
+              "category": "{{ $product->productCategories->first()->name ?? 'Uncategorized' }}",
+              "offers": {
                 "@type": "Offer",
-                "itemOffered": {
-                  "@type": "Product",
-                  "name": "Industrial Refrigeration Systems",
-                  "description": "Professional coldroom and refrigeration solutions"
-                }
-              },
-              {
-                "@type": "Offer",
-                "itemOffered": {
-                  "@type": "Product",
-                  "name": "Custom Stainless Steel Fabrication",
-                  "description": "Bespoke stainless steel solutions for commercial needs"
-                }
-              },
-              {
-                "@type": "Offer",
-                "itemOffered": {
-                  "@type": "Product",
-                  "name": "Commercial Laundry Equipment",
-                  "description": "Industrial laundry solutions for businesses"
-                }
+                "priceCurrency": "KES",
+                "price": "{{ $product->cost_price ?? 0 }}",
+                "availability": "https://schema.org/InStock",
+                "url": "{{
+                    request()->is('product/' . $product->id . '/*')
+                        ? request()->url()
+                        : url('/') . '/kitchen/product/' . $product->id . '/' . Str::slug($product->name)
+                }}"
               }
-            ]
-          }
+            }
+          }{{ !$loop->last ? ',' : '' }}
+          @endforeach
         ]
-      },
+      }
+    ]
+  },
+  "offers": [
+        @foreach($productsForSchema as $product)
+        {
+        "@type": "Offer",
+        "name": "{{ $product->name }}",
+        "description": "{{ Str::limit($product->description ?? 'Product description not available', 160) }}",
+        "priceCurrency": "KES",
+        "price": "{{ $product->price ?? 0 }}",
+        "availability": "https://schema.org/InStock",
+        "url": "{{
+            request()->is('product/' . $product->id . '/*')
+                ? request()->url()
+                : url('/') . '/kitchen/product/' . $product->id . '/' . Str::slug($product->name)
+        }}",
+        "brand": {
+            "@type": "Brand",
+            "name": "{{ $product->productBrand->name ?? 'Sheffield Steel Systems' }}"
+        }
+        }{{ !$loop->last ? ',' : '' }}
+        @endforeach
+    ],
       "brand": {
         "@type": "Brand",
         "name": "Sheffield Steel Systems",
@@ -439,9 +484,9 @@
       "@type": "VideoObject",
       "name": "Sheffield Commercial Kitchen Solutions Overview",
       "description": "Comprehensive overview of our commercial kitchen equipment and services",
-      "thumbnailUrl": "https://www.sheffieldafrica.com/videos/thumbnail.jpg",
-      "uploadDate": "2024-01-01",
-      "duration": "PT2M30S"
+      "thumbnailUrl": "https://www.youtube.com/watch?v=YvhZ9lOAnSc&",
+      "uploadDate": "2021-07-12",
+      "duration": "PT2M23S"
     }
     </script>
     <!-- Favicon -->
