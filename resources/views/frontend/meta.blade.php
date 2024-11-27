@@ -202,10 +202,6 @@
 
     $promoProducts = \App\Http\Resources\ProductResource::collection($promotionalProducts);
 
-    echo '<pre>';
-    print_r($contentData);
-    echo '</pre>';
-
     // Check if there's a current product (if on a product detail page)
 $currentProduct = $contentData && $contentData['type'] === 'product' ? $contentData['content'] : null;
 
