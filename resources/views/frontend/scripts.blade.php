@@ -181,6 +181,10 @@ $productsForSchema = $productsForSchema->merge($promotionalProducts)->unique('id
                 "sku": {!! json_encode($product->sku ?? 'SSS' . $product->id) !!},
                 "shippingDetails": {
                     "@type": "OfferShippingDetails",
+                    "shippingDestination": {
+                        "@type": "DefinedRegion",
+                        "addressCountry": "KE"
+                    },
                     "shippingRate": {
                         "@type": "MonetaryAmount",
                         "value": {!! json_encode($product->shipping_cost ?? 0) !!},
@@ -204,8 +208,11 @@ $productsForSchema = $productsForSchema->merge($promotionalProducts)->unique('id
                 },
                 "hasMerchantReturnPolicy": {
                     "@type": "MerchantReturnPolicy",
-                    "returnPolicyCategory": "https://schema.org/RefundTypeFull",
-                    "merchantReturnDays": {!! json_encode($product->return_days ?? 30) !!}
+                    "applicableCountry": "KE",
+                    "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+                    "merchantReturnDays": 60,
+                    "returnMethod": "https://schema.org/ReturnByMail",
+                    "returnFees": "https://schema.org/FreeReturn"
                 }
               }
             }
