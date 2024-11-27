@@ -1,64 +1,3 @@
-@php
-    $promotionalProducts = [];
-    $currentProduct = null;
-    // Fetch promotional products
-    $promotionalProducts = \App\Models\Product::whereHas('productCategories', function ($query) {
-        $query->where('category_id', 371);
-    })
-        ->where('is_published', true)
-        ->with('productBrand', 'productCategories')
-        ->get();
-
-    $promoProducts = \App\Http\Resources\ProductResource::collection($promotionalProducts);
-
-    // Check if there's a current product (if on a product detail page)
-$currentProductId = request()->route('id');
-$currentProduct = $currentProductId
-    ? \App\Models\Product::with('productBrand', 'productCategories')->find($currentProductId)
-    : null;
-
-// Combine current product and promotional products
-$productsForSchema = collect();
-if ($currentProduct) {
-    $currentProduct = \App\Http\Resources\ProductResource::make($currentProduct);
-    $productsForSchema->push($currentProduct);
-}
-$productsForSchema = $productsForSchema->merge($promotionalProducts)->unique('id');
-    foreach ($productsForSchema as &$product) {
-        $product->productImages;
-    }
-@endphp
-<!-- Enhanced Organization Schema -->
-@php
-    $promotionalProducts = [];
-    $currentProduct = null;
-    // Fetch promotional products
-    $promotionalProducts = \App\Models\Product::whereHas('productCategories', function ($query) {
-        $query->where('category_id', 371);
-    })
-        ->where('is_published', true)
-        ->with('productBrand', 'productCategories')
-        ->get();
-
-    $promoProducts = \App\Http\Resources\ProductResource::collection($promotionalProducts);
-
-    // Check if there's a current product (if on a product detail page)
-$currentProductId = request()->route('id');
-$currentProduct = $currentProductId
-    ? \App\Models\Product::with('productBrand', 'productCategories')->find($currentProductId)
-    : null;
-
-// Combine current product and promotional products
-$productsForSchema = collect();
-if ($currentProduct) {
-    $currentProduct = \App\Http\Resources\ProductResource::make($currentProduct);
-    $productsForSchema->push($currentProduct);
-}
-$productsForSchema = $productsForSchema->merge($promotionalProducts)->unique('id');
-    foreach ($productsForSchema as &$product) {
-        $product->productImages;
-    }
-@endphp
 <!-- Enhanced Organization Schema -->
 <script type="application/ld+json">
 {
@@ -146,7 +85,7 @@ $productsForSchema = $productsForSchema->merge($promotionalProducts)->unique('id
               "image": [
                 {!! json_encode($product->main_image_path ? url('storage/' . $product->main_image_path) : '') !!},
                 @foreach($product->productImages as $image)
-                {!! json_encode($image->image_path ? url('storage/' . $image->image_path) : '') !!}{{ !$loop->last ? ',' : '' }}
+                {!! json_encode($image->name ? url('storage/' . $image->name) : '') !!}{{ !$loop->last ? ',' : '' }}
                 @endforeach
               ],
               "brand": {
@@ -158,7 +97,7 @@ $productsForSchema = $productsForSchema->merge($promotionalProducts)->unique('id
                 "@type": "Review",
                 "reviewRating": {
                   "@type": "Rating",
-                  "ratingValue": {!! json_encode($product->review_rating ?? 4.9) !!},
+                  "ratingValue": {{$product->review_rating ?? 4.9}},
                   "bestRating": "5"
                 },
                 "author": {
@@ -168,8 +107,8 @@ $productsForSchema = $productsForSchema->merge($promotionalProducts)->unique('id
               },
               "aggregateRating": {
                 "@type": "AggregateRating",
-                "ratingValue": {!! json_encode($product->aggregate_rating ?? 5) !!},
-                "reviewCount": {!! json_encode($product->review_count ?? 100) !!}
+                "ratingValue": {{ $product->review_rating ?? 4.9 }},
+                "reviewCount": {{ $product->review_count ?? 100 }}
               },
               "offers": {
                 "@type": "Offer",
