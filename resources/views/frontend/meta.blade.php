@@ -105,14 +105,14 @@
                         'description' => $cleanDescription($content->content),
                         'ogTitle' => $content->name,
                         'ogDescription' => $cleanDescription($content->content),
-                        'primaryImage' => $content->blogImages->first()
-                            ? $content->blogImages->first()->url
+                        'primaryImage' => $content->main_image_path
+                            ? url('storage/' . $content->main_image_path)
                             : url('assets/images/logo.png'),
                         'jsonLdSchema' => [
                             '@context' => 'https://schema.org',
                             '@type' => 'BlogPosting',
                             'headline' => $content->name,
-                            'image' => [url('/') . $content->main_image_path],
+                            'image' => [url('storage/' . $content->main_image_path)],
                             'datePublished' => $content->created_at->toIso8601String(),
                             'dateModified' => $content->updated_at->toIso8601String(),
                             'author' => $content->author
@@ -142,7 +142,7 @@
                         'ogTitle' => $content->name . ' - Sheffield Steel Systems',
                         'ogDescription' => $cleanDescription($content->description ?? ''),
                         'primaryImage' => $content->main_image_path
-                            ? $content->productImages->first()->url
+                            ? url('storage/' . $content->main_image_path)
                             : url('assets/images/logo.png'),
                         'jsonLdSchema' => null,
                     ];
@@ -201,6 +201,10 @@
         ->get();
 
     $promoProducts = \App\Http\Resources\ProductResource::collection($promotionalProducts);
+
+    echo '<pre>';
+    print_r($contentData);
+    echo '</pre>';
 
     // Check if there's a current product (if on a product detail page)
 $currentProduct = $contentData && $contentData['type'] === 'product' ? $contentData['content'] : null;
