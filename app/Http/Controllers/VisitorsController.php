@@ -25,10 +25,9 @@ class VisitorsController extends Controller
         ]);
 
         if ($validate->fails()) {
-            return [
-                'status' => 'error',
-                'message' => 'Tracking ID is required',
-            ];
+            header('Content-type: image/gif');
+            echo base64_decode('R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==');
+            return;
         }
 
         $agent = new Agent();
@@ -59,9 +58,7 @@ class VisitorsController extends Controller
 
         Visitors::create($newData);
 
-        return [
-            'status' => 'success',
-            'message' => 'Tracking ID is valid',
-        ];
+        header('Content-type: image/gif');
+        echo base64_decode('R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==');
     }
 }
