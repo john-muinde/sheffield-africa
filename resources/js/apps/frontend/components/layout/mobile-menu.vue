@@ -1,3 +1,4 @@
+<!-- eslint-disable no-console -->
 <template>
   <!-- Mobile Menu -->
   <div class="mobile-menu-overlay" @click="closeMenu"></div>
@@ -44,22 +45,23 @@
           <nav class="mobile-nav">
             <ul class="mobile-menu">
               <li class="active">
-                <router-link to="/" @click.native="closeMenu">
+                <router-link to="/" @click="closeMenu">
                   Home
                 </router-link>
               </li>
               <li>
-                <router-link to="/commercial-kitchen">
+                <router-link to="/commercial-kitchen" class="sf-with-ul">
                   Kitchen
+                  <i class="icon-chevron-down" @click="toggleSubMenu($event)"></i>
                 </router-link>
-                <ul>
+                <ul class="submenu">
                   <li v-for="category in mainKitchenCategories" :key="category.id">
                     <router-link
                       :to="getKitchenCategoryLink(
                         category.id,
                         category.name
                       )"
-                      @click.native="closeMenu"
+                      @click="closeMenu"
                     >
                       {{ category.name }}
                     </router-link>
@@ -70,15 +72,16 @@
               <li>
                 <router-link to="/laundry" class="sf-with-ul">
                   LAUNDRY & FLOOR CLEANING
+                  <i class="icon-chevron-down" @click="toggleSubMenu($event)"></i>
                 </router-link>
-                <ul>
+                <ul class="submenu">
                   <li v-for="category in mainLaundryCategories" :key="category.id">
                     <router-link
                       :to="getLaundryCategoryLink(
                         category.id,
                         category.name
                       )"
-                      @click.native="closeMenu"
+                      @click="closeMenu"
                     >
                       {{ category.name }}
                     </router-link>
@@ -89,15 +92,16 @@
               <li>
                 <router-link to="/cold-storage" class="sf-with-ul">
                   Cold Storage
+                  <i class="icon-chevron-down" @click="toggleSubMenu($event)"></i>
                 </router-link>
-                <ul>
+                <ul class="submenu">
                   <li v-for="category in mainColdRoomCategories" :key="category.id">
                     <router-link
                       :to="getColdRoomCategoryLink(
                         category.id,
                         category.name
                       )"
-                      @click.native="closeMenu"
+                      @click="closeMenu"
                     >
                       {{ category.name }}
                     </router-link>
@@ -106,17 +110,18 @@
               </li>
 
               <li>
-                <router-link to="/promotional-solutions">
+                <router-link to="/promotional-solutions" class="sf-with-ul">
                   Promotions
+                  <i class="icon-chevron-down" @click="toggleSubMenu($event)"></i>
                 </router-link>
-                <ul>
+                <ul class="submenu">
                   <li v-for="category in mainPromotionalCategories" :key="category.id">
                     <router-link
                       :to="getPromotionalCategoryLink(
                         category.id,
                         category.name
                       )"
-                      @click.native="closeMenu"
+                      @click="closeMenu"
                     >
                       {{ category.name }}
                     </router-link>
@@ -125,54 +130,50 @@
               </li>
 
               <li>
-                <router-link to="/consultancy-and-design" class="sf-with-ul" @click.native="closeMenu">
+                <router-link to="/consultancy-and-design" class="sf-with-ul" @click="closeMenu">
                   Consultancy & Design
                 </router-link>
               </li>
               <li>
-                <router-link to="/about-us" class="sf-with-ul" @click.native="closeMenu">
+                <router-link to="/about-us" class="sf-with-ul" @click="closeMenu">
                   About Us
                 </router-link>
               </li>
 
               <li>
-                <router-link
-                  to="/about-us/sheffield-advantage"
-                  class="sf-with-ul"
-                  @click.native="closeMenu"
-                >
+                <router-link to="/about-us/sheffield-advantage" class="sf-with-ul" @click="closeMenu">
                   Sheffield
                   Advantages
                 </router-link>
               </li>
               <li>
-                <router-link to="/projects" class="sf-with-ul" @click.native="closeMenu">
+                <router-link to="/projects" class="sf-with-ul" @click="closeMenu">
                   Project References
                 </router-link>
               </li>
 
               <li>
-                <router-link to="/events" class="sf-with-ul" @click.native="closeMenu">
+                <router-link to="/events" class="sf-with-ul" @click="closeMenu">
                   Events
                 </router-link>
               </li>
               <li>
-                <router-link to="/careers" class="sf-with-ul" @click.native="closeMenu">
+                <router-link to="/careers" class="sf-with-ul" @click="closeMenu">
                   Careers
                 </router-link>
               </li>
               <li>
-                <router-link to="/faq" class="sf-with-ul" @click.native="closeMenu">
+                <router-link to="/faq" class="sf-with-ul" @click="closeMenu">
                   FAQ
                 </router-link>
               </li>
               <li>
-                <router-link to="/media" class="sf-with-ul" @click.native="closeMenu">
+                <router-link to="/media" class="sf-with-ul" @click="closeMenu">
                   Media Center
                 </router-link>
               </li>
               <li>
-                <router-link to="/contact-us" class="sf-with-ul" @click.native="closeMenu">
+                <router-link to="/contact-us" class="sf-with-ul" @click="closeMenu">
                   Contact us
                 </router-link>
               </li>
@@ -190,17 +191,18 @@
           <nav class="mobile-cats-nav">
             <ul class="mobile-menu">
               <li>
-                <router-link to="/commercial-kitchen">
+                <router-link to="/commercial-kitchen" class="sf-with-ul">
                   KITCHEN SOLUTIONS
+                  <i class="icon-chevron-down" @click="toggleSubMenu($event)"></i>
                 </router-link>
-                <ul>
+                <ul class="submenu">
                   <li v-for="solution in mainKitchenSolutions" :key="solution.id">
                     <router-link
                       :to="getSolutionKitchenLink(
                         solution.id,
                         solution.name
                       )"
-                      @click.native="closeMenu"
+                      @click="closeMenu"
                     >
                       {{ solution.name }}
                     </router-link>
@@ -209,17 +211,18 @@
               </li>
 
               <li>
-                <router-link to="/laundry">
+                <router-link to="/laundry" class="sf-with-ul">
                   LAUNDRY & FLOOR CLEANING SOLUTIONS
+                  <i class="icon-chevron-down" @click="toggleSubMenu($event)"></i>
                 </router-link>
-                <ul>
+                <ul class="submenu">
                   <li v-for="solution in mainLaundrySolutions" :key="solution.id">
                     <router-link
                       :to="getSolutionLaundryLink(
                         solution.id,
                         solution.name
                       )"
-                      @click.native="closeMenu"
+                      @click="closeMenu"
                     >
                       {{ solution.name }}
                     </router-link>
@@ -228,17 +231,18 @@
               </li>
 
               <li>
-                <router-link to="/cold-storage">
+                <router-link to="/cold-storage" class="sf-with-ul">
                   COLD STORAGE SOLUTIONS
+                  <i class="icon-chevron-down" @click="toggleSubMenu($event)"></i>
                 </router-link>
-                <ul>
+                <ul class="submenu">
                   <li v-for="solution in mainColdRoomSolutions" :key="solution.id">
                     <router-link
                       :to="getSolutionColdRoomLink(
                         solution.id,
                         solution.name
                       )"
-                      @click.native="closeMenu"
+                      @click="closeMenu"
                     >
                       {{ solution.name }}
                     </router-link>
@@ -247,17 +251,18 @@
               </li>
 
               <li>
-                <router-link to="/promotional-solutions">
+                <router-link to="/promotional-solutions" class="sf-with-ul">
                   PROMOTIONAL SOLUTIONS
+                  <i class="icon-chevron-down" @click="toggleSubMenu($event)"></i>
                 </router-link>
-                <ul>
+                <ul class="submenu">
                   <li v-for="solution in mainPromotionalSolutions" :key="solution.id">
                     <router-link
                       :to="getSolutionPromotionalLink(
                         solution.id,
                         solution.name
                       )"
-                      @click.native="closeMenu"
+                      @click="closeMenu"
                     >
                       {{ solution.name }}
                     </router-link>

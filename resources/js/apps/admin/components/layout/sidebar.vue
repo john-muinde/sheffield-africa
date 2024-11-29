@@ -8,7 +8,7 @@
     <nav
       id="sidebar"
       class="overflow-y-auto"
-      style="height: 82vh !important; scrollbar-width: none; overflow-x: hidden; z-index: 1035;"
+      style="height: 82vh !important; scrollbar-width: none; overflow-x: hidden; z-index: 1035"
     >
       <perfect-scrollbar class="menu-categories mb-4" tag="div">
         <div v-for="(item, index) in menuItems" :key="index" class="menu">

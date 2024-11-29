@@ -131,7 +131,7 @@
               </div>
               <!-- End .cart-product -->
               <div class="dropdown-cart-action">
-                <router-link to="/request-for-quote" class="btn btn-primary mt-2 float-right">
+                <router-link to="/request-for-quote" class="btn btn-primary mt-2 float-right quote-btn" style="color:white">
                   Request for Quote
                 </router-link>
               </div>
@@ -632,9 +632,12 @@ const viewProduct = (route = null) => {
 };
 </script>
 
-
-
 <style>
+
+.header-6 .btn-primary:hover, .header-6 .btn-primary:focus, .header-6 .btn-primary.focus, .header-6 .btn-primary:not(:disabled):not(.disabled):active, .header-6 .btn-primary:not(:disabled):not(.disabled).active, .header-6 .show > .btn-primary.dropdown-toggle {
+    border-color: black;
+    background-color: #007bff;
+}
 /* Swiper Navigation Enhancements */
 .swiper-button-next,
 .swiper-button-prev {
