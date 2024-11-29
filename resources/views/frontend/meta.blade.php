@@ -173,8 +173,8 @@
         {
             return [
                 'title' => 'Sheffield Steel Systems | Commercial Kitchen, Laundry & Steel Solutions',
-                'description' =>
-                    "Discover Sheffield Steel Systems, East Africa's leader in commercial kitchen equipment, laundry solutions, coldrooms, steel fabrication.",
+                'description' => "Discover Sheffield Steel Systems, East Africa's leader in commercial kitchen equipment, laundry solutions,
+                    coldrooms, steel fabrication.",
                 'ogTitle' => 'Sheffield Steel Systems Limited - Transforming Ideas into Sustainable Realities',
                 'ogDescription' =>
                     "East Africa's leading solution and service provider for Commercial Kitchen, commercial equipment, Laundry, and Cold Storage Solutions.",
@@ -191,27 +191,23 @@
     $contentData = $extractedId ? $metaGenerator->findContent($extractedId) : null;
     $metaTags = $metaGenerator->generateMetaTags($contentData);
 
+    $productsForSchema = collect();
     $promotionalProducts = [];
-    // Fetch promotional products
-    $promotionalProducts = \App\Models\Product::whereHas('productCategories', function ($query) {
-        $query->where('category_id', 371);
-    })
-        ->where('is_published', true)
-        ->with('productBrand', 'productCategories')
-        ->get();
 
-    $promoProducts = \App\Http\Resources\ProductResource::collection($promotionalProducts);
+    $currentProduct = $contentData && $contentData['type'] === 'product' ? $contentData['content'] : null;
 
-    // Check if there's a current product (if on a product detail page)
-$currentProduct = $contentData && $contentData['type'] === 'product' ? $contentData['content'] : null;
-
-// Combine current product and promotional products
-$productsForSchema = collect();
-if ($currentProduct) {
-    $currentProduct = \App\Http\Resources\ProductResource::make($currentProduct);
-    $productsForSchema->push($currentProduct);
-}
-$productsForSchema = $productsForSchema->merge($promotionalProducts)->unique('id');
+    if ($currentProduct) {
+        $currentProduct = \App\Http\Resources\ProductResource::make($currentProduct);
+        $productsForSchema->push($currentProduct);
+    } else {
+        $promotionalProducts = \App\Models\Product::whereHas('productCategories', function ($query) {
+            $query->where('category_id', 371);
+        })
+            ->where('is_published', true)
+            ->with('productBrand', 'productCategories')
+            ->get();
+        $productsForSchema = $productsForSchema->merge($promotionalProducts)->unique('id');
+    }
     foreach ($productsForSchema as &$product) {
         $product->productImages;
     }
@@ -342,8 +338,11 @@ $productsForSchema = $productsForSchema->merge($promotionalProducts)->unique('id
 
 @if ($metaTags['jsonLdSchema'])
     <script type="application/ld+json">
-{!! json_encode($metaTags['jsonLdSchema']) !!}
+{
+    !!json_encode($metaTags['jsonLdSchema']) !!
+}
 </script>
 @endif
+
 
 @include('frontend.scripts')

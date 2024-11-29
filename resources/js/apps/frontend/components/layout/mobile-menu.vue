@@ -136,7 +136,11 @@
               </li>
 
               <li>
-                <router-link to="/about-us/sheffield-advantage" class="sf-with-ul" @click.native="closeMenu">
+                <router-link
+                  to="/about-us/sheffield-advantage"
+                  class="sf-with-ul"
+                  @click.native="closeMenu"
+                >
                   Sheffield
                   Advantages
                 </router-link>
@@ -457,11 +461,15 @@ const isMenuActive = ref(false);
 const toggleMenu = () => {
     isMenuActive.value = !isMenuActive.value;
     document.body.classList.toggle('mmenu-active', isMenuActive.value);
+    const targetElement = document.querySelector('.the_main_div');
+    targetElement.classList.toggle('mmenu-active');
 };
 
 const closeMenu = () => {
     isMenuActive.value = false;
     document.body.classList.remove('mmenu-active');
+    const targetElement = document.querySelector('.the_main_div');
+    targetElement.classList.remove('mmenu-active');
 };
 
 onMounted(() => {
