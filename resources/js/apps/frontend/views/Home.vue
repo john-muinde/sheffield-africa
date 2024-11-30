@@ -354,7 +354,7 @@
     <div class="popup-advert">
       <div class="popup-content">
         <img
-          src="/assets/images/events/Showroom Bonanza_Pizzeria Solutions Promotion-01.webp"
+          src="/assets/images/events/Rational Live 11 Dec.jpg"
           alt="Rotobake Ovens Solutions"
           class="popup-image"
           style="width: 100%; min-height: 480px"
@@ -365,7 +365,7 @@
           </button>
           <button
             class="btn btn-secondary btn-footer col-4"
-            @click="viewProduct('/promotional-solutions/371/nov-1-nov-31-2024-promotions')"
+            @click="viewProduct()"
           >
             View
           </button>
@@ -406,7 +406,6 @@ useMeta({
 import CartComponent from '../components/layout/CartComponent.vue';
 
 const router = useRouter();
-
 
 const getProductLink = (id, name, model_number, main_second_parent_cat) => {
     const firstPart = main_second_parent_cat?.split('/')[0];
@@ -570,7 +569,7 @@ const viewProduct = (route = null) => {
     router.push(route);
     return;
   }
-  window.open('https://forms.gle/as8SvN2SNTKxSbKA9', '_blank');
+  window.open('https://forms.gle/Z36CZ1AnM6PVzNqv7', '_blank');
 };
 </script>
 
