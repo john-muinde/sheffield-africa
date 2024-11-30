@@ -72,8 +72,8 @@ const menuItems = ref([
         title: 'Dashboard',
         icon: PresentationChartBarIcon,
         subItems: [
-            { title: 'Sales', route: '/admin' },
-            { title: 'Analytics', route: '/admin/analytics' },
+            { title: 'Analytics', route: '/admin' },
+            // { title: 'Analytics', route: '/admin/analytics' },
         ],
     },
     {

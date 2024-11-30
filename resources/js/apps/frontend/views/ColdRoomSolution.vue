@@ -122,7 +122,7 @@
                                        class="btn-product-icon btn-compare" title="Compare" ><span>Compare</span></a> -->
                       </div>
                       <!-- End .product-action-vertical -->
-                      <div class="product-action">
+                      <div class="product-action" :disabled="!product">
                         <button
                           type="button"
                           class="btn-product btn-cart"

@@ -256,20 +256,22 @@ class UserController extends Controller
         if (!$responseData['success']) {
             return response()->json(['message' => 'reCAPTCHA verification failed', 'status' => 'error']);
         } else {
-            $formData = $request->only([
-                'surname',
-                'email',
-                'company_name',
-                'business_type',
-                'country',
-                'location',
-                'code',
-                'firstname',
-                'phone_number',
-                'shipping',
-                'installation',
-                'cartItems'
+            $formData = $request->validate([
+                'surname' => 'required|string|max:255',
+                'email' => 'required|email|max:255',
+                'company_name' => 'required|string|max:255',
+                'country' => 'required|string|max:255',
+                'location' => 'required|string|max:255',
+                'firstname' => 'required|string|max:255',
+                'phone_number' => 'required|string|max:20',
+                'shipping' => 'required|string|max:255',
+                'installation' => 'required|string|max:255',
+                'cartItems' => 'required|string',
             ]);
+
+            if (empty($formData['code'])) {
+                $formData['code'] = explode(' ', $formData['phone_number'])[0];
+            }
 
             $formData['cartItems'] = json_decode($formData['cartItems'], true);
 

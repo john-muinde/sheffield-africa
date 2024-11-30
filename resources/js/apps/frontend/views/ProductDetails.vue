@@ -168,7 +168,13 @@
                 </div>
 
                 <div class="product-details-action product-details-sheffield mt-2">
-                  <button type="button" class="btn-product btn-cart" @click="addToCart(product)">
+                  <button
+                    type="button"
+                    class="btn-product btn-cart"
+                    :class="{ 'disabled cursor-not-allowed': !product.id }"
+                    :disabled="!product.id"
+                    @click="addToCart(product)"
+                  >
                     <span>Add to Cart</span>
                   </button>
                 </div>

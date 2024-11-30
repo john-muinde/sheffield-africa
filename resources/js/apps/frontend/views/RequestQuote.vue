@@ -1,18 +1,6 @@
 <template>
   <div class="page-wrapper">
     <main class="main">
-      <!-- <div
-        class="page-header text-center"
-        style="background-image: url('../assets/images/page-header-bg.jpg')"
-      >
-        <div class="container">
-          <h1 class="page-title">Shopping Cart<span>Shop</span></h1>
-        </div>
-
-      </div> -->
-
-      <!-- End .breadcrumb-nav -->
-
       <div class="page-content">
         <div class="cart">
           <div class="container">
@@ -27,8 +15,10 @@
                 </p>
               </div>
 
-              <form class="row " @submit.prevent="submitForm">
-                <div class="offset-lg-1 col-lg-6 mb-3 mr-2 mb-lg-0 contact-form-div request-quote-contact-div ">
+              <form class="row" @submit.prevent="submitForm">
+                <div
+                  class="offset-lg-1 col-lg-6 mb-3 mr-2 mb-lg-0 contact-form-div request-quote-contact-div"
+                >
                   <div class="row">
                     <div class="col-sm-12">
                       <label for="cname" class="label-contact">First Name *</label>
@@ -39,8 +29,12 @@
                         class="form-control"
                         name="firstname"
                         placeholder="Please enter your first name"
-                        required
                       />
+                      <div class="mt-1 text-danger">
+                        <div v-for="message in validationErrors.firstname" :key="message">
+                          {{ message }}
+                        </div>
+                      </div>
                     </div>
 
                     <div class="col-sm-12">
@@ -52,21 +46,29 @@
                         class="form-control"
                         name="surname"
                         placeholder="Please enter your surname"
-                        required
                       />
+                      <div class="mt-1 text-danger">
+                        <div v-for="message in validationErrors?.surname" :key="message">
+                          {{ message }}
+                        </div>
+                      </div>
                     </div>
 
                     <div class="col-sm-12">
                       <label for="cname" class="label-contact">Phone Number *</label>
                       <div class="input-group">
                         <vue-tel-input
-                          v-model="contact.phone"
+                          v-model="contact.phone_number"
                           mode="international"
                           default-country="KE"
                           :valid-characters-only="true"
                           class="w-full"
-                          @validate="onPhoneValidate"
                         />
+                        <div class="mt-1 text-danger">
+                          <div v-for="message in validationErrors?.phone_number" :key="message">
+                            {{ message }}
+                          </div>
+                        </div>
                       </div>
                     </div>
 
@@ -79,8 +81,12 @@
                         class="form-control"
                         name="email"
                         placeholder="Please enter your email"
-                        required
                       />
+                      <div class="mt-1 text-danger">
+                        <div v-for="message in validationErrors?.email" :key="message">
+                          {{ message }}
+                        </div>
+                      </div>
                     </div>
 
                     <div class="col-sm-12">
@@ -92,8 +98,12 @@
                         class="form-control"
                         name="company_name"
                         placeholder="Please enter your company name"
-                        required
                       />
+                      <div class="mt-1 text-danger">
+                        <div v-for="message in validationErrors?.company_name" :key="message">
+                          {{ message }}
+                        </div>
+                      </div>
                     </div>
 
                     <div class="col-sm-12">
@@ -101,7 +111,7 @@
 
                       <multiselect
                         v-model="contact.country"
-                        :reduce="country => country.code"
+                        :reduce="(country) => country.code"
                         :options="countryOptions"
                         :searchable="true"
                         placeholder="Select country"
@@ -110,7 +120,6 @@
                         selected-label=""
                         select-label=""
                         deselect-label=""
-                        required
                       >
                         <template #singleLabel="{ option }">
                           <span class="flex items-center">
@@ -125,6 +134,11 @@
                           </span>
                         </template>
                       </multiselect>
+                      <div class="mt-1 text-danger">
+                        <div v-for="message in validationErrors?.country" :key="message">
+                          {{ message }}
+                        </div>
+                      </div>
                     </div>
 
                     <div class="col-lg-12">
@@ -136,18 +150,14 @@
                         cols="30"
                         rows="4"
                         name="request"
-                        required
+
                         placeholder="Enter your location ..."
                       ></textarea>
-                    </div>
-
-                    <div class="col-lg-12 mt-1">
-                      <vue-recaptcha
-                        ref="recaptcha"
-                        :sitekey="'6Ldyw1wpAAAAAGx6vRq1hhnnfKaKHPmcuJ0imPkT'"
-                        size="normal"
-                        @verify="onRecaptchaVerify"
-                      />
+                      <div class="mt-1 text-danger">
+                        <div v-for="message in validationErrors?.location" :key="message">
+                          {{ message }}
+                        </div>
+                      </div>
                     </div>
                   </div>
                   <!-- End .row -->
@@ -179,7 +189,8 @@
                               Your Cart Feels a Little Empty
                             </h3>
                             <p class="text-gray-600 mb-4">
-                              Explore our commercial kitchen solutions and find the perfect equipment for your business.
+                              Explore our commercial kitchen solutions and find the perfect
+                              equipment for your business.
                             </p>
                             <router-link
                               to="/commercial-kitchen"
@@ -201,11 +212,7 @@
                           </div>
                         </div>
 
-
                         <div v-else class="space-y-4">
-                          <h3 class="text-2xl font-bold mb-4 text-gray-800">
-                            Your Selected Products
-                          </h3>
                           <div class="max-h-[400px] overflow-y-auto">
                             <transition-group name="cart-item" tag="div" class="space-y-3">
                               <div
@@ -224,6 +231,8 @@
                                     <p class="text-sm text-gray-500">
                                       {{ item.category }}
                                     </p>
+                                    <!-- quantity -->
+                                    <span class="text-gray-500">Qty: {{ item.quantity }}</span>
                                   </div>
                                 </div>
                                 <button
@@ -271,19 +280,16 @@
                                 name="shipping"
                                 class="custom-control-input"
                                 value="Deliver to my location"
-                                required
                               />
                               <label
                                 style="font-size: 1.4rem; font-weight: 450"
                                 class="custom-control-label float-left text-dark"
                                 for="deliver"
-                              >Deliver to my
-                                location</label>
+                              >Deliver to my location</label>
                             </div>
                             <!-- End .custom-control -->
                           </td>
                         </tr>
-                        <!-- End .summary-shipping-row -->
 
                         <tr class="">
                           <td style="min-width: 100%; width: 100%">
@@ -295,15 +301,18 @@
                                 name="shipping"
                                 class="custom-control-input"
                                 value="Collect from Sheffield"
-                                required
                               />
                               <label
                                 style="font-size: 1.4rem; font-weight: 450"
                                 class="custom-control-label float-left text-dark"
                                 for="collect_from_sheffield"
-                              >Collect
-                                from Sheffield
+                              >Collect from Sheffield
                               </label>
+                            </div>
+                            <div v-if="validationErrors?.shipping" class="text-danger text-left w-full flex">
+                              <div v-for="message in validationErrors?.shipping" :key="message">
+                                {{ message }}
+                              </div>
                             </div>
                             <!-- End .custom-control -->
                           </td>
@@ -328,7 +337,6 @@
                                 name="installation"
                                 class="custom-control-input"
                                 value="Yes"
-                                required
                               />
                               <label
                                 style="font-size: 1.4rem; font-weight: 450"
@@ -351,7 +359,6 @@
                                 name="installation"
                                 class="custom-control-input"
                                 value="No"
-                                required
                               />
                               <label
                                 style="font-size: 1.4rem; font-weight: 450"
@@ -359,14 +366,13 @@
                                 for="installation_no"
                               >No</label>
                             </div>
-                            <!-- End .custom-control -->
+                            <div v-if="validationErrors?.installation" class="text-danger text-left w-full flex">
+                              <div v-for="message in validationErrors?.installation" :key="message">
+                                {{ message }}
+                              </div>
+                            </div>
                           </td>
                         </tr>
-                        <!-- End .summary-shipping-row -->
-
-                        <!-- End .summary-shipping-row -->
-
-                        <!-- End .summary-total -->
                       </tbody>
                     </table>
                     <!-- End .table table-summary -->
@@ -402,10 +408,7 @@
   import { useMeta } from '../../admin/composables/use-meta';
   useMeta({ title: 'Request Quote' });
 
-  import {
-    reactive,
-    computed,
-  } from 'vue';
+  import {  computed } from 'vue';
 
   import { ShoppingCartIcon } from 'lucide-vue-next';
   import { VueTelInput } from 'vue-tel-input';
@@ -419,8 +422,6 @@
   import 'vue-multiselect/dist/vue-multiselect.min.css';
 
   import useRequestQuotes from '@/composables/requestQuote';
-  import { useForm, useField, defineRule } from 'vee-validate';
-  import { required, min } from '@/validation/rules';
 
   import { useStore } from 'vuex';
   const store = useStore();
@@ -435,51 +436,8 @@
 
   const { executeRecaptcha } = useReCaptcha();
 
-  defineRule('required', required);
-  defineRule('min', min);
 
-  // Define a validation schema
-  const schema = {
-    firstname: 'required',
-    surname: 'required',
-    code: 'required',
-    phone_number: 'required',
-    email: 'required|min:3',
-    company_name: 'required',
-    location: 'required',
-    country: 'required',
-    shipping: 'required',
-    installation: 'required',
-  };
-
-  // Create a form context with the validation schema
-  const { validate } = useForm({ validationSchema: schema });
-
-  const { value: firstname } = useField('firstname', null, { initialValue: '' });
-  const { value: surname } = useField('surname', null, { initialValue: '' });
-  const { value: email } = useField('email', null, { initialValue: '' });
-  const { value: company_name } = useField('company_name', null, { initialValue: '' });
-  const { value: country } = useField('country', null, { initialValue: '' });
-  const { value: location } = useField('location', null, { initialValue: '' });
-  const { value: code } = useField('code', null, { initialValue: '254' });
-  const { value: phone_number } = useField('phone_number', null, { initialValue: '' });
-  const { value: shipping } = useField('shipping', null, { initialValue: '' });
-  const { value: installation } = useField('installation', null, { initialValue: '' });
-
-  const { storeContact, isLoading } = useRequestQuotes();
-
-  const contact = reactive({
-    firstname,
-    surname,
-    email,
-    company_name,
-    country,
-    location,
-    code,
-    phone_number,
-    installation,
-    shipping,
-  });
+  const { storeContact, isLoading,validationErrors,contact } = useRequestQuotes();
 
   // Prepare Country Options with Flags
   const countryOptions = computed(() =>
@@ -490,27 +448,12 @@
     })),
   );
 
-  // Phone Validation
-  const onPhoneValidate = (obj) => {
-    contact.phone = obj.formatInternational;
-  };
-
-  const onRecaptchaVerify = async () => {
-    await submitForm();
-  };
-
   const submitForm = async () => {
     try {
-      const form = await validate();
-      if (form.valid) {
-        const recaptchaToken = await executeRecaptcha('request_quote_form');
-        contact.recaptchaToken = recaptchaToken;
-        contact.cartItems = JSON.stringify(cartItems);
-
-
-
-        storeContact(contact);
-      }
+      const recaptchaToken = await executeRecaptcha('request_quote_form');
+      contact.value.recaptchaToken = recaptchaToken;
+      contact.value.cartItems = JSON.stringify(cartItems);
+      storeContact(contact.value);
     } catch (error) {
       console.error('Validation error:', error);
     }
@@ -537,7 +480,6 @@
     margin-bottom: 1rem;
   }
 
-  .contact-images img::before {}
 
   .contact-form-div {
     background-color: #ffffff;
@@ -545,11 +487,6 @@
     padding-bottom: 15px;
     padding-left: 30px;
     padding-right: 30px;
-  }
-
-  .page-content-contact {
-    /* background-image: ; */
-    /*linear-gradient(to right, #304296, #ec1f25);*/
   }
 
   .my_form_contact_us {

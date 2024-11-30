@@ -72,78 +72,7 @@
         <!-- End .header-left -->
 
         <div class="header-right">
-          <!-- <a class="header_phone" href="tel:+254713777111">+254 713 777 111</a> -->
-          <!-- <a
-                        href="#"
-                        data-bs-toggle="modal"
-                        data-bs-target="#exampleModal"
-                        ><i
-                            class="icon-telegram-plane"
-                            style="font-size: 40px"
-                        ></i>
-                        Contact Us</a
-                    > -->
-          <div class="dropdown cart-dropdown" style="color: black !important">
-            <router-link
-              to="/request-for-quote"
-              class="dropdown-toggle"
-              role="button"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-              data-display="static"
-            >
-              <i class="icon-shopping-cart"></i>
-              <span class="cart-count">{{ cartItems.length }}</span>
-              <span class="cart-txt">Cart</span>
-            </router-link>
-
-            <div class="dropdown-menu dropdown-menu-right">
-              <div class="dropdown-cart-products">
-                <div v-for="(item, index) in cartItems" :key="index" class="product">
-                  <div class="product-cart-details">
-                    <h4 class="product-title">
-                      {{ item.name }}
-                    </h4>
-
-                    <span class="cart-product-info">
-                      <span class="cart-product-qty">Qty : {{ item.quantity }}</span>
-                    </span>
-                  </div>
-
-                  <figure class="product-image-container">
-                    <a href="product.html" class="product-image">
-                      <img :src="'/storage/' + item.main_image_path" alt="product" />
-                    </a>
-                  </figure>
-                  <button
-                    type="button"
-                    class="btn-remove"
-                    title="Remove Product"
-                    @click="removeFromCart(index)"
-                  >
-                    <i class="icon-close"></i>
-                  </button>
-                </div>
-                <!-- End .product -->
-
-                <!-- End .product -->
-              </div>
-              <!-- End .cart-product -->
-              <div class="dropdown-cart-action">
-                <router-link to="/request-for-quote" class="btn btn-primary mt-2 float-right quote-btn" style="color:white">
-                  Request for Quote
-                </router-link>
-              </div>
-              <!-- End .dropdown-cart-total -->
-            </div>
-            <!-- End .dropdown-menu -->
-          </div>
-
-          <button class="mobile-menu-toggler" @click="handleButtonClick">
-            <span class="sr-only">Toggle mobile menu</span>
-            <i class="icon-bars"></i>
-          </button>
+          <CartComponent />
         </div>
       </div>
       <!-- End .container -->
@@ -474,16 +403,29 @@ useMeta({
   keywords: 'Commercial Kitchen, Commercial laundry, Commercial Cold room',
 });
 
-import { useStore } from 'vuex'; // Import the store
+import CartComponent from '../components/layout/CartComponent.vue';
 
 const router = useRouter();
 
-const store = useStore();
 
-const cartItems = store.state.cart.cartItems;
+const getProductLink = (id, name, model_number, main_second_parent_cat) => {
+    const firstPart = main_second_parent_cat?.split('/')[0];
+    // Replace spaces with dashes
+    let transformedName = name.replace(/ /g, '-').replace(/\//g, '-');
+    // Remove consecutive dashes
+    transformedName = transformedName.replace(/-+/g, '-');
+    // Remove leading and trailing dashes
+    transformedName = transformedName.replace(/^-+|-+$/g, '');
+    // Convert to lowercase
+    transformedName = transformedName.toLowerCase();
 
-const removeFromCart = (index) => {
-  store.dispatch('cart/removeFromCart', index);
+    let transformedModelNumber = model_number.toLowerCase().replace(/ /g, '-').replace(/\//g, '-');
+    // Remove consecutive dashes
+    transformedModelNumber = transformedModelNumber.replace(/-+/g, '-');
+    // Remove leading and trailing dashes
+    transformedModelNumber = transformedModelNumber.replace(/^-+|-+$/g, '');
+
+    return `/${firstPart}/product/${id}/${transformedName}-${transformedModelNumber}`;
 };
 
 const swiperInstance = ref(null);

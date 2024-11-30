@@ -1,6 +1,7 @@
 import { notification } from 'ant-design-vue';
 
 const showToast = (description, type = 'success', message = 'Success') => {
+    type = type.toLowerCase();
     if (!message || message.length == 0 || type != 'success') {
         message = type.substring(0, 1).toUpperCase() + type.substring(1);
     }
