@@ -338,9 +338,7 @@
 
 @if ($metaTags['jsonLdSchema'])
     <script type="application/ld+json">
-{
-    !!json_encode($metaTags['jsonLdSchema']) !!
-}
+{!!json_encode($metaTags['jsonLdSchema']) !!}
 </script>
 @endif
 
