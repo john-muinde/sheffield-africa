@@ -111,12 +111,11 @@
 
                       <multiselect
                         v-model="contact.country"
-                        :reduce="(country) => country.code"
                         :options="countryOptions"
                         :searchable="true"
                         placeholder="Select country"
                         label="name"
-                        track-by="code"
+                        track-by="name"
                         selected-label=""
                         select-label=""
                         deselect-label=""
@@ -405,59 +404,51 @@
 </template>
 
 <script setup>
-  import { useMeta } from '../../admin/composables/use-meta';
-  useMeta({ title: 'Request Quote' });
+import { ref, computed } from 'vue';
+import { useStore } from 'vuex';
+import { useReCaptcha } from 'vue-recaptcha-v3';
+import { ShoppingCartIcon } from 'lucide-vue-next';
+import { VueTelInput } from 'vue-tel-input';
+import 'vue-tel-input/vue-tel-input.css';
+import { countries } from 'countries-list';
+import useRequestQuotes from '@/composables/requestQuote';
+import { useMeta } from '../../admin/composables/use-meta';
 
-  import {  computed } from 'vue';
-
-  import { ShoppingCartIcon } from 'lucide-vue-next';
-  import { VueTelInput } from 'vue-tel-input';
-  import 'vue-tel-input/vue-tel-input.css';
-
-  // Import countries with flag data
-  import { countries } from 'countries-list';
-
-  // Multiselect
-  import Multiselect from 'vue-multiselect';
-  import 'vue-multiselect/dist/vue-multiselect.min.css';
-
-  import useRequestQuotes from '@/composables/requestQuote';
-
-  import { useStore } from 'vuex';
-  const store = useStore();
-
-  const cartItems = store.state.cart.cartItems;
-
-  const removeFromCart = (index) => {
-    store.dispatch('cart/removeFromCart', index);
-  };
-
-  import { useReCaptcha } from 'vue-recaptcha-v3';
-
-  const { executeRecaptcha } = useReCaptcha();
+// Multiselect
+import Multiselect from 'vue-multiselect';
+import 'vue-multiselect/dist/vue-multiselect.min.css';
 
 
-  const { storeContact, isLoading,validationErrors,contact } = useRequestQuotes();
+useMeta({ title: 'Request Quote' });
 
-  // Prepare Country Options with Flags
-  const countryOptions = computed(() =>
-    Object.entries(countries).map(([code, country]) => ({
-      code,
-      name: country.name,
-      flag: `https://flagcdn.com/w20/${code.toLowerCase()}.png`,
-    })),
-  );
+const store = useStore();
+const cartItems = store.state.cart.cartItems;
+const { executeRecaptcha } = useReCaptcha();
+const { storeContact, isLoading, validationErrors, contact } = useRequestQuotes();
 
-  const submitForm = async () => {
-    try {
-      const recaptchaToken = await executeRecaptcha('request_quote_form');
-      contact.value.recaptchaToken = recaptchaToken;
-      contact.value.cartItems = JSON.stringify(cartItems);
-      storeContact(contact.value);
-    } catch (error) {
-      console.error('Validation error:', error);
-    }
-  };
+const countryOptions = computed(() =>
+  Object.entries(countries).map(([code, country]) => ({
+    code,
+    name: country.name,
+    flag: `https://flagcdn.com/w20/${code.toLowerCase()}.png`,
+  })),
+);
+
+const removeFromCart = (index) => {
+  store.dispatch('cart/removeFromCart', index);
+};
+
+const submitForm = async () => {
+  try {
+    const recaptchaToken = await executeRecaptcha('request_quote_form');
+    contact.value.recaptchaToken = recaptchaToken;
+    contact.value.cartItems = JSON.stringify(cartItems);
+    contact.value.country = contact.value.country?.name || '';
+    storeContact(contact.value);
+  } catch (error) {
+    console.error('Validation error:', error);
+  }
+};
 </script>
 
 <style>
