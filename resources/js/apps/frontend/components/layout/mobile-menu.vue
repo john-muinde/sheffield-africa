@@ -52,7 +52,7 @@
               <li>
                 <router-link to="/commercial-kitchen" class="sf-with-ul">
                   Kitchen
-                  <i class="icon-chevron-down" @click="toggleSubMenu($event)"></i>
+                  <ChevronDown class="chevron-icon" @click="toggleSubMenu($event)" />
                 </router-link>
                 <ul class="submenu">
                   <li v-for="category in mainKitchenCategories" :key="category.id">
@@ -72,7 +72,7 @@
               <li>
                 <router-link to="/laundry" class="sf-with-ul">
                   LAUNDRY & FLOOR CLEANING
-                  <i class="icon-chevron-down" @click="toggleSubMenu($event)"></i>
+                  <ChevronDown class="chevron-icon" @click="toggleSubMenu($event)" />
                 </router-link>
                 <ul class="submenu">
                   <li v-for="category in mainLaundryCategories" :key="category.id">
@@ -92,7 +92,7 @@
               <li>
                 <router-link to="/cold-storage" class="sf-with-ul">
                   Cold Storage
-                  <i class="icon-chevron-down" @click="toggleSubMenu($event)"></i>
+                  <ChevronDown class="chevron-icon" @click="toggleSubMenu($event)" />
                 </router-link>
                 <ul class="submenu">
                   <li v-for="category in mainColdRoomCategories" :key="category.id">
@@ -109,10 +109,10 @@
                 </ul>
               </li>
 
-              <li>
+              <li v-if="promotionExists">
                 <router-link to="/promotional-solutions" class="sf-with-ul">
                   Promotions
-                  <i class="icon-chevron-down" @click="toggleSubMenu($event)"></i>
+                  <ChevronDown class="chevron-icon" @click="toggleSubMenu($event)" />
                 </router-link>
                 <ul class="submenu">
                   <li v-for="category in mainPromotionalCategories" :key="category.id">
@@ -193,7 +193,7 @@
               <li>
                 <router-link to="/commercial-kitchen" class="sf-with-ul">
                   KITCHEN SOLUTIONS
-                  <i class="icon-chevron-down" @click="toggleSubMenu($event)"></i>
+                  <ChevronDown class="chevron-icon" @click="toggleSubMenu($event)" />
                 </router-link>
                 <ul class="submenu">
                   <li v-for="solution in mainKitchenSolutions" :key="solution.id">
@@ -213,7 +213,7 @@
               <li>
                 <router-link to="/laundry" class="sf-with-ul">
                   LAUNDRY & FLOOR CLEANING SOLUTIONS
-                  <i class="icon-chevron-down" @click="toggleSubMenu($event)"></i>
+                  <ChevronDown class="chevron-icon" @click="toggleSubMenu($event)" />
                 </router-link>
                 <ul class="submenu">
                   <li v-for="solution in mainLaundrySolutions" :key="solution.id">
@@ -233,7 +233,7 @@
               <li>
                 <router-link to="/cold-storage" class="sf-with-ul">
                   COLD STORAGE SOLUTIONS
-                  <i class="icon-chevron-down" @click="toggleSubMenu($event)"></i>
+                  <ChevronDown class="chevron-icon" @click="toggleSubMenu($event)" />
                 </router-link>
                 <ul class="submenu">
                   <li v-for="solution in mainColdRoomSolutions" :key="solution.id">
@@ -250,10 +250,10 @@
                 </ul>
               </li>
 
-              <li>
+              <li v-if="promotionExists">
                 <router-link to="/promotional-solutions" class="sf-with-ul">
                   PROMOTIONAL SOLUTIONS
-                  <i class="icon-chevron-down" @click="toggleSubMenu($event)"></i>
+                  <ChevronDown class="chevron-icon" @click="toggleSubMenu($event)" />
                 </router-link>
                 <ul class="submenu">
                   <li v-for="solution in mainPromotionalSolutions" :key="solution.id">
@@ -458,8 +458,9 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onBeforeUnmount } from 'vue';
+import { ref, onMounted, onBeforeUnmount,computed } from 'vue';
 import axios from 'axios';
+import { ChevronDown } from 'lucide-vue-next';
 
 const isMenuActive = ref(false);
 
@@ -475,6 +476,23 @@ const closeMenu = () => {
     document.body.classList.remove('mmenu-active');
     const targetElement = document.querySelector('.the_main_div');
     targetElement.classList.remove('mmenu-active');
+};
+
+const toggleSubMenu = (event) => {
+  // Prevent the default router-link navigation
+  event.preventDefault();
+
+  // Toggle the 'show' class on the immediate parent <li> element
+  const parentLi = event.target.closest('li');
+  parentLi.classList.toggle('show');
+
+  // Optionally, close other open submenus
+  const otherOpenLis = document.querySelectorAll('.mobile-menu > li.show');
+  otherOpenLis.forEach(li => {
+    if (li !== parentLi) {
+      li.classList.remove('show');
+    }
+  });
 };
 
 onMounted(() => {
@@ -500,6 +518,8 @@ const mainKitchenCategories = ref([]);
 const mainLaundryCategories = ref([]);
 const mainColdRoomCategories = ref([]);
 const mainPromotionalCategories = ref([]);
+
+const promotionExists = computed(() => mainPromotionalCategories.value.length > 0);
 
 const fetchData = async (url, stateVariable) => {
     try {
@@ -557,36 +577,26 @@ onMounted(() => {
 
 
 <style scoped>
-.social-icons {
-    justify-content: center;
-    margin-left: 10px;
+.mobile-menu li .submenu {
+  display: none;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
 }
 
-.social-icon {
-    width: 4.5rem;
-    height: 4.5rem;
+.mobile-menu li.show > .submenu {
+  display: block;
+  max-height: 1000px; /* Adjust as needed */
 }
 
-.side_bar_title::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 20px;
-    height: 3px;
-    background: #ff5400;
+.mobile-menu li .sf-with-ul {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-
-.social-icon img {
-    filter: invert(22%) sepia(49%) saturate(4151%) hue-rotate(338deg) brightness(82%) contrast(93%);
-}
-
-.social-icon:hover {
-    background-color: #c02434 !important;
-}
-
-.social-icon:hover img {
-    filter: invert(99%) sepia(0%) saturate(2%) hue-rotate(132deg) brightness(111%) contrast(101%);
+.mobile-menu li .icon-chevron-down {
+  cursor: pointer;
+  padding: 10px; /* Increase click area */
 }
 </style>

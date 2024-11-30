@@ -67,7 +67,7 @@
                       {{ errors.location }}
                     </div>
                     <div class="text-danger mt-1">
-                      <div v-for="message in validationErrors?.location">
+                      <div v-for="message in validationErrors?.location" :key="message">
                         {{ message }}
                       </div>
                     </div>
@@ -76,7 +76,6 @@
 
                 <div class="row">
                   <div class="form-group col-md-6">
-                    {{ typeof event.start_date }}
                     <label for="post-start_date">Start Date</label>
                     <flat-pickr
                       v-model="event.start_date"
@@ -89,7 +88,7 @@
                     </div>
 
                     <div class="text-danger mt-1">
-                      <div v-for="message in validationErrors?.end_date">
+                      <div v-for="message in validationErrors?.end_date" :key="message">
                         {{ message }}
                       </div>
                     </div>
@@ -109,7 +108,7 @@
                     </div>
 
                     <div class="text-danger mt-1">
-                      <div v-for="message in validationErrors?.end_date">
+                      <div v-for="message in validationErrors?.end_date" :key="message">
                         {{ message }}
                       </div>
                     </div>
@@ -130,7 +129,7 @@
                     {{ errors.url }}
                   </div>
                   <div class="text-danger mt-1">
-                    <div v-for="message in validationErrors?.url">
+                    <div v-for="message in validationErrors?.url" :key="message">
                       {{ message }}
                     </div>
                   </div>
@@ -149,7 +148,7 @@
                   </div>
 
                   <div class="text-danger mt-1">
-                    <div v-for="message in validationErrors?.description">
+                    <div v-for="message in validationErrors?.description" :key="message">
                       {{ message }}
                     </div>
                   </div>
@@ -201,7 +200,7 @@
                     {{ errors.is_published }}
                   </div>
                   <div class="text-danger mt-1">
-                    <div v-for="message in validationErrors?.is_published">
+                    <div v-for="message in validationErrors?.is_published" :key="message">
                       {{ message }}
                     </div>
                   </div>
@@ -284,7 +283,7 @@ const { value: is_published } = useField('is_published', null, {
     initialValue: '',
 });
 
-const { storeEvent, validationErrors, isLoading, getEventList, eventList } =
+const { storeEvent, validationErrors, isLoading, getEventList } =
     useEvents();
 
 const event = ref({
