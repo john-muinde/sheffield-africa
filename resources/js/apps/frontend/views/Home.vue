@@ -26,7 +26,7 @@
                     Loading...
                   </div>
 
-                  <div v-if="!results.length && !searchLoading" class="form-control">
+                  <div v-if="!results?.length && !searchLoading" class="form-control">
                     No results found
                   </div>
 
@@ -250,7 +250,7 @@
         </router-link>
       </div>
 
-      <template v-if="promotionProducts.length">
+      <template v-if="promotionProducts?.length">
         <div class="container-fluid">
           <div class="d-flex align-items-center mt-1 row" style="min-height: 500px !important">
             <div class="image-container col-xl-3 col-lg-4 col-md-12 mb-md-4" style="height: 100%">
@@ -518,7 +518,7 @@ const fetchProducts = async () => {
     promotionProducts.value = response.data.products.data;
 
     promotionProducts.value = promotionProducts.value
-      .map((product) => {
+      ?.map((product) => {
         if (convertToNumber(product.cost_price) <= 0) {
           product.cost_price = convertToNumber(product.retail_price);
         }
