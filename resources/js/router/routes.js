@@ -1,4 +1,3 @@
-import { has } from 'lodash';
 import store from '../store';
 
 function requireAdminLogin(to, from, next) {

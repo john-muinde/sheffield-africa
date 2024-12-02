@@ -328,7 +328,6 @@ const imgs = ref([]);
 const rootUrl = window.location.protocol + '//' + window.location.host;
 
 const showMultiple = async () => {
-  console.log(product.value);
   imgs.value = product.value.product_images.map((item) => rootUrl + '/storage/' + item.name);
   show();
 };

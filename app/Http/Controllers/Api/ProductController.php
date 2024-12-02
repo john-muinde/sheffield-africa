@@ -205,7 +205,7 @@ class ProductController extends Controller
                 $file_path = 'uploads/' . $file_name;
 
                 // Create and process the image using the new syntax
-            $image = $this->imageManager->read($file)->coverDown(800, 800)->toJpeg(85);
+                $image = $this->imageManager->read($file)->coverDown(800, 800)->toJpeg(85);
 
                 // Store the optimized image
                 Storage::disk('public')->put($file_path, $image);
@@ -257,7 +257,12 @@ class ProductController extends Controller
         $category = Category::where('id', $categoryId)->where('is_published', true)->first();
 
         if (!$category) {
-            return response()->json(['error' => 'Category not found or not published'], 404);
+            return response()->json([
+                'products' => [],
+                'categories' => [],
+                'brands' => [],
+                'the_category' => null,
+            ]);
         }
 
         $allChildrenIds = $category->getAllChildrenIds();
