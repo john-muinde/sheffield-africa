@@ -244,8 +244,6 @@ onMounted(async () => {
     background-color: #555;
 }
 
-.menu-vertical .megamenu {}
-
 .scroll-track {
     position: absolute;
     top: 0;

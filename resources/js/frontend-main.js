@@ -26,8 +26,6 @@ import vSelect from 'vue-select';
 import 'sweetalert2/dist/sweetalert2.min.css';
 import 'vue-select/dist/vue-select.css';
 
-//import TawkMessengerVue from '@tawk.to/tawk-messenger-vue-3';
-
 import VueLazyload from 'vue-lazyload';
 
 //vue-i18n

@@ -65,9 +65,7 @@
                               class="btn-video btn-iframe"
                               @click="showVideoPopup
                               "
-                            ><i
-                              class="icon-play"
-                            ></i></a>
+                            ><i class="icon-play"></i></a>
 
                             <VideoPopup
                               :show-popup="isVideoPopupVisible

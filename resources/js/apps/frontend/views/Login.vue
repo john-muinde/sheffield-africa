@@ -1,18 +1,6 @@
 <template>
   <div class="page-wrapper">
     <main class="main">
-      <!-- <nav aria-label="breadcrumb" class="breadcrumb-nav border-0 mb-0">
-                <div class="container">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                        <li class="breadcrumb-item"><a href="#">Pages</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Login</li>
-                    </ol>
-                </div>
-            </nav> -->
-
-
-
       <div class="login-page bg-image pt-8 pb-8 pt-md-5 pb-md-5 pt-lg-6 pb-lg-6" style="background-image: url('/assets/images/login-background.jpg')">
         <div class="container">
           <div class="form-box">

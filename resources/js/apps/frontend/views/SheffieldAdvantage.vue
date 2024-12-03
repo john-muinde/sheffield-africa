@@ -3,16 +3,6 @@
     <div class="page-content pb-3 pt-1 my-header-image-section">
       <!-- <img class="my-header-image" src="/assets/images/sheffield_advantage.jpg"> -->
       <div class="container">
-        <!-- <div class="row justify-content-center mb-4">
-                    <div class="col-12">
-                        <div class="headings main-header">
-                            <h3 class="heading text-primary">Sheffield Advantages</h3>
-                        </div>
-                    </div>
-
-                </div> -->
-        <!-- End .row -->
-
         <div class="row">
           <div class="col-md-12 justify-content-center">
             <div class="row justify-content-left links-container mt-3 mb-3">
