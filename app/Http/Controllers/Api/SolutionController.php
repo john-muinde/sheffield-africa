@@ -7,14 +7,10 @@ use App\Http\Requests\StoreSolutionRequest;
 use App\Http\Requests\UpdateSolutionRequest;
 use App\Http\Resources\SolutionResource;
 use App\Http\Resources\ProductResource;
-use Intervention\Image\Laravel\Facades\Image;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Solution;
 use App\Models\SolutionCategory;
-use App\Models\SolutionImage;
 use App\Models\Category;
-use App\Models\Product;
-use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 
@@ -284,92 +280,6 @@ class SolutionController extends Controller
             $allChildrenIds = array_merge($allChildrenIds, $category->getAllChildrenIds());
         }
 
-
-        //  $products_main_query = Product::with('productBrand')->with('productCategories')
-        //      ->whereHas('productCategories', function ($query) use ($categoryId, $allChildrenIds) {
-        //         $query->whereIn('category_id', $allChildrenIds);
-        //         $query->orWhereIn('category_id', $categoryId);
-        //      });
-
-        // if (!isset($checkedCategoriesSolutions[$solution_id])) {
-
-        //      $products_main_query = $products_main_query->with('productCategories')
-        //      ->whereHas('productCategories', function ($query) use ($categoryId, $allChildrenIds) {
-        //         $query->whereIn('category_id', $allChildrenIds);
-        //         $query->orWhereIn('category_id', $categoryId);
-        //      });
-
-        //  }else{
-
-        //      $allcats = [];
-
-        //      foreach ($checkedCategoriesSolutions[$solution_id] as  $key => $value) {
-
-        //          $categorycat = Category::find($value);
-        //          $allChildrenIdscat = $categorycat->getAllChildrenIds();
-        //          $allcats = array_merge($allcats, [$value]);
-        //          $allcats = array_merge($allcats, $allChildrenIdscat);
-        //      }
-
-        //       $products_main_query = $products_main_query->whereHas('productCategories', function ($query) use ($allcats) {
-        //         $query->whereIn('category_id', $allcats);
-        //      });
-        // }
-
-        // $products = $products_main_query->get();
-
-        //  //return response()->json($products);
-
-        //  return ProductResource::collection($products);
-
-
-        //  if (!isset($checkedCategoriesSolutions[$solution_id])) {
-
-        //      // $products_main_query = $products_main_query->with('productCategories')
-        //      // ->whereHas('productCategories', function ($query) use ($categoryId, $allChildrenIds) {
-        //      //    $query->whereIn('category_id', $allChildrenIds);
-        //      //    $query->orWhereIn('category_id', $categoryId);
-        //      // });
-
-        //  }else{
-
-        //      $allcats = [];
-
-        //      foreach ($checkedCategoriesSolutions[$solution_id] as  $key => $value) {
-
-        //          $categorycat = Category::find($value);
-        //          $allChildrenIdscat = $categorycat->getAllChildrenIds();
-        //          $allcats = array_merge($allcats, [$value]);
-        //          $allcats = array_merge($allcats, $allChildrenIdscat);
-        //      }
-
-        //      //  $products_main_query = $products_main_query->whereHas('productCategories', function ($query) use ($allcats) {
-        //      //    $query->whereIn('category_id', $allcats);
-        //      // });
-        // }
-
-
-        ///new
-
-
-        // $SolutionCategory = SolutionCategory::where("solution_id", "=", $solution_id);
-
-        // $SolutionCategory = $SolutionCategory->with(['category' => function ($query) use($allChildrenIds) {
-
-        //     $query = $query->orderBy('order_index');
-
-        // }]);
-
-        // $SolutionCategory = $SolutionCategory->orderBy("order_index", "ASC")->get();
-
-        // dd($SolutionCategory);
-
-
-
-        //end new
-
-
-
         $SolutionCategory = SolutionCategory::where("solution_id", "=", $solution_id)->orderBy("order_index", "ASC")->get();
 
 
@@ -410,12 +320,6 @@ class SolutionController extends Controller
 
             $category_products = Category::where('id', '=', $value);
 
-            // if (!isset($checkedCategories[$categoryId])) {
-
-            //     $category_products = $category_products->orWhere('id', '=', $categoryId);
-
-            // }
-
             $category_products = $category_products->with(['products' => function ($query) {
 
 
@@ -431,19 +335,10 @@ class SolutionController extends Controller
                 ->orderBy('order_index')
                 ->first();
 
-
-
-
-
-            //$allProducts = array_merge($allProducts, $category_products->flatMap->products->toArray());
-
-
             if ($category_products && $category_products->products->isNotEmpty()) {
                 $allProducts = array_merge($allProducts, $category_products->products->toArray());
             }
         }
-
-        // $allProducts = ProductResource::collection($allProducts);
 
         $page = request()->get('page', 1); // Get the current page from the request
 
@@ -451,22 +346,14 @@ class SolutionController extends Controller
         $total = count($allProducts);
         $products = array_slice($allProducts, ($page - 1) * $perPage, $perPage);
 
-        // $total = $allProducts->count();
-        // $products = $allProducts->slice(($page - 1) * $perPage, $perPage)->all();
-
-
         if (empty($products)) {
             return response()->json(['products' => [], 'total' => 0]);
         }
 
         $my_products = new LengthAwarePaginator($products, $total, $perPage, $page);
 
-        //dd($my_products);
-
-
-
         $result = [
-            'products' => $my_products,
+            'products' => ProductResource::collection($my_products),
         ];
 
 

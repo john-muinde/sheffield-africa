@@ -1,14 +1,5 @@
 <template>
   <main class="main">
-    <!-- <div
-         class="page-header text-center"
-         style="background-image: url('../../../../assets/images/sheffield_stainless_steel_background.jpg')"
-         >
-         <div class="container">
-            <h1 class="page-title">{{ the_category.name }}<span>View our amazing products under this section</span></h1>
-         </div>
-
-      </div> -->
     <nav aria-label="breadcrumb" class="breadcrumb-nav border-0 mb-0">
       <div class="container d-flex align-items-center">
         <ol class="breadcrumb">
@@ -167,37 +158,13 @@
                           }}
                         </router-link>
                       </h3>
-                      <!-- End .product-title -->
-                      <!-- <div class="product-price">$ {{ product.retail_price }}.00</div> -->
-                      <!-- End .product-price -->
                       <div class="ratings-container">
-                        <!-- <div class="ratings">
-                                       <div class="ratings-val" style="width: 20%"></div>
-                                    </div> -->
-                        <!-- End .ratings -->
-                        <!--  <span class="ratings-text">( 2 Reviews )</span> -->
                       </div>
-                      <!-- End .rating-container -->
-                      <!-- <div class="product-nav product-nav-thumbs"> <a href="#" class="active">
-                                    <img src="../assets/images/products/product6.webp" alt="product desc"
-                                       /> </a>
-                                    <a href="#"> <img
-                                       src="../assets/images/products/product4.webp"
-                                       alt="product desc" />
-                                    </a>
-                                    <a href="#"> <img
-                                       src="../assets/images/products/product1.webp"
-                                       alt="product desc" />
-                                    </a>
-                                 </div> -->
-                      <!-- End .product-nav -->
                     </div>
                     <!-- End .product-body -->
                   </div>
                   <!-- End .product -->
                 </div>
-
-                <!-- End .col-sm-6 col-lg-4 col-xl-3 -->
               </div>
               <!-- End .row -->
             </div>

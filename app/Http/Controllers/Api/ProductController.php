@@ -6,14 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Http\Resources\ProductResource;
-use Intervention\Image\Laravel\Facades\Image;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Product;
-use App\Models\ProductImage;
 use App\Models\Category;
-use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Support\Facades\Log;
 
 class ProductController extends Controller
 {
