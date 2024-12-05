@@ -306,7 +306,7 @@ class ProductController extends Controller
         $allProducts = $category_products->flatMap->products;
         $total = $allProducts->count();
         $products = $allProducts->slice(($page - 1) * $perPage, $perPage)->all();
-
+        $products = json_decode(json_encode(ProductResource::collection($products)), true);
         $products = new LengthAwarePaginator($products, $total, $perPage, $page);
 
         $categories = Category::withCount('categoryProducts')
