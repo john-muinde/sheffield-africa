@@ -5,25 +5,24 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreSolutionRequest;
 use App\Http\Requests\UpdateSolutionRequest;
-use App\Http\Resources\SolutionResource;
 use App\Http\Resources\ProductResource;
-use Illuminate\Support\Facades\Storage;
+use App\Http\Resources\SolutionResource;
+use App\Models\Category;
 use App\Models\Solution;
 use App\Models\SolutionCategory;
-use App\Models\Category;
 use Illuminate\Pagination\LengthAwarePaginator;
-
+use Illuminate\Support\Facades\Storage;
 
 class SolutionController extends Controller
 {
     public function index()
     {
         $orderColumn = request('order_column', 'created_at');
-        if (!in_array($orderColumn, ['id', 'name', 'created_at'])) {
+        if (! in_array($orderColumn, ['id', 'name', 'created_at'])) {
             $orderColumn = 'created_at';
         }
         $orderDirection = request('order_direction', 'desc');
-        if (!in_array($orderDirection, ['asc', 'desc'])) {
+        if (! in_array($orderDirection, ['asc', 'desc'])) {
             $orderDirection = 'desc';
         }
         $solutions = Solution::when(request('search_id'), function ($query) {
@@ -43,6 +42,7 @@ class SolutionController extends Controller
             })
             ->orderBy($orderColumn, $orderDirection)
             ->paginate(10000);
+
         return SolutionResource::collection($solutions);
     }
 
@@ -57,7 +57,6 @@ class SolutionController extends Controller
         if ($existingSolution) {
             return response()->json(['errors' => ['name' => ['Solution with the same name already exists.']]], 409);
         }
-
 
         $validatedData = $request->validated();
         $validatedData['created_by'] = auth()->user()->id;
@@ -79,10 +78,8 @@ class SolutionController extends Controller
             $validatedData['main_image_path'] = $file_path;
         }
 
-
         //dd($validatedData);
         $solution = Solution::create($validatedData);
-
 
         if ($request->has('categories')) {
             $categories = $request->input('categories');
@@ -103,6 +100,7 @@ class SolutionController extends Controller
     public function show(Solution $solution)
     {
         $this->authorize('solution-edit');
+
         return new SolutionResource($solution);
     }
 
@@ -111,7 +109,6 @@ class SolutionController extends Controller
         $this->authorize('solution-edit');
 
         $validatedData = $request->validated();
-
 
         // Check if the solution with the same name already exists (excluding the current solution)
         $existingSolution = Solution::where('name', $request->name)
@@ -178,7 +175,6 @@ class SolutionController extends Controller
             }
         }
 
-
         //dd("test");
 
         return new SolutionResource($solution);
@@ -197,13 +193,12 @@ class SolutionController extends Controller
         return SolutionResource::collection(Solution::all());
     }
 
-
-
     public function getMainSolutions($id)
     {
         $solutions = Solution::where('solution_category', '=', $id)->orderBy('order_index', 'ASC')->get();
         $data = [];
-        $data["data"] = $solutions;
+        $data['data'] = $solutions;
+
         return $data;
     }
 
@@ -217,7 +212,6 @@ class SolutionController extends Controller
         $category = Category::find($categoryId);
         $the_category = $category;
         $allChildrenIds = $category->getAllChildrenIds();
-
 
         $solutions = Solution::with('solutionBrand')
             ->whereHas('solutionCategories', function ($query) use ($categoryId, $allChildrenIds) {
@@ -247,7 +241,6 @@ class SolutionController extends Controller
         return response()->json($result);
     }
 
-
     public function getSolutionCategories()
     {
         $solution_id = request('solution_id', 1);
@@ -257,92 +250,67 @@ class SolutionController extends Controller
         return new SolutionResource($solution);
     }
 
-
     public function getSolutionCategoryProducts()
     {
-
-
         $perPage = request('per_page', 10000);
         $solution_id = request('solution_id', 1);
         $checkedCategoriesSolutions = request('checkedCategoriesSolutions');
 
-
         $product_categories = Solution::find($solution_id);
+
+        if (!$product_categories) {
+            return response()->json(['products' => [], 'total' => 0]);
+        }
+
         $categoryId = $product_categories->solutionCategories->pluck('category_id');
-
-
-
         $categories = Category::whereIn('id', $categoryId)->get();
 
         $allChildrenIds = [];
-
         foreach ($categories as $category) {
             $allChildrenIds = array_merge($allChildrenIds, $category->getAllChildrenIds());
         }
 
-        $SolutionCategory = SolutionCategory::where("solution_id", "=", $solution_id)->orderBy("order_index", "ASC")->get();
+        $SolutionCategory = SolutionCategory::where('solution_id', $solution_id)
+            ->orderBy('order_index', 'ASC')
+            ->get();
 
-
+        $allcats = [];
         if (!isset($checkedCategoriesSolutions[$solution_id])) {
-
-            $allcats = [];
-
-            foreach ($SolutionCategory as $key => $value) {
-
+            foreach ($SolutionCategory as $value) {
                 $category_id = $value->category_id;
-
                 $categorycat = Category::find($category_id);
                 $allChildrenIdscat = $categorycat->getAllChildrenIds();
-                $allcats = array_merge($allcats, [$category_id]);
-                $allcats = array_merge($allcats, $allChildrenIdscat);
+                $allcats = array_merge($allcats, [$category_id], $allChildrenIdscat);
             }
         } else {
-
-            $allcats = [];
-
-            foreach ($checkedCategoriesSolutions[$solution_id] as  $key => $value) {
-
-                $category_id = $value;
+            foreach ($checkedCategoriesSolutions[$solution_id] as $category_id) {
                 $categorycat = Category::find($category_id);
                 $allChildrenIdscat = $categorycat->getAllChildrenIds();
-                $allcats = array_merge($allcats, [$category_id]);
-                $allcats = array_merge($allcats, $allChildrenIdscat);
+                $allcats = array_merge($allcats, [$category_id], $allChildrenIdscat);
             }
         }
 
-        //check code from here
-
         $allProducts = [];
-
-
-        foreach ($allcats as $key => $value) {
-
-
-            $category_products = Category::where('id', '=', $value);
-
-            $category_products = $category_products->with(['products' => function ($query) {
-
-
-
-                $query = $query->orderBy('order_index')->with('productBrand')
-
-                    ->with(['productCategories' => function ($query) {
-                        $query->with(['category' => function ($query) {
-                            $query->with('parent');
+        foreach ($allcats as $value) {
+            $category_products = Category::where('id', $value)
+                ->with(['products' => function ($query) {
+                    $query->orderBy('order_index')
+                        ->with('productBrand')
+                        ->with(['productCategories' => function ($query) {
+                            $query->with(['category' => function ($query) {
+                                $query->with('parent');
+                            }]);
                         }]);
-                    }]);
-            }])
+                }])
                 ->orderBy('order_index')
                 ->first();
 
             if ($category_products && $category_products->products->isNotEmpty()) {
-                $allProducts = array_merge($allProducts, $category_products->products->toArray());
+                $allProducts = array_merge($allProducts, json_decode(json_encode(ProductResource::collection($category_products->products)), true));
             }
         }
 
-        $page = request()->get('page', 1); // Get the current page from the request
-
-
+        $page = request()->get('page', 1);
         $total = count($allProducts);
         $products = array_slice($allProducts, ($page - 1) * $perPage, $perPage);
 
@@ -352,13 +320,7 @@ class SolutionController extends Controller
 
         $my_products = new LengthAwarePaginator($products, $total, $perPage, $page);
 
-        $result = [
-            'products' => ProductResource::collection($my_products),
-        ];
-
-
-
-        return response()->json($result);
+        return response()->json(['products' => $my_products]);
     }
 
 
@@ -371,7 +333,7 @@ class SolutionController extends Controller
         $filter_category_id = request('filter_category_id');
         $search = request('search');
 
-        if (isset($mainCategory) && !isset($search)) {
+        if (isset($mainCategory) && ! isset($search)) {
 
             $perPage = 1000;
         }
@@ -380,24 +342,22 @@ class SolutionController extends Controller
 
         $Solution = Solution::with('solutionCategory');
 
-        if ($search != "") {
+        if ($search != '') {
             $Solution = $Solution->where('name', 'like', '%' . $search . '%');
         }
 
-        if ($mainCategory != "") {
+        if ($mainCategory != '') {
             $Solution = $Solution->where('solution_category', '=', $mainCategory);
         }
 
         $Solution = $Solution->OrderBy('order_index', 'ASC')->paginate($perPage);
 
-
         $result = [
-            'categories' => $Solution
+            'categories' => $Solution,
         ];
 
         return response()->json($result);
     }
-
 
     public function getSolutionsCategories()
     {
@@ -405,9 +365,7 @@ class SolutionController extends Controller
         $solution_id = request('solution_id');
         $perPage = 1000;
 
-
         $Solution = Solution::with('solutionCategories.category')->where('id', '=', $solution_id)->first();
-
 
         $solutions = $Solution->solutionCategories;
 
@@ -416,9 +374,7 @@ class SolutionController extends Controller
         // $total = $allCategories->count();
         // $categories = $allCategories->slice(($page - 1) * $perPage, $perPage)->all();
 
-
         // $solutions = new LengthAwarePaginator($categories, $total, $perPage, $page);
-
 
         $result = [
 
@@ -429,7 +385,6 @@ class SolutionController extends Controller
 
         return response()->json($result);
     }
-
 
     public function postNewOrderSolutions()
     {
@@ -450,9 +405,6 @@ class SolutionController extends Controller
             }
         }
     }
-
-
-
 
     public function postNewOrderSolutionOrders()
     {
