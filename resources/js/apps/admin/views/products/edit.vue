@@ -641,7 +641,7 @@ const { getBrandList, brandList } = useBrands();
 // Define actual fields for validation
 const { value: name } = useField('name', null, { initialValue: '' });
 const { value: brand } = useField('brand', null, {
-    initialValue: postData.value.brand_json,
+    initialValue: postData.value.product_brand,
 });
 const { value: model_number } = useField('model_number', null, {
     initialValue: '',
@@ -786,7 +786,7 @@ onMounted(() => {
 watchEffect(() => {
     product.id = postData.value.id;
     product.name = postData.value.name;
-    product.brand = postData.value.brand_json;
+    product.brand = postData.value.product_brand;
     product.model_number = postData.value.model_number;
     product.sku = postData.value.sku;
     product.quantity = postData.value.quantity;
