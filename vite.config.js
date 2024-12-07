@@ -9,11 +9,11 @@ import commonjs from "@rollup/plugin-commonjs";
 export default defineConfig({
     css: {
         preprocessorOptions: {
-        scss: {
-            silenceDeprecations: ["legacy-js-api"],
+            scss: {
+                silenceDeprecations: ["legacy-js-api"],
+            },
         },
-        },
-  },
+    },
     build: {
         sourcemap: false,
         assetsDir: "assets",
@@ -74,7 +74,7 @@ export default defineConfig({
     optimizeDeps: {
         include: ["quill", "nouislider"],
     },
-    assetsInclude: ["resources/js/src/assets"],
+    assetsInclude: ["resources/js/src/assets", "**/*.md"],
     resolve: {
         alias: [
             {
