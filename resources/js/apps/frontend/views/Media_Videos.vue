@@ -49,7 +49,11 @@
               </span>
 
               <ContentState v-if="loading" type="loading" content-type="videos" />
-              <ContentState v-if="!filteredVideos.length && !loading" type="empty" content-type="videos" />
+              <ContentState
+                v-if="!filteredVideos.length && !loading"
+                type="empty"
+                content-type="videos"
+              />
               <ContentState v-if="!!error" type="error" content-type="videos" />
 
               <TransitionGroup
@@ -108,8 +112,9 @@
                       class="font-semibold text-gray-900 mb-2 line-clamp-2"
                       style="font-size: 1.6rem;"
                     >
-                      {{ video.name
-                      }}
+                      {{ textFormatter.processText(video.name, {
+                        sentenceCase: true
+                      }) }}
                     </h4>
                   </div>
                 </div>
@@ -203,6 +208,7 @@ import { TransitionRoot, TransitionChild, Dialog, DialogPanel } from '@headlessu
 import gsap from 'gsap';
 
 import ContentState from '@/Components/ContentState.vue';
+import { textFormatter } from '@/utils';
 
 // State
 const videos = ref([]);

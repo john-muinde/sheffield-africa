@@ -92,7 +92,7 @@ const fetchMediaCenter = async () => {
 
 // Fetch and process documents
 onMounted(async () => {
-    await processDocuments(fetchMediaCenter);
+    await processDocuments(fetchMediaCenter,'created_at');
     initializeDflip();
 });
 

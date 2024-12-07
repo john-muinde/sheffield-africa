@@ -114,3 +114,182 @@ export const generateChartOptions = (
     ],
     ...additionalOptions,
 });
+
+
+// Text case formatting utility
+export const textFormatter = {
+    // Words to keep lowercase (unless at start/end of sentence or after punctuation)
+    smallWords: new Set([
+        // Articles
+        'a', 'an', 'the',
+
+        // Coordinating Conjunctions
+        'and', 'but', 'for', 'nor', 'or', 'so', 'yet',
+
+        // Prepositions (common ones)
+        'aboard', 'about', 'above', 'across', 'after', 'against', 'along', 'amid',
+        'among', 'around', 'as', 'at', 'before', 'behind', 'below', 'beneath',
+        'beside', 'besides', 'between', 'beyond', 'by', 'down', 'during', 'except',
+        'for', 'from', 'in', 'inside', 'into', 'like', 'near', 'of', 'off', 'on',
+        'onto', 'out', 'outside', 'over', 'past', 'per', 'through', 'throughout',
+        'till', 'to', 'toward', 'under', 'underneath', 'until', 'up', 'upon',
+        'via', 'with', 'within', 'without', 'if', 'once', 'unless', 'until', 'when', 'is', 'are', 'was', 'were', 'be', 'been', 'being', 'have', 'has', 'had', 'do', 'does', 'did', 'will', 'would', 'shall', 'should', 'may', 'might', 'must', 'can', 'could',
+    ]),
+
+    // Special cases with specific capitalization
+    specialCases: {
+        // Technology & Brands
+        'iphone': 'iPhone',
+        'ipad': 'iPad',
+        'ipod': 'iPod',
+        'imac': 'iMac',
+        'icloud': 'iCloud',
+        'itunes': 'iTunes',
+        'ios': 'iOS',
+        'macos': 'macOS',
+        'macbook': 'MacBook',
+        'javascript': 'JavaScript',
+        'typescript': 'TypeScript',
+        'jquery': 'jQuery',
+        'nodejs': 'Node.js',
+        'vue.js': 'Vue.js',
+        'node.js': 'Node.js',
+        'mongodb': 'MongoDB',
+        'postgresql': 'PostgreSQL',
+        'mysql': 'MySQL',
+        'php': 'PHP',
+        'css': 'CSS',
+        'html': 'HTML',
+        'aws': 'AWS',
+        'api': 'API',
+
+        // Companies
+        'github': 'GitHub',
+        'gitlab': 'GitLab',
+        'linkedin': 'LinkedIn',
+        'youtube': 'YouTube',
+        'facebook': 'Facebook',
+        'paypal': 'PayPal',
+        'microsoft': 'Microsoft',
+        'apple': 'Apple',
+        'google': 'Google',
+
+        // Locations & Organizations
+        'usa': 'USA',
+        'uk': 'UK',
+        'eu': 'EU',
+        'un': 'UN',
+        'nato': 'NATO',
+        'nasa': 'NASA',
+        'fbi': 'FBI',
+        'cia': 'CIA',
+
+        // Academic
+        'phd': 'PhD',
+        'ba': 'BA',
+        'bs': 'BS',
+        'bsc': 'BSc',
+        'ma': 'MA',
+        'msc': 'MSc',
+        'mba': 'MBA',
+
+        // Common Abbreviations
+        'mr': 'Mr.',
+        'mrs': 'Mrs.',
+        'ms': 'Ms.',
+        'dr': 'Dr.',
+        'prof': 'Prof.',
+        'sr': 'Sr.',
+        'jr': 'Jr.',
+        'vs': 'vs.',
+        'etc': 'etc.',
+        'i.e': 'i.e.',
+        'e.g': 'e.g.',
+    },
+
+    // Sentence terminators
+    sentenceTerminators: new Set(['.', '!', '?']),
+
+    // Process a single word
+    processWord: function (word, isStart = false, isEnd = false) {
+        if (!word) return '';
+
+        const lowerWord = word.toLowerCase();
+
+        // Check special cases first
+        if (this.specialCases[lowerWord]) {
+            return this.specialCases[lowerWord];
+        }
+
+        // Handle hyphenated words
+        if (word.includes('-')) {
+            return word.split('-')
+                .map(part => this.processWord(part, true))
+                .join('-');
+        }
+
+        // Handle apostrophes (e.g., O'Reilly)
+        if (word.includes('\'')) {
+            return word.split('\'')
+                .map((part, index) => index === 0 || part.length > 1 ?
+                    this.processWord(part, true) : part)
+                .join('\'');
+        }
+
+        // Handle periods (e.g., U.S.A.)
+        if (word.includes('.')) {
+            return word.split('.')
+                .map(part => part ? part.toUpperCase() : '')
+                .join('.');
+        }
+
+        // Capitalize if:
+        // 1. It's the start/end of the title
+        // 2. It's not in smallWords
+        // 3. It's a forced capitalization
+        if (isStart || isEnd || !this.smallWords.has(lowerWord)) {
+            return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+        }
+
+        return word.toLowerCase();
+    },
+
+    // Process entire text
+    processText: function (text, options = {}) {
+        if (!text || typeof text !== 'string') return '';
+
+        const {
+            sentenceCase = false,
+            preserveSpecialCases = true,
+        } = options;
+
+        // Split text into sentences
+        const sentences = text.split(/([.!?]+\s+)/).filter(Boolean);
+
+        return sentences.map(sentence => {
+            // Process each sentence
+            let words = sentence.trim().split(/\s+/);
+
+            if (sentenceCase) {
+                // Only capitalize first word and special cases
+                return words.map((word, index) => {
+                    if (index === 0) {
+                        return this.processWord(word, true);
+                    }
+                    return preserveSpecialCases ?
+                        this.processWord(word) :
+                        word.toLowerCase();
+                }).join(' ');
+            } else {
+                // Title case: process all words
+                return words.map((word, index, array) => {
+                    return this.processWord(
+                        word,
+                        index === 0,
+                        index === array.length - 1,
+                    );
+                }).join(' ');
+            }
+        }).join('');
+    },
+};
