@@ -20,13 +20,7 @@
         <div class="container terms_page">
           <div class="row">
             <div class="col-lg-12">
-              <div ref="markdownContainer">
-                <vue-markdown
-                  :source="markdownContent"
-                  :html="true"
-                  :breaks="true"
-                />
-              </div>
+              <div ref="markdownContainer" v-html="renderedContent"></div>
             </div>
           </div>
         </div>
@@ -38,23 +32,32 @@
 <script setup>
 import { useMeta } from '../../admin/composables/use-meta';
 import { useMarkdownFormatter } from '@/composables/markdown';
-import VueMarkdown from 'vue-markdown-render';
+import MarkdownIt from 'markdown-it';
 import { ref, onMounted } from 'vue';
 
-useMeta({ title: 'Terms & Conditions' });
 
 const { formatMarkdownContent } = useMarkdownFormatter();
 const markdownContainer = ref(null);
-const markdownContent = ref('');
+
+useMeta({ title: 'Warranty Terms' });
+
+const md = new MarkdownIt({
+  html: true,
+  breaks: true,
+  linkify: true,
+});
+
+const renderedContent = ref('');
 
 onMounted(async () => {
   try {
     const response = await import('@/data/warranty-terms.md?raw');
-    markdownContent.value = response.default;
+    const rawContent = response.default;
+    renderedContent.value = md.render(rawContent);
     await formatMarkdownContent(markdownContainer.value);
   } catch (error) {
     console.error('Error loading markdown content:', error);
-    markdownContent.value = 'Error loading content. Please try again later.';
+    renderedContent.value = 'Error loading content. Please try again later.';
   }
 });
 </script>

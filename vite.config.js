@@ -74,7 +74,7 @@ export default defineConfig({
     optimizeDeps: {
         include: ["quill", "nouislider"],
     },
-    assetsInclude: ["resources/js/src/assets", "**/*.md"],
+    assetsInclude: ["resources/js/src/assets", '**/*.md'],
     resolve: {
         alias: [
             {
