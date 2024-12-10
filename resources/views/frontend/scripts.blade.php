@@ -251,7 +251,6 @@
 
 
 <!-- Schema.org markup for Google -->
-
 <script type="application/ld+json">
   {
     "@context": "https://schema.org",

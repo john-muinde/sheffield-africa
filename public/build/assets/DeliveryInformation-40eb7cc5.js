@@ -1,0 +1,1 @@
+import{v as e}from"./index-6713a4f9.js";import{_ as o}from"./_plugin-vue_export-helper-c27b6911.js";import"./_commonjsHelpers-23102255.js";const t={};function n(l,r){return e.openBlock(),e.createElementBlock("div",null,r[0]||(r[0]=[e.createElementVNode("p",null,"Delivery Information",-1)]))}const f=o(t,[["render",n]]);export{f as default};

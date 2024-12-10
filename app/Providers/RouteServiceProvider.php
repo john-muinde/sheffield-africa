@@ -10,20 +10,16 @@ use Illuminate\Support\Facades\Route;
 
 class RouteServiceProvider extends ServiceProvider
 {
-    /**
-     * The path to the "home" route for your application.
-     *
-     * Typically, users are redirected here after authentication.
-     *
-     * @var string
-     */
     public const HOME = '/dashboard';
 
     /**
-     * Define your route model bindings, pattern filters, and other route configuration.
-     *
-     * @return void
+     * IPs that should be excluded from rate limiting
      */
+    protected $excludedIps = [
+        '127.0.0.1', 
+        '41.139.134.175'
+    ];
+
     public function boot()
     {
         $this->configureRateLimiting();
@@ -38,15 +34,17 @@ class RouteServiceProvider extends ServiceProvider
         });
     }
 
-    /**
-     * Configure the rate limiters for the application.
-     *
-     * @return void
-     */
     protected function configureRateLimiting()
     {
         RateLimiter::for('api', function (Request $request) {
-            return Limit::perMinute(60)->by($request->user()?->id ?: $request->ip());
+            $ip = $request->ip();
+
+            // Skip rate limiting for excluded IPs
+            if (in_array($ip, $this->excludedIps)) {
+                return Limit::none();
+            }
+
+            return Limit::perMinute(60)->by($request->user()?->id ?: $ip);
         });
     }
 }
