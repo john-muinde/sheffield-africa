@@ -1,19 +1,33 @@
 import { ref } from 'vue';
 import { apiRequest } from '../utils/api';
 import { Modal } from 'ant-design-vue';
+import dayjs from 'dayjs';
+import isSameOrAfter from 'dayjs/plugin/isSameOrAfter';
+import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
+import customParseFormat from 'dayjs/plugin/customParseFormat';
+import advancedFormat from 'dayjs/plugin/advancedFormat';
+import utc from 'dayjs/plugin/utc';
+import timezone from 'dayjs/plugin/timezone';
+
+dayjs.extend(isSameOrAfter);
+dayjs.extend(isSameOrBefore);
+dayjs.extend(customParseFormat);
+dayjs.extend(advancedFormat);
+dayjs.extend(utc);
+dayjs.extend(timezone);
 
 export default function useStats() {
     const stats = ref([]);
     const dates = ref({
         label: 'This Week',
-        start_date: moment().startOf('week').format('YYYY-MM-DD'),
-        end_date: moment().endOf('week').format('YYYY-MM-DD'),
+        start_date: dayjs().startOf('week').format('YYYY-MM-DD'),
+        end_date: dayjs().endOf('week').format('YYYY-MM-DD'),
     });
 
     const period = (start_date, end_date) => {
         // if difference of days is 6, then it is a week, else it is a month, else it is a year
-        const start = moment(start_date);
-        const end = moment(end_date);
+        const start = dayjs(start_date);
+        const end = dayjs(end_date);
         const days = end.diff(start, 'days');
         if (days <= 0) return 'day';
         if (days <= 7) return 'week';
@@ -42,20 +56,20 @@ export default function useStats() {
         }
     };
 
-    const datePickerOnChange = (datesMoment, datesStrings) => {
-        if (!datesMoment || !datesStrings || !datesStrings.length) return null;
+    const datePickerOnChange = (datesDayjs, datesStrings) => {
+        if (!datesDayjs || !datesStrings || !datesStrings.length) return null;
 
         let label = presetRanges.find(
             (range) =>
-                range.value[0] == datesMoment[0] &&
-                range.value[1] == datesMoment[1],
+                range.value[0].isSame(datesDayjs[0], 'day') &&
+                range.value[1].isSame(datesDayjs[1], 'day'),
         );
 
         if (!label) {
             label = {
-                label: `${moment(datesMoment[0]).format(
+                label: `${dayjs(datesDayjs[0]).format(
                     'MMM D, YYYY',
-                )} - ${moment(datesMoment[1]).format('MMM D, YYYY')}`,
+                )} - ${dayjs(datesDayjs[1]).format('MMM D, YYYY')}`,
             };
         }
 
@@ -69,39 +83,39 @@ export default function useStats() {
     };
 
     const presetRanges = [
-        { label: 'Today', value: [moment(), moment()] },
+        { label: 'Today', value: [dayjs(), dayjs()] },
         {
             label: 'Yesterday',
-            value: [moment().subtract(1, 'day'), moment().subtract(1, 'day')],
+            value: [dayjs().subtract(1, 'day'), dayjs().subtract(1, 'day')],
         },
         {
             label: 'This Week',
-            value: [moment().startOf('week'), moment().endOf('week')],
+            value: [dayjs().startOf('week'), dayjs().endOf('week')],
         },
         {
             label: 'Last 7 Days',
-            value: [moment().subtract(7, 'day'), moment()],
+            value: [dayjs().subtract(7, 'day'), dayjs()],
         },
         {
             label: 'This Month',
-            value: [moment().startOf('month'), moment().endOf('month')],
+            value: [dayjs().startOf('month'), dayjs().endOf('month')],
         },
         {
             label: 'Last Month',
             value: [
-                moment().subtract(1, 'months').startOf('month'),
-                moment().subtract(1, 'months').endOf('month'),
+                dayjs().subtract(1, 'months').startOf('month'),
+                dayjs().subtract(1, 'months').endOf('month'),
             ],
         },
         {
             label: 'This Year',
-            value: [moment().startOf('year'), moment().endOf('year')],
+            value: [dayjs().startOf('year'), dayjs().endOf('year')],
         },
         {
             label: 'Last Year',
             value: [
-                moment().subtract(1, 'year').startOf('year'),
-                moment().subtract(1, 'year').endOf('year'),
+                dayjs().subtract(1, 'year').startOf('year'),
+                dayjs().subtract(1, 'year').endOf('year'),
             ],
         },
     ];
@@ -112,10 +126,10 @@ export default function useStats() {
             content: `This will reset the date range to ${dates.value.label}`,
             onOk() {
                 datePickerOnChange(
-                    [moment().startOf('week'), moment().endOf('week')],
+                    [dayjs().startOf('week'), dayjs().endOf('week')],
                     [
-                        moment().startOf('week').format('YYYY-MM-DD'),
-                        moment().endOf('week').format('YYYY-MM-DD'),
+                        dayjs().startOf('week').format('YYYY-MM-DD'),
+                        dayjs().endOf('week').format('YYYY-MM-DD'),
                     ],
                 );
             },
