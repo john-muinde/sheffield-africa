@@ -14,7 +14,9 @@ use Illuminate\Support\Facades\Cache;
 
 class HomeController extends Controller
 {
-    private const CACHE_TTL = 3600; // 1 hour cache
+    // Reduced cache time for file driver to prevent stale cache files
+    private const CACHE_TTL = 300; // 5 minutes
+    private const STATIC_CACHE_TTL = 1800; // 30 minutes for less frequently changing data
 
     public function __construct()
     {
@@ -32,28 +34,41 @@ class HomeController extends Controller
         $customStartDate = request()->query('start_date');
         $customEndDate = request()->query('end_date');
 
-        // Generate cache key based on parameters
-        $cacheKey = "stats_{$period}_{$customStartDate}_{$customEndDate}";
+        // Include authenticated user ID in cache key to prevent cache collisions
+        $userId = auth()->id();
+        $cacheKey = "stats_u{$userId}_{$period}_{$customStartDate}_{$customEndDate}";
 
-        return Cache::remember($cacheKey, self::CACHE_TTL, function () use ($period, $customStartDate, $customEndDate) {
+        // Using shorter TTL with file cache
+        $stats = Cache::remember($cacheKey, self::CACHE_TTL, function () use ($period, $customStartDate, $customEndDate) {
             [$start_date, $end_date] = $this->getDateRange($period, $customStartDate, $customEndDate);
             $grouping = $this->getGroupingConfig($period);
 
-            return [
-                'period' => $period,
-                'date_range' => [
-                    'start' => $start_date->format('Y-m-d'),
-                    'end' => $end_date->format('Y-m-d')
-                ],
-                'total_clients' => $this->getCachedCount('clients_count', fn() => Client::count()),
-                'total_admins' => $this->getCachedCount('admins_count', fn() => User::where('role', 1)->count()),
-                'visitor_details' => $this->getRecentVisitors($start_date, $end_date),
-                'activities' => $this->getRecentActivities(),
-                'visitors' => $this->getVisitorsData($start_date, $end_date),
-                'total_posts' => Post::whereBetween('created_at', [$start_date, $end_date])->count(),
-                'series' => $this->getVisitorsSeries($start_date, $end_date, $grouping)
-            ];
+            // Fetch data in parallel using database transactions
+            DB::beginTransaction();
+            try {
+                $stats = [
+                    'period' => $period,
+                    'date_range' => [
+                        'start' => $start_date->format('Y-m-d'),
+                        'end' => $end_date->format('Y-m-d')
+                    ],
+                    'total_clients' => $this->getCachedCount('clients_count', fn() => Client::count()),
+                    'total_admins' => $this->getCachedCount('admins_count', fn() => User::where('role', 1)->count()),
+                    'visitor_details' => $this->getRecentVisitors($start_date, $end_date),
+                    'activities' => $this->getRecentActivities(),
+                    'visitors' => $this->getVisitorsData($start_date, $end_date),
+                    'total_posts' => Post::whereBetween('created_at', [$start_date, $end_date])->count(),
+                    'series' => $this->getVisitorsSeries($start_date, $end_date, $grouping)
+                ];
+                DB::commit();
+                return $stats;
+            } catch (\Exception $e) {
+                DB::rollBack();
+                throw $e;
+            }
         });
+
+        return $stats;
     }
 
     private function getDateRange($period, $customStartDate, $customEndDate)
@@ -89,104 +104,109 @@ class HomeController extends Controller
 
     private function getRecentVisitors($start_date, $end_date)
     {
-        return Visitors::whereBetween('created_at', [$start_date, $end_date])
-            ->select(
-                'tracking_id',
-                DB::raw('MAX(created_at) as last_visit'),
-                DB::raw('FIRST_VALUE(is_new) OVER (PARTITION BY tracking_id ORDER BY created_at DESC) as is_new'),
-                DB::raw('FIRST_VALUE(platform) OVER (PARTITION BY tracking_id ORDER BY created_at DESC) as platform'),
-                DB::raw('FIRST_VALUE(browser) OVER (PARTITION BY tracking_id ORDER BY created_at DESC) as browser'),
-                DB::raw('FIRST_VALUE(is_desktop) OVER (PARTITION BY tracking_id ORDER BY created_at DESC) as is_desktop'),
-                DB::raw('FIRST_VALUE(location) OVER (PARTITION BY tracking_id ORDER BY created_at DESC) as location'),
-                DB::raw('FIRST_VALUE(url) OVER (PARTITION BY tracking_id ORDER BY created_at DESC) as url')
-            )
-            ->groupBy('tracking_id')
-            ->orderBy('last_visit', 'desc')
-            ->limit(5)
-            ->get()
-            ->map(function ($visitor) use ($start_date, $end_date) {
-                return [
-                    'visitor' => [
-                        'tracking_id' => $visitor->tracking_id,
-                        'is_new' => $visitor->is_new,
-                        'platform' => $visitor->platform,
-                        'browser' => $visitor->browser,
-                        'is_desktop' => $visitor->is_desktop,
-                        'location' => $visitor->location,
-                        'last_visit' => $visitor->last_visit
-                    ],
-                    'visits' => Visitors::where('tracking_id', $visitor->tracking_id)
-                        ->whereBetween('created_at', [$start_date, $end_date])
-                        ->select('url', 'created_at', 'platform', 'browser', 'location', 'is_new')
-                        ->orderBy('created_at', 'desc')
-                        ->limit(5)
-                        ->get()
-                        ->map(fn($visit) => [
-                            'url' => $visit->url,
-                            'timestamp' => $visit->created_at->format('Y-m-d H:i:s'),
-                            'platform' => $visit->platform,
-                            'browser' => $visit->browser,
-                            'location' => $visit->location,
-                            'is_new' => $visit->is_new
-                        ])
-                ];
-            });
+        $key = "recent_visitors_" . $start_date->timestamp . "_" . $end_date->timestamp;
+
+        return Cache::remember($key, self::CACHE_TTL, function () use ($start_date, $end_date) {
+            return Visitors::whereBetween('created_at', [$start_date, $end_date])
+                ->select(
+                    'tracking_id',
+                    DB::raw('MAX(created_at) as last_visit'),
+                    DB::raw('FIRST_VALUE(is_new) OVER (PARTITION BY tracking_id ORDER BY created_at DESC) as is_new'),
+                    DB::raw('FIRST_VALUE(platform) OVER (PARTITION BY tracking_id ORDER BY created_at DESC) as platform'),
+                    DB::raw('FIRST_VALUE(browser) OVER (PARTITION BY tracking_id ORDER BY created_at DESC) as browser'),
+                    DB::raw('FIRST_VALUE(is_desktop) OVER (PARTITION BY tracking_id ORDER BY created_at DESC) as is_desktop'),
+                    DB::raw('FIRST_VALUE(location) OVER (PARTITION BY tracking_id ORDER BY created_at DESC) as location'),
+                    DB::raw('FIRST_VALUE(url) OVER (PARTITION BY tracking_id ORDER BY created_at DESC) as url')
+                )
+                ->groupBy('tracking_id')
+                ->orderBy('last_visit', 'desc')
+                ->limit(5)
+                ->get()
+                ->map(function ($visitor) use ($start_date, $end_date) {
+                    $visitsKey = "visitor_visits_{$visitor->tracking_id}_{$start_date->timestamp}_{$end_date->timestamp}";
+
+                    return [
+                        'visitor' => [
+                            'tracking_id' => $visitor->tracking_id,
+                            'is_new' => $visitor->is_new,
+                            'platform' => $visitor->platform,
+                            'browser' => $visitor->browser,
+                            'is_desktop' => $visitor->is_desktop,
+                            'location' => $visitor->location,
+                            'last_visit' => $visitor->last_visit
+                        ],
+                        'visits' => Cache::remember($visitsKey, self::CACHE_TTL, function () use ($visitor, $start_date, $end_date) {
+                            return Visitors::where('tracking_id', $visitor->tracking_id)
+                                ->whereBetween('created_at', [$start_date, $end_date])
+                                ->select('url', 'created_at', 'platform', 'browser', 'location', 'is_new')
+                                ->orderBy('created_at', 'desc')
+                                ->limit(5)
+                                ->get()
+                                ->map(fn($visit) => [
+                                    'url' => $visit->url,
+                                    'timestamp' => $visit->created_at->format('Y-m-d H:i:s'),
+                                    'platform' => $visit->platform,
+                                    'browser' => $visit->browser,
+                                    'location' => $visit->location,
+                                    'is_new' => $visit->is_new
+                                ]);
+                        })
+                    ];
+                });
+        });
     }
 
     private function getRecentActivities()
     {
-        return QuoteRequest::latest()
-            ->take(5)
-            ->get()
-            ->map(fn($quote) => [
-                'type' => 'quote_request',
-                'timestamp' => $quote->created_at->format('Y-m-d H:i:s'),
-                'data' => [
-                    'items_count' => count($quote->cartItems),
-                    'email' => $quote->email,
-                    'message' => $quote->shipping,
-                ]
-            ]);
+        return Cache::remember('recent_activities', self::CACHE_TTL, function () {
+            return QuoteRequest::latest()
+                ->take(5)
+                ->get()
+                ->map(fn($quote) => [
+                    'type' => 'quote_request',
+                    'timestamp' => $quote->created_at->format('Y-m-d H:i:s'),
+                    'data' => [
+                        'items_count' => count($quote->cartItems),
+                        'email' => $quote->email,
+                        'message' => $quote->shipping
+                    ]
+                ]);
+        });
     }
 
     private function getVisitorsData($start_date, $end_date)
     {
-        return Visitors::whereBetween('created_at', [$start_date, $end_date])
-            ->select('tracking_id', 'is_new', 'platform', 'browser', 'is_desktop', 'location')
-            ->orderBy('created_at', 'desc')
-            ->get();
+        $key = "visitors_data_{$start_date->timestamp}_{$end_date->timestamp}";
+
+        return Cache::remember($key, self::CACHE_TTL, function () use ($start_date, $end_date) {
+            return Visitors::whereBetween('created_at', [$start_date, $end_date])
+                ->select('tracking_id', 'is_new', 'platform', 'browser', 'is_desktop', 'location')
+                ->orderBy('created_at', 'desc')
+                ->get();
+        });
     }
 
     private function getVisitorsSeries($start_date, $end_date, $grouping)
     {
-        $dates = $this->generateDatePeriods($start_date, $end_date, $grouping);
+        $key = "visitors_series_{$start_date->timestamp}_{$end_date->timestamp}";
 
-        $visitors_data = Visitors::where('created_at', '>=', $start_date)
-            ->where('created_at', '<=', $end_date)
-            ->select(
-                DB::raw("DATE_FORMAT(created_at, '{$grouping['sql_format']}') as date"),
-                DB::raw('COUNT(DISTINCT CASE WHEN is_new = 1 THEN tracking_id END) as new_visitors'),
-                DB::raw('COUNT(DISTINCT CASE WHEN is_new = 0 THEN tracking_id END) as returning_visitors')
-            )
-            ->groupBy(DB::raw("DATE_FORMAT(created_at, '{$grouping['sql_format']}')"))
-            ->get()
-            ->keyBy('date');
+        return Cache::remember($key, self::CACHE_TTL, function () use ($start_date, $end_date, $grouping) {
+            $dates = $this->generateDatePeriods($start_date, $end_date, $grouping);
 
-        $series_data = $this->formatSeriesData($dates, $visitors_data, $grouping);
+            $visitors_data = DB::table('visitors')
+                ->where('created_at', '>=', $start_date)
+                ->where('created_at', '<=', $end_date)
+                ->select(
+                    DB::raw("DATE_FORMAT(created_at, '{$grouping['sql_format']}') as date"),
+                    DB::raw('COUNT(DISTINCT CASE WHEN is_new = 1 THEN tracking_id END) as new_visitors'),
+                    DB::raw('COUNT(DISTINCT CASE WHEN is_new = 0 THEN tracking_id END) as returning_visitors')
+                )
+                ->groupBy(DB::raw("DATE_FORMAT(created_at, '{$grouping['sql_format']}')"))
+                ->get()
+                ->keyBy('date');
 
-        return [
-            'labels' => $series_data['labels'],
-            'datasets' => [
-                [
-                    'name' => 'New Visitors',
-                    'data' => $series_data['new_visitors']
-                ],
-                [
-                    'name' => 'Returning Visitors',
-                    'data' => $series_data['returning_visitors']
-                ]
-            ]
-        ];
+            return $this->formatSeriesData($dates, $visitors_data, $grouping);
+        });
     }
 
     private function generateDatePeriods($start_date, $end_date, $grouping)
@@ -217,14 +237,22 @@ class HomeController extends Controller
 
         return [
             'labels' => $labels,
-            'new_visitors' => $new_visitors,
-            'returning_visitors' => $returning_visitors
+            'datasets' => [
+                [
+                    'name' => 'New Visitors',
+                    'data' => $new_visitors
+                ],
+                [
+                    'name' => 'Returning Visitors',
+                    'data' => $returning_visitors
+                ]
+            ]
         ];
     }
 
     private function getCachedCount($key, $callback)
     {
-        return Cache::remember($key, self::CACHE_TTL, $callback);
+        return Cache::remember($key, self::STATIC_CACHE_TTL, $callback);
     }
 
     private function getGroupingConfig($period)
