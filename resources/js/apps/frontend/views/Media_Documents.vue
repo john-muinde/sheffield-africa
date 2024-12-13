@@ -66,89 +66,91 @@
 </template>
 
 <script setup>
-import { onMounted } from 'vue';
-import { useMediaDocuments } from '@/composables/documents';
-import ContentState from '@/Components/ContentState.vue';
-import { onBeforeRouteLeave } from 'vue-router';
+  import { onMounted } from 'vue';
+  import { useMediaDocuments } from '@/composables/documents';
+  import ContentState from '@/Components/ContentState.vue';
+  import { onBeforeRouteLeave } from 'vue-router';
 
-// Initialize with custom options
-const {
+  // Initialize with custom options
+  const {
     processDocuments,
     initializeDflip,
     documents: brochures,
     loading,
     error,
     handleRouteLeave,
-} = useMediaDocuments({
+  } = useMediaDocuments({
     thumbnailScale: 0.4,
     enableDflip: true,
-});
+  });
 
-// Fetch function for media center
-const fetchMediaCenter = async () => {
+  const axios = window.axios;
+
+  // Fetch function for media center
+  const fetchMediaCenter = async () => {
     const response = await axios.get('/api/get-media-center');
     return response.data.brochures;
-};
+  };
 
-// Fetch and process documents
-onMounted(async () => {
+  // Fetch and process documents
+  onMounted(async () => {
     await processDocuments(fetchMediaCenter);
     initializeDflip();
-});
+  });
 
-onBeforeRouteLeave(handleRouteLeave);
+  onBeforeRouteLeave(handleRouteLeave);
 </script>
 
 <style>
-/* Styles remain unchanged */
-._df_thumb {
+  /* Styles remain unchanged */
+  ._df_thumb {
     width: 240px;
     height: 360px;
-}
+  }
 
-.df-sheet .df-page:before {
+  .df-sheet .df-page:before {
     opacity: 0.5;
-}
+  }
 
-section.linkAnnotation a,
-a.linkAnnotation,
-.buttonWidgetAnnotation a,
-a.customLinkAnnotation,
-.customHtmlAnnotation,
-.customVideoAnnotation,
-a.df-autolink {
+  section.linkAnnotation a,
+  a.linkAnnotation,
+  .buttonWidgetAnnotation a,
+  a.customLinkAnnotation,
+  .customHtmlAnnotation,
+  .customVideoAnnotation,
+  a.df-autolink {
     background-color: #ff0;
     opacity: 0.2;
-}
+  }
 
-section.linkAnnotation a:hover,
-a.linkAnnotation:hover,
-.buttonWidgetAnnotation a:hover,
-a.customLinkAnnotation:hover,
-.customHtmlAnnotation:hover,
-.customVideoAnnotation:hover,
-a.df-autolink:hover {
+  section.linkAnnotation a:hover,
+  a.linkAnnotation:hover,
+  .buttonWidgetAnnotation a:hover,
+  a.customLinkAnnotation:hover,
+  .customHtmlAnnotation:hover,
+  .customVideoAnnotation:hover,
+  a.df-autolink:hover {
     background-color: #2196f3;
     opacity: 0.5;
-}
+  }
 
-.df-icon-play-popup:before {
+  .df-icon-play-popup:before {
     background-color: rgb(51, 133, 209);
-}
+  }
 
-.df-icon-play-popup:before {
+  .df-icon-play-popup:before {
     color: #fff;
-}
+  }
 
-.df-lightbox-bg {
+  .df-lightbox-bg {
     opacity: 0.8;
-}
+  }
 
-.df-lightbox-wrapper .df-bg {
+  .df-lightbox-wrapper .df-bg {
     background-color: transparent;
-}
+  }
 
-.df-container.df-transparent.df-fullscreen {
+  .df-container.df-transparent.df-fullscreen {
     background-color: #eee;
-}
+  }
 </style>

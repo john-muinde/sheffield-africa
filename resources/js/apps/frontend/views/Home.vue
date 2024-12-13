@@ -486,10 +486,6 @@ document.addEventListener('DOMContentLoaded', () => {
   document.body.classList.toggle('mmenu-active1', true);
 });
 
-const handleButtonClick = () => {
-  addClassToBody();
-};
-
 // Function to dismiss the popup
 const dismissPopup = () => {
   showPopup.value = false;
