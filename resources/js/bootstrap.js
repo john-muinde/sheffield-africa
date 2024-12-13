@@ -12,9 +12,6 @@ import 'bootstrap';
 import axios from 'axios';
 window.axios = axios;
 
-// set base url
-window.axios.defaults.baseURL = import.meta.env.VITE_APP_URL || 'https://sheffieldafrica.com';
-
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 window.axios.defaults.withCredentials = true;

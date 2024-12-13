@@ -137,7 +137,7 @@
               <div class="rounded-2xl overflow-hidden shadow-md hover:shadow-xl">
                 <div class="relative overflow-hidden aspect-w-1 aspect-h-1">
                   <img
-                    :src="axios.defaults.baseURL + '/storage/' + project.main_image_path"
+                    :src=" '/storage/' + project.main_image_path"
                     :alt="project.name"
                     class="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
                   />
