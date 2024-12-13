@@ -68,7 +68,7 @@
         $currentPath = request()->path();
     @endphp
 
-    <div id="app" class="{{ in_array($currentPath, $excludedPaths) ? '' : 'pt-[65px] lg:pt-[110px]' }}" v-cloak>
+    <div id="app" class="{{ in_array($currentPath, $excludedPaths) ? '' : 'pt-[80px] lg:pt-[110px]' }}" v-cloak>
         <div id="breadcrumb"></div>
     </div>
 
