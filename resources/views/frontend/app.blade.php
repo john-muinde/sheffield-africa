@@ -33,7 +33,6 @@
     @vite('resources/js/apps/frontend/assets/css/style.css')
     @vite('resources/js/apps/frontend/assets/css/skins/skin-demo-14.css')
     @vite('resources/js/apps/frontend/assets/css/demos/demo-14.css')
-    @vite('resources/js/apps/frontend/assets/css/demos/demo-4.css')
 
     <link rel="stylesheet" id="dflip-style-css" href="/dearflip/dflip/css/dflip.min.css" media="all" />
 
@@ -62,7 +61,7 @@
 </head>
 
 <body>
-    <div id="app" v-cloak>
+    <div id="app" class="pt-[65px] lg:pt-[110px]" v-cloak>
         <div id="breadcrumb"></div>
     </div>
 

@@ -40,10 +40,10 @@
       </div>
     </div>
   </div>
-  <div class="mobile-categories">
+  <div class="mobile-categories justify-center !flex ">
     <button
       id="menu1"
-      class="btn btn-default dropdown-toggle button"
+      class="btn btn-default dropdown-toggle button !max-w-xl align-middle"
       type="button"
       data-toggle="dropdown"
     >

@@ -11,25 +11,11 @@
               href="mailto:info@sheffieldafrica.com"
             ><i class="icon-envelope"></i> info@sheffieldafrica.com</a>
           </div>
-          <!-- End .header-left -->
-
           <div class="header-right d-none d-lg-block">
             <ul class="top-menu">
               <li>
                 <a href="#">Links</a>
                 <ul class="menus">
-                  <!-- <div class="header-dropdown">
-                                      <a href="#">USD</a>
-                                      <div class="header-menu">
-                                        <ul>
-                                          <li><a href="#">Eur</a></li>
-                                          <li><a href="#">Usd</a></li>
-                                        </ul>
-                                      </div>
-
-                                    </div> -->
-                  <!-- End .header-dropdown -->
-
                   <li :class="{ 'active-li': isKitchenPage }">
                     <router-link to="/commercial-kitchen">
                       <span class="top-icon">
@@ -168,23 +154,6 @@
               </li>
             </ul>
           </div>
-          <!-- End .header-right -->
-
-          <!-- <div class="header-right d-block d-lg-none">
-                        <ul class="top-menu">
-                            <li class="login" v-if="!user?.name">
-                                <router-link to="/login"> LOG IN </router-link>
-                            </li>
-
-                            <li class="register" v-if="!user?.name">
-                                <router-link to="/register">
-                                    REGISTER
-                                </router-link>
-                            </li>
-                        </ul>
-
-                    </div> -->
-          <!-- End .header-right -->
         </div>
         <!-- End .container -->
       </div>
@@ -426,18 +395,15 @@
 </template>
 
 <script setup>
-
   import useAuth from '@/composables/auth';
   import { computed, reactive, ref, onMounted } from 'vue';
   import { useRoute } from 'vue-router';
-import CartComponent from './CartComponent.vue';
+  import CartComponent from './CartComponent.vue';
 
-import { useStore } from 'vuex';
-
-  let isShown = false;
+  import { useStore } from 'vuex';
 
   const route = useRoute();
-const store = useStore();
+  const store = useStore();
 
   const isKitchenPage = computed(() => {
     return route.path.includes('/commercial-kitchen');
@@ -456,7 +422,9 @@ const store = useStore();
   });
 
   const user = computed(() => store.getters['auth/user']);
-  const { processing, logout } = useAuth();
+  const {  logout } = useAuth();
+
+  const axios = window.axios;
 
   const categories = reactive([]);
 
@@ -517,7 +485,7 @@ const store = useStore();
     transformedModelNumber = transformedModelNumber.replace(/^-+|-+$/g, '');
 
     return `/${firstPart}/product/${id}/${transformedName}-${transformedModelNumber}`;
-};
+  };
 
   const query = ref('');
   const results = ref([]);

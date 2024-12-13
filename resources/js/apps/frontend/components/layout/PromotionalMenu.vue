@@ -30,7 +30,7 @@
   <div class="mobile-categories">
     <button
       id="menu1"
-      class="btn btn-default dropdown-toggle button"
+      class="btn btn-default dropdown-toggle button !max-w-full"
       type="button"
       data-toggle="dropdown"
     >

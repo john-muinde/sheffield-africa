@@ -8,7 +8,7 @@
         <div class="container-fluid ">
           <div class="row mt-3">
             <div class="col-xl-12 justify-content-center footer-banner mb-1">
-              <h1 class="cta-title cta-title-footer text-primary">
+              <h1 class="cta-title cta-title-footer text-primary px-3 rounded-md py-3">
                 SHEFFIELD STEEL SYSTEMS LIMITED
               </h1>
             </div>
