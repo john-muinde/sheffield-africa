@@ -40,6 +40,7 @@ export default defineConfig({
                 "resources/js/apps/frontend/assets/css/style.css",
                 "resources/js/apps/frontend/assets/css/skins/skin-demo-14.css",
                 "resources/js/apps/frontend/assets/css/demos/demo-14.css",
+                "resources/js/apps/frontend/assets/css/demos/demo-4.css",
                 "resources/js/apps/frontend/assets/js/jquery.min.js", //this is disabled
                 "node_modules/jquery/src/jquery.js",
                 "resources/js/apps/frontend/assets/js/bootstrap.bundle.min.js",

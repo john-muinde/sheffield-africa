@@ -33,6 +33,8 @@
     @vite('resources/js/apps/frontend/assets/css/style.css')
     @vite('resources/js/apps/frontend/assets/css/skins/skin-demo-14.css')
     @vite('resources/js/apps/frontend/assets/css/demos/demo-14.css')
+    {{-- demo-4 --}}
+    @vite('resources/js/apps/frontend/assets/css/css/demos/demo-4.css')
 
     <link rel="stylesheet" id="dflip-style-css" href="/dearflip/dflip/css/dflip.min.css" media="all" />
 
