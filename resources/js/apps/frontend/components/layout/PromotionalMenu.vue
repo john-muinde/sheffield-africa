@@ -329,7 +329,7 @@ const route = useRoute();
     }
 
     .mobile-categories {
-        display: block;
+        display: flex;
     }
 }
 

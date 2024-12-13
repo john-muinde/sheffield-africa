@@ -40,7 +40,7 @@
       </div>
     </div>
   </div>
-  <div class="mobile-categories justify-center !flex ">
+  <div class="mobile-categories justify-center ">
     <button
       id="menu1"
       class="btn btn-default dropdown-toggle button !max-w-xl align-middle"
@@ -335,9 +335,7 @@ const linkClass = computed(() => {
     }
 
     .mobile-categories {
-        display: block;
-        max-height: 100vh;
-        overflow-y: auto;
+        display: flex;
     }
 }
 
@@ -347,15 +345,4 @@ const linkClass = computed(() => {
     }
 }
 
-/* @media only screen and (max-width: 768px) {
-    .categories {
-        display: none;
-    }
-
-    .mobile-categories {
-        display: block;
-        max-height: 100vh;
-        overflow-y: auto;
-    }
-} */
 </style>

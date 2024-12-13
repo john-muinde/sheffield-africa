@@ -320,7 +320,7 @@ const linkClass = computed(() => {
     }
 
     .mobile-categories {
-        display: block;
+        display: flex;
     }
 }
 
