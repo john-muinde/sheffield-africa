@@ -26,7 +26,7 @@
       <span class="text-start product-name">{{ product.name }}</span>
       <!-- Description with ellipsis -->
       <span class="text-start text-muted product-description">
-        {{ product.model_number }}
+        {{ product.model_number }} SKU: {{ product.sku }}
       </span>
     </div>
 

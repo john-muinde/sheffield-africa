@@ -5,7 +5,7 @@
          style="background-image: url('../../../../assets/images/sheffield_stainless_steel_background.jpg')"
          >
          <div class="container">
-            <h1 class="page-title">{{ the_category.name }}<span>View our amazing products under this section</span></h1>
+            <h1 class="page-title">{{ the_category?.name }}<span>View our amazing products under this section</span></h1>
          </div>
 
       </div> -->
@@ -25,7 +25,7 @@
           </li>
 
           <li class="breadcrumb-item active" aria-current="page">
-            {{ the_category.name }}
+            {{ the_category?.name }}
           </li>
         </ol>
       </div>
@@ -84,7 +84,7 @@
               <div class="row">
                 <div
                   v-for="product in displayedProducts"
-                  :key="product.id"
+                  :key="product?.id"
                   class="col-6 col-md-3 col-lg-2 col-xl-2"
                 >
                   <ProductCard :product="product" />
@@ -103,8 +103,8 @@
                   <router-link
                     class="page-link page-link-prev"
                     :to="getCategoryLink(
-                      the_category.id,
-                      the_category.name,
+                      the_category?.id,
+                      the_category?.name,
                       currentPage - 1
                     )
                     "
@@ -127,8 +127,8 @@
                     <router-link
                       class="page-link"
                       :to="getCategoryLink(
-                        the_category.id,
-                        the_category.name,
+                        the_category?.id,
+                        the_category?.name,
                         page
                       )
                       "
@@ -150,8 +150,8 @@
                   <router-link
                     class="page-link page-link-next"
                     :to="getCategoryLink(
-                      the_category.id,
-                      the_category.name,
+                      the_category?.id,
+                      the_category?.name,
                       currentPage + 1
                     )
                     "
@@ -192,26 +192,26 @@
                 <div id="widget-1" class="show">
                   <div class="widget-body">
                     <div class="filter-items filter-items-count">
-                      <div v-for="category in categories" :key="category.id" class="filter-item">
+                      <div v-for="category in categories" :key="category?.id" class="filter-item">
                         <div class="custom-control custom-checkbox">
                           <input
-                            :id="'cat-' + category.id
+                            :id="'cat-' + category?.id
                             "
                             type="checkbox"
                             class="custom-control-input"
-                            :value="category.id"
+                            :value="category?.id"
                             @change="
                               handleCheckboxChange(
-                                category.id
+                                category?.id
                               )
                             "
                           />
                           <label
                             class="custom-control-label"
-                            :for="'cat-' + category.id
+                            :for="'cat-' + category?.id
                             "
                           >{{
-                            category.name
+                            category?.name
                           }}</label>
                         </div>
                         <!-- End .custom-checkbox -->
@@ -242,23 +242,23 @@
                 <div id="widget-4" class="show">
                   <div class="widget-body">
                     <div class="filter-items">
-                      <div v-for="brand in brands" :key="brand.id" class="filter-item">
+                      <div v-for="brand in brands" :key="brand?.id" class="filter-item">
                         <div class="custom-control custom-checkbox">
                           <input
                             :id="'brand-' +
                               brand.product_brand
-                                .id
+                                ?.id
                             "
                             type="checkbox"
                             class="custom-control-input"
                             :value="brand.product_brand
-                              .id
+                              ?.id
                             "
                             @change="
                               handleCheckboxBrandChange(
                                 brand
                                   .product_brand
-                                  .id
+                                  ?.id
                               )
                             "
                           />
@@ -266,11 +266,11 @@
                             class="custom-control-label"
                             :for="'brand-' +
                               brand.product_brand
-                                .id
+                                ?.id
                             "
                           >{{
                             brand.product_brand
-                              .name
+                              ?.name
                           }}</label>
                         </div>
                         <!-- End .custom-checkbox -->
@@ -529,15 +529,15 @@ watchEffect(() => {
 
 const title = ref('');
 
-// Watch for changes in the_category.value.name
+// Watch for changes in the_category.value?.name
 watch(
-    () => the_category.value.name,
+    () => the_category.value?.name,
     (newName, oldName) => {
 
 
         if (newName !== oldName) {
 
-            // Update the title when the_category.value.name changes
+            // Update the title when the_category.value?.name changes
             title.value = newName;
         }
     },
