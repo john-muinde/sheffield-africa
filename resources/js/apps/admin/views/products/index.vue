@@ -104,15 +104,6 @@
                   class="form-control"
                   placeholder="Search ..."
                 />
-
-                <!-- <div class="text-danger mt-1">
-                                    {{ errors.name }}
-                                </div>
-                                <div class="text-danger mt-1">
-                                    <div v-for="message in validationErrors?.name">
-                                        {{ message }}
-                                    </div>
-                                </div> -->
               </div>
             </div>
 
@@ -329,13 +320,6 @@
                   </router-link>
                 </li>
 
-                <!-- <li class="page-item" :class="{ disabled: currentPage === 1 }">
-                                    <router-link class="page-link page-link-first" :to="getCategoryLink(the_category.id, 1 )" aria-label="First" @click="goToNextPage">
-                                      First
-                                      <span aria-hidden="true"><i class="icon-long-arrow-right"></i></span>
-                                    </router-link>
-                                  </li> -->
-
                 <li
                   v-for="page in generatePageLinks"
                   :key="page"
@@ -356,7 +340,6 @@
                     </router-link>
                   </template>
                 </li>
-                <!--  <li class="page-item page-item-total">of {{ totalPages }}</li> -->
 
                 <li
                   class="page-item"
@@ -419,15 +402,13 @@ import { VueDraggableNext as draggable } from 'vue-draggable-next';
 
 import { useRoute } from 'vue-router';
 
-import highlight from '../../components/plugins/highlight.vue';
-
 import { useMeta } from '../../composables/use-meta';
 useMeta({ title: 'View Products' });
 
 // import useCategories from "@/composables/categories";
 
 
-import { useForm, useField, defineRule } from 'vee-validate';
+import {  useField } from 'vee-validate';
 
 import useCategories from '@/composables/categories';
 
@@ -437,7 +418,6 @@ import axiosInstance from '../../../../axiosInstance';
 import useProducts from '../../../../composables/products';
 
 const {
-    getCategoryList,
     categoryList,
     getMainCategoryList,
     categoryMainList,
@@ -447,7 +427,6 @@ const {
 const { deleteProduct } = useProducts();
 
 const route = useRoute();
-const currentRoute = ref(route);
 
 const currentPage = ref(route.params.page ? parseInt(route.params.page) : 1);
 //const perPage = ref(20);

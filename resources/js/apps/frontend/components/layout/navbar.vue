@@ -62,94 +62,6 @@
                       Consultancy
                     </router-link>
                   </li>
-                  <!-- <li
-                                        class="login ml-5 pl-5"
-                                        v-if="!user?.name"
-                                    >
-                                        <router-link to="/login">
-                                            LOG IN
-                                        </router-link>
-                                    </li>
-
-                                    <li class="login" v-if="!user?.name">
-                                        <router-link to="/register">
-                                            REGISTER</router-link
-                                        >
-                                    </li> -->
-
-                  <!-- <li v-if="user?.name" class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            {{ user.name }}
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end">
-                            <li><router-link class="dropdown-item" to="/admin">Admin</router-link></li>
-                            <li><router-link to="/admin/posts" class="dropdown-item">Post</router-link></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="javascript:void(0)" @click="logout">Logout</a></li>
-                        </ul>
-                    </li> -->
-
-                  <!-- <li v-if="user?.name">
-                                        <div
-                                            class="header-dropdown"
-                                            v-if="user?.name"
-                                        >
-                                            <router-link to="/my-account">{{
-                                                user.name
-                                            }}</router-link>
-                                            <div class="header-menu">
-                                                <ul>
-                                                    <li>
-                                                        <router-link
-                                                            class="dropdown-item"
-                                                            to="/my-account"
-                                                            >My
-                                                            Account</router-link
-                                                        >
-                                                    </li>
-                                                    <li>
-                                                        <hr
-                                                            class="dropdown-divider"
-                                                        />
-                                                    </li>
-                                                    <li>
-                                                        <router-link
-                                                            to="/admin/posts"
-                                                            class="dropdown-item"
-                                                            >Wishlist</router-link
-                                                        >
-                                                    </li>
-                                                    <li>
-                                                        <hr
-                                                            class="dropdown-divider"
-                                                        />
-                                                    </li>
-                                                    <li>
-                                                        <router-link
-                                                            to="/admin/posts"
-                                                            class="dropdown-item"
-                                                            >Change
-                                                            Password</router-link
-                                                        >
-                                                    </li>
-                                                    <li>
-                                                        <hr
-                                                            class="dropdown-divider"
-                                                        />
-                                                    </li>
-                                                    <li>
-                                                        <a
-                                                            class="dropdown-item"
-                                                            href="javascript:void(0)"
-                                                            @click="logout"
-                                                            >Logout</a
-                                                        >
-                                                    </li>
-                                                </ul>
-                                            </div>
-
-                                        </div>
-                                    </li> -->
                 </ul>
               </li>
             </ul>
@@ -303,8 +215,6 @@
           <!-- End .container-fluid -->
         </div>
         <!-- End .header-middle -->
-
-        <!-- old header was here -->
         <!-- End .header-bottom -->
       </div>
     </header>

@@ -364,7 +364,9 @@ class ProductController extends Controller
 
         if ($search != "") {
             $Product = $Product->where('name', 'like', '%' . $search . '%')
-                ->orWhere('model_number', 'like', '%' . $search . '%');
+                ->orWhere('model_number', 'like', '%' . $search . '%')
+                ->orWhere('brand', 'like', '%' . $search . '%')
+                ->orWhere('sku', 'like', '%' . $search . '%');
         }
 
         if ($mainCategory != "" && $filter_category_id == "") {
