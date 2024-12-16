@@ -16,7 +16,7 @@
     <div class="alert alert-info text-center">
       No promotion products available
     </div>
-    </div>
+  </div>
 
   <div
     v-else-if="promotionProducts.length"

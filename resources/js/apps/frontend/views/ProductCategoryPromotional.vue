@@ -85,7 +85,7 @@
                 <div
                   v-for="product in displayedProducts"
                   :key="product?.id"
-                  class="col-6 col-md-3 col-lg-2 col-xl-2"
+                  class="col-6 col-md-4 col-lg-3 col-xl-2"
                 >
                   <ProductCard :product="product" />
                   <!-- End .product -->
@@ -320,6 +320,8 @@ const the_category = ref([]);
 const checkedCategories = ref([]);
 const checkedBrands = ref([]);
 const selectedSortOption = ref('');
+
+const axios = window.axios;
 
 // Fetch products based on the current page
 const fetchProducts = async () => {
