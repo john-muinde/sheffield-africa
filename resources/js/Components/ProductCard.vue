@@ -219,7 +219,7 @@ const getProductLink = (id, name, model_number) => {
 
 .product-description {
     font-size: 1.1rem;
-    /* margin-bottom: 12px; */
+    font-weight: 600;
 }
 
 .pricing-section {
