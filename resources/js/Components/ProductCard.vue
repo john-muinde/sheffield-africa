@@ -25,8 +25,9 @@
       <!-- Product Name with ellipsis -->
       <span class="text-start product-name">{{ product.name }}</span>
       <!-- Description with ellipsis -->
-      <span class="text-start text-muted product-description">
-        {{ product.model_number }} SKU: {{ product.sku }}
+      <span class="fw-bold text-start text-muted product-description">
+        SKU: {{ product.sku }} <br />
+        MODEL NUMBER: {{ product.model_number }}
       </span>
     </div>
 
@@ -110,17 +111,18 @@ const calculateDiscount = (original, discounted) => {
 // }
 
 
+const toast = window.Swal.mixin({
+    toast: true,
+    position: 'bottom-end',
+    showConfirmButton: false,
+    timer: 4000,
+    padding: '2em',
+});
+
 const addToCart = (product) => {
     if (isAdding.value) return;
     isAdding.value = true;
     try {
-        const toast = window.Swal.mixin({
-            toast: true,
-            position: 'bottom-end',
-            showConfirmButton: false,
-            timer: 4000,
-            padding: '2em',
-        });
         store.dispatch('cart/addToCart', product);
         toast.fire({
             icon: 'success',
@@ -147,7 +149,7 @@ const addToCart = (product) => {
 
 
 
-const getProductLink = (id, name, model_number, main_second_parent_cat) => {
+const getProductLink = (id, name, model_number) => {
     // Replace spaces with dashes
     let transformedName = name.replace(/ /g, '-').replace(/\//g, '-');
     // Remove consecutive dashes

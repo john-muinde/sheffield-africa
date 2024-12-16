@@ -509,7 +509,6 @@ watch(products, updateDisplayedProducts);
 
 watchEffect(() => {
     const params = route.params; // Access the route parameters
-    const query = route.query; // Access the query parameters
 
     if (params.id !== '' && category_id.value !== params.id) {
         currentPage.value = 1;
@@ -519,11 +518,7 @@ watchEffect(() => {
         if (params.page !== '' && currentPage.value !== params.page) {
             currentPage.value = params.page ? parseInt(params.page) : 1;
         }
-
-        // Call a method or update component data based on the new route
-
         fetchProducts();
-        //
     }
 });
 
@@ -551,11 +546,6 @@ useMetaLaundry({ title: title.value + 'All you can get Promotions' });
     margin-bottom: 20px;
 }
 
-.products-section {
-    /*border-right: 15px solid #304296;
-    border-radius: 2px;
-    padding-right: 15px;*/
-}
 
 .custom-control-label {
     margin-right: 0rem;
