@@ -245,7 +245,7 @@ watch(products, updateDisplayedProducts);
 </script>
 
 <style>
-.terms ul,ol {
+.terms > ul, .terms > ol {
     list-style: unset !important;
     margin-left: 30px;
 }
