@@ -195,10 +195,10 @@ class SolutionController extends Controller
 
     public function getMainSolutions($id)
     {
-        $solutions =
-            Solution::where('solution_category', $id)
-            // and where('is_published', 0
-            ->orderBy('order_index', 'ASC')->get();
+        $solutions = Solution::where('solution_category', $id)
+            ->where('is_published', 1) // Assuming you want to fetch published solutions
+            ->orderBy('order_index', 'ASC')
+            ->get();
         $data = [];
         $data['data'] = $solutions;
 
