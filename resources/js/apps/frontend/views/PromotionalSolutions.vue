@@ -65,6 +65,7 @@
                 <div class="col-12 col-md-6 col-lg-6 col-xl-6 image-container">
                   <div class="card-body middle-section">
                     <span
+                      class="terms"
                       v-html="solutionCategories.description
                       "
                     ></span>
@@ -244,7 +245,7 @@ watch(products, updateDisplayedProducts);
 </script>
 
 <style>
-ul,ol {
+.terms ul,ol {
     list-style: unset !important;
     margin-left: 30px;
 }
