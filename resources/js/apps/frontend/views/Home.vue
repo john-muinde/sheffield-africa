@@ -1065,9 +1065,7 @@ const viewProduct = (route = null) => {
   }
 }
 
-.desktop-header {
-  margin-top: -110px;
-}
+
 
 /* Tablet screens */
 
