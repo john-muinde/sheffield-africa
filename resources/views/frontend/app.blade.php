@@ -9,10 +9,13 @@
 <html lang="{{ $locale }}" prefix="og: https://ogp.me/ns#">
 
 <head>
+    <base href="/">
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="google-site-verification" content="HTu3UM8rSXb95ng7ySUN6dIa0OTHQtzcZiJa7C9T1pk" />
     <link rel="profile" href="https://gmpg.org/xfn/11">
+
 
 
     @include('frontend.meta')

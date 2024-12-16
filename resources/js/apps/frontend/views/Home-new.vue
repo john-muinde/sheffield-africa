@@ -251,7 +251,7 @@
       </div>
 
       <PromotionSection
-        v-if="promotionProducts.length"
+        v-if="promotionProducts.length && showProducts"
         :promotion-products="promotionProducts"
         :promotion-id="promotionId"
       />
@@ -292,9 +292,6 @@ import PromotionSection from '@/Components/PromotionSection.vue';
 import {
   ref,
   onMounted,
-  onBeforeUnmount,
-  onBeforeMount,
-  computed,
 } from 'vue';
 
 import { useMeta } from '../../admin/composables/use-meta';
@@ -312,7 +309,7 @@ import CartComponent from '../components/layout/CartComponent.vue';
 
 const router = useRouter();
 
-
+const showProducts = ref(false);
 
 const getProductLink = (id, name, model_number, main_second_parent_cat) => {
     const firstPart = main_second_parent_cat?.split('/')[0];
@@ -377,7 +374,7 @@ const dismissPopup = () => {
 };
 
 // Move promotion-specific logic to the new component
-const promotionId = ref(371);
+const promotionId = ref(373);
 const promotionProducts = ref([]);
 
 const fetchProducts = async () => {

@@ -81,6 +81,7 @@ useMeta({
     keywords: 'Industrial kitchen equipment,commercial oven,commercial kitchen machines and equipment, kitchen equipment kenya, cooking kitchen equipment',
 });
 
+const axios = window.axios;
 
 // const mainCategories = ref([]);
 const mainSolutions = ref([]);
@@ -88,7 +89,9 @@ const mainSolutions = ref([]);
 const fetchMainSolutions = async () => {
     try {
         const response = await axios.get('/api/get-solutions/370', {});
-        mainSolutions.value = response.data.data;
+        mainSolutions.value = response.data.data.filter(
+            (solution) => Number(solution.is_published) == 1,
+        );
     } catch (error) {
         console.error(error);
     }

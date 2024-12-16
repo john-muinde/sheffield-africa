@@ -201,7 +201,7 @@
         $productsForSchema->push($currentProduct);
     } else {
         $promotionalProducts = \App\Models\Product::whereHas('productCategories', function ($query) {
-            $query->where('category_id', 371);
+            $query->where('category_id', 373);
         })
             ->where('is_published', true)
             ->with('productBrand', 'productCategories')

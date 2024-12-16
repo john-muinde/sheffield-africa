@@ -48,7 +48,7 @@
           </div>
 
           <router-link
-            to="/promotional-solutions/371/nov-1-nov-31-2024-promotions"
+            to="/promotional-solutions/373/nov-16-2024-jan-15-2024-promotions"
             class="btn btn-outline-primary d-none d-lg-block"
           >
             View All Products
@@ -79,7 +79,7 @@
         <!-- Mobile View All Button -->
         <div class="d-md-none text-center mt-4">
           <router-link
-            to="/promotional-solutions/371/nov-1-nov-31-2024-promotions"
+            to="/promotional-solutions/373/nov-16-2024-jan-15-2024-promotions"
             class="btn btn-block btn-primary"
           >
             View All Products
@@ -92,7 +92,7 @@
 
 <script>
 // PromotionSection.vue
-import { ref, computed, onMounted, onUnmounted, watch } from 'vue';
+import { ref, computed, onMounted, onUnmounted } from 'vue';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import axios from 'axios';
@@ -113,7 +113,7 @@ export default {
   props: {
     initialCategoryId: {
       type: Number,
-      default: 371,
+      default: 373,
     },
   },
   setup(props) {

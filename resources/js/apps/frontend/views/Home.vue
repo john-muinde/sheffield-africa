@@ -285,7 +285,7 @@
                   class="view-all-slide align-items-center justify-content-center h-100 d-none d-lg-flex col-3"
                 >
                   <router-link
-                    to="/promotional-solutions/371/nov-1-nov-31-2024-promotions"
+                    to="/promotional-solutions/373/nov-16-2024-jan-15-2024-promotions"
                     class="btn btn-dark btn-md view-all-button"
                   >
                     View All Products
@@ -335,7 +335,7 @@
               <!-- Mobile View All Button -->
               <div class="d-md-none text-center mt-4">
                 <router-link
-                  to="/promotional-solutions/371/nov-1-nov-31-2024-promotions"
+                  to="/promotional-solutions/373/nov-16-2024-jan-15-2024-promotions"
                   class="btn btn-dark btn-block"
                 >
                   View All Products
@@ -556,7 +556,7 @@ onMounted(async () => {
     showPopup.value = true;
   }
 
-  promotionId.value = 371;
+  promotionId.value = 373;
   await fetchProducts();
 });
 
