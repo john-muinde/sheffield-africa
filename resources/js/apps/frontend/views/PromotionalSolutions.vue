@@ -160,6 +160,8 @@ const solution_id = ref(route.params.id ? parseInt(route.params.id) : 1);
 const solutionCategories = ref([]);
 const solutionCategoriesList = ref([]);
 
+const axios = window.axios;
+
 
 const fetchSolutionCategories = async () => {
     try {
@@ -242,6 +244,10 @@ watch(products, updateDisplayedProducts);
 </script>
 
 <style>
+ul,ol {
+    list-style: unset !important;
+    margin-left: 30px;
+}
 .product-item {
     margin-bottom: 20px;
 }

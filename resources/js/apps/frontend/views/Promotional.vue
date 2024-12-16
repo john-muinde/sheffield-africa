@@ -10,7 +10,7 @@
               <div class="col-sm-12 col-xl-12 col-xxl-12">
                 <div class="banner banner-overlay solution-image">
                   <a href="#">
-                    <img src="/assets/images/events/november-promo.png" alt="Banner img desc" />
+                    <img src="/assets/images/events/" alt="Banner img desc" />
                   </a>
                 </div>
                 <!-- End .banner -->
