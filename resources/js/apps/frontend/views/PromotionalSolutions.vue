@@ -186,6 +186,7 @@ const fetchSolutionCategories = async () => {
 };
 
 const solutionCategoryProducts = ref([]);
+const checkedCategoriesSolutions = ref([]);
 
 const fetchSolutionCategoryProducts = async () => {
     try {

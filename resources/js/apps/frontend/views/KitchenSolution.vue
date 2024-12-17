@@ -329,6 +329,7 @@ const solutionCategories = ref([]);
 const solutionCategoriesList = ref([]);
 
 const checkedCategoriesSolutions = ref([]);
+const axios = window.axios;
 
 const fetchSolutionCategories = async () => {
     try {
@@ -354,10 +355,6 @@ const fetchSolutionCategories = async () => {
 const solutionCategoryProducts = ref([]);
 
 const fetchSolutionCategoryProducts = async () => {
-    const newCheckedCategoriesSolutions = {
-        [solution_id.value]:
-            checkedCategoriesSolutions.value[solution_id.value] || [],
-    };
 
     try {
         const response = await axios.get(
@@ -418,23 +415,7 @@ const totalPages = computed(() => {
 // Displayed products based on the current page
 const displayedProducts = ref([]);
 
-// Go to the previous page
-const goToPreviousPage = () => {
-    if (currentPage.value > 1) {
-        currentPage.value--;
-    }
-};
 
-// Go to the next page
-const goToNextPage = () => {
-    if (currentPage.value < totalPages.value) {
-        currentPage.value++;
-    }
-};
-
-const goToThisPage = (page) => {
-    currentPage.value = page;
-};
 
 const getProductLink = (id, name, model_number, main_second_parent_cat) => {
     // Replace spaces with dashes
