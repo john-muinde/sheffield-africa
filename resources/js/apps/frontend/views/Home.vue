@@ -354,7 +354,7 @@
     <div class="popup-advert">
       <div class="popup-content">
         <img
-          src="/assets/images/events/december-promo.jpg"
+          src="/assets/images/events/december-promo.png"
           alt="Rotobake Ovens Solutions"
           class="popup-image"
           style="width: 100%; min-height: 480px"
@@ -365,7 +365,7 @@
           </button>
           <button
             class="btn btn-secondary btn-footer col-4"
-            @click="viewProduct()"
+            @click="viewProduct('/promotional-solutions/373/nov-16-2024-jan-15-2024-promotions')"
           >
             View
           </button>
@@ -565,7 +565,7 @@ const viewProduct = (route = null) => {
     router.push(route);
     return;
   }
-  window.open('https://www.sheffieldafrica.com/promotional-solutions/373/nov-16-2024-jan-15-2024-promotions', '_blank');
+  window.open('https://forms.gle/Z36CZ1AnM6PVzNqv7', '_blank');
 };
 </script>
 
