@@ -250,7 +250,7 @@
         </router-link>
       </div>
 
-      <template v-if="promotionProducts?.length">
+      <template v-if="promotionProducts?.length && show">
         <div class="container-fluid">
           <div class="d-flex align-items-center mt-1 row" style="min-height: 500px !important">
             <div class="image-container col-xl-3 col-lg-4 col-md-12 mb-md-4" style="height: 100%">
@@ -354,7 +354,7 @@
     <div class="popup-advert">
       <div class="popup-content">
         <img
-          src="/assets/images/events/december-promo.png"
+          src="/assets/images/events/december-promo.jpg"
           alt="Rotobake Ovens Solutions"
           class="popup-image"
           style="width: 100%; min-height: 480px"
@@ -406,6 +406,7 @@ useMeta({
 import CartComponent from '../components/layout/CartComponent.vue';
 
 const router = useRouter();
+const show = ref(false);
 
 const getProductLink = (id, name, model_number, main_second_parent_cat) => {
     const firstPart = main_second_parent_cat?.split('/')[0];
