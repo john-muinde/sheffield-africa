@@ -52,7 +52,7 @@
                         slideShadows: true,
                       }"
                       :keyboard="{ enabled: true }"
-                      :mousewheel="{ thresholdDelta: 70 }"
+                      :mousewheel="false"
                       :autoplay="false"
                       :pagination="{ clickable: true }"
                       :breakpoints="{
@@ -268,7 +268,7 @@
                         slideShadows: true,
                       }"
                       :keyboard="{ enabled: true }"
-                      :mousewheel="{ thresholdDelta: 70 }"
+                      :mousewheel="false"
                       :autoplay="{ delay: 2000, disableOnInteraction: true }"
                       :pagination="{ clickable: true }"
                       :breakpoints="{
