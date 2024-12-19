@@ -8,11 +8,11 @@ jobs:
     - name: 🚚 Get latest code
       uses: actions/checkout@v4
     
-    - name: 🔍 Ping test
-      run: |
-        echo "Testing connection to server..."
-        ping -c 4 ${{ secrets.FTP_SERVER }}
-      continue-on-error: true
+    # - name: 🔍 Ping test
+    #   run: |
+    #     echo "Testing connection to server..."
+    #     ping -c 4 ${{ secrets.FTP_SERVER }}
+    #   continue-on-error: true
     
     - name: 🌐 Test FTP connection
       run: |
@@ -27,6 +27,5 @@ jobs:
         password: ${{ secrets.FTP_PASSWORD }}
         port: 21
         timeout: 60000
-        local-dir: ./routes/
-        server-dir: public_html/routes/    # Added server directory path
-        log-level: verbose                 # Added for better debugging
+        local-dir: ./
+        # log-level: verbose                 # Added for better debugging
