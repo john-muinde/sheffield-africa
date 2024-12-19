@@ -66,7 +66,7 @@
                   <li class="my-footer-li">
                     <img src="/assets/images/footer-icons/footer_phone.png" alt="Icon 1" />
 
-                    <div><a href="tel:+254716518450">+254 716 518 450 </a></div>
+                    <div><a href="tel:+254713317214">+254 713 317 214 </a></div>
                   </li>
                   <li class="my-footer-li">
                     <img src="/assets/images/footer-icons/footer_email.png" alt="Icon 1" />
