@@ -21,7 +21,5 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          protocol: ftp               # Use 'ftps' if your server requires SSL/TLS
           port: 21                    # Standard FTP port
           timeout: 60000             # Increased timeout (60 seconds)
-          passive: true              # Enable passive mode transfer
